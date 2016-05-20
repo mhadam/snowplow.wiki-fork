@@ -11,7 +11,7 @@
 <a name="overview" />
 ## 1. Overview
 
-The [Snowplow C++ Tracker](https://github.com/snowplow/snowplow-cpp-tracker) lets you add analytics to your [C++][cpp]-based apps, games and servers.
+The [Snowplow C++ Tracker](https://github.com/snowplow/snowplow-cpp-tracker) lets you add analytics to your [C++][cpp] based apps, games and servers.
 
 Ready? Let's get started.
 
