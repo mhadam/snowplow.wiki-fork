@@ -4,95 +4,54 @@
 
 This tool builds into a single zip file which can be uploaded as a new [AWS Lambda](http://docs.aws.amazon.com/lambda/latest/dg/welcome.html) function. The description you give your Lambda will be used as your collector endpoint (an URL). This means the Lambda you create will need the ability to perform `lambda:GetFunctionConfiguration` on itself, amongst the other normal AWS lambda permissions.
 
-##Building the zip artifact
+##Using the `deploy.py` script
 
-For either method, you'll first need to build the zip artifact for uploading to AWS Lambda.
+It's recommended you launch this script from within Vagrant, as the dependencies are pre built. The deploy script works using a configuration file `deploy/config.yaml`, this must be edited
+to suit prior to running the script.
 
-Executing the following:
-
-```
-./gradlew buildZip
-```
-
-in either Vagrant or your host will build a zipped archive ready for deployment in `build/distrubutions/`.
-
-##Using the `install.bash` script
-
-Providing you have the [aws-cli](http://docs.aws.amazon.com/cli/latest/userguide/installing.html) tools installed (and [jq](https://stedolan.github.io/jq/download/)) you can use the install script provided as `install/install.sh`. This script is interactive and will set up everything required to start monitoring an existing s3 bucket.
-
-To run:
+To get started, clone this repository:
 
 ```
-cd install
-chmod +x install.sh
-./install.bash
+git clone git@github.com:snowplow/snowplow-aws-lambda-source.git
 ```
 
-##Using the AWS web UI
+### Editing `deploy/config.yaml`
 
-It's recommended you use the `install.sh` script, however if you're familiar with AWS Lambda, or prefer the AWS web console you can upload this tool yourself manually with the following steps:
+This configures your deployment. The configuration file is written in [YAML](yaml-link) and looks as below:
 
-1.&nbsp;Create an IAM role for the Lambda - a sample policy is provided below:
-
-```
-{
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Effect": "Allow",
-            "Action": [
-                "logs:CreateLogGroup",
-                "logs:CreateLogStream",
-                "logs:PutLogEvents"
-            ],
-            "Resource": "arn:aws:logs:*:*:*"
-        },
-        {
-            "Effect": "Allow",
-            "Action": [
-                "s3:GetObject",
-                "s3:PutObject"
-            ],
-            "Resource": [
-                "arn:aws:s3:::*"
-            ]
-        },
-        {
-            "Effect": "Allow",
-            "Action": [
-                "lambda:GetFunctionConfiguration"
-            ],
-            "Resource": [
-                "*"
-            ]
-        }
-    ]
-}
+```{yaml}
+snowplow:
+    collector: http://a-collector.com
+s3:
+    buckets:
+        - bucket-a
+        - bucket-b
+        - bucket-c
 ```
 
-and the initial trust policy to invoke AWS Lambda:
+The `collector` field is the URL of your collector, for example `http://com.acme:8080/`. Under `s3` the `buckets` field is an array of the buckets you wish to monitor. 
+These buckets must exist prior to run and will not be created by the script. 
+
+### Running the deployment script
+
+Once you have edited the configuration, you can execute `deploy.py` to deploy and configure the S3 source on AWS. It's strongly recommended you use Vagrant, however providing
+you have the `aws-cli` tools installed and configured, a python 2.7 install (including pyyaml) then you can run the script without Vagrant.
 
 ```
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Sid": "",
-      "Effect": "Allow",
-      "Principal": {
-        "Service": "lambda.amazonaws.com"
-      },
-      "Action": "sts:AssumeRole"
-    }
-  ]
-}
+# Assuming you're in the root of the cloned directory
+vagrant up && vagrant ssh
+cd deploy
+python deploy.py
 ```
 
-2.&nbsp;Create a new Java8 Lambda
+## More information on uploading a AWS Lambda function manually is available [here](http://docs.aws.amazon.com/lambda/latest/dg/with-s3.html).
 
-- Ensure the `description` field is set to the collector you wish to use, e.g. `http://mycollector.com` (NB the 'http://' is required)
+## Redshift
 
-3.&nbsp;Upload the zip file  
-4.&nbsp;Add the event sources for your S3 bucket(s)
+If you are running the Snowplow batch (Hadoop) flow with Amazon Redshift, then you should deploy the relevant event table into your Amazon Redshift.
 
-More information on uploading a AWS Lambda function manually is available [here](http://docs.aws.amazon.com/lambda/latest/dg/with-s3.html).
+You can find the table definition here:
+
+[s3_notification_event_1.sql](https://github.com/snowplow/snowplow/blob/master/4-storage/redshift-storage/sql/com.amazon.aws.lambda/s3_notification_event_1.sql)
+
+Make sure to deploy this table into the same schema as your `events` table.
