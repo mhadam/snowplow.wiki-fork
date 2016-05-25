@@ -39,4 +39,4 @@ All resources for the S3 source events:
 <a name="see-also" />
 ## 4. See also
 
-[[AWS Lambda Source webhook setup]]
+[[AWS Lambda Source setup]]
