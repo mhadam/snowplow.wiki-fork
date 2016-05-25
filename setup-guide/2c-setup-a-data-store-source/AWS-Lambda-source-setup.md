@@ -4,7 +4,7 @@
 
 This tool builds into a single zip file which can be uploaded as a new [AWS Lambda](http://docs.aws.amazon.com/lambda/latest/dg/welcome.html) function. The description you give your Lambda will be used as your collector endpoint (an URL). This means the Lambda you create will need the ability to perform `lambda:GetFunctionConfiguration` on itself, amongst the other normal AWS lambda permissions.
 
-##Using the `deploy.py` script
+###Using the `deploy.py` script
 
 It's recommended you launch this script from within Vagrant, as the dependencies are pre built. The deploy script works using a configuration file `deploy/config.yaml`, this must be edited
 to suit prior to running the script.
@@ -43,8 +43,6 @@ vagrant up && vagrant ssh
 cd deploy
 python deploy.py
 ```
-
-## More information on uploading a AWS Lambda function manually is available [here](http://docs.aws.amazon.com/lambda/latest/dg/with-s3.html).
 
 ## Redshift
 
