@@ -6,7 +6,7 @@ This tool builds into a single zip file which can be uploaded as a new [AWS Lamb
 
 ## Deployment guide
 
-This deployment assumes you have the AWS-cli[link], and Python ~2.7 installed.
+This deployment assumes you have the [AWS-CLI](http://docs.aws.amazon.com/cli/latest/userguide/installing.html), and Python ~2.7 installed.
 
 ```{bash}
 sudo pip install pyyaml
