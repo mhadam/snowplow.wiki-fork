@@ -15,7 +15,7 @@ unzip snowplow_aws_lambda_source_0.1.0_bundle.zip
 cd snowplow_aws_lambda_source_0.1.0_bundle
 ```
 
-At this point, fire up your favourite editor and edit the file `config.yaml` (see below)
+At this point, fire up your favourite editor and edit the file `config.yaml` (see below).
 
 ### Editing `deploy/config.yaml`
 
