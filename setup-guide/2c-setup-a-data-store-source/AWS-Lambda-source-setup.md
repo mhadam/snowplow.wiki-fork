@@ -34,6 +34,8 @@ s3:
 The `collector` field is the URL of your collector, for example `http://com.acme:8080/`. Under `s3` the `buckets` field is an array of the buckets you wish to monitor. 
 These buckets must exist prior to run and will not be created by the script. 
 
+**N.B. bucket names here should not include the s3:// prefix**
+
 ### Running the deployment script
 
 After you've edited the configuration file, you can deploy the AWS Lambda source and it's required permissions using:
