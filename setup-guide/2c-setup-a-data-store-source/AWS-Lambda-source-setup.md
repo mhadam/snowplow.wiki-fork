@@ -4,16 +4,18 @@
 
 This tool builds into a single zip file which can be uploaded as a new [AWS Lambda](http://docs.aws.amazon.com/lambda/latest/dg/welcome.html) function. The description you give your Lambda will be used as your collector endpoint (an URL). This means the Lambda you create will need the ability to perform `lambda:GetFunctionConfiguration` on itself, amongst the other normal AWS lambda permissions.
 
-###Using the `deploy.py` script
+## Deployment guide
 
-It's recommended you launch this script from within Vagrant, as the dependencies are pre built. The deploy script works using a configuration file `deploy/config.yaml`, this must be edited
-to suit prior to running the script.
+This deployment assumes you have the AWS-cli[link], and Python ~2.7 installed.
 
-To get started, clone this repository:
-
+```{bash}
+sudo pip install pyyaml
+wget <download_bundle>
+unzip <download_bundle>
+cd <download_bundle>
 ```
-git clone git@github.com:snowplow/snowplow-aws-lambda-source.git
-```
+
+At this point, fire up your favourite editor and edit the file `config.yaml` (see below)
 
 ### Editing `deploy/config.yaml`
 
@@ -34,13 +36,9 @@ These buckets must exist prior to run and will not be created by the script.
 
 ### Running the deployment script
 
-Once you have edited the configuration, you can execute `deploy.py` to deploy and configure the S3 source on AWS. It's strongly recommended you use Vagrant, however providing
-you have the `aws-cli` tools installed and configured, a python 2.7 install (including pyyaml) then you can run the script without Vagrant.
+After you've edited the configuration file, you can deploy the AWS Lambda source and it's required permissions using:
 
-```
-# Assuming you're in the root of the cloned directory
-vagrant up && vagrant ssh
-cd deploy
+```{bash}
 python deploy.py
 ```
 
