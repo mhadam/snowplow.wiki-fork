@@ -17,9 +17,9 @@ cd snowplow_aws_lambda_source_0.1.0_bundle
 
 At this point, fire up your favourite editor and edit the file `config.yaml` (see below).
 
-### Editing `deploy/config.yaml`
+### Editing `config.yaml`
 
-This configures your deployment. The configuration file is written in [YAML](yaml-link) and looks as below:
+This configures your deployment. The configuration file is written in [YAML](http://www.yaml.org/spec/1.2/spec.html) and looks as below:
 
 ```{yaml}
 snowplow:
