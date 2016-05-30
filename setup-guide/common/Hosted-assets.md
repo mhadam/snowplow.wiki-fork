@@ -110,7 +110,7 @@ We are steadily moving over to [Bintray][bintray] for hosting binaries and artif
 
 To make deployment easier, the Kinesis apps Scala Stream Collector, Stream Enrich and Kinesis Elasticsearch Sink are now all available in a single zip file here:
 
-    http://dl.bintray.com/snowplow/snowplow-generic/snowplow_kinesis_r78_great_hornbill.zip
+    http://dl.bintray.com/snowplow/snowplow-generic/snowplow_kinesis_r80_southern_cassowary.zip
 
 Right-click on this [Download link] [kinesis-download] to save it down locally.
 
@@ -136,7 +136,7 @@ Please see the [[Artifact repositories]] wiki page for more information.
 [maxmind]: http://www.maxmind.com/?rld=snowplow
 
 [bintray]: https://bintray.com/
-[kinesis-download]: http://dl.bintray.com/snowplow/snowplow-generic/snowplow_kinesis_r78_great_hornbill.zip
+[kinesis-download]: http://dl.bintray.com/snowplow/snowplow-generic/snowplow_kinesis_r80_southern_cassowary.zip
 [kinesis-s3-download]: http://dl.bintray.com/snowplow/snowplow-generic/kinesis_s3_0.4.0.zip
 
 [emr-download]: http://dl.bintray.com/snowplow/snowplow-generic/snowplow_emr_r77_great_auk.zip
