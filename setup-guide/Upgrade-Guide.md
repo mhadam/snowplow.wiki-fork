@@ -6,6 +6,7 @@ You can also use [Snowplow Version Matrix](Snowplow-version-matrix) as a guidanc
 
 For easier navigation, please, follow the links below.
 
+- [Snowplow 80 Southern Cassowary](#r80) (**r80**) 2016-05-30
 - [Snowplow 79 Black Swan](#r79) (**r79**) 2016-05-12
 - [Snowplow 78 Great Hornbill](#r78) (**r78**) 2016-03-15
 - [Snowplow 77 Great Auk](#r77) (**r77**) 2016-02-29
@@ -41,6 +42,56 @@ For easier navigation, please, follow the links below.
 - [Snowplow 0.9.2](#v0.9.2) (**v0.9.2**) 2014-04-30
 - [Snowplow 0.9.1](#v0.9.1) (**v0.9.1**) 2014-04-11
 - [Snowplow 0.9.0](#v0.9.0) (**v0.9.0**) 2014-02-04
+
+<a name="r80" />
+##Snowplow 80 Southern Cassowary
+
+This is a real-time pipeline release which improves stability and brings the real-time pipeline up-to-date with our Hadoop pipeline. 
+
+As a result, you can now use R79 Black Swan’s *API Request Enrichment* and the *HTTP Header Extractor Enrichment* in your real-time pipeline. Also you can now configure the number of records that the *Kinesis Client Library* should retrieve with each call to `GetRecords`. 
+
+### Upgrade steps
+
+####Kinesis applications
+
+The Kinesis apps for R80 Southern Cassowary are all available in a single zip file here:
+
+```
+http://dl.bintray.com/snowplow/snowplow-generic/snowplow_kinesis_r80_southern_cassowary.zip
+```
+
+There are no breaking changes in this release - you can upgrade the individual Kinesis apps without worrying about having to update the configuration files or indeed the Kinesis streams.
+
+####Configuration files
+
+If you want to configure how many records *Stream Enrich* should read from Kinesis at a time, update its configuration file to add a `maxRecords` property like so:
+
+```
+enrich {
+  ...
+  streams {
+    in: {
+      ...
+      maxRecords: 5000 # Default is 10000
+      ...
+```
+
+If you want to configure how many records *Kinesis Elasticsearch Sink* should read from Kinesis at a time, again update its configuration file to add a `maxRecords` property:
+
+```
+sink {
+  ...
+  kinesis {
+    in: {
+      ...
+      maxRecords: 5000 # Default is 10000
+      ...
+```
+
+### Read more
+
+* [R80 Blog Post](http://snowplowanalytics.com/blog/2016/05/30/snowplow-r80-southern-cassowary-released/)
+* [R80 Release Notes](https://github.com/snowplow/snowplow/releases/tag/r80-southern-cassowary)
 
 <a name="r79" />
 ##Snowplow 79 Black Swan
