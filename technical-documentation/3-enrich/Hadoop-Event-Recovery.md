@@ -131,24 +131,24 @@ You will use [S3DistCp](http://docs.aws.amazon.com/ElasticMapReduce/latest/Devel
 
 to only process inputs dating from between November 2015 and December 2016. This regex would also cause input files from the same month to be concatenated (since the brackets go around only the part of the regex corresponding to the year and month).
 
-We also use the `--targetSize` argument to control the maximum size up to which files are concatenated.
+We also use the `--targetSize` argument to control the maximum size up to which files are concatenated. Because `--targetSize` limits the total size of the concatenated files, there is no reason not to write the `--groupBy` regex in such a way that all files end up in a single group, as we do in the following examples:
 
 To process all files from 2014, concatenating all files:
 
 ```
-.*run=2014().*
+.*(run)=2014.*
 ```
 
 To process only files from the 24th of February, 2016:
 
 ```
-.*run=2016-02-24().*
+.*(run)=2016-02-24.*
 ```
 
 To process all files from between 3rd January 2016 and 10th August 2016 inclusive:
 
 ```
-.*run=2016()-(?:01-(?:0[3-9]|[1-3][0-9])|0[2-7]-[0-9][0-9]|08-0[0-9]|08-10).*
+.*(run)=2016-(?:01-(?:0[3-9]|[1-3][0-9])|0[2-7]-[0-9][0-9]|08-0[0-9]|08-10).*
 ```
 
 [Debuggex](https://www.debuggex.com/) makes building these regular expressions more intuitive.
@@ -171,7 +171,7 @@ aws emr create-cluster --applications Name=Hadoop --ec2-attributes '{
         "--dest",
         "hdfs:///local/monthly/",
         "--groupBy",
-        ".*run=201(5-1[12]|6-[0-9][0-9]).*",
+        ".*(run)=2014.*",
         "--targetSize",
         "128",
         "--outputCodec",
