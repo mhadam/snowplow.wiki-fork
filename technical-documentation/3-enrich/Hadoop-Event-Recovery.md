@@ -72,7 +72,7 @@ Base64-decodes a string
 
 Base64-encodes a string
 
-### An example
+### Examples
 
 You could use this JavaScript to change the Tracker Version of every bad event to "js-2.7.0":
 
@@ -83,6 +83,19 @@ function process(event, errors) {
 	querystringDict['tv'] = 'js-2.7.0';
 	fields[11] = buildQuerystring(querystringDict);
 	return arrayToTsv(fields);
+}
+```
+
+This script will select bad rows which only failed due to a missing schema, and return the original raw event unchanged:
+
+```javascript
+function process(event, errors) {
+    for (var i = 0; i < errors.length; i++) {
+        if (! /Could not find schema with key/.test(errors[i])) {
+            return null;
+        }
+    }
+    return event;
 }
 ```
 
