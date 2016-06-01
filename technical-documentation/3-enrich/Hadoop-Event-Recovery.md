@@ -162,9 +162,9 @@ You will run Hadoop Event Recovery directly from the command line using the AWS 
 ```bash
 aws emr create-cluster --applications Name=Hadoop --ec2-attributes '{
     "InstanceProfile":"EMR_EC2_DefaultRole",
-    "AvailabilityZone":"us-east-1d",
-    "EmrManagedSlaveSecurityGroup":"sg-2f9aba4b",
-    "EmrManagedMasterSecurityGroup":"sg-2e9aba4a"
+    "AvailabilityZone":"{{...}}",
+    "EmrManagedSlaveSecurityGroup":"{{...}}",
+    "EmrManagedMasterSecurityGroup":"{{...}}"
 }' --service-role EMR_DefaultRole --enable-debugging --release-label emr-4.3.0 --log-uri 's3n://{{path to logs}}' --steps '[
 {
     "Args":[
@@ -229,7 +229,7 @@ aws emr create-cluster --applications Name=Hadoop --ec2-attributes '{
 ]'
 ```
 
-Replace the `{{...}}` placeholders above with the appropriate bucket paths, and alter the `--groupBy` regular expression to process the time range of files which you are interested in.
+Replace the `{{...}}` placeholders above with the appropriate values, and alter the `--groupBy` regular expression to process the time range of files which you are interested in.
 
 ### Checking the result
 
