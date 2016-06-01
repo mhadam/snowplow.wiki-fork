@@ -196,7 +196,7 @@ aws emr create-cluster --applications Name=Hadoop --ec2-attributes '{
     ],
     "Type":"CUSTOM_JAR",
     "ActionOnFailure":"CONTINUE",
-    "Jar":"s3://snowplow-hosted-assets/3-enrich/hadoop-event-recovery/snowplow-hadoop-event-recovery-0.1.0.jar",
+    "Jar":"s3://snowplow-hosted-assets/3-enrich/hadoop-event-recovery/snowplow-hadoop-event-recovery-0.2.0.jar",
     "Name":"Fix up bad rows"
 },
 {
