@@ -74,15 +74,17 @@ Base64-encodes a string
 
 ### Examples
 
-You could use this JavaScript to change the Tracker Version of every bad event to "js-2.7.0":
+You could use this JavaScript to change the Tracker Version of every bad event to "js-2.7.0" for GET requests, and leave POST requests unchanged:
 
 ```javascript
 function process(event, errors) {
-	var fields = tsvToArray(event);
-	var querystringDict = parseQuerystring(fields[11]);
-	querystringDict['tv'] = 'js-2.7.0';
-	fields[11] = buildQuerystring(querystringDict);
-	return arrayToTsv(fields);
+    var fields = tsvToArray(event);
+    if (fields[5] == 'GET') {
+	    var querystringDict = parseQuerystring(fields[11]);
+        querystringDict['tv'] = 'js-2.7.0';
+        fields[11] = buildQuerystring(querystringDict);
+    }
+    return arrayToTsv(fields);
 }
 ```
 
@@ -96,6 +98,61 @@ function process(event, errors) {
         }
     }
     return event;
+}
+```
+
+Now for a more complicated example. Suppose that you again want to reprocess bad events which failed due to a missing schema. But you also have some events which fail validation due to having noncompliant URLs. You could use this JavaScript to replace the bad URLs so those events will be valid again:
+
+```javascript
+function process(event, errors) {
+
+    var failedUrl = false;
+
+    for (var i = 0; i < errors.length; i++) {
+            var err = errors[i];
+            if (isBadUrlError(err)) {
+                    failedUrl = true;
+            } else if (!isMissingSchemaError(err)) {
+                    return null;
+            }
+    }
+
+    if (failedUrl) {
+        var fields = tsvToArray(event);
+        fields[9] = 'http://www.placeholder.com';
+
+        if (fields[5] == 'GET') {
+
+                var querystring = parseQuerystring(fields[11]);
+                querystring['url'] = 'http://www.placeholder.com';
+                querystring['refr'] = 'http://www.placeholder.com';
+                fields[11] = buildQuerystring(querystring);
+                return arrayToTsv(fields);
+        } else if (fields[5] == 'POST') {
+
+                var postPosition = fields.length - 1;
+                var decodedPost = decodeBase64(fields[postPosition]);
+                var postJson = parseJson(decodedPost);
+                for (var i = 0; i < postJson.data.length; i++) {
+                        postJson.data[i].url = 'http://www.placeholder.com';
+                        postJson.data[i].refr = 'http://www.placeholder.com';
+                }
+                fields[postPosition] = encodeBase64(stringifyJson(postJson));
+                return arrayToTsv(fields);
+        } else {
+                return null;
+        }
+    } else {
+        return event;
+    }
+}
+
+function isBadUrlError(err) {
+    return /RFC 2396|could not be parsed by Netaporter|Unexpected error creating URI from string/.test(err);
+}
+
+function isMissingSchemaError(err) {
+    return /Could not find schema with key/.test(err);
 }
 ```
 
