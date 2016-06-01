@@ -10,7 +10,7 @@ This deployment assumes you have the [AWS-CLI](http://docs.aws.amazon.com/cli/la
 
 ```{bash}
 sudo pip install pyyaml
-wget  wget https://bintray.com/artifact/download/snowplow/snowplow-generic/snowplow_aws_lambda_source_0.1.0_bundle.zip
+wget https://bintray.com/artifact/download/snowplow/snowplow-generic/snowplow_aws_lambda_source_0.1.0_bundle.zip
 unzip snowplow_aws_lambda_source_0.1.0_rc1_bundle.zip -d snowplow_aws_lambda_source_0.1.0_rc1_bundle
 cd snowplow_aws_lambda_source_0.1.0_bundle
 ```
