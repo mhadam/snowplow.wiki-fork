@@ -257,6 +257,7 @@ aws emr create-cluster --applications Name=Hadoop --ec2-attributes '{
 {
     "Args":[
         "com.snowplowanalytics.hadoop.scalding.SnowplowEventRecoveryJob",
+        "--hdfs",
         "--input",
         "hdfs:///local/monthly/*",
         "--output",
