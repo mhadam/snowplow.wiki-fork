@@ -77,6 +77,62 @@ The Tracker is designed to be used as a Singleton object.  Meaning that within y
 * Thrashing of the database.
 * Hogging of resources for sending HTTP requests which can slow your application.
 
+For a basic example of the Singleton pattern:
+
+```objc
+// --- Header File 'SnowplowManager.h'
+
+@class SPTracker;
+
+@interface SnowplowManager : NSObject {
+    SPTracker *tracker;
+}
+
+@property (nonatomic, retain) SPTracker *tracker;
+
++ (id) snowplowManager;
+
+@end
+
+// --- Method File 'SnowplowManager.m'
+
+#import "SnowplowManager.h"
+#import "SPTracker.h"
+#import "SPEmitter.h"
+
+@implementation SnowplowManager
+
+@synthesize tracker;
+
+#pragma mark Singleton Methods
+
++ (id) snowplowManager {
+    static SnowplowManager *sharedSnowplowManager = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        sharedSnowplowManager = [[self alloc] init];
+    });
+    return sharedSnowplowManager;
+}
+
+- (id) init {
+  self = [super init];
+  if (self) {
+    SPEmitter *emitter = [SPEmitter build:^(id<SPEmitterBuilder> builder) {
+        [builder setUrlEndpoint:@"com.acme"];
+    }];
+    tracker = [SPTracker build:^(id<SPTrackerBuilder> builder) {
+        [builder setEmitter:emitter];
+    }];
+  }
+  return self;
+}
+
+@end
+```
+
+You can then access your Tracker via `SnowplowManager *snowplowManager = [SnowplowManager snowplowManager]`.
+
 [Back to top](#top)
 
 <a name="demo-app" />
