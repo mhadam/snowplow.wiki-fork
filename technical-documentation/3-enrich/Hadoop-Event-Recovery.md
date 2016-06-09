@@ -332,14 +332,16 @@ If the job runs without errors, the fixed-up raw events will be available in `s3
 
 ### Next steps
 
-Assuming your JavaScript was correct, the data in the reprocessing bucket is now in the Snowplow raw event format. This means you can run EmrEtlRunner specifying the reprocessing bucket as one of the input buckets - so the `aws.s3.buckets.raw` section of your EmrEtlRunner configuration file would look something like this:
+Assuming your JavaScript was correct, the data in the reprocessing bucket is now in the Snowplow raw event format. This means you can run EmrEtlRunner specifying the reprocessing bucket as the processing bucket - so the `aws.s3.buckets.raw` section of your EmrEtlRunner configuration file would look something like this:
 
-```
+```yaml
 raw:
   in:
-    - s3://{{my-recovery-bucket/recovered}}
-    - s3://{{any other input buckets you want to process in this run}}
+    - s3://does-not-exist # The "in" section will be ignored
+  processing: s3://{{my-recovery-bucket/recovered}}
 ```
+
+You should then run EmrEtlRunner with the `--skip staging` option, since the data is already in the processing bucket.
 
 See [[Setting up EmrEtlRunner]] for more information.
 
