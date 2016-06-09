@@ -127,7 +127,7 @@ You can also customize the part of the tag between the comments containing "!!!"
 
     if (ecommerce.promoView) {
       for (var l = 0; l < ecommerce.promoView.promotions.length; l++) {
-        var promotion = ecommerce.promoView.promotions[l];
+        var promo = ecommerce.promoView.promotions[l];
         SNOWPLOW_NAME_HERE('addEnhancedEcommercePromoContext',
           promo.id,
           promo.name,
