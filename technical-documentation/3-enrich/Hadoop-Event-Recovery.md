@@ -42,33 +42,57 @@ We provide several built-in functions which are commonly used by event recovery 
 
 #### tsvToArray
 
+Input: String
+Output: Array of strings
+
 Split the input event TSV into an array
 
 #### arrayToTsv
+
+Input: Array of strings
+Output: String
 
 Turn an array of strings into a TSV
 
 #### parseQuerystring
 
+Input: String
+Output: Dictionary wih string keys and string values
+
 Convert a querystring into a JavaScript object
 
 #### buildQuerystring
+
+Input: Dictionary wih string keys and string values
+Output: String
 
 Convert a JavaScript object into a querystring
 
 #### parseJson
 
+Input: String
+Output: Object
+
 Converts a JSON string into a JavaScript object
 
 #### stringifyJson
+
+Input: Object
+Output: String
 
 Converts a JavaScript object into a JSON string. Use this instead of `JSON.stringify`. 
 
 #### decodeBase64
 
+Input: String
+Output: String
+
 Base64-decodes a string
 
 #### encodeBase64
+
+Input: String
+Output: String
 
 Base64-encodes a string
 
