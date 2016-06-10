@@ -163,15 +163,15 @@ You can also customize the part of the tag between the comments containing "!!!"
       if (ecommerce[action].actionField) {
         var actionObject = ecommerce[action].actionField;
         SNOWPLOW_NAME_HERE('addEnhancedEcommerceActionContext',
-          action.id,
-          action.affiliation,
-          action.revenue,
-          action.tax,
-          action.shipping,
-          action.coupon,
-          action.list,
-          action.step,
-          action.option,
+          actionObject.id,
+          actionObject.affiliation,
+          actionObject.revenue,
+          actionObject.tax,
+          actionObject.shipping,
+          actionObject.coupon,
+          actionObject.list,
+          actionObject.step,
+          actionObject.option,
           currencyCode
         );
       }
