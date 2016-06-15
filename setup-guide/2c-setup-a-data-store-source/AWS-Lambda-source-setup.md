@@ -24,6 +24,7 @@ This configures your deployment. The configuration file is written in [YAML](htt
 ```{yaml}
 snowplow:
     collector: http://a-collector.com
+    app_id: your_app_id
 s3:
     buckets:
         - bucket-a
@@ -33,6 +34,8 @@ s3:
 
 The `collector` field is the URL of your collector, for example `http://com.acme:8080/`. Under `s3` the `buckets` field is an array of the buckets you wish to monitor. 
 These buckets must exist prior to run and will not be created by the script. 
+
+The `app_id` field is the namespace to give your events, for example `com.snowplow.s3lambda`.
 
 **N.B. bucket names here should not include the s3:// prefix**
 
