@@ -341,7 +341,7 @@ raw:
   processing: s3://{{my-recovery-bucket/recovered}}
 ```
 
-You should then run EmrEtlRunner with the `--skip staging` option, since the data is already in the processing bucket.
+First, ensure that no other jobs are running - we don't want a conflict between our recovery job and our regular batch pipeline runs. Now, you can run EmrEtlRunner with the `--skip staging` option, since the data is already in the processing bucket.
 
 See [[Setting up EmrEtlRunner]] for more information.
 
