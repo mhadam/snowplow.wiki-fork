@@ -6,6 +6,7 @@ You can also use [Snowplow Version Matrix](Snowplow-version-matrix) as a guidanc
 
 For easier navigation, please, follow the links below.
 
+- [Snowplow 81 Kangaroo Island Emu](#r81) (**r81**) 2016-06-16
 - [Snowplow 80 Southern Cassowary](#r80) (**r80**) 2016-05-30
 - [Snowplow 79 Black Swan](#r79) (**r79**) 2016-05-12
 - [Snowplow 78 Great Hornbill](#r78) (**r78**) 2016-03-15
@@ -42,6 +43,30 @@ For easier navigation, please, follow the links below.
 - [Snowplow 0.9.2](#v0.9.2) (**v0.9.2**) 2014-04-30
 - [Snowplow 0.9.1](#v0.9.1) (**v0.9.1**) 2014-04-11
 - [Snowplow 0.9.0](#v0.9.0) (**v0.9.0**) 2014-02-04
+
+<a name="r81" />
+##Snowplow 81 Kangaroo Island Emu
+
+This is a real-time pipeline release. At the heart of it is the [Hadoop Event Recovery project](https://github.com/snowplow/snowplow/master/3-enrich/hadoop-event-recovery?_sp=0d8c4086-6778-47da-b736-9c55ff098552.1466110215242), which allows you to fix up Snowplow bad rows and make them ready for reprocessing. 
+
+### Upgrade steps
+
+The Kinesis apps for *R81 Kangaroo Island Emu* are all available in a single zip file here:
+
+```
+http://dl.bintray.com/snowplow/snowplow-generic/snowplow_kinesis_r81_kangaroo_island_emu.zip
+```
+
+Only the *Stream Enrich* app has actually changed. The change is not breaking, so you don’t have to make any changes to your configuration file. To upgrade *Stream Enrich*:
+
+- Install the new *Stream Enrich* app on each server in your Stream Enrich auto-scaling group
+- Update your supervisor process to point to the new *Stream Enrich* app
+- Restart the supervisor process on each server running *Stream Enrich*
+
+### Read more
+
+* [R81 Blog Post](http://snowplowanalytics.com/blog/2016/06/16/snowplow-r81-kangaroo-island-emu-released/)
+* [R81 Release Notes](https://github.com/snowplow/snowplow/releases/tag/r81-kangaroo-island-emu/)
 
 <a name="r80" />
 ##Snowplow 80 Southern Cassowary
