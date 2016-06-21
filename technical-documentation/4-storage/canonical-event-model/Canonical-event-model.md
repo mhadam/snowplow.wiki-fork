@@ -372,7 +372,7 @@ Contexts enable Snowplow users to define their own entities that are related to 
 
 An event can have any number of custom contexts attached. Each context is passed into Snowplow as a JSON. Additionally, the Snowplow Enrichment process can derive additional contexts.
 
-Contexts are not part of the `atomic.events` table; instead, for users running on Redshift, Snowplow will shred each context JSON into a dedicated table in the `atomic` schema, making it much more efficient for analysts to query data passed in in any one of the contexts. Those contexts can be joined back to the core `atomic.events` table on `atomic.my_custom_context_table.root_id = atomic.events.event_id`, which is a one-to-one join.
+Contexts are not part of the `atomic.events` table; instead, for users running on Redshift, Snowplow will shred each context JSON into a dedicated table in the `atomic` schema, making it much more efficient for analysts to query data passed in in any one of the contexts. Those contexts can be joined back to the core `atomic.events` table on `atomic.my_custom_context_table.root_id = atomic.events.event_id`, which is a one-to-one join or a many-to-one join.
 
 Back to [top](#top).
 
