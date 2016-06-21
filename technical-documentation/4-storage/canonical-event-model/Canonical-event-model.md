@@ -65,9 +65,9 @@ In order to analyse Snowplow data, it is important to understand how it is struc
 | `app_id`        | text     | Application ID  | Yes       | 'angry-birds'  |
 | `platform`      | text     | Platform        | Yes       | 'web'          |    
 
-The application ID is used to distinguish different applications that are being tracked by the same Snowplow stack.
+The application ID is used to distinguish different applications that are being tracked by the same Snowplow stack, e.g. `production` versus `dev`.
 
-The platform ID is used to distinguish the same app running on different platforms e.g. `iOS` vs `web`.
+The platform ID is used to distinguish the same app running on different platforms, e.g. `iOS` vs `web`.
 
 Back to [top](#top).
 
