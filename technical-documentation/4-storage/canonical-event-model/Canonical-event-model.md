@@ -187,8 +187,6 @@ Fields containing information about the event type.
 <a name="platform" />
 ### 2.2 Platform-specific fields
 
-Currently the only platform supported is `web`. However, as we build trackers for more platforms (e.g. iOS, Windows 8) we would expect to add platforms that are specific to each of these platforms.
-
 <a name="web" />
 #### 2.2.1 Web-specific fields
 
