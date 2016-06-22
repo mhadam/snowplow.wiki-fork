@@ -88,6 +88,7 @@ The optional tracker arguments:
 | `app_id`             | The application ID                            | No            | ``           |
 | `name_space`         | The name of the tracker instance              | No            | ``           |
 | `use_base64`         | Whether to enable [base 64 encoding] [base64] | No            | `true`       |
+| `desktop_context`    | Whether to add a `desktop_context` to events  | No            | `true`       |
 
 A more complete example:
 
@@ -108,8 +109,9 @@ string platform = "pc";
 string app_id = "openage";
 string name_space = "sp-pc";
 bool base64 = false;
+bool desktop_context = true;
 
-Tracker *t = Tracker::init(emitter, &subject, &client_session, &platform, &app_id, &name_space, &base64);
+Tracker *t = Tracker::init(emitter, &subject, &client_session, &platform, &app_id, &name_space, &base64, &desktop_context);
 ```
 
 __NOTE__: To ensure all of your events are sent before closing your application you can call the tracker flush function which is a blocking call that will send everything in the database and then will join the daemon thread to the calling thread.
