@@ -15,6 +15,7 @@
     - 2.2.5 [`app_id`](#app-id)
     - 2.2.6 [`name_space`](#name-space)
     - 2.2.7 [`use_base64`](#base64)
+    - 2.2.8 [`desktop_context`](#desktop-context)
 - 3. [Adding extra data: the Subject class](#subject-class)
   - 3.1 [`set_user_id`](#set-user-id)
   - 3.2 [`set_screen_resolution`](#set-screen-resolution)
@@ -151,12 +152,12 @@ The `app_id` argument lets you set the application ID to any string.
 If provided, the `name_space` argument will be attached to every event fired by the new tracker. This allows you to later identify which tracker fired which event if you have multiple trackers running.
 
 <a name="base64" />
-#### 2.2.6 `use_base64`
+#### 2.2.7 `use_base64`
 
 By default, unstructured events and custom contexts are encoded using Base64 to ensure that no data is lost or corrupted.
 
-<a name="base64" />
-#### 2.2.7 `desktop_context`
+<a name="desktop_context" />
+#### 2.2.8 `desktop_context`
 
 The `desktop_context` gathers extra information about the device it is running on and sends it along with every event that is made by the Tracker.
 
