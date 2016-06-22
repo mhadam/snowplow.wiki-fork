@@ -156,7 +156,7 @@ If provided, the `name_space` argument will be attached to every event fired by 
 
 By default, unstructured events and custom contexts are encoded using Base64 to ensure that no data is lost or corrupted.
 
-<a name="desktop_context" />
+<a name="desktop-context" />
 #### 2.2.8 `desktop_context`
 
 The `desktop_context` gathers extra information about the device it is running on and sends it along with every event that is made by the Tracker.
