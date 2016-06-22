@@ -155,6 +155,27 @@ If provided, the `name_space` argument will be attached to every event fired by 
 
 By default, unstructured events and custom contexts are encoded using Base64 to ensure that no data is lost or corrupted.
 
+<a name="base64" />
+#### 2.2.7 `desktop_context`
+
+The `desktop_context` gathers extra information about the device it is running on and sends it along with every event that is made by the Tracker.
+
+An example of the data in this context:
+
+```json
+{
+	"deviceManufacturer": "Apple Inc.",
+	"deviceModel": "MacPro3,1",
+	"deviceProcessorCount": 8,
+	"osIs64Bit": true,
+	"osServicePack": "",
+	"osType": "macOS",
+	"osVersion": "10.11.2"
+}
+```
+
+For more information the raw JsonSchema can be found [here](https://raw.githubusercontent.com/snowplow/iglu-central/master/schemas/com.snowplowanalytics.snowplow/desktop_context/jsonschema/1-0-0).
+
 [Back to top](#top)
 
 <a name="subject-class" />
