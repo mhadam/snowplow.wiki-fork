@@ -15,6 +15,7 @@
     - 2.2.5 [`app_id`](#app-id)
     - 2.2.6 [`name_space`](#name-space)
     - 2.2.7 [`use_base64`](#base64)
+    - 2.2.8 [`desktop_context`](#desktop-context)
 - 3. [Adding extra data: the Subject class](#subject-class)
   - 3.1 [`set_user_id`](#set-user-id)
   - 3.2 [`set_screen_resolution`](#set-screen-resolution)
@@ -88,6 +89,7 @@ The optional tracker arguments:
 | `app_id`             | The application ID                            | No            | ``           |
 | `name_space`         | The name of the tracker instance              | No            | ``           |
 | `use_base64`         | Whether to enable [base 64 encoding] [base64] | No            | `true`       |
+| `desktop_context`    | Whether to add a `desktop_context` to events  | No            | `true`       |
 
 A more complete example:
 
@@ -108,8 +110,9 @@ string platform = "pc";
 string app_id = "openage";
 string name_space = "sp-pc";
 bool base64 = false;
+bool desktop_context = true;
 
-Tracker *t = Tracker::init(emitter, &subject, &client_session, &platform, &app_id, &name_space, &base64);
+Tracker *t = Tracker::init(emitter, &subject, &client_session, &platform, &app_id, &name_space, &base64, &desktop_context);
 ```
 
 __NOTE__: To ensure all of your events are sent before closing your application you can call the tracker flush function which is a blocking call that will send everything in the database and then will join the daemon thread to the calling thread.
@@ -149,9 +152,30 @@ The `app_id` argument lets you set the application ID to any string.
 If provided, the `name_space` argument will be attached to every event fired by the new tracker. This allows you to later identify which tracker fired which event if you have multiple trackers running.
 
 <a name="base64" />
-#### 2.2.6 `use_base64`
+#### 2.2.7 `use_base64`
 
 By default, unstructured events and custom contexts are encoded using Base64 to ensure that no data is lost or corrupted.
+
+<a name="desktop-context" />
+#### 2.2.8 `desktop_context`
+
+The `desktop_context` gathers extra information about the device it is running on and sends it along with every event that is made by the Tracker.
+
+An example of the data in this context:
+
+```json
+{
+	"deviceManufacturer": "Apple Inc.",
+	"deviceModel": "MacPro3,1",
+	"deviceProcessorCount": 8,
+	"osIs64Bit": true,
+	"osServicePack": "",
+	"osType": "macOS",
+	"osVersion": "10.11.2"
+}
+```
+
+For more information the raw JsonSchema can be found [here](https://raw.githubusercontent.com/snowplow/iglu-central/master/schemas/com.snowplowanalytics.snowplow/desktop_context/jsonschema/1-0-0).
 
 [Back to top](#top)
 

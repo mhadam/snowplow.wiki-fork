@@ -1291,7 +1291,7 @@ Emitter e2 = new Emitter
         .EmitterBuilder("com.collector.acme", Context context) // Required
         .method(HttpMethod.GET) // Optional - Defines how we send the request
         .option(BufferOption.Single) // Optional - Defines how many events we bundle in a POST
-        .security(EmitterSecurity.HTTPS) // Optional - Defines what protocol used to send events
+        .security(RequestSecurity.HTTPS) // Optional - Defines what protocol used to send events
         .callback(new EmitterCallback() {...})
         .build();
 ```

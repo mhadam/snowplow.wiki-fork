@@ -63,7 +63,8 @@ We now need to create the Amazon policy document to define *just* the user permi
                 "iam:passrole",
                 "cloudformation:ListStackResources",
                 "cloudformation:DescribeStacks",
-                "autoscaling:DescribeAutoScalingGroups"
+                "autoscaling:DescribeAutoScalingGroups",
+                "redshift:DescribeClusters"
             ],
             "Resource": "*",
             "Effect": "Allow"
