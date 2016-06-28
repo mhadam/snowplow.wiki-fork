@@ -16,6 +16,8 @@
     - [referer-parser enrichment] (referer-parser-enrichment)
     - [ua-parser enrichment] (ua-parser-enrichment)
     - [user-agent-utils enrichment] (user-agent-utils-enrichment)
+    - [[Event fingerprint enrichment]]
+    - [[Cookie extractor enrichment]]
     - [Weather enrichment] (Weather-enrichment)
     - [API Request enrichment] (API-Request-enrichment)
     - [HTTP header extractor enrichment] (HTTP-header-extractor-enrichment)
