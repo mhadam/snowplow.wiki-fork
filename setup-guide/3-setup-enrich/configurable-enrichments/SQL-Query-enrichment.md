@@ -187,11 +187,11 @@ With this configuration:
 
 ```json
 ...
-"query": {
-    "sql": "SELECT username, date_of_birth FROM tbl_users WHERE user = ?",
-    "expectedRows": "AT_MOST_ONE"
-    },
+  "query": {
+    "sql": "SELECT username, date_of_birth FROM tbl_users WHERE user = ?"
+  },
   "output": {
+    "expectedRows": "AT_MOST_ONE",
     "json": {
       "schema": "iglu:com.acme/user/jsonschema/1-0-0",
       "describes": "ALL_ROWS",
@@ -250,11 +250,11 @@ With this configuration:
 
 ```json
 ...
-"query": {
-    "sql": "SELECT * FROM product WHERE category = ?",
-    "expectedRows": "AT_LEAST_ZERO"
-    },
+  "query": {
+    "sql": "SELECT * FROM product WHERE category = ?"
+  },
   "output": {
+    "expectedRows": "AT_LEAST_ZERO",
     "json": {
       "schema": "iglu:com.acme/products/jsonschema/1-0-0",
       "describes": "ALL_ROWS",
@@ -296,6 +296,7 @@ If we change the configuration to:
 ```json
 ...
   "output": {
+    "expectedRows": "AT_LEAST_ZERO",
     "json": {
       "schema": "iglu:com.acme/product/jsonschema/1-0-0",
       "describes": "EVERY_ROW",
