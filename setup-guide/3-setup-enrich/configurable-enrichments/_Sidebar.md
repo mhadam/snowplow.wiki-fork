@@ -21,6 +21,7 @@
     - [Weather enrichment] (Weather-enrichment)
     - [API Request enrichment] (API-Request-enrichment)
     - [HTTP header extractor enrichment] (HTTP-header-extractor-enrichment)
+    - [SQL Query enrichment] (SQL-Query-enrichment)
 - [Step 4: Setup alternative data stores] (setting-up-alternative-data-stores)  
 - [Step 5: Analyze your data!] (Getting started analyzing Snowplow data)  
 
