@@ -13,6 +13,10 @@ Data provider	Internal
 
 The SQL Query Enrichment lets you perform dimension widening on a Snowplow event via your own internal relational database.
 
+This is the field which this enrichment will augment:
+
+* derived_contexts
+
 ### Database support
 
 Currently supported database types:
@@ -21,10 +25,6 @@ Currently supported database types:
 * PostgreSQL, plus variants which speak PostgreSQL
 
 We **don't recommend** to use this enrichment with analytical databases which support minimal (50-100) concurrent queries (e.g. Redshift).
-
-This is the field which this enrichment will augment:
-
-* derived_contexts
 
 ### Example
 
