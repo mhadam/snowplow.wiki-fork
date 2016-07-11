@@ -273,7 +273,7 @@ To take each variable in turn:
 2. `type`, what type of database are we loading into? Currently the
    only supported formats are "postgres" and "redshift"
 3. `host`, the host (endpoint in Redshift parlance) of the databse to
-   load. Only supported for Redshift currently, leave blank for Infobright
+   load.
 4. `database`, the name of the database to load
 5. `port`, the port of the database to load. 5439 is the default Redshift
    port; 5432 is the default Postgres port
@@ -286,10 +286,14 @@ To take each variable in turn:
 9. `maxerror`, a Redshift-specific setting governing how many load errors
    should be permitted before failing the overall load. See the
    [Redshift `COPY` documentation] [redshift-copy] for more details
+10. `comprows`, a Redshift-specific setting defining number of rows to be used as the sample size for compression analysis
+11. `ssl_mode`, determines how to handle encryption for client connections and server certificate verification.      The the following `sslmode` values are supported:
+ - `disable`: SSL is disabled and the connection is not encrypted.
+ - `require`: SSL is required.
+ - `verify-ca`: SSL must be used and the server certificate must be verified.
+ - `verify-full`: SSL must be used. The server certificate must be verified and the server hostname must match the hostname attribute on the certificate.
 
-Note that the `host` and `port` options are not currently supported for
-Infobright - StorageLoader assumes that the Infobright database is on the
-server it is being run on, and accesses it on the standard Infobright port (5029).
+Note: The difference between `verify-ca` and `verify-full` depends on the policy of the root CA. If a public CA is used, `verify-ca` allows connections to a server that somebody else may have registered with the CA to succeed. In this case, `verify-full` should always be used. If a local CA is used, or even a self-signed certificate, using `verify-ca` often provides enough protection.
 
 ##### Elasticsearch
 
