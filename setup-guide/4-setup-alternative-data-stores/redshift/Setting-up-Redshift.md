@@ -164,7 +164,20 @@ The Redshift cluster is now visible on Navicat, alongside every other database i
 <a name="ssl" />
 ### 3.2 Connect via SSL
 
-TO WRITE
+Amazon Redshift supports Secure Sockets Layer (SSL) connections to encrypt data and server certificates to validate the server certificate that the client connects to. 
+
+ODBC DSNs contain an `sslmode` setting that determines how to handle encryption for client connections and server certificate verification. The following `sslmode` values from the client connection are supported:
+
+- `disable`: SSL is disabled and the connection is not encrypted.
+- `allow`: SSL is used if the server requires it.
+- `prefer`: SSL is used if the server supports it. Amazon Redshift supports SSL, so SSL is used when you set `sslmode` to `prefer`.
+- `require`: SSL is required.
+- `verify-ca`: SSL must be used and the server certificate must be verified.
+- `verify-full`: SSL must be used. The server certificate must be verified and the server hostname must match the hostname attribute on the certificate.
+
+The difference between `verify-ca` and `verify-full` depends on the policy of the root CA. If a public CA is used, `verify-ca` allows connections to a server that somebody else may have registered with the CA to succeed. In this case, `verify-full` should always be used. If a local CA is used, or even a self-signed certificate, using verify-ca often provides enough protection.
+
+The default value for `sslmode` is `prefer`. It is only provided as the default for backwards compatibility, and not recommended in secure deployments. 
 
 <a name="db" />
 ## 4. Set up the Snowplow database and events table
