@@ -166,5 +166,5 @@ Field | Purpose
 `mkt_clickid` | Click ID which resulted in the redirect/follow request
 `mkt_network` | The advertising network name, either default determined from parameter for Click ID or custom specifically stated
 
-[schema-1]: http://iglucentral.com/schemas/com.snowplowanalytics.snowplow/referer_parser/jsonschema/1-0-0
-[schema-2]: http://iglucentral.com/schemas/com.snowplowanalytics.snowplow/referer_parser/jsonschema/1-0-0
+[schema-1]: http://iglucentral.com/schemas/com.snowplowanalytics.snowplow/campaign_attribution/jsonschema/1-0-0
+[schema-2]: http://iglucentral.com/schemas/com.snowplowanalytics.snowplow/campaign_attribution/jsonschema/1-0-1
