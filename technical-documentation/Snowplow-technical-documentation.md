@@ -41,7 +41,7 @@ The technical documentation reflects the Snowplow architecture, with six loosely
 ## 2. Collectors
 
 [Collectors overview](collectors)  
-[Cloudfront collector](cloudfront)  
+[Cloudfront collector](Cloudfront-collector)  
 [Clojure collector (Elastic Beanstalk)](Clojure-collector)  
 [Scala Stream collector](Scala-stream-collector)  
 
