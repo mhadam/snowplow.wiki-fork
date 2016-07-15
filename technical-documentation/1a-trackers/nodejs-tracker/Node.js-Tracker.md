@@ -268,7 +268,7 @@ If a visitor arrives on a page advertising a movie, the context dictionary might
 
 ```js
 { 
-  "schema": "iglu:com.acme_company/movie_poster/jsonschema/2.1.1",
+  "schema": "iglu:com.acme_company/movie_poster/jsonschema/2-1-1",
   "data": {
     "movie_name": "Solaris", 
     "poster_country": "JP"
@@ -280,7 +280,7 @@ This is how to fire a page view event with the above custom context:
 
 ```js
 t.trackPageView("http://www.films.com", "Homepage", null, [{ 
-  "schema": "iglu:com.acme_company/movie_poster/jsonschema/2.1.1",
+  "schema": "iglu:com.acme_company/movie_poster/jsonschema/2-1-1",
   "data": {
     "movie_name": "Solaris", 
     "poster_country": "JP"
@@ -441,7 +441,7 @@ Example:
 
 ```js
 t.trackUnstructEvent({
-  "schema": "com.example_company/save-game/jsonschema/1.0.2",
+  "schema": "iglu:com.example_company/save-game/jsonschema/1-0-2",
   "data": {
     "save_id": "4321",
     "level": 23,
