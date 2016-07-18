@@ -473,6 +473,9 @@ These settings are currently not editable from the constructor; however the valu
 <a name="file-emitter" />
 ### 4.4 File
 
+[[/images/warning.png]] | When running under Windows, PHP cannot spawn truly separate processes, and slowly eats more and more resources when more processes are spawned. Thus, Windows might crash under high load when using the File Emitter.
+---|:---
+
 The File Emitter is the only true non-blocking solution.  The File Emitter works via spawning workers which grab created files of logged events from a local temporary folder.  The workers then load the events using the same asynchronous curl properties from the above emitter.
 
 All of the worker processes are created as background processes so none of them will delay the execution of the main script.  Currently they are configured to look for files inside created worker folders until there are none left and they hit their `timeout` limit, at which point the process will kill itself.
