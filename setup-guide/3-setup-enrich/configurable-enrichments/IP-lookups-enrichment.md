@@ -17,7 +17,7 @@ There are five possible fields you can add to the "parameters" section of the en
 * The `database` field contains the name of the database file.
 * The `uri` field contains the URI of the bucket in which the database file is found. Can have either http: (for publically available MaxMind files) or s3: (for commercial MaxMind files) as the scheme. Must *not* end with a trailing slash.
 
-This table contains describes the five types of lookup:
+The below table describes the five types of lookup. Note Snowplow only works with the legacy binary formats (.DAT) which you should have access to with any subscription to [MaxMind][maxmind].
 
 | **Field name**   | **MaxMind Database name**     | **Lookup description**                             | **Accepted database filenames**                   | **Fields populated** |
 |-----------------:|:------------------------------|:---------------------------------------------------|:--------------------------------------------------|:---------------------|
