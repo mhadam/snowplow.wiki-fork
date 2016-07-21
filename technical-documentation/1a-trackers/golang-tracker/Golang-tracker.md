@@ -716,9 +716,9 @@ emitter := sp.InitEmitter(
   sp.OptionByteLimitGet(52000),
   sp.OptionByteLimitPost(52000),
   sp.OptionDbName("/home/vagrant/test.db"),
-  sp.OptionCallback(func(g int, b int) {
-    log.Println("Successes: " + IntToString(g))
-    log.Println("Failures: " + IntToString(b))
+  sp.OptionCallback(func(g []CallbackResult, b []CallbackResult)) {
+    log.Println("Successes: " + IntToString(len(g)))
+    log.Println("Failures: " + IntToString(len(b)))
   }),
 )
 ```
