@@ -20,7 +20,7 @@ Ready? Let's get started.
 <a name="compatibility" />
 ## 2 Tracker compatibility
 
-The Snowplow Golang Tracker has been built and tested using Golang versions 1.3, 1.4, 1.5, 1.6 and tip.
+The Snowplow Golang Tracker has been built and tested using Golang versions 1.3, 1.4, 1.5 and 1.6.
 
 [Back to top](#top)
 
@@ -41,7 +41,7 @@ To import the package, add the following line to your code:
 import "gopkg.in/snowplow/snowplow-golang-tracker.v1/tracker"
 ```
 
-The current version of the Snowplow Golang Tracker is 1.0.0.
+The current version of the Snowplow Golang Tracker is 1.1.0.
 
 [Back to top](#top)
 
