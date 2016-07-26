@@ -62,7 +62,6 @@ You can also customize the part of the tag between the comments containing "!!!"
     };p[i].q=p[i].q||[];n=l.createElement(o);g=l.getElementsByTagName(o)[0];n.async=1;
     n.src=w;g.parentNode.insertBefore(n,g)}}(window,document,"script","//d1fc8wv8zag5ca.cloudfront.net/2.6.1/sp.js","SNOWPLOW_NAME_HERE"));
 
-
     // !!! Customizable section starts
     // Track page views, enable link clicks, and so on here
       
@@ -75,11 +74,9 @@ You can also customize the part of the tag between the comments containing "!!!"
     SNOWPLOW_NAME_HERE('trackPageView');
 
     // !!! Customizable section ends
-    
   }
   
   var ecommerce = {{ecommerce}};
-
   var actions = [
     "click",
     "detail",
@@ -92,22 +89,19 @@ You can also customize the part of the tag between the comments containing "!!!"
     "promo_click",
     "view"
   ];
-
   if (ecommerce) {
     sendEnhancedEcommerceEvent(ecommerce);
   }
   
   function sendEnhancedEcommerceEvent(ecommerce) {
     var currencyCode = ecommerce.currencyCode;
-    var action;
-
+    var relevantActions = [];
+    
     for (var i = 0; i < actions.length; i++) {
       if (ecommerce[actions[i]]) {
-        action = actions[i];
-        break;
+        relevantActions.push(actions[i]);
       }
     }
-
     if (ecommerce.impressions) {
       for (var j = 0; j < ecommerce.impressions.length; j++) {
         var impression = ecommerce.impressions[j];
@@ -124,7 +118,6 @@ You can also customize the part of the tag between the comments containing "!!!"
         );
       }
     }
-
     if (ecommerce.promoView) {
       for (var l = 0; l < ecommerce.promoView.promotions.length; l++) {
         var promo = ecommerce.promoView.promotions[l];
@@ -137,47 +130,47 @@ You can also customize the part of the tag between the comments containing "!!!"
         );
       }
     }
-
-    if (!action) {
-      action = 'view';
+    if (relevantActions.length === 0) {
+      SNOWPLOW_NAME_HERE('trackEnhancedEcommerceAction', 'view');
     } else {
-      if (ecommerce[action].products) {
-        for (var k = 0; k < ecommerce[action].products.length; k++) {
-          var product = ecommerce[action].products[k];
-          SNOWPLOW_NAME_HERE('addEnhancedEcommerceProductContext',
-            product.id,
-            product.name,
-            product.list,
-            product.brand,
-            product.category,
-            product.variant,
-            product.price,
-            product.quantity,
-            product.coupon,
-            product.position,
+      for (var m = 0; m < relevantActions.length; m++) {
+        var relevantAction = relevantActions[m];
+        if (ecommerce[relevantAction].products) {
+          for (var k = 0; k < ecommerce[relevantAction].products.length; k++) {
+            var product = ecommerce[relevantAction].products[k];
+            SNOWPLOW_NAME_HERE('addEnhancedEcommerceProductContext',
+              product.id,
+              product.name,
+              product.list,
+              product.brand,
+              product.category,
+              product.variant,
+              product.price,
+              product.quantity,
+              product.coupon,
+              product.position,
+              currencyCode
+            );
+          }
+        }
+        if (ecommerce[relevantAction].actionField) {
+          var actionObject = ecommerce[relevantAction].actionField;
+          SNOWPLOW_NAME_HERE('addEnhancedEcommerceActionContext',
+            actionObject.id,
+            actionObject.affiliation,
+            actionObject.revenue,
+            actionObject.tax,
+            actionObject.shipping,
+            actionObject.coupon,
+            actionObject.list,
+            actionObject.step,
+            actionObject.option,
             currencyCode
           );
         }
-      }
-
-      if (ecommerce[action].actionField) {
-        var actionObject = ecommerce[action].actionField;
-        SNOWPLOW_NAME_HERE('addEnhancedEcommerceActionContext',
-          actionObject.id,
-          actionObject.affiliation,
-          actionObject.revenue,
-          actionObject.tax,
-          actionObject.shipping,
-          actionObject.coupon,
-          actionObject.list,
-          actionObject.step,
-          actionObject.option,
-          currencyCode
-        );
+        SNOWPLOW_NAME_HERE('trackEnhancedEcommerceAction', relevantAction);
       }
     }
-
-    SNOWPLOW_NAME_HERE('trackEnhancedEcommerceAction', action);
   }
 </script>
 ```
