@@ -965,7 +965,7 @@ window.snowplow('trackTiming',
 );
 ```
 
-Site search events are implemented as Snowplow unstructured events. [Here][timing] is the schema for a `site_search` event.
+Site search events are implemented as Snowplow unstructured events. [Here][timing] is the schema for a `timing` event.
 
 `trackTiming` can also be passed an array of custom contexts as an additional final parameter. See [Contexts](#custom-contexts) for more information.
 
