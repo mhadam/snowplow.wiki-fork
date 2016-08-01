@@ -934,7 +934,7 @@ window.snowplow_name_here('trackSiteSearch',
     ['unified', 'log'], // search terms
     ['books'],          // filters
     14,                 // results found
-    8,                  // results displayed on first page
+    8                   // results displayed on first page
 );
 ```
 
@@ -1232,7 +1232,7 @@ window.snowplow_name_here('trackPageView', null, [{
 {
     schema: "iglu:com.example_company/user/jsonschema/2-0-0",
     data: {
-      userType: 'tester',
+      userType: 'tester'
     }
 }]);
 ```
