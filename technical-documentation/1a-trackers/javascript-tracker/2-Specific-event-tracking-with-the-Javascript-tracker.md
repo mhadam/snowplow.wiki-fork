@@ -923,7 +923,7 @@ Use the `trackSiteSearch` method to track users searching your website. Here are
 | **Name**       | **Required?** | **Description**                            | **Type**             |
 |---------------:|:--------------|:-------------------------------------------|:---------------------|
 |        `terms` | Yes           | Search terms   | array     |
-|     `filters`  | No            | Search filters   |  array |
+|     `filters`  | No            | Search filters   |  JSON |
 | `totalResults` | No            | Results found   |    number    |
 |  `pageResults` | No            | Results displayed on first page             |    number            |
 
@@ -931,10 +931,10 @@ An example:
 
 ```javascript
 window.snowplow_name_here('trackSiteSearch',
-    ['unified', 'log'], // search terms
-    ['books'],          // filters
-    14,                 // results found
-    8                   // results displayed on first page
+    ['unified', 'log'],      // search terms
+    {'category': 'books', 'sub-category': 'non-fiction'},  // filters
+    14,                      // results found
+    8                        // results displayed on first page
 );
 ```
 
