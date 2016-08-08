@@ -148,7 +148,7 @@ Uncomment line 59:
 
 And update the line to enable connections from any IP address:
 
-	listen_address='*'
+	listen_addresses='*'
 
 And uncomment line 63:
 
