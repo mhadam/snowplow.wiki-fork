@@ -28,6 +28,8 @@ The minified JavaScript tracker is hosted on CloudFront against its full semanti
 
 **Note**: The above URL references JavaScript tracker v2.6.1 (d1fc8wv8zag5ca.cloudfront.net/**2.6.1**/sp.js). To ensure you are using the latest version, please, check what it currently is at [GitHub](https://github.com/snowplow/snowplow-javascript-tracker/releases) and amend accordingly.
 
+## 2. Collectors
+
 ### 2.1 Clojure Collector resources
 
 The Clojure Collector packaged as a complete WAR file, ready for Amazon Elastic Beanstalk, is here:
@@ -38,7 +40,11 @@ Right-click on this [Download link] [cc-download] to save it down locally via Cl
 
 ### 2.2 Scala Stream Collector resources
 
-See _6. Kinesis resources_ below.
+The Scala Stream Collector is available on Bintray here:
+
+    http://dl.bintray.com/snowplow/snowplow-generic/snowplow_stream_collector_0.7.0.zip
+
+Right-click on this [Download link] [ssc-download] to save it down locally.
 
 ## 3. Enrich
 
@@ -68,7 +74,11 @@ Right-click on this [Download link] [hadoop-event-recovery-download] to save it 
 
 ### 3.4 Stream Enrich resources
 
-See _6. Kinesis resources_ below.
+The Stream Enrich app is available on Bintray here:
+
+    http://dl.bintray.com/snowplow/snowplow-generic/snowplow_stream_enrich_0.8.1.zip
+
+Right-click on this [Download link] [se-download] to save it down locally.
 
 ### 3.3 Shared resources
 
@@ -94,11 +104,19 @@ If you are running StorageLoader, these files will automatically be used for loa
 
 ### 4.2 Kinesis Elasticsearch Sink resources
 
-See _6. Kinesis resources_ below.
+The Kinesis Elasticsearch Sink app is available on Bintray here:
+
+    http://dl.bintray.com/snowplow/snowplow-generic/snowplow_elasticsearch_sink_0.7.0.zip
+
+Right-click on this [Download link] [kes-download] to save it down locally.
 
 ### 4.3 Kinesis LZO S3 Sink resources
 
-See _6. Kinesis resources_ below.
+The Kinesis S3 app is available for download separately here:
+
+    http://dl.bintray.com/snowplow/snowplow-generic/kinesis_s3_0.4.0.zip
+
+Right-click on this [Download link] [kinesis-s3-download] to save it down locally.
 
 ## 5. Analytics
 
@@ -106,19 +124,11 @@ No hosted assets currently.
 
 ## 6. Kinesis resources
 
-We are steadily moving over to [Bintray][bintray] for hosting binaries and artifacts which don't have to be hosted on S3.
+To make deployment easier, the Kinesis apps Scala Stream Collector, Stream Enrich and Kinesis Elasticsearch Sink are also all available in a single zip file here:
 
-To make deployment easier, the Kinesis apps Scala Stream Collector, Stream Enrich and Kinesis Elasticsearch Sink are now all available in a single zip file here:
-
-    http://dl.bintray.com/snowplow/snowplow-generic/snowplow_kinesis_r80_southern_cassowary.zip
+    https://dl.bintray.com/snowplow/snowplow-generic/snowplow_kinesis_r82_tawny_eagle.zip
 
 Right-click on this [Download link] [kinesis-download] to save it down locally.
-
-The Kinesis S3 app is available for download separately here:
-
-    http://dl.bintray.com/snowplow/snowplow-generic/kinesis_s3_0.4.0.zip
-
-Right-click on this [Download link] [kinesis-s3-download] to save it down locally.
 
 ## See also
 
@@ -136,7 +146,9 @@ Please see the [[Artifact repositories]] wiki page for more information.
 [maxmind]: http://www.maxmind.com/?rld=snowplow
 
 [bintray]: https://bintray.com/
-[kinesis-download]: http://dl.bintray.com/snowplow/snowplow-generic/snowplow_kinesis_r80_southern_cassowary.zip
+[kinesis-download]: https://dl.bintray.com/snowplow/snowplow-generic/snowplow_kinesis_r82_tawny_eagle.zip
 [kinesis-s3-download]: http://dl.bintray.com/snowplow/snowplow-generic/kinesis_s3_0.4.0.zip
-
+[ssc-download]: http://dl.bintray.com/snowplow/snowplow-generic/snowplow_stream_collector_0.7.0.zip
+[se-download]: http://dl.bintray.com/snowplow/snowplow-generic/snowplow_stream_enrich_0.8.1.zip
+[kes-download]: http://dl.bintray.com/snowplow/snowplow-generic/snowplow_elasticsearch_sink_0.7.0.zip
 [emr-download]: http://dl.bintray.com/snowplow/snowplow-generic/snowplow_emr_r77_great_auk.zip
