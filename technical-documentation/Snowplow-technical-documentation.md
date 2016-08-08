@@ -1,6 +1,6 @@
 [**HOME**](Home) » **SNOWPLOW TECHNICAL DOCUMENTATION**
 
-The technical documentation reflects the Snowplow architecture, with six loosely-coupled sub-systems connected by five standardised data protocols/formats:
+The technical documentation reflects the Snowplow architecture, with six loosely-coupled sub-systems connected by five standardized data protocols/formats:
 
 ![architecture] [technical-architecture]
 
@@ -10,7 +10,7 @@ The technical documentation reflects the Snowplow architecture, with six loosely
 [ActionScript3 Tracker](ActionScript3-Tracker)  
 [Android Tracker](Android-Tracker)  
 [Arduino Tracker](Arduino-Tracker)  
-[Goland Tracker](Golang-tracker)  
+[Golang Tracker](Golang-tracker)  
 [[Google AMP Tracker]]  
 [iOS Tracker](iOS-Tracker)  
 [Java Tracker](Java-Tracker)   
