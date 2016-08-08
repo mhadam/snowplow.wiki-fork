@@ -6,6 +6,7 @@ You can also use [Snowplow Version Matrix](Snowplow-version-matrix) as a guidanc
 
 For easier navigation, please, follow the links below.
 
+- [Snowplow 82 Tawny Eagle](#r82) (**r82**) 2016-08-08
 - [Snowplow 81 Kangaroo Island Emu](#r81) (**r81**) 2016-06-16
 - [Snowplow 80 Southern Cassowary](#r80) (**r80**) 2016-05-30
 - [Snowplow 79 Black Swan](#r79) (**r79**) 2016-05-12
@@ -44,10 +45,50 @@ For easier navigation, please, follow the links below.
 - [Snowplow 0.9.1](#v0.9.1) (**v0.9.1**) 2014-04-11
 - [Snowplow 0.9.0](#v0.9.0) (**v0.9.0**) 2014-02-04
 
+<a name="r82" />
+##Snowplow 82 Tawny Eagle
+
+This is a real-time pipeline release. This release updates the Kinesis Elasticsearch Sink with support for sending events via HTTP, allowing us to support [Amazon Elasticsearch Service](https://aws.amazon.com/elasticsearch-service/). 
+
+### Upgrade steps
+
+The Kinesis apps for *82 Tawny Eagle* are all available in a single zip file here:
+
+```
+https://dl.bintray.com/snowplow/snowplow-generic/snowplow_kinesis_r82_tawny_eagle.zip
+```
+
+The individual Kinesis apps for R82 Tawny Eagle are also available in the following zipfiles:
+
+```
+http://dl.bintray.com/snowplow/snowplow-generic/snowplow_stream_collector_0.7.0.zip
+http://dl.bintray.com/snowplow/snowplow-generic/snowplow_stream_enrich_0.8.1.zip
+http://dl.bintray.com/snowplow/snowplow-generic/snowplow_elasticsearch_sink_0.7.0.zip
+```
+
+Only the *Elasticsearch Sink* app has actually changed. The change does however include breaking config changes, so you will need to make some minor changes to your configuration file. To upgrade the *Elasticsearch Sink*:
+
+1. Install the new Elasticsearch Sink app on each server in your Elasticsearch Sink auto-scaling group
+2. Update your Elasticsearch Sink config with the new `elasticsearch` section:
+ - The only new fields are `elasticsearch.client.type` and `elasticsearch.client.port`
+ - The following fields have been renamed:
+`elasticsearch.cluster-name` is now `elasticsearch.cluster.name`
+`elasticsearch.endpoint` is now `elasticsearch.client.endpoint`
+`elasticsearch.max-timeout` is now `elasticsearch.client.max-timeout`
+`elasticsearch.index` is now `elasticsearch.cluster.index`
+`elasticsearch.type` is now `elasticsearch.cluster.type`
+3. Update your supervisor process to point to the new Kinesis Elasticsearch Sink app
+4. Restart the supervisor process on each server running the sink
+
+### Read more
+
+* [R82 Blog Post](http://snowplowanalytics.com/blog/2016/08/08/snowplow-r82-tawny-eagle-released-with-kinesis-elasticsearch-service-support/)
+* [R82 Release Notes](https://github.com/snowplow/snowplow/releases/tag/r82-tawny-eagle)
+
 <a name="r81" />
 ##Snowplow 81 Kangaroo Island Emu
 
-This is a real-time pipeline release. At the heart of it is the [Hadoop Event Recovery project](https://github.com/snowplow/snowplow/master/3-enrich/hadoop-event-recovery?_sp=0d8c4086-6778-47da-b736-9c55ff098552.1466110215242), which allows you to fix up Snowplow bad rows and make them ready for reprocessing. 
+This is a real-time pipeline release. At the heart of it is the [Hadoop Event Recovery project](https://github.com/snowplow/snowplow/master/3-enrich/hadoop-event-recovery), which allows you to fix up Snowplow bad rows and make them ready for reprocessing. 
 
 ### Upgrade steps
 
