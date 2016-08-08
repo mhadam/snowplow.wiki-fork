@@ -216,4 +216,4 @@ This will start the process of reading events from Kinesis and writing them to a
 [scala-kinesis-enrich]: https://github.com/snowplow/snowplow/wiki/Scala-Kinesis-Enrich
 [conf-example]: https://github.com/snowplow/snowplow/blob/r67-bohemian-waxwing/4-storage/kinesis-elasticsearch-sink/src/main/resources/config.hocon.sample
 [0.1]: https://github.com/snowplow/snowplow/wiki/kinesis-elasticsearch-sink-setup-0.1.0
-[0.5]: https://github.com/snowplow/snowplow/wiki/kinesis-elasticsearch-sink-setup
+[0.5]: https://github.com/snowplow/snowplow/wiki/kinesis-elasticsearch-sink-setup-0.5.0
