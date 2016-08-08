@@ -312,7 +312,7 @@ tracker.set_ip_address('34.633.11.139')
 ```
 
 <a name="set-useragent" />
-### 3.9 Setting the useragent with `set_ip_address`
+### 3.9 Setting the useragent with `set_useragent`
 
 If you have access to the user's useragent (sometimes called "browser string"), you can set it like this:
 
