@@ -66,7 +66,7 @@ public class SnowplowTrackerBuilder {
 Once you have successfully built your Tracker object you can track events with calls like the following:
 
 ```java
-Tracker tracker = getClassicTracker(context);
+Tracker tracker = getTracker(activity, context);
 tracker.track(ScreenView.builder().name("screenName").id("screenId").build());
 ```
 
