@@ -1,112 +1,57 @@
 <a name="top" />
 
-This page refers to integration samples for [Android Tracker v0.5.1][android-tracker].  This assumes you have already successfully gone through the [Setup Guide][setup-guide] for setting up all the dependencies for the tracker.
+This page refers to integration samples for [Android Tracker v0.6.0][android-tracker].  This assumes you have already successfully gone through the [Setup Guide][setup-guide] for setting up all the dependencies for the tracker.
 
 The following example classes are using the bare minimum of settings for building a Tracker.  It is encouraged to flesh out the options for the Tracker and Emitter builders.
 
 For previous versions:
 
+* [v0.5.0][0.5.0]
 * [v0.4.0][0.4.0]
 
 ## Contents
 
-- 1. [Classic Tracker](#classic)
-- 2. [RxJava Tracker](#rx-java)
-- 3. [Tracking Events](#events)
-- 4. [Application Focus](#app-focus)
+- 1. [Init Tracker](#tracker)
+- 2. [Tracking Events](#events)
+- 3. [Application Focus](#app-focus)
 
-<a name="classic" />
-## 1. Classic Tracker
-
-You will need to have imported the following library into your project:
-
-```groovy
-dependencies {
-    ...
-    // Snowplow Android Tracker Classic
-    compile 'com.snowplowanalytics:snowplow-android-tracker-classic:0.5.1'
-}
-```
-
-Example class to return an Android Classic Tracker:
-
-```java
-import com.snowplowanalytics.snowplow.tracker.*;
-import android.content.Context;
-
-public class TrackerBuilderClassic {
-
-    public static Tracker getClassicTracker(Context context) {
-        Emitter emitter = getClassicEmitter(context);
-        Subject subject = getSubject(context);  // Optional
-
-        return new Tracker
-            .TrackerBuilder(emitter, "your-namespace", "your-appid", context,
-                com.snowplowanalytics.snowplow.tracker.classic.Tracker.class)
-            .subject(subject) // Optional
-            .build();
-    }
-
-    private static Emitter getClassicEmitter(Context context) {
-        return new Emitter
-            .EmitterBuilder("notarealuri.fake.io", context,
-                com.snowplowanalytics.snowplow.tracker.classic.Emitter.class)
-            .build();
-    }
-
-    private static Subject getSubject(Context context) {
-        return new Subject
-            .SubjectBuilder()
-            .context(context)
-            .build();
-    }
-}
-```
-
-[Back to top](#top)
-
-<a name="rx-java" />
-## 2. RxJava tracker
+<a name="tracker" />
+## 1. Init Tracker
 
 You will need to have imported the following library into your project:
 
 ```groovy
 dependencies {
     ...
-    // Snowplow Android Tracker Rx
-    compile 'com.snowplowanalytics:snowplow-android-tracker-rx:0.5.1'
+    compile 'com.snowplowanalytics:snowplow-android-tracker:0.6.0@aar'
 }
 ```
 
-Example class to return an Android RxJava Tracker:
+Example class to return an Android Tracker:
 
 ```java
 import com.snowplowanalytics.snowplow.tracker.*;
 import android.content.Context;
 
-public class TrackerBuilderRx {
+public class SnowplowTrackerBuilder {
 
-    public static Tracker getRxTracker(Context context) {
-        Emitter emitter = getRxEmitter(context);
+    public static Tracker getTracker(Activity activity, Context context) {
+        Emitter emitter = getEmitter(context);
         Subject subject = getSubject(context); // Optional
 
-        return new Tracker
-            .TrackerBuilder(emitter, "your-namespace", "your-appid", context,
-                com.snowplowanalytics.snowplow.tracker.rx.Tracker.class)
+        return Tracker.init(new Tracker.TrackerBuilder(emitter, "your-namespace", "your-appid", context)
             .subject(subject) // Optional
-            .build();
+            .build()
+        ).setLifecycleHandler(activity);
     }
 
-    private static Emitter getRxEmitter(Context context) {
-        return new Emitter
-            .EmitterBuilder("notarealuri.fake.io", context,
-                com.snowplowanalytics.snowplow.tracker.rx.Emitter.class)
+    private static Emitter getEmitter(Context context) {
+        return new Emitter.EmitterBuilder("notarealuri.fake.io", context)
             .build();
     }
 
     private static Subject getSubject(Context context) {
-        return new Subject
-            .SubjectBuilder()
+        return new Subject.SubjectBuilder()
             .context(context)
             .build();
     }
@@ -116,7 +61,7 @@ public class TrackerBuilderRx {
 [Back to top](#top)
 
 <a name="events" />
-## 3. Tracking Events
+## 2. Tracking Events
 
 Once you have successfully built your Tracker object you can track events with calls like the following:
 
@@ -130,11 +75,11 @@ For an outline of all available tracking combinations have a look [here][demo-ap
 [Back to top](#top)
 
 <a name="app-focus" />
-## 4. Application Focus
+## 3. Application Focus
 
 The Tracker Session object can be tuned to timeout in `foreground` and `background` scenarios, but you are required to tell us when your application is in these states.  Unfortunately it is not possible to do so from a library standpoint.
 
-The current implementation we are using is to override the `onPause()` and `onResume()` functions of an application activity to notify the session when we change states.
+For Android APIs lower than 14 the current implementation we are using is to override the `onPause()` and `onResume()` functions of an application activity to notify the session when we change states.
 
 ```java
 @Override
@@ -150,7 +95,11 @@ protected void onResume() {
 }
 ```
 
-If you know of a better way please do not hesitate to let us know!
+For Android APIs 14+ we utilise a Lifecycle Handler class to manage this for us.  Simply setup the handler with your application activity like so:
+
+```java
+Tracker.instance().setLifecycleHandler({{ APPLICATION_ACTIVITY }})
+```
 
 [Back to top](#top)
 
@@ -158,3 +107,4 @@ If you know of a better way please do not hesitate to let us know!
 [setup-guide]: https://github.com/snowplow/snowplow/wiki/Android-Tracker-Setup
 [demo-app-track-events]: https://raw.githubusercontent.com/snowplow/snowplow-android-tracker/master/snowplow-demo-app/src/main/java/com/snowplowanalytics/snowplowtrackerdemo/utils/TrackerEvents.java
 [0.4.0]: https://github.com/snowplow/snowplow/wiki/Android-Integration-0.4.0
+[0.5.0]: https://github.com/snowplow/snowplow/wiki/Android-Integration-0.5.0

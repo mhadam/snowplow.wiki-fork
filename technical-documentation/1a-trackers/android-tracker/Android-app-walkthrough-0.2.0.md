@@ -4,7 +4,6 @@ This page is a walkthrough detailing how the demo app works, what it is doing an
 
 For previous versions:
 
-* [v0.2.0][0.2.0]
 * [v0.1.0][0.1.0]
 
 ## Contents
@@ -29,13 +28,13 @@ For help in setting up a local endpoint please go [here][testing].
 
 The main screen:
 
-[[/technical-documentation/images/android/android-app-1-0.3.0.png]]
+[[/technical-documentation/images/android/android-app-1.png]]
 
-From this screen you will be able to select the Tracker Demo screen.
+From this screen you will be able to select either RxJava or Classic Trackers for a demo run.  For this walkthrough we will select the Classic Tracker.
 
-[[/technical-documentation/images/android/android-app-2-0.3.0.png]]
+[[/technical-documentation/images/android/android-app-classic-0.2.0.png]]
 
-Once on this page the Tracker has been created and you will notice a few options to set as well as some metrics which will update as you run the demo.
+Once on this page the Classic Tracker has been created and you will notice a few options to set as well as some metrics which will update as you run the demo.
 
 Metrics Explained:
 
@@ -56,11 +55,13 @@ Options Explained:
 
 So now that we know what everything is lets start the demo!
 
+[[/technical-documentation/images/android/android-app-classic-0.2.0-1.png]]
+
 So we have entered in a valid URI for the application and we are sending events to it in POST's.
 
 Everytime the emitter successfully sends off a batch a log will appear in the Emitter Callback section of the demo, this will denote the Successes (or Failures) that occured during sending.  As events are sent you will also notice that the DB Size will gradually go back to 0.
 
-[[/technical-documentation/images/android/android-app-3-0.3.0.png]]
+[[/technical-documentation/images/android/android-app-classic-0.2.0-2.png]]
 
 In the last frame you will now notice that we have successfully sent all of our events to the endpoint, the DB Size has gone back to 0 and the emitter will soon stop searching for events to send.
 
@@ -79,13 +80,12 @@ This should give you a fair amount of examples to get started!  If you need any 
 
 [Back to top](#top)
 
-[download-apk]: http://dl.bintray.com/snowplow/snowplow-generic/snowplow-demo-app-release-0.3.0.apk
+[download-apk]: http://dl.bintray.com/snowplow/snowplow-generic/snowplow-demo-app-release-0.2.1.apk
 [unknown-sources]: http://developer.android.com/distribute/tools/open-distribution.html
 [integration]: https://github.com/snowplow/snowplow/wiki/Android-Integration
 [testing]: https://github.com/snowplow/snowplow/wiki/Android-Testing-locally-and-Debugging
-[calling-from-ui]: https://github.com/snowplow/snowplow-android-tracker/blob/master/snowplow-demo-app/src/main/java/com/snowplowanalytics/snowplowtrackerdemo/Demo.java#L114
+[calling-from-ui]: https://github.com/snowplow/snowplow-android-tracker/blob/master/snowplow-demo-app/src/main/java/com/snowplowanalytics/snowplowtrackerdemo/ClassicDemo.java#L114
 [events-examples]: https://github.com/snowplow/snowplow-android-tracker/blob/master/snowplow-demo-app/src/main/java/com/snowplowanalytics/snowplowtrackerdemo/utils/TrackerEvents.java#L41-L87
 [custom-context]: https://github.com/snowplow/snowplow-android-tracker/blob/master/snowplow-demo-app/src/main/java/com/snowplowanalytics/snowplowtrackerdemo/utils/TrackerEvents.java#L92-L100
 [user-group]: https://groups.google.com/forum/#!forum/snowplow-user
 [0.1.0]: https://github.com/snowplow/snowplow/wiki/Android-app-walkthrough-0.1.0
-[0.2.0]: https://github.com/snowplow/snowplow/wiki/Android-app-walkthrough-0.2.0

@@ -2,11 +2,10 @@
 
 [**HOME**](Home) > [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow technical documentation) > [**Trackers**](trackers) > Android Tracker
 
-This page refers to version 0.6.0+ of the Snowplow Android Tracker.
+This page refers to version 0.5.4+ of the Snowplow Android Tracker.
 
-Documentation for older versions of this tracker is available:
+Documentation for older version of this tracker is available:
 
-* [Android v0.5.*][android-0.5]
 * [Android v0.4.*][android-0.4]
 * [Android v0.3.*][android-0.3]
 * [Java v0.6.* and Android v0.2.*][java-0.6]
@@ -14,7 +13,6 @@ Documentation for older versions of this tracker is available:
 
 Integration Guide:
 
-* [Android v0.6.*][android-integration-0.6.0]
 * [Android v0.5.*][android-integration-0.5.0]
 * [Android v0.4.*][android-integration-0.4.0]
 
@@ -47,7 +45,6 @@ Local Testing:
     - 2.3.12 [`setPlatform`](#set-platform)
     - 2.3.13 [`setSubject`](#set-subject)
     - 2.3.14 [`setEmitter`](#set-emitter)
-    - 2.3.15 [`setLifecycleHandler`](#set-lifecycle-handler)
   - 2.4 [Extra Tracker Functions](#functions-tracker-extra)
     - 2.4.1 [`resumeSessionChecking`](#start-session)
     - 2.4.2 [`pauseSessionChecking`](#shutdown-session)
@@ -101,6 +98,11 @@ The [Snowplow Android Tracker](https://github.com/snowplow/snowplow-android-trac
 
 The tracker should be straightforward to use if you are comfortable with Java development; its API is modelled after Snowplow's [[Python Tracker]] so any prior experience with that tracker is helpful but not necessary. If you haven't already, have a look at the [[Android Tracker Setup]] guide before continuing.
 
+__NOTE__: The Tracker should only ever be setup as a singleton object.  Due to the way it stores and reads information and the creation of persistent background services, creating more than one Tracker can cause a plethora of race conditions.
+
+1. Double (or more) sending of events.
+2. Constant session expiration (as old Tracker services continually fail to see any new events being created).
+
 [Back to top](#top)
 
 <a name="demo-app" />
@@ -120,13 +122,12 @@ For a walkthrough go [here][app-walkthrough].
 To activate client sessionization please enter the following builder arguments to your tracker:
 
 ```java
-Tracker.init(new Tracker.TrackerBuilder( ... )
-  .sessionContext(true)     // To use the session context
-  .sessionCheckInterval(10) // Checks every 10 seconds (default is 15)
-  .foregroundTimeout(300)   // Timeout after 5 minutes (default is 10)
-  .backgroundTimeout(120)   // Timeout after 2 minutes (default is 5)
-  .build()
-);
+Tracker tracker = new Tracker.TrackerBuilder( ... )
+    .sessionContext(true)     // To use the session context
+    .sessionCheckInterval(10) // Checks every 10 seconds (default is 15)
+    .foregroundTimeout(300)   // Timeout after 5 minutes (default is 10)
+    .backgroundTimeout(120)   // Timeout after 2 minutes (default is 5)
+    .build();
 ```
 
 Once sessionization has been turned on several things will begin to happen:
@@ -140,13 +141,7 @@ Once sessionization has been turned on several things will begin to happen:
 * Each time an event is sent from the Tracker, both timeouts for the session are reset
 * Session information will survive for the life of the application, i.e. until it is uninstalled from the Android device.
 
-If you are building for Android API 14+ you can activate automatic background and foreground detection via:
-
-```java
-Tracker.instance().setLifecycleHandler({{ APPLICATION_ACTIVITY }});
-```
-
-If you are below API 14 you will have to update your applications onPause() and onResume() functions to manually flag this change. The following samples can be copied into an application activity to set the background state of the application for the session checker:
+An important note here is that the tracker does not automatically detect if the application is in the background or not from a library standpoint. You will have to update your applications onPause() and onResume() functions to manually flag this change. The following samples can be copied into an application activity to set the background state of the application for the session checker:
 
 ```java
 @Override
@@ -187,30 +182,31 @@ To instantiate a tracker in your code (can be global or local to the process bei
 
 ```java
 // Create an Emitter
-Emitter e1 = new Emitter.EmitterBuilder("com.collector.acme", getContext())
-  .build();
+Emitter e1 = new Emitter
+        .EmitterBuilder("com.collector.acme", getContext())
+        .build();
 
 // Make and return the Tracker object
-Tracker.init(new Tracker.TrackerBuilder(e1, "myNamespace", "myAppId", getContext())
-  .build()
-);
+Tracker t1 = new Tracker
+        .TrackerBuilder(e1, "myNamespace", "myAppId", getContext())
+        .build();
 ```
 
 This is the most basic Tracker creation possible. Note that `getContext()` is an Android global function. You can expand on this creation with the following builder options:
 
 ```java
 // Create an Emitter
-Emitter e2 = new Emitter.EmitterBuilder("com.collector.acme", getContext())
-  .build();
+Emitter e2 = new Emitter
+        .EmitterBuilder("com.collector.acme", getContext())
+        .build();
 
 // Create a Tracker with all options
-Tracker.init(new Tracker
-  .TrackerBuilder(e2, "myNamespace", "myAppId", getContext())
-  .base64(false) // Optional - defines if we use base64 encoding
-  .platform(DevicePlatforms.Mobile) // Optional - defines what platform the event will report to be on
-  .subject(new Subject.SubjectBuilder().build()) // Optional - a subject which contains values appended to every event
-  .build()
-);
+Tracker t2 = new Tracker
+        .TrackerBuilder(e2, "myNamespace", "myAppId", getContext())
+        .base64(false) // Optional - defines if we use base64 encoding
+        .platform(DevicePlatforms.Mobile) // Optional - defines what platform the event will report to be on
+        .subject(new Subject.SubjectBuilder().build()) // Optional - a subject which contains values appended to every event
+        .build();
 ```
 
 As you can see there is a fair amount of modularity to the Trackers creation.
@@ -238,10 +234,6 @@ We also have several extra builder options:
 | `sessionCheckInterval`| The session check interval                  | Any valid `Long`                    | `15` |
 | `threadCount`         | The amount of threads to use                | Any valid `Integer`                 | `10` threads |
 | `timeUnit`            | The TimeUnit that time measurements are in  | `TimeUnit.{{ Enum Option }}`        | `TimeUnit.SECONDS` |
-| `geoLocationContext`  | Whether to enable GeoLocation context       | `True, False`                       | `False` |
-| `mobileContext`       | Whether to enable Mobile context            | `True, False`                       | `False` |
-| `applicationCrash`    | Whether to track application crashes        | `True, False`                       | `False` |
-| `lifecycleEvents`     | Whether to track lifecycle events           | `True, False`                       | `False` |
 
 <a name="constructor-tracker" />
 #### 2.2.1 Constructor Options Explained
@@ -258,10 +250,6 @@ We also have several extra builder options:
 * `subject` : An optional Subject object which will add extra decoration to events sent from the Tracker.
 * `platform` : The platform that the Tracker is running on (defaults to `MOBILE`)
 * `base64` : Whether to encode `unstructured` events and `custom contexts` in base64 formatting.
-* `geoLocationContext` : Optionally adds a geo-location context to each event
-* `mobileContext` : Optionally adds a mobile context to each event
-* `applicationCrash` : Optionally tracks UncaughtExceptions before re-throwing the exception
-* `lifecycleEvents` : Optionally tracks foreground and background events
 
 #### Session Parameters
 
@@ -403,17 +391,6 @@ tracker.setEmitter(newEmitter);
 
 [Back to top](#top)
 
-<a name="set-lifecycle-handler" />
-#### 2.3.15 Sets up an activity Lifecycle Handler
-
-You can set up the lifecycle handler with the following sample:
-
-```java
-tracker.setLifecycleHandler(activity);
-```
-
-[Back to top](#top)
-
 <a name="functions-tracker-extra" />
 ### 2.4 Extra Tracker Functions
 
@@ -499,6 +476,10 @@ The Subject class has a set of `set...()` methods to attach extra data relating 
 * [`setUseragent`](#set-user-agent)
 * [`setNetworkUserId`](#set-network-user-id)
 * [`setDomainUserId`](#set-domain-user-id)
+* [`setAdvertisingID`](#set-advertising-id)
+* [`setCarrier`](#set-carrier)
+* [`setLocation`](#set-location)
+* [`setDefaultScreenResolution`](#set-default-screen-res)
 
 Here are some examples:
 
@@ -513,21 +494,21 @@ s1.setScreenResolution(1920, 1080);
 After that, you can add your Subject to your Tracker like so:
 
 ```java
-Tracker.init(new Tracker.TrackerBuilder(emitter, "myNamespace", "myAppId")
-  .subject(s1) // Include your subject here!
-  .build()
-);
+Tracker t1 = new Tracker
+        .TrackerBuilder(emitter, "myNamespace", "myAppId")
+        .subject(s1) // Include your subject here!
+        .build();
 
 // Or you can set the subject after creation
 // This will also override any currently set Subject object
 
-Tracker.instance().setSubject(s1);
+t1.setSubject(s1);
 ```
 
 To update the Trackers subject without changing the subject attached already you can use the following:
 
 ```java
-Tracker.instance().getSubject().setUserId("Gleason Kevin"); // Because object references are passed by value in Java
+t1.getSubject().setUserId("Gleason Kevin"); // Because object references are passed by value in Java
 ```
 
 [Back to top](#top)
@@ -702,6 +683,74 @@ subj.setDomainUserId("domain-id");
 
 [Back to top](#top)
 
+<a name="set-advertising-id" />
+### 3.1.11 `setAdvertisingID`
+
+This method lets you set the Advertising ID
+
+```java
+setAdvertisingID(Context context)
+```
+
+You will need to pass in the application's context as a parameter.
+
+```java
+subj.setAdvertisingID(context);
+```
+
+[Back to top](#top)
+
+<a name="set-carrier" />
+### 3.1.12 `setCarrier`
+
+This method lets you set the mobile carrier.
+
+```java
+setCarrier(Context context)
+```
+
+You will need to pass in the application's context as a parameter.
+
+```java
+subj.setCarrier(context);
+```
+
+[Back to top](#top)
+
+<a name="set-location" />
+### 3.1.13 `setLocation`
+
+This method lets you set the mobile location.
+
+```java
+setLocation(Context context)
+```
+
+You will need to pass in the application's context as a parameter.
+
+```java
+subj.setLocation(context);
+```
+
+[Back to top](#top)
+
+<a name="set-default-screen-res" />
+### 3.1.14 `setDefaultScreenResolution`
+
+This method lets you set the default screen resolution using the application context.
+
+```java
+setDefaultScreenResolution(Context context)
+```
+
+You will need to pass in the application's context as a parameter.
+
+```java
+subj.setDefaultScreenResolution(context);
+```
+
+[Back to top](#top)
+
 <a name="additional-contexts" />
 ### 3.2 Additional contexts sent by this tracker
 
@@ -720,17 +769,14 @@ The `mobile_context` is comprised of the following fields:
 * `deviceManufacturer` -> The host phones  phones manufacturer
 * `osVersion` -> The host phones  phones operating system version
 * `osType` -> The host phones  phones operating system type
-* `networkType` -> The network type being used
-* `networkTechnology` -> The network technology being used
 
-To get the mobile context:
+To ensure you gather all of this information you will need to create your Subject with the following argument:
 
 ```java
-Tracker.init(new Tracker.TrackerBuilder(...)
-  .mobileContext(true)
-  .build()
-);
+Subject subject = new Subject.SubjectBuilder().context(getContext()).build();
 ```
+
+Note that `getContext()` is an Android global function.  It is needed to grab information that is related to the client specifically.
 
 [Back to top](#top)
 
@@ -745,16 +791,14 @@ The `geolocation_context` is comprised of the following fields:
 * `latitudeLongitudeAccuracy` -> The host phones position accuracy
 * `speed` -> The host phones speed
 * `bearing` -> The host phones current bearing
-* `timestamp` -> The time that the geolocation context was built
 
-To get the geolocation context:
+To ensure you gather all of this information you will need to create your Subject with the following argument:
 
 ```java
-Tracker.init(new Tracker.TrackerBuilder(...)
-  .geoLocationContext(true)
-  .build()
-);
+Subject subject = new Subject.SubjectBuilder().context(getContext()).build();
 ```
+
+Note that `getContext()` is an Android global function.
 
 You will also need to include the following in your `AndroidManifest.xml` file:
 
@@ -765,70 +809,6 @@ You will also need to include the following in your `AndroidManifest.xml` file:
 
 This will make the functions for checking these metrics available for the tracker to use.
 
-__NOTE__: If you are building for Android API 24+ you will need to request the location permission manually in your application for this context to work.
-
-```java
-  private void setupTrackerWithPermission() {
-    if (checkPermissionGranted(Manifest.permission.ACCESS_FINE_LOCATION)) {
-      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-        getPermission(REQUEST_CODE_ACCESS_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION);
-      }
-    } else {
-      // Permission already granted, setup normally
-      setupTracker();
-    }
-  }
-
-  private void setupTracker() {
-    // Tracker Setup code
-  }
-
-  // --- Permissions
-
-  private static final int REQUEST_CODE_ACCESS_LOCATION = 0;
-
-  /**
-   * Checks if we have a certain permission
-   *
-   * @param permission the permission to check
-   * @return boolean on if we have permission
-   */
-  @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-  public boolean checkPermissionGranted(String permission) {
-    return ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED;
-  }
-
-  /**
-   * Requests permission to read from external storage
-   *
-   * @param code the code that corresponds to the function
-   *             to run in the event that we are successful
-   */
-  @TargetApi(Build.VERSION_CODES.M)
-  public void getPermission(int code, String permission) {
-    requestPermissions(new String[]{permission}, code);
-  }
-
-  /**
-   * Called when requests for permissions are made
-   *
-   * @param code the request code
-   * @param permissions the granted permission
-   * @param grantResults the result of the granting
-   */
-  @Override
-  public void onRequestPermissionsResult(int code, @NonNull String permissions[], @NonNull int[] grantResults) {
-    switch (code) {
-      case REQUEST_CODE_ACCESS_LOCATION:
-        setupTracker();
-        break;
-      default:
-        break;
-    }
-  }
-}
-```
-
 [Back to top](#top)
 
 <a name="android-idfa" />
@@ -836,18 +816,28 @@ __NOTE__: If you are building for Android API 24+ you will need to request the l
 
 __NOTE__: For this code to be available you must include the following library dependency: 
 
-* `compile 'com.google.android.gms:play-services-analytics:9.4.0'
+* `compile 'com.google.android.gms:play-services-analytics:7.5.0'
 
-The Android Idfa code is a unique identifier for google advertising.  You can get this code via the utility function available:
+The Android Idfa code is a unique identifier for google advertising.  You can get this code using this library in two ways:
+
+1. Use the utility function available:
 
 ```java
 import com.snowplowanalytics.snowplow.tracker.utils.Util;
 
 // Context is your application context object
-String androidIdfa = Util.getAndroidIdfa(context);
+String androidIdfa = Util.getAdvertisingId(context);
 ```
 
 Please note that this function will only work when run from a different thread than the UI/Main thread of your application.
+
+2. Get it from the Subject class:
+
+If you created a Tracker Subject with your application's context then the ID will have already been populated.
+
+```java
+String androidIdfa = tracker.getSubject().getSubjectMobile().get("androidIdfa");
+```
 
 [Back to top](#top)
 
@@ -1476,10 +1466,8 @@ Logging in the Tracker is done using our own Logger class: '/utils/Logger.java'.
 [java-0.5]: https://github.com/snowplow/snowplow/wiki/Android-v0.1-and-Java-Tracker-v0.5
 [android-0.3]: https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.3.0
 [android-0.4]: https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.4.0
-[android-0.5]: https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.5.0
 
-[android-integration-0.6.0]: https://github.com/snowplow/snowplow/wiki/Android-Integration
-[android-integration-0.5.0]: https://github.com/snowplow/snowplow/wiki/Android-Integration-0.5.0
+[android-integration-0.5.0]: https://github.com/snowplow/snowplow/wiki/Android-Integration
 [android-testing-0.5.0]: https://github.com/snowplow/snowplow/wiki/Android-Testing-locally-and-Debugging
 [android-integration-0.4.0]: https://github.com/snowplow/snowplow/wiki/Android-Integration-0.4.0
 [android-testing-0.4.0]: https://github.com/snowplow/snowplow/wiki/Android-Testing-locally-and-Debugging-0.4.0
@@ -1491,4 +1479,4 @@ Logging in the Tracker is done using our own Logger class: '/utils/Logger.java'.
 [issue-1231]: https://github.com/snowplow/snowplow/issues/1231
 
 [android-unknown]: http://developer.android.com/distribute/tools/open-distribution.html
-[demo-app-link]: http://dl.bintray.com/snowplow/snowplow-generic/snowplow-demo-app-release-0.3.0.apk
+[demo-app-link]: http://dl.bintray.com/snowplow/snowplow-generic/snowplow-demo-app-release-0.2.1.apk
