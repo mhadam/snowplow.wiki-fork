@@ -6,7 +6,8 @@
 
 *[Version 0.3][ruby-0.3]*
 *[Version 0.4][ruby-0.4]*
-*[Version 0.5][ruby-latest]*
+*[Version 0.5][ruby-0.5]*
+*[Version 0.6][ruby-latest]*
 
 ## Contents
 
@@ -448,6 +449,7 @@ The keys of the `event_json` hash can be either strings or Ruby symbols.
 
 [ruby-0.3]: https://github.com/snowplow/snowplow/wiki/Ruby-Tracker-v0.3
 [ruby-0.4]: https://github.com/snowplow/snowplow/wiki/Ruby-Tracker-v0.4
+[ruby-0.5]: https://github.com/snowplow/snowplow/wiki/Ruby-Tracker-v0.5
 [ruby-latest]: https://github.com/snowplow/snowplow/wiki/Ruby-Tracker
 
 [contexts]: http://snowplowanalytics.com/blog/2014/01/27/snowplow-javascript-tracker-0.13.0-released-with-custom-contexts/#contexts
