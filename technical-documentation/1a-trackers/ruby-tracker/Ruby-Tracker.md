@@ -773,6 +773,7 @@ This section covers more advanced techniques with the Snowplow Ruby Tracker.
 [ruby-0.2]: https://github.com/snowplow/snowplow/wiki/Ruby-Tracker-v0.2
 [ruby-0.3]: https://github.com/snowplow/snowplow/wiki/Ruby-Tracker-v0.3
 [ruby-0.4]: https://github.com/snowplow/snowplow/wiki/Ruby-Tracker-v0.4
+[ruby-0.5]: https://github.com/snowplow/snowplow/wiki/Ruby-Tracker-v0.5
 
 [contexts]: http://snowplowanalytics.com/blog/2014/01/27/snowplow-javascript-tracker-0.13.0-released-with-custom-contexts/#contexts
 [self-describing-jsons]: http://snowplowanalytics.com/blog/2014/05/15/introducing-self-describing-jsons/
