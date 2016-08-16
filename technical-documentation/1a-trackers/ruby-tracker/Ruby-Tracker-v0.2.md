@@ -2,7 +2,7 @@
 
 [**HOME**](Home) > [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow technical documentation) > [**Trackers**](trackers) > Ruby Tracker
 
-*This page refers to version 0.2.0 of the Snowplow Python Tracker. Documentation for the latest version, 0.3.0, is available:*
+*This page refers to version 0.2.0 of the Snowplow Ruby Tracker. Documentation for the latest version, 0.6.0, is available:*
 
 *[Version 0.3][ruby-0.3]*
 *[Version 0.4][ruby-0.4]*
