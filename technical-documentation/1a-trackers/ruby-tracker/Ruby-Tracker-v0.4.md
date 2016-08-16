@@ -6,7 +6,8 @@
 
 *[Version 0.2][ruby-0.2]*  
 *[Version 0.3][ruby-0.3]*  
-*[Version 0.5][ruby-latest]*  
+*[Version 0.5][ruby-0.5]*  
+*[Version 0.6][ruby-latest]*  
 
 **Please note** that this version of the Ruby Tracker is dependent upon the [Snowplow 0.9.14 release][snowplow-0.9.14]. You will need to be running version 0.9.14 or later of Snowplow for events sent by the tracker using POST to be successfully processed. Snowplow 0.9.14 contains updates to the Hadoop Enrich and Scala Hadoop Shred jobs to allow the newer self-describing JSON version which the Ruby Tracker sends for POSTs. For more information, please refer to tickets [#1220][issue-1220] and [#1231][issue-1231].
 
@@ -729,6 +730,7 @@ This section covers more advanced techniques with the Snowplow Ruby Tracker.
 
 [ruby-0.2]: https://github.com/snowplow/snowplow/wiki/Ruby-Tracker-v0.2
 [ruby-0.3]: https://github.com/snowplow/snowplow/wiki/Ruby-Tracker-v0.3
+[ruby-0.5]: https://github.com/snowplow/snowplow/wiki/Ruby-Tracker-v0.5
 [ruby-latest]: https://github.com/snowplow/snowplow/wiki/Ruby-Tracker
 
 [contexts]: http://snowplowanalytics.com/blog/2014/01/27/snowplow-javascript-tracker-0.13.0-released-with-custom-contexts/#contexts
