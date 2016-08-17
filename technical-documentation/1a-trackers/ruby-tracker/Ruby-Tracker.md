@@ -42,6 +42,7 @@
   - 4.4 [`track_ecommerce_transaction`](#ecommerce-transaction)
   - 4.5 [`track_struct_event`](#struct-event)
   - 4.6 [`track_unstruct_event`](#unstruct-event)
+  - 4.7 [`track_self_describing_event`](#self-describing-event)
 - 5. [Emitters](#emitters)
   - 5.1 [Overview](#emitters-overview)
   - 5.2 [The AsyncEmitter class](#async-emitter)
@@ -336,7 +337,7 @@ Tracking methods supported by the Ruby Tracker at a glance:
 | [`track_ecommerce_transaction`](#ecommerce-transaction)   | Track an ecommerce transaction          | 
 | [`track_screen_view`](#screen-view)         | Track the user viewing a screen within the application |
 | [`track_struct_event`](#struct-event)       | Track a Snowplow custom structured event               |
-| [`track_unstruct_event`](#unstruct-event)   | Track a Snowplow custom unstructured event             |
+| [`track_self_describing_event`](#self-describing-event)   | Track a Snowplow custom unstructured event             |
 
 <a name="common" />
 ### 4.1 Common
@@ -581,7 +582,12 @@ tracker.track_struct_event("shop", "add-to-basket", nil, "pcs", 2)
 <a name="unstruct-event" />
 ### 4.6 Track unstructured events with ```track_unstruct_event```
 
-Use `track_unstruct_event()` to track a custom event which consists of a name and an unstructured set of properties. This is useful when:
+This is the old name for [track_self_describing_event][#self-describing-event].
+
+<a name="self-describing-event" /?
+### 4.7 Track self describing events with ```track_self_describing_event```
+
+Use `track_self_describing_event()` to track a custom event which consists of a name and an self describing set of properties. This is useful when:
 
 * You want to track event types which are proprietary/specific to your business (i.e. not already part of Snowplow), or
 * You want to track events which have unpredictable or frequently changing properties
@@ -597,7 +603,7 @@ The arguments are as follows:
 Example:
 
 ```ruby
-tracker.track_unstruct_event(SnowplowTracker::SelfDescribingJson.new(
+tracker.track_self_describing_event(SnowplowTracker::SelfDescribingJson.new(
   "com.example_company/save_game/jsonschema/1-0-2",
   {
     "saveId" => "4321",
@@ -725,15 +731,7 @@ You may wish to add backoff logic to delay the resending.
 <a name="contracts" />
 ### 6. Contracts
 
-The Snowplow Ruby Tracker uses the [Ruby Contracts gem][contracts] for typechecking. Contracts are enabled by default but can be turned on or off:
-
-```ruby
-# Turn contracts off
-SnowplowTracker::disable_contracts
-
-# Turn contracts back on
-SnowplowTracker::enable_contracts
-```
+The Snowplow Ruby Tracker uses the [Ruby Contracts gem][contracts] for typechecking. As of version 0.6.0 these cannot be turned off.
 
 <a name="logging" />
 ## 7. Logging
