@@ -582,7 +582,7 @@ tracker.track_struct_event("shop", "add-to-basket", nil, "pcs", 2)
 <a name="unstruct-event" />
 ### 4.6 Track unstructured events with ```track_unstruct_event```
 
-This is the old name for [track_self_describing_event][#self-describing-event].
+This is the old name for [track_self_describing_event](#self-describing-event).
 
 <a name="self-describing-event" />
 ### 4.7 Track self describing events with ```track_self_describing_event```
