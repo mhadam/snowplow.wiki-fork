@@ -584,7 +584,7 @@ tracker.track_struct_event("shop", "add-to-basket", nil, "pcs", 2)
 
 This is the old name for [track_self_describing_event][#self-describing-event].
 
-<a name="self-describing-event" /?
+<a name="self-describing-event" />
 ### 4.7 Track self describing events with ```track_self_describing_event```
 
 Use `track_self_describing_event()` to track a custom event which consists of a name and an self describing set of properties. This is useful when:
