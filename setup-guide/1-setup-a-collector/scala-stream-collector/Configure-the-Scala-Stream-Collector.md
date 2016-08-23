@@ -98,4 +98,4 @@ Next: [[Run the Scala Stream collector]]
 
 [v0.1]: https://github.com/snowplow/snowplow/wiki/Configure-the-Scala-Stream-Collector-v0.1
 [v0.3]: https://github.com/snowplow/snowplow/wiki/Configure-the-Scala-Stream-Collector-v0.3
-[app-conf]: https://github.com/snowplow/snowplow/blob/r67-bohemian-waxwing/2-collectors/scala-stream-collector/src/main/resources/config.hocon.sample
+[app-conf]: https://raw.githubusercontent.com/snowplow/snowplow/master/2-collectors/scala-stream-collector/examples/config.hocon.sample
