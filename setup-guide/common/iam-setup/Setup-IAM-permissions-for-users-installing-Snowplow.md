@@ -125,7 +125,6 @@ Paste the following JSON into the _Policy Document_ text area:
       "Action": [
         "acm:DescribeCertificate",
         "acm:ListCertificate",
-        "acm:ListCertificate",
         "autoscaling:*",
         "elasticloadbalancing:*",
         "kinesis:*",
@@ -184,7 +183,7 @@ Paste the following JSON into the _Policy Document_ text area:
         "cloudwatch:*",
         "dynamodb:*",
         "ec2:*",
-        "ec2:*",
+        "es:*",
         "elasticbeanstalk:*",
         "elasticloadbalancing:*",
         "elasticmapreduce:*",
