@@ -83,8 +83,8 @@ Local Testing:
   - 4.4 [`track(EcommerceTransaction event)`](#ecommerce-transaction)
     - 4.4.1 [`EcommerceTransactionItem`](#ecommerce-transaction-item)
   - 4.5 [`track(Structured event)`](#struct-event)
-  - 4.6 [`track(Unstructured event)`](#unstruct-event)
-  - 4.7 [`track(TimingWithCategory event)`](#timing)
+  - 4.6 [`track(SelfDescribing event)`](#self-describing-event)
+  - 4.7 [`track(Timing event)`](#timing)
 - 5 [Sending events: `Emitter`](#emitters)
   - 5.1 [Constructor Explained](#constructor-emitter)
   - 5.2 [How the `Emitter` works](#emitter-works)
@@ -257,7 +257,7 @@ We also have several extra builder options:
 
 * `subject` : An optional Subject object which will add extra decoration to events sent from the Tracker.
 * `platform` : The platform that the Tracker is running on (defaults to `MOBILE`)
-* `base64` : Whether to encode `unstructured` events and `custom contexts` in base64 formatting.
+* `base64` : Whether to encode `self-describing` events and `custom contexts` in base64 formatting.
 * `geoLocationContext` : Optionally adds a geo-location context to each event
 * `mobileContext` : Optionally adds a mobile context to each event
 * `applicationCrash` : Optionally tracks UncaughtExceptions before re-throwing the exception
@@ -314,7 +314,7 @@ Returns the `appId` argument that you passed in Tracker construction.
 <a name="base64" />
 #### 2.3.5 `getBase64Encoded`
 
-By default, unstructured events and custom contexts are encoded into Base64 to ensure that no data is lost or corrupted. You can turn encoding on or off using the Boolean `base64Encoded` builder option.
+By default, self-describing events and custom contexts are encoded into Base64 to ensure that no data is lost or corrupted. You can turn encoding on or off using the Boolean `base64Encoded` builder option.
 
 [Back to top](#top)
 
@@ -864,7 +864,7 @@ Tracking methods supported by the Android Tracker at a glance:
 | [`track(PageView event)`](#page-view)                         | Track and record views of web pages                    |
 | [`track(EcommerceTransaction event)`](#ecommerce-transaction) | Track an ecommerce transaction and its items           |
 | [`track(Structured event)`](#struct-event)                    | Track a Snowplow custom structured event               |
-| [`track(Unstructured event)`](#unstruct-event)                | Track a Snowplow custom unstructured event             |
+| [`track(SelfDescribing event)`](#self-describing-event)       | Track a Snowplow custom self-describing event          |
 | [`track(TimingWithCategory event)`](#timing)                  | Track a Timing with Category event                     |
 
 [Back to top](#top)
@@ -897,7 +897,7 @@ You can create a SelfDescribingJson with the following arguments:
 | `schema`     | JsonSchema that describes the data        | Yes           | `String`                 |
 | `data`       | Data that will be validated by the schema | No            | `Map<String, String>, Map<String, Object>, TrackerPayload, SelfDescribingJson` |
 
-`SelfDescribingJson` is used for recording [custom contexts](#custom-contexts) and [unstructured events](#unstruct-event).
+`SelfDescribingJson` is used for recording [custom contexts](#custom-contexts) and [self-describing events](#self-describing-event).
 
 [Back to top](#top)
 
@@ -910,7 +910,7 @@ In short, custom contexts let you add additional information about the circumsta
 t1.track(PageView.builder().( ... ).customContext(List<SelfDescribingJson> context).build());
 ```
 
-The `customContext` argument should consist of a `List` of `SelfDescribingJson` representing an array of one or more contexts. The format of each individual context element is the same as for an [unstructured event](#unstruct-event).
+The `customContext` argument should consist of a `List` of `SelfDescribingJson` representing an array of one or more contexts. The format of each individual context element is the same as for a [self-describing event](#self-describing-event).
 
 If a visitor arrives on a page advertising a movie, the context dictionary might look like this:
 
@@ -947,14 +947,24 @@ Note that even if there is only one custom context attached to the event, it sti
 [Back to top](#top)
 
 <a name="timestamp" />
-#### 4.1.3 Timestamp override
+#### 4.1.3 Timestamp overrides
 
 In all the trackers, we offer a way to override the timestamp if you want the event to show as tracked at a specific time. If you don't, we create a timestamp while the event is being tracked.
 
 Here is an example:
 
 ```java
-t1.track(PageView.builder().( ... ).timestamp(1423583655000).build());
+// Equivalent functions
+
+t1.track(PageView.builder().( ... ).timestamp(1423583655000).build()); // Deprecated
+
+t1.track(PageView.builder().( ... ).deviceCreatedTimestamp(1423583655000).build());
+```
+
+To track the `trueTimestamp` of your event:
+
+```java
+t1.track(PageView.builder().( ... ).trueTimestamp(1423583655000).build());
 ```
 
 [Back to top](#top)
@@ -969,7 +979,8 @@ Use `track(ScreenView event)` to track a user viewing a screen (or equivalent) w
 | `name`         | Human-readable name for this screen | No            | `String`                   |
 | `id`           | Unique identifier for this screen   | No            | `String`                   |
 | `customContext`| Optional custom context             | No            | `List<SelfDescribingJson>` |
-| `timestamp`    | Optional timestamp                  | No            | `Long`                     |
+| `deviceCreatedTimestamp` | Optional timestamp        | No            | `Long`                     |
+| `trueTimestamp`| Optional timestamp                  | No            | `Long`                     |
 | `eventId`      | Optional custom event id            | No            | `String`                   |
 
 Examples:
@@ -1004,7 +1015,8 @@ Arguments are:
 | `pageTitle`    | The title of the page                | No            | `String`                   |
 | `referrer`     | The address which linked to the page | No            | `String`                   |
 | `customContext`| Optional custom context              | No            | `List<SelfDescribingJson>` |
-| `timestamp`    | Optional timestamp                   | No            | `Long`                     |
+| `deviceCreatedTimestamp` | Optional timestamp         | No            | `Long`                     |
+| `trueTimestamp`| Optional timestamp                   | No            | `Long`                     |
 | `eventId`      | Optional custom event id             | No            | `String`                   |
 
 Examples:
@@ -1049,7 +1061,8 @@ Arguments:
 | `items`        | Items in the transaction             | Yes           | `List<EcommerceTransactionItem>`    |
 | `items`        | Items in the transaction             | Yes           | `EcommerceTransactionItem...` |
 | `customContext`| Optional custom context              | No            | `List<SelfDescribingJson>` |
-| `timestamp`    | Optional timestamp                   | No            | `Long`                     |
+| `deviceCreatedTimestamp` | Optional timestamp         | No            | `Long`                     |
+| `trueTimestamp`| Optional timestamp                   | No            | `Long`                     |
 | `eventId`      | Optional custom event id             | No            | `String`                   |
 
 The `items` argument is a `List` of individual `EcommerceTransactionItem` elements representing the items in the e-commerce transaction or it can be a `varargs` argument of many individual items. Note that `track(EcommerceTransaction event)` fires multiple events: one transaction event for the transaction as a whole, and one transaction item event for each element of the `items` `List`. Each transaction item event will have the same timestamp, order_id, and currency as the main transaction event.
@@ -1085,7 +1098,8 @@ These are the fields that can appear as elements in each `EcommerceTransactionIt
 | `category`     | Item category                        | No            | `String`                   |
 | `currency`     | Item currency                        | No            | `String`                   |
 | `customContext`| Optional custom context              | No            | `List<SelfDescribingJson>` |
-| `timestamp`    | Optional timestamp                   | No            | `Long`                     |
+| `deviceCreatedTimestamp` | Optional timestamp         | No            | `Long`                     |
+| `trueTimestamp`| Optional timestamp                   | No            | `Long`                     |
 | `eventId`      | Optional custom event id             | No            | `String`                   |
 
 Example of tracking a transaction containing two items:
@@ -1161,7 +1175,8 @@ Use `track(Structured event)` to track a custom event happening in your app whic
 | `property`     | A string describing the object or the action performed on it     | No            | `String`                   |
 | `value`        | A value to provide numerical data about the event                | No            | `Double`                   |
 | `customContext`| Optional custom context                                          | No            | `List<SelfDescribingJson>` |
-| `timestamp`    | Optional timestamp                                               | No            | `Long`                     |
+| `deviceCreatedTimestamp` | Optional timestamp                                     | No            | `Long`                     |
+| `trueTimestamp`| Optional timestamp                                               | No            | `Long`                     |
 | `eventId`      | Optional custom event id                                         | No            | `String`                   |
 
 Examples:
@@ -1189,14 +1204,14 @@ t1.track(Structured.builder()
 
 [Back to top](#top)
 
-<a name="unstruct-event" />
-#### 4.6 Track unstructured events with `track(Unstructured event)`
+<a name="self-describing-event" />
+#### 4.6 Track SelfDescribing events with `track(SelfDescribing event)`
 
-Custom unstructured events are a flexible tool that enable Snowplow users to define their own event types and send them into Snowplow.
+Custom SelfDescribing events are a flexible tool that enable Snowplow users to define their own event types and send them into Snowplow.
 
-When a user sends in a custom unstructured event, they do so as a JSON of name-value properties, that conforms to a JSON schema defined for the event earlier.
+When a user sends in a custom SelfDescribing event, they do so as a JSON of name-value properties, that conforms to a JSON schema defined for the event earlier.
 
-Use `track(Unstructured event)` to track a custom event which consists of a name and an unstructured set of properties. This is useful when:
+Use `track(SelfDescribing event)` to track a custom event which consists of a name and an SelfDescribing set of properties. This is useful when:
 
 * You want to track event types which are proprietary/specific to your business (i.e. not already part of Snowplow), or
 * You want to track events which have unpredictable or frequently changing properties
@@ -1207,7 +1222,8 @@ The arguments are as follows:
 |---------------:|:----------------------------------|:---------------|:---------------------------|
 | `eventData`    | The properties of the event       | Yes            | `SelfDescribingJson`       |
 | `customContext`| Optional custom context           | No             | `List<SelfDescribingJson>` |
-| `timestamp`    | Optional timestamp                | No             | `Long`                     |
+| `deviceCreatedTimestamp` | Optional timestamp      | No             | `Long`                     |
+| `trueTimestamp`| Optional timestamp                | No             | `Long`                     |
 | `eventId`      | Optional custom event id          | No             | `String`                   |
 
 Example event json to track:
@@ -1234,13 +1250,13 @@ eventMap.put("levelIndex", 23);
 SelfDescribingJson eventData = new SelfDescribingJson("iglu:com.acme/save_game/jsonschema/1-0-0", eventMap);
 
 // Track your event with your custom event data
-t1.track(Unstructured.builder()
+t1.track(SelfDescribing.builder()
     .eventData(eventData)
     .build();
 
 // OR
 
-t1.track(Unstructured.builder()
+t1.track(SelfDescribing.builder()
     .eventData(eventData)
     .customContext(contextList)
     .timestamp(1423583655000)
@@ -1253,9 +1269,9 @@ For more on JSON schema, see the [blog post] [self-describing-jsons].
 [Back to top](#top)
 
 <a name="timing" />
-#### 4.7 Track timing events with `track(TimingWithCategory event)`
+#### 4.7 Track timing events with `track(Timing event)`
 
-Use `track(TimingWithCategory event)` to track an event related to a custom timing.
+Use `track(Timing event)` to track an event related to a custom timing.
 
 | **Argument**   | **Description**                                 | **Required?** | **Type**                   |
 |---------------:|:------------------------------------------------|:--------------|:---------------------------|
@@ -1264,20 +1280,21 @@ Use `track(TimingWithCategory event)` to track an event related to a custom timi
 | `timing`       | The timing measurement in milliseconds          | Yes           | `Integer`                  |
 | `variable`     | The name of the timed event                     | Yes           | `String`                   |
 | `customContext`| Optional custom context                         | No            | `List<SelfDescribingJson>` |
-| `timestamp`    | Optional timestamp                              | No            | `Long`                     |
+| `deviceCreatedTimestamp` | Optional timestamp                    | No            | `Long`                     |
+| `trueTimestamp`| Optional timestamp                              | No            | `Long`                     |
 | `eventId`      | Optional custom event id                        | No            | `String`                   |
 
 Examples:
 
 ```java
-t1.track(TimingWithCategory.builder()
+t1.track(Timing.builder()
     .category("category")
     .variable("variable")
     .timing(1)
     .label("label")
     .build());
 
-t1.track(TimingWithCategory.builder()
+t1.track(Timing.builder()
     .category("category")
     .variable("variable")
     .timing(1)
