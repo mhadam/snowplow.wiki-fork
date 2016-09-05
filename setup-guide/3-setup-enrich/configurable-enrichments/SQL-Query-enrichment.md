@@ -5,7 +5,7 @@
 ### Compatibility
 
 JSON Schema	[iglu:com.snowplowanalytics.snowplow.enrichments/sql_query_enrichment_config/jsonschema/1-0-0][schema]  
-Compatibility	Batch: R83+ **NOT RELEASED YET** Real-time: R8x **NOT RELEASED YET**
+Compatibility	Batch: R83+ **NOT RELEASED YET** Real-time: R8x **NOT RELEASED YET**  
 Data provider	Internal  
 
 
