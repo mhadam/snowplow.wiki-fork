@@ -174,7 +174,7 @@ If these options aren't bespoke enough, remember that you can use column aliasin
 
 A Snowplow enrichment can run many millions of time per hour, effectively launching a DoS attack on a data source if we are not careful. The `cache` configuration attempts to minimize the number of lookups performed.
 
-The cache is an LRU (least-recently used) cache, where less frequently accessed values are evicted to make space for new values. The `uri` with all keys populated is used as the key in the cache. Configure the `cache` as follows:
+The cache is an LRU (least-recently used) cache, where less frequently accessed values are evicted to make space for new values. Complex object with underlying Indexed HashMap which consists of placeholder numbers as keys and extracted values as HashMap values is used as cache key. Configure the `cache` as follows:
 
 * `size` is the maximum number of entries to hold in the cache at any one time
 * `ttl` is the number of seconds that an entry can stay in the cache before it is forcibly evicted. This is useful to prevent stale values from being retrieved in the case that your DB can return different values for the same key over time
