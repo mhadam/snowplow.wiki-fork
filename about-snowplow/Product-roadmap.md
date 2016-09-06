@@ -9,11 +9,11 @@ We discuss each of these in turn below.
 
 ## Short-term: planned releases
 
-In this section we list out the series of 'point' releases (0.9.x, 0.9.y etc) that we have planned. This list is accurate as of early September 2014 - but we always recommend browsing the list of [Open Milestones] [milestones] on our main GitHub repository.
+You'll find the full list of milestones we are considering here:
 
-**Warning:** we may change this schedule as new priorities are identified and the community feeds back on our current plans. If you are particularly interested in a given task being completed per schedule (or even accelerated), please 'vote' for the ticket by leaving a "+1" comment or similar on the relevant ticket.
+https://github.com/snowplow/snowplow/milestones
 
-**Update** this section has been removed because it was not current.
+For upcoming releases, look in that list for milestones whose names start with "Rxx", indicating that this milestone represents an upcoming release.
 
 ## Longer-term: approximate schedule
 
