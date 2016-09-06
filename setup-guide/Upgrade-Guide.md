@@ -6,6 +6,7 @@ You can also use [Snowplow Version Matrix](Snowplow-version-matrix) as a guidanc
 
 For easier navigation, please, follow the links below.
 
+- [Snowplow 83 Bald Eagle](#r83) (**r83**) 2016-09-06
 - [Snowplow 82 Tawny Eagle](#r82) (**r82**) 2016-08-08
 - [Snowplow 81 Kangaroo Island Emu](#r81) (**r81**) 2016-06-16
 - [Snowplow 80 Southern Cassowary](#r80) (**r80**) 2016-05-30
@@ -44,6 +45,30 @@ For easier navigation, please, follow the links below.
 - [Snowplow 0.9.2](#v0.9.2) (**v0.9.2**) 2014-04-30
 - [Snowplow 0.9.1](#v0.9.1) (**v0.9.1**) 2014-04-11
 - [Snowplow 0.9.0](#v0.9.0) (**v0.9.0**) 2014-02-04
+
+<a name="r83" />
+##Snowplow 83 Bald Eagle
+
+This release introduces our powerful new [SQL Query Enrichment](https://github.com/snowplow/snowplow/wiki/SQL-Query-enrichment), long-awaited support for the EU Frankfurt AWS region (eu-central-1), plus `POST` support for our [Iglu webhook adapter](https://github.com/snowplow/snowplow/wiki/Iglu-webhook-adapter). 
+
+### Upgrade steps
+
+Update the `hadoop_enrich` job version in your configuration YAML like so:
+
+```
+versions:
+  hadoop_enrich: 1.8.0        # WAS 1.7.0
+  hadoop_shred: 0.9.0         # UNCHANGED
+  hadoop_elasticsearch: 0.1.0 # UNCHANGED
+```
+
+For a complete example, see our sample [`config.yml`](https://github.com/snowplow/snowplow/blob/r83-bald-eagle/3-enrich/emr-etl-runner/config/config.yml.sample) template.
+
+### Read more
+
+* [R83 Blog Post](http://snowplowanalytics.com/blog/2016/09/06/snowplow-r83-bald-eagle-released-with-sql-query-enrichment/)
+* [R83 Release Notes](https://github.com/snowplow/snowplow/releases/tag/r83-bald-eagle)
+
 
 <a name="r82" />
 ##Snowplow 82 Tawny Eagle
