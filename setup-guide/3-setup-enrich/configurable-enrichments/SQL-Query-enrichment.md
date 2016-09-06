@@ -5,7 +5,7 @@
 ### Compatibility
 
 JSON Schema	[iglu:com.snowplowanalytics.snowplow.enrichments/sql_query_enrichment_config/jsonschema/1-0-0][schema]  
-Compatibility	Batch: R83+ **NOT RELEASED YET** Real-time: R8x **NOT RELEASED YET**  
+Compatibility	Batch: R83+ Real-time: R8x **NOT RELEASED YET**  
 Data provider	Internal  
 
 
@@ -28,8 +28,7 @@ We **don't recommend** to use this enrichment with analytical databases which su
 
 ### Example
 
-
-Below you can see an example configuration using imaginary PostgreSQL database with CRM data, used to widen Snowplow event with context containing information about users.
+Below you can see an example configuration using imaginary PostgreSQL database with CRM data, used to widen Snowplow event with context containing information about users. To find real-world example you can check our extensive tutorial on [How to enrich events with MySQL data using the SQL Query Enrichment][mysql-tutorial].
 
 ```json
 {
@@ -360,3 +359,5 @@ As during the SQL Query enrichment process the new context is added to `derived_
 [Unstructured-events]: https://github.com/snowplow/snowplow/wiki/Custom-events#unstructured-event
 [Custon-contexts]: https://github.com/snowplow/snowplow/wiki/Custom-contexts
 [jsonpath]: http://goessner.net/articles/JsonPath/
+
+[mysql-tutorial]: http://discourse.snowplowanalytics.com/t/how-to-enrich-events-with-mysql-data-using-the-sql-query-enrichment-tutorial/385
