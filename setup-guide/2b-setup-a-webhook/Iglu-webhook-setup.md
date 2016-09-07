@@ -13,7 +13,7 @@
 <a name="overview" />
 ## 1. Overview
 
-This webhook adapter lets you track events sent via a `GET` request containing an [Iglu] [iglu]-compatible event payload.
+This webhook adapter lets you track events sent via a `GET` or `POST` request containing an [Iglu] [iglu]-compatible event payload.
 
 You can use this adapter with vendors who allow you define your **own** event types for "postback". An example of a vendor who supports this is [AD-X Tracking] [adxtracking-website].
 
@@ -24,6 +24,7 @@ For the technical implementation, see [[Iglu webhook adapter]].
 
 * [Snowplow 0.9.11] [snowplow-0.9.11]+ (all collectors)
 * Iglu self-describing JSON
+* Iglu Webhook `POST` support - [Snowplow R83 Bald Eagle] [snowplow-r83]
 
 <a name="setup" />
 ## 2. Setup
@@ -36,7 +37,7 @@ Integrating Iglu-compatible webhooks into Snowplow is a two-stage process:
 <a name="setup-webhook" />
 ## 2.1 Your webhook
 
-Currently the Iglu webhook adapter only supports events send in as `GET` requests.
+The Iglu webhook adapter supports events send in as `GET` and `POST` requests.
 
 ### 2.1.1 Path
 
@@ -70,7 +71,7 @@ You can also manually override the event's `platform` parameter like so:
 
 Supported platform codes can again be found in the [Snowplow Tracker Protocol] [tracker-protocol]; if not set, then the value for `platform` will default to `srv` for a server-side application.
 
-### 2.1.4 Example
+### 2.1.4 Example `GET` request
 
 Here is an example of an Iglu-compatible event sent as a `GET` request, broken out onto multiple lines to make it easier to read:
 
@@ -93,10 +94,59 @@ This will be converted by the Iglu webhook adapter into a self-describing JSON l
     "tracking_id":null,
     "publisher_name":"Organic",
     "user":"6353af9b-e288-4cf3-9f1c-b377a9c84dac"
+  }
 }
 ```
 
 The Snowplow enriched event containing this JSON will include `app_id` set to "mobile-attribution" and `platform` set to "mob".
+
+### 2.1.5 Example `POST` request
+
+POST requests can be compiled in two different ways for the Iglu webhook:
+
+* As a full SelfDescribing JSON in the body
+* With a `?schema=<iglu schema uri>` in the querystring and a data JSON in the body
+
+__NOTE__: For the event to be accepted the `Content-Type` must be either:
+
+* `application/json`
+* `application/json; charset=utf-8`
+
+To send the first type:
+
+```
+http://snplow.acme.com/com.snowplowanalytics.iglu/v1 -d '{
+  "schema":"iglu:com.acme/campaign/jsonschema/1-0-0",
+  "data": {
+    "name":"download",
+    "source":null,
+    "ad_unit":null,
+    "tracking_id":null,
+    "publisher_name":"Organic",
+    "user":"6353af9b-e288-4cf3-9f1c-b377a9c84dac"
+  }
+}'
+```
+
+To send the second type:
+
+```
+http://snplow.acme.com/com.snowplowanalytics.iglu/v1?schema=iglu%3Acom.acme%2Fcampaign%2Fjsonschema%2F1-0-0 -d '{
+  "name":"download",
+  "source":null,
+  "ad_unit":null,
+  "tracking_id":null,
+  "publisher_name":"Organic",
+  "user":"6353af9b-e288-4cf3-9f1c-b377a9c84dac"
+}'
+```
+
+As with the `GET` request above you can also attach extra information into the querystring to help describe your event.  Such as:
+
+* `aid=` : The Application ID
+* `p=` : The platform
+* `nuid=` : The Network User ID
+* `eid=` : A custom event ID
 
 <a name="setup-redshift" />
 ## 2.2 Redshift
@@ -117,5 +167,6 @@ And that's it - you should be ready now to start processing Iglu-compatible even
 
 [adxtracking-website]: http://adxtracking.com/
 [snowplow-0.9.11]: https://github.com/snowplow/snowplow/releases/tag/0.9.11
+[snowplow-r83]: https://github.com/snowplow/snowplow/releases/tag/r83-bald-eagle
 
 [tracker-protocol]: https://github.com/snowplow/snowplow/wiki/snowplow-tracker-protocol#1-common-parameters-platform-and-event-independent
