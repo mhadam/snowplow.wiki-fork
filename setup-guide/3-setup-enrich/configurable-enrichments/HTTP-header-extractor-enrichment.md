@@ -5,7 +5,7 @@
 ### Compatibility
 
 JSON Schema   [iglu:com.snowplowanalytics.snowplow.enrichments/http_header_extractor_config/jsonschema/1-0-0][schema]  
-Compatibility r79+, Scala Stream Collector only
+Compatibility r79+, Scala Stream Collector only  
 Data provider None 
 
 ### Overview
