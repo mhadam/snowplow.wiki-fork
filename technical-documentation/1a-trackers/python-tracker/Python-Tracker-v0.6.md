@@ -12,7 +12,9 @@
 
 *[Version 0.5][python-0.5]*
 
-*[Version 0.7][python-latest]*
+*[Version 0.7][python-0.7]*
+
+*[Version 0.8][python-latest]*
 
 ## Contents
 
@@ -935,6 +937,7 @@ This will set up a worker which will run indefinitely, taking events from the Re
 [python-0.3]: https://github.com/snowplow/snowplow/wiki/Python-Tracker-v0.3
 [python-0.4]: https://github.com/snowplow/snowplow/wiki/Python-Tracker-v0.4
 [python-0.5]: https://github.com/snowplow/snowplow/wiki/Python-Tracker-v0.5
+[python-0.7]: https://github.com/snowplow/snowplow/wiki/Python-Tracker-v0.7
 [python-latest]: https://github.com/snowplow/snowplow/wiki/Python-Tracker
 [pycontracts]: http://andreacensi.github.io/contracts/
 

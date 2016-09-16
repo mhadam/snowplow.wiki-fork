@@ -2,7 +2,9 @@
 
 [**HOME**](Home) > [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow technical documentation) > [**Trackers**](trackers) > Python Tracker
 
-*This page refers to version 0.7.0 of the Snowplow Python Tracker, which is the latest version. Documentation for earlier versions is available:*
+**NOT RELEASED YET**
+
+*This page refers to version 0.8.0 of the Snowplow Python Tracker, which is the latest version. Documentation for earlier versions is available:*
 
 *[Version 0.2][python-0.2]*
 
@@ -13,6 +15,8 @@
 *[Version 0.5][python-0.5]*
 
 *[Version 0.6][python-0.6]*
+
+*[Version 0.7][python-0.7]*
 
 ## Contents
 
@@ -48,6 +52,15 @@
   - 4.5 [`track_ecommerce_transaction_item()`](#ecommerce-transaction-item)
   - 4.6 [`track_struct_event()`](#struct-event)
   - 4.7 [`track_unstruct_event()`](#unstruct-event)
+  - 4.8 [`track_self_describing_event()`](#selfdesc-alias)
+
+  - 4.9 [`track_page_ping()`](#track-page-ping)
+  - 4.10 [`track_link_click()`](#track-link-click)
+  - 4.11 [`track_add_to_cart()`](#track-add-to-cart)
+  - 4.12 [`track_remove_from_cart()`](#track-remove-from-cart)
+  - 4.13 [`track_form_change()`](#track-form-change)
+  - 4.14 [`track_form_submit()`](#track-form-submit)
+  - 4.15 [`track_site_search()`](#track-site-search)
 - 5. [Emitters](#emitters)
   - 5.1 [The basic Emitter class](#base-emitter)
   - 5.2 [The AsyncEmitter class](#async-emitter)
@@ -413,13 +426,14 @@ Snowplow has been built to enable you to track a wide range of events that occur
 
 Tracking methods supported by the Python Tracker at a glance:
 
-| **Function**                                  | **Description**                                        |
-|----------------------------------------------:|:-------------------------------------------------------|
-| [`track_page_view()`](#page-view)             | Track and record views of web pages.                   |
-| [`track_ecommerce_transaction()`](#ecommerce-transaction)   | Track an ecommerce transaction           |
-| [`track_screen_view()`](#screen-view)         | Track the user viewing a screen within the application |
-| [`track_struct_event()`](#struct-event)       | Track a Snowplow custom structured event               |
-| [`track_unstruct_event()`](#unstruct-event)   | Track a Snowplow custom unstructured event             |
+| **Function**                                               | **Description**                                        |
+|-----------------------------------------------------------:|:-------------------------------------------------------|
+| [`track_page_view()`](#page-view)                          | Track and record views of web pages                    |
+| [`track_ecommerce_transaction()`](#ecommerce-transaction)  | Track an ecommerce transaction                         |
+| [`track_screen_view()`](#screen-view)                      | Track the user viewing a screen within the application |
+| [`track_struct_event()`](#struct-event)                    | Track a Snowplow custom structured event               |
+| [`track_unstruct_event()`](#unstruct-event)                | Track a Snowplow custom unstructured event             |
+| [`track_self_describing_event()`](#selfdesc-alias)         | Track a Snowplow custom unstructured event (alias)     |
 
 <a name="common" />
 ### 4.1 Common
@@ -672,7 +686,7 @@ t.track_unstruct_event(SelfDescribingJson(
     "save_id": "4321",
     "level": 23,
     "difficultyLevel": "HARD",
-    "dl_content": true 
+    "dl_content": true
   }
 )
 ```
@@ -680,6 +694,134 @@ t.track_unstruct_event(SelfDescribingJson(
 The `event_json` is represented using the SelfDescribingJson class. It has two fields: `schema` and `data`. `data` is a dictionary containing the properties of the unstructured event. `schema` identifies the JSON schema against which `data` should be validated.
 
 For more on JSON schema, see the [blog post] [self-describing-jsons].
+
+<a name="selfdesc-alias" />
+### 4.8 Track unstructured events with `track_self_describing_event()`
+
+`track_self_describing_event()` method is full equivalent of [`track_unstruct_event`](#unstruct-event).
+
+<a name="track-page-ping" />
+### 4.9 track_page_ping
+
+Use `track_page_view()` to track engagement with a web page over time.
+
+Arguments are:
+
+| **Argument** | **Description**                                    | **Required?** | **Validation**           |
+|-------------:|:---------------------------------------------------|:--------------|:-------------------------|
+| `page_url`   | The URL of the page                                | Yes           | Non-empty string         |
+| `page_title` | The title of the page                              | No            | String                   |
+| `referrer`   | The address which linked to the page               | No            | String                   |
+| `min_x`      | Minimum page X offset seen in the last ping period | No            | Positive integer         |
+| `max_x`      | Maximum page X offset seen in the last ping period | No            | Positive integer         |
+| `min_y`      | Minimum page Y offset seen in the last ping period | No            | Positive integer         |
+| `max_y`      | Maximum page Y offset seen in the last ping period | No            | Positive integer         |
+| `context`    | Custom context for the event                       | No            | List(SelfDescribingJson) |
+| `tstamp`     | When the pageview occurred                         | No            | Positive integer         |
+
+
+<a name="track-link-click" />
+### 4.10 track_link_click
+
+Use `track_link_click()` to track individual link click events.
+Arguments are:
+
+| **Argument**      | **Description**                     | **Required?** | **Validation**          |
+|------------------:|:------------------------------------|:--------------|:------------------------|
+| `target_url`      | The URL of the page                 | Yes           | Non-empty string        |
+| `element_id`      | ID attribute of the HTML element    | No            | String                  |
+| `element_classes` | Classes of the HTML element         | No            | List(string)            |
+| `element_content` | The content of the HTML element     | No            | String                  |
+| `context`         | Custom context for the event        | No            | List(SelfDescribingJson)|
+| `tstamp`          | When the pageview occurred          | No            | Positive integer        |
+
+<a name="track-add-to-cart" />
+### 4.11 track_add_to_cart
+
+Use `track_add_to_cart()` to track adding items to a cart on an ecommerce site.
+Arguments are:
+
+| **Argument** | **Description**               | **Required?** | **Validation**           |
+|-------------:|:------------------------------|:--------------|:-------------------------|
+| `sku`        | Item SKU or ID                | Yes           | Non-empty string         |
+| `quantity`   | Number of items added to cart | Yes           | Integer                  |
+| `name`       | Item's name                   | No            | String                   |
+| `category`   | Item's category               | No            | String                   |
+| `unit_price` | Item's price                  | No            | Int or Float             |
+| `currency`   | Currency                      | No            | String                   |
+| `context`    | Custom context for the event  | No            | List(SelfDescribingJson) |
+| `tstamp`     | When the pageview occurred    | No            | Positive integer         |
+
+<a name="track-remove-from-cart" />
+### 4.12 track_remove_from_cart
+
+Use `track_remove_from_cart()` to track removing items from a cart on an ecommerce site.
+Arguments are:
+
+| **Argument** | **Description**               | **Required?** | **Validation**           |
+|-------------:|:------------------------------|:--------------|:-------------------------|
+| `sku`        | Item SKU or ID                | Yes           | Non-empty string         |
+| `quantity`   | Number of items added to cart | Yes           | Integer                  |
+| `name`       | Item's name                   | No            | String                   |
+| `category`   | Item's category               | No            | String                   |
+| `unit_price` | Item's price                  | No            | Int or Float             |
+| `currency`   | Currency                      | No            | String                   |
+| `context`    | Custom context for the event  | No            | List(SelfDescribingJson) |
+| `tstamp`     | When the pageview occurred    | No            | Positive integer         |
+
+<a name="track-form-change" />
+### 4.13 track_form_change
+
+Use `track_from_change()` to track changes in website form inputs over session.
+Arguments are:
+
+| **Argument**      | **Description**                      | **Required?** | **Validation**          |
+|------------------:|:-------------------------------------|:--------------|:------------------------|
+| `form_id`         | ID attribute of the HTML form        | Yes           | Non-empty string        |
+| `element_id`      | ID attribute of the HTML element     | Yes           | String                  |
+| `node_name`       | Type of input element                | Yes           | Non-empty string        |
+| `value`           | Value of input element               | Yes           | String                  |
+| `type_`           | Type of data the element represents  | No            | Non-empty string        |
+| `element_classes` | Classes of the HTML element          | No            | List(string)            |
+| `context`         | Custom context for the event         | No            | List(SelfDescribingJson)                    |
+| `tstamp`          | When the pageview occurred           | No            | Positive integer        |
+
+
+<a name="track-form-submit" />
+### 4.14 track_form_submit
+
+Use `track_form_submit()` to track sumbitted forms.
+Arguments are:
+
+| **Argument**      | **Description**                      | **Required?** | **Validation**          |
+|------------------:|:-------------------------------------|:--------------|:------------------------|
+| `form_id`         | ID attribute of the HTML form        | Yes           | Non-empty string        |
+| `form_classes`    | Classes of the HTML form             | No            | List(str)               |
+| `elements`        | Value of input element               | No            | List(dict)              |
+| `context`         | Custom context for the event         | No            | List(SelfDescribingJson)                    |
+| `tstamp`          | When the pageview occurred           | No            | Positive integer        |
+
+<a name="track-site-search" />
+### 4.15 track_site_search
+
+Use `track_site_search()` to track a what user searches on your website.
+Arguments are:
+
+| **Argument** | **Description**                     | **Required?** | **Validation**          |
+|----------------:|:------------------------------------|:--------------|:------------------------|
+| `terms`         | Search terms                        | Yes           | List(str)               |
+| `filters`       | Filters applied to search           | No            | List(dict{str:str|bool})                  |
+| `total_results` | Total number of results             | No            | Integer                 |
+| `page_results`  | Number of pages of results          | No            | String                  |
+| `context`       | Custom context for the event        | No            | List(SelfDescribingJson)                    |
+| `tstamp`        | When the pageview occurred          | No            | Positive integer        |
+
+Example:
+
+```python
+t.track_page_view("www.example.com", "example", "www.referrer.com")
+```
+
 
 <a name="emitters" />
 ## 5. Emitters

@@ -2,7 +2,7 @@
 
 [**HOME**](Home) > [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow technical documentation) > [**Trackers**](trackers) > Python Tracker
 
-*This page refers to version 0.5.0 of the Snowplow Python Tracker. Documentation for other versions is available:*
+*This page refers to version 0.7.0 of the Snowplow Python Tracker, which is the latest version. Documentation for earlier versions is available:*
 
 *[Version 0.2][python-0.2]*
 
@@ -10,9 +10,9 @@
 
 *[Version 0.4][python-0.4]*
 
-*[Version 0.6][python-0.6]*
+*[Version 0.5][python-0.5]*
 
-*[Version 0.7][python-0.7]*
+*[Version 0.6][python-0.6]*
 
 *[Version 0.8][python-latest]*
 
@@ -35,6 +35,10 @@
   - 3.5 [`set_color_depth`](#set-color-depth)
   - 3.6 [`set_timezone`](#set-timezone)
   - 3.7 [`set_lang`](#set-lang)
+  - 3.8 [`set_ip_address`](#set-ip-address)
+  - 3.9 [`set_useragent`](#set-useragent)
+  - 3.10 [`set_domain_user_id`](#set-domain-user-id)
+  - 3.11 [`set_network_user_id`](#set-network-user-id)
 - 4. [Tracking specific events](#events)
   - 4.1 [Common](#common)
     - 4.1.1 [Custom contexts](#custom-contexts)
@@ -46,7 +50,7 @@
   - 4.5 [`track_ecommerce_transaction_item()`](#ecommerce-transaction-item)
   - 4.6 [`track_struct_event()`](#struct-event)
   - 4.7 [`track_unstruct_event()`](#unstruct-event)
-- 5. [Emitters](#emitter)
+- 5. [Emitters](#emitters)
   - 5.1 [The basic Emitter class](#base-emitter)
   - 5.2 [The AsyncEmitter class](#async-emitter)
   - 5.3 [The CeleryEmitter class](#celery-emitter)
@@ -54,6 +58,7 @@
   - 5.5 [Manual flushing](#manual-flushing)
   - 5.6 [Multiple emitters](#multiple-emitters)
   - 5.7 [Custom emitters](#custom-emitters)
+  - 5.8 [Automatically retry sending failed events](#onfailure-loop)
 - 6 [Contracts](#contracts)
 - 7 [Logging](#logging)
 - 8 [The RedisWorker class](#redis-worker)
@@ -71,6 +76,10 @@ Note that this tracker has access to a more restricted set of Snowplow events th
 There are three basic types of object you will create when using the Snowplow Python Tracker: subjects, emitters, and trackers.
 
 A subject represents a user whose events are tracked. A tracker constructs events and sends them to one or more emitters. Each emitter then sends the event to the endpoint you configure. This will usually be a Snowplow collector, but could also be a Redis database or Celery task queue.
+
+**A note on compatibility**
+
+Version 0.6.0 of the Python Tracker sends POST requests and custom contexts in a format which earlier versions of Snowplow don't accept. If you wish to send POST requests or custom contexts, you must be using Snowplow version 0.9.14 or later.
 
 <a name="init" />
 ## 2 Initialization
@@ -154,7 +163,7 @@ Create a subject like this:
 
 ```python
 from snowplow_tracker import Subject
-s = subject()
+s = Subject()
 ```
 
 The Subject class has a set of `set...()` methods to attach extra data relating to the user to all tracked events:
@@ -275,7 +284,7 @@ s.timezone( {{TIMEZONE}} )
 The timezone should be a string:
 
 ```python
-s.set_color_depth("Europe/London")
+s.timezone("Europe/London")
 ```
 
 [Back to top](#top)
@@ -293,6 +302,63 @@ The language should be a string:
 
 ```python
 s.set_lang('en')
+```
+
+<a name="set-ip-address" />
+### 3.8 Setting the IP address with `set_ip_address`
+
+If you have access to the user's IP address, you can set it like this:
+
+```python
+tracker.set_ip_address('34.633.11.139')
+```
+
+<a name="set-useragent" />
+### 3.9 Setting the useragent with `set_useragent`
+
+If you have access to the user's useragent (sometimes called "browser string"), you can set it like this:
+
+```python
+tracker.set_useragent('Mozilla/5.0 (Windows NT 5.1; rv:23.0) Gecko/20100101 Firefox/23.0')
+```
+
+<a name="set-domain-user-id" />
+### 3.10 Setting the domain user ID with `set_domain_user_id`
+
+The `domain_userid` field of the Snowplow event model corresponds to the ID stored in the first party cookie set by the Snowplow JavaScript Tracker. If you want to match up server-side events with client-side events, you can set the domain user ID for server-side events like this:
+
+```python
+tracker.set_domain_user_id('c7aadf5c60a5dff9')
+```
+
+You can extract the domain user ID from the cookies of a request using the `get_domain_user_id` function below.
+The `request` argument is the [Django request object][django-request].
+
+**Note that this function has not been tested.**
+
+```python
+import re
+def snowplow_cookie(request):
+    for name in request.COOKIES:
+        if re.match(r"_sp_id", name) != None:
+           return request.COOKIES[name]
+    return None
+
+def get_domain_user_id(request):
+    cookie = snowplow_cookie(request)
+    if cookie != None:
+        return cookie.split(".")[0]
+```
+
+If you used the "cookieName" configuration option of the Snowplow JavaScript Tracker, replace "_sp_" with the same string you passed as the cookieName.
+
+<a name="set-network-user-id" />
+### 3.11 Setting the network user ID with `set_network_user_id`
+
+The `network_user_id` field of the Snowplow event model corresponds to the ID stored in the third party cookie set by the Snowplow Clojure Collector. You can set the network user ID for server-side events like this:
+
+```python
+tracker.set_network_user_id('ecdff4d0-9175-40ac-a8bb-325c49733607')
 ```
 
 [Back to top](#top)
@@ -379,27 +445,22 @@ If a visitor arrives on a page advertising a movie, the context dictionary might
 
 
 ```python
-{ 
-  "schema": "iglu:com.acme_company/movie_poster/jsonschema/2-1-1",
-  "data": {
+from snowplow_tracker import SelfDescribingJson
+
+my_context = SelfDescribingJson(
+  "iglu:com.acme_company/movie_poster/jsonschema/2-1-1",
+  {
     "movie_name": "Solaris", 
     "poster_country": "JP", 
     "poster_year": new Date(1978, 1, 1)
   }
-}
+)
 ```
 
 This is how to fire a page view event with the above custom context:
 
 ```python
-t.track_page_view("http://www.films.com", "Homepage", context=[{ 
-  "schema": "iglu:com.acme_company/movie_poster/jsonschema/2-1-1",
-  "data": {
-    "movie_name": "Solaris", 
-    "poster_country": "JP", 
-    "poster_year": new Date(1978, 1, 1)
-  }
-}])
+t.track_page_view("http://www.films.com", "Homepage", context=[my_context])
 ```
 
 Note that even though there is only one custom context attached to the event, it still needs to be placed in an array.
@@ -450,7 +511,7 @@ Use `track_screen_view()` to track a user viewing a screen (or equivalent) withi
 |-------------:|:------------------------------------|:--------------|:------------------------|
 | `name`       | Human-readable name for this screen | No           | Non-empty string         |
 | `id_`         | Unique identifier for this screen  | No            | String                  |
-| `context`    | Custom context for the event        | No            | List                    |
+| `context`    | Custom context for the event        | No            | List(SelfDescribingJson)                    |
 | `tstamp`     | When the screen was viewed          | No            | Positive integer        |
 
 Although name and id_ are not individually required, at least one must be provided or the event will fail validation.
@@ -474,7 +535,7 @@ Arguments are:
 | `page_url`   | The URL of the page                 | Yes           | Non-empty string        |
 | `page_title` | The title of the page               | No            | String                  |
 | `referrer`   | The address which linked to the page| No            | String                  |
-| `context`    | Custom context for the event        | No            | List                    |
+| `context`    | Custom context for the event        | No            | List(SelfDescribingJson)                    |
 | `tstamp`     | When the pageview occurred          | No            | Positive integer        |
 
 Example:
@@ -486,7 +547,7 @@ t.track_page_view("www.example.com", "example", "www.referrer.com")
 [Back to top](#top)
 
 <a name="ecommerce-transaction" />
-### 4.4 Track ecommerce transactions with `track-ecommerce-transaction()`
+### 4.4 Track ecommerce transactions with `track_ecommerce_transaction()`
 
 Use `track_ecommerce_transaction()` to track an ecommerce transaction.
 Arguments:
@@ -501,9 +562,9 @@ Arguments:
 | `city`        | Delivery address city                | No            | String            |
 | `state`       | Delivery address state               | No            | String            |
 | `country`     | Delivery address country             | No            | String            | 
-| `currency     | Transaction currency                 | No            | String            |
+| `currency`    | Transaction currency                 | No            | String            |
 | `items`       | Items in the transaction             | Yes           | List              |
-| `context`     | Custom context for the event         | No            | List              |
+| `context`     | Custom context for the event         | No            | List(SelfDescribingJson)              |
 | `tstamp`      | When the transaction event occurred  | No            | Positive integer  |
 
 The `items` argument is an array of Python dictionaries representing the items in the transaction. `track_ecommerce_transaction` fires multiple events: one "transaction" event for the transaction as a whole, and one "transaction item" event for each element of the `items` array. Each transaction item event will have the same timestamp, order_id, and currency as the main transaction event. 
@@ -552,7 +613,7 @@ Arguments:
 | `quantity`    | Item quantity                       | Yes           | Int                      |
 | `name`        | Item name                           | No            | String                   |
 | `category`    | Item category                       | No            | String                   |
-| `context`     | Custom context for the event        | No            | List                     |
+| `context`     | Custom context for the event        | No            | List(SelfDescribingJson)                     |
 | `tstamp`      | When the transaction event occurred | No            | Positive integer         |
 
 Example:
@@ -575,7 +636,7 @@ Use `track_struct_event()` to track a custom event happening in your app which f
 | `label`      | A string to provide additional dimensions to the event data      | No            | String                   |
 | `property`   | A string describing the object or the action performed on it     | No            | String                   |
 | `value`      | A value to provide numerical data about the event                | No            | Int or Float             |
-| `context`    | Custom context for the event                                     | No            | List                     |
+| `context`    | Custom context for the event                                     | No            | List(SelfDescribingJson)                     |
 | `tstamp`     | When the structured event occurred                               | No            | Positive integer         |
 
 Example:
@@ -598,29 +659,31 @@ The arguments are as follows:
 
 | **Argument**   | **Description**                      | **Required?** | **Validation**          |
 |---------------:|:-------------------------------------|:--------------|:------------------------|
-| `event_json`   | The properties of the event          | Yes           | Dict                    |
-| `context`      | Custom context for the event         | No            | List                    |
+| `event_json`   | The properties of the event          | Yes           | SelfDescribingJson      |
+| `context`      | Custom context for the event         | No            | List(SelfDescribingJson)                    |
 | `tstamp`       | When the unstructured event occurred | No            | Positive integer        |
 
 Example:
 
 ```python
-t.track_unstruct_event({
-  "schema": "com.example_company/save-game/jsonschema/1-0-2",
-  "data": {
+from snowplow_tracker import SelfDescribingJson
+
+t.track_unstruct_event(SelfDescribingJson(
+  "com.example_company/save-game/jsonschema/1-0-2",
+  {
     "save_id": "4321",
     "level": 23,
     "difficultyLevel": "HARD",
     "dl_content": true 
   }
-})
+)
 ```
 
-The `event_json` must be a Python dictionary with two fields: `schema` and `data`. `data` is a flat dictionary containing the properties of the unstructured event. `schema` identifies the JSON schema against which `data` should be validated.
+The `event_json` is represented using the SelfDescribingJson class. It has two fields: `schema` and `data`. `data` is a dictionary containing the properties of the unstructured event. `schema` identifies the JSON schema against which `data` should be validated.
 
 For more on JSON schema, see the [blog post] [self-describing-jsons].
 
-<a name="emitter" />
+<a name="emitters" />
 ## 5. Emitters
 
 Tracker instances must be initialized with an emitter. This section will go into more depth about the Emitter class and its subclasses.
@@ -656,9 +719,7 @@ def __init__(self, endpoint,
 
 `protocol` defaults to "http" but can also be "https". 
 
-When the emitter receives an event, it adds it to a buffer. When the queue is full, all events in the queue get sent to the collector. The `buffer_size` argument allows you to customize the queue size. By default, it is 1 for GET requests and 10 for POST requests. (So in the case of GET requests, each event is fired as soon as the emitter receives it.) If the emitter is configured to send POST requests, then instead of sending one for every event in the buffer, it will send a sing request containing all those events in JSON format.
-
-*Warning: `method` defaults to GET because Snowplow collectors do not currently support POST requests.*
+When the emitter receives an event, it adds it to a buffer. When the queue is full, all events in the queue get sent to the collector. The `buffer_size` argument allows you to customize the queue size. By default, it is 1 for GET requests and 10 for POST requests. (So in the case of GET requests, each event is fired as soon as the emitter receives it.) If the emitter is configured to send POST requests, then instead of sending one for every event in the buffer, it will send a single request containing all those events in JSON format.
 
 `on_success` is an optional callback that will execute whenever the queue is flushed successfully, that is, whenever every request sent has status code 200. It will be passed one argument: the number of events that were sent.
 
@@ -700,10 +761,12 @@ t.track_page_view("http://www.example.com/page2")
 ```python
 from snowplow_tracker import AsyncEmitter
 
-e = AsyncEmitter("d3rkrsqld9gmqf.cloudfront.net")
+e = Emitter("d3rkrsqld9gmqf.cloudfront.net", thread_count=10)
 ```
 
 The `AsyncEmitter` class works just like the Emitter class. It has one advantage, though: HTTP(S) requests are sent asynchronously, so the Tracker won't be blocked while the Emitter waits for a response. For this reason, the AsyncEmitter is recommended over the base `Emitter` class.
+
+The AsyncEmitter uses a fixed-size thread pool to perform network I/O. By default this pool contains only one thread, but you can configure the number of threads in the constructor using the `thread_count` argument.
 
 <a name="celery-emitter" />
 ## 5.3 The CeleryEmitter class
@@ -750,11 +813,19 @@ print(rdb.lrange("my_snowplowkey", 0, -1))
 <a name="manual-flushing" />
 ### 5.5 Manual flushing
 
-You can flush the emitter manually using the `flush` method of the `Tracker` instance which is sending events to the emitter. This is a blocking call which synchronously sends all events in the emitter's buffer. In the case of the `AsyncEmitter`, it also forces all running threads to finish within 10 seconds.
+You can flush the emitter manually using the `flush` method of the `Tracker` instance which is sending events to the emitter. This is a blocking call which synchronously sends all events in the emitter's buffer.
 
 ```python
 t.flush()
 ```
+
+You can alternatively perform an asynchronous flush, which tells the tracker to send all buffered events but doesn't wait for the sending to complete:
+
+```python
+t.flush(False)
+```
+
+If you are using the AsyncEmitter, you shouldn't perform a synchronous flush inside an on_success or on_failure callback function as this can cause a deadlock.
 
 <a name="multiple-emitters" />
 ### 5.6 Multiple emitters
@@ -781,6 +852,20 @@ t.addEmitter(e3)
 ### 5.7 Custom emitters
 
 You can create your own custom emitter class, either from scratch or by subclassing one of the existing classes (with the exception of `CeleryEmitter`, since it uses the `pickle` module which doesn't work correctly with a class subclassed from a class located in a different module). The only requirement for compatibility is that is must have an `input` method which accepts a Python dictionary of name-value pairs.
+
+<a name="onfailure-loop" />
+### 5.8 Automatically retry sending failed events
+
+You can use the following function as the `on_failure` callback to immediately retry failed events:
+
+```python
+def on_failure_retry(failed_event_count, failed_events):
+  # possible backoff-and-retry timeout here
+  for e in failed_events:
+    my_emitter.input(e)
+```
+
+You may wish to add backoff logic to delay the resending.
 
 <a name="contracts" />
 ## 6. Contracts
@@ -871,14 +956,14 @@ This will set up a worker which will run indefinitely, taking events from the Re
 [python-0.2]: https://github.com/snowplow/snowplow/wiki/Python-Tracker-v0.2
 [python-0.3]: https://github.com/snowplow/snowplow/wiki/Python-Tracker-v0.3
 [python-0.4]: https://github.com/snowplow/snowplow/wiki/Python-Tracker-v0.4
+[python-0.5]: https://github.com/snowplow/snowplow/wiki/Python-Tracker-v0.5
 [python-0.6]: https://github.com/snowplow/snowplow/wiki/Python-Tracker-v0.6
-[python-0.7]: https://github.com/snowplow/snowplow/wiki/Python-Tracker-v0.7
 [python-latest]: https://github.com/snowplow/snowplow/wiki/Python-Tracker
 [pycontracts]: http://andreacensi.github.io/contracts/
-
 
 [jsonschema]: http://snowplowanalytics.com/blog/2014/05/13/introducing-schemaver-for-semantic-versioning-of-schemas/
 [self-describing-jsons]: http://snowplowanalytics.com/blog/2014/05/15/introducing-self-describing-jsons/
 [base64]: https://en.wikipedia.org/wiki/Base64
 [celery]: http://www.celeryproject.org/
 [redis]: http://redis.io/
+[django-request]: https://docs.djangoproject.com/en/1.7/ref/request-response/
