@@ -2,6 +2,8 @@
 
 [**HOME**](Home) > [**SNOWPLOW SETUP GUIDE**](Setting-up-Snowplow) > [**Step 2: setup a Tracker**](Setting-up-a-Tracker) > [Zendesk Tracker](Zendesk Tracker.md)
 
+**THIS WEBHOOK HAS NOT BEEN RELEASED YET.**
+
 This guide will explain how to configure your Zendesk account so that whenever a ticket is created, closed, or commented on, Zendesk will send the relevant information to your Snowplow collector in the form of an unstructured event.
 
 1. [Setting up a Cloudfront collector as a Zendesk extension](#extension)
