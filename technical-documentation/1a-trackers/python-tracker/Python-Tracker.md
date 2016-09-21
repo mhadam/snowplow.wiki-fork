@@ -775,6 +775,12 @@ Arguments are:
 | `context`    | Custom context for the event  | No            | List(SelfDescribingJson) |
 | `tstamp`     | When the pageview occurred    | No            | Positive integer         |
 
+Example:
+
+```py
+t.track_add_to_cart("123", 2, "The Devil's Dance", "Books", 23.99, "USD", None )
+```
+
 <a name="track-remove-from-cart" />
 ### 4.12 track_remove_from_cart
 
@@ -791,6 +797,10 @@ Arguments are:
 | `currency`   | Currency                      | No            | String                   |
 | `context`    | Custom context for the event  | No            | List(SelfDescribingJson) |
 | `tstamp`     | When the pageview occurred    | No            | Positive integer         |
+
+```py
+t.track_remove_from_cart("123", 2, "The Devil's Dance", "Books", 23.99, "USD", None )
+```
 
 <a name="track-form-change" />
 ### 4.13 track_form_change
