@@ -20,8 +20,8 @@
 
 ## Contents
 
-- 1. [Overview](#overview)  
-- 2. [Initialization](#init)  
+- 1 [Overview](#overview)  
+- 2 [Initialization](#init)  
   - 2.1 [Importing the module](#importing)
   - 2.2 [Creating a tracker](#create-tracker)
     - 2.2.1 [`emitters`](#emitter)  
@@ -29,7 +29,7 @@
     - 2.2.3 [`namespace`](#namespace)
     - 2.2.4 [`app_id`](#app-id)
     - 2.2.5 [`encode_base64`](#base64)
-- 3. [Adding extra data: the Subject class](#subject-class)
+- 3 [Adding extra data: the Subject class](#subject-class)
   - 3.1 [`set_platform`](#set-platform)
   - 3.2 [`set_user_id`](#set-user-id)
   - 3.3 [`set_screen_resolution`](#set-screen-resolution)
@@ -41,7 +41,7 @@
   - 3.9 [`set_useragent`](#set-useragent)
   - 3.10 [`set_domain_user_id`](#set-domain-user-id)
   - 3.11 [`set_network_user_id`](#set-network-user-id)
-- 4. [Tracking specific events](#events)
+- 4 [Tracking specific events](#events)
   - 4.1 [Common](#common)
     - 4.1.1 [Custom contexts](#custom-contexts)
     - 4.1.2 [Optional timestamp argument](#tstamp-arg)
@@ -61,7 +61,7 @@
   - 4.14 [`track_site_search()`](#site-search)
   - 4.15 [`track_unstruct_event()`](#unstruct-event)
 
-- 5. [Emitters](#emitters)
+- 5 [Emitters](#emitters)
   - 5.1 [The basic Emitter class](#base-emitter)
   - 5.2 [The AsyncEmitter class](#async-emitter)
   - 5.3 [The CeleryEmitter class](#celery-emitter)
