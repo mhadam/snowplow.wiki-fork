@@ -50,7 +50,7 @@ See [Snowplow tracker protocol](snowplow-tracker-protocol#39-custom-structured-e
 <a name="unstructured-event" />
 ##Self-describing event
 
-Self-describing events (also known as custom unstructured events are user events which do not fit one of the existing [Snowplow event types](Snowplow-authored-events) (page views, ecommerce transactions, etc.), and do not fit easily into our existing [custom structured event format](#structured-event). A **self-describing event** consists of two elements:
+Self-describing events (also known as custom unstructured events) are user events which do not fit one of the existing [Snowplow event types](Snowplow-authored-events) (page views, ecommerce transactions, etc.), and do not fit easily into our existing [custom structured event format](#structured-event). A **self-describing event** consists of two elements:
 
 - A `name` of the unstructured event, e.g. "Game saved" or "returned-order". This is case-sensitive; spaces etc are allowed
 - A set of `key: value` properties (also known as a hash, associative array or dictionary)
