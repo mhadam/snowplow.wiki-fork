@@ -560,7 +560,7 @@ Example:
 from snowplow_tracker import SelfDescribingJson
 
 t.track_self_describing_event(SelfDescribingJson(
-  "com.example_company/save-game/jsonschema/1-0-2",
+  "iglu:com.example_company/save-game/jsonschema/1-0-2",
   {
     "save_id": "4321",
     "level": 23,
