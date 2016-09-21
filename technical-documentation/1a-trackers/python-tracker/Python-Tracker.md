@@ -747,9 +747,16 @@ Arguments are:
 | `target_url`      | The URL of the page                 | Yes           | Non-empty string        |
 | `element_id`      | ID attribute of the HTML element    | No            | String                  |
 | `element_classes` | Classes of the HTML element         | No            | List(string)            |
+| `element_target`  | Target element                      | No            | String
 | `element_content` | The content of the HTML element     | No            | String                  |
 | `context`         | Custom context for the event        | No            | List(SelfDescribingJson)|
 | `tstamp`          | When the pageview occurred          | No            | Positive integer        |
+
+Example:
+
+```py
+t.track_link_click("http://my-target-url2/path", "element id 2", None, "element target", "element content", None)
+```
 
 <a name="track-add-to-cart" />
 ### 4.11 track_add_to_cart
