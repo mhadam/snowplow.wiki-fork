@@ -46,20 +46,20 @@
     - 4.1.1 [Custom contexts](#custom-contexts)
     - 4.1.2 [Optional timestamp argument](#tstamp-arg)
     - 4.1.3 [Tracker method return values](#return-values)
-  - 4.1 [`track_self_describing_event()`](#selfdesc-alias)
-  - 4.2 [`track_screen_view()`](#screen-view)
-  - 4.3 [`track_page_view()`](#page-view)
-  - 4.4 [`track_ecommerce_transaction()`](#ecommerce-transaction)
-  - 4.5 [`track_ecommerce_transaction_item()`](#ecommerce-transaction-item)
-  - 4.6 [`track_struct_event()`](#struct-event)
-  - 4.9 [`track_page_ping()`](#track-page-ping)
-  - 4.10 [`track_link_click()`](#track-link-click)
-  - 4.11 [`track_add_to_cart()`](#track-add-to-cart)
-  - 4.12 [`track_remove_from_cart()`](#track-remove-from-cart)
-  - 4.13 [`track_form_change()`](#track-form-change)
-  - 4.14 [`track_form_submit()`](#track-form-submit)
-  - 4.15 [`track_site_search()`](#track-site-search)
-  - 4.16 [`track_unstruct_event()`](#unstruct-event)
+  - 4.2 [`track_self_describing_event()`](#selfdesc-alias)
+  - 4.3 [`track_screen_view()`](#screen-view)
+  - 4.4 [`track_page_view()`](#page-view)
+  - 4.5 [`track_ecommerce_transaction()`](#ecommerce-transaction)
+  - 4.6 [`track_ecommerce_transaction_item()`](#ecommerce-transaction-item)
+  - 4.7 [`track_struct_event()`](#struct-event)
+  - 4.8 [`track_page_ping()`](#page-ping)
+  - 4.9 [`track_link_click()`](#link-click)
+  - 4.10 [`track_add_to_cart()`](#add-to-cart)
+  - 4.11 [`track_remove_from_cart()`](#remove-from-cart)
+  - 4.12 [`track_form_change()`](#form-change)
+  - 4.13 [`track_form_submit()`](#form-submit)
+  - 4.14 [`track_site_search()`](#site-search)
+  - 4.15 [`track_unstruct_event()`](#unstruct-event)
 
 - 5. [Emitters](#emitters)
   - 5.1 [The basic Emitter class](#base-emitter)
@@ -543,8 +543,6 @@ t.track_page_view("http://www.example.com").track_screen_view("title screen")
 
 [Back to top](#top)
 
-<a name="screen-view" />
-
 <a name="selfdesc-alias" />
 ### 4.2 Track self-describing events with `track_self_describing_event()`
 
@@ -600,7 +598,7 @@ t.track_page_view("www.example.com", "example", "www.referrer.com")
 
 [Back to top](#top)
 
-<a name="track-page-ping" />
+<a name="page-ping" />
 ### 4.1 track_page_ping
 
 Use `track_page_ping()` to track engagement with a web page over time, via a heart beat event. (Each ping represents a single heartbeat.)
@@ -626,6 +624,7 @@ Example:
 t.track_page_ping("http://mytesturl/test2", "Page title 2", "http://myreferrer.com", 0, 100, 0, 500, None)
 ```
 
+<a name="screen-view" />
 ### 4.4 Track screen views with `track_screen_view()`
 
 Use `track_screen_view()` to track a user viewing a screen (or equivalent) within your app. This is an alternative to the `track_page_view` method which is less web-centric. The arguments are:
@@ -752,7 +751,7 @@ t.track_struct_event("shop", "add-to-basket", None, "pcs", 2)
 
 
 
-<a name="track-link-click" />
+<a name="link-click" />
 ### 4.8 track_link_click
 
 Use `track_link_click()` to track individual link click events.
@@ -774,7 +773,7 @@ Example:
 t.track_link_click("http://my-target-url2/path", "element id 2", None, "element target", "element content", None)
 ```
 
-<a name="track-add-to-cart" />
+<a name="add-to-cart" />
 ### 4.9 track_add_to_cart
 
 Use `track_add_to_cart()` to track adding items to a cart on an ecommerce site.
@@ -797,7 +796,7 @@ Example:
 t.track_add_to_cart("123", 2, "The Devil's Dance", "Books", 23.99, "USD", None )
 ```
 
-<a name="track-remove-from-cart" />
+<a name="remove-from-cart" />
 ### 4.10 track_remove_from_cart
 
 Use `track_remove_from_cart()` to track removing items from a cart on an ecommerce site.
@@ -818,7 +817,7 @@ Arguments are:
 t.track_remove_from_cart("123", 2, "The Devil's Dance", "Books", 23.99, "USD", None )
 ```
 
-<a name="track-form-change" />
+<a name="form-change" />
 ### 4.11 track_form_change
 
 Use `track_from_change()` to track changes in website form inputs over session.
@@ -836,7 +835,7 @@ Arguments are:
 | `tstamp`          | When the pageview occurred           | No            | Positive integer        |
 
 
-<a name="track-form-submit" />
+<a name="form-submit" />
 ### 4.12 track_form_submit
 
 Use `track_form_submit()` to track sumbitted forms.
@@ -850,7 +849,7 @@ Arguments are:
 | `context`         | Custom context for the event         | No            | List(SelfDescribingJson)                    |
 | `tstamp`          | When the pageview occurred           | No            | Positive integer        |
 
-<a name="track-site-search" />
+<a name="site-search" />
 ### 4.13 track_site_search
 
 Use `track_site_search()` to track a what user searches on your website.
