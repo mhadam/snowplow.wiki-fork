@@ -46,13 +46,12 @@
     - 4.1.1 [Custom contexts](#custom-contexts)
     - 4.1.2 [Optional timestamp argument](#tstamp-arg)
     - 4.1.3 [Tracker method return values](#return-values)
+  - 4.1 [`track_self_describing_event()`](#selfdesc-alias)
   - 4.2 [`track_screen_view()`](#screen-view)
   - 4.3 [`track_page_view()`](#page-view)
   - 4.4 [`track_ecommerce_transaction()`](#ecommerce-transaction)
   - 4.5 [`track_ecommerce_transaction_item()`](#ecommerce-transaction-item)
   - 4.6 [`track_struct_event()`](#struct-event)
-  - 4.7 [`track_unstruct_event()`](#unstruct-event)
-  - 4.8 [`track_self_describing_event()`](#selfdesc-alias)
   - 4.9 [`track_page_ping()`](#track-page-ping)
   - 4.10 [`track_link_click()`](#track-link-click)
   - 4.11 [`track_add_to_cart()`](#track-add-to-cart)
@@ -60,6 +59,8 @@
   - 4.13 [`track_form_change()`](#track-form-change)
   - 4.14 [`track_form_submit()`](#track-form-submit)
   - 4.15 [`track_site_search()`](#track-site-search)
+  - 4.16 [`track_unstruct_event()`](#unstruct-event)
+
 - 5. [Emitters](#emitters)
   - 5.1 [The basic Emitter class](#base-emitter)
   - 5.2 [The AsyncEmitter class](#async-emitter)
@@ -106,7 +107,7 @@ Require the Python Tracker's module into your Python code like so:
 from snowplow_tracker import Subject, Tracker, Emitter
 ```
 
-That's it - you are now ready to initialize a tracker instance. 
+That's it - you are now ready to initialize a tracker instance.
 
 [Back to top](#top)
 
@@ -168,7 +169,7 @@ By default, unstructured events and custom contexts are encoded into Base64 to e
 <a name="subject-class" />
 ## 3. Adding extra data: The Subject class
 
-You may have additional information about your application's environment, current user and so on, which you want to send to Snowplow with each event.
+You may have additional information about the user (i.e. subject) performing the action or the environment in which the user has performed the action, some of that additional data can be sent into Snowplow with each event as part of the subject class.
 
 Create a subject like this:
 
@@ -422,18 +423,18 @@ t.set_subject(s1).track_struct_event("Ecomm", "add-to-basket", "dog-skateboardin
 <a name="events" />
 ## 4. Tracking specific events
 
-Snowplow has been built to enable you to track a wide range of events that occur when users interact with your websites and apps. We are constantly growing the range of functions available in order to capture that data more richly.
+As a Snowplow user, you have the ability to define your own event types, upload the associated schemas for those types to your own Iglu schema registry and then track those events in Snowplow using the `track_self_describing_event()` method.
 
-Tracking methods supported by the Python Tracker at a glance:
+In addition, Snowplow has a wide selection of pre-defined events and associated and associated methods for tracking:
 
 | **Function**                                               | **Description**                                        |
 |-----------------------------------------------------------:|:-------------------------------------------------------|
-| [`track_page_view()`](#page-view)                          | Track and record views of web pages                    |
-| [`track_ecommerce_transaction()`](#ecommerce-transaction)  | Track an ecommerce transaction                         |
-| [`track_screen_view()`](#screen-view)                      | Track the user viewing a screen within the application |
+| [`track_self_describing_event()`](#selfdesc-alias)         | Track events that you've defined yourself              |
+| [`track_page_view()`](#page-view)                          | Track views of web pages                               |
+| [`track_ecommerce_transaction()`](#ecommerce-transaction)  | Track ecommerce transaction                            |
+| [`track_screen_view()`](#screen-view)                      | Track screen views in your app                         |
 | [`track_struct_event()`](#struct-event)                    | Track a Snowplow custom structured event               |
-| [`track_unstruct_event()`](#unstruct-event)                | Track a Snowplow custom unstructured event             |
-| [`track_self_describing_event()`](#selfdesc-alias)         | Track a Snowplow custom unstructured event (alias)     |
+
 
 <a name="common" />
 ### 4.1 Common
@@ -443,13 +444,31 @@ All events are tracked with specific methods on the tracker instance, of the for
 <a name="custom-contexts" />
 ### 4.1.1 Custom contexts
 
-In short, custom contexts let you add additional information about the circumstances surrounding an event in the form of a Python dictionary object. Each tracking method accepts an additional optional contexts parameter after all the parameters specific to that method:
+When you track an event, some of the data that you track will be specific to that event. A lot of the data you want to record, however, will describe entities that are tracked across multiple events. For example, a media company might want to track the following events:
+
+* User views video listing
+* User plays video
+* User pauses video
+* User shares video
+* User favorites video
+* User reviews video
+
+Whilst each of those events is a different type, all of them involve capturing data about the user and the video. Both the 'user' and 'video' are entities that are tracked across multiple event types. Both are candidates to be "custom context". You as a Snowplow user can define your own custom contexts (including associated schemas) and then send data for as many custom contexts as you wish with *any* Snowplow event. So if you want, you can define your own "user context", and then send additional user data in that object with any event. Other examples of context include:
+
+* articles
+* videos
+* products
+* categories
+* pages / page_types
+* environments
+
+Each tracking method accepts an additional optional contexts parameter after all the parameters specific to that method:
 
 ```python
 def track_page_view(self, page_url, page_title=None, referrer=None, context=None, tstamp=None):
 ```
 
-The `context` argument should consist of an array of one or more Python dictionaries. The format of each dictionary is the same as for an [unstructured event](#unstruct-event).
+The `context` argument should consist of an array of one or more Python dictionaries. The format of each dictionary is the same as for an [self-describing event](#selfdesc-alias).
 
 **Important:** Even if only one custom context is being attached to an event, it still needs to be wrapped in an array.
 
@@ -462,8 +481,8 @@ from snowplow_tracker import SelfDescribingJson
 my_context = SelfDescribingJson(
   "iglu:com.acme_company/movie_poster/jsonschema/2-1-1",
   {
-    "movie_name": "Solaris", 
-    "poster_country": "JP", 
+    "movie_name": "Solaris",
+    "poster_country": "JP",
     "poster_year": new Date(1978, 1, 1)
   }
 )
@@ -525,9 +544,91 @@ t.track_page_view("http://www.example.com").track_screen_view("title screen")
 [Back to top](#top)
 
 <a name="screen-view" />
-### 4.2 Track screen views with `track_screen_view()`
 
-Use `track_screen_view()` to track a user viewing a screen (or equivalent) within your app. Arguments are:
+<a name="selfdesc-alias" />
+### 4.2 Track self-describing events with `track_self_describing_event()`
+
+Use `track_self_describing_event()` to track a event types that you have defined yourself. The arguments are as follows:
+
+| **Argument**   | **Description**                      | **Required?** | **Validation**          |
+|---------------:|:-------------------------------------|:--------------|:------------------------|
+| `event_json`   | The properties of the event          | Yes           | SelfDescribingJson      |
+| `context`      | Custom context for the event         | No            | List(SelfDescribingJson)                    |
+| `tstamp`       | When the unstructured event occurred | No            | Positive integer        |
+
+Example:
+
+```python
+from snowplow_tracker import SelfDescribingJson
+
+t.track_self_describing_event(SelfDescribingJson(
+  "com.example_company/save-game/jsonschema/1-0-2",
+  {
+    "save_id": "4321",
+    "level": 23,
+    "difficultyLevel": "HARD",
+    "dl_content": True
+  }
+))
+```
+
+The `event_json` is represented using the SelfDescribingJson class. It has two fields: `schema` and `data`. `data` is a dictionary containing the properties of the unstructured event. `schema` identifies the JSON schema against which `data` should be validated. This schema should be available in your [Iglu schema registry] [iglu-schema-registry]  and your Snowplow pipeline configured so that that that registry is included in your Iglu resolver.
+
+For more on JSON schema, see the [blog post] [self-describing-jsons].
+
+Many Snowplow users use the above method to track *all* their events i.e. only record event types that they have defined. However, there are a number of "out of the box" events that have dedicated tracking methods. These are detailed below:
+
+
+<a name="page-view" />
+### 4.3 Track pageviews with `track_page_view()`
+
+Use `track_page_view()` to track a user viewing a page within your app or website. The arguments are:
+
+| **Argument** | **Description**                     | **Required?** | **Validation**          |
+|-------------:|:------------------------------------|:--------------|:------------------------|
+| `page_url`   | The URL of the page                 | Yes           | Non-empty string        |
+| `page_title` | The title of the page               | No            | String                  |
+| `referrer`   | The address which linked to the page| No            | String                  |
+| `context`    | Custom context for the event        | No            | List(SelfDescribingJson)                    |
+| `tstamp`     | When the pageview occurred          | No            | Positive integer        |
+
+Example:
+
+```python
+t.track_page_view("www.example.com", "example", "www.referrer.com")
+```
+
+[Back to top](#top)
+
+<a name="track-page-ping" />
+### 4.1 track_page_ping
+
+Use `track_page_ping()` to track engagement with a web page over time, via a heart beat event. (Each ping represents a single heartbeat.)
+
+Arguments are:
+
+| **Argument** | **Description**                                    | **Required?** | **Validation**           |
+|-------------:|:---------------------------------------------------|:--------------|:-------------------------|
+| `page_url`   | The URL of the page                                | Yes           | Non-empty string         |
+| `page_title` | The title of the page                              | No            | String                   |
+| `referrer`   | The address which linked to the page               | No            | String                   |
+| `min_x`      | Minimum page X offset seen in the last ping period | No            | Positive integer         |
+| `max_x`      | Maximum page X offset seen in the last ping period | No            | Positive integer         |
+| `min_y`      | Minimum page Y offset seen in the last ping period | No            | Positive integer         |
+| `max_y`      | Maximum page Y offset seen in the last ping period | No            | Positive integer         |
+| `context`    | Custom context for the event                       | No            | List(SelfDescribingJson) |
+| `tstamp`     | When the pageview occurred                         | No            | Positive integer         |
+
+
+Example:
+
+```py
+t.track_page_ping("http://mytesturl/test2", "Page title 2", "http://myreferrer.com", 0, 100, 0, 500, None)
+```
+
+### 4.4 Track screen views with `track_screen_view()`
+
+Use `track_screen_view()` to track a user viewing a screen (or equivalent) within your app. This is an alternative to the `track_page_view` method which is less web-centric. The arguments are:
 
 | **Argument** | **Description**                     | **Required?** | **Validation**          |
 |-------------:|:------------------------------------|:--------------|:------------------------|
@@ -546,30 +647,10 @@ t.track_screen_view("HUD > Save Game", "screen23", null, 1368725287000)
 
 [Back to top](#top)
 
-<a name="page-view" />
-### 4.3 Track pageviews with `track_page_view()`
 
-Use `track_page_view()` to track a user viewing a page within your app.
-Arguments are:
-
-| **Argument** | **Description**                     | **Required?** | **Validation**          |
-|-------------:|:------------------------------------|:--------------|:------------------------|
-| `page_url`   | The URL of the page                 | Yes           | Non-empty string        |
-| `page_title` | The title of the page               | No            | String                  |
-| `referrer`   | The address which linked to the page| No            | String                  |
-| `context`    | Custom context for the event        | No            | List(SelfDescribingJson)                    |
-| `tstamp`     | When the pageview occurred          | No            | Positive integer        |
-
-Example:
-
-```python
-t.track_page_view("www.example.com", "example", "www.referrer.com")
-```
-
-[Back to top](#top)
 
 <a name="ecommerce-transaction" />
-### 4.4 Track ecommerce transactions with `track_ecommerce_transaction()`
+### 4.5 Track ecommerce transactions with `track_ecommerce_transaction()`
 
 Use `track_ecommerce_transaction()` to track an ecommerce transaction.
 Arguments:
@@ -583,13 +664,13 @@ Arguments:
 | `shipping`    | Delivery cost charged                | No            | Int or Float      |
 | `city`        | Delivery address city                | No            | String            |
 | `state`       | Delivery address state               | No            | String            |
-| `country`     | Delivery address country             | No            | String            | 
+| `country`     | Delivery address country             | No            | String            |
 | `currency`    | Transaction currency                 | No            | String            |
 | `items`       | Items in the transaction             | Yes           | List              |
 | `context`     | Custom context for the event         | No            | List(SelfDescribingJson)              |
 | `tstamp`      | When the transaction event occurred  | No            | Positive integer  |
 
-The `items` argument is an array of Python dictionaries representing the items in the transaction. `track_ecommerce_transaction` fires multiple events: one "transaction" event for the transaction as a whole, and one "transaction item" event for each element of the `items` array. Each transaction item event will have the same timestamp, order_id, and currency as the main transaction event. 
+The `items` argument is an array of Python dictionaries representing the items in the transaction. `track_ecommerce_transaction` fires multiple events: one "transaction" event for the transaction as a whole, and one "transaction item" event for each element of the `items` array. Each transaction item event will have the same timestamp, order_id, and currency as the main transaction event.
 
 These are the fields that can appear in a transaction item dictionary:
 
@@ -621,7 +702,7 @@ t.track_ecommerce_transaction("6a8078be", 35, city="London", currency="GBP", ite
 [Back to top](#top)
 
 <a name="ecommerce-transaction-item" />
-### 4.5 Track ecommerce transactions with `track_ecommerce_transaction_item()`
+### 4.6 Track ecommerce transactions with `track_ecommerce_transaction_item()`
 
 Use `track_ecommerce_transaction_item()` to track an individual line item within an ecommerce transaction.
 
@@ -647,7 +728,7 @@ t.track_ecommerce_transaction_item("order-789", "2001", 49.99, 1, "Green shoes",
 [Back to top](#top)
 
 <a name="struct-event" />
-### 4.6 Track structured events with `track_struct_event()`
+### 4.7 Track structured events with `track_struct_event()`
 
 Use `track_struct_event()` to track a custom event happening in your app which fits the Google Analytics-style structure of having up to five fields (with only the first two required):
 
@@ -669,75 +750,10 @@ t.track_struct_event("shop", "add-to-basket", None, "pcs", 2)
 
 [Back to top](#top)
 
-<a name="unstruct-event" />
-### 4.7 Track unstructured events with `track_unstruct_event()`
 
-Use `track_unstruct_event()` to track a custom event which consists of a name and an unstructured set of properties. This is useful when:
-
-* You want to track event types which are proprietary/specific to your business (i.e. not already part of Snowplow), or
-* You want to track events which have unpredictable or frequently changing properties
-
-The arguments are as follows:
-
-| **Argument**   | **Description**                      | **Required?** | **Validation**          |
-|---------------:|:-------------------------------------|:--------------|:------------------------|
-| `event_json`   | The properties of the event          | Yes           | SelfDescribingJson      |
-| `context`      | Custom context for the event         | No            | List(SelfDescribingJson)                    |
-| `tstamp`       | When the unstructured event occurred | No            | Positive integer        |
-
-Example:
-
-```python
-from snowplow_tracker import SelfDescribingJson
-
-t.track_unstruct_event(SelfDescribingJson(
-  "com.example_company/save-game/jsonschema/1-0-2",
-  {
-    "save_id": "4321",
-    "level": 23,
-    "difficultyLevel": "HARD",
-    "dl_content": True
-  }
-))
-```
-
-The `event_json` is represented using the SelfDescribingJson class. It has two fields: `schema` and `data`. `data` is a dictionary containing the properties of the unstructured event. `schema` identifies the JSON schema against which `data` should be validated.
-
-For more on JSON schema, see the [blog post] [self-describing-jsons].
-
-<a name="selfdesc-alias" />
-### 4.8 Track unstructured events with `track_self_describing_event()`
-
-`track_self_describing_event()` method is full equivalent of [`track_unstruct_event`](#unstruct-event).
-
-<a name="track-page-ping" />
-### 4.9 track_page_ping
-
-Use `track_page_view()` to track engagement with a web page over time.
-
-Arguments are:
-
-| **Argument** | **Description**                                    | **Required?** | **Validation**           |
-|-------------:|:---------------------------------------------------|:--------------|:-------------------------|
-| `page_url`   | The URL of the page                                | Yes           | Non-empty string         |
-| `page_title` | The title of the page                              | No            | String                   |
-| `referrer`   | The address which linked to the page               | No            | String                   |
-| `min_x`      | Minimum page X offset seen in the last ping period | No            | Positive integer         |
-| `max_x`      | Maximum page X offset seen in the last ping period | No            | Positive integer         |
-| `min_y`      | Minimum page Y offset seen in the last ping period | No            | Positive integer         |
-| `max_y`      | Maximum page Y offset seen in the last ping period | No            | Positive integer         |
-| `context`    | Custom context for the event                       | No            | List(SelfDescribingJson) |
-| `tstamp`     | When the pageview occurred                         | No            | Positive integer         |
-
-
-Example:
-
-```py
-t.track_page_ping("http://mytesturl/test2", "Page title 2", "http://myreferrer.com", 0, 100, 0, 500, None)
-```
 
 <a name="track-link-click" />
-### 4.10 track_link_click
+### 4.8 track_link_click
 
 Use `track_link_click()` to track individual link click events.
 Arguments are:
@@ -759,7 +775,7 @@ t.track_link_click("http://my-target-url2/path", "element id 2", None, "element 
 ```
 
 <a name="track-add-to-cart" />
-### 4.11 track_add_to_cart
+### 4.9 track_add_to_cart
 
 Use `track_add_to_cart()` to track adding items to a cart on an ecommerce site.
 Arguments are:
@@ -782,7 +798,7 @@ t.track_add_to_cart("123", 2, "The Devil's Dance", "Books", 23.99, "USD", None )
 ```
 
 <a name="track-remove-from-cart" />
-### 4.12 track_remove_from_cart
+### 4.10 track_remove_from_cart
 
 Use `track_remove_from_cart()` to track removing items from a cart on an ecommerce site.
 Arguments are:
@@ -803,7 +819,7 @@ t.track_remove_from_cart("123", 2, "The Devil's Dance", "Books", 23.99, "USD", N
 ```
 
 <a name="track-form-change" />
-### 4.13 track_form_change
+### 4.11 track_form_change
 
 Use `track_from_change()` to track changes in website form inputs over session.
 Arguments are:
@@ -821,7 +837,7 @@ Arguments are:
 
 
 <a name="track-form-submit" />
-### 4.14 track_form_submit
+### 4.12 track_form_submit
 
 Use `track_form_submit()` to track sumbitted forms.
 Arguments are:
@@ -835,7 +851,7 @@ Arguments are:
 | `tstamp`          | When the pageview occurred           | No            | Positive integer        |
 
 <a name="track-site-search" />
-### 4.15 track_site_search
+### 4.13 track_site_search
 
 Use `track_site_search()` to track a what user searches on your website.
 Arguments are:
@@ -854,6 +870,14 @@ Example:
 ```python
 t.track_page_view("www.example.com", "example", "www.referrer.com")
 ```
+
+
+<a name="unstruct-event" />
+### 4.14 Track unstructured events with `track_unstruct_event()`
+
+Thi is functionally equivalent to `track_self_describing_event`. We believe that the method name is misleading: this method is used to track events that are structured in nature (they have an associated schema), which is why we believe referring to them as `self-describing` events makes more sense than referring to them as `unstructured events`.
+
+The method is provided for reasons of backwards compatibility.
 
 
 <a name="emitters" />
@@ -875,8 +899,8 @@ e = Emitter("d3rkrsqld9gmqf.cloudfront.net")
 This is the signature of the constructor for the base Emitter class:
 
 ```python
-def __init__(self, endpoint, 
-             protocol="http", port=None, method="get", 
+def __init__(self, endpoint,
+             protocol="http", port=None, method="get",
              buffer_size=None, on_success=None, on_failure=None):
 ```
 
@@ -891,7 +915,7 @@ def __init__(self, endpoint,
 | `on_failure`   | Callback executed when a flush is unsuccessful | No            | Function taking 2 arguments |
 | `byte_limit`   | Number of bytes to store before flushing       | No            | Positive integer            |
 
-`protocol` defaults to "http" but can also be "https". 
+`protocol` defaults to "http" but can also be "https".
 
 When the emitter receives an event, it adds it to a buffer. When the queue is full, all events in the queue get sent to the collector. The `buffer_size` argument allows you to customize the queue size. By default, it is 1 for GET requests and 10 for POST requests. (So in the case of GET requests, each event is fired as soon as the emitter receives it.) If the emitter is configured to send POST requests, then instead of sending one for every event in the buffer, it will send a single request containing all those events in JSON format.
 
@@ -905,7 +929,7 @@ An example:
 
 ```python
 def f(x):
-    print(str(x) + " events sent successfully!") 
+    print(str(x) + " events sent successfully!")
 
 unsent_events = []
 
@@ -1162,3 +1186,5 @@ This will set up a worker which will run indefinitely, taking events from the Re
 
 [python-protocol-datetime]: https://github.com/snowplow/snowplow/wiki/snowplow-tracker-protocol#12-date--time-parameter
 [python-model-datetime]: https://github.com/snowplow/snowplow/wiki/canonical-event-model#212-date--time-fields
+
+[iglu-schema-registry]: https://github.com/snowplow/iglu
