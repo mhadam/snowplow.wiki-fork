@@ -211,7 +211,7 @@ For example:
 s.set_platform("tv") # Running on a Connected TV
 ```
 
-For a full list of supported platforms, please see the [[Snowplow Tracker Protocol]].
+For a full list of supported platforms, please see the [Snowplow Tracker Protocol](Snowplow Tracker Protocol#1-common-parameters-platform-and-event-independent).
 
 [Back to top](#top)
 
