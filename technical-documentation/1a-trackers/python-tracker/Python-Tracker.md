@@ -47,12 +47,12 @@
     - 4.1.2 [Optional timestamp argument](#tstamp-arg)
     - 4.1.3 [Tracker method return values](#return-values)
   - 4.2 [`track_self_describing_event()`](#selfdesc-alias)
-  - 4.3 [`track_screen_view()`](#screen-view)
-  - 4.4 [`track_page_view()`](#page-view)
-  - 4.5 [`track_ecommerce_transaction()`](#ecommerce-transaction)
-  - 4.6 [`track_ecommerce_transaction_item()`](#ecommerce-transaction-item)
-  - 4.7 [`track_struct_event()`](#struct-event)
-  - 4.8 [`track_page_ping()`](#page-ping)
+  - 4.3 [`track_page_view()`](#page-view)
+  - 4.4 [`track_page_ping()`](#page-ping)
+  - 4.5 [`track_screen_view()`](#screen-view)
+  - 4.6 [`track_ecommerce_transaction()`](#ecommerce-transaction)
+  - 4.7 [`track_ecommerce_transaction_item()`](#ecommerce-transaction-item)
+  - 4.8 [`track_struct_event()`](#struct-event)
   - 4.9 [`track_link_click()`](#link-click)
   - 4.10 [`track_add_to_cart()`](#add-to-cart)
   - 4.11 [`track_remove_from_cart()`](#remove-from-cart)
@@ -429,10 +429,10 @@ In addition, Snowplow has a wide selection of pre-defined events and associated 
 
 | **Function**                                               | **Description**                                        |
 |-----------------------------------------------------------:|:-------------------------------------------------------|
-| [`track_self_describing_event()`](#selfdesc-alias)         | Track events that you've defined yourself              |
 | [`track_page_view()`](#page-view)                          | Track views of web pages                               |
+| [`track_page_ping()`](#page-ping)                          | Track engagement on web pages over time                |
+| [`track_screen_view()`](#screen-view)                      | Track screen views (non-web e.g. in-app)               |
 | [`track_ecommerce_transaction()`](#ecommerce-transaction)  | Track ecommerce transaction                            |
-| [`track_screen_view()`](#screen-view)                      | Track screen views in your app                         |
 | [`track_struct_event()`](#struct-event)                    | Track a Snowplow custom structured event               |
 
 
@@ -599,7 +599,7 @@ t.track_page_view("www.example.com", "example", "www.referrer.com")
 [Back to top](#top)
 
 <a name="page-ping" />
-### 4.1 track_page_ping
+### 4.4 track_page_ping
 
 Use `track_page_ping()` to track engagement with a web page over time, via a heart beat event. (Each ping represents a single heartbeat.)
 
@@ -625,7 +625,7 @@ t.track_page_ping("http://mytesturl/test2", "Page title 2", "http://myreferrer.c
 ```
 
 <a name="screen-view" />
-### 4.4 Track screen views with `track_screen_view()`
+### 4.5 Track screen views with `track_screen_view()`
 
 Use `track_screen_view()` to track a user viewing a screen (or equivalent) within your app. This is an alternative to the `track_page_view` method which is less web-centric. The arguments are:
 
@@ -649,7 +649,7 @@ t.track_screen_view("HUD > Save Game", "screen23", null, 1368725287000)
 
 
 <a name="ecommerce-transaction" />
-### 4.5 Track ecommerce transactions with `track_ecommerce_transaction()`
+### 4.6 Track ecommerce transactions with `track_ecommerce_transaction()`
 
 Use `track_ecommerce_transaction()` to track an ecommerce transaction.
 Arguments:
@@ -701,7 +701,7 @@ t.track_ecommerce_transaction("6a8078be", 35, city="London", currency="GBP", ite
 [Back to top](#top)
 
 <a name="ecommerce-transaction-item" />
-### 4.6 Track ecommerce transactions with `track_ecommerce_transaction_item()`
+### 4.7 Track ecommerce transactions with `track_ecommerce_transaction_item()`
 
 Use `track_ecommerce_transaction_item()` to track an individual line item within an ecommerce transaction.
 
@@ -727,7 +727,7 @@ t.track_ecommerce_transaction_item("order-789", "2001", 49.99, 1, "Green shoes",
 [Back to top](#top)
 
 <a name="struct-event" />
-### 4.7 Track structured events with `track_struct_event()`
+### 4.8 Track structured events with `track_struct_event()`
 
 Use `track_struct_event()` to track a custom event happening in your app which fits the Google Analytics-style structure of having up to five fields (with only the first two required):
 
@@ -752,7 +752,7 @@ t.track_struct_event("shop", "add-to-basket", None, "pcs", 2)
 
 
 <a name="link-click" />
-### 4.8 track_link_click
+### 4.9 track_link_click
 
 Use `track_link_click()` to track individual link click events.
 Arguments are:
@@ -774,7 +774,7 @@ t.track_link_click("http://my-target-url2/path", "element id 2", None, "element 
 ```
 
 <a name="add-to-cart" />
-### 4.9 track_add_to_cart
+### 4.10 track_add_to_cart
 
 Use `track_add_to_cart()` to track adding items to a cart on an ecommerce site.
 Arguments are:
@@ -797,7 +797,7 @@ t.track_add_to_cart("123", 2, "The Devil's Dance", "Books", 23.99, "USD", None )
 ```
 
 <a name="remove-from-cart" />
-### 4.10 track_remove_from_cart
+### 4.11 track_remove_from_cart
 
 Use `track_remove_from_cart()` to track removing items from a cart on an ecommerce site.
 Arguments are:
@@ -818,7 +818,7 @@ t.track_remove_from_cart("123", 2, "The Devil's Dance", "Books", 23.99, "USD", N
 ```
 
 <a name="form-change" />
-### 4.11 track_form_change
+### 4.12 track_form_change
 
 Use `track_from_change()` to track changes in website form inputs over session.
 Arguments are:
@@ -836,7 +836,7 @@ Arguments are:
 
 
 <a name="form-submit" />
-### 4.12 track_form_submit
+### 4.13 track_form_submit
 
 Use `track_form_submit()` to track sumbitted forms.
 Arguments are:
@@ -850,7 +850,7 @@ Arguments are:
 | `tstamp`          | When the pageview occurred           | No            | Positive integer        |
 
 <a name="site-search" />
-### 4.13 track_site_search
+### 4.14 track_site_search
 
 Use `track_site_search()` to track a what user searches on your website.
 Arguments are:
@@ -872,7 +872,7 @@ t.track_page_view("www.example.com", "example", "www.referrer.com")
 
 
 <a name="unstruct-event" />
-### 4.14 Track unstructured events with `track_unstruct_event()`
+### 4.15 Track unstructured events with `track_unstruct_event()`
 
 Thi is functionally equivalent to `track_self_describing_event`. We believe that the method name is misleading: this method is used to track events that are structured in nature (they have an associated schema), which is why we believe referring to them as `self-describing` events makes more sense than referring to them as `unstructured events`.
 
