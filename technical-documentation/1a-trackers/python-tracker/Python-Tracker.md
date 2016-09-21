@@ -599,7 +599,7 @@ t.track_page_view("www.example.com", "example", "www.referrer.com")
 [Back to top](#top)
 
 <a name="page-ping" />
-### 4.4 track_page_ping
+### 4.4 Track page pings with `track_page_ping()`
 
 Use `track_page_ping()` to track engagement with a web page over time, via a heart beat event. (Each ping represents a single heartbeat.)
 
