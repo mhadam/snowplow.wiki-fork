@@ -730,6 +730,12 @@ Arguments are:
 | `tstamp`     | When the pageview occurred                         | No            | Positive integer         |
 
 
+Example:
+
+```py
+t.track_page_ping("http://mytesturl/test2", "Page title 2", "http://myreferrer.com", 0, 100, 0, 500, None)
+```
+
 <a name="track-link-click" />
 ### 4.10 track_link_click
 
