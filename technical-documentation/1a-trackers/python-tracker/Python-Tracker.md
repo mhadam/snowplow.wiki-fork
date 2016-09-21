@@ -696,9 +696,9 @@ t.track_unstruct_event(SelfDescribingJson(
     "save_id": "4321",
     "level": 23,
     "difficultyLevel": "HARD",
-    "dl_content": true
+    "dl_content": True
   }
-)
+))
 ```
 
 The `event_json` is represented using the SelfDescribingJson class. It has two fields: `schema` and `data`. `data` is a dictionary containing the properties of the unstructured event. `schema` identifies the JSON schema against which `data` should be validated.
