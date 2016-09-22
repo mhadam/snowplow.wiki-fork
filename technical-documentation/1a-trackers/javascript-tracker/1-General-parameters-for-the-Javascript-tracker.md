@@ -626,7 +626,7 @@ You can use the following function to extract the user ID from the ID cookie:
 */
 function getSnowplowDuid(cookieName) {
   cookieName = cookieName || '_sp_';
-  var matcher = new RegExp(cookieName + 'id\\.[a-f0-9]+=([^;]+);');
+  var matcher = new RegExp(cookieName + 'id\\.[a-f0-9]+=([^;]+);?');
   var match = document.cookie.match(matcher);
   if (match && match[1]) {
     return match[1].split('.')[0];
