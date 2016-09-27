@@ -778,10 +778,16 @@ Arguments are:
 | `context`         | Custom context for the event        | No            | List(SelfDescribingJson)|
 | `tstamp`          | When the pageview occurred          | No            | Positive integer        |
 
-Example:
+Basic example:
 
-```py
-t.track_link_click("http://my-target-url2/path", "element id 2", None, "element target", "element content", None)
+```python
+t.track_link_click("http://my-target-url2/path")
+```
+
+Advanced example:
+
+```python
+t.track_link_click("http://my-target-url2/path", "element id 2", None, "element target", "element content")
 ```
 
 <a name="add-to-cart" />
@@ -803,7 +809,7 @@ Arguments are:
 
 Example:
 
-```py
+```python
 t.track_add_to_cart("123", 2, "The Devil's Dance", "Books", 23.99, "USD", None )
 ```
 
@@ -824,8 +830,16 @@ Arguments are:
 | `context`    | Custom context for the event  | No            | List(SelfDescribingJson) |
 | `tstamp`     | When the pageview occurred    | No            | Positive integer         |
 
-```py
-t.track_remove_from_cart("123", 2, "The Devil's Dance", "Books", 23.99, "USD", None )
+Basic example:
+
+```python
+t.track_remove_from_cart("123", 1)
+```
+
+Advanced example:
+
+```python
+t.track_remove_from_cart("123", 2, "The Devil's Dance", "Books", 23.99, "USD")
 ```
 
 <a name="form-change" />
@@ -834,17 +848,28 @@ t.track_remove_from_cart("123", 2, "The Devil's Dance", "Books", 23.99, "USD", N
 Use `track_from_change()` to track changes in website form inputs over session.
 Arguments are:
 
-| **Argument**      | **Description**                      | **Required?** | **Validation**          |
-|------------------:|:-------------------------------------|:--------------|:------------------------|
-| `form_id`         | ID attribute of the HTML form        | Yes           | Non-empty string        |
-| `element_id`      | ID attribute of the HTML element     | Yes           | String                  |
-| `node_name`       | Type of input element                | Yes           | Non-empty string        |
-| `value`           | Value of input element               | Yes           | String                  |
-| `type_`           | Type of data the element represents  | No            | Non-empty string        |
-| `element_classes` | Classes of the HTML element          | No            | List(string)            |
-| `context`         | Custom context for the event         | No            | List(SelfDescribingJson)                    |
-| `tstamp`          | When the pageview occurred           | No            | Positive integer        |
+| **Argument**      | **Description**                      | **Required?** | **Validation**           |
+|------------------:|:-------------------------------------|:--------------|:-------------------------|
+| `form_id`         | ID attribute of the HTML form        | Yes           | Non-empty string         |
+| `element_id`      | ID attribute of the HTML element     | Yes           | String                   |
+| `node_name`       | Type of input element                | Yes           | Non-empty string         |
+| `value`           | Value of input element               | Yes           | String                   |
+| `type_`           | Type of data the element represents  | No            | Non-empty string         |
+| `element_classes` | Classes of the HTML element          | No            | List(string)             |
+| `context`         | Custom context for the event         | No            | List(SelfDescribingJson) |
+| `tstamp`          | When the pageview occurred           | No            | Positive integer         |
 
+Basic example:
+
+```python
+t.track_form_change("signupForm", "ageInput", "age", "24")
+```
+
+Advanced example:
+
+```python
+t.track_form_change("signupForm", "ageInput", "age", "24", "number", ["signup__number", "form__red"])
+```
 
 <a name="form-submit" />
 ### 4.13 track_form_submit
@@ -860,32 +885,49 @@ Arguments are:
 | `context`         | Custom context for the event         | No            | List(SelfDescribingJson)                    |
 | `tstamp`          | When the pageview occurred           | No            | Positive integer        |
 
+Basic example:
+
+```python
+t.track_form_submit("registrationForm")
+```
+
+Advanced example:
+
+```python
+t.track_form_submit("signupForm", ["signup__warning"], {"name": "email", "value": "tracker@example.com", "nodeName": "INPUT", "type": "email"})
+```
+
 <a name="site-search" />
 ### 4.14 track_site_search
 
 Use `track_site_search()` to track a what user searches on your website.
 Arguments are:
 
-| **Argument** | **Description**                     | **Required?** | **Validation**          |
-|----------------:|:------------------------------------|:--------------|:------------------------|
-| `terms`         | Search terms                        | Yes           | List(str)               |
-| `filters`       | Filters applied to search           | No            | List(dict{str:str|bool})                  |
-| `total_results` | Total number of results             | No            | Integer                 |
-| `page_results`  | Number of pages of results          | No            | String                  |
-| `context`       | Custom context for the event        | No            | List(SelfDescribingJson)                    |
-| `tstamp`        | When the pageview occurred          | No            | Positive integer        |
+| **Argument**    | **Description**                     | **Required?** | **Validation**           |
+|----------------:|:------------------------------------|:--------------|:-------------------------|
+| `terms`         | Search terms                        | Yes           | List(str)                |
+| `filters`       | Filters applied to search           | No            | List(dict{str:str|bool}) |
+| `total_results` | Total number of results             | No            | Integer                  |
+| `page_results`  | Number of pages of results          | No            | Integer                  |
+| `context`       | Custom context for the event        | No            | List(SelfDescribingJson) |
+| `tstamp`        | When the pageview occurred          | No            | Positive integer         |
 
-Example:
+Basic example:
 
 ```python
-t.track_page_view("www.example.com", "example", "www.referrer.com")
+t.track_site_search(["analytics", "snowplow", "tracker"])
 ```
 
+Advanced example:
+
+```python
+t.track_site_search(["pulp fiction", "reviews"], {"nswf": true}, 215, 22)
+```
 
 <a name="unstruct-event" />
 ### 4.15 Track unstructured events with `track_unstruct_event()`
 
-Thi is functionally equivalent to `track_self_describing_event`. We believe that the method name is misleading: this method is used to track events that are structured in nature (they have an associated schema), which is why we believe referring to them as `self-describing` events makes more sense than referring to them as `unstructured events`.
+This functionally is equivalent to `track_self_describing_event`. We believe that the method name is misleading: this method is used to track events that are structured in nature (they have an associated schema), which is why we believe referring to them as `self-describing` events makes more sense than referring to them as `unstructured events`.
 
 The method is provided for reasons of backwards compatibility.
 
