@@ -848,16 +848,16 @@ t.track_remove_from_cart("123", 2, "The Devil's Dance", "Books", 23.99, "USD")
 Use `track_from_change()` to track changes in website form inputs over session.
 Arguments are:
 
-| **Argument**      | **Description**                      | **Required?** | **Validation**           |
-|------------------:|:-------------------------------------|:--------------|:-------------------------|
-| `form_id`         | ID attribute of the HTML form        | Yes           | Non-empty string         |
-| `element_id`      | ID attribute of the HTML element     | Yes           | String                   |
-| `node_name`       | Type of input element                | Yes           | Non-empty string         |
-| `value`           | Value of input element               | Yes           | String                   |
-| `type_`           | Type of data the element represents  | No            | Non-empty string         |
-| `element_classes` | Classes of the HTML element          | No            | List(string)             |
-| `context`         | Custom context for the event         | No            | List(SelfDescribingJson) |
-| `tstamp`          | When the pageview occurred           | No            | Positive integer         |
+| **Argument**      | **Description**                      | **Required?** | **Validation**                                 |
+|------------------:|:-------------------------------------|:--------------|:-----------------------------------------------|
+| `form_id`         | ID attribute of the HTML form        | Yes           | Non-empty string                               |
+| `element_id`      | ID attribute of the HTML element     | Yes           | String                                         |
+| `node_name`       | Type of input element                | Yes           | [Valid node_name][change-form-schema-nodename] |
+| `value`           | Value of input element               | Yes           | String                                         |
+| `type_`           | Type of data the element represents  | No            | Non-empty string                               |
+| `element_classes` | Classes of the HTML element          | No            | List(string)                                   |
+| `context`         | Custom context for the event         | No            | List(SelfDescribingJson)                       |
+| `tstamp`          | When the pageview occurred           | No            | Positive integer                               |
 
 Basic example:
 
@@ -1241,3 +1241,5 @@ This will set up a worker which will run indefinitely, taking events from the Re
 
 [iglu-schema-registry]: https://github.com/snowplow/iglu
 [iglu-central]: https://github.com/snowplow/iglu-central
+
+[change-form-schema-nodename]: https://github.com/snowplow/iglu-central/blob/53589a5dd41f2f88cabb359488019e0ebb72ec49/schemas/com.snowplowanalytics.snowplow/change_form/jsonschema/1-0-0#L20
