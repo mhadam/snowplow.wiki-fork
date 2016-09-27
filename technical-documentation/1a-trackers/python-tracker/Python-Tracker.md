@@ -468,33 +468,44 @@ Each tracking method accepts an additional optional contexts parameter after all
 def track_page_view(self, page_url, page_title=None, referrer=None, context=None, tstamp=None):
 ```
 
-The `context` argument should consist of an array of one or more Python dictionaries. The format of each dictionary is the same as for an [self-describing event](#selfdesc-alias).
+The `context` argument should consist of an array of one or more instances of `SelfDescribingJson` class.
+This class isomorphic to [self-describing JSON](#selfdesc-alias), to be more precisely - it has Iglu URI attribute and data itself.
 
-**Important:** Even if only one custom context is being attached to an event, it still needs to be wrapped in an array.
-
-If a visitor arrives on a page advertising a movie, the context dictionary might look like this:
-
+If server-side Python application can determite visitor's geoposition - it can be attached to event, using following context (`geolocation_context` is predefined on [Iglu Central][iglu-central]):
 
 ```python
 from snowplow_tracker import SelfDescribingJson
 
-my_context = SelfDescribingJson(
-  "iglu:com.acme_company/movie_poster/jsonschema/2-1-1",
+geo_context = SelfDescribingJson(
+  "iglu:com.snowplowanalytics.snowplow/geolocation_context/jsonschema/1-0-0",
   {
-    "movie_name": "Solaris",
-    "poster_country": "JP",
-    "poster_year": new Date(1978, 1, 1)
+    "latitude": -23.2,
+    "longitude": 43.0
   }
 )
 ```
 
-This is how to fire a page view event with the above custom context:
+If a visitor arrives on a page advertising a movie, the context object might look like this (`movie_poster` is custom context):
+
 
 ```python
-t.track_page_view("http://www.films.com", "Homepage", context=[my_context])
+poster_context = SelfDescribingJson(
+  "iglu:com.acme_company/movie_poster/jsonschema/2-1-1",
+  {
+    "movie_name": "Solaris",
+    "poster_country": "JP",
+    "poster_year": "1978-01-01"
+  }
+)
 ```
 
-Note that even though there is only one custom context attached to the event, it still needs to be placed in an array.
+This is how to fire a page view event with both above contexts:
+
+```python
+t.track_page_view("http://www.films.com", "Homepage", context=[poster_context, geo_context])
+```
+
+**Important:** Even if only one custom context is being attached to an event, it still needs to be wrapped in an array.
 
 Note also that you should not pass in an empty array of contexts as this will fail validation. Instead of an empty array you can pass in `None`.
 
@@ -1187,3 +1198,4 @@ This will set up a worker which will run indefinitely, taking events from the Re
 [python-model-datetime]: https://github.com/snowplow/snowplow/wiki/canonical-event-model#212-date--time-fields
 
 [iglu-schema-registry]: https://github.com/snowplow/iglu
+[iglu-central]: https://github.com/snowplow/iglu-central
