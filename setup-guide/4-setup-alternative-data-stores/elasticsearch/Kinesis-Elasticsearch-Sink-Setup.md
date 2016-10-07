@@ -4,9 +4,9 @@
 
 This documentation is for version 0.7.0 of Kinesis Elasticsearch Sink.  For previous versions:
 
-**[Version 0.1.0 - 0.3.0][0.1]**  
-**[Version 0.4.0][0.4]**
-**[Version 0.5.0 - 0.6.0][0.5]**
+* **[Version 0.1.0 - 0.3.0][0.1]**  
+* **[Version 0.4.0][0.4]**
+* **[Version 0.5.0 - 0.6.0][0.5]**
 
 ## Overview
 
