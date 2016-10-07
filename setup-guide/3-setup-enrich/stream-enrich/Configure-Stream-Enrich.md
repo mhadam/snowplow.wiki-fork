@@ -2,11 +2,11 @@
 
 [**HOME**](Home) > [**SNOWPLOW SETUP GUIDE**](Setting-up-Snowplow) > [**Step 3: Setting up Enrich**](Setting-up-enrich) > [**Step 3.2: setting up Stream Enrich**](Setting-up-Stream-Enrich) > [2: Configuring](Configuring-Stream-Enrich)
 
-This documentation is for version 0.6.0 of Stream Enrich. Documentation for other versions is available:
+This documentation is for version 0.6.0 - 0.9.0 of Stream Enrich. Documentation for other versions is available:
 
-**[Version 0.1.0][v0.1]**
-**[Version 0.3.0][v0.3]**
-**[Version 0.5.0][v0.5]**
+* **[Version 0.1.0][v0.1]**
+* **[Version 0.3.0][v0.3]**
+* **[Version 0.5.0][v0.5]**
 
 Stream Enrich has a number of configuration options available.
 
