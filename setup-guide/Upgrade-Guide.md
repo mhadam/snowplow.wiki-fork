@@ -6,6 +6,7 @@ You can also use [Snowplow Version Matrix](Snowplow-version-matrix) as a guidanc
 
 For easier navigation, please, follow the links below.
 
+- [Snowplow 84 Steller's Sea Eagle](#r84) (**r84**) 2016-10-07
 - [Snowplow 83 Bald Eagle](#r83) (**r83**) 2016-09-06
 - [Snowplow 82 Tawny Eagle](#r82) (**r82**) 2016-08-08
 - [Snowplow 81 Kangaroo Island Emu](#r81) (**r81**) 2016-06-16
@@ -45,6 +46,39 @@ For easier navigation, please, follow the links below.
 - [Snowplow 0.9.2](#v0.9.2) (**v0.9.2**) 2014-04-30
 - [Snowplow 0.9.1](#v0.9.1) (**v0.9.1**) 2014-04-11
 - [Snowplow 0.9.0](#v0.9.0) (**v0.9.0**) 2014-02-04
+
+<a name="r84" />
+##Snowplow 84 Steller's Sea Eagle
+
+The Kinesis apps for R84 Stellers Sea Eagle are available in the following zipfiles:
+
+```
+http://dl.bintray.com/snowplow/snowplow-generic/snowplow_stream_collector_0.8.0.zip
+http://dl.bintray.com/snowplow/snowplow-generic/snowplow_stream_enrich_0.9.0.zip
+http://dl.bintray.com/snowplow/snowplow-generic/snowplow_elasticsearch_sink_0.8.0.zip
+```
+
+Or you can download all of the apps together in this zipfile:
+
+```
+https://dl.bintray.com/snowplow/snowplow-generic/snowplow_kinesis_r84_stellers_sea_eagle.zip
+```
+
+Only the Elasticsearch Sink app config has changed. The change does not include breaking config changes. To upgrade the Elasticsearch Sink:
+
+- Install the new Elasticsearch Sink app on each server in your Elasticsearch Sink auto-scaling group
+- Update your Elasticsearch Sink config with the new `elasticsearch.client.http` section:
+ - `elasticsearch.client.http.conn-timeout`
+ - `elasticsearch.client.http.read-timeout`
+
+NOTE: These timeouts are optional and will default to 300000 if they cannot be found in your Config.
+
+See our sample [`config.hocon`](https://github.com/snowplow/snowplow/blob/r84-stellers-sea-eagle/4-storage/kinesis-elasticsearch-sink/examples/config.hocon.sample) template.
+
+### Read more
+
+* [R84 Blog Post](http://snowplowanalytics.com/blog/2016/10/08/snowplow-r84-stellers-sea-eagle-released-with-elasticsearch-2-x-support/)
+* [R84 Release Notes](https://github.com/snowplow/snowplow/releases/tag/r84-stellers-sea-eagle)
 
 <a name="r83" />
 ##Snowplow 83 Bald Eagle
