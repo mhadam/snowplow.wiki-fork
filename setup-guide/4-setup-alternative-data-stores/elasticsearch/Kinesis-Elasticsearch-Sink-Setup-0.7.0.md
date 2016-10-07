@@ -2,12 +2,11 @@
 
 [**HOME**](Home) > [**SNOWPLOW SETUP GUIDE**](Setting-up-Snowplow) > [**Step 4: setting up alternative data stores**](Setting-up-alternative-data-stores) > [Kinesis-Elasticsearch-Sink-Setup](Kinesis-Elasticsearch-Sink-Setup)
 
-This documentation is for version 0.8.0 of Kinesis Elasticsearch Sink.  For previous versions:
+This documentation is for version 0.7.0 of Kinesis Elasticsearch Sink.  For previous versions:
 
 * **[Version 0.1.0 - 0.3.0][0.1]**  
 * **[Version 0.4.0][0.4]**
 * **[Version 0.5.0 - 0.6.0][0.5]**
-* **[Version 0.7.0][0.7]**
 
 ## Overview
 
@@ -17,7 +16,7 @@ If you are using [Stream Enrich][stream-enrich] to write enriched Snowplow event
 
 ### Getting started
 
-First off, install and set up Elasticsearch version 1.x.x or 2.x.x. For more information check out the [installation guide][installation-guide].
+First off, install and set up Elasticsearch version 1.4.0. For more information check out the [installation guide][installation-guide].
 
 ### Raising the file limit
 
@@ -46,9 +45,7 @@ If the `max_file_descriptors` equals 32000 it is running with the new limit.
 
 ### Defining the mapping
 
-Use the following request to create the mapping for the enriched event type on a 1.x cluster:
-
-__NOTE__: On a 2.x cluster you will need to remove the `_timestamp` key as this definition is no longer supported.
+Use the following request to create the mapping for the enriched event type:
 
 ```
 curl -XPUT 'http://localhost:9200/snowplow' -d '{
@@ -136,7 +133,7 @@ To get a local copy, you can download the executable jarfile directly from our H
 You will need to add the executable flag onto the file:
 
 ```
-$ chmod +x snowplow-elasticsearch-sink-0.8.0-(1x|2x)
+$ chmod +x snowplow-elasticsearch-sink-0.7.0
 ```
 
 ### Compiling from source
@@ -155,23 +152,13 @@ Navigate into the Kinesis Elasticsearch Sink folder:
 $ cd 4-storage/kinesis-elasticsearch-sink
 ```
 
-Set the version you want to build:
-
-```
-$ export ELASTICSEARCH_VERSION=1x
-
-OR
-
-$ export ELASTICSEARCH_VERSION=2x
-```
-
 Use `sbt` to resolve dependencies, compile the source, and build an [assembled][assembly] fat JAR file with all dependencies.
 
 ```
 $ sbt assembly
 ```
 
-The `jar` file will be saved as `snowplow-elasticsearch-sink-0.8.0-(1x|2x)` in the `target/scala-2.10` subdirectory. It is now ready to be deployed.
+The `jar` file will be saved as `snowplow-elasticsearch-sink-0.7.0` in the `target/scala-2.10` subdirectory. It is now ready to be deployed.
 
 ## Using the Kinesis Elasticsearch Sink
 
@@ -194,8 +181,6 @@ The sink is configured using a HOCON file. These are the fields:
 * `elasticsearch.client.endpoint` : The Elasticesarch cluster endpoint
 * `elasticsearch.client.port` : The Elasticesarch cluster port
 * `elasticsearch.client.max-timeout` : The Elasticesarch maximum timeout in milliseconds
-* `elasticsearch.client.http.conn-timeout` : The connection timeout for the HTTP client
-* `elasticsearch.client.http.read-timeout` : The read timeout for the HTTP client
 * `elasticsearch.cluster.name`: The Elasticesarch cluster name
 * `elasticsearch.cluster.index`: The Elasticsearch index name
 * `elasticsearch.cluster.type`: The Elasticesarch type name
@@ -222,7 +207,7 @@ You will need to configure the names of the input and output streams.
 The Kinesis Elasticsearch Sink is an executable jarfile which should be runnable from any Unix-like shell environment. Simply provide the configuration file as a parameter:
 
 ```
-$ ./kinesis-elasticsearch-sink-0.8.0-(1x|2x) --config my.conf
+$ ./kinesis-elasticsearch-sink-0.7.0 --config my.conf
 ```
 
 This will start the process of reading events from Kinesis and writing them to an Elasticsearch cluster.
@@ -231,8 +216,7 @@ This will start the process of reading events from Kinesis and writing them to a
 [installation-guide]: http://www.elastic.co/guide/en/elasticsearch/guide/current/_installing_elasticsearch.html
 [DefaultAWSCredentialsProviderChain]: http://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/com/amazonaws/auth/DefaultAWSCredentialsProviderChain.html
 [stream-enrich]: https://github.com/snowplow/snowplow/wiki/Stream-Enrich
-[conf-example]: https://raw.githubusercontent.com/snowplow/snowplow/master/4-storage/kinesis-elasticsearch-sink/examples/config.hocon.sample
+[conf-example]: https://github.com/snowplow/snowplow/blob/r67-bohemian-waxwing/4-storage/kinesis-elasticsearch-sink/src/main/resources/config.hocon.sample
 [0.1]: https://github.com/snowplow/snowplow/wiki/kinesis-elasticsearch-sink-setup-0.1.0
 [0.4]: https://github.com/snowplow/snowplow/wiki/kinesis-elasticsearch-sink-setup-0.4.0
 [0.5]: https://github.com/snowplow/snowplow/wiki/kinesis-elasticsearch-sink-setup-0.5.0
-[0.7]: https://github.com/snowplow/snowplow/wiki/kinesis-elasticsearch-sink-setup-0.7.0
