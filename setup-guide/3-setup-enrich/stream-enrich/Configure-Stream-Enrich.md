@@ -105,8 +105,8 @@ Next: [[Run Stream Enrich]]
 [v0.3]: https://github.com/snowplow/snowplow/wiki/Configure-Scala-Kinesis-Enrich-v0.3
 [v0.5]: https://github.com/snowplow/snowplow/wiki/Configure-Scala-Kinesis-Enrich-v0.5
 [geolite]: http://dev.maxmind.com/geoip/legacy/geolite/?rld=snowplow
-[app-conf]: https://github.com/snowplow/snowplow/blob/r78-great-hornbill/3-enrich/stream-enrich/src/main/resources/config.hocon.sample
+[app-conf]: https://raw.githubusercontent.com/snowplow/snowplow/master/3-enrich/stream-enrich/examples/config.hocon.sample
 [enrichment-json-examples]: https://github.com/snowplow/snowplow/tree/master/3-enrich/emr-etl-runner/config/enrichments
 [configuring-enrichments]: https://github.com/snowplow/snowplow/wiki/Configurable-enrichments
-[resolver.json.sample]: https://github.com/snowplow/snowplow/blob/r78-great-hornbill/3-enrich/config/iglu_resolver.json
+[resolver.json.sample]: https://raw.githubusercontent.com/snowplow/snowplow/master/3-enrich/config/iglu_resolver.json
 [ddb]: http://aws.amazon.com/dynamodb/
