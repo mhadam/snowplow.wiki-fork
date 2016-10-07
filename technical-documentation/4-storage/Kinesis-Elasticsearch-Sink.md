@@ -2,8 +2,6 @@
 
 The Kinesis Elasticsearch Sink converts enriched Snowplow events from a Kinesis stream to JSON and writes them to an Elasticsearch cluster.
 
-__NOTE__: This application is not compatible with the [Amazon Elasticsearch Service](https://aws.amazon.com/elasticsearch-service/) as it does not currently support sending via the TransportClient; which the Elasticsearch Sink uses.
-
 The resulting JSONs are like the [Snowplow Canonical Event](canonical-event-model) model with the following changes:
 
 ### Boolean fields reformatted
