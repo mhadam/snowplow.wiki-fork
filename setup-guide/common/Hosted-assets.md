@@ -106,8 +106,8 @@ If you are running StorageLoader, these files will automatically be used for loa
 
 The Kinesis Elasticsearch Sink app is available for both Elasticsearch 1.x and 2.x on Bintray here:
 
-    http://dl.bintray.com/snowplow/snowplow-generic/snowplow_elasticsearch_sink_0.8.0_1x.zip
-    http://dl.bintray.com/snowplow/snowplow-generic/snowplow_elasticsearch_sink_0.8.0_2x.zip
+    http://dl.bintray.com/snowplow/snowplow-generic/snowplow_kinesis_elasticsearch_sink_0.8.0_1x.zip
+    http://dl.bintray.com/snowplow/snowplow-generic/snowplow_kinesis_elasticsearch_sink_0.8.0_2x.zip
 
 Right-click on this [Download link] [kes-download-1x] for the 1.x version and this [Download link] [kes-download-2x] for the 2.x version.
 
@@ -151,6 +151,6 @@ Please see the [[Artifact repositories]] wiki page for more information.
 [kinesis-s3-download]: http://dl.bintray.com/snowplow/snowplow-generic/kinesis_s3_0.4.0.zip
 [ssc-download]: http://dl.bintray.com/snowplow/snowplow-generic/snowplow_stream_collector_0.8.0.zip
 [se-download]: http://dl.bintray.com/snowplow/snowplow-generic/snowplow_stream_enrich_0.9.0.zip
-[kes-download-1x]: http://dl.bintray.com/snowplow/snowplow-generic/snowplow_elasticsearch_sink_0.8.0_1x.zip
-[kes-download-2x]: http://dl.bintray.com/snowplow/snowplow-generic/snowplow_elasticsearch_sink_0.8.0_2x.zip
+[kes-download-1x]: http://dl.bintray.com/snowplow/snowplow-generic/snowplow_kinesis_elasticsearch_sink_0.8.0_1x.zip
+[kes-download-2x]: http://dl.bintray.com/snowplow/snowplow-generic/snowplow_kinesis_elasticsearch_sink_0.8.0_2x.zip
 [emr-download]: http://dl.bintray.com/snowplow/snowplow-generic/snowplow_emr_r77_great_auk.zip
