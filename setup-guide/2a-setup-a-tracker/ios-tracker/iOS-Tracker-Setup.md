@@ -2,7 +2,7 @@
 
 [**HOME**](Home) > [**SNOWPLOW SETUP GUIDE**](Setting-up-Snowplow) > [**Step 2: Setup a Tracker**](Setting-up-a-Tracker) > [**Objective-C tracker**](ios-tracker-setup)
 
-This page refers to version 0.6.1 of the Snowplow Objective-C Tracker, which is the latest version. Documentation for earlier versions is available:
+This page refers to version 0.6.2 of the Snowplow Objective-C Tracker, which is the latest version. Documentation for earlier versions is available:
 
 * *[Version 0.5][ios-0.5]*
 * *[Version 0.4][ios-0.4]*
@@ -256,7 +256,7 @@ Now add the `OpenIDFA.{h,m}` files to your project by:
 [tvos]: https://www.apple.com/tv/
 [objc-tracker-github]: https://github.com/snowplow/snowplow-objc-tracker
 
-[static-download]: https://bintray.com/artifact/download/snowplow/snowplow-generic/snowplow_objc_tracker_0.6.1.zip
+[static-download]: https://bintray.com/artifact/download/snowplow/snowplow-generic/snowplow_objc_tracker_0.6.2.zip
 [apple-static-instructions]: https://developer.apple.com/library/ios/technotes/iOSStaticLibraries/Articles/configuration.html
 
 [git]: http://git-scm.com/downloads
