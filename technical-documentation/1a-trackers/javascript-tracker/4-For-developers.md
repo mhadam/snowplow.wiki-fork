@@ -143,7 +143,40 @@ request with payload created in `core` and `Tracker`.
 <a name="tests" />
 ## 5.4 Tests
 
-TODO
+For testing javascript tracker uses [intern][intern] testing framework.
+
+You can install it with npm as part of devDependencies: 
+`cd snowplow-javascript-tracker && npm install`.
+
+Intern provides two strategies for testing: unit and functional tests.
+
+You can run unit tests using `grunt intern:nonfunctional`. You don't need any
+other auxiliary tools for running unit tests, they're pure JavaScript and can
+be executed in node environment.
+
+Functional tests are bit different. We have two functional test suites:
+`functional` and `integration`. Functional tests work by emulating user
+interactions with browser, therefore they need some "browser emulator". We're
+using [Sauce Labs][saucelabs] for emulating browser - it provides many cool
+features such multiple browser/OS environments, interaction recording, etc. You
+need to have an account on Sauce Labs (it has no free plans, sadly) and provide 
+`SAUCE_ACCESS_KEY` and `SAUCE_USERNAME` environment variables. Providing it you
+can run functional suite with `grunt intern:functional`.
+
+Another functional suite called `integration`. It not just emulates user
+interactions, but also sends data (tracking payload) to [emulated
+collector][snowplow-collector]. This collector emulator is primitive node.js
+middleware that write down GET-payloads as JSON to temporary file, which then 
+can be parsed by test runner. You can find this middleware at 
+`tests/integration/request_recorder.js`. But some more preparation is required.
+Problem here is that integration suite executing on remote Sauce Lab server,
+whereas requirest recorder runs on local machine. To solve this we're using 
+[Ngrok][ngrok]. This tool tunnels your local port to some public acessible 
+machine, which means your collector emulator will be available at public host.
+You'll also need to set this host as `SUBDOMAIN` environment variable and grunt
+will generate html page out of `tests/pages/integration-template.html` with
+appropriate domain (`SUBDOMAIN.ngrok.io`) as collector.
+
 
 <a name="build" />
 ## 5.5 Build
@@ -163,3 +196,4 @@ TODO
 [example-newtracker]: https://github.com/snowplow/snowplow/wiki/1-General-parameters-for-the-Javascript-tracker#22-initialising-a-tracker
 [npm-core]: https://www.npmjs.com/package/snowplow-tracker-core
 [tracker-protocol]: https://github.com/snowplow/snowplow/wiki/snowplow-tracker-protocol
+[snowplow-collector]: https://github.com/snowplow/snowplow/wiki/Setting-up-a-Collector
