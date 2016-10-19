@@ -36,7 +36,14 @@ Scala Hadoop Shred is a dedicated Scalding job to perform the JSON validation an
 
 Configuring this is covered in [Configuring shredding](6-Configuring-shredding).
 
-**Note**: Removing endogenous duplicate records as a phase in Shredding process was introduced to r76 release. It does not require an additional configuration.
+As of release R76, removing endogenous duplicate records was also introduced as a phase in Shredding process. It does not require an additional configuration. Hadoop Shred de-duplicates “natural duplicates” - i.e. events which share the same event ID and the same event fingerprint, meaning that they are semantically identical to each other.
+
+For a given ETL run of events being processed, Hadoop Shred will now keep only one out of each group of natural duplicates; all others will be discarded.
+
+Note:
+
+- We do not yet tackle “synthetic dupes” - this is where two events have the same event ID but different event fingerprints. 
+- If natural duplicates exist across ETL runs, these will not be de-duplicated currently. This is something we hope to explore soon.
 
 ### 2. StorageLoader
 
