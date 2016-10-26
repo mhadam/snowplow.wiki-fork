@@ -94,7 +94,7 @@ Back to [top](#top).
 | `event`         | text     | The type of event recorded | Yes | 'page_view'    |
 | `event_id`      | text     | A UUID for each event | Yes | 'c6ef3124-b53a-4b13-a233-0088f79dcbcb' |
 | `txn_id`        | int      | Transaction ID set client-side, used to de-dupe records | No | 421828 |
-| `event_fingerprint`        | tesxt      | Hash client-set event fields | No | AADCE520E20C2899F4CED228A79A3083 |
+| `event_fingerprint`        | text      | Hash client-set event fields | No | AADCE520E20C2899F4CED228A79A3083 |
 
 A complete list of event types is given [here] (#event).
 
