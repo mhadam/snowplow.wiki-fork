@@ -2,14 +2,13 @@
 
 [**HOME**](Home) > [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow technical documentation) > [**Trackers**](trackers) > [**JavaScript Tracker**](Javascript-Tracker) > Specific event tracking
 
-*This page refers to version 2.7.0 of the Snowplow JavaScript Tracker.*  
+*This page refers to version 2.6.1 of the Snowplow JavaScript Tracker.*  
 *Click [here] [specific-events-v1] for the corresponding documentation for version 1.*  
 *Click [here] [specific-events-v2.0] for the corresponding documentation for version 2.0.*  
 *Click [here] [specific-events-v2.2] for the corresponding documentation for version 2.2.2.*  
 *Click [here] [specific-events-v2.3] for the corresponding documentation for version 2.3.0.*  
 *Click [here] [specific-events-v2.4] for the corresponding documentation for version 2.4.3.*  
 *Click [here] [specific-events-v2.5] for the corresponding documentation for version 2.5.3.*  
-*Click [here] [specific-events-v2.6] for the corresponding documentation for version 2.6.2.*  
 
 <a name="tracking-specific-events" />
 ## 3. Tracking specific events
@@ -1252,7 +1251,6 @@ For more information on custom contexts, see [this][contexts] blog post.
 [specific-events-v2.3]: https://github.com/snowplow/snowplow/wiki/2-Specific-event-tracking-with-the-Javascript-tracker-v2.3
 [specific-events-v2.4]: https://github.com/snowplow/snowplow/wiki/2-Specific-event-tracking-with-the-Javascript-tracker-v2.4
 [specific-events-v2.5]: https://github.com/snowplow/snowplow/wiki/2-Specific-event-tracking-with-the-Javascript-tracker-v2.5
-[specific-events-v2.6]: https://github.com/snowplow/snowplow/wiki/2-Specific-event-tracking-with-the-Javascript-tracker-v2.6
 [multiple-trackers]: https://github.com/snowplow/snowplow/wiki/1-General-parameters-for-the-Javascript-tracker#24-managing-multiple-trackers
 [json-schema]: http://json-schema.org/
 [self-describing-jsons]: http://snowplowanalytics.com/blog/2014/05/15/introducing-self-describing-jsons/

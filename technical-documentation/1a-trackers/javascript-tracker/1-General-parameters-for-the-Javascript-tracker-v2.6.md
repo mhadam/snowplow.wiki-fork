@@ -2,16 +2,14 @@
 
 [**HOME**](Home) » [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow technical documentation) » [**Trackers**](trackers) » [**JavaScript Tracker**](Javascript-Tracker) » General parameters
 
-__UNRELEASED__
-
-*This page refers to version 2.7.0 of the Snowplow JavaScript Tracker.*  
+*This page refers to version 2.6.2 of the Snowplow JavaScript Tracker.*  
 *Click [here] [general-parameters-v1] for the corresponding documentation for version 1.*  
 *Click [here] [general-parameters-v2.0] for the corresponding documentation for version 2.1.1.*  
 *Click [here] [general-parameters-v2.2] for the corresponding documentation for version 2.2.2.*  
 *Click [here] [general-parameters-v2.3] for the corresponding documentation for version 2.3.0.*  
 *Click [here] [general-parameters-v2.4] for the corresponding documentation for version 2.4.3.*  
 *Click [here] [general-parameters-v2.5] for the corresponding documentation for version 2.5.3.*  
-*Click [here] [general-parameters-v2.6] for the corresponding documentation for version 2.6.2.*  
+*Click [here] [general-parameters-v2.7] for the corresponding documentation for version 2.7.0.*  
 
 <a name="general" />
 ## 2. General parameters
@@ -653,7 +651,6 @@ The Snowplow JavaScript Tracker uses `window.localStorage` to store events in ca
 [general-parameters-v2.3]: https://github.com/snowplow/snowplow/wiki/1-General-parameters-for-the-Javascript-tracker-v2.3
 [general-parameters-v2.4]: https://github.com/snowplow/snowplow/wiki/1-General-parameters-for-the-Javascript-tracker-v2.4
 [general-parameters-v2.5]: https://github.com/snowplow/snowplow/wiki/1-General-parameters-for-the-Javascript-tracker-v2.5
-[general-parameters-v2.6]: https://github.com/snowplow/snowplow/wiki/1-General-parameters-for-the-Javascript-tracker-v2.6
 [snowplow-tracker-protocol]: https://github.com/snowplow/snowplow/wiki/SnowPlow-Tracker-Protocol
 [contexts]: https://github.com/snowplow/snowplow/wiki/2-Specific-event-tracking-with-the-Javascript-tracker-v1#custom-contexts
 [clojure-collector]: https://github.com/snowplow/snowplow/wiki/Clojure-collector

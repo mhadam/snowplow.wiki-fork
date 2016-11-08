@@ -19,6 +19,8 @@
     - 5.3.5 [core/lib/core.ts](#core)
     - 5.3.5 [js/out_queue.js](#out_queue)
   - 5.4 [Tests](#tests)
+    - 5.4.1 [Automated testing](#autotest)
+    - 5.4.2 [Manual testing](#manualtest)
   - 5.5 [Build](#build)
 
 <a name="tools" />
@@ -143,6 +145,8 @@ request with payload created in `core` and `Tracker`.
 <a name="tests" />
 ## 5.4 Tests
 
+### 5.4.1 Automated testing
+
 For testing javascript tracker uses [intern][intern] testing framework.
 
 You can install it with npm as part of devDependencies: 
@@ -177,11 +181,15 @@ You'll also need to set this host as `SUBDOMAIN` environment variable and grunt
 will generate html page out of `tests/pages/integration-template.html` with
 appropriate domain (`SUBDOMAIN.ngrok.io`) as collector.
 
+### 5.4.2 Manual testing
+
+TODO: mention async-small etc
 
 <a name="build" />
 ## 5.5 Build
 
-TODO
+We're using Grunt as our build system.
+
 
 
 [grunt]: http://gruntjs.com/
