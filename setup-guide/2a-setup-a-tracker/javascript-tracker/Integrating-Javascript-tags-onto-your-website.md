@@ -34,7 +34,7 @@ To use `sp.js` in an 'async' manner, first add the following script into your we
 ;(function(p,l,o,w,i,n,g){if(!p[i]){p.GlobalSnowplowNamespace=p.GlobalSnowplowNamespace||[];
 p.GlobalSnowplowNamespace.push(i);p[i]=function(){(p[i].q=p[i].q||[]).push(arguments)
 };p[i].q=p[i].q||[];n=l.createElement(o);g=l.getElementsByTagName(o)[0];n.async=1;
-n.src=w;g.parentNode.insertBefore(n,g)}}(window,document,"script","//d1fc8wv8zag5ca.cloudfront.net/2.6.1/sp.js","snowplow"));
+n.src=w;g.parentNode.insertBefore(n,g)}}(window,document,"script","//d1fc8wv8zag5ca.cloudfront.net/2.7.0/sp.js","snowplow"));
 
 window.snowplow('newTracker', 'cf', '{{MY-COLLECTOR-URI}}', { // Initialise a tracker
   appId: '{{MY-SITE-ID}}',
@@ -98,6 +98,8 @@ snowplowTracker.trackPageView();
 <!-- Snowplow stops plowing -->
 ```
 
+We recommend to use synchronous only for debugging purposes, as there's a big chance that many events from users with slow/2G connection will [be lost][document-write-deprecation].
+
 <a name="events" />
 ## 2. Tracking more than just page views: event tracking, ecommerce tracking etc.
 
@@ -125,3 +127,4 @@ Once you have integrated Snowplow tracking tags on your site, you can [test that
 [network-pane]: setup-guide/images/01_network_pane.png
 [contact]: mailto:services@snowplowanalytics.com
 [gtm]: http://www.google.com/tagmanager/
+[document-write-deprecation]: https://developers.google.com/web/updates/2016/08/removing-document-write
