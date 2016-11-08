@@ -63,6 +63,7 @@
 - 4.2 [Methods which can be used from inside a callback](3-Advanced-usage-of-the-JavaScript-Tracker#return-methods)
 - 4.3 [Extracting the Google Analytics cookie ID](3-Advanced-usage-of-the-JavaScript-Tracker#ga)
 - 5. [Modifying Snowplow JS](Modifying-snowplow-js)
+- 6. [For developers](4-For-developers)
 
 
 <a name="overview" />

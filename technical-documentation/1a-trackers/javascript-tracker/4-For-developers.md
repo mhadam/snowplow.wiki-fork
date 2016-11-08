@@ -2,10 +2,9 @@
 
 [**HOME**](Home) » [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow technical documentation) » [**Trackers**](trackers) » [**JavaScript Tracker**](Javascript-Tracker) » For Developers
 
-
 **THIS DOCUMENT IS WIP**
 
-*This page refers to version 2.6.1 of the Snowplow JavaScript Tracker*  
+*This page refers to version 2.7.0 of the Snowplow JavaScript Tracker*  
 
 <a name="for-developers" />
 ## 5. For developers
