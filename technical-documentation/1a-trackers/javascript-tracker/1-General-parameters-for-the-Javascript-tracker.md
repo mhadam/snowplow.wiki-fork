@@ -706,4 +706,3 @@ You can also use, plain number or `{type: 'dtm', value: stamp}` to send `device_
 [geolocation-spec]: http://dev.w3.org/geo/api/spec-source.html
 [optimizely-export]: https://developers.optimizely.com/classic/events/export/index.html
 [model-datetime]: https://github.com/snowplow/snowplow/wiki/canonical-event-model#212-date--time-fields
-

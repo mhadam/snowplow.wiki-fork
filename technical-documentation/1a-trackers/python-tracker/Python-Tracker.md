@@ -2,8 +2,6 @@
 
 [**HOME**](Home) > [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow technical documentation) > [**Trackers**](trackers) > Python Tracker
 
-**NOT RELEASED YET**
-
 *This page refers to version 0.8.0 of the Snowplow Python Tracker, which is the latest version. Documentation for earlier versions is available:*
 
 *[Version 0.2][python-0.2]*
