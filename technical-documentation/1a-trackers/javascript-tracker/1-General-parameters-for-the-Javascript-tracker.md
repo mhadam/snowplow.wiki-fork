@@ -42,6 +42,7 @@ __UNRELEASED__
       - 2.2.14.9 [optimizelyVisitor context](#optimizelyVisitor)
       - 2.2.14.10 [optimizelyAudiences context](#optimizelyAudiences)
       - 2.2.14.11 [optimizelyDimensions context](#optimizelyDimensions)
+      - 2.2.14.12 [optimizelySummary context](#optimizelySummary)
     - 2.2.15 [POST support](#post)
     - 2.2.16 [Disabling cookies](#use-cookies)
     - 2.2.17 [Configuring cross-domain tracking](#cross-domain)
@@ -322,6 +323,16 @@ To see what will be captured please see the JsonSchema file [com.optimizely/visi
 If this context is enabled the JavaScript Tracker will use the `window['optimizely'].data.visitor.dimensions` object to create an array of context JSONs; one for each sub-object.  
 
 To see what will be captured please see the JsonSchema file [com.optimizely/visitor_dimension/jsonschema/1-0-0](https://raw.githubusercontent.com/snowplow/iglu-central/master/schemas/com.optimizely/visitor_dimension/jsonschema/1-0-0).
+
+<a name="optimizelySummary" />
+##### 2.2.14.11 optimizelySummary context
+
+Unlike previously mentioned Optimizely contexts this context doesn't attach existing in browser object, but its own using only data necessary to join with [exported Optimizely][optimizely-export] data.
+
+To see what will be captured please see the JsonSchema file [com.optimizely.snowplow/optimizely_summary/jsonschema/1-0-0](https://raw.githubusercontent.com/snowplow/iglu-central/master/schemas/com.optimizely.snowplow/optimizely_summary/jsonschema/1-0-0).
+
+We highly recommend to use this context instead of previous ones because it is has much smaller footprint and contains all necessary data.
+
 
 <a name="post" />
 #### 2.2.15 POST support
@@ -662,3 +673,4 @@ The Snowplow JavaScript Tracker uses `window.localStorage` to store events in ca
 [performancetiming]: https://github.com/snowplow/iglu-central/blob/master/schemas/org.w3/PerformanceTiming/jsonschema/1-0-0
 [performance-spec]: http://www.w3.org/TR/2012/REC-navigation-timing-20121217/#sec-window.performance-attribute
 [geolocation-spec]: http://dev.w3.org/geo/api/spec-source.html
+[optimizely-export]: https://developers.optimizely.com/classic/events/export/index.html
