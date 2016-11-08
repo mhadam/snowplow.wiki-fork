@@ -2,6 +2,8 @@
 
 [**HOME**](Home) > [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow technical documentation) > [**Trackers**](trackers) > [**JavaScript Tracker**](Javascript-Tracker) > Specific event tracking
 
+__UNRELEASED__
+
 *This page refers to version 2.7.0 of the Snowplow JavaScript Tracker.*  
 *Click [here] [specific-events-v1] for the corresponding documentation for version 1.*  
 *Click [here] [specific-events-v2.0] for the corresponding documentation for version 2.0.*  
@@ -37,8 +39,8 @@ Snowplow has been built to enable users to track a wide range of events that occ
     - 3.6.4 [Example: implementing impression tracking with Snowplow and OpenX](#ad-example)
   - 3.7 [Tracking custom structured events](#custom-structured-events)  
     - 3.7.1 [`trackStructEvent`](#trackStructEvent)
-  - 3.8 [Tracking custom unstructured events](#custom-unstructured-events)
-    - 3.8.1 [`trackUnstructEvent`](#trackUnstructEvent)   
+  - 3.8 [Tracking custom self-describing (unstructured) events](#custom-selfdescribing-events)
+    - 3.8.1 [`trackSelfdescribingEvent`](#trackSelfdescribingEvent)   
   - 3.9 [Link click tracking](#link-click-tracking)
     - 3.9.1 [`enableLinkClickTracking`](#enableLinkClickTracking)
     - 3.9.2 [`refreshLinkClickTracking`](#refreshLinkClickTracking)
@@ -656,26 +658,29 @@ Note that in the above example no value is set for the `event property`.
 [Back to top](#top)  
 [Back to JavaScript technical documentation contents][contents]
 
-<a name="custom-unstructured-events" />
-### 3.8 Tracking custom unstructured events
+<a name="custom-selfdescribing-events" />
+### 3.8 Tracking custom self-describing (unstructured) events
 
-You may wish to track events on your website or application which are not directly supported by Snowplow and which [structured event tracking](#custom-structured-events) does not adequately capture. Your event may have more than the five fields offered by `trackStructEvent`, or its fields may not fit into the category-action-label-property-value model. The solution is Snowplow's custom unstructured events. Unstructured events use JSONs which can have arbitrarily many fields.
+You may wish to track events on your website or application which are not directly supported by Snowplow and which [structured event tracking](#custom-structured-events) does not adequately capture. 
+Your event may have more than the five fields offered by `trackStructEvent`, or its fields may not fit into the category-action-label-property-value model. 
+The solution is Snowplow's self-describing events (previously known as unstructured). Self-describing events use JSONs which can have arbitrarily many fields.
 
-To define your own custom event, you must create a [JSON schema][json-schema] for that event and upload it to an [Iglu Schema Repository][iglu-repo]. Snowplow uses the schema to validate that the JSON containing the event properties is well-formed.
+To define your own custom event, you must create a [JSON schema][json-schema] for that event and upload it to an [Iglu Schema Repository][iglu-repo]. 
+Snowplow uses the schema to validate that the JSON containing the event properties is well-formed.
 
-<a name="trackUnstructEvent" />
-#### 3.8.1 `trackUnstructEvent`
+<a name="trackSelfdescribingEvent" />
+#### 3.8.1 `trackSelfdescribingEvent`
 
-To track an unstructured event, you make use the `trackUnstructEvent` method:
+To track a self-describing event, you make use the `trackSelfdescribingEvent` method:
 
 ```javascript
-snowplow_name_here('trackUnstructEvent', <<SELF-DESCRIBING EVENT JSON>>);
+snowplow_name_here('trackSelfdescribingEvent', <<SELF-DESCRIBING EVENT JSON>>);
 ```
 
 For example:
 
 ```javascript
-window.snowplow_name_here('trackUnstructEvent', {
+window.snowplow_name_here('trackSelfdescribingEvent', {
     schema: 'iglu:com.acme_company/viewed_product/jsonschema/2-0-0',
     data: {
         productId: 'ASO01043',
@@ -696,7 +701,7 @@ The second argument is a [self-describing JSON][self-describing-jsons]. It has t
 
 The `data` field should be flat, not nested.
 
-`trackUnstructEvent` can also be passed an array of custom contexts as an additional final parameter. See [Contexts](#custom-contexts) for more information.
+`trackSelfdescribingEvent` can also be passed an array of custom contexts as an additional final parameter. See [Contexts](#custom-contexts) for more information.
 
 [Back to top](#top)  
 [Back to JavaScript technical documentation contents][contents]
