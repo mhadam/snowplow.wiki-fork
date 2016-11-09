@@ -57,7 +57,9 @@ Snowplow has been built to enable users to track a wide range of events that occ
     - 3.14.4 [`addEnhancedEcommercePromoContext`](#addEnhancedEcommercePromoContext)
     - 3.14.5 [`trackEnhancedEcommerceAction`](#trackEnhancedEcommerceAction)
   - 3.15 [Custom contexts](#custom-contexts)
-  - 3.16 [`trackError`](#trackError)
+  - 3.16 [Error tracking](#errors)
+    - 3.16.1 [`trackError`](#trackError)
+    - 3.16.2 [`enableErrorTracking`](#enableErrorTracking)
 
 <a name="page" />
 ### 3.1 Pageviews
@@ -1248,9 +1250,13 @@ In this case an empty string has been provided to the optional `customTitle` arg
 
 For more information on custom contexts, see [this][contexts] blog post.
 
-#### 3.15 `trackError`
+#### 3.16 Error tracking
 
-Use the `trackError` method to track exceptions (application errors) in your JS code. This is its signature:
+Snowplow JS tracker provides two ways of tracking exceptions: manual tracking of handled exceptions using `trackError` and automatic tracking of unhandled exceptions using `enableErrorTracking`.
+
+##### 3.16.1 `trackError`
+
+Use the `trackError` method to track handled exceptions (application errors) in your JS code. This is its signature:
 
 ```javascript
 function (message, filename, lineno, colno, error, contexts)
@@ -1265,6 +1271,7 @@ function (message, filename, lineno, colno, error, contexts)
 | `error`    | No            | JS `ErrorEvent`                     | ErrorEvent |
 
 Of these arguments, only `message` is required.
+Signature of this method defined to match `window.onerror` callback in modern browsers.
 
 ```javascript
 try {
@@ -1274,10 +1281,30 @@ try {
 }
 ```
 
-Application error events are implemented as Snowplow unstructured events. [Here][application_error] is the schema for a `application_error` event.
-
-
 `trackError` can also be passed an array of custom contexts as an additional final parameter. See [Contexts](#custom-contexts) for more information.
+
+Using `trackError` it's assumed that developer knows where error could happen, which is not often the case. Therefor it's recommended to use `enableErrorTracking` as it allows you to discover errors that weren't expected.
+
+##### 3.16.2 `enableErrorTracking`
+
+Use the `enableErrorTracking` method to track unhandled exceptions (application errors) in your JS code. This is its signature:
+
+```javascript
+function (filter, contextAdder)
+```
+
+| **Name**       | **Required?** | **Description**                         | **Type**                                         |
+|---------------:|:--------------|:----------------------------------------|:-------------------------------------------------|
+| `filter`       | No            | Predicate function to filter exceptions | Function ErrorEvent => Boolean                   |
+| `contextAdder` | No            | Function to grab custom contexts        | Function ErrorEvent => Array<SelfDescribingJson> |
+
+Unlike `trackError` you need enable error tracking only once:
+
+```javascript
+snowplow_name_here('enableErrorTracking')
+```
+
+Application error events are implemented as Snowplow unstructured events. [Here][application_error] is the schema for a `application_error` event.
 
 [Back to top](#top)  
 [Back to JavaScript technical documentation contents][contents]
