@@ -27,12 +27,12 @@ Snowplow has been built to enable users to track a wide range of events that occ
     - 3.3.2 [`addItem`](#addItem)  
     - 3.3.3 [`trackTrans`](#trackTrans)  
     - 3.3.4 [Pulling it all together: an example](#ecomm-example)
-  - 3.4 [Social tracking](#social) 
+  - 3.4 [Social tracking](#social)
     - 3.4.1 [`trackSocialInteraction`](#trackSocial)
   - 3.5 [Campaign tracking](#campaign)  
     - 3.5.1 [Identifying paid sources](#identifying-paid-sources)  
     - 3.5.2 [Anatomy of the query parameter](#anatomy-of-the-query-parameters)
-  - 3.6 [Ad tracking methods](#ad-tracking) 
+  - 3.6 [Ad tracking methods](#ad-tracking)
     - 3.6.1 [`trackAdImpression`](#adImpression)
     - 3.6.2 [`trackAdClick`](#adClick)
     - 3.6.3 [`trackAdConversion`](#adConversion)
@@ -57,6 +57,7 @@ Snowplow has been built to enable users to track a wide range of events that occ
     - 3.14.4 [`addEnhancedEcommercePromoContext`](#addEnhancedEcommercePromoContext)
     - 3.14.5 [`trackEnhancedEcommerceAction`](#trackEnhancedEcommerceAction)
   - 3.15 [Custom contexts](#custom-contexts)
+  - 3.16 [`trackError`](#trackError)
 
 <a name="page" />
 ### 3.1 Pageviews
@@ -164,7 +165,7 @@ snowplow_name_here('trackPageView');
 
 The first ping would occur after 30 seconds, and subsequent pings every 10 seconds as long as the user continued to browse the page actively.
 
-Notes: 
+Notes:
 
 * In general this is executed as part of the main Snowplow tracking tag. As a result, you can elect to enable this on specific pages.
 * The `enableActivityTracking` method **must** be called *before* the `trackPageView` method.
@@ -186,19 +187,19 @@ Modelled on Google Analytics ecommerce tracking capability, Snowplow uses three 
 
 The `addTrans` method creates a transaction object. It takes nine possible parameters, two of which are required:
 
-| **Parameter** | **Description** | **Required?** | **Example value** | 
+| **Parameter** | **Description** | **Required?** | **Example value** |
 |:---|:---|:---|:---|
 | `orderId` | Internal unique order id number for this transaction | Yes | '1234' |
 | `affiliation` | Partner or store affiliation | No | 'Womens Apparel' |
 | `total` | Total amount of the transaction | Yes | '19.99' |
 | `tax` | Tax amount of the transaction | No | '1.00' |
 | `shipping` | Shipping charge for the transaction | No | '2.99' |
-| `city` | City to associate with transaction | No | 'San Jose' | 
+| `city` | City to associate with transaction | No | 'San Jose' |
 | `state` | State or province to associate with transaction | No | 'California' |
 | `country` | Country to associate with transaction | No | 'USA' |
 | `currency` | Currency to associate with this transaction | No | 'USD' |
 
-For example: 
+For example:
 
 ```javascript
 snowplow_name_here('addTrans',
@@ -330,7 +331,7 @@ Social tracking will be used to track the way users interact with Facebook, Twit
 
 The `trackSocialInteraction` method takes three parameters:
 
-| **Parameter** | **Description** | **Required?** | **Example value**     | 
+| **Parameter** | **Description** | **Required?** | **Example value**     |
 |:--------------|:----------------|:--------------|:----------------------|
 | `action`| Social action performed | Yes         | 'like', 'retweet'     |
 | `network`     | Social network  | Yes           | 'facebook', 'twitter' |
@@ -423,23 +424,23 @@ Below is an example of how to achieve this when using Snowplow ad impression tra
 ```html
 <!-- Snowplow starts plowing -->
 <script type="text/javascript">
- 
+
 // Wrap script in a closure.
 // This prevents rnd from becoming a global variable.
-// So if multiple copies of the script are loaded on the same page, 
+// So if multiple copies of the script are loaded on the same page,
 // each instance of rnd will be inside its own namespace and will
 // not overwrite any of the others.
 // See http://benalman.com/news/2010/11/immediately-invoked-function-expression/
 (function(){
   // Randomly generate tracker namespace to prevent clashes
   var rnd = Math.random().toString(36).substring(2);
-   
+
   // Load Snowplow
   ;(function(p,l,o,w,i,n,g){if(!p[i]){p.GlobalSnowplowNamespace=p.GlobalSnowplowNamespace||[];
   p.GlobalSnowplowNamespace.push(i);p[i]=function(){(p[i].q=p[i].q||[]).push(arguments)
   };p[i].q=p[i].q||[];n=l.createElement(o);g=l.getElementsByTagName(o)[0];n.async=1;
   n.src=w;g.parentNode.insertBefore(n,g)}}(window,document,"script","//d1fc8wv8zag5ca.cloudfront.net/2.5.1/sp.js","sp_pm"));
-   
+
   // Create a new tracker namespaced to rnd
   window.sp_pm('newTracker', rnd, 'dgrp31ac2azr9.cloudfront.net', {
     appId: 'myApp',
@@ -580,11 +581,11 @@ Ad conversion events are implemented as Snowplow unstructured events. [Here][ad-
 <a name="ad-example" />
 #### 3.6.4 Example: implementing impression tracking with Snowplow and OpenX
 
-Most ad servers enable you to append custom code to your ad tags. Here's what the zone append functionality looks like in the OpenX adserver (OnRamp edition): 
+Most ad servers enable you to append custom code to your ad tags. Here's what the zone append functionality looks like in the OpenX adserver (OnRamp edition):
 
 ![zoneappend] [zoneappend]
 
-You will need to populate the ad zone append field with Snowplow tags for **every ad zone/unit** which you use to serve ads across your site or network. Read on for the Snowplow HTML code to use for OpenX. 
+You will need to populate the ad zone append field with Snowplow tags for **every ad zone/unit** which you use to serve ads across your site or network. Read on for the Snowplow HTML code to use for OpenX.
 
 #### OpenX: Snowplow impression tracking using magic macros
 
@@ -622,7 +623,7 @@ There are likely to be a large number of AJAX events that can occur on your site
 * Adding an item to basket
 * Submitting a lead form
 
-Our philosophy in creating Snowplow is that users should capture "every" consumer interaction and work out later how to use this data. This is different from traditional web analytics and business intelligence, that argues that you should first work out what you need, and only then start capturing the data. 
+Our philosophy in creating Snowplow is that users should capture "every" consumer interaction and work out later how to use this data. This is different from traditional web analytics and business intelligence, that argues that you should first work out what you need, and only then start capturing the data.
 
 As part of a Snowplow implementation, therefore, we recommend that you identify every type of AJAX interaction that a user might have with your site: each one of these is an event that will not be captured as part of the standard page view tracking. All of them are candidates to track using `trackStructEvent`, if none of the other event-specific methods outlined above are appropriate.
 
@@ -661,11 +662,11 @@ Note that in the above example no value is set for the `event property`.
 <a name="custom-selfdescribing-events" />
 ### 3.8 Tracking custom self-describing (unstructured) events
 
-You may wish to track events on your website or application which are not directly supported by Snowplow and which [structured event tracking](#custom-structured-events) does not adequately capture. 
-Your event may have more than the five fields offered by `trackStructEvent`, or its fields may not fit into the category-action-label-property-value model. 
+You may wish to track events on your website or application which are not directly supported by Snowplow and which [structured event tracking](#custom-structured-events) does not adequately capture.
+Your event may have more than the five fields offered by `trackStructEvent`, or its fields may not fit into the category-action-label-property-value model.
 The solution is Snowplow's self-describing events (previously known as unstructured). Self-describing events use JSONs which can have arbitrarily many fields.
 
-To define your own custom event, you must create a [JSON schema][json-schema] for that event and upload it to an [Iglu Schema Repository][iglu-repo]. 
+To define your own custom event, you must create a [JSON schema][json-schema] for that event and upload it to an [Iglu Schema Repository][iglu-repo].
 Snowplow uses the schema to validate that the JSON containing the event properties is well-formed.
 
 <a name="trackSelfdescribingEvent" />
@@ -1247,6 +1248,37 @@ In this case an empty string has been provided to the optional `customTitle` arg
 
 For more information on custom contexts, see [this][contexts] blog post.
 
+#### 3.15 `trackError`
+
+Use the `trackError` method to track exceptions (application errors) in your JS code. This is its signature:
+
+```javascript
+function (message, filename, lineno, colno, error, contexts)
+```
+
+| **Name**   | **Required?** | **Description**                     | **Type**   |
+|-----------:|:--------------|:------------------------------------|:-----------|
+| `message`  | Yes           | Error message                       | string     |
+| `filename` | No            | Filename or URL                     | string     |
+| `lineno`   | No            | Line number of problem code chunk   | number     |
+| `colno`    | No            | Column number of problem code chunk | number     |
+| `error`    | No            | JS `ErrorEvent`                     | ErrorEvent |
+
+Of these arguments, only `message` is required.
+
+```javascript
+try {
+  var user = getUser()
+} catch(e) {
+  snowplow_name_here('trackError', 'Cannot get user object', 'shop.js', null, null, e);
+}
+```
+
+Application error events are implemented as Snowplow unstructured events. [Here][application_error] is the schema for a `application_error` event.
+
+
+`trackError` can also be passed an array of custom contexts as an additional final parameter. See [Contexts](#custom-contexts) for more information.
+
 [Back to top](#top)  
 [Back to JavaScript technical documentation contents][contents]
 
@@ -1269,7 +1301,7 @@ For more information on custom contexts, see [this][contexts] blog post.
 [openx]: http://www.openx.com/publisher/enterprise-ad-server
 [zoneappend]: /snowplow/snowplow/wiki/setup-guide/images/03a_zone_prepend_openx.png
 [magicmacros]: http://www.openx.com/docs/whitepapers/magic-macros
-[dmp]: http://www.adopsinsider.com/online-ad-measurement-tracking/data-management-platforms/what-are-data-management-platforms/ 
+[dmp]: http://www.adopsinsider.com/online-ad-measurement-tracking/data-management-platforms/what-are-data-management-platforms/
 [contactus]: mailto:contact@snowplowanalytics.com
 [gahelppage]: https://support.google.com/analytics/answer/1033863
 [gaurlbuilder]: https://support.google.com/analytics/answer/1033867?hl=en
@@ -1288,3 +1320,4 @@ For more information on custom contexts, see [this][contexts] blog post.
 [timing]: https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/timing/jsonschema/1-0-0
 [performancetiming]: https://github.com/snowplow/iglu-central/blob/master/schemas/org.w3/PerformanceTiming/jsonschema/1-0-0
 [performance-spec]: http://www.w3.org/TR/2012/REC-navigation-timing-20121217/#sec-window.performance-attribute
+[application_error]: https://raw.githubusercontent.com/snowplow/iglu-central/master/schemas/com.snowplowanalytics.snowplow/application_error/jsonschema/1-0-1
