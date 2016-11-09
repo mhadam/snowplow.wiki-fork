@@ -1250,10 +1250,12 @@ In this case an empty string has been provided to the optional `customTitle` arg
 
 For more information on custom contexts, see [this][contexts] blog post.
 
+<a name="error-tracking" />
 #### 3.16 Error tracking
 
 Snowplow JS tracker provides two ways of tracking exceptions: manual tracking of handled exceptions using `trackError` and automatic tracking of unhandled exceptions using `enableErrorTracking`.
 
+<a name="trackError" />
 ##### 3.16.1 `trackError`
 
 Use the `trackError` method to track handled exceptions (application errors) in your JS code. This is its signature:
@@ -1285,6 +1287,7 @@ try {
 
 Using `trackError` it's assumed that developer knows where error could happen, which is not often the case. Therefor it's recommended to use `enableErrorTracking` as it allows you to discover errors that weren't expected.
 
+<a name="enableErrorTracking" />
 ##### 3.16.2 `enableErrorTracking`
 
 Use the `enableErrorTracking` method to track unhandled exceptions (application errors) in your JS code. This is its signature:
