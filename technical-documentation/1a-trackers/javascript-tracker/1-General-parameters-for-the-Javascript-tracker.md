@@ -61,6 +61,7 @@ __UNRELEASED__
   - 2.7 [Getting the user ID from the first-party cookie](#get-id)
   - 2.8 [How the Tracker uses localStorage](#local-storage)
   - 2.9 [Optional timestamp argument](#timestamp)
+  - 2.10 [Preserving pageViewId](#preservePageViewId)
 
 <a name="loading"/>
 ### 2.1 Loading Snowplow.js
@@ -661,10 +662,6 @@ The Snowplow JavaScript Tracker uses `window.localStorage` to store events in ca
 <a name="timestamp" />
 ### 2.9 Optional timestamp argument
 
-
-<a name="tstamp-arg" />
-### 4.1.2 Optional timestamp argument
-
 Since 2.7.0 each `track...()` method supports an optional timestamp as its final argument; this allows you to manually override the timestamp attached to this event. 
 The timestamp should be in milliseconds since the Unix epoch.
 
@@ -686,6 +683,18 @@ snowplow_name_here("trackSelfdescribingEvent", {"schema": "iglu:com.acme/event/j
 
 Above will attach `ttm` ([`true_tstamp`][model-datetime]) parameter instead of default `dtm`.
 You can also use, plain number or `{type: 'dtm', value: stamp}` to send `device_sent_timestamp`.
+
+<a name="preservePageViewId" />
+### 2.10 Preserving pageViewId
+
+As explained in [webPage section](#webPage), JS tracker regenerates `webPage` context each time `trackPageView` was called.
+However, before 2.7.0 this was not always the case - `webPage` context was regenerating only when whole HTML page loaded, initialising the tracker.
+It means `pageViewId` would remain same on many single-page applications.
+This behaviour was considered a bug, but if for some reasons you need restore old behaviour you can use `preservePageViewId` method:
+
+```javascript
+snowplow_name_here("preservePageViewId")
+```
 
 
 [contents]: Javascript-Tracker
