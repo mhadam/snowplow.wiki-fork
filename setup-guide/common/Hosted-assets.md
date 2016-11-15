@@ -42,7 +42,7 @@ Right-click on this [Download link] [cc-download] to save it down locally via Cl
 
 The Scala Stream Collector is available on Bintray here:
 
-    http://dl.bintray.com/snowplow/snowplow-generic/snowplow_scala_stream_collector_0.8.0.zip
+    http://dl.bintray.com/snowplow/snowplow-generic/snowplow_scala_stream_collector_0.9.0.zip
 
 Right-click on this [Download link] [ssc-download] to save it down locally.
 
@@ -76,7 +76,7 @@ Right-click on this [Download link] [hadoop-event-recovery-download] to save it 
 
 The Stream Enrich app is available on Bintray here:
 
-    http://dl.bintray.com/snowplow/snowplow-generic/snowplow_stream_enrich_0.9.0.zip
+    http://dl.bintray.com/snowplow/snowplow-generic/snowplow_stream_enrich_0.10.0.zip
 
 Right-click on this [Download link] [se-download] to save it down locally.
 
@@ -127,7 +127,7 @@ No hosted assets currently.
 
 To make deployment easier, the Kinesis apps Scala Stream Collector, Stream Enrich and Kinesis Elasticsearch Sink are also all available in a single zip file here:
 
-    https://dl.bintray.com/snowplow/snowplow-generic/snowplow_kinesis_r84_stellers_sea_eagle.zip
+    https://dl.bintray.com/snowplow/snowplow-generic/snowplow_kinesis_r85_metamorphosis.zip
 
 Right-click on this [Download link] [kinesis-download] to save it down locally.
 
@@ -147,10 +147,10 @@ Please see the [[Artifact repositories]] wiki page for more information.
 [maxmind]: http://www.maxmind.com/?rld=snowplow
 
 [bintray]: https://bintray.com/
-[kinesis-download]: https://dl.bintray.com/snowplow/snowplow-generic/snowplow_kinesis_r84_stellers_sea_eagle.zip
+[kinesis-download]: https://dl.bintray.com/snowplow/snowplow-generic/snowplow_kinesis_r85_metamorphosis.zip
 [kinesis-s3-download]: http://dl.bintray.com/snowplow/snowplow-generic/kinesis_s3_0.4.0.zip
-[ssc-download]: http://dl.bintray.com/snowplow/snowplow-generic/snowplow_scala_stream_collector_0.8.0.zip
-[se-download]: http://dl.bintray.com/snowplow/snowplow-generic/snowplow_stream_enrich_0.9.0.zip
+[ssc-download]: http://dl.bintray.com/snowplow/snowplow-generic/snowplow_scala_stream_collector_0.9.0.zip
+[se-download]: http://dl.bintray.com/snowplow/snowplow-generic/snowplow_stream_enrich_0.10.0.zip
 [kes-download-1x]: http://dl.bintray.com/snowplow/snowplow-generic/snowplow_kinesis_elasticsearch_sink_0.8.0_1x.zip
 [kes-download-2x]: http://dl.bintray.com/snowplow/snowplow-generic/snowplow_kinesis_elasticsearch_sink_0.8.0_2x.zip
 [emr-download]: http://dl.bintray.com/snowplow/snowplow-generic/snowplow_emr_r77_great_auk.zip
