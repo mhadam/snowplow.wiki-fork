@@ -43,7 +43,7 @@ curl localhost:9200/_nodes/process?pretty
 
 If the `max_file_descriptors` equals 32000 it is running with the new limit.
 
-### Defining the mapping
+### Defining the mapping for Elasticsearch 1.x
 
 Use the following request to create the mapping for the enriched event type:
 
@@ -108,6 +108,76 @@ curl -XPUT 'http://localhost:9200/snowplow' -d '{
             "properties": {
                 "geo_location": {
                     "type": "geo_point"
+                },
+                "field_to_tokenize": {
+                    "type": "string",
+                    "analyzer": "english"
+                }
+            }
+        }
+    }
+}'
+```
+
+### Defining the mapping for Elasticsearch 2.x
+
+Use the following request to create the mapping for the enriched event type:
+
+```
+curl -XPUT 'http://localhost:9200/snowplow' -d '{
+    "settings": {
+        "analysis": {
+            "analyzer": {
+                "default": {
+                    "type": "keyword"
+                }
+            }
+        }
+    },
+    "mappings": {
+        "enriched": {
+            "_ttl": {
+              "enabled":true,
+              "default": "7d"
+            },
+            "properties": {
+                "geo_location": {
+                    "type": "geo_point",
+                    "geohash": true
+                }
+            }
+        }
+    }
+}'
+```
+
+Elasticsearch will then treat the geo_location field as a "geo_point". Documents will be automatically deleted one week (7d) after their creation time.
+
+This initialization sets the default analyzer to "keyword". This means that string fields will not be split into separate tokens for the purposes of searching. This saves space and ensures that URL fields are handled correctly.
+
+If you want to tokenize specific string fields, you can change the "properties" field in the mapping like this:
+
+```
+curl -XPUT 'http://localhost:9200/snowplow' -d '{
+    "settings": {
+        "analysis": {
+            "analyzer": {
+                "default": {
+                    "type": "keyword"
+                }
+            }
+        }
+    },
+    "mappings": {
+        "enriched": {
+            "_ttl": {
+              "enabled": true,
+              "default": "7d"
+            },
+            "properties": {
+                "geo_location": {
+                    "type": "geo_point",
+                    "geohash": true
                 },
                 "field_to_tokenize": {
                     "type": "string",
