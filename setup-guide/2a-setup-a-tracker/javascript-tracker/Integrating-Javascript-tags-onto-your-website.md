@@ -34,7 +34,7 @@ To use `sp.js` in an 'async' manner, first add the following script into your we
 ;(function(p,l,o,w,i,n,g){if(!p[i]){p.GlobalSnowplowNamespace=p.GlobalSnowplowNamespace||[];
 p.GlobalSnowplowNamespace.push(i);p[i]=function(){(p[i].q=p[i].q||[]).push(arguments)
 };p[i].q=p[i].q||[];n=l.createElement(o);g=l.getElementsByTagName(o)[0];n.async=1;
-n.src=w;g.parentNode.insertBefore(n,g)}}(window,document,"script","//d1fc8wv8zag5ca.cloudfront.net/2.7.0/sp.js","snowplow"));
+n.src=w;g.parentNode.insertBefore(n,g)}}(window,document,"script","//d1fc8wv8zag5ca.cloudfront.net/2.6.2/sp.js","snowplow"));
 
 window.snowplow('newTracker', 'cf', '{{MY-COLLECTOR-URI}}', { // Initialise a tracker
   appId: '{{MY-SITE-ID}}',
@@ -46,7 +46,8 @@ window.snowplow('trackPageView');
 <!-- Snowplow stops plowing -->
 ```
 
-**Note**: The above snippet references JavaScript tracker v2.6.1 (//d1fc8wv8zag5ca.cloudfront.net/**2.6.1**/sp.js). To ensure you are using the latest version, please, check what it currently is at [GitHub](https://github.com/snowplow/snowplow-javascript-tracker/releases) and amend accordingly.
+**Note**: The above snippet references JavaScript tracker v2.6.2 (//d1fc8wv8zag5ca.cloudfront.net/**2.6.2**/sp.js). 
+To ensure you are using the latest version, please, check what it currently is at [GitHub](https://github.com/snowplow/snowplow-javascript-tracker/releases) and amend accordingly.
 
 #### 1.1.2 Configuring the header script: setting the Collector endpoint
 
