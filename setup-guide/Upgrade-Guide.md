@@ -6,6 +6,7 @@ You can also use [Snowplow Version Matrix](Snowplow-version-matrix) as a guidanc
 
 For easier navigation, please, follow the links below.
 
+- [Snowplow 85 Metamorphosis](#r85) (**r85**) 2016-11-15
 - [Snowplow 84 Steller's Sea Eagle](#r84) (**r84**) 2016-10-07
 - [Snowplow 83 Bald Eagle](#r83) (**r83**) 2016-09-06
 - [Snowplow 82 Tawny Eagle](#r82) (**r82**) 2016-08-08
@@ -46,6 +47,91 @@ For easier navigation, please, follow the links below.
 - [Snowplow 0.9.2](#v0.9.2) (**v0.9.2**) 2014-04-30
 - [Snowplow 0.9.1](#v0.9.1) (**v0.9.1**) 2014-04-11
 - [Snowplow 0.9.0](#v0.9.0) (**v0.9.0**) 2014-02-04
+
+<a name="r85" />
+##Snowplow 85 Metamorphosis
+
+This release brings initial beta support for using [Apache Kafka](https://kafka.apache.org/) with the Snowplow real-time pipeline, as an alternative to Amazon Kinesis.
+
+**Please note that this Kafka support is extremely beta - we want you to use it and test it; do not use it in production.**
+
+### Upgrade steps
+
+The real-time apps for R85 Metamorphosis are available in the following zipfiles:
+
+```
+http://dl.bintray.com/snowplow/snowplow-generic/snowplow_scala_stream_collector_0.9.0.zip
+http://dl.bintray.com/snowplow/snowplow-generic/snowplow_stream_enrich_0.10.0.zip
+http://dl.bintray.com/snowplow/snowplow-generic/snowplow_kinesis_elasticsearch_sink_0.8.0_1x.zip
+http://dl.bintray.com/snowplow/snowplow-generic/snowplow_kinesis_elasticsearch_sink_0.8.0_2x.zip
+```
+
+Or you can download all of the apps together in this zipfile:
+
+```
+https://dl.bintray.com/snowplow/snowplow-generic/snowplow_kinesis_r85_metamorphosis.zip
+```
+
+To upgrade the *Stream Collector* application:
+
+- Install the new Collector on each server in your auto-scaling group
+- Upgrade your config by:
+  - Moving the `collector.sink.kinesis.buffer` section down to `collector.sink.buffer`; as this section will be used to configure limits for both Kinesis and Kafka.
+  - Adding a new section within the `collector.sink` block:
+
+```
+collector {
+  ...
+
+  sink {
+    ...
+
+    buffer {
+      byte-limit: 
+      record-limit:  # Not supported by Kafka; will be ignored
+      time-limit: 
+    }
+    ...
+
+    kafka {
+      brokers: ""
+
+      # Data will be stored in the following topics
+      topic {
+        good: ""
+        bad: ""
+      }
+    }
+    ...
+
+}
+```
+
+To upgrade the *Stream Enrich* application:
+
+- Install the new Stream Enrich on each server in your auto-scaling group
+- Upgrade your config by:
+  - Adding a new section within the enrich block:
+
+```
+enrich {
+  ...
+
+  # Kafka configuration
+  kafka {
+    brokers: "localhost:9092"
+  }
+
+  ...
+}
+```
+
+**Note**: The app-name defined in your config will be used as your Kafka consumer group ID.
+
+### Read more
+
+* [R85 Blog Post](http://snowplowanalytics.com/blog/2016/11/15/snowplow-r85-metamorphosis-released-with-beta-apache-kafka-support/)
+* [R85 Release Notes](https://github.com/snowplow/snowplow/releases/tag/r85-metamorphosis)
 
 <a name="r84" />
 ##Snowplow 84 Steller's Sea Eagle
