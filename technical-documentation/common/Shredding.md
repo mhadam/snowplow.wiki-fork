@@ -45,6 +45,8 @@ Note:
 - We do not yet tackle “synthetic dupes” - this is where two events have the same event ID but different event fingerprints. 
 - If natural duplicates exist across ETL runs, these will not be de-duplicated currently. This is something we hope to explore soon.
 
+More technical information about Scala Hadoop Shred can be found on dedicated [Scala Hadoop Shred](Scala Hadoop Shred) page.
+
 ### 2. StorageLoader
 
 The StorageLoader has functionality to load shredded types into corresponding tables in Redshift, using Redshift's native [`COPY FROM JSON`](http://docs.aws.amazon.com/redshift/latest/dg/copy-usage_notes-copy-from-json.html) functionality. This is a multi-step process:

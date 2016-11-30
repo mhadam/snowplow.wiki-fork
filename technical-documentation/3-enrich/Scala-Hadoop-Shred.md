@@ -8,7 +8,7 @@ You will typically run the Scala Hadoop Shred jar as part of an EMR jobflow, sta
 
 Scala Hadoop Shred has two primary tasks:
 
-1. Shred enriched event into atomic event TSV and associated JSONs
+1. Shred enriched event into `atomic-event` TSV and associated JSONs
 2. Make `event_id`s for all events unique
 
 ### Shredding
@@ -62,6 +62,9 @@ Shredding is classic example of Hadoop [mapper](https://hadoop.apache.org/docs/r
 each line (event) is independent of each other, it is a function which has 
 single input and output, whereas two applied deduplications are only
 aggregations happening in Snowplow pipeline.
+
+More details on what shredding is can be found on dedicated 
+[shredding](Shredding) page.
 
 
 [EnrichedEvent]: https://github.com/snowplow/snowplow/blob/master/3-enrich/scala-common-enrich/src/main/scala/com.snowplowanalytics.snowplow.enrich/common/outputs/EnrichedEvent.scala
