@@ -2,9 +2,11 @@
 
 ### Overview
 
-Scala Hadoop Shred is Hadoop job allowing you to split (shred) Snowplow enriched event, produced by Scala Hadoop Enrich into separate enrities.
+Scala Hadoop Shred is Hadoop job, written in [Scalding][scalding] (Scala API for [Cascading][cascading]) and allowing you to split (shred) Snowplow enriched event, produced by Scala Hadoop Enrich into separate enrities.
+Scala Hadoop Shred utilizes the [scala-common-enrich][sce] Scala project to load enriched events.
 
 You will typically run the Scala Hadoop Shred jar as part of an EMR jobflow, started by [EmrEtlRunner](EmrEtlRunner).
+It is designed to be used downstream of the Scala Hadoop Enrich and upstream of [StorageLoader](StorageLoader).
 
 Scala Hadoop Shred has two primary tasks:
 
@@ -67,11 +69,14 @@ More details on what shredding is can be found on dedicated
 [shredding](Shredding) page.
 
 
-[EnrichedEvent]: https://github.com/snowplow/snowplow/blob/master/3-enrich/scala-common-enrich/src/main/scala/com.snowplowanalytics.snowplow.enrich/common/outputs/EnrichedEvent.scala
 [redshift-copy]: http://docs.aws.amazon.com/redshift/latest/dg/copy-parameters-data-source-s3.html
 [ndjson]: http://ndjson.org/
+[scalding]: https://github.com/twitter/scalding
+[cascading]: http://www.cascading.org/
 
 [issue-2967]: http://snowplowanalytics.com/blog/2016/01/26/snowplow-r76-changeable-hawk-eagle-released/#deduplication
 
+[EnrichedEvent]: https://github.com/snowplow/snowplow/blob/master/3-enrich/scala-common-enrich/src/main/scala/com.snowplowanalytics.snowplow.enrich/common/outputs/EnrichedEvent.scala
+[sce]: https://github.com/snowplow/snowplow/tree/master/3-enrich/scala-common-enrich
 [dealing-with-duplicate-event-ids]: http://snowplowanalytics.com/blog/2015/08/19/dealing-with-duplicate-event-ids/
 [r76-release]: http://snowplowanalytics.com/blog/2016/01/26/snowplow-r76-changeable-hawk-eagle-released/#deduplication
