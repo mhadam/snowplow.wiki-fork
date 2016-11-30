@@ -52,12 +52,11 @@ To solve it Scala Hadoop Shred applies two strategies:
 
 1. If `event_id` and `event_fingerprint` (hash calculated from payload fields)
    for two events are identical - drop all these events except first one. This
-   removes natural duplicates, caused by **1**.
+   removes natural duplicates, caused by **1**. Available since r76.
 2. For all events left having same `event_id` - regenerate random
    `event_id` and add new `duplicate` context containing original `event_id`.
    This provides data for analyst to deal with synthetic duplicates caused by
-   **2** and **3**.
-
+   **2** and **3**. **NOT AVAILABLE YET**.
 
 Shredding is classic example of Hadoop [mapper](https://hadoop.apache.org/docs/r2.6.2/api/org/apache/hadoop/mapreduce/Mapper.html) - 
 each line (event) is independent of each other, it is a function which has 

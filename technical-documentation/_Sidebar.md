@@ -44,8 +44,9 @@
 **3. Enrich**  
 [Overview](Enrichment)  
 [EmrEtlRunner](EmrEtlRunner)  
-[Stream Enrich](Stream-Enrich)
-[Hadoop Event Recovery](Hadoop-Event-Recovery)
+[Stream Enrich](Stream-Enrich)  
+[Scala Hadoop Shred](Hadoop-Hadoop-Shred)  
+[Hadoop Event Recovery](Hadoop-Event-Recovery)  
 
 **[C. Canonical Snowplow event model](canonical-event-model)**  
 
