@@ -1,6 +1,6 @@
 [**HOME**](Home) > [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow technical documentation) > [**Enrichment**](Enrichment) > Scala Hadoop Shred
 
-### Overview
+### 1. Overview
 
 Scala Hadoop Shred is Hadoop job, written in [Scalding][scalding] (Scala API for [Cascading][cascading]) and allowing you to split (shred) Snowplow enriched event, produced by Scala Hadoop Enrich into separate enrities.
 Scala Hadoop Shred utilizes the [scala-common-enrich][sce] Scala project to load enriched events.
@@ -13,7 +13,7 @@ Scala Hadoop Shred has two primary tasks:
 1. Shred enriched event into `atomic-event` TSV and associated JSONs
 2. Make `event_id`s for all events unique
 
-### Shredding
+### 2. Shredding
 
 Snowplow [enriched event][EnrichedEvent] is 131-column TSV file, produced by Scala Hadoop Enrich. 
 Each line contains all information about specific events, including id, timestamps, custom and derived contexts and many more.
@@ -40,7 +40,14 @@ Shredding is process of splitting `EnrichedEvent` TSV into following parts:
    is that it has one-to-one relation to `atomic.events`, whereas contexts have
    many-to-one relation.
 
-### Deduplication
+Shredding is classic example of Hadoop [mapper](https://hadoop.apache.org/docs/r2.6.2/api/org/apache/hadoop/mapreduce/Mapper.html) - 
+each line (event) is independent of each other, it is a function which has 
+single input and output.
+
+More details on what shredding is can be found on dedicated 
+[shredding](Shredding) page.
+
+### 3. Deduplication
 
 Duplicates is common problem in event pipelines, it is described 
 [many][dealing-with-duplicate-event-ids] [times][r76-release]. Basically
@@ -50,24 +57,39 @@ problem is that we cannot guarantee that every event has unique `UUID` because
 2. some user-side software makes events send more than once
 3. flawed [algorithms][issue-2967]
 
-To solve it Scala Hadoop Shred applies two strategies:
+There are four strategies planned for Scala Hadoop Shred's deduplication:
 
-1. If `event_id` and `event_fingerprint` (hash calculated from payload fields)
+| Strategy                             | Batch?      | Same event ID? | Same event fingerprint? | Availability                              |
+|--------------------------------------|-------------|----------------|-------------------------|-------------------------------------------|
+| In-batch natural de-duplication      | In-batch    | Yes            | Yes                     | [R76 Changeable Hawk-Eagle] [r76-release] |
+| In-batch synthetic de-duplication    | In-batch    | Yes            | No                      | R86 Petra                                 |
+| Cross-batch natural de-duplication   | Cross-batch | Yes            | Yes                     | Planned                                   |
+| Cross-batch synthetic de-duplication | Cross-batch | Yes            | No                      | Planned                                   |
+
+We will cover these in turn:
+
+#### 3.1 In-batch natural de-duplication
+
+If `event_id` and `event_fingerprint` (hash calculated from payload fields)
    for two events are identical - drop all these events except first one. This
-   removes natural duplicates, caused by **1**. Available since r76.
-2. For all events left having same `event_id` - regenerate random
+   removes natural duplicates.
+
+**ANTON TO UPDATE THIS WITH MORE DETAIL FROM THE R76 RELEASE POST**
+
+#### 3.2 In-batch synthetic de-duplication
+
+For all events left having same `event_id` - regenerate random
    `event_id` and add new `duplicate` context containing original `event_id`.
-   This provides data for analyst to deal with synthetic duplicates caused by
-   **2** and **3**. **NOT AVAILABLE YET**.
 
-Shredding is classic example of Hadoop [mapper](https://hadoop.apache.org/docs/r2.6.2/api/org/apache/hadoop/mapreduce/Mapper.html) - 
-each line (event) is independent of each other, it is a function which has 
-single input and output, whereas two applied deduplications are only
-aggregations happening in Snowplow pipeline.
+**ANTON TO UPDATE THIS WITH MORE DETAIL.**
 
-More details on what shredding is can be found on dedicated 
-[shredding](Shredding) page.
+#### 3.3 Cross-batch natural de-duplication
 
+**ALEX TO ADD**
+
+#### 3.4 Cross-batch synthetic de-duplication
+
+**ALEX TO ADD**
 
 [redshift-copy]: http://docs.aws.amazon.com/redshift/latest/dg/copy-parameters-data-source-s3.html
 [ndjson]: http://ndjson.org/
