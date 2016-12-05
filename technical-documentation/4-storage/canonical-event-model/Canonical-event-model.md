@@ -361,7 +361,11 @@ Custom unstructured events are a flexible tool that enable Snowplow users to def
 
 When a user sends in a custom unstructured event, they do so as a JSON of name-value properties that conforms to a JSON schema defined for the event earlier. 
 
-The unstructured event is not part of the `atomic.events` table; instead, for users running on Redshift, it is shredded into its own table. The fields in this table will be determined by the JSON schema defined for the event in advance. Users can query just the table for that particular unstructured event, if that's all that's required for their analysis, or join that table back to the `atomic.events` table by `atomic.my_example_unstructured_event_table.root_id = atomic.events.root_id`.
+The unstructured event is not part of the `atomic.events` table; instead, for users running on Redshift, it is shredded into its own table. The fields in this table will be determined by the JSON schema defined for the event in advance. Users can query just the table for that particular unstructured event, if that's all that's required for their analysis, or join that table back to the `atomic.events` table by 
+
+```
+atomic.my_example_unstructured_event_table.root_id = atomic.events.event_id
+```
 
 Back to [top](#top).
 
