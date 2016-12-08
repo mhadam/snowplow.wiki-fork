@@ -75,7 +75,7 @@ We will cover these in turn:
 
 #### 3.1 In-batch natural de-duplication
 
-As of [R76 Changeable Eagle-Hawk release][r76], Hadoop Shred de-duplicates
+As of [R76 Changeable Eagle-Hawk release][r76-release], Hadoop Shred de-duplicates
 "natural duplicates" - i.e. events which share the same event ID (`event_id`)
 and the same event payload (based by `event_fingerprint`), meaning that they are
 semantically identical to each other. For a given ETL run (batch) of events
