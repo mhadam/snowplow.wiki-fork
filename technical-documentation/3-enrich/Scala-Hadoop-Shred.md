@@ -110,6 +110,8 @@ in order to correctly populate `event_fingerprint` property.
 
 With cross-batch natural de-duplication, we have a challenge: we need to track events across multiple ETL processing batches to detect duplicates. We don't need to store the whole event - just the `event_id` and the `event_fingerprint` metadata. And we need to store these in a database that allows fast random access - we chose Amazon DynamoDB, a fully managed NoSQL database service.
 
+#### DynamoDB table design
+
 We store the event metadata in a DynamoDB table with the following columns:
 
 * `event_id`, a String
@@ -119,6 +121,8 @@ We store the event metadata in a DynamoDB table with the following columns:
 A lookup into this table will tell us if the event we are looking has been seen before based on `event_id` and `event_fingerprint`.
 
 We store the `etl_timestamp` to prevent issues in the case of a failed run. If a run fails during Hadoop Shred and is then rerun, we don't want the rerun to consider rows in the DynamoDB table which were written as part of the prior failed run; otherwise all events in the rerun would be rejected as dupes!
+
+#### Check-and-set algorithm
 
 It is clear when we read the event metadata from DynamoDB: during the Hadoop Shred process. But when do we write the event metadata for this run back to DynamoDB? Instead of doing all the reads and then doing all the writes, we decided to use DynamoDB's [conditional update] [dynamodb-cond-writes] to perform a check-and-set operation inside Hadoop Shred, on a per-event basis.
 
@@ -131,6 +135,12 @@ The algorithm is simple:
 If we discover a natural duplicate, then we delete it. We know that we have an "original" of this event already safely in Redshift (because we have found it in DynamoDB).
 
 In the code, we perform this check after we have grouped the batch by `event_id` and `event_fingerprint`; this ensures that all check-and-set requests to a specific `event_id-event_fingerprint` pair in DynamoDB will come from a single mapper.
+
+#### Error handling
+
+The major failure states will be operational issues - for example a sudden event spike causing DynamoDB throughput exceptions. Hadoop Shred will attempt back-off-and-retry in the case of an error; if three re-attempts fail, then Hadoop Shred will fail the whole job. This is preferable to allowing duplicates to land in Redshift, where they can cause Cartesian product explosions.
+
+#### Enabling
 
 To enable cross-batch natural de-duplication you must provide a DynamoDB table configuration to EmrEtlRunner. If this is not provided, then cross-batch natural de-duplication will be disabled. In-batch de-duplication will still work however.
 
