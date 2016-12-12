@@ -106,11 +106,33 @@ in order to correctly populate `event_fingerprint` property.
 
 #### 3.3 Cross-batch natural de-duplication
 
-**ALEX TO ADD**
+**Cross-batch natural de-duplication has not been implemented yet.**
+
+With cross-batch natural de-duplication, we have a challenge: we need to track events across multiple ETL processing batches to detect duplicates. We don't need to store the whole event - just the `event_id` and the `event_fingerprint` metadata. And we need to store these in a database that allows fast random access - we chose Amazon DynamoDB, a fully managed NoSQL database service.
+
+We store the event metadata in a DynamoDB table with the following columns:
+
+* `event_id`, a String
+* `event_fingerprint`, a String
+* `etl_timestamp`, a Date
+
+A lookup into this table will tell us if the event we are looking has been seen before based on `event_id` and `event_fingerprint`.
+
+We store the `etl_timestamp` to prevent issues in the case of a failed run. If a run fails during Hadoop Shred and is then rerun, we don't want the rerun to consider rows in the DynamoDB table which were written as part of the prior failed run; otherwise all events in the rerun would be rejected as dupes!
+
+It is clear when we read the event metadata from DynamoDB: during the Hadoop Shred process. But when do we write the event metadata for this run back to DynamoDB? Instead of doing all the reads and then doing all the writes, we decided to use DynamoDB's [conditional update] [dynamodb-cond-writes] to perform a check-and-set operation inside Hadoop Shred, on a per event basis.
+
+The algorithm is simple:
+
+* Attempt to write the `event_id-event_fingerprint-etl_timestamp` triple to DynamoDB **but only if** the `event_id-event_fingerprint` pair cannot be found with an earlier `etl_timestamp` than the provided one
+* If the write fails, we have a natural duplicate
+* If the write succeeds, we know we have an event which is not a natural duplicate (it could still be a synthetic duplicate however)
+
+If we discover a natural duplicate, then we delete it. We know that we have an "original" of this event already safely in Redshift (because we have found it in DynamoDB).
 
 #### 3.4 Cross-batch synthetic de-duplication
 
-**ALEX TO ADD**
+This section hasn't been written yet.
 
 [redshift-copy]: http://docs.aws.amazon.com/redshift/latest/dg/copy-parameters-data-source-s3.html
 [ndjson]: http://ndjson.org/
@@ -126,3 +148,5 @@ in order to correctly populate `event_fingerprint` property.
 [r76-release]: http://snowplowanalytics.com/blog/2016/01/26/snowplow-r76-changeable-hawk-eagle-released/#deduplication
 [r86-release]: TODO
 [duplicate-schema]: https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/duplicate/jsonschema/1-0-0
+
+[dynamodb-cond-writes]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithItems.html#WorkingWithItems.ConditionalUpdate
