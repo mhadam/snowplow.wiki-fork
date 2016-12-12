@@ -1,4 +1,4 @@
-[**HOME**](Home) > [**SNOWPLOW SETUP GUIDE**](Setting-up-Snowplow) > [**Step 1: setup a Collector**](Setting-up-a-collector) > [**Setup the Cloudfront collector**](setting up the cloudfront collector) > Overview
+[**HOME**](Home) » [**SNOWPLOW SETUP GUIDE**](Setting-up-Snowplow) »  [**Step 1: setup a Collector**](Setting-up-a-collector) »  [**Setup the Cloudfront collector**](setting up the cloudfront collector) » Overview
 
 ## Introduction
 
@@ -31,6 +31,13 @@ Setting up the Cloudfront Collector is a five stage process:
 5. [Test your tracking pixel on Cloudfront] [5-test]. 
 
 **Note**: We recommend running all Snowplow AWS operations through an IAM user with the bare minimum permissions required to run Snowplow. Please see our [IAM user setup page](IAM-setup) for more information on doing this.
+
+### Using webhook adapter
+
+You could also send your payload to [Iglu webhook adapter](Iglu-webhook-adapter). For that, the tracking pixel would also have to be uploaded to `com.snowplowanalytics.iglu` folder as `v1` image (the instructions are similar to those outlined in [Pre-requisites](#Pre-requisites)):
+
+- Create folder `com.snowplowanalytics.iglu` in the S3 bucket you set up earlier
+- Rename `i` tracking pixel into `v1` and upload it to that folder
 
 [Return to the setup guide][setup-guide].
 
