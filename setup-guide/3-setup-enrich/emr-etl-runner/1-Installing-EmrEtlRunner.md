@@ -57,16 +57,16 @@ Done? Right, now we can install EmrEtlRunner.
 
 We host EmrEtlRunner on the distribution platform [JFrog Bintray](https://bintray.com/). You can get a copy of it as shown below.
 
-**Note**: Please, follow [this link](http://dl.bintray.com/snowplow/snowplow-generic/) if you wish to get a different version of the runner. The distribution name follows the pattern `snowplow_emr_{{RELEASE_VERSION}}.zip`.
+**Note**: follow [this link](http://dl.bintray.com/snowplow/snowplow-generic/) to choose your version of the EmrEtlRunner. The distribution name follows the pattern `snowplow_emr_{{RELEASE_VERSION}}.zip`.
 
 ```sh
-$ wget http://dl.bintray.com/snowplow/snowplow-generic/snowplow_emr_r77_great_auk.zip
+$ wget http://dl.bintray.com/snowplow/snowplow-generic/snowplow_emr_{{RELEASE_VERSION}}.zip
 ```
 
 The archive contains both EmrEtlRunner and [StorageLoader](1-Installing-the-StorageLoader). Unzip the archive:
 
 ```sh
-$ unzip snowplow_emr_r77_great_auk.zip
+$ unzip snowplow_emr_{{RELEASE_VERSION}}.zip
 ```
 
 You will see two files `snowplow-emr-etl-runner` and `snowplow-storage-loader` where the first one is the actual EmrEtlRunner.
