@@ -97,7 +97,7 @@ Hadoop Shred uses following strategy:
 
 1. Collect all events with identical `event_id` left after natural-deduplication
 2. Generate new random `event_id` for each of them
-3. Create [`duplicate`][duplicate-schema] context  original with `event_id` to each event where duplicated `event_id` was found
+3. Create [`duplicate`][duplicate-schema] context original with `event_id` to each event where duplicated `event_id` was found
 
 There is no configuration required for this functionality - de-duplication is
 performed automatically in Hadoop Shred, but it is highly recommended to use
@@ -120,7 +120,7 @@ A lookup into this table will tell us if the event we are looking has been seen 
 
 We store the `etl_timestamp` to prevent issues in the case of a failed run. If a run fails during Hadoop Shred and is then rerun, we don't want the rerun to consider rows in the DynamoDB table which were written as part of the prior failed run; otherwise all events in the rerun would be rejected as dupes!
 
-It is clear when we read the event metadata from DynamoDB: during the Hadoop Shred process. But when do we write the event metadata for this run back to DynamoDB? Instead of doing all the reads and then doing all the writes, we decided to use DynamoDB's [conditional update] [dynamodb-cond-writes] to perform a check-and-set operation inside Hadoop Shred, on a per event basis.
+It is clear when we read the event metadata from DynamoDB: during the Hadoop Shred process. But when do we write the event metadata for this run back to DynamoDB? Instead of doing all the reads and then doing all the writes, we decided to use DynamoDB's [conditional update] [dynamodb-cond-writes] to perform a check-and-set operation inside Hadoop Shred, on a per-event basis.
 
 The algorithm is simple:
 
@@ -129,6 +129,10 @@ The algorithm is simple:
 * If the write succeeds, we know we have an event which is not a natural duplicate (it could still be a synthetic duplicate however)
 
 If we discover a natural duplicate, then we delete it. We know that we have an "original" of this event already safely in Redshift (because we have found it in DynamoDB).
+
+In the code, we perform this check after we have grouped the batch by `event_id` and `event_fingerprint`; this ensures that all check-and-set requests to a specific `event_id-event_fingerprint` pair in DynamoDB will come from a single mapper.
+
+To enable cross-batch natural de-duplication you must provide a DynamoDB table configuration to EmrEtlRunner. If this is not provided, then cross-batch natural de-duplication will be disabled. In-batch de-duplication will still work however.
 
 #### 3.4 Cross-batch synthetic de-duplication
 
