@@ -48,6 +48,7 @@ __UNRELEASED__
     - 2.2.17 [Configuring cross-domain tracking](#cross-domain)
     - 2.2.18 [Configuring the maximum payload size in bytes](#maxPostBytes)
     - 2.2.19 [Automatically discover and set the root domain](#discoverRootDomain)
+    - 2.2.20 [Configuring the cookie lifetime](#visitorCookieDuration)
   - 2.3 [Other parameters](#other-methods)
     - 2.3.1 [Setting the user id](#user-id)
       - 2.3.1.1 [`setUserId`](#set-user-id)
@@ -146,6 +147,7 @@ snowplow_name_here("newTracker", "cf", "d3rkrsqld9gmqf.cloudfront.net", {
   crossDomainLinker: function (linkElement) {
     return (linkElement.href === "http://acme.de" || linkElement.id === "crossDomainLink"); 
   },
+  cookieLifetime: 86400 * 31,
   contexts: {
     webPage: true,
     performanceTiming: true,
@@ -432,6 +434,22 @@ If the optional `discoverRootDomain` field of the argmap is set to `true`, the T
 __NOTE__: If you have been setting this manually please note that the automatic detection does not prepend a '.' to the domain. For example a root domain of ".mydomain.com" would become "mydomain.com".  This is because the library we use for setting cookies doesn't care about the difference.
 
 **This will then result in a different domain hash, so we recommend that if you have been setting this manually with a leading '.' to continue to do so manually.**
+
+<a name="visitorCookieDuration" />
+#### 2.2.20 Configuring the cookies lifetime
+
+Whenever tracker initialized on your domain - it will set domain-specific visitor's cookies.
+By default, these cookies will be active for 2 years. You can change this duration using `cookieLifetime` argmap parameter or `setVisitorCookieTimeout` method.
+
+```javascript
+snowplow_name_here("newTracker", "cf", "d3rkrsqld9gmqf.cloudfront.net", {
+  cookieLifetime: 86400 * 31,
+});
+
+// or
+
+snowplow_name_here('setVisitorCookieTimeout', 86400 * 30);  // 30 days
+```
 
 [Back to top](#top)  
 [Back to JavaScript technical documentation contents][contents]
