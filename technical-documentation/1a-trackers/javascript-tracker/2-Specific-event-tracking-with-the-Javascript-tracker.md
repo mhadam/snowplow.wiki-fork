@@ -40,7 +40,7 @@ Snowplow has been built to enable users to track a wide range of events that occ
   - 3.7 [Tracking custom structured events](#custom-structured-events)  
     - 3.7.1 [`trackStructEvent`](#trackStructEvent)
   - 3.8 [Tracking custom self-describing (unstructured) events](#custom-selfdescribing-events)
-    - 3.8.1 [`trackSelfdescribingEvent`](#trackSelfdescribingEvent)   
+    - 3.8.1 [`trackSelfDescribingEvent`](#trackSelfDescribingEvent)   
   - 3.9 [Link click tracking](#link-click-tracking)
     - 3.9.1 [`enableLinkClickTracking`](#enableLinkClickTracking)
     - 3.9.2 [`refreshLinkClickTracking`](#refreshLinkClickTracking)
@@ -671,13 +671,13 @@ The solution is Snowplow's self-describing events (previously known as unstructu
 To define your own custom event, you must create a [JSON schema][json-schema] for that event and upload it to an [Iglu Schema Repository][iglu-repo].
 Snowplow uses the schema to validate that the JSON containing the event properties is well-formed.
 
-<a name="trackSelfdescribingEvent" />
-#### 3.8.1 `trackSelfdescribingEvent`
+<a name="trackSelfDescribingEvent" />
+#### 3.8.1 `trackSelfDescribingEvent`
 
 To track a self-describing event, you make use the `trackSelfdescribingEvent` method:
 
 ```javascript
-snowplow_name_here('trackSelfdescribingEvent', <<SELF-DESCRIBING EVENT JSON>>);
+snowplow_name_here('trackSelfDescribingEvent', <<SELF-DESCRIBING EVENT JSON>>);
 ```
 
 For example:
