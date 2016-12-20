@@ -24,9 +24,9 @@ Right-click on this [Download link] [emr-download] to save it down locally.
 
 The minified JavaScript tracker is hosted on CloudFront against its full semantic version:
 
-    http(s)://d1fc8wv8zag5ca.cloudfront.net/2.6.1/sp.js
+    http(s)://d1fc8wv8zag5ca.cloudfront.net/2.6.2/sp.js
 
-**Note**: The above URL references JavaScript tracker v2.6.1 (d1fc8wv8zag5ca.cloudfront.net/**2.6.1**/sp.js). To ensure you are using the latest version, please, check what it currently is at [GitHub](https://github.com/snowplow/snowplow-javascript-tracker/releases) and amend accordingly.
+**Note**: The above URL references JavaScript tracker v2.6.2 (d1fc8wv8zag5ca.cloudfront.net/**2.6.2**/sp.js). To ensure you are using the latest version, please, check what it currently is at [GitHub](https://github.com/snowplow/snowplow-javascript-tracker/releases) and amend accordingly.
 
 ## 2. Collectors
 
@@ -60,7 +60,7 @@ Right-click on this [Download link] [hadoop-enrich-download] to save it down loc
 
 The Scala Hadoop Shred process uses a single jarfile containing the MapReduce job. This is made available in a public Amazon S3 bucket, for Snowplowers who are running their Hadoop Enrich & Shred process on Amazon EMR:
 
-    s3://snowplow-hosted-assets/3-enrich/scala-hadoop-shred/snowplow-hadoop-shred-0.9.0.jar
+    s3://snowplow-hosted-assets/3-enrich/scala-hadoop-shred/snowplow-hadoop-shred-0.10.0.jar
 
 Right-click on this [Download link] [hadoop-shred-download] to save it down locally via CloudFront CDN.
 
