@@ -674,7 +674,7 @@ Snowplow uses the schema to validate that the JSON containing the event properti
 <a name="trackSelfDescribingEvent" />
 #### 3.8.1 `trackSelfDescribingEvent`
 
-To track a self-describing event, you make use the `trackSelfdescribingEvent` method:
+To track a self-describing event, you make use the `trackSelfDescribingEvent` method:
 
 ```javascript
 snowplow_name_here('trackSelfDescribingEvent', <<SELF-DESCRIBING EVENT JSON>>);
@@ -683,7 +683,7 @@ snowplow_name_here('trackSelfDescribingEvent', <<SELF-DESCRIBING EVENT JSON>>);
 For example:
 
 ```javascript
-window.snowplow_name_here('trackSelfdescribingEvent', {
+window.snowplow_name_here('trackSelfDescribingEvent', {
     schema: 'iglu:com.acme_company/viewed_product/jsonschema/2-0-0',
     data: {
         productId: 'ASO01043',
