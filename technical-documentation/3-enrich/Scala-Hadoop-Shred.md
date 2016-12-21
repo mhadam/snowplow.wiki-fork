@@ -67,7 +67,7 @@ There are four strategies planned for Scala Hadoop Shred's deduplication:
 | Strategy                             | Batch?      | Same event ID? | Same event fingerprint? | Availability                              |
 |--------------------------------------|-------------|----------------|-------------------------|-------------------------------------------|
 | In-batch natural de-duplication      | In-batch    | Yes            | Yes                     | [R76 Changeable Hawk-Eagle] [r76-release] |
-| In-batch synthetic de-duplication    | In-batch    | Yes            | No                      | R86 Petra                                 |
+| In-batch synthetic de-duplication    | In-batch    | Yes            | No                      | [R86 Petra][r86-release]                                 |
 | Cross-batch natural de-duplication   | Cross-batch | Yes            | Yes                     | Planned                                   |
 | Cross-batch synthetic de-duplication | Cross-batch | Yes            | No                      | Planned                                   |
 
@@ -160,7 +160,7 @@ This section hasn't been written yet.
 [sce]: https://github.com/snowplow/snowplow/tree/master/3-enrich/scala-common-enrich
 [dealing-with-duplicate-event-ids]: http://snowplowanalytics.com/blog/2015/08/19/dealing-with-duplicate-event-ids/
 [r76-release]: http://snowplowanalytics.com/blog/2016/01/26/snowplow-r76-changeable-hawk-eagle-released/#deduplication
-[r86-release]: TODO
+[r86-release]: http://snowplowanalytics.com/blog/2016/12/20/snowplow-r86-petra-released/
 [duplicate-schema]: https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/duplicate/jsonschema/1-0-0
 
 [dynamodb-cond-writes]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithItems.html#WorkingWithItems.ConditionalUpdate
