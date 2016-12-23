@@ -664,6 +664,8 @@ Note that in the above example no value is set for the `event property`.
 <a name="custom-selfdescribing-events" />
 ### 3.8 Tracking custom self-describing (unstructured) events
 
+*Note that this is only available on version 2.7.0 and above of the JS tracker.*
+
 You may wish to track events on your website or application which are not directly supported by Snowplow and which [structured event tracking](#custom-structured-events) does not adequately capture.
 Your event may have more than the five fields offered by `trackStructEvent`, or its fields may not fit into the category-action-label-property-value model.
 The solution is Snowplow's self-describing events (previously known as unstructured). Self-describing events use JSONs which can have arbitrarily many fields.
@@ -1252,6 +1254,8 @@ For more information on custom contexts, see [this][contexts] blog post.
 
 <a name="error-tracking" />
 #### 3.16 Error tracking
+
+*Note that this is only available on version 2.7.0 and above of the JS tracker.*
 
 Snowplow JS tracker provides two ways of tracking exceptions: manual tracking of handled exceptions using `trackError` and automatic tracking of unhandled exceptions using `enableErrorTracking`.
 
