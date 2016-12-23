@@ -60,6 +60,7 @@ Snowplow has been built to enable users to track a wide range of events that occ
   - 3.16 [Error tracking](#errors)
     - 3.16.1 [`trackError`](#trackError)
     - 3.16.2 [`enableErrorTracking`](#enableErrorTracking)
+  - 3.17 [Setting the true timestamp](#trueTimestamps)
 
 <a name="page" />
 ### 3.1 Pageviews
@@ -1312,6 +1313,63 @@ snowplow_name_here('enableErrorTracking')
 ```
 
 Application error events are implemented as Snowplow unstructured events. [Here][application_error] is the schema for a `application_error` event.
+
+[Back to top](#top)  
+[Back to JavaScript technical documentation contents][contents]
+
+<a name="trueTimestamps" />
+### 3.17 Setting the true timestamp
+
+As standard, every event tracked by the Javascript tracker will be recorded with two timestamps:
+
+1. A `device_created_tstamp` - set when the event occurred
+2. A `device_sent_tstamp` - set when the event was sent by the tracker to the collector
+
+These are combined downstream in the Snowplow pipeline (with the `collector_tstamp`) to calculate the `derived_tstamp`, which is our best estimate of when the event actually occurred.
+
+In certain circumstances you might want to set the timestamp yourself e.g. if the JS tracker is being used to process historical event data, rather than tracking the events live. In this case you can set the `true_timestamp` for the event. When set, this will be used as the value in the `derived_tstamp` rather than a combination of the `device_created_tstamp`, `device_sent_tstamp` and `collector_tstamp`.
+
+To set the true timestamp add an extra argument to your track method:
+
+```js
+{type: 'ttm', value: unixtimestamp}
+```
+
+e.g. to set a true timestamp with a page view event:
+
+```javascript
+window.snowplow_name_here('trackPageView', null, [{
+    schema: "iglu:com.example_company/page/jsonschema/1-2-1",
+    data: {
+        pageType: 'test',
+        lastUpdated: new Date(2014,1,26)
+    }
+},
+{
+    schema: "iglu:com.example_company/user/jsonschema/2-0-0",
+    data: {
+      userType: 'tester'
+    }
+}],
+{type: 'ttm', value: 1482511723});
+```
+
+e.g. to set a true timestamp for a self-describing event:
+
+```javascript
+window.snowplow_name_here('trackSelfDescribingEvent', {
+    schema: 'iglu:com.acme_company/viewed_product/jsonschema/2-0-0',
+    data: {
+        productId: 'ASO01043',
+        category: 'Dresses',
+        brand: 'ACME',
+        returning: true,
+        price: 49.95,
+        sizes: ['xs', 's', 'l', 'xl', 'xxl'],
+        availableSince: new Date(2013,3,7)
+    }
+}, null, {type: 'ttm', value: 1482511723});
+```
 
 [Back to top](#top)  
 [Back to JavaScript technical documentation contents][contents]
