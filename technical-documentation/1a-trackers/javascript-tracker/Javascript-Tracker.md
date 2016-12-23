@@ -66,6 +66,7 @@
   - 3.16 [Error tracking](2-Specific-event-tracking-with-the-Javascript-tracker#errors)
     - 3.16.1 [`trackError`](2-Specific-event-tracking-with-the-Javascript-tracker#trackError)
     - 3.16.2 [`enableErrorTracking`](2-Specific-event-tracking-with-the-Javascript-tracker#enableErrorTracking)
+  - 3.17 [Setting the true timestamp](#trueTimestamps)
 - 4. [Advanced usage of the JavaScript Tracker](3-Advanced-usage-of-the-JavaScript-Tracker)
 - 4.1 [Callbacks](3-Advanced-usage-of-the-JavaScript-Tracker#callbacks)
 - 4.2 [Methods which can be used from inside a callback](3-Advanced-usage-of-the-JavaScript-Tracker#return-methods)
@@ -81,7 +82,7 @@ The [Snowplow JavaScript Tracker](https://github.com/snowplow/snowplow-javascrip
 
 Tracking is done by inserting JavaScript tags onto pages. These tags run functions defined in [tracker.js](https://github.com/snowplow/snowplow-javascript-tracker/blob/master/src/js/tracker.js), that trigger GET requests of the Snowplow pixel. The JavaScript functions append data points to be passed into Snowplow onto the query string for the GET requests. These then get logged by the Snowplow [collector](collectors). For a full list of data points that can be passed into Snowplow in this way, please refer to the [Snowplow tracker protocol](snowplow-tracker-protocol) documentation.
 
-The JavaScript Tracker supports both synchronous and asynchronous tags. We recommend the asynchronous tags in nearly all instances, as these do not slow down page load times. 
+The JavaScript Tracker supports both synchronous and asynchronous tags. We recommend the asynchronous tags in nearly all instances, as these do not slow down page load times.
 
 2. [General parameters](1-General-parameters-for-the-Javascript-tracker#wiki-general)  
 3. [Tracking specific events](2-Specific-event-tracking-with-the-Javascript-tracker#wiki-tracking-specific-events)  
