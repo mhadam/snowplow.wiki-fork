@@ -92,7 +92,7 @@ Initialize a tracker instance like this:
 
 ```ruby
 emitter = SnowplowTracker::Emitter.new("d3rkrsqld9gmqf.cloudfront.net")
-tracker = SnowplowTracker::Tracker.new(e)
+tracker = SnowplowTracker::Tracker.new(emitter)
 ```
 
 If you wish to send events to more than one emitter, you can provide an array of emitters to the tracker constructor.
