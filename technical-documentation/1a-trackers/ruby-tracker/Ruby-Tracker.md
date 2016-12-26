@@ -2,7 +2,7 @@
 
 [**HOME**](Home) > [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow technical documentation) > [**Trackers**](trackers) > Ruby Tracker
 
-**This page refers to version 0.6.0 of the Snowplow Ruby Tracker. Documentation for other versions is available:**
+**This page refers to version 0.6.1 of the Snowplow Ruby Tracker. Documentation for other versions is available:**
 
 *[Version 0.2][ruby-0.2]*  
 *[Version 0.3][ruby-0.3]*  
