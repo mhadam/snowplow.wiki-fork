@@ -57,7 +57,7 @@ Snowplow has been built to enable users to track a wide range of events that occ
     - 3.14.4 [`addEnhancedEcommercePromoContext`](#addEnhancedEcommercePromoContext)
     - 3.14.5 [`trackEnhancedEcommerceAction`](#trackEnhancedEcommerceAction)
   - 3.15 [Custom contexts](#custom-contexts)
-  - 3.16 [Error tracking](#errors)
+  - 3.16 [Error tracking](#316-error-tracking)
     - 3.16.1 [`trackError`](#trackError)
     - 3.16.2 [`enableErrorTracking`](#enableErrorTracking)
   - 3.17 [Setting the true timestamp](#trueTimestamps)
