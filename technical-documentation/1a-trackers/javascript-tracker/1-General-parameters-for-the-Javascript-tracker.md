@@ -48,7 +48,7 @@ __UNRELEASED__
     - 2.2.17 [Configuring cross-domain tracking](#cross-domain)
     - 2.2.18 [Configuring the maximum payload size in bytes](#maxPostBytes)
     - 2.2.19 [Automatically discover and set the root domain](#discoverRootDomain)
-    - 2.2.20 [Configuring the cookie lifetime](#configuring-the-cookies-lifetime)
+    - 2.2.20 [Configuring the cookie lifetime](#visitorCookieDuration)
   - 2.3 [Other parameters](#other-methods)
     - 2.3.1 [Setting the user id](#user-id)
       - 2.3.1.1 [`setUserId`](#set-user-id)
