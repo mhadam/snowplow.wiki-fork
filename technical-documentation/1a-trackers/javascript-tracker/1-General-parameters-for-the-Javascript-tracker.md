@@ -439,7 +439,8 @@ __NOTE__: If you have been setting this manually please note that the automatic 
 #### 2.2.20 Configuring the cookies lifetime
 
 Whenever tracker initialized on your domain - it will set domain-specific visitor's cookies.
-By default, these cookies will be active for 2 years. You can change this duration using `cookieLifetime` argmap parameter or `setVisitorCookieTimeout` method.
+By default, these cookies will be active for 2 years. 
+You can change this duration using `cookieLifetime` argmap parameter or `setVisitorCookieTimeout` method.
 
 ```javascript
 snowplow_name_here("newTracker", "cf", "d3rkrsqld9gmqf.cloudfront.net", {
@@ -450,6 +451,9 @@ snowplow_name_here("newTracker", "cf", "d3rkrsqld9gmqf.cloudfront.net", {
 
 snowplow_name_here('setVisitorCookieTimeout', 86400 * 30);  // 30 days
 ```
+
+If `cookieLifetime` is set to `0`, the cookie will expire at the end of the session (when the browser closes).
+If set to `-1`, the first-party cookies will be disabled.
 
 [Back to top](#top)  
 [Back to JavaScript technical documentation contents][contents]
