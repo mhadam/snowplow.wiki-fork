@@ -2,7 +2,7 @@
 
 [**HOME**](Home) > [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow technical documentation) > [**Trackers**](trackers) > Android Tracker
 
-This page refers to version 0.6.1+ of the Snowplow Android Tracker.
+This page refers to version 0.6.2+ of the Snowplow Android Tracker.
 
 Documentation for older versions of this tracker is available:
 
