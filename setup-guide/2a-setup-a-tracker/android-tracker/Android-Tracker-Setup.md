@@ -56,7 +56,7 @@ compile 'com.squareup.okhttp3:okhttp:3.4.1'
 
 The Tracker is published to jcenter, which should make it easy to add it as a dependency into your own Android app.
 
-The current version of the Snowplow Android Tracker is 0.6.1.
+The current version of the Snowplow Android Tracker is 0.6.2.
 
 <a name="gradle" />
 ### 3.2 Gradle
@@ -76,11 +76,11 @@ Then add into the same file:
 dependencies {
     ...
     // Snowplow Android Tracker
-    compile 'com.snowplowanalytics:snowplow-android-tracker:0.6.1@aar'
+    compile 'com.snowplowanalytics:snowplow-android-tracker:0.6.2@aar'
 }
 ```
 
-This will install version `0.6.1` of the android tracker.  However if you would like to ensure that all bug fixes and patches for version `0.6.1` are installed, simply change `0.6.1` into `0.6.+`.  
+This will install version `0.6.2` of the android tracker.  However if you would like to ensure that all bug fixes and patches for version `0.6.2` are installed, simply change `0.6.2` into `0.6.+`.  
 
 Please note that no breaking changes will occur in the '0.6.x' space.
 
@@ -139,7 +139,7 @@ dependencies {
     compile 'com.squareup.okhttp3:okhttp:3.4.1'
 
     // Tracker Import
-    compile 'com.snowplowanalytics:snowplow-android-tracker:0.6.1@aar'
+    compile 'com.snowplowanalytics:snowplow-android-tracker:0.6.2@aar'
 }
 ```
 
