@@ -333,7 +333,7 @@ Returns the `session` object created for the Tracker (if `sessionContext` was en
 
 [Back to top](#top)
 
-<a name="session" />
+<a name="session-user-id" />
 #### 2.3.7.1 `getUserId`
 
 Returns the sessions user id - this is an automatically generated UUID which is consistent for the life of the application.  This can be reset by:
