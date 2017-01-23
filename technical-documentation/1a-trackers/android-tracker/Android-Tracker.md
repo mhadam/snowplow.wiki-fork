@@ -40,6 +40,7 @@ Local Testing:
     - 2.3.5 [`getBase64Encoded`](#base64)
     - 2.3.6 [`getPlatform`](#platform)
     - 2.3.7 [`getSession`](#session)
+      - 2.3.7.1 [`getUserId`](#session-user-id)
     - 2.3.8 [`getDataCollection`](#data)
     - 2.3.9 [`getLogLevel`](#log-level)
     - 2.3.10 [`getThreadCount`](#thread-count)
@@ -329,6 +330,16 @@ Returns the 'platform' that was set in Tracker construction, the builder allows 
 #### 2.3.7 `getSession`
 
 Returns the `session` object created for the Tracker (if `sessionContext` was enabled).
+
+[Back to top](#top)
+
+<a name="session" />
+#### 2.3.7.1 `getUserId`
+
+Returns the sessions user id - this is an automatically generated UUID which is consistent for the life of the application.  This can be reset by:
+
+1. Deleting the local data of the application manually
+2. Uninstalling and reinstalling the application
 
 [Back to top](#top)
 
