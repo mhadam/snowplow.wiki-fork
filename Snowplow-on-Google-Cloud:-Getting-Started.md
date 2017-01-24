@@ -30,7 +30,7 @@ To get started with Google Cloud, first go to https://console.cloud.google.com/i
 
 
 <a name="gcloud-sdk">
-### 3. Google Cloud SDK
+### 3. Installing Google Cloud SDK locally
 
 Google provides a second way for you to interact with its services: the Cloud SDK. It allows you to issue a large number of commands, to (for example): create Compute instances, publish and subscribe to Pub/Sub topics, create BigQuery tables, authenticate, among others.  
 
@@ -38,7 +38,7 @@ Google provides a second way for you to interact with its services: the Cloud SD
 - If you intend to run some part of your project locally, you'll need to download and install the appropriate [Cloud SDK package](https://cloud.google.com/sdk/) for your platform.
 
 <a name="auth">
-### 4. Authentication and Credentials
+### 4. Setting up Authentication and Credentials
 
 - Go to [the credentials section of the API manager](https://console.cloud.google.com/apis/credentials). 
 - Make sure your project is selected (in the dropdown menu to the left of the search bar). 
