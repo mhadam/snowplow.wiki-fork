@@ -51,7 +51,7 @@ On this page, you can create credentials for your existing accounts. If you don'
 - Fill in the Service account name and ID, and pick its role. 
 - Finally, click Create. This will download a JSON file with the credentials. This is the only occasion in which this file can be downloaded, so save it carefully. You'll need to place this file wherever you need this service account to be able to authenticate.  
 
-[[/images/gcloud-service.account.png]]
+[[/images/gcloud-service-account.png]]
 
 You can also use the SDK to authenticate (if you want to authenticate with your personal account), doing:
 
