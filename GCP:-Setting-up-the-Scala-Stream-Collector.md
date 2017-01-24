@@ -4,7 +4,11 @@
 
 - 1. [Introduction](#intro)
 - 2. [Enable and Setup Google Cloud Pub/Sub](#pubsub)
-- 3. [Setting up the Scala Stream Collector locally](#ssc)
+- 3. [Setting up the Scala Stream Collector](#ssc)
+- 4. [Running the Collector](#running)
+    * 4a. [locally (useful for testing)](#running-locally)
+    * 4b. [on a GCP instance](#running-instance)
+    * 4c. [on a load balanced auto-scaling GCP cluster](#running-cluster)
   
 
 <a name="intro">
@@ -35,11 +39,209 @@ policies. For more on Pub/Sub go to: https://cloud.google.com/pubsub/docs/concep
 <a name="ssc">
 ### 3. Setting up the Scala Stream Collector
 
-- To set up the Scala Stream Collector, fill the apropriate fields of the config file (check the [example](https://raw.githubusercontent.com/snowplow/snowplow/pubsub-collector/2-collectors/scala-stream-collector/examples/config.hocon.sample))
-	* sink.enabled = "pubsub"
-	* sink.pubsub.topic.good = "GOOD-SINK-NAME" _in the case of this tutorial, this will be 'good'_
-	* sink.pubsub.topic.bad = "BAD-SINK-NAME" _in the case of this tutorial, this will be 'bad'_
-	* sink.pubsub.google-project-id = "YOUR-PROJECT-ID" _in the case of this tutorial, this will be 'example-project-156611'_
-	* sink.pubsub.google-auth-path = "/absolute/path/to/credentials/file.json" _refer to [this](https://github.com/snowplow/snowplow/wiki/GCP:-Getting-Started#auth) for more info on what this file is and how to get it_
+- To set up the Scala Stream Collector, fill the apropriate fields of the config file
+- Here's an example:
 
-- Just run it! :)
+```
+# 'collector' contains configuration options for the main Scala collector.
+collector {
+  # The collector runs as a web service specified on the following
+  # interface and port.
+  interface = "0.0.0.0"
+  port = 8080 
+
+  # Production mode disables additional services helpful for configuring and
+  # initializing the collector, such as a path '/dump' to view all
+  # records stored in the current stream.
+  production = true
+
+  # Configure the P3P policy header.
+  p3p {
+    policyref = "/w3c/p3p.xml"
+    CP = "NOI DSP COR NID PSA OUR IND COM NAV STA"
+  }
+
+  # The collector returns a cookie to clients for user identification
+  # with the following domain and expiration.
+  cookie {
+    enabled = false
+    expiration =  "365 days"
+    # Network cookie name
+    name = sp
+    # The domain is optional and will make the cookie accessible to other
+    # applications on the domain. Comment out this line to tie cookies to
+    # the collector's full domain
+    domain = ""
+  }
+
+  # The collector has a configurable sink for storing data in
+  # different formats for the enrichment process.
+  sink {
+    # Sinks currently supported are:
+    # 'kinesis' for writing Thrift-serialized records to a Kinesis stream
+    # 'kafka' for writing Thrift-serialized records to kafka
+    # 'pubsub' for writing Thrift-serialized records to Google Cloud Pub/Sub
+    # 'stdout' for writing Base64-encoded Thrift-serialized records to stdout
+    #    Recommended settings for 'stdout' so each line printed to stdout
+    #    is a serialized record are:
+    #      1. Setting 'akka.loglevel = OFF' and 'akka.loggers = []'
+    #         to disable all logging.
+    #      2. Using 'sbt assembly' and 'java -jar ...' to disable
+    #         sbt logging.
+    enabled = "pubsub"
+
+    kinesis {
+      thread-pool-size: 10 # Thread pool size for Kinesis API requests
+
+      # The following are used to authenticate for the Amazon Kinesis sink.
+      #
+      # If both are set to 'default', the default provider chain is used
+      # (see http://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/com/amazonaws/auth/DefaultAWSCredentialsProviderChain.html)
+      #
+      # If both are set to 'iam', use AWS IAM Roles to provision credentials.
+      #
+      # If both are set to 'env', use environment variables AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY
+      aws {
+        access-key: "iam"
+        secret-key: "iam"
+      }
+
+      # Data will be stored in the following stream.
+      stream {
+        region: "{{collectorSinkKinesisStreamRegion}}"
+        good: "{{collectorKinesisStreamGoodName}}"
+        bad: "{{collectorKinesisStreamBadName}}"
+      }
+
+      # Minimum and maximum backoff periods
+      backoffPolicy: {
+        minBackoff: 3000
+        maxBackoff: 600000
+      }
+    }
+
+    kafka {
+      brokers: "{{collectorKafkaBrokers}}"
+
+      # Data will be stored in the following topics
+      topic {
+        good: "{{collectorKafkaTopicGoodName}}"
+        bad: "{{collectorKafkaTopicBadName}}"
+      }
+    }
+
+    pubsub {
+      topic {
+        # these will be the names of the topics you created earlier
+        good: "good"
+        bad: "bad"
+      }
+
+      # if set to 'env' it will use the GOOGLE_APPLICATION_CREDENTIALS environment variable,
+      # else, it assumes an absolute path
+      google-auth-path: "/home/colobas/dev/snowplow-winternship/misc/spc-pubsub-b3f49687089b.json"
+      google-project-id: "spc-pubsub"
+    }
+
+    # Incoming events are stored in a buffer before being sent to Kinesis/Kafka.
+    # The buffer is emptied whenever:
+    # - the number of stored records reaches record-limit or
+    # - the combined size of the stored records reaches byte-limit or
+    # - the time in milliseconds since the buffer was last emptied reaches time-limit
+    buffer {
+      byte-limit: 4000000
+      record-limit: 500
+      time-limit: 5000
+    }
+  }
+}
+
+# Akka has a variety of possible configuration options defined at
+# http://doc.akka.io/docs/akka/2.2.3/general/configuration.html.
+akka {
+  loglevel = OFF  # 'OFF' for no logging, 'DEBUG' for all logging.
+  loggers = ["akka.event.slf4j.Slf4jLogger"]
+}
+
+# spray-can is the server the Stream collector uses and has configurable
+# options defined at
+# https://github.com/spray/spray/blob/master/spray-can/src/main/resources/reference.conf
+spray.can.server {
+  # To obtain the hostname in the collector, the 'remote-address' header
+  # should be set. By default, this is disabled, and enabling it
+  # adds the 'Remote-Address' header to every request automatically.
+  remote-address-header = on
+
+  uri-parsing-mode = relaxed
+  raw-request-uri-header = on
+
+  # Define the maximum request length (the default is 2048)
+  parsing {
+    max-uri-length = 32768
+  }
+}
+
+```
+
+
+<a name="running" >
+### 4. Running the Collector
+
+- To run the collector, you'll need a config file as the one above.
+- You'll also need a credentials JSON file (whose path you'll have to specify
+in the config file, as done in the example). 
+- For info on how to get the credentials JSON file 
+refer to [this](https://github.com/snowplow/snowplow/wiki/GCP:-Getting-Started#auth)
+- Has described in that link, this JSON can only be obtained once, so it should be
+handled carefully.
+- It should be **safely** placed wherever you intend to run it - don't e-mail it.
+
+<a name="running-locally" >
+#### 4a. locally (useful for testing)
+To run the collector locally, assuming you have the above files in place,
+simply run:
+```
+$ scala-stream-collector --config config.hocon
+```
+
+<a name="running-instance" >
+#### 4b. on a GCP instance
+To run the collector on a GCP instance, you'll first need to spin one up.
+There are two ways to do so:
+
+##### 4b-1. via dashboard
+- Go to the [GCP dashboard](https://console.cloud.google.com/home/dashboard), and once again, make sure your project is selected.
+- Click the hamburger on the top left corner, and select Compute Engine, under Compute
+- Enable billing if you haven't (if you haven't enabled billing, at this point the only option you'll see is a button to do so)
+[[/images/gcloud-instance-nobilling.png]]
+- Click "Create instance" and pick the apropriate settings for your case
+[[/images/gcloud-instance-create.png]]
+##### 4b-2. via command line
+- Make sure you have authenticated as described above
+- Here's an example command of an instance spin up: (check the [gcloud reference](https://developers.google.com/cloud/sdk/gcloud/reference/compute/?hl=en_US) for more info)
+
+```
+$ gcloud compute --project "example-project-156611" instances create "instance-1" \
+                   --zone "us-central1-c" \
+                   --machine-type "n1-standard-1" \
+                   --subnet "default" \
+                   --maintenance-policy "MIGRATE" \
+                   --scopes 189687079473-compute@developer.gserviceaccount.com="https://www.googleapis.com/auth/devstorage.read_only",189687079473-compute@developer.gserviceaccount.com="https://www.googleapis.com/auth/logging.write",189687079473-compute@developer.gserviceaccount.com="https://www.googleapis.com/auth/monitoring.write",189687079473-compute@developer.gserviceaccount.com="https://www.googleapis.com/auth/servicecontrol",189687079473-compute@developer.gserviceaccount.com="https://www.googleapis.com/auth/service.management.readonly",189687079473-compute@developer.gserviceaccount.com="https://www.googleapis.com/auth/trace.append" \
+                   --image "/debian-cloud/debian-8-jessie-v20170110" \
+                   --boot-disk-size "10" \
+                   --boot-disk-type "pd-standard" \
+                   --boot-disk-device-name "instance-1"
+```
+
+
+
+
+
+
+
+
+
+
+
+<a name="running-cluster" >
+#### 4c. a load balanced auto-scaling GCP cluster
