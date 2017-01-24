@@ -71,7 +71,7 @@ Every gcloud command can be appended with '--help' for more info. For more detai
 
 Most likely, you'll need to spin up a Google Compute instance at some point. This can be done in two ways:
 
-## 5a. via dashboard
+#### 5a. via dashboard
 
 - Go to the [GCP dashboard](https://console.cloud.google.com/home/dashboard), and once again, make sure your project is selected.
 - Click the hamburger on the top left corner, and select Compute Engine, under Compute
@@ -80,7 +80,7 @@ Most likely, you'll need to spin up a Google Compute instance at some point. Thi
 - Click "Create instance" and pick the apropriate settings for your case
 [[/images/gcloud-instance-create.png]]
 
-## 5b. via command line
+#### 5b. via command line
 - Make sure you have authenticated as described above
 - Here's an example command of an instance spin up: (check the [gcloud reference](https://developers.google.com/cloud/sdk/gcloud/reference/compute/?hl=en_US) for more info)
 
