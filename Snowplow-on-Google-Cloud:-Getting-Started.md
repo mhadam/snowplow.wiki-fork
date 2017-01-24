@@ -4,12 +4,8 @@
 
 - 1. [Creating a new project](#new-project)  
 - 2. [Enabling Billing and appropriate APIs and services](#api-enabling)  
-- 3. [Google Cloud SDK](#gcloud-sdk)
-- 4. [Authentication and Credentials](#auth)
-- 5. [Spinning up a Google Compute instance](#instance)
-	* 5a. [via dashboard](#instance-dashboard)
-	* 5b. [via command line](#instance-cli)
-  
+- 3. [Installing Google Cloud SDK locally](#gcloud-sdk)
+- 4. [Setting up Authentication and Credentials](#auth)
 
 <a name="new-project">
 ### 1. Creating a new project
@@ -66,33 +62,4 @@ If you have multiple projects, this will default to the most recent one you work
 
 Every gcloud command can be appended with '--help' for more info. For more detailed information on Service Accounts: https://developers.google.com/identity/protocols/OAuth2ServiceAccount
 
-<a name="instance">
-### 5. Spinning up a Google Compute instance
-
-Most likely, you'll need to spin up a Google Compute instance at some point. This can be done in two ways:
-
-#### 5a. via dashboard
-
-- Go to the [GCP dashboard](https://console.cloud.google.com/home/dashboard), and once again, make sure your project is selected.
-- Click the hamburger on the top left corner, and select Compute Engine, under Compute
-- Enable billing if you haven't (if you haven't enabled billing, at this point the only option you'll see is a button to do so)
-[[/images/gcloud-instance-nobilling.png]]
-- Click "Create instance" and pick the apropriate settings for your case
-[[/images/gcloud-instance-create.png]]
-
-#### 5b. via command line
-- Make sure you have authenticated as described above
-- Here's an example command of an instance spin up: (check the [gcloud reference](https://developers.google.com/cloud/sdk/gcloud/reference/compute/?hl=en_US) for more info)
-
-```
-$ gcloud compute --project "example-project-156611" instances create "instance-1" \
-                   --zone "us-central1-c" \
-                   --machine-type "n1-standard-1" \
-                   --subnet "default" \
-                   --maintenance-policy "MIGRATE" \
-                   --scopes 189687079473-compute@developer.gserviceaccount.com="https://www.googleapis.com/auth/devstorage.read_only",189687079473-compute@developer.gserviceaccount.com="https://www.googleapis.com/auth/logging.write",189687079473-compute@developer.gserviceaccount.com="https://www.googleapis.com/auth/monitoring.write",189687079473-compute@developer.gserviceaccount.com="https://www.googleapis.com/auth/servicecontrol",189687079473-compute@developer.gserviceaccount.com="https://www.googleapis.com/auth/service.management.readonly",189687079473-compute@developer.gserviceaccount.com="https://www.googleapis.com/auth/trace.append" \
-                   --image "/debian-cloud/debian-8-jessie-v20170110" \
-                   --boot-disk-size "10" \
-                   --boot-disk-type "pd-standard" \
-                   --boot-disk-device-name "instance-1"
-```
+Next: [Setting up the Scala Stream Collector on GCP](https://github.com/snowplow/snowplow/wiki/Snowplow-on-Google-Cloud:-Setting-up-the-Scala-Stream-Collector)
