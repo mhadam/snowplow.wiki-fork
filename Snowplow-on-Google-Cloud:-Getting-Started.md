@@ -83,7 +83,8 @@ Most likely, you'll need to spin up a Google Compute instance at some point. Thi
 ## 5b. via command line
 - Make sure you have authenticated as described above
 - Here's an example command of an instance spin up: (check the [gcloud reference](https://developers.google.com/cloud/sdk/gcloud/reference/compute/?hl=en_US) for more info)
-    gcloud compute --project "example-project-156611" instances create "instance-1" \
+
+    $ gcloud compute --project "example-project-156611" instances create "instance-1" \
                    --zone "us-central1-c" \
                    --machine-type "n1-standard-1" \
                    --subnet "default" \
