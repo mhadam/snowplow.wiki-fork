@@ -216,6 +216,7 @@ There are two ways to do so:
 [[/images/gcloud-instance-nobilling.png]]
 - Click "Create instance" and pick the apropriate settings for your case
 [[/images/gcloud-instance-create.png]]
+
 ##### 4b-2. via command line
 - Make sure you have authenticated as described above
 - Here's an example command of an instance spin up: (check the [gcloud reference](https://developers.google.com/cloud/sdk/gcloud/reference/compute/?hl=en_US) for more info)
@@ -234,13 +235,13 @@ $ gcloud compute --project "example-project-156611" instances create "instance-1
 ```
 
 
+Once you have an instance running, ssh into it:
+```
+$ gcloud compute ssh your-instance-name --zone your-instance-zone
+```
 
-
-
-
-
-
-
+And place the above mentioned files there (using scp, for example).
+Then run the collector as you would locallly.
 
 
 <a name="running-cluster" >
