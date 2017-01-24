@@ -187,6 +187,8 @@ spray.can.server {
 <a name="running" >
 ### 4. Running the Collector
 
+- Download the Scala Stream Collector from Bintray. (The download destination will depend on where you want
+to run the Collector)
 - To run the collector, you'll need a config file as the one above.
 - You'll also need a credentials JSON file (whose path you'll have to specify
 in the config file, as done in the example). 
