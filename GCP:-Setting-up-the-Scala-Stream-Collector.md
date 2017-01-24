@@ -40,6 +40,6 @@ policies. For more on Pub/Sub go to: https://cloud.google.com/pubsub/docs/concep
 	* sink.pubsub.topic.good = "GOOD-SINK-NAME" _in the case of this tutorial, this will be 'good'_
 	* sink.pubsub.topic.bad = "BAD-SINK-NAME" _in the case of this tutorial, this will be 'bad'_
 	* sink.pubsub.google-project-id = "YOUR-PROJECT-ID" _in the case of this tutorial, this will be 'example-project-156611'_
-	* sink.pubsub.google-auth-path = "/absolute/path/to/credentials/file.json" _refer to [this](https://github.com/snowplow/snowplow/wiki/Snowplow-on-Google-Cloud:-Getting-Started#4-authentication-and-credentials) for more info on what this file is and how to get it_
+	* sink.pubsub.google-auth-path = "/absolute/path/to/credentials/file.json" _refer to [this](https://github.com/snowplow/snowplow/wiki/GCP:-Getting-Started#auth) for more info on what this file is and how to get it_
 
 - Just run it! :)
