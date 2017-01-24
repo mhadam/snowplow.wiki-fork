@@ -91,8 +91,8 @@ $ gcloud compute --project "example-project-156611" instances create "instance-1
                    --subnet "default" \
                    --maintenance-policy "MIGRATE" \
                    --scopes 189687079473-compute@developer.gserviceaccount.com="https://www.googleapis.com/auth/devstorage.read_only",189687079473-compute@developer.gserviceaccount.com="https://www.googleapis.com/auth/logging.write",189687079473-compute@developer.gserviceaccount.com="https://www.googleapis.com/auth/monitoring.write",189687079473-compute@developer.gserviceaccount.com="https://www.googleapis.com/auth/servicecontrol",189687079473-compute@developer.gserviceaccount.com="https://www.googleapis.com/auth/service.management.readonly",189687079473-compute@developer.gserviceaccount.com="https://www.googleapis.com/auth/trace.append" \
-                   --image "/debian-cloud/debian-8-jessie-v20170110" 
-                   --boot-disk-size "10" 
-                   --boot-disk-type "pd-standard" 
+                   --image "/debian-cloud/debian-8-jessie-v20170110" \
+                   --boot-disk-size "10" \
+                   --boot-disk-type "pd-standard" \
                    --boot-disk-device-name "instance-1"
 ```
