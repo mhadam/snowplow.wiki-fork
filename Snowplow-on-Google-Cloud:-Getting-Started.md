@@ -1,8 +1,18 @@
 **This is pre-release**
+
+## Contents
+
+- 1. [Creating a new project](#new-project)  
+- 2. [Enabling Billing and appropriate APIs and services](#api-enabling)  
+- 3. [Google Cloud SDK](#gcloud-sdk)
+- 4. [Authentication and Credentials](#auth)
   
+
+<a name="new-project">
 ### 1. Creating a new project
 To get started with Google Cloud, first go to https://console.cloud.google.com/iam-admin/projects and create a new project.
 
+<a name="api-enabling">
 ### 2. Enabling Billing and appropriate APIs and services
 - Once you've created your project, you have to enable billing and to enable all the services your project requires. 
 - For instance, if you need a Google Compute instance (equivalent to an AWS EC2 instance), you'd want to make sure Google Compute Engine API is enabled. 
@@ -13,6 +23,7 @@ To get started with Google Cloud, first go to https://console.cloud.google.com/i
 | Google Compute Engine | Anything that needs an instance |
 | Google Cloud Pub/Sub  | Scala Stream Collector          |
 
+<a name="gcloud-sdk">
 ### 3. Google Cloud SDK
 
 Google provides a second way for you to interact with its services: the Cloud SDK. It allows you to issue a large number of commands, to (for example): create Compute instances, publish and subscribe to Pub/Sub topics, create BigQuery tables, authenticate, among others.  
@@ -20,6 +31,7 @@ Google provides a second way for you to interact with its services: the Cloud SD
 - Google Compute instances come with the Cloud SDK pre-installed. 
 - If you intend to run some part of your project locally, you'll need to download and install the appropriate [Cloud SDK package](https://cloud.google.com/sdk/) for your platform.
 
+<a name="auth">
 ### 4. Authentication and Credentials
 
 - Go to [the credentials section of the API manager](https://console.cloud.google.com/apis/credentials). 
