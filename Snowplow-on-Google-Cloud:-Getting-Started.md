@@ -14,7 +14,7 @@ To get started with Google Cloud, first go to https://console.cloud.google.com/i
 
 <a name="api-enabling">
 ### 2. Enabling Billing and appropriate APIs and services
-- Once you've created your project, you have to enable billing and to enable all the services your project requires. 
+- Once you've created your project, you have to enable all the services your project requires.
 - For instance, if you need a Google Compute instance (equivalent to an AWS EC2 instance), you'd want to make sure Google Compute Engine API is enabled. 
 - To enable/disable APIs, and check your API usage, go to https://console.cloud.google.com/apis/dashboard
 
@@ -22,6 +22,8 @@ To get started with Google Cloud, first go to https://console.cloud.google.com/i
 |-----------------------|---------------------------------|
 | Google Compute Engine | Anything that needs an instance |
 | Google Cloud Pub/Sub  | Scala Stream Collector          |
+
+- Some services require Billing to be enabled. To enable and manage your billing accounts, go to https://console.cloud.google.com/billing
 
 <a name="gcloud-sdk">
 ### 3. Google Cloud SDK
