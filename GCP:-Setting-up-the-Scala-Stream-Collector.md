@@ -24,16 +24,16 @@ policies. For more on Pub/Sub go to: https://cloud.google.com/pubsub/docs/concep
 
 - To use Pub/Sub, first we need to enable it. 
 - Go to https://console.cloud.google.com/apis/api/pubsub.googleapis.com/overview
-	* Make sure your project is selected (on the navbar, to the left of the search bar)
-	* Click Enable
+    * Make sure your project is selected (on the navbar, to the left of the search bar)
+    * Click Enable
 [[images/gcloud/gcloud-enable-pubsub.png]]
 
 - You'll then have to create the topics to which the Scala Stream Collector publishes:
-	* Click on the hamburger, on the top left corner
-	* Type "Pub/Sub" or scroll down until you find it, under "Big Data"
-	[[images/gcloud/gcloud-pubsub-sidebar.png]]
-	* Create two topics: these will be the good topic and bad topic.
-	[[images/gcloud/gcloud-pubsub-topics.png]]
+    * Click on the hamburger, on the top left corner
+    * Type "Pub/Sub" or scroll down until you find it, under "Big Data"
+    [[images/gcloud/gcloud-pubsub-sidebar.png]]
+    * Create two topics: these will be the good topic and bad topic.
+    [[images/gcloud/gcloud-pubsub-topics.png]]
 
 
 <a name="ssc">
@@ -226,10 +226,24 @@ There are two ways to do so:
     * Select Ubuntu LTS as the Boot disk
     * Under _Access scopes_, select "Set access for each API" and enable "Cloud Pub/Sub"
     * Under _Firewall_, select "Allow HTTP traffic"
+    * Click _Management, disk, networking, SSH keys_
+        - Under _Management_, add a Tag, such as "collector". (This is needed to add a Firewall rule)
 
 [[images/gcloud/gcloud-instance-create1.png]]
 
 [[images/gcloud/gcloud-instance-create2.png]]
+
+- Click the hamburger on the top left corner, and click on "Networking", under _Compute_
+- On the sidebar, click on "Firewall rules"
+- Click "Create Firewall Rule"
+- Name your rule
+- Under _Source filter_ pick "Allow from any source"
+- Under _Allowed protocols and ports_ add "tcp:8080"
+    * Note that 8080 is the port assigned to the collector in the config file. If you choose another port here, make sure you change the config file
+- Under _Target tags_ add the Tag with which you labeled your instance
+- Click "Create"
+
+[[/images/gcloud/gcloud-firewall.png]]
 
 ##### 4b-2. via command line
 - Make sure you have authenticated as described above
@@ -243,17 +257,23 @@ $ gcloud compute --project "example-project-156611" instances create "instance-2
                  --subnet "default" \
                  --maintenance-policy "MIGRATE" \
                  --scopes 189687079473-compute@developer.gserviceaccount.com="https://www.googleapis.com/auth/pubsub",189687079473-compute@developer.gserviceaccount.com="https://www.googleapis.com/auth/servicecontrol",189687079473-compute@developer.gserviceaccount.com="https://www.googleapis.com/auth/service.management.readonly",189687079473-compute@developer.gserviceaccount.com="https://www.googleapis.com/auth/logging.write",189687079473-compute@developer.gserviceaccount.com="https://www.googleapis.com/auth/monitoring.write",189687079473-compute@developer.gserviceaccount.com="https://www.googleapis.com/auth/trace.append",189687079473-compute@developer.gserviceaccount.com="https://www.googleapis.com/auth/devstorage.read_only" \
-                 --tags "http-server" \
+                 --tags "collector" \
                  --image "/ubuntu-os-cloud/ubuntu-1604-xenial-v20170113" \
                  --boot-disk-size "10" \
                  --boot-disk-type "pd-standard" \
-                 --boot-disk-device-name "instance-2" \
+                 --boot-disk-device-name "instance-2"
 
-$ gcloud compute --project "example-project-156611" firewall-rules create "default-allow-http" 
-                 --allow tcp:80 
-                 --network "default" 
-                 --source-ranges "0.0.0.0/0" 
-                 --target-tags "http-server"
+$ gcloud compute --project "example-project-156611" firewall-rules create "default-allow-http" \
+                 --allow tcp:80 \
+                 --network "default" \
+                 --source-ranges "0.0.0.0/0" \
+                 --target-tags "collector"
+
+$ gcloud compute --project "example-project-156611" firewall-rules create "collectors-allow-tcp8080" \
+                 --allow tcp:8080 \
+                 --network "default" \
+                 --source-ranges "0.0.0.0/0" \
+                 --target-tags "collector"
 
 ```
 
@@ -283,13 +303,15 @@ To run a load balanced auto-scaling cluster, you'll need the following steps:
 - Click the hamburger on the top left corner and find "Compute Engine", under _Compute_
 - Go to "Instance templates" on the sidebar. Click "Create instance template"
 - Choose the appropriate settings for your case. Do (at least) the following:
-    * Change the OS image to Ubuntu LTS
-    * Make sure you select "Allow HTTP traffic" under _Firewall_
-    * Under _Access Scopes_ check "Set access for each API", find "Cloud Pub/Sub" and select "Enabled" in the respective dropdown menu
+    * Select Ubuntu LTS as the Boot disk
+    * Under _Access scopes_, select "Set access for each API" and enable "Cloud Pub/Sub"
+    * Under _Firewall_, select "Allow HTTP traffic"
+    * Click _Management, disk, networking, SSH keys_
 
 [[images/gcloud/gcloud-instance-template1.png]]
 
 - Click "Management, disk, networking, SSH keys"
+- Under _Management_, add a Tag, such as "collector". (This is needed to add a Firewall rule)
 - Under "Startup script" add the following script (changing the relevant fields for your case):
 
 **THIS HAS TO BE CORRECTED**
@@ -303,6 +325,7 @@ chmod +x snowplow_scala_stream_collector;
 [[images/gcloud/gcloud-instance-template2.png]]
 
 - Click "Create"
+- Add a Firewall rule as described above (if you haven't already)
 
 ###### via command-line
 Here's the command-line equivalent for the options selected by performing the steps above:
@@ -314,7 +337,7 @@ $ gcloud compute --project "example-project-156611" instance-templates create "s
                  --network "default" \
                  --maintenance-policy "MIGRATE" \
                  --scopes 189687079473-compute@developer.gserviceaccount.com="https://www.googleapis.com/auth/pubsub",189687079473-compute@developer.gserviceaccount.com="https://www.googleapis.com/auth/servicecontrol",189687079473-compute@developer.gserviceaccount.com="https://www.googleapis.com/auth/service.management.readonly",189687079473-compute@developer.gserviceaccount.com="https://www.googleapis.com/auth/logging.write",189687079473-compute@developer.gserviceaccount.com="https://www.googleapis.com/auth/monitoring.write",189687079473-compute@developer.gserviceaccount.com="https://www.googleapis.com/auth/trace.append",189687079473-compute@developer.gserviceaccount.com="https://www.googleapis.com/auth/devstorage.read_only" \
-                 --tags "http-server" 
+                 --tags "collector" 
                  --image "/ubuntu-os-cloud/ubuntu-1604-xenial-v20170113" 
                  --boot-disk-size "10" 
                  --boot-disk-type "pd-standard" 
@@ -379,6 +402,7 @@ $ gcloud compute --project "example-project-156611" instance-groups managed set-
 
 - Under _Frontend configuration_:
     * Leave _IP_ as "Ephemeral" and set _Port_ to 80
+    * Add another one. Leave _IP_ as "Ephemeral" and set _Port_ to the port you added a Firewall rule for (8080 in the case of this example)
 
 [[images/gcloud/gcloud-load-balancer3.png]]
 
