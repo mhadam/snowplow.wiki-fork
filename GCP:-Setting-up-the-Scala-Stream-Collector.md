@@ -216,24 +216,39 @@ There are two ways to do so:
 - Click the hamburger on the top left corner, and select Compute Engine, under Compute
 - Enable billing if you haven't (if you haven't enabled billing, at this point the only option you'll see is a button to do so)
 [[images/gcloud/gcloud-instance-nobilling.png]]
-- Click "Create instance" and pick the apropriate settings for your case
-[[images/gcloud/gcloud-instance-create.png]]
+- Click "Create instance" and pick the apropriate settings for your case, making sure of, at least the following:
+    * Select Ubuntu LTS as the Boot disk
+    * Under _Access scopes_, select "Set access for each API" and enable "Cloud Pub/Sub"
+    * Under _Firewall_, select "Allow HTTP traffic"
+
+[[images/gcloud/gcloud-instance-create1.png]]
+
+[[images/gcloud/gcloud-instance-create2.png]]
 
 ##### 4b-2. via command line
 - Make sure you have authenticated as described above
 - Here's an example command of an instance spin up: (check the [gcloud reference](https://developers.google.com/cloud/sdk/gcloud/reference/compute/?hl=en_US) for more info)
 
 ```
-$ gcloud compute --project "example-project-156611" instances create "instance-1" \
-                   --zone "us-central1-c" \
-                   --machine-type "n1-standard-1" \
-                   --subnet "default" \
-                   --maintenance-policy "MIGRATE" \
-                   --scopes 189687079473-compute@developer.gserviceaccount.com="https://www.googleapis.com/auth/devstorage.read_only",189687079473-compute@developer.gserviceaccount.com="https://www.googleapis.com/auth/logging.write",189687079473-compute@developer.gserviceaccount.com="https://www.googleapis.com/auth/monitoring.write",189687079473-compute@developer.gserviceaccount.com="https://www.googleapis.com/auth/servicecontrol",189687079473-compute@developer.gserviceaccount.com="https://www.googleapis.com/auth/service.management.readonly",189687079473-compute@developer.gserviceaccount.com="https://www.googleapis.com/auth/trace.append" \
-                   --image "/debian-cloud/debian-8-jessie-v20170110" \
-                   --boot-disk-size "10" \
-                   --boot-disk-type "pd-standard" \
-                   --boot-disk-device-name "instance-1"
+
+$ gcloud compute --project "example-project-156611" instances create "instance-2" \
+                 --zone "us-central1-c" \
+                 --machine-type "n1-standard-1" \
+                 --subnet "default" \
+                 --maintenance-policy "MIGRATE" \
+                 --scopes 189687079473-compute@developer.gserviceaccount.com="https://www.googleapis.com/auth/pubsub",189687079473-compute@developer.gserviceaccount.com="https://www.googleapis.com/auth/servicecontrol",189687079473-compute@developer.gserviceaccount.com="https://www.googleapis.com/auth/service.management.readonly",189687079473-compute@developer.gserviceaccount.com="https://www.googleapis.com/auth/logging.write",189687079473-compute@developer.gserviceaccount.com="https://www.googleapis.com/auth/monitoring.write",189687079473-compute@developer.gserviceaccount.com="https://www.googleapis.com/auth/trace.append",189687079473-compute@developer.gserviceaccount.com="https://www.googleapis.com/auth/devstorage.read_only" \
+                 --tags "http-server" \
+                 --image "/ubuntu-os-cloud/ubuntu-1604-xenial-v20170113" \
+                 --boot-disk-size "10" \
+                 --boot-disk-type "pd-standard" \
+                 --boot-disk-device-name "instance-2" \
+
+$ gcloud compute --project "example-project-156611" firewall-rules create "default-allow-http" 
+                 --allow tcp:80 
+                 --network "default" 
+                 --source-ranges "0.0.0.0/0" 
+                 --target-tags "http-server"
+
 ```
 
 
