@@ -26,14 +26,14 @@ policies. For more on Pub/Sub go to: https://cloud.google.com/pubsub/docs/concep
 - Go to https://console.cloud.google.com/apis/api/pubsub.googleapis.com/overview
 	* Make sure your project is selected (on the navbar, to the left of the search bar)
 	* Click Enable
-[[/images/gcloud-enable-pubsub.png]]
+[[images/gcloud/gcloud-enable-pubsub.png]]
 
 - You'll then have to create the topics to which the Scala Stream Collector publishes:
 	* Click on the hamburger, on the top left corner
 	* Type "Pub/Sub" or scroll down until you find it, under "Big Data"
-	[[/images/gcloud-pubsub-sidebar.png]]
+	[[images/gcloud/gcloud-pubsub-sidebar.png]]
 	* Create two topics: these will be the good topic and bad topic.
-	[[/images/gcloud-pubsub-topics.png]]
+	[[images/gcloud/gcloud-pubsub-topics.png]]
 
 
 <a name="ssc">
@@ -215,9 +215,9 @@ There are two ways to do so:
 - Go to the [GCP dashboard](https://console.cloud.google.com/home/dashboard), and once again, make sure your project is selected.
 - Click the hamburger on the top left corner, and select Compute Engine, under Compute
 - Enable billing if you haven't (if you haven't enabled billing, at this point the only option you'll see is a button to do so)
-[[/images/gcloud-instance-nobilling.png]]
+[[images/gcloud/gcloud-instance-nobilling.png]]
 - Click "Create instance" and pick the apropriate settings for your case
-[[/images/gcloud-instance-create.png]]
+[[images/gcloud/gcloud-instance-create.png]]
 
 ##### 4b-2. via command line
 - Make sure you have authenticated as described above
@@ -261,19 +261,24 @@ To run a load balanced auto-scaling cluster, you'll need the following steps:
 ###### via Google Cloud Console
 - Click the hamburger on the top left corner and find "Compute Engine", under _Compute_
 - Go to "Instance templates" on the sidebar. Click "Create instance template"
-- Choose the appropriate settings for your case. Note the following:
+- Choose the appropriate settings for your case. Do (at least) the following:
+    * Change the OS image to Ubuntu LTS
     * Make sure you select "Allow HTTP traffic" under _Firewall_
     * Under _Access Scopes_ check "Set access for each API", find "Cloud Pub/Sub" and select "Enabled" in the respective dropdown menu
+[[images/gcloud/gcloud-template-instance1.png]]
 - Click "Management, disk, networking, SSH keys"
 - Under "Startup script" add the following script (changing the relevant fields for your case):
 
 **THIS HAS TO BE CORRECTED**
 ```
-wget http://dl.bintray.com/snowplow/snowplow-generic/snowplow_scala_stream_collector_0.9.0.zip; \
-wget http://link-to-your-config-file/config.hocon; unzip snowplow_scala_stream_collector_0.9.0.zip; \
-chmod +x snowplow_scala_stream_collector; \
+wget http://dl.bintray.com/snowplow/snowplow-generic/snowplow_scala_stream_collector_0.9.0.zip;
+wget http://link-to-your-config-file/config.hocon;
+unzip snowplow_scala_stream_collector_0.9.0.zip;
+chmod +x snowplow_scala_stream_collector;
 ./snowplow_scala_stream_collector --config config.hocon &
 ```
+[[images/gcloud/gcloud-template-instance2.png]]
+
 - Click "Create"
 
 ###### via command-line
@@ -287,7 +292,7 @@ $ gcloud compute --project "example-project-156611" instance-templates create "s
                  --maintenance-policy "MIGRATE" \
                  --scopes 189687079473-compute@developer.gserviceaccount.com="https://www.googleapis.com/auth/pubsub",189687079473-compute@developer.gserviceaccount.com="https://www.googleapis.com/auth/servicecontrol",189687079473-compute@developer.gserviceaccount.com="https://www.googleapis.com/auth/service.management.readonly",189687079473-compute@developer.gserviceaccount.com="https://www.googleapis.com/auth/logging.write",189687079473-compute@developer.gserviceaccount.com="https://www.googleapis.com/auth/monitoring.write",189687079473-compute@developer.gserviceaccount.com="https://www.googleapis.com/auth/trace.append",189687079473-compute@developer.gserviceaccount.com="https://www.googleapis.com/auth/devstorage.read_only" \
                  --tags "http-server" 
-                 --image "/debian-cloud/debian-8-jessie-v20170124" 
+                 --image "/ubuntu-os-cloud/ubuntu-1604-xenial-v20170113" 
                  --boot-disk-size "10" 
                  --boot-disk-type "pd-standard" 
                  --boot-disk-device-name "ssc-instance-template"
@@ -303,7 +308,14 @@ $ gcloud compute --project "example-project-156611" instance-templates create "s
 - Fill in with the appropriate values. We named our instance group "collectors".
 - Under _Instance template_ pick the instance template you created previously
 - Set _Autoscaling_ to "On". By default the Autoscale is based on CPU usage and set with default settings, but you can change these to better suit your needs. We'll live them as they are for now.
+- Under _Health Check_, pick "Create health check"
+    * Name your health check
+    * Under _Request path_ add "/health"
+    * Click "Save and Continue"
 - Click "Create"
+
+[[images/gcloud/gcloud-group-create1.png]]
+[[images/gcloud/gcloud-group-create2.png]]
 
 ###### via command-line
 Here's the command-line equivalent for te options selected by performing the steps above:
@@ -332,16 +344,23 @@ $ gcloud compute --project "example-project-156611" instance-groups managed set-
 - On the side bar, click "Load Balancing"
 - Click "Create load balancer", then click "Continue"
 - Select "New TCP load balancer". Name your load balancer.
+
+[[images/gcloud/gcloud-load-balancer1.png]]
+
 - Under _Backend configuration_:
     * Pick the region where your instance group lives
     * Click "Select existing instance groups" and pick the instance group you created previously
-    * Under _Health check_ pick "Create health check"
-    * On the menu that shows up:
-        - Name your health check
-        - Add "/health" under _Request path_
+    * Under _Health check_ pick the health check you created previously
+
+[[images/gcloud/gcloud-load-balancer2.png]]
+
 - Under _Frontend configuration_:
     * Leave _IP_ as "Ephemeral" and set _Port_ to 80
+
+[[images/gcloud/gcloud-load-balancer3.png]]
+
 - Click "Review and finalize" to check everything is OK.
+
 - Click "Create"
 
 
