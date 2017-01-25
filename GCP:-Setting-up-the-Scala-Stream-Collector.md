@@ -265,7 +265,9 @@ To run a load balanced auto-scaling cluster, you'll need the following steps:
     * Change the OS image to Ubuntu LTS
     * Make sure you select "Allow HTTP traffic" under _Firewall_
     * Under _Access Scopes_ check "Set access for each API", find "Cloud Pub/Sub" and select "Enabled" in the respective dropdown menu
-[[images/gcloud/gcloud-template-instance1.png]]
+
+[[images/gcloud/gcloud-instance-template1.png]]
+
 - Click "Management, disk, networking, SSH keys"
 - Under "Startup script" add the following script (changing the relevant fields for your case):
 
@@ -277,7 +279,7 @@ unzip snowplow_scala_stream_collector_0.9.0.zip;
 chmod +x snowplow_scala_stream_collector;
 ./snowplow_scala_stream_collector --config config.hocon &
 ```
-[[images/gcloud/gcloud-template-instance2.png]]
+[[images/gcloud/gcloud-instance-template2.png]]
 
 - Click "Create"
 
