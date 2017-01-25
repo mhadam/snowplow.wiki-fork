@@ -248,3 +248,95 @@ Then run the collector as you would locallly.
 
 <a name="running-cluster" >
 #### 4c. a load balanced auto-scaling GCP cluster
+
+To run a load balanced auto-scaling cluster, you'll need the following steps:
+
+- Create an instance template
+- Create an auto managed instance group
+- Create a load balancer
+
+
+##### Creating an instance template
+
+###### via Google Cloud Console
+- Click the hamburger on the top left corner and find "Compute Engine", under _Compute_
+- Go to "Instance templates" on the sidebar. Click "Create instance template"
+- Choose the appropriate settings for your case. Note the following:
+    * Make sure you select "Allow HTTP traffic" under _Firewall_
+    * Under _Access Scopes_ check "Set access for each API", find "Cloud Pub/Sub" and select "Enabled" in the respective dropdown menu
+- Click "Management, disk, networking, SSH keys"
+- Under "Startup script" add the following script (changing the relevant fields for your case):
+```
+startup-script=wget http://dl.bintray.com/snowplow/snowplow-generic/snowplow_scala_stream_collector_0.9.0.zip; wget http://link-to-your-config-file/config.hocon; unzip snowplow_scala_stream_collector_0.9.0.zip; chmod +x snowplow_scala_stream_collector; ./snowplow_scala_stream_collector --config config.hocon &
+```
+- Click "Create"
+
+###### via command-line
+Here's the command-line equivalent for the options selected by performing the steps above:
+
+```
+
+$ gcloud compute --project "example-project-156611" instance-templates create "ssc-instance-template" \
+                 --machine-type "n1-standard-1" \
+                 --network "default" \
+                 --maintenance-policy "MIGRATE" \
+                 --scopes 189687079473-compute@developer.gserviceaccount.com="https://www.googleapis.com/auth/pubsub",189687079473-compute@developer.gserviceaccount.com="https://www.googleapis.com/auth/servicecontrol",189687079473-compute@developer.gserviceaccount.com="https://www.googleapis.com/auth/service.management.readonly",189687079473-compute@developer.gserviceaccount.com="https://www.googleapis.com/auth/logging.write",189687079473-compute@developer.gserviceaccount.com="https://www.googleapis.com/auth/monitoring.write",189687079473-compute@developer.gserviceaccount.com="https://www.googleapis.com/auth/trace.append",189687079473-compute@developer.gserviceaccount.com="https://www.googleapis.com/auth/devstorage.read_only" \
+                 --tags "http-server" 
+                 --image "/debian-cloud/debian-8-jessie-v20170124" 
+                 --boot-disk-size "10" 
+                 --boot-disk-type "pd-standard" 
+                 --boot-disk-device-name "ssc-instance-template"
+                 --metadata "startup-script=wget http://dl.bintray.com/snowplow/snowplow-generic/snowplow_scala_stream_collector_0.9.0.zip; wget http://link-to-your-config-file/config.hocon; unzip snowplow_scala_stream_collector_0.9.0.zip; chmod +x snowplow_scala_stream_collector; ./snowplow_scala_stream_collector --config config.hocon &"
+```
+
+##### Create an auto managed instance group
+
+###### via Google Cloud Console
+
+- On the side bar, click "Instance groups"
+- Click "Create instance group"
+- Fill in with the appropriate values. We named our instance group "collectors".
+- Under _Instance template_ pick the instance template you created previously
+- Set _Autoscaling_ to "On". By default the Autoscale is based on CPU usage and set with default settings, but you can change these to better suit your needs. We'll live them as they are for now.
+- Click "Create"
+
+###### via command-line
+Here's the command-line equivalent for te options selected by performing the steps above:
+
+```
+
+$ gcloud compute --project "example-project-156611" instance-groups managed create "collectors" \
+                 --zone "us-central1-c" \
+                 --base-instance-name "collectors" \
+                 --template "instance-template-1" \
+                 --size "1" \
+
+$ gcloud compute --project "example-project-156611" instance-groups managed set-autoscaling "collectors" 
+                 --zone "us-central1-c" 
+                 --cool-down-period "60" 
+                 --max-num-replicas "10" 
+                 --min-num-replicas "1" 
+                 --target-cpu-utilization "0.6"
+
+```
+
+
+##### Configure the load balancer
+
+- Click the hamburger on the top left corner, and find "Networking" under _Compute_
+- On the side bar, click "Load Balancing"
+- Click "Create load balancer", then click "Continue"
+- Select "New TCP load balancer". Name your load balancer.
+- Under _Backend configuration_:
+    * Pick the region where your instance group lives
+    * Click "Select existing instance groups" and pick the instance group you created previously
+    * Under _Health check_ pick "Create health check"
+    * On the menu that shows up:
+        - Name your health check
+        - Add "/health" under _Request path_
+- Under _Frontend configuration_:
+    * Leave _IP_ as "Ephemeral" and set _Port_ to 80
+- Click "Review and finalize" to check everything is OK.
+- Click "Create"
+
+
