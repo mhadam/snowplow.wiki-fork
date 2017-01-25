@@ -139,8 +139,8 @@ collector {
 
       # if set to 'env' it will use the GOOGLE_APPLICATION_CREDENTIALS environment variable,
       # else, it assumes an absolute path
-      google-auth-path: "/home/colobas/dev/snowplow-winternship/misc/spc-pubsub-b3f49687089b.json"
-      google-project-id: "spc-pubsub"
+      google-auth-path: "env"
+      google-project-id: "YOUR-PROJECT-ID"
     }
 
     # Incoming events are stored in a buffer before being sent to Kinesis/Kafka.
@@ -190,13 +190,19 @@ spray.can.server {
 - Download the Scala Stream Collector from Bintray. (The download destination will depend on where you want
 to run the Collector)
 - To run the collector, you'll need a config file as the one above.
-- You'll also need a credentials JSON file (whose path you'll have to specify
+- If the host where you're running is authenticated with an account authorized to use Pub/Sub, you won't need
+the JSON credentials file and you should set "google-auth-path" to "env" in your config file. 
+This is the case if you're running locally and have authenticated with
+``` $ gcloud auth login ```
+and also if you have set up the default Compute service account with Cloud Pub/Sub enabled (as we instructed above).
+Otherwise :
+    * You'll also need a credentials JSON file (whose path you'll have to specify
 in the config file, as done in the example). 
-- For info on how to get the credentials JSON file 
+    * For info on how to get the credentials JSON file 
 refer to [this](https://github.com/snowplow/snowplow/wiki/GCP:-Getting-Started#auth)
-- Has described in that link, this JSON can only be obtained once, so it should be
+    * Has described in that link, this JSON can only be obtained once, so it should be
 handled carefully.
-- It should be **safely** placed wherever you intend to run it - don't e-mail it.
+    * It should be **safely** placed wherever you intend to run it - don't e-mail it.
 
 <a name="running-locally" >
 #### 4a. locally (useful for testing)
