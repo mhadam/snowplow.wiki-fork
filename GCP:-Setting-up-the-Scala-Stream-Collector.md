@@ -266,8 +266,13 @@ To run a load balanced auto-scaling cluster, you'll need the following steps:
     * Under _Access Scopes_ check "Set access for each API", find "Cloud Pub/Sub" and select "Enabled" in the respective dropdown menu
 - Click "Management, disk, networking, SSH keys"
 - Under "Startup script" add the following script (changing the relevant fields for your case):
+
+**THIS HAS TO BE CORRECTED**
 ```
-startup-script=wget http://dl.bintray.com/snowplow/snowplow-generic/snowplow_scala_stream_collector_0.9.0.zip; wget http://link-to-your-config-file/config.hocon; unzip snowplow_scala_stream_collector_0.9.0.zip; chmod +x snowplow_scala_stream_collector; ./snowplow_scala_stream_collector --config config.hocon &
+wget http://dl.bintray.com/snowplow/snowplow-generic/snowplow_scala_stream_collector_0.9.0.zip; \
+wget http://link-to-your-config-file/config.hocon; unzip snowplow_scala_stream_collector_0.9.0.zip; \
+chmod +x snowplow_scala_stream_collector; \
+./snowplow_scala_stream_collector --config config.hocon &
 ```
 - Click "Create"
 
