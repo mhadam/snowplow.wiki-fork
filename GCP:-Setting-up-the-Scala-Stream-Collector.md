@@ -298,8 +298,8 @@ $ gcloud compute ssh your-instance-name --zone your-instance-zone
 And then run:
 ```
 $ sudo apt-get update
-$ sudo apt-get install default-jre
-$ sudo apt-get install unzip
+$ sudo apt-get -y install default-jre
+$ sudo apt-get -y install unzip
 $ wget http://dl.bintray.com/snowplow/snowplow-generic/snowplow_scala_stream_collector_0.9.0.zip
 $ gsutil cp gs://<YOUR-BUCKET-NAME/<YOUR-CONFIG-FILE-NAME> .
 $ unzip snowplow_scala_stream_collector_0.9.0.zip
@@ -342,8 +342,8 @@ To run a load balanced auto-scaling cluster, you'll need the following steps:
 ```
 #! /bin/bash
 sudo apt-get update
-sudo apt-get install default-jre
-sudo apt-get install unzip
+sudo apt-get -y install default-jre
+sudo apt-get -y install unzip
 wget http://dl.bintray.com/snowplow/snowplow-generic/snowplow_scala_stream_collector_0.9.0.zip
 gsutil cp gs://<YOUR-BUCKET-NAME/<YOUR-CONFIG-FILE-NAME> .
 unzip snowplow_scala_stream_collector_0.9.0.zip
