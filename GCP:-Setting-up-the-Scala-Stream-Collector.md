@@ -278,14 +278,34 @@ $ gcloud compute --project "example-project-156611" firewall-rules create "colle
 ```
 
 
-Once you have an instance running, ssh into it:
+To place the above mentioned files in the instance (config file and the collector executable jar)
+we suggest: for the jar, you'll wget it from Bintray into the instance directly; for the config file, store it using GCP Storage and then wget it into the instance. To store the config file:
+- Click the hamburger on the top left corner and find Storage, under _Storage_
+- Create a bucket
+[[/images/gcloud/gcloud-storage1.png]]
+- Then click "Upload Files" and upload your configuration file
+- The link to your file will be https://storage.cloud.google.com/<YOUR-BUCKET-NAME>/<YOUR-CONFIG-FILE-NAME>
+
+
+Once you have your config file in place, ssh into your instance:
+
 ```
 $ gcloud compute ssh your-instance-name --zone your-instance-zone
+
 ```
 
-And place the above mentioned files there (using scp, for example).
-Then run the collector as you would locallly.
+And then run:
+```
+$ sudo apt-get update
+$ sudo apt-get install default-jre
+$ sudo apt-get install unzip
+$ wget http://dl.bintray.com/snowplow/snowplow-generic/snowplow_scala_stream_collector_0.9.0.zip
+$ wget https://storage.cloud.google.com/<YOUR-BUCKET-NAME>/<YOUR-CONFIG-FILE-NAME>
+$ unzip snowplow_scala_stream_collector_0.9.0.zip
+$ chmod +x snowplow-stream-collector-0.9.0
+$ ./snowplow-stream-collector-0.9.0 --config <YOUR-CONFIG-FILE-NAME> &
 
+```
 
 <a name="running-cluster" >
 #### 4c. a load balanced auto-scaling GCP cluster
@@ -298,6 +318,9 @@ To run a load balanced auto-scaling cluster, you'll need the following steps:
 
 
 ##### Creating an instance template
+
+- First you'll have to store your config file in some place that your instances can download it from.
+- We suggest you store it in a GCP Storage bucket, as described above
 
 ###### via Google Cloud Console
 - Click the hamburger on the top left corner and find "Compute Engine", under _Compute_
@@ -314,13 +337,17 @@ To run a load balanced auto-scaling cluster, you'll need the following steps:
 - Under _Management_, add a Tag, such as "collector". (This is needed to add a Firewall rule)
 - Under "Startup script" add the following script (changing the relevant fields for your case):
 
-**THIS HAS TO BE CORRECTED**
+**THIS HAS TO BE CHECKED**
 ```
-wget http://dl.bintray.com/snowplow/snowplow-generic/snowplow_scala_stream_collector_0.9.0.zip;
-wget http://link-to-your-config-file/config.hocon;
-unzip snowplow_scala_stream_collector_0.9.0.zip;
-chmod +x snowplow_scala_stream_collector;
-./snowplow_scala_stream_collector --config config.hocon &
+#! /bin/bash
+sudo apt-get update
+sudo apt-get install default-jre
+sudo apt-get install unzip
+wget http://dl.bintray.com/snowplow/snowplow-generic/snowplow_scala_stream_collector_0.9.0.zip
+wget https://storage.cloud.google.com/<YOUR-BUCKET-NAME>/<YOUR-CONFIG-FILE-NAME>
+unzip snowplow_scala_stream_collector_0.9.0.zip
+chmod +x snowplow-stream-collector-0.9.0
+./snowplow-stream-collector-0.9.0 --config <YOUR-CONFIG-FILE-NAME> &
 ```
 [[images/gcloud/gcloud-instance-template2.png]]
 
@@ -337,11 +364,11 @@ $ gcloud compute --project "example-project-156611" instance-templates create "s
                  --network "default" \
                  --maintenance-policy "MIGRATE" \
                  --scopes 189687079473-compute@developer.gserviceaccount.com="https://www.googleapis.com/auth/pubsub",189687079473-compute@developer.gserviceaccount.com="https://www.googleapis.com/auth/servicecontrol",189687079473-compute@developer.gserviceaccount.com="https://www.googleapis.com/auth/service.management.readonly",189687079473-compute@developer.gserviceaccount.com="https://www.googleapis.com/auth/logging.write",189687079473-compute@developer.gserviceaccount.com="https://www.googleapis.com/auth/monitoring.write",189687079473-compute@developer.gserviceaccount.com="https://www.googleapis.com/auth/trace.append",189687079473-compute@developer.gserviceaccount.com="https://www.googleapis.com/auth/devstorage.read_only" \
-                 --tags "collector" 
-                 --image "/ubuntu-os-cloud/ubuntu-1604-xenial-v20170113" 
-                 --boot-disk-size "10" 
-                 --boot-disk-type "pd-standard" 
-                 --boot-disk-device-name "ssc-instance-template"
+                 --tags "collector" \
+                 --image "/ubuntu-os-cloud/ubuntu-1604-xenial-v20170113" \
+                 --boot-disk-size "10" \
+                 --boot-disk-type "pd-standard" \
+                 --boot-disk-device-name "ssc-instance-template" \
                  --metadata "startup-script=wget http://dl.bintray.com/snowplow/snowplow-generic/snowplow_scala_stream_collector_0.9.0.zip; wget http://link-to-your-config-file/config.hocon; unzip snowplow_scala_stream_collector_0.9.0.zip; chmod +x snowplow_scala_stream_collector; ./snowplow_scala_stream_collector --config config.hocon &"
 ```
 
