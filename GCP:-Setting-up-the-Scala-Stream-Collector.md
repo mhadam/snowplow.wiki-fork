@@ -279,7 +279,8 @@ $ gcloud compute --project "example-project-156611" firewall-rules create "colle
 
 
 To place the above mentioned files in the instance (config file and the collector executable jar)
-we suggest: for the jar, you'll wget it from Bintray into the instance directly; for the config file, store it using GCP Storage and then wget it into the instance. To store the config file:
+we suggest: for the jar, you'll wget it from Bintray into the instance directly; 
+for the config file, store it using GCP Storage and then download it into the instance. To store the config file:
 - Click the hamburger on the top left corner and find Storage, under _Storage_
 - Create a bucket
 [[/images/gcloud/gcloud-storage1.png]]
@@ -300,7 +301,7 @@ $ sudo apt-get update
 $ sudo apt-get install default-jre
 $ sudo apt-get install unzip
 $ wget http://dl.bintray.com/snowplow/snowplow-generic/snowplow_scala_stream_collector_0.9.0.zip
-$ wget https://storage.cloud.google.com/<YOUR-BUCKET-NAME>/<YOUR-CONFIG-FILE-NAME>
+$ gsutil cp gs://<YOUR-BUCKET-NAME/<YOUR-CONFIG-FILE-NAME> .
 $ unzip snowplow_scala_stream_collector_0.9.0.zip
 $ chmod +x snowplow-stream-collector-0.9.0
 $ ./snowplow-stream-collector-0.9.0 --config <YOUR-CONFIG-FILE-NAME> &
@@ -344,7 +345,7 @@ sudo apt-get update
 sudo apt-get install default-jre
 sudo apt-get install unzip
 wget http://dl.bintray.com/snowplow/snowplow-generic/snowplow_scala_stream_collector_0.9.0.zip
-wget https://storage.cloud.google.com/<YOUR-BUCKET-NAME>/<YOUR-CONFIG-FILE-NAME>
+gsutil cp gs://<YOUR-BUCKET-NAME/<YOUR-CONFIG-FILE-NAME> .
 unzip snowplow_scala_stream_collector_0.9.0.zip
 chmod +x snowplow-stream-collector-0.9.0
 ./snowplow-stream-collector-0.9.0 --config <YOUR-CONFIG-FILE-NAME> &
@@ -383,6 +384,7 @@ $ gcloud compute --project "example-project-156611" instance-templates create "s
 - Set _Autoscaling_ to "On". By default the Autoscale is based on CPU usage and set with default settings, but you can change these to better suit your needs. We'll live them as they are for now.
 - Under _Health Check_, pick "Create health check"
     * Name your health check
+    * Under _Port_ add 8080
     * Under _Request path_ add "/health"
     * Click "Save and Continue"
 - Click "Create"
