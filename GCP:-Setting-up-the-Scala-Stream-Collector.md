@@ -338,7 +338,6 @@ To run a load balanced auto-scaling cluster, you'll need the following steps:
 - Under _Management_, add a Tag, such as "collector". (This is needed to add a Firewall rule)
 - Under "Startup script" add the following script (changing the relevant fields for your case):
 
-**THIS HAS TO BE CHECKED**
 ```
 #! /bin/bash
 sudo apt-get update
@@ -370,7 +369,7 @@ $ gcloud compute --project "example-project-156611" instance-templates create "s
                  --boot-disk-size "10" \
                  --boot-disk-type "pd-standard" \
                  --boot-disk-device-name "ssc-instance-template" \
-                 --metadata "startup-script=wget http://dl.bintray.com/snowplow/snowplow-generic/snowplow_scala_stream_collector_0.9.0.zip; wget http://link-to-your-config-file/config.hocon; unzip snowplow_scala_stream_collector_0.9.0.zip; chmod +x snowplow_scala_stream_collector; ./snowplow_scala_stream_collector --config config.hocon &"
+                 --metadata "startup-script=<THE-STARTUP-SCRIPT-AS-DESCRIBED-ABOVE>"
 ```
 
 ##### Create an auto managed instance group
