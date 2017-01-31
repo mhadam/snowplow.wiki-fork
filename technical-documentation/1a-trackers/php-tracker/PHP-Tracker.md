@@ -599,7 +599,7 @@ An example of a Context Array Structure:
 
 ```php
 array(
-    "schema" => "iglu:com.acme_company/movie_poster/jsonschema/2.1.1",
+    "schema" => "iglu:com.acme_company/movie_poster/jsonschema/2-1-1",
     "data" => array(
         "movie_name" => "Solaris", 
         "poster_country" => "JP"
@@ -616,7 +616,7 @@ $tracker->trackPageView(
     NULL,
     array(
         array(
-            "schema" => "iglu:com.acme_company/movie_poster/jsonschema/2.1.1",
+            "schema" => "iglu:com.acme_company/movie_poster/jsonschema/2-1-1",
             "data" => array(
                 "movie_name" => "Solaris", 
                 "poster_country" => "JP"
