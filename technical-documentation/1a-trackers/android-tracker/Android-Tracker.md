@@ -927,7 +927,7 @@ If a visitor arrives on a page advertising a movie, the context dictionary might
 
 ```json
 { 
-  "schema": "iglu:com.acme_company/movie_poster/jsonschema/2.1.1",
+  "schema": "iglu:com.acme_company/movie_poster/jsonschema/2-1-1",
   "data": {
     "movie_name": "Solaris", 
     "poster_country": "JP", 
@@ -946,7 +946,7 @@ dataMap.put("poster_country", "JP");
 dataMap.put("poster_year", "1978");
 
 // Now create your SelfDescribingJson object...
-SelfDescribingJson context1 = new SelfDescribingJson("iglu:com.acme/movie_poster/jsonschema/2.1.1", dataMap);
+SelfDescribingJson context1 = new SelfDescribingJson("iglu:com.acme/movie_poster/jsonschema/2-1-1", dataMap);
 
 // Now add this JSON into a list of SelfDescribingJsons...
 List<SelfDescribingJson> contexts = new ArrayList<>();

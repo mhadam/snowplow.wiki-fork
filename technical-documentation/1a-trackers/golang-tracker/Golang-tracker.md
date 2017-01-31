@@ -389,7 +389,7 @@ If a visitor arrives on a page advertising a movie, the dictionary for a single 
 ```golang
 contextArray := []sp.SelfDescribingJson{
   *sp.InitSelfDescribingJson(
-    "iglu:com.acme_company/movie_poster/jsonschema/2.1.1", 
+    "iglu:com.acme_company/movie_poster/jsonschema/2-1-1", 
     map[string]interface{}{
       "movie_name": "Solaris",
       "poster_country": "JP",
