@@ -33,22 +33,23 @@ The EmrEtlRunner is an executable jar:
 The command-line options for EmrEtlRunner look like this:
 
     Usage: snowplow-emr-etl-runner [options]
-
+    
     Specific options:
         -c, --config CONFIG              configuration file
         -n, --enrichments ENRICHMENTS    enrichments directory
-        -r, --resolver RESOLVER,         Iglu resolver file
+        -r, --resolver RESOLVER          Iglu resolver file
+        -t, --targets TARGETS            targets directory
         -d, --debug                      enable EMR Job Flow debugging
         -s, --start YYYY-MM-DD           optional start date *
         -e, --end YYYY-MM-DD             optional end date *
-        -x staging,s3distcp,emr{enrich,shred},archive_raw,
+        -x staging,s3distcp,emr{enrich,shred,elasticsearch},archive_raw,
             --skip                       skip work step(s)
         -E, --process-enrich LOCATION    run enrichment only on specified location. Implies --skip staging,shred,archive_raw
         -S, --process-shred LOCATION     run shredding only on specified location. Implies --skip staging,enrich,archive_raw
-
+    
     * filters the raw event logs processed by EmrEtlRunner by their timestamp. Only
       supported with 'cloudfront' collector format currently.
-
+    
     Common options:
         -h, --help                       Show this message
         -v, --version                    Show version
