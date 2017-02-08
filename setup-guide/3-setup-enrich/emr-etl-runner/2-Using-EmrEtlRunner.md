@@ -57,11 +57,11 @@ The command-line options for EmrEtlRunner look like this:
 A note on the `--skip` option: this takes a list of individual steps to skip.
 So for example you could run **only** the EMR job with the command-line option:
 
-    $ ./snowplow-emr-etl-runner --skip staging,archive_raw --config config/config.yml --resolver resolver.json --enrichments config/enrichments
+    $ ./snowplow-emr-etl-runner --skip staging,archive_raw --config config/config.yml --targets config/targets/ --resolver resolver.json --enrichments config/enrichments
 
 Instead of using the --config option, you can pass the configuration to the EmrEtlRunner via stdin. You need to set `--config -` to signal that the config is to be read from stdin rather than from a file:
 
-    $ cat config/config.yml | ./snowplow-emr-etl-runner --config - --resolver resolver.json --enrichments config/enrichments
+    $ cat config/config.yml | ./snowplow-emr-etl-runner --config - --targets config/targets/ --resolver resolver.json --enrichments config/enrichments
 
 <a name="running"/>
 ## 3. Running in each mode
