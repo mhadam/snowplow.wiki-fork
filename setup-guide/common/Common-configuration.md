@@ -78,41 +78,6 @@ enrich:
 storage:
   download:
     folder: # Postgres-only config option. Where to store the downloaded files. Leave blank for Redshift
-  targets:
-    - name: "My Redshift database"
-      type: redshift
-      host: ADD HERE # The endpoint as shown in the Redshift console
-      database: ADD HERE # Name of database
-      port: 5439 # Default Redshift port
-      table: atomic.events
-      username: ADD HERE
-      password: ADD HERE
-      maxerror: 1 # Stop loading on first error, or increase to permit more load errors
-      comprows: 200000 # Default for a 1 XL node cluster. Not used unless --include compupdate specified
-      ssl_mode: disable
-    - name: "My PostgreSQL database"
-      type: postgres
-      host: ADD HERE # Hostname of database server
-      database: ADD HERE # Name of database
-      port: 5432 # Default Postgres port
-      table: atomic.events
-      username: ADD HERE
-      password: ADD HERE
-      maxerror: # Not required for Postgres
-      comprows: # Not required for Postgres
-      ssl_mode: disable
-    - name: "myelasticsearchtarget" # Name for the target - used to label the corresponding jobflow step
-      type: elasticsearch # Marks the database type as Elasticsearch
-      host: "ec2-43-1-854-22.compute-1.amazonaws.com" # Elasticsearch host
-      database: index1 # The Elasticsearch index
-      port: 9200 # Port used to connect to Elasticsearch
-      table: type1 # The Elasticsearch type
-      es_nodes_wan_only: false # Set to true if using Amazon Elasticsearch Service
-      username: # Unnecessary for Elasticsearch
-      password: # Unnecessary for Elasticsearch
-      sources: # Leave blank or specify: ["s3://out/enriched/bad/run=xxx", "s3://out/shred/bad/run=yyy"]
-      maxerror: # Not required for Elasticsearch
-      comprows: # Not required for Elasticsearch
 monitoring:
   tags: {} # Name-value pairs describing this job
   logging:
@@ -254,60 +219,6 @@ please make sure that:
 * is writable by StorageLoader
 * it is empty
 * **PostgreSQL's own `postgres` user must to be able to read every parent directory of the directory specified. This is necessary to ensure that PostgreSQL can read the data in the directory, when it comes to ingest it**
-
-#### targets
-
-In this section we configure exactly what database(s) StorageLoader should
-load our Snowplow events into. At the moment, StorageLoader supports
-only two types of load target, Redshift and Postgres, which require slightly different configurations.
-
-Additionally, you can configure Elasticsearch targets in this section. These targets are ignored by StorageLoader, but the EmrEtlRunner will load bad rows (rows which fail the enrichment process) into these targets so you can more easily inspect their associated error information and determine what went wrong.
-
-You can load multiple storage targets.
-
-##### Redshift and Postgres
-
-To take each variable in turn:
-
-1. `name`, enter a descriptive name for this Snowplow storage target
-2. `type`, what type of database are we loading into? Currently the
-   only supported formats are "postgres" and "redshift"
-3. `host`, the host (endpoint in Redshift parlance) of the databse to
-   load.
-4. `database`, the name of the database to load
-5. `port`, the port of the database to load. 5439 is the default Redshift
-   port; 5432 is the default Postgres port
-6. `table`, the name of the database table which will store your
-   Snowplow events. Must have been setup previously  
-7. `username`, the database user to load your Snowplow events with.
-   You can leave this blank to default to the user running the script
-8. `password`, the password for the database user. Leave blank if there
-   is no password
-9. `maxerror`, a Redshift-specific setting governing how many load errors
-   should be permitted before failing the overall load. See the
-   [Redshift `COPY` documentation] [redshift-copy] for more details
-10. `comprows`, a Redshift-specific setting defining number of rows to be used as the sample size for compression analysis
-11. `ssl_mode`, determines how to handle encryption for client connections and server certificate verification.      The the following `sslmode` values are supported:
- - `disable`: SSL is disabled and the connection is not encrypted.
- - `require`: SSL is required.
- - `verify-ca`: SSL must be used and the server certificate must be verified.
- - `verify-full`: SSL must be used. The server certificate must be verified and the server hostname must match the hostname attribute on the certificate.
-
-Note: The difference between `verify-ca` and `verify-full` depends on the policy of the root CA. If a public CA is used, `verify-ca` allows connections to a server that somebody else may have registered with the CA to succeed. In this case, `verify-full` should always be used. If a local CA is used, or even a self-signed certificate, using `verify-ca` often provides enough protection.
-
-##### Elasticsearch
-
-To take each variable in turn:
-
-1. `name`: a descriptive name for this Snowplow storage target
-2. `type`: should be "elasticsearch" to signal that this is an Elasticsearch target
-3. `port`: The port to load. Normally 9200, should be 80 for Amazon Elasticsearch Service. 
-4. `database`: The Elasticsearch index to load
-5. `table`: The Elasticsearch type to load
-6: `sources`: If this field is left blank, then after the enrich and shred steps of the current job, all bad rows generated by those two steps will be loaded into Elasticsearch. Otherwise, you can provide an array of buckets (such as  `["s3://out/enriched/bad/run=2015-11-04-02-52-59", "s3://out/shred/bad/run=2015-11-04-02-52-59"]` ). All bad row files in those buckets will be loaded into Elasticsearch.
-7. es_nodes_wan_only: if this is set to true, the EMR job will disable node discovery. This option is necessary when using Amazon Elasticsearch Service.
-
-For information on setting up Elasticsearch itself, see [[Setting up Amazon Elasticsearch Service]].
 
 ### monitoring
 
