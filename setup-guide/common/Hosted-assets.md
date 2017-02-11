@@ -24,9 +24,9 @@ Right-click on this [Download link] [emr-download] to save it down locally.
 
 The minified JavaScript tracker is hosted on CloudFront against its full semantic version:
 
-    http(s)://d1fc8wv8zag5ca.cloudfront.net/2.6.2/sp.js
+    http(s)://d1fc8wv8zag5ca.cloudfront.net/2.7.0/sp.js
 
-**Note**: The above URL references JavaScript tracker v2.6.2 (d1fc8wv8zag5ca.cloudfront.net/**2.6.2**/sp.js). To ensure you are using the latest version, please, check what it currently is at [GitHub](https://github.com/snowplow/snowplow-javascript-tracker/releases) and amend accordingly.
+**Note**: The above URL references JavaScript tracker v2.7.0 (d1fc8wv8zag5ca.cloudfront.net/**2.6.2**/sp.js). To ensure you are using the latest version, please, check what it currently is at [GitHub](https://github.com/snowplow/snowplow-javascript-tracker/releases) and amend accordingly.
 
 ## 2. Collectors
 
