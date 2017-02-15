@@ -15,7 +15,28 @@
 
 Log into the AWS console, navigate to the IAM section and go to **Policies**:
 
-TODO policy
+```json
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "Stmt1486765706000",
+            "Effect": "Allow",
+            "Action": [
+                "dynamodb:CreateTable",
+                "dynamodb:DeleteTable",
+                "dynamodb:DescribeTable",
+                "dynamodb:PutItem"
+            ],
+            "Resource": [
+                "arn:aws:dynamodb:us-east-1:719197435995:table/duplicates-storage"
+            ]
+        }
+    ]
+}
+```
+
+Notice `duplicates-storage` table name in `Resourse`. It must be changed to your own unique name.
 
 TODO image
 [[/setup-guide/images/postgresql/aws-ec2-console.jpg]]
@@ -23,8 +44,7 @@ TODO image
 <a name="policy" />
 ## 2. Creating Amazon DynamoDB table
 
-This step is optional, but recommended. If [[Scala Hadoop Shred]] won't find a specified table - it will try to create it with default provisioned throughput.
-
+If [[Scala Hadoop Shred]] won't find a specified table - it will try to create it with default provisioned throughput, which might be not enough. This step is optional, but recommended. 
 
 TODO image
 
@@ -33,7 +53,7 @@ Back to [top](#top).
 <a name="next-steps" />
 ## 4. Next steps
 
-Now you have setup PostgreSQL, you are ready to [setup the StorageLoader][setup-storageloader] to automate the regular loading of Snowplow data into the PostgreSQL events table.
+Now you have setup DynamoDB, you are ready to run [[Scala Hadoop Shred]] job with cross-batch de-duplication.
 
 [amazon-emr-guide]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AccessingInstancesLinux.html
 [setup-storageloader]: 1-Installing-the-StorageLoader
