@@ -122,7 +122,7 @@ The `bad:` entries will store any raw Snowplow log lines which did not pass the 
 
 **Important 2:** do not put your `raw:processing` inside your `raw:in` bucket, or your `enriched:good` inside your `raw:processing`, or you will create circular references which EmrEtlRunner cannot resolve when moving files.
 
-**Important 3:** if you are using the **Clojure collector**, the path to your `raw:in` path will be of the format: 
+**Important 3:** if you are using the **Clojure collector**, the path to your `raw:in` path will be of the format:
 
 	s3://elasticbeanstalk-{{REGION NAME}}-{{UUID}}/resources/environments/logs/publish/{{SECURITY GROUP IDENTIFIER}}
 
@@ -132,7 +132,7 @@ Also - Clojure Collector usees should be sure not include an `{{INSTANCE IDENTIF
 
 **Example bucket settings**
 
-Here is an example configuration: 
+Here is an example configuration:
 
 ```yaml
 buckets:
@@ -211,7 +211,7 @@ See the [[EmrEtlRunner Input Formats]] page.
 #### download
 
 This is where we configure the StorageLoader download operation, which
-downloads the Snowplow event files from Amazon S3 to your local server, 
+downloads the Snowplow event files from Amazon S3 to your local server,
 ready for loading into your database.
 
 This setting is needed for Postgres, but not if you are only loading into Redshift
@@ -220,7 +220,7 @@ This setting is needed for Postgres, but not if you are only loading into Redshi
 You will need to set the `folder` variable to a local directory path -
 please make sure that:
 
-* this path exists, 
+* this path exists,
 * is writable by StorageLoader
 * it is empty
 * **PostgreSQL's own `postgres` user must to be able to read every parent directory of the directory specified. This is necessary to ensure that PostgreSQL can read the data in the directory, when it comes to ingest it**
@@ -244,4 +244,3 @@ The `snowplow` section allows the ETL apps to send Snowplow events describing th
 [config-yml]: https://github.com/snowplow/snowplow/blob/master/3-enrich/emr-etl-runner/config/config.yml.sample
 [using-emretlrunner]: 2-Using-EmrEtlRunner
 [install-aws-cli]: http://docs.aws.amazon.com/cli/latest/userguide/installing.html
-[redshift-copy]: http://docs.aws.amazon.com/redshift/latest/dg/r_COPY.html
