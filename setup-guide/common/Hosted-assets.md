@@ -16,7 +16,7 @@ To make operating Snowplow easier, the EmrEtlRunner and StorageLoader apps are n
 
 Right-click on this [Download link] [emr-download] to save it down locally.
 
-**Note**: The link above refers to the latest version at the time of writing (r77). If you know there is a newer version you can locate and download it from the [generic page](http://dl.bintray.com/snowplow/snowplow-generic/). Search for the pattern `snowplow_emr_`. The higher the number version the newer it is.
+**Note**: The link above refers to the latest version at the time of writing (R87). If you know there is a newer version you can locate and download it from the [generic page](http://dl.bintray.com/snowplow/snowplow-generic/). Search for the pattern `snowplow_emr_`. The higher the number version the newer it is.
 
 ## 1. Trackers
 
