@@ -1,5 +1,6 @@
 [**HOME**](Home) > [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow technical documentation) > [**Enrichment**](Enrichment) > Scala Hadoop Shred
 
+<a name="overview">
 ### 1. Overview
 
 Scala Hadoop Shred is Hadoop job, written in [Scalding][scalding] (Scala API
@@ -17,6 +18,7 @@ Scala Hadoop Shred has two primary tasks:
 1. Shred enriched event into `atomic-event` TSV and associated JSONs
 2. Make `event_id`s for all events unique
 
+<a name="shredding">
 ### 2. Shredding
 
 Snowplow [enriched event][EnrichedEvent] is 131-column TSV file, produced by
@@ -28,7 +30,7 @@ Shredding is process of splitting `EnrichedEvent` TSV into following parts:
 1. **Atomic event**. TSV line very similar to `EnrichedEvent` but not contining
    JSON fields (`contexts`, `derived_contexts` and `unstruct_event`). Result
    will be stored in path similar to `shredded/good/run=2016-11-26-21-48-42/atomic-events/part-00000`
-   and wil be available to load via [StorageLoader](StorageLoader) or directly
+   and will be available to load via [StorageLoader](StorageLoader) or directly
    via Redshift [COPY][redshift-copy].
 2. **Contexts**. This part consists of two extracted above JSON fields:
    `contexts` and `derived_contexts`, which are validated (on enrichment-step)
@@ -52,6 +54,7 @@ single input and output.
 More details on what shredding is can be found on dedicated
 [shredding](Shredding) page.
 
+<a name="deduplication">
 ### 3. Deduplication
 
 Duplicates is common problem in event pipelines, it is described
@@ -73,6 +76,7 @@ There are four strategies planned for Scala Hadoop Shred's deduplication:
 
 We will cover these in turn:
 
+<a name="inbatch-natural-deduplication">
 #### 3.1 In-batch natural de-duplication
 
 As of [R76 Changeable Eagle-Hawk release][r76-release], Hadoop Shred de-duplicates
@@ -85,6 +89,7 @@ duplicates; all others will be discarded.
 To enable this functionality you need to have [Event Fingerprint Enrichment][fingerprint-enrichment]
 enabled in order to correctly populate `event_fingerprint` property.
 
+<a name="inbatch-synthetic-deduplication">
 #### 3.2 In-batch synthetic de-duplication
 
 As of [R86 Petra][r86-release], Hadoop Shred de-duplicates
@@ -104,6 +109,7 @@ performed automatically in Hadoop Shred, but it is highly recommended to use
 [Event Fingerprint Enrichment][fingerprint-enrichment]
 in order to correctly populate `event_fingerprint` property.
 
+<a name="crossbatch-deduplication">
 #### 3.3 Cross-batch natural de-duplication
 
 **Cross-batch natural de-duplication has not been implemented yet.**
