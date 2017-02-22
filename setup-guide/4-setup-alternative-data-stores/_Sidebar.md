@@ -16,6 +16,7 @@
   - [4.7: setup Elasticsearch] (kinesis-elasticsearch-sink-setup)  
   - [4.8: setup the Kinesis LZO S3 Sink] (kinesis-lzo-s3-sink-setup)  
   - [4.9: setup Druid] (Setting-up-Druid)  
+  - [4.10: setup Amazon DynamoDB] (Setting-up-Amazon-DynamoDB)  
 - [Step 5: Data modeling] (getting-started-with-data-modeling)  
 - [Step 6: Analyze your data!] (getting-started-analyzing-snowplow-data)
 
