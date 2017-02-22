@@ -6,6 +6,7 @@ You can also use [Snowplow Version Matrix](Snowplow-version-matrix) as a guidanc
 
 For easier navigation, please, follow the links below.
 
+- [Snowplow 87 Chichen Itza](#r87) (**r87**) 2017-02-21
 - [Snowplow 86 Petra](#r86) (**r86**) 2016-12-20
 - [Snowplow 85 Metamorphosis](#r85) (**r85**) 2016-11-15
 - [Snowplow 84 Steller's Sea Eagle](#r84) (**r84**) 2016-10-07
@@ -48,6 +49,50 @@ For easier navigation, please, follow the links below.
 - [Snowplow 0.9.2](#v0.9.2) (**v0.9.2**) 2014-04-30
 - [Snowplow 0.9.1](#v0.9.1) (**v0.9.1**) 2014-04-11
 - [Snowplow 0.9.0](#v0.9.0) (**v0.9.0**) 2014-02-04
+
+<a name="r87" />
+## Snowplow 86 Chichen Itza
+
+This release contains a wide array of new features, stability enhancements and performance improvements for EmrEtlRunner and StorageLoader. As of this release EmrEtlRunner lets you specify EBS volumes for your Hadoop worker nodes; meanwhile StorageLoader now writes to a dedicated manifest table to record each load.
+
+### Upgrade steps
+
+#### Upgrading EmrEtlRunner and StorageLoader
+
+The latest version of the EmrEtlRunner and StorageLoader are available from our Bintray [here](http://dl.bintray.com/snowplow/snowplow-generic/snowplow_emr_r87_chichen_itza.zip).
+
+#### Updating config.yml
+
+To make use of the new ability to specify EBS volumes for your EMR cluster’s core nodes, update your configuration YAML like so:
+
+```yaml
+    jobflow:
+      master_instance_type: m1.medium
+      core_instance_count: 1
+      core_instance_type: c4.2xlarge
+      core_instance_ebs:   # Optional. Attach an EBS volume to each core instance.
+        volume_size: 200    # Gigabytes
+        volume_type: "io1"
+        volume_iops: 400    # Optional. Will only be used if volume_type is "io1"
+        ebs_optimized: false # Optional. Will default to true
+```
+
+The above configuration will attach an EBS volume of 200 GiB to each core instance in your EMR cluster; the volumes will be Provisioned IOPS (SSD), with the performance of 400 IOPS/GiB. The volumes will not be EBS optimized. Note that this configuration has finally allowed us to use the EBS-only `c4` instance types for our core nodes.
+
+For a complete example, see our sample [`config.yml`](https://github.com/snowplow/snowplow/blob/r87-chichen-itza/3-enrich/emr-etl-runner/config/config.yml.sample) template.
+
+#### Upgrading Redshift
+
+You will also need to deploy the following manifest table for Redshift: 
+
+- [4-storage/redshift-storage/sql/manifest-def.sql](https://github.com/snowplow/snowplow/blob/r87-chichen-itza/4-storage/redshift-storage/sql/manifest-def.sql)
+
+This table should be deployed into the same schema as your `events` and other tables.
+
+### Read more
+
+* [R87 Blog Post](http://snowplowanalytics.com/blog/2017/02/21/snowplow-r87-chichen-itza-released/)
+* [R87 Release Notes](https://github.com/snowplow/snowplow/releases/tag/r87-chichen-itza)
 
 <a name="r86" />
 ## Snowplow 86 Petra
