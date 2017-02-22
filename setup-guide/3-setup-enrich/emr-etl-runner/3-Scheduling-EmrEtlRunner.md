@@ -31,7 +31,7 @@ To consider your different scheduling options in turn:
 
 The recommended way of scheduling the ETL process is as a daily cronjob.
 
-**Note**: The below reference to `snowplow-emr-etl-runner.sh` script is provided in case you are still using the older version of *EmrEtlRunner*. It's a better solution to use [`snowplow-runner-and-loader.sh`](https://github.com/snowplow/snowplow/blob/r88-TODO/4-storage/storage-loader/bin/snowplow-runner-and-loader.sh) script which synchronizes EmrEtlRunner and [StorageLoader](1-Installing-the-StorageLoader). You might skip this instructions altogether and return to this topic on [Scheduling the StorageLoader](3-scheduling-the-storageloader) page.
+**Note**: The below reference to `snowplow-emr-etl-runner.sh` script is provided in case you are still using the older version of *EmrEtlRunner*. It's a better solution to use [`snowplow-runner-and-loader.sh`](https://github.com/snowplow/snowplow/blob/r88-angkor-wat/4-storage/storage-loader/bin/snowplow-runner-and-loader.sh) script which synchronizes EmrEtlRunner and [StorageLoader](1-Installing-the-StorageLoader). You might skip this instructions altogether and return to this topic on [Scheduling the StorageLoader](3-scheduling-the-storageloader) page.
 
 If you are still using the shell script available in the Snowplow GitHub repository at 
 [`/3-enrich/emr-etl-runner/bin/snowplow-emr-etl-runner.sh`] [bash-script] you need to edit this script and update the three variables:
