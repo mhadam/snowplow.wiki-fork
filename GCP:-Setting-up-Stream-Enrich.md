@@ -153,6 +153,13 @@ enrich {
 
 ```
 
+You will also need an iglu resolver, and enrichments. These files can be stored both in the same machine where your collector will run or in Cloud Datastore, under any entity with a "json" property. To add, for example, the iglu resolver, go to https://console.cloud.google.com/datastore/entities/query?project=YOUR-PROJECT-ID , click "Create Entity", fill in its Kind (we used "resolver") and introduce its name/id manually, or take note of the auto-generated one after you click "Create".
+
+[[images/gcloud/iglu_ds.png]]
+
+[[images/gcloud/iglu_ds2.png]]
+
+Then, when running the project, pass the resolver parameter as: ```--resolver googleds:yourProjectId/resolver/resolver_name_or_id```
 
 <a name="running" >
 ### 4. Running Stream Enrich
