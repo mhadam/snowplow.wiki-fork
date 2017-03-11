@@ -319,9 +319,9 @@ Fields that start `tr_` relate to the transaction as a whole. Fields that start 
 | `ti_sku`            | text     | Product SKU     | Yes       | 'pbz00123'     |
 | `ti_name`           | text     | Product name    | No        | 'Cone pendulum'|
 | `ti_category`       | text     | Product category| No        | 'New Age'      |
-| `ti_price`          | text     | Product unit price | Yes    | 9.99           |
-| `ti_price_base`*    | text     | Price in base currency | No    | 9.99           |
-| `ti_quantity`       | text     | Number of product in transaction | Yes | 2         |
+| `ti_price`          | decimal     | Product unit price | Yes    | 9.99           |
+| `ti_price_base`*    | decimal     | Price in base currency | No    | 9.99           |
+| `ti_quantity`       | integer     | Number of product in transaction | Yes | 2         |
 | `ti_currency`       | text     | Currency        | No        | 'EUR'          |
 | `base_currency`*    | text     | Reporting currency | No        | 'GBP'          |
 
