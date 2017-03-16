@@ -1,8 +1,9 @@
 <a name="top" />
 
-[**HOME**](Home) > [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow technical documentation) > [**Trackers**](trackers) > [**JavaScript Tracker**](Javascript-Tracker) > Specific event tracking
+[**HOME**](Home) > [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow-technical-documentation) > [**Trackers**](trackers) > [**JavaScript Tracker**](Javascript-Tracker) > Specific event tracking
 
 <a name="tracking-specific-events" />
+
 ## 4. Advanced usage
 
 This page covers the more advanced elements of the Snowplow JavaScript Tracker API.
@@ -13,6 +14,7 @@ This page covers the more advanced elements of the Snowplow JavaScript Tracker A
   - 4.4 [Getting the most out of the PerformanceTiming context](#timing)
 
 <a name="callbacks" />
+
 ### 4.1 Callbacks
 
 If you call `snowplow_name_here` with a function as the argument, the function will be executed when sp.js loads:
@@ -66,9 +68,11 @@ snowplow_name_here(console.log.bind(console), "sp.js has loaded");
 For more on execution context in JavaScript, see the [MDN page][execution-context].
 
 <a name="return-methods" />
+
 ### 4.2 Methods which can be used from inside a callback
 
 <a name="get-user-fingerprint" />
+
 #### 4.2.1 `getUserFingerprint`
 
 The `getUserFingerprint` method returns the tracker-generated user fingerprint:
@@ -89,6 +93,7 @@ snowplow(function () {
 ```
 
 <a name="get-domain-user-id" />
+
 #### 4.2.2 `getDomainUserId`
 
 The `getDomainUserId` method returns the user ID stored in the first-party cookie:
@@ -103,6 +108,7 @@ snowplow(function () {
 ```
 
 <a name="get-domain-user-info" />
+
 #### 4.2.3 `getDomainUserInfo`
 
 The `getDomainUserInfo` method returns all the information stored in first-party cookie in an array:
@@ -126,6 +132,7 @@ The `domainUserInfo` variable will contain an array with 6 elements:
 5. The timestamp of the last visit
 
 <a name="get-user-id" />
+
 #### 4.2.4 `getUserId`
 
 The `getUserId` method returns the user ID which you configured using `setUserId()`:
@@ -140,6 +147,7 @@ snowplow(function () {
 ```
 
 <a name="ga" />
+
 ### 4.3 Extracting the Google Analytics cookie ID
 
 Use the following function to extract ID stored in GA's first-party cookie:
@@ -164,6 +172,7 @@ You can then set a user's Snowplow business user ID to be equal to the user's GA
 snowplow('setUserId', getGoogleId());
 ```
 <a name="timing" />
+
 ### 4.4 Getting the most out of the PerformanceTiming context
 
 The `domComplete`, `loadEventStart`, and `loadEventEnd` metrics in the NavigationTiming API are set to 0 until after every script on the page has finished executing, including sp.js. This means that the corresponding fields in the PerformanceTiming reported by the tracker will be 0. To get around this limitation, you can wrap all Snowplow code in a `setTimeout` call:
