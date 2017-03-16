@@ -11,6 +11,8 @@
 *Click [here][general-parameters-v2.5] for the corresponding documentation for version 2.5.3.*  
 *Click [here][general-parameters-v2.6] for the corresponding documentation for version 2.6.2.*  
 
+<div id="general"></div>
+
 ## 2. General parameters
 
   - 2.1 [Loading Snowplow.js](#loading)
@@ -62,7 +64,7 @@
   - 2.9 [Optional timestamp argument](#timestamp)
   - 2.10 [Preserving pageViewId](#preservePageViewId)
 
-<a name="loading"/>
+<a name="loading">
 ### 2.1 Loading Snowplow.js
 
 Use the following tag to your page to load Snowplow.js:
