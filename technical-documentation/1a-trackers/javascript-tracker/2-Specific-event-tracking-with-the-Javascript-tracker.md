@@ -705,7 +705,7 @@ The second argument is a [self-describing JSON][self-describing-jsons]. It has t
 
 The `data` field should be flat, not nested.
 
-`trackSelfdescribingEvent` can also be passed an array of custom contexts as an additional final parameter. See [Contexts](#custom-contexts) for more information.
+`trackSelfDescribingEvent` can also be passed an array of custom contexts as an additional final parameter. See [Contexts](#custom-contexts) for more information.
 
 [Back to top](#top)  
 [Back to JavaScript technical documentation contents][contents]
