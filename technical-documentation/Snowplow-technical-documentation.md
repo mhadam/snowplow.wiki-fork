@@ -2,7 +2,7 @@
 
 The technical documentation reflects the Snowplow architecture, with six loosely-coupled sub-systems connected by five standardized data protocols/formats:
 
-![architecture] [technical-architecture]
+![architecture][technical-architecture]
 
 ## 1A. Trackers
 
@@ -33,8 +33,8 @@ The technical documentation reflects the Snowplow architecture, with six loosely
 [[Mandrill webhook adapter]]  
 [[Pagerduty webhook adapter]]  
 [[Pingdom webhook adapter]]  
-[[SendGrid-webhook-adapter]]  
-[[Urban-Airship-Connect-webhook-adapter]]  
+[[SendGrid webhook adapter]]  
+[[Urban Airship Connect webhook adapter]]  
 
 ### A. [Snowplow tracker protocol](snowplow-tracker-protocol)  
 

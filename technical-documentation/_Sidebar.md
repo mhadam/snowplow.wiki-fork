@@ -1,4 +1,4 @@
-[**HOME**](Home) > [**TECHNICAL DOCUMENTATION**](Snowplow technical documentation)
+[**HOME**](Home) > [**TECHNICAL DOCUMENTATION**](Snowplow-technical-documentation)
 
 **1A. Trackers**  
 [Overview](trackers)  
@@ -19,15 +19,15 @@
 [Ruby Tracker](Ruby-Tracker)  
 [Scala Tracker](Scala-Tracker)  
 [Unity Tracker](Unity-Tracker)  
-[[Building a Tracker]]
+[[Building-a-Tracker]]
 
 **1B. Webhooks**  
-[[Iglu webhook adapter]]  
-[[CallRail webhook adapter]]  
-[[MailChimp webhook adapter]]  
-[[Mandrill webhook adapter]]  
-[[Pagerduty webhook adapter]]  
-[[Pingdom webhook adapter]]  
+[[Iglu-webhook-adapter]]  
+[[CallRail-webhook-adapter]]  
+[[MailChimp-webhook-adapter]]  
+[[Mandrill-webhook-adapter]]  
+[[Pagerduty-webhook-adapter]]  
+[[Pingdom-webhook-adapter]]  
 [[SendGrid-webhook-adapter]]  
 [[Urban-Airship-Connect-webhook-adapter]]  
 
@@ -52,7 +52,7 @@
 
 **4. Storage**  
 [Overview](Storage-documentation)  
-[Storage in S3](S3 storage)  
+[Storage in S3](S3-storage)  
 [Storage in Redshift](amazon-redshift-storage)  
 [Storage in PostgreSQL](postgresql-storage)  
 [Storage in Infobright](infobright-storage) (deprecated)  
@@ -61,8 +61,8 @@
 **D. Snowplow storage formats (to write)**
 
 **5. Analytics**  
-[[Analytics documentation]]  
+[[Analytics-documentation]]  
 
 **Common**  
 [[Shredding]]  
-[[Artifact repositories]]  
+[[Artifact-repositories]]  

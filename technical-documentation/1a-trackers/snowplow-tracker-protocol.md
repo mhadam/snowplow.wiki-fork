@@ -1,12 +1,13 @@
 <a name="top" />
-[**HOME**](Home) > [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow technical documentation) > [**Trackers**](trackers)
+[**HOME**](Home) > [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow-technical-documentation) > [**Trackers**](trackers)
 
 <a name="overview" />
+
 ## Overview
 
 Snowplow trackers fire _events_, which are either `GET` or `POST` requests of a [Snowplow collector](collectors), whenever an event on a website or application takes place. By appending events' parameters and values to the end of those `GET`  requests or adding them into the body of `POST` messages, trackers can pass data into the collectors, for processing by Snowplow.
 
-The Snowplow Tracker Protocol is the list of all the parameters that Snowplow trackers use when firing events to push data into the [Snowplow collectors] (collectors). Each parameter maps onto one or more fields in the [Snowplow events table] (canonical-event-model) employed in storage. Here we document which field in the [Snowplow events table] (canonical-event-model) each parameter added to the query string maps onto.
+The Snowplow Tracker Protocol is the list of all the parameters that Snowplow trackers use when firing events to push data into the [Snowplow collectors](collectors). Each parameter maps onto one or more fields in the [Snowplow events table](canonical-event-model) employed in storage. Here we document which field in the [Snowplow events table](canonical-event-model) each parameter added to the query string maps onto.
 
 Snowplow has been architected to be as easy as possible for developers to create their own alternative subsystems. This documentation should be used by anyone who would like to build their own tracker: by utilising the parameters documented here, the author of a new tracker can be confident that his / her tracker will work with the rest of the Snowplow stack, and be confident where the values associated with each parameter on every call will be available to query in Snowplow, whether that's in Hive or Infobright or another database.
 
@@ -44,9 +45,11 @@ In the [first part of this guide](#common), we cover the parameters in the Snowp
 - 5. [Reserved parameters](#reserved-parameters)
 
 <a name="common" />
+
 ## 1. Common parameters (platform and event independent)
 
 <a name="appid" />
+
 #### 1.1 Application parameters
 
 | **Parameter** | **Maps to**      | **Type** |**Description**               | **Implemented?** | **Example values**        |
@@ -80,6 +83,7 @@ As a Snowplow user, you can define application IDs for each of your different di
 Back to [common field types](#common).
 
 <a name="timestamp" />
+
 #### 1.2 Date / time parameter
 
 | **Parameter** | **Maps to**        | **Type** | **Description**               | **Implemented?** | **Example values**        |
@@ -98,6 +102,7 @@ The tracker can pass a client-side timestamp to the collector using the above pa
 Back to [common field types](#common).
 
 <a name="event2" />
+
 #### 1.3 Event / transaction parameters
 
 | **Parameter** | **Maps to**      | **Type** | **Description**               | **Implemented?** | **Example values**        |
@@ -115,17 +120,19 @@ The event ID (`eid`) is the unique identifier (UUID) for this row. Historically 
 Back to [common field types](#common).
 
 <a name="version" />
+
 #### 1.4 Snowplow Tracker Version
 
 | **Parameter** | **Maps to**      | **Type** | **Description**               | **Implemented?** | **Example values**        |
 |:--------------|:-----------------|:---------|:------------------------------|:-----------------|:--------------------------|
 | `tv`          | `v_tracker`      | text     | Identifier for Snowplow tracker | Yes             | `js-0.5.1`                |
 
-For deployments where multiple trackers are used (e.g. for businesses that use the [JavaScript tracker] (javascript-tracker) to track events on their domains alongside the [Pixel tracker] (pixel-tracker) to track events on 3rd party domains), it is useful to be able to distinguish data generated from each tracker. It can also be useful when tracker versions are updated, so that it is easier to see if an update in tracker accounts for a feature of the data at analysis time.
+For deployments where multiple trackers are used (e.g. for businesses that use the [JavaScript tracker](javascript-tracker) to track events on their domains alongside the [Pixel tracker](pixel-tracker) to track events on 3rd party domains), it is useful to be able to distinguish data generated from each tracker. It can also be useful when tracker versions are updated, so that it is easier to see if an update in tracker accounts for a feature of the data at analysis time.
 
 Back to [common field types](#common).
 
 <a name="user" />
+
 #### 1.5 User related parameters
 
 | **Parameter** | **Maps to**      | **Type** | **Description**               | **Implemented?** | **Example values**        |
@@ -149,6 +156,7 @@ If you are tracking events both server-side and client-side and you want the `ne
 Back to [common field types](#common).
 
 <a name="device" />
+
 #### 1.6 Device related properties
 
 | **Parameter** | **Maps to**      | **Type** | **Description**               | **Implemented?** | **Example values**        |
@@ -160,9 +168,11 @@ We intend to build out the list of device related properties over time.
 Back to [common field types](#common).
 
 <a name="platform" />
+
 ### 2. Platform specific parameters
 
 <a name="web" />
+
 #### 2.1 Web-specific parameters
 
 In addition, there is a set of browser-specific parameters that only makes sense to record for events that happen on web platforms (`p=web`). These parameters are relevant across **all** web events, regardless of the event type. (E.g. if it is a pageview, pageping, transaction, media play etc...)
@@ -194,6 +204,7 @@ In addition, there is a set of browser-specific parameters that only makes sense
 Back to [common field types](#common).
 
 <a name="iot" />
+
 #### 2.2 Internet of Things-specific parameters
 
 In addition, there is a set of device-specific parameters that only makes sense to record for events that happen on the Internet of Things (`p=iot`). These parameters are relevant across **all** Internet of Things events, regardless of the event type:
@@ -205,6 +216,7 @@ In addition, there is a set of device-specific parameters that only makes sense 
 Back to [common field types](#common).
 
 <a name="events" />
+
 ### 3. Snowplow events
 
 At its heart, Snowplow is a platform for granular tracking of events. Currently, Snowplow understands the following events. In the tracker protocol, each event is denoted by an `e=...` parameter.
@@ -227,6 +239,7 @@ We are working to make the data model for each of the above events richer, and e
 In each case, we use the `&e` parameter to indicate the type of event that is being tracked by Snowplow to the value indicated in the above table
 
 <a name="pageview" />
+
 #### 3.1 Pageview tracking
 
 Pageview tracking is used to record views of web pages.
@@ -281,6 +294,7 @@ e=pv           // page view
 Back to [event tracking](#events).
 
 <a name="pagepings" />
+
 #### 3.2 Page pings
 
 Page pings are used to record users engaging with content on a web page after it has originally loaded. It can be used to track e.g. how far down an article a user scrolls.
@@ -326,6 +340,7 @@ res=1920x976          // Monitor resolution / size
 Back to [event tracking](#events).
 
 <a name="linkclick" />
+
 #### 3.3 Link click tracking
 
 Link clicks are treated as unstructured events. The schema for a link click event can be found [here][link-click-schema].
@@ -333,6 +348,7 @@ Link clicks are treated as unstructured events. The schema for a link click even
 Back to [event tracking](#events).
 
 <a name="adimp" />
+
 #### 3.4 Ad impression tracking
 
 *Deprecation warning: the special ad impression querystring parameters described in this section are deprecated. Instead, ad impressions, ad clicks, and ad conversions are all treated as unstructured events. There schemas are available at the following locations:*
@@ -373,6 +389,7 @@ duid=aeb1691c5a0ee5a6   // Domain user ID
 Back to [event tracking](#events).
 
 <a name="ecomm" />
+
 #### 3.5 Ecommerce tracking
 
 To track an ecommerce transaction, fire a `transaction` event (`e=tr`) to register the transaction, and then fire `item` events (`e=ti`) to log specific data about the items that were part of that transaction. The `order_id`, (captured using the `ti` parameter) is used to link the transaction-level and item-level data at analysis time.
@@ -444,6 +461,7 @@ uid=aeb1691c5a0ee5a6    // User ID
 Back to [event tracking](#events).
 
 <a name="social" />
+
 #### 3.6 Social tracking
 
 **Note!** This has not been implemented yet.
@@ -472,6 +490,7 @@ uid=aeb1691c5a0ee5a6    // User ID
 Back to [event tracking](#events).
 
 <a name="item" />
+
 #### 3.7 Item views
 
 Pageviews track page load events. Itemviews track views of specific items e.g. articles on a content site, videos on a video site, or products on an online retail site.
@@ -481,6 +500,7 @@ This functionality has not been developed yet. When it is, it will be documented
 Back to [event tracking](#events).
 
 <a name="error" />
+
 ### 3.8 Error tracking
 
 This functionality has not been developed yet. When it is, it will be documented here.
@@ -490,6 +510,7 @@ Back to [event tracking](#events).
 Back to the [top](#top).
 
 <a name="event" />
+
 #### 3.9. Custom structured event tracking
 
 Custom event tracking is used to track events that are not natively supported by Snowplow. (Like ad impressions, page views, ecomm transactions.)
@@ -544,6 +565,7 @@ Back to [event tracking](#events).
 
 
 <a name="unstructevent" />
+
 #### 3.10 Custom unstructured event tracking
 
 Custom unstructured event tracking is used to track events that are not natively supported by Snowplow and allow arbitrary name: value pairs associated with the event.
