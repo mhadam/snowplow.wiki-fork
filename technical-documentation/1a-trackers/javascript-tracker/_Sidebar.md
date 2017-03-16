@@ -1,4 +1,4 @@
-[**HOME**](Home) > [**TECHNICAL DOCUMENTATION**](Snowplow technical documentation) > [**Trackers**](trackers) > [**Javascript tracker**](javascript-tracker)
+[**HOME**](Home) > [**TECHNICAL DOCUMENTATION**](Snowplow-technical-documentation) > [**Trackers**](trackers) > [**Javascript tracker**](javascript-tracker)
 
 **1. Trackers**  
 [Overview](trackers)  
@@ -43,7 +43,7 @@
 **D. Snowplow storage formats (to write)**
 
 **5. Analytics**  
-[[Analytics documentation]]  
+[[Analytics-documentation]]  
 
 **Common**  
-[[Artifact repositories]]  
+[[Artifact-repositories]]  
