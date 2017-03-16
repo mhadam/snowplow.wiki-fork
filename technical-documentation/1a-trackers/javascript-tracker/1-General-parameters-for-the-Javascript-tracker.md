@@ -1,6 +1,6 @@
 <a name="top" />
 
-[**HOME**](Home) » [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow technical documentation) » [**Trackers**](trackers) » [**JavaScript Tracker**](Javascript-Tracker) » General parameters
+[**HOME**](Home) » [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow-technical-documentation) » [**Trackers**](trackers) » [**JavaScript Tracker**](Javascript-Tracker) » General parameters
 
 *This page refers to version 2.7.2 of the Snowplow JavaScript Tracker.*  
 *Click [here][general-parameters-v1] for the corresponding documentation for version 1.*  
@@ -11,8 +11,8 @@
 *Click [here][general-parameters-v2.5] for the corresponding documentation for version 2.5.3.*  
 *Click [here][general-parameters-v2.6] for the corresponding documentation for version 2.6.2.*  
 
-<a name="general" />
 ## 2. General parameters
+
   - 2.1 [Loading Snowplow.js](#loading)
   - 2.2 [Initialising a tracker](#initialisation)
     - 2.2.1 [Setting the application ID](#app-id)
