@@ -1,6 +1,6 @@
 <a name="top" />
 
-[**HOME**](Home) > [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow technical documentation) > [**Trackers**](trackers) > Tracker Specification
+[**HOME**](Home) > [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow-technical-documentation) > [**Trackers**](trackers) > Tracker Specification
 
 ## Contents
 
@@ -10,11 +10,13 @@
 - 4. [Advanced features](#advanced)
 
 <a name="overview" />
+
 ## 1. Overvew
 
 This page describes the feature list for Snowplow Trackers. The [[Snowplow Tracker Protocol]] may also be helpful as it contains information about specific event fields.
 
 <a name="essential" />
+
 ## 2. Essential Features
 
 These are the features which all Snowplow Trackers should support from the first version.
@@ -51,6 +53,7 @@ These are the features which all Snowplow Trackers should support from the first
 * Empty strings and null values should never be added to the payload for an event.
 
 <a name="power" />
+
 ## 2. Power Features
 
 These are features which all server-side trackers should aim to support.
@@ -78,6 +81,7 @@ These are features which all server-side trackers should aim to support.
   * `Debug`: Contents of all events fired in JSON form
 
 <a name="advanced" />
+
 ## 3. Advanced Features
 
 These are advanced features which most trackers do not support.
