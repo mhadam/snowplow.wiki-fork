@@ -11,7 +11,7 @@
 *Click [here][general-parameters-v2.5] for the corresponding documentation for version 2.5.3.*  
 *Click [here][general-parameters-v2.6] for the corresponding documentation for version 2.6.2.*  
 
-<a id="general"></a>
+<a name="general"></a>
 
 ## 2. General parameters
 
