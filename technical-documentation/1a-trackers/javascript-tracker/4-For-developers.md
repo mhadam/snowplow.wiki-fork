@@ -1,12 +1,13 @@
 <a name="top" />
 
-[**HOME**](Home) » [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow technical documentation) » [**Trackers**](trackers) » [**JavaScript Tracker**](Javascript-Tracker) » For Developers
+[**HOME**](Home) » [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow-technical-documentation) » [**Trackers**](trackers) » [**JavaScript Tracker**](Javascript-Tracker) » For Developers
 
 **THIS DOCUMENT IS WIP**
 
 *This page refers to version 2.7.0 of the Snowplow JavaScript Tracker*  
 
 <a name="for-developers" />
+
 ## 5. For developers
   - 5.1 [Tools](#tools)
   - 5.2 [Tag](#tag)
@@ -23,6 +24,7 @@
   - 5.5 [Build](#build)
 
 <a name="tools" />
+
 ## 5.1 Tools
 
 In JavaScript tracker development we're using following tools:
@@ -38,6 +40,7 @@ In JavaScript tracker development we're using following tools:
 None of above tools are essential for JavaScript tracker, but they are necessary to build and test it.
 
 <a name="tag" />
+
 ## 5.2 Tag
 
 As all programs, JavaScript tracker has an entry point from where tracker gets 
@@ -54,9 +57,11 @@ default - `snowplow_name_here`) is `Function` object with `q` property attached
 to it. While execution still in the tag - `q` is simple JS `Array`.
 
 <a name="modules" />
+
 ## 5.3 Tracker modules
 
 <a name="init" />
+
 ### 5.3.1 js/init.js
 
 When *actual tracker code* loads - we're getting into second entry point - 
@@ -66,6 +71,7 @@ push many events there since script loading is asynchronous). You can ignore
 everything with `_snaq` - this is legacy queue which will be removed soon.
 
 <a name="snowplow" />
+
 ### 5.3.2 js/snowplow.js
 
 Here we come to `Snowplow` module, which can be considered as third entry point,
@@ -85,6 +91,7 @@ like `snowplowMutState` to pass them around and calls `InQueueManager`
 constructor (I cannot see why it cannot be plain function as well).
 
 <a name="in_queue" />
+
 ### 5.3.3 js/in_queue.js
 
 `InQueueManager` object is exactly that `q` property on namespace object.
@@ -110,6 +117,7 @@ calls) - it just decides on which tracker this method should be called and
 actually invokes it.
 
 <a name="tracker" />
+
 ### 5.3.4 js/tracker.js
 
 When loop in `push` encounters `newTracker` method - it invokes `Tracker` 
@@ -121,6 +129,7 @@ side-effecting constructor and lot of private helper methods.
 
 
 <a name="core" />
+
 ### 5.3.5 core/lib/core.ts
 
 Tracker's `core` object is part of separate project published as
@@ -135,6 +144,7 @@ Particularly in `Tracker` this callback sends payload data into
 `OutQueueManager`.
 
 <a name="out_queue" />
+
 ### 5.3.6 js/out_queue.js
 
 `OutQueueManager` is transport layer for tracker. Here's the end of the world
@@ -142,6 +152,7 @@ for events. It connects to collector using chosen HTTP method and performs
 request with payload created in `core` and `Tracker`.
 
 <a name="tests" />
+
 ## 5.4 Tests
 
 ### 5.4.1 Automated testing
