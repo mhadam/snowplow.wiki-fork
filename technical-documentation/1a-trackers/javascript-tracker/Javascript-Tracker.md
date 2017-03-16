@@ -1,6 +1,6 @@
 <a name="top" />
 
-[**HOME**](Home) > [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow technical documentation) > [**Trackers**](trackers) > [**JavaScript Tracker**](Javascript-Tracker)
+[**HOME**](Home) > [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow-technical-documentation) > [**Trackers**](trackers) > [**JavaScript Tracker**](Javascript-Tracker)
 
 ## Contents
 
@@ -76,6 +76,7 @@
 
 
 <a name="overview" />
+
 ## 1. Overview
 
 The [Snowplow JavaScript Tracker](https://github.com/snowplow/snowplow-javascript-tracker/) works in much the same way as JavaScript trackers for other major web analytics solutions including Google Analytics and Omniture. We have tried, as far as possible, to keep the API very close to that used by Google Analytics, so that users who have implemented Google Analytics JavaScript tags have no difficulty also implementing the Snowplow JavaScript tags.
