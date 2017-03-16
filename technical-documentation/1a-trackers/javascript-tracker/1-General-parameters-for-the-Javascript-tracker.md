@@ -3,13 +3,13 @@
 [**HOME**](Home) » [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow technical documentation) » [**Trackers**](trackers) » [**JavaScript Tracker**](Javascript-Tracker) » General parameters
 
 *This page refers to version 2.7.2 of the Snowplow JavaScript Tracker.*  
-*Click [here] [general-parameters-v1] for the corresponding documentation for version 1.*  
-*Click [here] [general-parameters-v2.0] for the corresponding documentation for version 2.1.1.*  
-*Click [here] [general-parameters-v2.2] for the corresponding documentation for version 2.2.2.*  
-*Click [here] [general-parameters-v2.3] for the corresponding documentation for version 2.3.0.*  
-*Click [here] [general-parameters-v2.4] for the corresponding documentation for version 2.4.3.*  
-*Click [here] [general-parameters-v2.5] for the corresponding documentation for version 2.5.3.*  
-*Click [here] [general-parameters-v2.6] for the corresponding documentation for version 2.6.2.*  
+*Click [here][general-parameters-v1] for the corresponding documentation for version 1.*  
+*Click [here][general-parameters-v2.0] for the corresponding documentation for version 2.1.1.*  
+*Click [here][general-parameters-v2.2] for the corresponding documentation for version 2.2.2.*  
+*Click [here][general-parameters-v2.3] for the corresponding documentation for version 2.3.0.*  
+*Click [here][general-parameters-v2.4] for the corresponding documentation for version 2.4.3.*  
+*Click [here][general-parameters-v2.5] for the corresponding documentation for version 2.5.3.*  
+*Click [here][general-parameters-v2.6] for the corresponding documentation for version 2.6.2.*  
 
 <a name="general" />
 ## 2. General parameters
@@ -164,7 +164,7 @@ Set the application ID using the `appId` field of the argmap. This will be attac
 
 <a name="platform" />
 #### 2.2.2 Setting the platform
-Set the application platform using the `platform` field of the argmap. This will be attached to every event the tracker fires. Its default value is "web". For a list of supported platforms, please see the [Snowplow Tracker Protocol] [snowplow-tracker-protocol]. 
+Set the application platform using the `platform` field of the argmap. This will be attached to every event the tracker fires. Its default value is "web". For a list of supported platforms, please see the [Snowplow Tracker Protocol][snowplow-tracker-protocol]. 
 
 <a name="cookie-domain" />
 #### 2.2.3 Configuring the cookie domain
