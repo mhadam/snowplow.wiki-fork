@@ -2,30 +2,28 @@
 
 [**HOME**](Home) > [**SNOWPLOW SETUP GUIDE**](Setting-up-Snowplow) > [Step 3: Setting up Enrich](Setting-up-enrich) > Configuring storage targets
 
-Snowplow offers the option to configure certain storage targets. This is done using configuration JSONs. When running EmrEtlRunner or StorageLoader, the `--targets` argument should be populated with the filepath of a directory containing your configuration JSONs. Each storage target JSON file can have arbitrary name, but must conform it's JSON Schema.
+Snowplow offers the option to configure certain storage targets. This is done using configuration JSONs. 
+When running EmrEtlRunner or StorageLoader, the `--targets` argument should be populated with the filepath of a directory containing your configuration JSONs. 
+Each storage target JSON file can have arbitrary name, but must conform it's JSON Schema.
 
 Some targets are handled by EmrEtlRunner (duplicate tracking, failure tracking) and some by StorageLoader (enriched data).
 
 Here's a list of currently supported targets, grouped by purpose:
 
 * Enriched data
-
   * [Redshift](#redshift)
   * [PostgreSQL](#postgres)
-
 * Failures
-
   * [ElasticSearch](#elasticsearch)
-
 * Duplicate tracking
-
   * [AWS DynamoDB](#dynamodb)
-
 
 
 <a name="redshift" />
 
-##### Redshift
+### Redshift
+
+Schema: [iglu:com.snowplowanalytics.snowplow.storage/redshift_config/jsonschema/1-0-0][redshift-schema]
 
 1. `name`, a descriptive name for this Snowplow storage target
 2. `host`, the host (endpoint in Redshift parlance) of the databse to load.
@@ -34,7 +32,7 @@ Here's a list of currently supported targets, grouped by purpose:
 5. `schema`, the name of the database schema which will store your Snowplow tables
 6. `username`, the database user to load your Snowplow events with. You can leave this blank to default to the user running the script
 7. `password`, the password for the database user. Leave blank if there is no password
-8. `maxError`, a Redshift-specific setting governing how many load errors should be permitted before failing the overall load. See the [Redshift `COPY` documentation] [redshift-copy] for more details
+8. `maxError`, a Redshift-specific setting governing how many load errors should be permitted before failing the overall load. See the [Redshift `COPY` documentation][redshift-copy] for more details
 9. `compRows`, a Redshift-specific setting defining number of rows to be used as the sample size for compression analysis. Should be between 1000 and 1000000000
 10. `purpose`: common for all targets. Redshift supports only `ENRICHED_DATA`
 11. `sslMode`, determines how to handle encryption for client connections and server certificate verification. The the following `sslMode` values are supported:
@@ -47,7 +45,9 @@ Note: The difference between `VERIFY_CA` and `VERIFY_FULL` depends on the policy
 
 <a name="postgres" />
 
-##### Postgres
+### Postgres
+
+Schema: [iglu:com.snowplowanalytics.snowplow.storage/postgresql_config/jsonschema/1-0-0][postgresql-schema]
 
 1. `name`, enter a descriptive name for this Snowplow storage target
 2. `host`, the host (endpoint in Redshift parlance) of the databse to
@@ -69,7 +69,9 @@ Note: The difference between `VERIFY_CA` and `VERIFY_FULL` depends on the policy
 
 <a name="elasticsearch" />
 
-##### Elasticsearch
+### Elasticsearch
+
+Schema: [iglu:com.snowplowanalytics.snowplow.storage/elastic_config/jsonschema/1-0-0][elastic-schema]
 
 1. `name`: a descriptive name for this Snowplow storage target
 3. `port`: The port to load. Normally 9200, should be 80 for Amazon Elasticsearch Service.
@@ -82,7 +84,9 @@ For information on setting up Elasticsearch itself, see [[Setting up Amazon Elas
 
 <a name="dynamodb">
 
-##### Amazon DynamoDB
+### Amazon DynamoDB
+
+Schema: [iglu:com.snowplowanalytics.snowplow.storage/amazon_dynamodb_config/jsonschema/1-0-0][amazon-dynamodb-schema]
 
 1. `name`: a descriptive name for this Snowplow storage target
 2. `accessKeyId`: AWS Access Key Id
@@ -90,5 +94,10 @@ For information on setting up Elasticsearch itself, see [[Setting up Amazon Elas
 4. `awsRegion`: AWS region
 5. `dynamodbTable`: DynamoDB table to store information about processed events
 6. `purpose`: common for all targets. Elasticsearch supports only `DUPLICATE_TRACKING`
+
+[amazon-dynamodb-schema]: https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow.storage/amazon_dynamodb_config/jsonschema/1-0-0
+[elastic-schema]: https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow.storage/elastic_config/jsonschema/1-0-0
+[postgresql-schema]: https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow.storage/postgresql_config/jsonschema/1-0-0
+[redshift-schema]: https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow.storage/redshift_config/jsonschema/1-0-0
 
 [redshift-copy]: http://docs.aws.amazon.com/redshift/latest/dg/r_COPY.html
