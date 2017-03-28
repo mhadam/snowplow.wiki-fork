@@ -24,6 +24,7 @@ Here's a list of currently supported targets, grouped by purpose:
 
 
 <a name="redshift" />
+
 ##### Redshift
 
 1. `name`, a descriptive name for this Snowplow storage target
@@ -45,6 +46,7 @@ Here's a list of currently supported targets, grouped by purpose:
 Note: The difference between `VERIFY_CA` and `VERIFY_FULL` depends on the policy of the root CA. If a public CA is used, `VERIFY_CA` allows connections to a server that somebody else may have registered with the CA to succeed. In this case, `verify-full` should always be used. If a local CA is used, or even a self-signed certificate, using `VERIFY_CA` often provides enough protection.
 
 <a name="postgres" />
+
 ##### Postgres
 
 1. `name`, enter a descriptive name for this Snowplow storage target
@@ -66,6 +68,7 @@ Note: The difference between `VERIFY_CA` and `VERIFY_FULL` depends on the policy
 10. `purpose`: common for all targets. PostgreSQL supports only `ENRICHED_DATA`
 
 <a name="elasticsearch" />
+
 ##### Elasticsearch
 
 1. `name`: a descriptive name for this Snowplow storage target
@@ -78,6 +81,7 @@ Note: The difference between `VERIFY_CA` and `VERIFY_FULL` depends on the policy
 For information on setting up Elasticsearch itself, see [[Setting up Amazon Elasticsearch Service]].
 
 <a name="dynamodb">
+
 ##### Amazon DynamoDB
 
 1. `name`: a descriptive name for this Snowplow storage target
