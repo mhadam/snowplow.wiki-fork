@@ -62,6 +62,7 @@
 
 **5. Analytics**  
 [[Analytics-documentation]]  
+[[Event-manifest-populator]]  
 
 **Common**  
 [[Shredding]]  
