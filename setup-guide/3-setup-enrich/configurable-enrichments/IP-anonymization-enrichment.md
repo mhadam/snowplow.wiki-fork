@@ -31,15 +31,15 @@ The IP anonymization enrichment lets you anonymize the IP addresses found in the
 
 The `anonOctets` field is set to two, so the last two octets of each IP address will be obscured.
 
-###Data sources
+### Data sources
 
 The input value for the enrichment comes from `ip` parameter which is mapped to `user_ipaddress` field in `atomic.events` table.
 
-###Algorithm
+### Algorithm
 
 This enrichment algorithm is straightforward. The value of `anonOctets` set in [`JSON`](https://github.com/snowplow/snowplow/blob/master/3-enrich/config/enrichments/anon_ip.json) indicates how many octets of the [IPv4 address](https://en.wikipedia.org/wiki/IPv4) are to be masked with `x`s starting from the last octet. The value of the `ip` parameter is masked accordingly.
 
-###Data generated
+### Data generated
 
 The masked (anonymized) value of the IP address will be recorded in `user_ipaddress` field of `atomic.events` table.
 
