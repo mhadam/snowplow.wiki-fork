@@ -101,7 +101,7 @@ where only the first two arguments are required. You would use it like this:
 snowplow_name_here('trackStructEvent', 'Mixes', 'Play', '', '', 20);
 ```
 
-Empty strings are provided for the label and value arguments to pad them out. (`Null` would also work.) They won't be added to the event. Neither will the context argument, which isn't provided at all.
+Empty strings are provided for the `label` and `property` arguments to pad them out. (`Null` would also work.) They won't be added to the event. Neither will the context argument, which isn't provided at all.
 
 [Back to top](#top)  
 [Back to JavaScript technical documentation contents][contents]

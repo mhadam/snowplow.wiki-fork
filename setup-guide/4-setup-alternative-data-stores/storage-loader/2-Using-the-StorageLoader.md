@@ -7,12 +7,14 @@
 5. [Next steps](#next-steps)
 
 <a name="usage-overview"/>
+
 ## 1. Overview
 
 Running the StorageLoader is very straightforward - please review the
 command-line options in the next section. 
 
 <a name="cli-options"/>
+
 ## 2. Command-line options
 
 The StorageLoader is an executable jar:
@@ -38,7 +40,7 @@ operation on the table following the load. `--include compupdate` runs
 the load then determines the best compression encoding format to use for
 each each of the fields in your Redshift event table, using the `:comprows:`
 setting for the sample size. For more information on Amazon’s comprows
-functionality, see the [Redshift documentation] [comprows].
+functionality, see the [Redshift documentation][comprows].
 
 A note on the `--skip` option: this skips the work steps listed. So, for example `--skip download,load` would only run the final archive step. This is useful if you have an error in your load and need to re-run only part of it.
 
@@ -49,6 +51,7 @@ $ cat config/config.yml | ./snowplow-storage-loader --config -
 ```
 
 <a name="running"/>
+
 ## 3. Running
 
 As per the above, running StorageLoader is a matter of populating
@@ -60,11 +63,12 @@ example, and then invoking StorageLoader like so:
 The `--skip analyze` is required because in Redshift only the table owner or superuser can ANALYZE a table, not our `storageloader` user.
 
 <a name="troubleshooting" />
+
 ## 4. Troubleshooting
 
 ### locate command missing
 
-StorageLoader depends on Snowplow's [Infobright Ruby Loader] [irl], which in turn uses the `locate` shell command. If your shell complains that this is missing, in which case you can install it separately.
+StorageLoader depends on Snowplow's [Infobright Ruby Loader][irl], which in turn uses the `locate` shell command. If your shell complains that this is missing, in which case you can install it separately.
 
 To install and configure `locate` on Debian/Ubuntu:
 
@@ -72,6 +76,7 @@ To install and configure `locate` on Debian/Ubuntu:
     $ sudo updatedb
 
 <a name="next-steps" />
+
 ## Next steps
 
 All done? Then [schedule the StorageLoader](3-Scheduling-the-StorageLoader) to regularly migrate new data into your data store (e.g. Infobright or Redshift).

@@ -316,7 +316,7 @@ tracker.set_network_user_id('ecdff4d0-9175-40ac-a8bb-325c49733607')
 <a name="set-fingerprint" />
 ### 3.12 Setting the user fingerprint with `set_fingerprint`
 
-The JavaScript Tracker generates a fingerprint based on browser features and attaches it to all client-side events. You can set the user fingerprint field for server-sie events like this:
+The JavaScript Tracker generates a fingerprint based on browser features and attaches it to all client-side events. You can set the user fingerprint field for server-side events like this:
 
 ```ruby
 tracker.set_fingerprint(164502195)
@@ -630,7 +630,7 @@ Example:
 
 ```ruby
 tracker.track_self_describing_event(SnowplowTracker::SelfDescribingJson.new(
-  "com.example_company/save_game/jsonschema/1-0-2",
+  "iglu:com.example_company/save_game/jsonschema/1-0-2",
   {
     "saveId" => "4321",
     "level" => 23,
