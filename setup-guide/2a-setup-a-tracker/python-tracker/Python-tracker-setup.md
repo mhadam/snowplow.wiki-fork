@@ -85,6 +85,7 @@ snowplow-tracker ~> 0.8.0
 ```
 
 <a name="easy_install" />
+
 ### 3.3 easy_install
 
 If you are still using easy_install:
