@@ -1,6 +1,6 @@
 [**HOME**](Home) » [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow-technical-documentation) » [**Snowplow Analytics SDK**](Snowplow-Analytics-SDK) » Python Analytics SDK
 
-##Overview
+## Overview
 
 The [Snowplow Analytics SDK for Python](https://github.com/snowplow/snowplow-python-analytics-sdk) lets you work with [Snowplow enriched events](https://github.com/snowplow/snowplow/wiki/canonical-event-model) in your Python event processing, data modeling and machine-learning jobs. You can use this SDK with [Apache Spark](http://spark.apache.org/), [AWS Lambda](https://aws.amazon.com/lambda/), and other Python-compatible data processing frameworks.
 
@@ -15,13 +15,13 @@ Working with the Snowplow Python Analytics SDK therefore has two major advantage
 
 Currently the Python Analytics SDK ships with one event transformer: the JSON Event Transformer. 
 
-##The JSON Event Transformer
+## The JSON Event Transformer
 
 The JSON Event Transformer takes a Snowplow enriched event and converts it into a JSON ready for further processing. This transformer was adapted from the code used to load Snowplow events into Elasticsearch in the Kinesis real-time pipeline.
 
 The JSON Event Transformer converts a Snowplow enriched event into a single JSON like so:
 
-```
+```json
 { "app_id":"demo",
   "platform":"web","etl_tstamp":"2015-12-01T08:32:35.048Z",
   "collector_tstamp":"2015-12-01T04:00:54.000Z","dvce_tstamp":"2015-12-01T03:57:08.986Z",
@@ -33,7 +33,7 @@ The most complex piece of processing is the handling of the self-describing JSON
 
 For example, if an enriched event contained a `com.snowplowanalytics.snowplow/link_click/jsonschema/1-0-1`, then the final JSON would contain:
 
-```
+```json
 { "app_id":"demo","platform":"web","etl_tstamp":"2015-12-01T08:32:35.048Z",
   "unstruct_event_com_snowplowanalytics_snowplow_link_click_1": {
     "targetUrl":"http://www.example.com",
@@ -42,23 +42,23 @@ For example, if an enriched event contained a `com.snowplowanalytics.snowplow/li
   },...
 ```
 
-##Using the SDK
+## Using the SDK
 
-###Installation
+### Installation
 
 The latest version of Snowplow Python Analytics SDK is 0.1.0. It is compatible with Python 2.7 and Python 3.3.
 
 You can install it like this:
 
-```
-pip install snowplow_analytics_sdk
+```bash
+$ pip install snowplow_analytics_sdk
 ```
 
-###Transforming events
+### Transforming events
 
 You can convert an enriched event TSV string to a JSON like this:
 
-```
+```python
 import snowplow_analytics_sdk.event_transformer
 import snowplow_analytics_sdk.snowplow_event_transformation_exception
 
