@@ -2,7 +2,7 @@
 
 - [Overview](Snowplow-Analytics-SDK)
 - [Scala Analytics SDK](Scala-Analytics-SDK)
-- [Python Analytics SDK](Python Analytics SDK)
+- [Python Analytics SDK](Python-Analytics-SDK)
 - Node.js Analytics SDK
 - Java Analytics SDK
 
