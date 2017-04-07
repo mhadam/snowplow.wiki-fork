@@ -3,6 +3,9 @@
 - [Overview](Snowplow-Analytics-SDK)
 - [Scala Analytics SDK](Scala-Analytics-SDK)
 - [Python Analytics SDK](Python-Analytics-SDK)
+    * [Setup](Python-Analytics-SDK-Setup)
+    * [Event Transformer](Python-Analytics-SDK-Event-Transformer)
+    * [Run Manifests](Python-Analytics-SDK-Run-Manifests)
 - Node.js Analytics SDK
 - Java Analytics SDK
 
