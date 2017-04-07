@@ -26,6 +26,7 @@ The SDK should be relatively straightforward to setup if you are familiar with P
 ## 2. Compatibility
 
 Snowplow Python Analytics SDK was tested with Python of versions: 2.7, 3.3, 3.4, 3.5.
+
 As analytics SDKs supposed to be used heavily in conjunction with data-processing engines such as [Apache Spark][spark], our goal is to maintain compatibility with all versions that PySpark supports.
 Whenever possible we try to maintain compatibility with broader range of Python versions and computing environments.
 This is achieved mostly by minimazing and isolating third-party dependencies and libraries.

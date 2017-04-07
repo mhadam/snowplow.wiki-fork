@@ -1,3 +1,5 @@
+<a name="top" />
+
 [**HOME**](Home) » [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow-technical-documentation) » [**Snowplow Analytics SDK**](Snowplow-Analytics-SDK) » Python Analytics SDK Run Manifests
 
 **This feature is added in 0.2.0 release, which is not published yet**
@@ -7,7 +9,7 @@
 The [Snowplow Analytics SDK for Python](https://github.com/snowplow/snowplow-python-analytics-sdk) provides you an API to work with run manifests.
 Run manifests is simple way to mark chunk (particular run) of enriched data as being processed, by for example Apache Spark data-modeling job.
 
-### Usage
+## Usage
 
 Run manifests functionality resides in new `snowplow_analytics_sdk.run_manifests` module.
 
@@ -16,7 +18,7 @@ Other commonly-used function is `list_runids` that is gives S3 client and path t
 folders that match Snowplow run id format (`run-YYYY-mm-DD-hh-MM-SS`).
 Using `list_runids` and `RunManifests` you can list job runs and safely process them one by one without risk of reprocessing.
 
-### Example
+## Example
 
 Here's a short usage example:
 
@@ -52,3 +54,8 @@ Note that `run_id` is simple string with S3 key of particular job run.
 * `create` DynamoDB table for manifests, 
 * `add` run to table 
 * check if table `contains` run id
+
+[Back to top](#top)  
+[Back to Python Analytics SDK contents][contents]
+
+[contents]: Python-Analytics-SDK

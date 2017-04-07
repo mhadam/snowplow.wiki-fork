@@ -1,8 +1,8 @@
+<a name="top" />
+
 [**HOME**](Home) » [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow-technical-documentation) » [**Snowplow Analytics SDK**](Snowplow-Analytics-SDK) » Python Analytics SDK Event Transformer
 
 ## Overview
-
-The [Snowplow Analytics SDK for Python](https://github.com/snowplow/snowplow-python-analytics-sdk) lets you work with [Snowplow enriched events](https://github.com/snowplow/snowplow/wiki/canonical-event-model) in your Python event processing, data modeling and machine-learning jobs. You can use this SDK with [Apache Spark](http://spark.apache.org/), [AWS Lambda](https://aws.amazon.com/lambda/), and other Python-compatible data processing frameworks.
 
 The Snowplow enriched event is a relatively complex TSV string containing self-describing JSONs. Rather than work with this structure directly, Snowplow analytics SDKs ship with *event transformers*, which translate the Snowplow enriched event format into something more convenient for engineers and analysts.
 
@@ -42,9 +42,7 @@ For example, if an enriched event contained a `com.snowplowanalytics.snowplow/li
   },...
 ```
 
-## Using the SDK
-
-### Transforming events
+## Example
 
 You can convert an enriched event TSV string to a JSON like this:
 
@@ -60,3 +58,8 @@ except snowplow_analytics_sdk.snowplow_event_transformation_exception.SnowplowEv
 ```
 
 Note that if the transformation throws an exception, the `error_messages` field of that exception will contain information about everything which was invalid about the TSV.
+
+[Back to top](#top)  
+[Back to Python Analytics SDK contents][contents]
+
+[contents]: Python-Analytics-SDK
