@@ -2,8 +2,6 @@
 
 [**HOME**](Home) » [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow-technical-documentation) » [**Snowplow Analytics SDK**](Snowplow-Analytics-SDK) » Python Analytics SDK Run Manifests
 
-**This feature is added in 0.2.0 release, which is not published yet**
-
 ## Overview
 
 The [Snowplow Analytics SDK for Python](https://github.com/snowplow/snowplow-python-analytics-sdk) provides you an API to work with run manifests.
