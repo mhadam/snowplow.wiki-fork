@@ -76,6 +76,7 @@ $ unzip snowplow_emr_{{RELEASE_VERSION}}.zip
 You will see two files `snowplow-emr-etl-runner` and `snowplow-storage-loader` where the first one is the actual EmrEtlRunner.
 
 <a name="configuration"/>
+
 ## 4. Configuration
 
 EmrEtlRunner requires a YAML format configuration file to run. There is a configuration file template available in the Snowplow GitHub repository at [`/3-enrich/emr-etl-runner/config/config.yml.sample`][config-yml]. See [[Common configuration]] more information on how to write this file.
