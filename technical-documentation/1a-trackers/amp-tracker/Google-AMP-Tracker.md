@@ -14,6 +14,7 @@
 - 4. [Analytics](#analytics)  
 
 <a name="overview" />
+
 ## 1. Overview
 
 Snowplow is collaborating with Google on their [Accelerated Mobile Pages Project] [amp] (AMPP or AMP for short). AMP is an open source (Apache License 2.0) initiative to improve the mobile web experience by optimizing web pages for mobile devices.
@@ -38,6 +39,7 @@ Snowplow is natively integrated in the project, so pages optimized with AMP HTML
 [Back to top](#top)
 
 <a name="vars" />
+
 ## 2. Standard variables
 
 Certain parameters must be provided in the `"vars"` section of the tag:
@@ -51,6 +53,7 @@ Certain parameters must be provided in the `"vars"` section of the tag:
 [Back to top](#top)
 
 <a name="collectorHost" />
+
 ### 2.1 `collectorHost`
 
 Specify the host to your collector like so:
@@ -70,6 +73,7 @@ Notes:
 [Back to top](#top)
 
 <a name="appId" />
+
 ### 2.2 `appId`
 
 You must set the application ID for the website you are tracking via AMP:
@@ -87,18 +91,20 @@ Notes:
 [Back to top](#top)
 
 <a name="events" />
+
 ## 3. Tracking events
 
 The following trigger request values are supported for the Snowplow Analytics configuration:
 
  * `pageView` for page view tracking
- * `unstructEvent` for structured event tracking
+ * `structEvent` for structured event tracking
 
 All event tracking is disabled by default; you can enable it on an event-by-event basis as follows:
 
 [Back to top](#top)
 
 <a name="pageView" />
+
 ### 3.1 Page view
 
 Enable the page view tracking like so:
@@ -125,6 +131,7 @@ Enable the page view tracking like so:
 [Back to top](#top)
 
 <a name="structEvent" />
+
 ### 3.2 Structured events
 
 Structured events are user interactions with content that can be tracked independently from a web page or a screen load. "Structured" refers to the Google Analytics-style structure of having up to five fields (with only the first two required).
@@ -170,6 +177,7 @@ You can set key-value pairs for the following event fields in the vars attribute
 [Back to top](#top)
 
 <a name="analytics" />
+
 ### 4. Analytics
 
 All events sent via this tracker will have:
