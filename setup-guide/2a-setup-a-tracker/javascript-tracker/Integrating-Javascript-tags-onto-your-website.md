@@ -18,6 +18,7 @@ We recommend using the Snowplow asynchronous tags. Doing so means that the loadi
 4. [Next steps](#next-steps)
 
 <a name="pageview"/>
+
 ## 1. Setting up Snowplow pageview tracking
 
 ### 1.1 Asyncronous integration
@@ -76,6 +77,7 @@ window.snowplow('newTracker', 'mycljcoll', 'snowplow-coll.acme.com', { // Initia
 Setting the collector endpoint is essential for Snowplow to work. Setting the application ID and cookie domain are optional. For details on setting these, see the [JavaScript technical documentation guide] (Javascript-Tracker).
 
 <a name="sync"/>
+
 ### 1.2 Synchronous integration
 
 #### 1.2.1 Installing the header script
@@ -102,6 +104,7 @@ snowplowTracker.trackPageView();
 We recommend to use synchronous only for debugging purposes, as there's a big chance that many events from users with slow/2G connection will [be lost][document-write-deprecation].
 
 <a name="events" />
+
 ## 2. Tracking more than just page views: event tracking, ecommerce tracking etc.
 
 Snowplow has been built to track more than simply page views. We believe, as far as possible, that *every* event that can happen on a user journey should be captured in Snowplow, and that includes every in-page events that might not result in a new page load. (Which are the only events that are captured as by the page view tracking already implemented.) The JavaScript Tracker incorporates a number of functions to capture a wealth of events including:
@@ -115,6 +118,7 @@ Detailed documentation on how to capture the complete range of events possible w
 Note: once you have finished setting up the additional Snowplow events (as documented in the [Technical Documentation](snowplow-technical-documentation) section), we recommend returning to the setup guide to complete your Snowplow installation.
 
 <a name="next-steps" />
+
 ## 3. Next steps
 
 Once you have integrated Snowplow tracking tags on your site, you can [test that the tags fire] (testing the javascript tracker is firing).
