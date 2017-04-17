@@ -4,12 +4,12 @@
 
 ## Contents
 
-1. [Overview](#overview)  
-2. [Compatibility](#compatibility)  
-3. [Setup](#setup)  
-  3.1 [SBT](#sbt)  
-  3.2 [Gradle](#gradle)  
-  3.3 [Maven](#maven)  
+- 1 [Overview](#overview)  
+- 2 [Compatibility](#compatibility)  
+- 3 [Setup](#setup)  
+  - 3.1 [SBT](#sbt)  
+  - 3.2 [Gradle](#gradle)  
+  - 3.3 [Maven](#maven)  
 
 
 <a name="overview" />

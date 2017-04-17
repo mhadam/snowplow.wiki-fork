@@ -1,28 +1,28 @@
 <a name="top" />
 
-[**HOME**](Home) » [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow-technical-documentation) » [**Snowplow Analytics SDK**](Snowplow-Analytics-SDK) » Python Analytics SDK Event Transformer
-
-## Contents
+[**HOME**](Home) » [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow-technical-documentation) » [**Snowplow Analytics SDK**](Snowplow-Analytics-SDK) » Scala Analytics SDK
 
 - 1 [Overview](#overview)  
 - 2 [The JSON Event Transformer](#transformer)  
-- 3 [Example](#example)  
+- 3 [Examples](#example)  
+  - 3.1 [Using from Apache Spark](#spark)  
+  - 3.2 [Using from AWS Lambda](#lambda)  
 
 <a name="overview" />
 
 ## Overview
 
-The Snowplow enriched event is a relatively complex TSV string containing self-describing JSONs. Rather than work with this structure directly, Snowplow analytics SDKs ship with *event transformers*, which translate the Snowplow enriched event format into something more convenient for engineers and analysts.
+The Snowplow enriched event is a relatively complex TSV string containing self-describing JSONs. 
 Rather than work with this structure directly, Snowplow analytics SDKs ship with *event transformers*, which translate the Snowplow enriched event format into something more convenient for engineers and analysts.
 
 As the Snowplow enriched event format evolves towards a cleaner [Apache Avro](https://avro.apache.org/)-based structure, we will be updating this Analytics SDK to maintain compatibility across different enriched event versions.
 
-Working with the Snowplow Python Analytics SDK therefore has two major advantages over working with Snowplow enriched events directly:
+Working with the Snowplow Scala Analytics SDK therefore has two major advantages over working with Snowplow enriched events directly:
 
 1. The SDK reduces your development time by providing analyst- and developer-friendly transformations of the Snowplow enriched event format
 2. The SDK futureproofs your code against new releases of Snowplow which update our enriched event format
 
-Currently the Python Analytics SDK ships with one event transformer: the JSON Event Transformer. 
+Currently the Analytics SDK for Scala ships with one event transformer: the JSON Event Transformer. 
 
 <a name="transformer" />
 
@@ -55,24 +55,48 @@ For example, if an enriched event contained a `com.snowplowanalytics.snowplow/li
 
 <a name="example" />
 
-## Example
+## Examples
 
-You can convert an enriched event TSV string to a JSON like this:
+<a name="spark" />
 
-```python
-import snowplow_analytics_sdk.event_transformer
-import snowplow_analytics_sdk.snowplow_event_transformation_exception
+### Using from Apache Spark
 
-try:
-    print(snowplow_analytics_sdk.event_transformer.transform(my_enriched_event_tsv))
-except snowplow_analytics_sdk.snowplow_event_transformation_exception.SnowplowEventTransformationException as e:
-    for error_message in e.error_messages:
-        print(error_message)
+The Scala Analytics SDK is a great fit for performing Snowplow [event data modeling](http://snowplowanalytics.com/blog/2016/03/16/introduction-to-event-data-modeling/) in Apache Spark and Spark Streaming.
+
+Here’s the code we use internally for our own data modeling jobs:
+
+```scala
+import com.snowplowanalytics.snowplow.analytics.scalasdk.json.EventTransformer
+
+val events = input
+  .map(line => EventTransformer.transform(line))
+  .filter(_.isSuccess)
+  .flatMap(_.toOption)
+
+val dataframe = ctx.read.json(events)
 ```
 
-Note that if the transformation throws an exception, the `error_messages` field of that exception will contain information about everything which was invalid about the TSV.
+<a name="lambda" />
+
+### Using from AWS Lambda
+
+The Scala Analytics SDK is a great fit for performing analytics-on-write, monitoring or alerting on Snowplow event streams using AWS Lambda.
+
+Here’s some sample code for transforming enriched events into JSON inside a Scala Lambda:
+
+```scala
+import com.snowplowanalytics.snowplow.analytics.scalasdk.json.EventTransformer
+
+def recordHandler(event: KinesisEvent) {
+
+  val events = for {
+    rec <- event.getRecords
+    line = new String(rec.getKinesis.getData.array())
+    json = EventTransformer.transform(line)
+  } yield json
+```
 
 [Back to top](#top)  
-[Back to Python Analytics SDK contents][contents]
+[Back to Scala Analytics SDK contents][contents]
 
-[contents]: Python-Analytics-SDK
+[contents]: Scala-Analytics-SDK
