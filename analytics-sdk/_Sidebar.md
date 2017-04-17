@@ -2,6 +2,7 @@
 
 - [Overview](Snowplow-Analytics-SDK)
 - [Scala Analytics SDK](Scala-Analytics-SDK)
+    * [Setup](Scala-Analytics-SDK-Setup)
 - [Python Analytics SDK](Python-Analytics-SDK)
     * [Setup](Python-Analytics-SDK-Setup)
     * [Event Transformer](Python-Analytics-SDK-Event-Transformer)
