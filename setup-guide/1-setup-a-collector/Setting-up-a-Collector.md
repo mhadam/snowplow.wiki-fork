@@ -1,6 +1,6 @@
 <a name="top" />
 
-[**HOME**](Home) » [**SNOWPLOW SETUP GUIDE**](Setting-up-Snowplow) » [**Step 1: Setup a Collector**](Setting-up-a-collector)
+[HOME](Home) » [SNOWPLOW SETUP GUIDE](Setting-up-Snowplow) » Step 1: Setup a Collector
 
 [[https://d3i6fms1cm1j0i.cloudfront.net/github-wiki/images/snowplow-architecture-2-collectors.png]]
 
