@@ -2,6 +2,8 @@
 
 [**HOME**](Home) » [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow-technical-documentation) » [**Snowplow Analytics SDK**](Snowplow-Analytics-SDK) » Scala Analytics SDK setup
 
+**Page refers to 0.2.0 which is not yet released**
+
 ## Contents
 
 - 1 [Overview](#overview)  
