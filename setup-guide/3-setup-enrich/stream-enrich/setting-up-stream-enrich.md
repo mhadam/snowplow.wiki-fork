@@ -1,12 +1,12 @@
 <a name="top" />
 
-[**HOME**](Home) > [**SNOWPLOW SETUP GUIDE**](Setting-up-Snowplow) > [Step 3: Setting up Enrich](Setting-up-enrich) > [**Step 3.2: setting up Stream Enrich**](Setting-up-Stream-Enrich)
+[HOME](Home) » [SNOWPLOW SETUP GUIDE](Setting-up-Snowplow) » [Step 3: Setting up Enrich](Setting-up-enrich) » Step 3.2: setting up Stream Enrich
 
 [[https://d3i6fms1cm1j0i.cloudfront.net/github-wiki/images/3-enrich.png]] 
 
 ## Overview of Stream Enrich
 
-[Stream Enrich] [stream-enrich] is a Kinesis application, built using the Kinesis Client Library, which:
+[Stream Enrich][stream-enrich] is a Kinesis application, built using the Kinesis Client Library, which:
 
 1. **Reads** raw Snowplow events off a Kinesis stream populated by the Scala Stream Collector
 2. **Validates** each raw event
