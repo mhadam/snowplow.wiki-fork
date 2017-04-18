@@ -1,4 +1,4 @@
-[**HOME**](Home) > [**SNOWPLOW SETUP GUIDE**](Setting-up-Snowplow) > [**Step 1: setup a Collector**](Setting-up-a-collector) > [**Setup the Cloudfront collector**](setting up the cloudfront collector) > 1. Setup a bucket on S3 for the pixel
+[**HOME**](Home) » [**SNOWPLOW SETUP GUIDE**](Setting-up-Snowplow) » [**Step 1: setup a Collector**](Setting-up-a-collector) » [**Setup the Cloudfront collector**](Setting-up-the-Cloudfront-collector) » 1. Setup a bucket on S3 for the pixel
 
 Log into your AWS account on [console.aws.amazon.com](https://console.aws.amazon.com) and select **S3** from the list of services offered. (Under **Storage & Content Delivery**.) You should be presented with a screen like the one below:
 
@@ -19,6 +19,7 @@ Click the **Create** button on the bottom right of the popup. The new bucket sho
 [[/setup-guide/images/cloudfront-collector-setup-guide/s3-bucket-created.jpg]]
 
 <a name="privacy" />
+
 ## A note on privacy
 
 Above we mentioned that, from a performance perspective, it is not important which Amazon data center you choose to self-host your pixel, or indeed your JavaScript:
@@ -29,7 +30,7 @@ However, data center choice, particularly for your access logs, does matter from
 
 It is your responsibility to ensure that you comply with the privacy laws governing your web property and users.
 
-##Alternative approach: AWS CLI
+## Alternative approach: AWS CLI
 
 Alternatively, the above steps could be achieved with the following [AWS CLI](https://aws.amazon.com/cli/) commands.
 
