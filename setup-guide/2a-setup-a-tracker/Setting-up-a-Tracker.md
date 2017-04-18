@@ -1,6 +1,8 @@
 <a name="top" />
 
-[**HOME**](Home) > [**SNOWPLOW SETUP GUIDE**](Setting-up-Snowplow) > [**Step 2a: Setup a Tracker**](Setting-up-a-tracker)
+[HOME](Home) » [SNOWPLOW SETUP GUIDE](Setting-up-Snowplow) » Step 2a: Setup a Tracker
+
+---
 
 [[https://d3i6fms1cm1j0i.cloudfront.net/github-wiki/images/snowplow-architecture-1a-trackers.png]]
 
@@ -9,6 +11,7 @@ Snowplow Trackers generate event-data and send that data to [Snowplow Collectors
 1. [Choose and setup a Tracker](#choose-setup)
 
 <a name="choose-setup" />
+
 ## 1. Choose and setup a Tracker
 
 There are currently 16 trackers available for setup:
