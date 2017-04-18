@@ -1,4 +1,4 @@
-[**HOME**](Home) » [**SNOWPLOW SETUP GUIDE**](Setting-up-Snowplow) » [**Step 1: setup a Collector**](Setting-up-a-collector) » Setting up the Cloudfront collector
+[HOME](Home) » [SNOWPLOW SETUP GUIDE](Setting-up-Snowplow) » [Step 1: setup a Collector](Setting-up-a-collector) » Setting up the Cloudfront collector
 
 ## Introduction
 
