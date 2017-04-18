@@ -1,4 +1,4 @@
-[**HOME**](Home) > [**SNOWPLOW SETUP GUIDE**](Setting-up-Snowplow) > [**Step 1: setup a Collector**](Setting-up-a-Collector) > [**Clojure collector setup**](setting-up-the-clojure-collector) > [[Enable logging to S3]]
+[**HOME**](Home) » [**SNOWPLOW SETUP GUIDE**](Setting-up-Snowplow) » [**Step 1: setup a Collector**](Setting-up-a-Collector) » [**Clojure collector setup**](setting-up-the-clojure-collector) » [[Download the Clojure collector WAR file or compile it from source]] » [[Create a new application in Elastic Beanstalk and upload the WAR file into it]] » [[Enable logging to S3]] » Configuring the Clojure collector
 
 There are several settings to configure for your Clojure collector application:
 
@@ -40,7 +40,7 @@ When you are done, click the **Save** button.
 
 Enabling this will enable us to make sure that in the event you want to scale down your cluster, you do not lose any log files generated on machines that will be terminated.
 
-To do this, navigate to the EC2 section of the AWS console and select **Load Balancers** from the left hand menu. Select the relevant Load Balancer from the list and click the **Edit** button in the **Connection Draining** section to enable this, as in the diagrams below:
+To do this, navigate to the EC2 section of the AWS console and select **Load Balancers** from the left-hand menu. Select the relevant Load Balancer from the list and click the **Edit** button in the **Connection Draining** section to enable this, as in the diagrams below:
 
 [[/setup-guide/images/clojure-collector-setup-guide/23.png]]
 
