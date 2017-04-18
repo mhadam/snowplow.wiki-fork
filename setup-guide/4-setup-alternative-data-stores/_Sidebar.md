@@ -1,4 +1,4 @@
-[**HOME**](Home) > [**SNOWPLOW SETUP GUIDE**](setting-up-snowplow) > [**Step 4: Setup alternative data stores**](setting-up-alternative-data-stores)
+[**HOME**](Home) » [**SNOWPLOW SETUP GUIDE**](setting-up-snowplow) » [**Step 4: Setup alternative data stores**](setting-up-alternative-data-stores)
 
 [**Setup Snowplow**](setting-up-snowplow)
 

@@ -1,4 +1,4 @@
-[**HOME**](Home) > [**SNOWPLOW SETUP GUIDE**](setting-up-snowplow) > [**Step 3: Setup Enrich**](Setting-up-enrich)
+[**HOME**](Home) » [**SNOWPLOW SETUP GUIDE**](setting-up-snowplow) » [**Step 3: Setup Enrich**](Setting-up-enrich)
 
 [**Setup Snowplow**](setting-up-snowplow)
 
