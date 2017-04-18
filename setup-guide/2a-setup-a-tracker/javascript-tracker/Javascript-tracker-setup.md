@@ -1,4 +1,6 @@
-[**HOME**](Home) > [**SNOWPLOW SETUP GUIDE**](Snowplow setup guide) > [**Step 2: setup a Tracker**](choosing-a-tracker) > [JavaScript Tracker](Javascript-tracker-setup)
+[HOME](Home) » [SNOWPLOW SETUP GUIDE](Snowplow-setup-guide) » [Step 2: setup a Tracker](choosing-a-tracker) » JavaScript Tracker
+
+---
 
 Before you integrate Snowplow's JavaScript Tracker, you need to decide whether you'll integrate it with a tag management system, or implement the Snowplow tags directly onto your site.
 
