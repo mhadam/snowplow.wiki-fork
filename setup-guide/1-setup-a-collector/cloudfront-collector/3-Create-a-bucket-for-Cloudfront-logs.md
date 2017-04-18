@@ -1,10 +1,10 @@
-[**HOME**](Home) > [**SNOWPLOW SETUP GUIDE**](Setting-up-Snowplow) > [**Step 1: setup a Collector**](Setting-up-a-collector) > [**Setup the Cloudfront collector**](setting up the cloudfront collector) > 3. Create a bucket for the Cloudfront logs
+[**HOME**](Home) » [**SNOWPLOW SETUP GUIDE**](Setting-up-Snowplow) » [**Step 1: setup a Collector**](Setting-up-a-collector) » [**Setup the Cloudfront collector**](Setting-up-the-Cloudfront-collector) » [**1. Setup a bucket on S3 for the pixel**](1-Setup-a-bucket-on-S3-for-the-pixel) » [**2. Upload the Tracking Pixel**](2-upload-the-tracking-pixel) » 3. Create a bucket for the Cloudfront logs
 
 Click on the **Create bucket** button again, this time to create a second bucket for storing the log files that Cloudfront will generate. Give the bucket a suitable name.
 
 [[/setup-guide/images/cloudfront-collector-setup-guide/s3-create-logs-bucket.jpg]]
 
-##Alternative approach: AWS CLI
+## Alternative approach: AWS CLI
 
 Alternatively, the above step could be achieved with the following [AWS CLI](https://aws.amazon.com/cli/) command.
 
