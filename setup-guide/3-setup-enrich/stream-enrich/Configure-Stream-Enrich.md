@@ -1,6 +1,6 @@
 <a name="top" />
 
-[**HOME**](Home) > [**SNOWPLOW SETUP GUIDE**](Setting-up-Snowplow) > [**Step 3: Setting up Enrich**](Setting-up-enrich) > [**Step 3.2: setting up Stream Enrich**](Setting-up-Stream-Enrich) > [2: Configuring](Configuring-Stream-Enrich)
+[HOME](Home) » [SNOWPLOW SETUP GUIDE](Setting-up-Snowplow) » [Step 3: Setting up Enrich](Setting-up-enrich) » [Step 3.2: setting up Stream Enrich](setting-up-stream-enrich) » [[Install Stream Enrich]] » Configure Stream Enrich
 
 This documentation is for version 0.6.0 - 0.9.0 of Stream Enrich. Documentation for other versions is available:
 
@@ -14,7 +14,7 @@ Stream Enrich has a number of configuration options available.
 
 ### Template
 
-Download a template configuration file from GitHub: [config.hocon.sample] [app-conf].
+Download a template configuration file from GitHub: [config.hocon.sample][app-conf].
 
 Now open the `config.hocon.sample` file in your editor of choice.
 
@@ -61,8 +61,6 @@ out: {
   bad: "SnowplowBad"
 }
 ```
-
-
 
 ### Monitoring
 
