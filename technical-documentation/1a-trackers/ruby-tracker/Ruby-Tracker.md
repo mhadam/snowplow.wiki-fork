@@ -1,6 +1,6 @@
 <a name="top" />
 
-[**HOME**](Home) > [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow technical documentation) > [**Trackers**](trackers) > Ruby Tracker
+[**HOME**](Home) » [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow-technical-documentation) » [**Trackers**](trackers) » Ruby Tracker
 
 **This page refers to version 0.6.1 of the Snowplow Ruby Tracker. Documentation for other versions is available:**
 
@@ -55,26 +55,29 @@
   - 8.1 [snowplow_ruby_duid](#snowplow-ruby-duid)
 
 <a name="overview" />
+
 ## 1. Overview
 
 The Snowplow Ruby Tracker allows you to track Snowplow events in your Ruby applications and gems and Ruby on Rails web applications.
 
 The tracker should be straightforward to use if you are comfortable with Ruby development; any prior experience with Snowplow's [[Python Tracker]], [[JavaScript Tracker]], [[Lua Tracker]], Google Analytics or Mixpanel (which have similar APIs to Snowplow) is helpful but not necessary.
 
-The Ruby Tracker and Python Tracker have very similiar functionality and APIs.
+The Ruby Tracker and Python Tracker have very similar functionality and APIs.
 
 There are three main classes which the Ruby Tracker uses: subjects, emitters, and trackers.
 
-A subject represents a single user whose events are tracked, and holds data specific to that user. If your tracker will only be tracking a single user, you don't have to create a subject - it will be done automatically.
+A subject represents a single user whose events are tracked and holds data specific to that user. If your tracker will only be tracking a single user, you don't have to create a subject - it will be done automatically.
 
 A tracker always has one active subject at a time associated with it. It constructs events with that subject and sends them to one or more emitters, which sends them on to a Snowplow collector.
 
 <a name="init" />
+
 ## 2. Initialization
 
 Assuming you have completed the [[Ruby Tracker Setup]] for your Ruby project, you are ready to initialize the Ruby Tracker.
 
 <a name="requiring" />
+
 ### 2.1 Requiring the module
 
 Require the Ruby Tracker into your code like this:
@@ -86,6 +89,7 @@ require 'snowplow_tracker'
 You can now initialize tracker instances.
 
 <a name="create-tracker" />
+
 ### 2.2 Creating a tracker
 
 Initialize a tracker instance like this:
@@ -116,6 +120,7 @@ tracker = SnowplowTracker::Tracker.new(emitter, initial_subject, 'cf', 'ID-ap000
 ```
 
 <a name="multi-tracker" />
+
 ### 2.3 Creating multiple trackers
 
 Each tracker instance is completely sandboxed, so you can create multiple trackers as you see fit.
@@ -136,9 +141,8 @@ t1.track_screen_view("Test", "23") # Back to first tracker
 
 [Back to top](#top)
 
-[Back to top](#top)
-
 <a name="add-data" />
+
 ## 3. Adding extra data
 
 You can configure the a tracker instance with additional information about your application's environment or current user. This data will be attached to every event the tracker fires regarding the subject. Here are the available methods:
@@ -197,6 +201,7 @@ my_tracker.set_subject(s0).track_screen_view('final page')
 ```
 
 <a name="set-platform" />
+
 ### 3.1 Set the tracker's platform with `set_platform`
 
 The platform can be any one of `'pc'`, `'tv'`, `'mob'`, `'cnsl'`, or `'iot'`. The default platform is `'srv'`.
@@ -206,6 +211,7 @@ tracker.set_platform('mob')
 ```
 
 <a name="set-user-id" />
+
 ### 3.2 Set the user ID with `set_user_id`
 
 You can make the user ID a string of your choice:
@@ -215,42 +221,47 @@ tracker.set_user_id('user-000563456')
 ```
 
 <a name="set-screen-resolution" />
+
 ### 3.3 Set the screen resolution with `set_screen_resolution`
 
-If your Ruby code has access to the device's screen resolution, you can pass it in to Snowplow. Both numbers should be positive integers; note the order is width followed by height. Example:
+If your Ruby code has access to the device's screen resolution, you can pass it into Snowplow. Both numbers should be positive integers; note the order is width followed by height. Example:
 
 ```ruby
 tracker.set_screen_resolution(1366, 768)
 ```
 
 <a name="set-viewport" />
+
 ### 3.4 Set the viewport dimensions with `set_viewport`
 
-Similarly, you can pass the viewport dimensions in to Snowplow. Again, both numbers should be positive integers and the order is width followed by height. Example:
+Similarly, you can pass the viewport dimensions into Snowplow. Again, both numbers should be positive integers and the order is width followed by height. Example:
 
 ```ruby
 tracker.set_viewport(300, 200)
 ```
 
 <a name="set-color-depth" />
+
 ### 3.5 Set the color depth with `set_color_depth`
 
-If your Ruby code has access to the bit depth of the device's color palette for displaying images, you can pass it in to Snowplow. The number should be a positive integer, in bits per pixel.
+If your Ruby code has access to the bit depth of the device's color palette for displaying images, you can pass it into Snowplow. The number should be a positive integer, in bits per pixel.
 
 ```ruby
 tracker.set_color_depth(24)
 ```
 
 <a name="set-timezone" />
+
 ### 3.6 Setting the timezone with `set_timezone`
 
-If your Ruby code has access to the timezone of the device, you can pass it in to Snowplow:
+If your Ruby code has access to the timezone of the device, you can pass it into Snowplow:
 
 ```ruby
 tracker.set_timezone('Europe London')
 ```
 
 <a name="set-language" />
+
 ### 3.7 Setting the language with `set_lang`
 
 You can set the language field like this:
@@ -260,6 +271,7 @@ tracker.set_lang('en')
 ```
 
 <a name="set-ip-address" />
+
 ### 3.8 Setting the IP address with `set_ip_address`
 
 If you have access to the user's IP address, you can set it like this:
@@ -314,6 +326,7 @@ tracker.set_network_user_id('ecdff4d0-9175-40ac-a8bb-325c49733607')
 ```
 
 <a name="set-fingerprint" />
+
 ### 3.12 Setting the user fingerprint with `set_fingerprint`
 
 The JavaScript Tracker generates a fingerprint based on browser features and attaches it to all client-side events. You can set the user fingerprint field for server-side events like this:
@@ -325,6 +338,7 @@ tracker.set_fingerprint(164502195)
 [Back to top](#top)
 
 <a name="events" />
+
 ## 4. Tracking specific events
 
 Snowplow has been built to enable you to track a wide range of events that occur when users interact with your websites and apps. We are constantly growing the range of functions available in order to capture that data more richly.
@@ -340,6 +354,7 @@ Tracking methods supported by the Ruby Tracker at a glance:
 | [`track_self_describing_event`](#self-describing-event)   | Track a Snowplow custom unstructured event             |
 
 <a name="common" />
+
 ### 4.1 Common
 
 All events are tracked with specific methods on the tracker instance, of the form `track_XXX()`, where `XXX` is the name of the event to track.
@@ -347,14 +362,16 @@ All events are tracked with specific methods on the tracker instance, of the for
 All tracker methods return the tracker instance, and so are chainable.
 
 <a name="validation" />
+
 #### 4.1.1 Argument validation
 
 Each `track_XXX` method expects arguments of a certain type. The types are validated using the Ruby Contracts library. If a check fails, a runtime error is thrown. The section for each `track_XXX` method specifies the expected argument types for that method.
 
 <a name="context-arg" />
+
 #### 4.1.2 Optional context argument
 
-Each `track_XXX` method has `context` as its penultimate optional parameter. This is for an optional nonempty array of [self-describing custom context JSONs][self-describing-jsons] attached to the event. Each element of the `context` argument should be a `SelfDescribingJson` with two fields: the "schema", pointing to the JSON schema against which the context will be validated, and the "data", containing the context data itself. The "data" field should contain a flat hash of key-value pairs.  
+Each `track_XXX` method has `context` as its penultimate optional parameter. This is for an optional non-empty array of [self-describing custom context JSONs][self-describing-jsons] attached to the event. Each element of the `context` argument should be a `SelfDescribingJson` with two fields: the "schema", pointing to the JSON schema against which the context will be validated, and the "data", containing the context data itself. The "data" field should contain a flat hash of key-value pairs.  
 
 **Important:**
 * Even if only one custom context is being attached to an event, it still needs to be wrapped in an array.
@@ -390,6 +407,7 @@ The keys of a context hash can be either strings or Ruby symbols.
 For more on how to use custom contexts, see the [blog post][contexts] which introduced them.
 
 <a name="tstamp-arg" />
+
 #### 4.1.3 Optional timestamp argument
 
 After the optional context argument, each `track_XXX` method supports an optional timestamp as its final argument. This allows you to manually override the timestamp attached to this event. If you do not pass this timestamp in as an argument, then the Ruby Tracker will use the current time to be the timestamp for the event. Timestamp is counted in milliseconds since the Unix epoch - the same format generated by `Time.now.to_i * 1000` in Ruby.
@@ -421,6 +439,7 @@ t.track_page_view('http://example.com',
 ```
 
 <a name="common-example" />
+
 #### 4.1.4 Example
 
 Here is an example of a page view event with custom context and timestamp arguments supplied:
@@ -449,6 +468,7 @@ tracker.track_page_view('http://www.film_company.com/movie_poster', nil, nil, [
 ```
 
 <a name="screen-view" />
+
 ### Track screen views with `track_screen_view`
 
 Use `track_screen_view()` to track a user viewing a screen (or equivalent) within your app. Arguments are:
@@ -467,6 +487,7 @@ tracker.track_screen_view("HUD > Save Game", "screen23")
 ```
 
 <a name="page-view" />
+
 ### Track page views with `track_page_view`
 
 Use `track_page_view()` to track a user viewing a page within your app.
@@ -487,6 +508,7 @@ t.track_page_view("www.example.com", "example", "www.referrer.com")
 ```
 
 <a name="ecommerce-transaction" />
+
 ### 4.4 Track ecommerce transactions with `track-ecommerce-transaction()`
 
 Use `track_ecommerce_transaction()` to track an ecommerce transaction.
@@ -584,6 +606,7 @@ All three events will have the same timestamp and same randomly generated Snowpl
 Note that each item in the transaction can have its own custom context.
 
 <a name="struct-event" />
+
 ### 4.5 Track structured events with `track_struct_event`
 
 Use `track_struct_event()` to track a custom event happening in your app which fits the Google Analytics-style structure of having up to five fields (with only the first two required):
@@ -606,14 +629,16 @@ tracker.track_struct_event("shop", "add-to-basket", nil, "pcs", 2)
 ```
 
 <a name="unstruct-event" />
+
 ### 4.6 Track unstructured events with ```track_unstruct_event```
 
 This is the old name for [track_self_describing_event](#self-describing-event).
 
 <a name="self-describing-event" />
+
 ### 4.7 Track self describing events with ```track_self_describing_event```
 
-Use `track_self_describing_event()` to track a custom event which consists of a name and an self describing set of properties. This is useful when:
+Use `track_self_describing_event()` to track a custom event which consists of a name and a self-describing set of properties. This is useful when:
 
 * You want to track event types which are proprietary/specific to your business (i.e. not already part of Snowplow), or
 * You want to track events which have unpredictable or frequently changing properties
@@ -647,11 +672,13 @@ The keys of the `event_json` hash can be either strings or Ruby symbols.
 [Back to top](#top)
 
 <a name="emitters" />
+
 ## 5. Emitters
 
 Tracker instances must be initialized with an emitter. This section will go into more depth about the Emitter and AsyncEmitter classes.
 
 <a name="emitters-overview" />
+
 ### 5.1. Overview
 
 Each tracker instance must now be initialized with an Emitter which is responsible for firing events to a Collector. An Emitter instance is initialized with two arguments: an endpoint and an optional configuration hash. 
@@ -694,6 +721,7 @@ Every setting in the configuration hash is optional. Here is what they do:
 * `thread_count` is only used by the AsyncEmitter. It determines the number of worker threads which will be used to send events.
 
 <a name="async-emitter" />
+
 ### 5.2. The AsyncEmitter class
 
 AsyncEmitter is a subclass of Emitter. Whenever the buffer is flushed, the AsyncEmitter places the flushed events in a work queue. The AsyncEmitter asynchronously sends events in this queue using a thread pool of a fixed size. You can choose the size of this thread pool with the `thread_count` field:
@@ -704,11 +732,12 @@ AsyncEmitter.new(ENDPOINT, {
 })
 ```
 
-By default this value is 1.
+By default, this value is 1.
 
-**A note on testing:** if you test the AsyncEmitter by using a short script to send an event, you may find that the event fails to send. This is because the process exits before the flushing thread is finished. You can get round this either by adding a `sleep(10)` to the end of your script, or by using the [synchronous flush](#flushing).
+**A note on testing:** if you test the AsyncEmitter by using a short script to send an event, you may find that the event fails to send. This is because the process exits before the flushing thread is finished. You can get round this either by adding a `sleep(10)` to the end of your script or by using the [synchronous flush](#flushing).
 
 <a name="multiple-emitters" />
+
 ### 5.3. Multiple emitters
 
 It is possible to initialize a tracker with an array of emitters, in which case events will be sent to all of them:
@@ -726,6 +755,7 @@ my_tracker.add_emitter(another_emitter)
 ```
 
 <a name="flushing" />
+
 ### 5.4. Manual flushing
 
 You may want to force an emitter to send all events in its buffer, even if the buffer is not full. The `Tracker` class has a `flush` method which flushes all its emitters. It accepts one argument, `async`, which defaults to false. Unless you set `async` to `true`, the flush will be synchronous: it will block until all queued events have been sent.
@@ -739,6 +769,7 @@ my_tracker.flush
 ```
 
 <a name="onfailure-loop" />
+
 ### 5.5 Automatically retry sending failed events
 
 You can use the following function as the `on_failure` callback to immediately retry failed events:
@@ -755,6 +786,7 @@ end
 You may wish to add backoff logic to delay the resending.
 
 <a name="contracts" />
+
 ### 6. Contracts
 
 The Snowplow Ruby Tracker uses the [Ruby Contracts gem][contracts] for typechecking. As of version 0.6.0 these cannot be turned off.
@@ -783,11 +815,13 @@ The levels are:
 [Back to top](#top)
 
 <a name="advanced" />
+
 ## 8. Advanced usage
 
 This section covers more advanced techniques with the Snowplow Ruby Tracker.
 
 <a name="snowplow-ruby-duid" />
+
 ### 8.1. snowplow_ruby_duid
 
 [snowplow_ruby_duid](https://github.com/simplybusiness/snowplow_ruby_duid/) is a Ruby gem that allows you to populate Snowplow's `domain_userid` cookie server-side from any Rack-based framework. This is useful if you want to fire an event on the user's initial request with the `domain_userid` already populated.
