@@ -1,4 +1,4 @@
-[**HOME**](Home) » [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow-technical-documentation) » [**Trackers**](trackers)
+[**HOME**](Home) » [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow-technical-documentation) » Trackers
 
 [[https://d3i6fms1cm1j0i.cloudfront.net/github-wiki/images/snowplow-architecture-1a-trackers.png]]
 
@@ -13,6 +13,9 @@
 * [[ActionScript3 Tracker]] - for tracking events in your Flash Player 9+, Flash Lite 4 and AIR games, apps and widgets
 * [[Arduino Tracker]] - for tracking events from an IP-connected Arduino board
 * [[Android Tracker]] - for tracking events from your Android-based applications, games or frameworks
+* [[CPP Tracker]] - for tracking events from your C++ apps, games and servers
+* [[Golang Tracker]] - for tracking events from your Golang apps and servers
+* [[Google AMP Tracker]] - is natively integrated into the AMP project
 * [[iOS Tracker]] - for tracking events in your iOS apps and games
 * [[Java Tracker]] - for tracking events in your Java-based desktop and server apps, servlets and games
 * [JavaScript Tracker](Javascript-Tracker) - for tracking user activity on websites and webapps
@@ -25,7 +28,6 @@
 * [[Ruby Tracker]] - for tracking events in your Ruby and Rails apps and gems
 * [[Scala Tracker]] - for tracking events in your Scala apps and servers
 * [[Unity Tracker]] - for tracking events from your Unity games and apps
-* [[Golang Tracker]] - for tracking events from your Golang apps and servers
 
 For other trackers (e.g. Erlang, C++) and their approximate timelines, please see the [Product roadmap](Product-roadmap).
 
