@@ -14,8 +14,8 @@
 
 * [ActionScript3 Tracker](ActionScript3-Tracker)  
 * [Android Tracker](Android-Tracker)  
-* [Arduino Tracker](Arduino-Tracker) 
-* [[CPP Tracker]] 
+* [Arduino Tracker](Arduino-Tracker)  
+* [[CPP Tracker]]  
 * [Golang Tracker](Golang-tracker)  
 * [[Google AMP Tracker]]  
 * [iOS Tracker](iOS-Tracker)  
