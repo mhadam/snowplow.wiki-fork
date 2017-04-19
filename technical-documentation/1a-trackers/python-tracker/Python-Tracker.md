@@ -1,6 +1,6 @@
 <a name="top" />
 
-[**HOME**](Home) > [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow-technical-documentation) > [**Trackers**](trackers) > Python Tracker
+[**HOME**](Home) » [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow-technical-documentation) » [**Trackers**](trackers) » Python Tracker
 
 *This page refers to version 0.8.0 of the Snowplow Python Tracker, which is the latest version. Documentation for earlier versions is available:*
 
@@ -295,7 +295,7 @@ s.set_color_depth(32)
 
 ### 3.6 Set timezone with `set_timezone`
 
-This method lets you pass a user's timezone in to Snowplow:
+This method lets you pass a user's timezone into Snowplow:
 
 ```python
 s.timezone( {{TIMEZONE}} )
@@ -313,7 +313,7 @@ s.timezone("Europe/London")
 
 ### 3.7 Set the language with `set_lang`
 
-This method lets you pass a user's language in to Snowplow:
+This method lets you pass a user's language into Snowplow:
 
 ```python
 s.set_lang( {{LANGUAGE}} )
@@ -488,7 +488,7 @@ def track_page_view(self, page_url, page_title=None, referrer=None, context=None
 The `context` argument should consist of an array of one or more instances of `SelfDescribingJson` class.
 This class isomorphic to [self-describing JSON](#selfdesc-alias), to be more precisely - it has Iglu URI attribute and data itself.
 
-If server-side Python application can determite visitor's geoposition - it can be attached to event, using following context (`geolocation_context` is predefined on [Iglu Central][iglu-central]):
+If server-side Python application can determine visitor's geoposition - it can be attached to the event, using following context (`geolocation_context` is predefined on [Iglu Central][iglu-central]):
 
 ```python
 from snowplow_tracker import SelfDescribingJson
@@ -524,7 +524,7 @@ t.track_page_view("http://www.films.com", "Homepage", context=[poster_context, g
 
 **Important:** Even if only one custom context is being attached to an event, it still needs to be wrapped in an array.
 
-Note also that you should not pass in an empty array of contexts as this will fail validation. Instead of an empty array you can pass in `None`.
+Note also that you should not pass in an empty array of contexts as this will fail validation. Instead of an empty array, you can pass in `None`.
 
 <a name="tstamp-arg" />
 
@@ -577,7 +577,7 @@ t.track_page_view("http://www.example.com").track_screen_view("title screen")
 
 ### 4.2 Track self-describing events with `track_self_describing_event()`
 
-Use `track_self_describing_event()` to track a event types that you have defined yourself. The arguments are as follows:
+Use `track_self_describing_event()` to track an event types that you have defined yourself. The arguments are as follows:
 
 | **Argument**   | **Description**                      | **Required?** | **Validation**          |
 |---------------:|:-------------------------------------|:--------------|:------------------------|
@@ -634,7 +634,7 @@ t.track_page_view("www.example.com", "example", "www.referrer.com")
 
 ### 4.4 Track page pings with `track_page_ping()`
 
-Use `track_page_ping()` to track engagement with a web page over time, via a heart beat event. (Each ping represents a single heartbeat.)
+Use `track_page_ping()` to track engagement with a web page over time, via a heartbeat event. (Each ping represents a single heartbeat.)
 
 Arguments are:
 
@@ -1010,7 +1010,7 @@ When the emitter receives an event, it adds it to a buffer. When the queue is fu
 
 `on_failure` is similar, but executes when the flush is not wholly successful. It will be passed two arguments: the number of events that were successfully sent, and an array of unsent requests. (If the emitter is configured to send POST requests, the array will actually be a string, but it can be turned back into an array of Python dictionaries (each corresponding to an event) by using `json.loads`.)
 
-`byte_limit` is similar to `buffer_size`, but instead of counting events - it takes in account only amount of bytes to be sent over network. *Warning*: this limit is approximate with infelicity < 1%.
+`byte_limit` is similar to `buffer_size`, but instead of counting events - it takes into account only the amount of bytes to be sent over the network. *Warning*: this limit is approximate with infelicity < 1%.
 
 An example:
 
@@ -1054,7 +1054,7 @@ e = Emitter("d3rkrsqld9gmqf.cloudfront.net", thread_count=10)
 
 The `AsyncEmitter` class works just like the Emitter class. It has one advantage, though: HTTP(S) requests are sent asynchronously, so the Tracker won't be blocked while the Emitter waits for a response. For this reason, the AsyncEmitter is recommended over the base `Emitter` class.
 
-The AsyncEmitter uses a fixed-size thread pool to perform network I/O. By default this pool contains only one thread, but you can configure the number of threads in the constructor using the `thread_count` argument.
+The AsyncEmitter uses a fixed-size thread pool to perform network I/O. By default, this pool contains only one thread, but you can configure the number of threads in the constructor using the `thread_count` argument.
 
 <a name="celery-emitter" />
 
@@ -1182,7 +1182,7 @@ e1.cancel_flush()
 
 ## 6. Contracts
 
-Python is a dynamically typed language, but each of our methods expects its arguments to be of specific types and value ranges, and validates that to be the case. These checks are done using the [PyContracts][pycontracts] library.
+Python is a dynamically typed language, but each of our methods expects its arguments to be of specific types and value ranges and validates that to be the case. These checks are done using the [PyContracts][pycontracts] library.
 
 If the validation check fails, then a runtime error is thrown:
 
@@ -1263,7 +1263,7 @@ r = RedisWorker(e, key="snowplow_redis_key")
 r.run()
 ```
 
-This will set up a worker which will run indefinitely, taking events from the Redis list with key "snowplow_redis_key" and inputting them to an AsyncEmitter, which will send them to a cloudfront collector. If the process receives a SIGINT signal (for example, due to a Ctrl-C keyboard interrupt), cleanup will occur before exiting to ensure no events are lost.
+This will set up a worker which will run indefinitely, taking events from the Redis list with key "snowplow_redis_key" and inputting them to an AsyncEmitter, which will send them to a Cloudfront collector. If the process receives a SIGINT signal (for example, due to a Ctrl-C keyboard interrupt), cleanup will occur before exiting to ensure no events are lost.
 
 [Back to top](#top)
 
