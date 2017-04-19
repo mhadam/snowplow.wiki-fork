@@ -1,4 +1,4 @@
-[**HOME**](Home) > [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow technical documentation) > [**Trackers**](trackers)
+[**HOME**](Home) » [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow-technical-documentation) » [**Trackers**](trackers) » Pixel tracker
 
 This guide covers:
 
@@ -9,17 +9,19 @@ This guide covers:
 5. [Click tracking](#click-tracking)
 
 <a name="what" />
+
 ## 1. What is the Pixel tracker?
 
 The Pixel tracker is a wizard that generates an HTML-only tracking tag (no JavaScript) to track opens / views of HTML content that does not support JavaScript. Examples of use cases include HTML emails.
 
 In a normal JavaScript tag, the name-value pairs of data that are sent through to the Snowplow collector via the querystring are calculated on the fly by the JavaScript. (Examples of data points that are calculated on the fly include `user_id`, or `browser_features`.)
 
-In an environment where JavaScript is not permitted, these values need to be set in advance, and hardcoded into the tracking tag. As a result, if you want to record a different `page_title`, for example, for several different HTML-only web pages using the tracking code, you will need to generate a different tracking tag for each of those different web pages, with the right `page_title` set for each.
+In an environment where JavaScript is not permitted, these values need to be set in advance and hardcoded into the tracking tag. As a result, if you want to record a different `page_title`, for example, for several different HTML-only web pages using the tracking code, you will need to generate a different tracking tag for each of those different web pages, with the right `page_title` set for each.
 
-To make it easy to quickly generate Pixel tracking tags, we have created a wizard. This is hosted on [snowplowanalytics.com] [wizard]. The source code is available on the core [Github repo] [pixel-repo].
+To make it easy to quickly generate Pixel tracking tags, we have created a wizard. This is hosted on [snowplowanalytics.com][wizard]. The source code is available on the core [Github repo][pixel-repo].
 
 <a name="anatomy" />
+
 ## 2. Anatomy of a Pixel tracking tag
 
 An example tag is shown below:
@@ -37,6 +39,7 @@ Some things to note about the tag:
 3. Five data points are passed on the query string: the event type (`pageview`), the page name (`Root README`), the URL (`http://github.com/snowplow/snowplow`), the application id (`snowplow`), the platform (`web`) and the tracker version (`no-js-0.1.0`)
 
 <a name="wizard" />
+
 ## 3. The tag-generating wizard
 
 The [wizard] generates the a tracking tag given:
@@ -50,6 +53,7 @@ The [wizard] generates the a tracking tag given:
 It takes care of URL encoding of values (e.g. for page title).
 
 <a name="clojure" />
+
 ## 4. Using the Pixel tracker with the Clojure collector
 
 When using the Pixel tracker with the Clojure collector, the Clojure collector sets a `user_id` and drops this on a browser cookie.
@@ -57,6 +61,7 @@ When using the Pixel tracker with the Clojure collector, the Clojure collector s
 Care must therefore be exercised when using the Pixel tracker on domains that you do not own. **It is your responsibility to abide by the terms and conditions of any domain owner for domains where you post content including uploading Pixel tracking tags.** Some domain owners forbid 3rd parties from dropping cookies on their domains. It is your responsibility to ensure you do not violate the terms and conditions of any domain owners that you work with.
 
 <a name="click-tracking" />
+
 ## 5. Click tracking
 
 **This feature requires Snowplow R72+ and the Clojure Collector 1.1.0+**
