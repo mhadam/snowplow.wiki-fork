@@ -1,4 +1,4 @@
-[**HOME**](Home) > [**TECHNICAL DOCUMENTATION**](Snowplow-technical-documentation)
+[**HOME**](Home) » [**TECHNICAL DOCUMENTATION**](Snowplow-technical-documentation)
 
 **1A. Trackers**  
 [Overview](trackers)  
@@ -19,17 +19,17 @@
 [Ruby Tracker](Ruby-Tracker)  
 [Scala Tracker](Scala-Tracker)  
 [Unity Tracker](Unity-Tracker)  
-[[Building-a-Tracker]]
+[[Building a Tracker]]
 
 **1B. Webhooks**  
-[[Iglu-webhook-adapter]]  
-[[CallRail-webhook-adapter]]  
-[[MailChimp-webhook-adapter]]  
-[[Mandrill-webhook-adapter]]  
-[[Pagerduty-webhook-adapter]]  
-[[Pingdom-webhook-adapter]]  
-[[SendGrid-webhook-adapter]]  
-[[Urban-Airship-Connect-webhook-adapter]]  
+[[Iglu webhook adapter]]  
+[[CallRail webhook adapter]]  
+[[MailChimp webhook adapter]]  
+[[Mandrill webhook adapter]]  
+[[PagerDuty webhook adapter]]  
+[[Pingdom webhook adapter]]  
+[[SendGrid webhook adapter]]  
+[[Urban Airship Connect webhook adapter]]  
 
 **[A. Snowplow Tracker Protocol](snowplow-tracker-protocol)**  
 
@@ -65,4 +65,4 @@
 
 **Common**  
 [[Shredding]]  
-[[Artifact-repositories]]  
+[[Artifact repositories]]  
