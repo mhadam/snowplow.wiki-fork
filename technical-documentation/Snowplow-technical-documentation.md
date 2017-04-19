@@ -10,6 +10,7 @@ The technical documentation reflects the Snowplow architecture, with six loosely
 [ActionScript3 Tracker](ActionScript3-Tracker)  
 [Android Tracker](Android-Tracker)  
 [Arduino Tracker](Arduino-Tracker)  
+[[CPP Tracker]]  
 [Golang Tracker](Golang-tracker)  
 [[Google AMP Tracker]]  
 [iOS Tracker](iOS-Tracker)  
