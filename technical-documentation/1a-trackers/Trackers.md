@@ -1,4 +1,4 @@
-[**HOME**](Home) > [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow technical documentation) > [**Trackers**](trackers)
+[**HOME**](Home) » [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow-technical-documentation) » [**Trackers**](trackers)
 
 [[https://d3i6fms1cm1j0i.cloudfront.net/github-wiki/images/snowplow-architecture-1a-trackers.png]]
 
