@@ -12,22 +12,24 @@
 * [Advanced usage](3-Advanced-usage-of-the-JavaScript-Tracker)
 * [Modifying Snowplow.js](Modifying-snowplow-js)
 
-* [[ActionScript3 Tracker]]
-* [[Arduino Tracker]]
-* [[Android Tracker]]
-* [[iOS Tracker]]
-* [[Java Tracker]]
-* [[JavaScript Tracker]]
-* [[Lua Tracker]]
-* [[.NET Tracker]]
-* [[Node.js Tracker]]
-* [[PHP Tracker]]
-* [[Python Tracker]]
-* [[Pixel Tracker]]
-* [[Ruby Tracker]]
-* [[Scala Tracker]]
-* [[Unity Tracker]]
-* [[Golang Tracker]]
+* [ActionScript3 Tracker](ActionScript3-Tracker)  
+* [Android Tracker](Android-Tracker)  
+* [Arduino Tracker](Arduino-Tracker) 
+* [[CPP Tracker]] 
+* [Golang Tracker](Golang-tracker)  
+* [[Google AMP Tracker]]  
+* [iOS Tracker](iOS-Tracker)  
+* [Java Tracker](Java-Tracker)   
+* [JavaScript Tracker](javascript-tracker)  
+* [Lua Tracker](Lua-Tracker)  
+* [.NET Tracker](.NET-Tracker)  
+* [Node.js Tracker](Node.js-Tracker)  
+* [PHP Tracker](PHP-Tracker)  
+* [Pixel Tracker](pixel-tracker)  
+* [Python Tracker](Python-Tracker)  
+* [Ruby Tracker](Ruby-Tracker)  
+* [Scala Tracker](Scala-Tracker)  
+* [Unity Tracker](Unity-Tracker) 
 
 **[A. Snowplow Tracker Protocol](snowplow-tracker-protocol)**
 
