@@ -12,7 +12,7 @@ Select a setup option below based on your choice of Tag Management solution:
 2. [Setting up Google Tag Manager (GTM) and integrating Snowplow JavaScript tracking tags via GTM](../Integrating-javascript-tags-with-Google-Tag-Manager) 
 3. [Setting up QuBit's OpenTag and integrating Snowplow JavaScript tracking tags via OpenTag](../Integrating-Javascript-tags-with-QuBit-OpenTag)
 
-Once you have integrated tags on our site (either directly or via a tag manager) you should [test that the tags are firing correctly](testing the Javascript tracker is firing).
+Once you have integrated tags on our site (either directly or via a tag manager) you should [test that the tags are firing correctly](../Testing-the-Javascript-tracker-is-firing).
 
 Once your tags are integrated and tested, there are three additional steps you may want to take:
 
