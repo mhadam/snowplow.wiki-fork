@@ -1,4 +1,4 @@
-[HOME](Home) » [SNOWPLOW SETUP GUIDE](Snowplow-setup-guide) » [Step 2: setup a Tracker](choosing-a-tracker) » JavaScript Tracker
+[HOME](Home) » [SNOWPLOW SETUP GUIDE](Snowplow-setup-guide) » [Step 2: setup a Tracker](../Setting-up-a-Tracker) » JavaScript Tracker
 
 ---
 
