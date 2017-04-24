@@ -47,7 +47,7 @@ To make the Snowplow Lua Tracker work out-of-the-box with as many different Lua 
 
 To make the Snowplow Lua Tracker work with as many different Lua programs as possible, we have tried to keep external dependencies to a minimum. There is only one external dependency currently:
 
-* [LuaSocket] [luasocket] - network support for the Lua language. Required to send events to the Snowplow collector
+* [LuaSocket][luasocket] - network support for the Lua language. Required to send events to the Snowplow collector
 
 All other dependencies are bundled with the Lua Tracker itself - see the [`src/lib`][tracker-lib] folder for details.
 
@@ -75,7 +75,7 @@ We expect that the Snowplow Lua Tracker should work in other Lua environments to
 
 ### 3.1 LuaRocks
 
-The Snowplow Lua Tracker is published to [LuaRocks] [luarocks], the popular deployment and management system for Lua modules.
+The Snowplow Lua Tracker is published to [LuaRocks][luarocks], the popular deployment and management system for Lua modules.
 
 This makes it easy to either install the tracker locally, or to add it as a dependency into your own LuaRocks-based app.
 
