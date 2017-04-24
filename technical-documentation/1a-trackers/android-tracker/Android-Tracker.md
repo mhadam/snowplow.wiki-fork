@@ -341,6 +341,7 @@ Returns the 'platform' that was set in Tracker construction, the builder allows 
 [Back to top](#top)
 
 <a name="session" />
+
 #### 2.3.7 `getSession`
 
 Returns the `session` object created for the Tracker (if `sessionContext` was enabled).
@@ -473,6 +474,7 @@ tracker.resumeSessionChecking();
 [Back to top](#top)
 
 <a name="shutdown-session" />
+
 #### 2.4.2 `pauseSessionChecking`
 
 This function stops the session checker from running.  Essentially preventing the current session from ever timing out.  Please note that if the application is restarted this paused state will not persist and checking will begin again.
@@ -681,6 +683,7 @@ subj.setLanguage("en");
 [Back to top](#top)
 
 <a name="set-ip-address" />
+
 ### 3.1.7 `setIpAddress`
 
 This method lets you pass a user's IP Address into Snowplow:
