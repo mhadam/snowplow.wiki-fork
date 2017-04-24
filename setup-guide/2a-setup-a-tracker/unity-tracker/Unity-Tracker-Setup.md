@@ -12,9 +12,10 @@
   - 3.1 [Download](#download)
 
 <a name="overview" />
+
 ## 1. Overview
 
-The [Snowplow Unity Tracker](https://github.com/snowplow/snowplow-unity-tracker) lets you add analytics to your [Unity] [unity]-based desktop and mobile apps, servlets and games.
+The [Snowplow Unity Tracker](https://github.com/snowplow/snowplow-unity-tracker) lets you add analytics to your [Unity][unity]-based desktop and mobile apps, servlets and games.
 
 The Tracker should be relatively straightforward to setup if you are familiar with Unity and C# development.
 
@@ -23,9 +24,11 @@ Ready? Let's get started.
 [Back to top](#top)
 
 <a name="integration-options" />
+
 ## 2. Integration options
 
 <a name="compatibility" />
+
 ### 2.1 Tracker compatibility
 
 The Snowplow Unity Tracker has been built and tested using Unity5+ on Windows, Linux, OSX and iOS.
@@ -35,6 +38,7 @@ It is not currently compatible with the WebPlayer as of yet.
 [Back to top](#top)
 
 <a name="dependencies" />
+
 ### 2.2 Dependencies
 
 There are several dependencies that are required to use the Unity Tracker currently.  These are available in [this folder][deps-folder].
@@ -46,12 +50,14 @@ All the other dependencies are required for proper Tracker function.
 [Back to top](#top)
 
 <a name="setup" />
+
 ## 3. Setup
 
 <a name="download" />
+
 ### 3.1 Download
 
-The Unity Tracker package is published to Snowplow's [bintray repository] [bintray-snplow].  Once downloaded simply add the `SnowplowTracker.unitypackage` to your project.  This should insert all of the required dll files into your `Assets/Plugins/` folder.
+The Unity Tracker package is published to Snowplow's [bintray repository][bintray-snplow].  Once downloaded simply add the `SnowplowTracker.unitypackage` to your project.  This should insert all of the required dll files into your `Assets/Plugins/` folder.
 
 Done? Now read the [Unity Tracker API](Unity-Tracker) to start tracking events.
 
