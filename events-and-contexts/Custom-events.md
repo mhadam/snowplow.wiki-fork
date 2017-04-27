@@ -1,6 +1,6 @@
 [**HOME**](Home) » [**EVENTS AND CONTEXTS**](Events-and-Contexts) » [Events Overview](Events-overview) » Custom Events
 
-##Overview
+## Overview
 
 Snowplow supports a large number of events "out of the box" (first class citizens), most of which are fairly standard in a web analytics context. See [Snowplow authored events](Snowplow-authored-events) for more details.
 
@@ -10,7 +10,8 @@ If you wish to track an event that Snowplow does not recognise as a first class 
 - [Self-describing event](#unstructured-event) (also called *unstructured* event)
 
 <a name="structured-event" />
-##Custom structured event
+
+## Custom structured event
 
 With a structured event, we follow Google five-variable tracking event structure. When you track a structured event, you get five parameters:
 
@@ -41,21 +42,22 @@ se_ca=email                          //event_category = email
 se_ac=open                           //event_action = open
 se_la=My Campaign                    //event_label = "My Campaign"
 se_pr={product:"ABC",discount:"10%"} //event_property = 10% discount on product ABC
-``` 
+```
 
 Note the user email address could have been populated with the emailing tool (unique for each recipient) while time of event is captured automatically by Snowplow.
 
 See [Snowplow tracker protocol](snowplow-tracker-protocol#39-custom-structured-event-tracking) for the specific parameters to be used with structured events and examples of usage.
 
 <a name="unstructured-event" />
-##Self-describing event
+
+## Self-describing event
 
 Self-describing events (also known as custom unstructured events) are user events which do not fit one of the existing [Snowplow event types](Snowplow-authored-events) (page views, ecommerce transactions, etc.), and do not fit easily into our existing [custom structured event format](#structured-event). A **self-describing event** consists of two elements:
 
 - A `name` of the unstructured event, e.g. "Game saved" or "returned-order". This is case-sensitive; spaces etc are allowed
 - A set of `key: value` properties (also known as a hash, associative array or dictionary)
 
-You might recognise what we call self-describing events (custom unstructured events) from other analytics tools including MixPanel, KISSmetrics and Keen.io, where they are the primary trackable event type.
+You might recognize what we call self-describing events (custom unstructured events) from other analytics tools including MixPanel, KISSmetrics and Keen.io, where they are the primary trackable event type.
 
 Self-describing events are great for a couple of use cases:
 
@@ -99,12 +101,12 @@ Knowing in advance what the expected structure and format of data should be as a
 
 » Read more about [schema registry](Schema-registry)
 
-##Further reading
+## Further reading
 
 To find out more about the concepts mentioned above and ultimately how to set up custom events and contexts and send them to Snowplow pipeline, follow the links below.
 
 - [Self-describing JSON](http://snowplowanalytics.com/blog/2014/05/15/introducing-self-describing-jsons/)
--  [Custom structured events](Canonical-event-model#customstruct)
+- [Custom structured events](Canonical-event-model#customstruct)
 - [Unstructured events guide][unstructured-events]
 - [Contexts](Contexts-overview)
 - [Event dictionary](Event-dictionary)
