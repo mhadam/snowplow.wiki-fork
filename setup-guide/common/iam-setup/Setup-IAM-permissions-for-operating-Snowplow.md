@@ -1,21 +1,23 @@
 <a name="top" />
+
 ## Overview
 
 These are instructions for setting up the IAM permissions for the "user(s)" that "operates" Snowplow: in practice this is the user associated with the credentials that should be used in the EmrEtlRunner and StorageLoader config files. The permissions represent the minimum required to keep the Snowplow data pipeline running: this is best practice, so that if a hacker manages to compromise the server with EmrEtlRunner and StorageLoader on it (so gain access to these credentials), they will have only limited access to your AWS resources.
 
 Setting up the credentials is an 5 step process:
 
-- 1. [Create a new IAM group](#create-group)
-- 2. [Set the permissions for the group](#permissions)
-  - 2.1 [Running Kinesis Applications](#kinesis-apps)
-- 3. [Create a new user](#user)
-- 4. [Add the new user to your new group](#add-to-group)
-- 5. [Update the EmrEtlRunner and StorageLoader config files with the new credentials](#update-configs)
-- 6. [Delete the user created to setup Snowplow](#delete)
+1. [Create a new IAM group](#create-group)
+2. [Set the permissions for the group](#permissions)
+    - [Running Kinesis Applications](#kinesis-apps)
+3. [Create a new user](#user)
+4. [Add the new user to your new group](#add-to-group)
+5. [Update the EmrEtlRunner and StorageLoader config files with the new credentials](#update-configs)
+6. [Delete the user created to setup Snowplow](#delete)
 
 **Disclaimer: Snowplow Analytics Ltd will not be liable for any problems caused by the full or partial implementation of these instructions on your Amazon Web Services account. If in doubt, please consult an independent AWS security expert.**
 
 <a name="create-group" />
+
 ## 1. Setup the IAM group
 
 ### Initial group configuration
@@ -39,6 +41,7 @@ Then click continue.
 Back to [top](#top).
 
 <a name="permissions" />
+
 ## 2. Set the permissions for the group
 
 Choose the *Custom Policy* option and click *Select*:
@@ -93,6 +96,7 @@ Review the final settings before pressing *Continue* to complete the process. Yo
 Back to [top](#top).
 
 <a name="kinesis-apps" />
+
 ### 2.1 Running Kinesis Applications
 
 Our Kinesis Applications are designed so that you can launch them all with IAM Roles so you will never have to store your AWS Access/Secret Keys on the instance itself. Lock down your permissions as far as possible, and remember that assigning permissions to specific instances of autoscaling groups is better than assigning them to users.
@@ -100,6 +104,7 @@ Our Kinesis Applications are designed so that you can launch them all with IAM R
 Back to [top](#top).
 
 <a name="user" />
+
 ## 3. Create a new user
 
 Now that our group has been created, we need to add a new user to it.
@@ -123,6 +128,7 @@ Now close the window: your new user is setup.
 Back to [top](top).
 
 <a name="add-to-group" />
+
 ## 4. Add the new user to your new group
 
 The user we have created has no permissions -> we need to add her to the new group we created to give her those permissions.
@@ -140,15 +146,17 @@ The user now has the required permissions.
 Back to [top](top).
 
 <a name="update-configs" />
+
 ## 5. Update the EmrEtlRunner and StorageLoader config files with the new credentials
 
 Now that you have setup your new user and given her the relevant permissions to run the Snowplow data pipeline, you need to take those credentials and use them instead of the existing credentials in your EmrEtlRunner and StorageLoader config files.
 
-Those files should be accessible on the server setup to run EmrEtlRunner and StorageLoader. (Examples of those files can be found on the Snowplow repo [here] [emretlrunner.config] and [here] [storageloader.config].) Update the `:access_key_id:` and `:secret_access_key:` fields with those from the new user in **both** files. 
+Those files should be accessible on the server setup to run EmrEtlRunner and StorageLoader. (Examples of those files can be found on the Snowplow repo [here][emretlrunner.config] and [here][storageloader.config].) Update the `:access_key_id:` and `:secret_access_key:` fields with those from the new user in **both** files. 
 
 Back to [top](#top).
 
 <a name="delete" />
+
 ## 6. Delete the user created to setup Snowplow
 
 Now that we have created a new user with just the permissions required to run the Snowplow data pipeline, and used her credentials in in the EmrEtlRunner and StorageLoader config files, we can delete the user that we created to setup/install Snowplow originally.
