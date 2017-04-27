@@ -4,11 +4,11 @@
 
 Setting up permissions in IAM for the user(s) installing Snowplow is an 3 step process:
 
-- 1. [Create an IAM group (incl. creating a user and setting permissions)](#create-group)
+- 1 [Create an IAM group (incl. creating a user and setting permissions)](#create-group)
   - 1.1 [Batch Permissions](#batch-perms)
   - 1.2 [Kinesis Permissions](#kinesis-perms)
   - 1.3 [Kinesis & Batch](#combined-perms)
-- 2. [Enable users to log into AWS](#enable-login)
+- 2 [Enable users to log into AWS](#enable-login)
 
 
 **Disclaimer: Snowplow Analytics Ltd will not be liable for any problems caused by the full or partial implementation of these instructions on your Amazon Web Services account. If in doubt, please consult an independent AWS security expert.**
