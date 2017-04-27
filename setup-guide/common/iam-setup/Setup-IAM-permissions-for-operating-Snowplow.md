@@ -6,13 +6,13 @@ These are instructions for setting up the IAM permissions for the "user(s)" that
 
 Setting up the credentials is an 5 step process:
 
-1. [Create a new IAM group](#create-group)
-2. [Set the permissions for the group](#permissions)
+- 1 [Create a new IAM group](#create-group)
+- 2 [Set the permissions for the group](#permissions)
     - [Running Kinesis Applications](#kinesis-apps)
-3. [Create a new user](#user)
-4. [Add the new user to your new group](#add-to-group)
-5. [Update the EmrEtlRunner and StorageLoader config files with the new credentials](#update-configs)
-6. [Delete the user created to setup Snowplow](#delete)
+- 3 [Create a new user](#user)
+- 4 [Add the new user to your new group](#add-to-group)
+- 5 [Update the EmrEtlRunner and StorageLoader config files with the new credentials](#update-configs)
+- 6 [Delete the user created to setup Snowplow](#delete)
 
 **Disclaimer: Snowplow Analytics Ltd will not be liable for any problems caused by the full or partial implementation of these instructions on your Amazon Web Services account. If in doubt, please consult an independent AWS security expert.**
 
