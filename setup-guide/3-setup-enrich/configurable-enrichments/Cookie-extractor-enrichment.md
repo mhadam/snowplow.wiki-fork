@@ -32,19 +32,19 @@ This community-contributed enrichment lets you specify cookies that you want to 
 
 This default configuration is capturing the Scala Stream Collector's own `sp` cookie - in practice you would probably extract other more valuable cookies available on your company domain.
 
-###Data sources
+### Data sources
 
 The data source for this enrichment is HTTP headers captured by the Scala Stream Collector and thus present in the Thrift raw event payload. Specifically, it is the `Cookie` header that is targeted here.
 
 **Note**: This enrichment only works with events recorded by the Scala Stream Collector - the CloudFront and Clojure Collectors do not capture HTTP headers.
 
-###Algorithm
+### Algorithm
 
 The name(s) of cookie(s) that are of interest to the user are extracted from the [`cookie_extractor_config.json`](https://github.com/snowplow/snowplow/blob/master/3-enrich/config/enrichments/cookie_extractor_config.json).
 
 The HTTP headers from the event payload are examined for presence of the cookie(s) and once found its name and value is captured and "inserted" as a single `derived_contexts` into the `enriched/good` stream/bucket.
 
-###Data generated
+### Data generated
 
 As each key-value pair corresponding to the cookie is represented as a `derived_contexts` correlated to the JSON Schema [org.ietf/http_cookie/jsonschema/1-0-0][http-cookie-schema], the output of this enrichment is a separate entity with the `data.name` and `data.value` fields where `data.name` is the name of the cookie and `data.value` is its value.
 

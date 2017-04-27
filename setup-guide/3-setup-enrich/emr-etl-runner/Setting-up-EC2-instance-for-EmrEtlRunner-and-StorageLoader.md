@@ -2,7 +2,7 @@
 
 This tutorial assumes it's your first installation and you probably just want to checkout the platform. Thus many steps describe low-performance and unsecured installation. In real-world scenario you may want to fix that.
 
-###Prepare your system
+### Prepare your system
 
 Before getting started you need to have:
 
@@ -12,10 +12,10 @@ Before getting started you need to have:
 - IAM user need to have attached `AdministratorAccess`.
 - Configured credentials on your local machine. (You can use `aws configure` for it).
 - For some steps you may want to install [`jq`](https://stedolan.github.io/jq/). It's optional, but handy.
- 
+
 Everything else can be done from CLI.
 
-###Setting up EC2 instance for EmrEtlRunner/StorageLoader
+### Setting up EC2 instance for EmrEtlRunner/StorageLoader
 
 In the end of this step, you'll have an AWS EC2 instance, SSH access to it and key stored on local machine.
 
@@ -27,7 +27,7 @@ We will refer to it as `{{ VPC_ID }}`.
 $ aws ec2 describe-vpcs | jq -r ".Vpcs[0].VpcId"
 ```
 
-**2. Create Security Group for SSH access** 
+**2. Create Security Group for SSH access**
 
 On output you'll get `GroupId`. We will refer to it as `{{ SSH_SG }}`.
 
@@ -49,7 +49,7 @@ $ aws ec2 authorize-security-group-ingress \
     --cidr 0.0.0.0/0
 ```
 
-**4. Create SSH key-pair named on the local machine** 
+**4. Create SSH key-pair named on the local machine**
 
 We named it "snowplow-ec2" here.
 
@@ -59,7 +59,7 @@ $ aws ec2 create-key-pair --key-name snowplow-ec2 \
 $ chmod go-rwx ~/.ssh/snowplow-ec2.pem
 ```
 
-**5. Run t2.small instance with Amazon Linux AMI with previously created SSH-key** 
+**5. Run t2.small instance with Amazon Linux AMI with previously created SSH-key**
 
 On output you will get your instance id. We will refer to it as `{{ INSTANCE_ID }}`.
 
@@ -80,7 +80,7 @@ $ aws ec2 modify-instance-attribute \
     --groups {{ SSH_SG }}
 ```
 
-**7. Check public IP-address of newly created Instance** 
+**7. Check public IP-address of newly created Instance**
 
 Further we will refer to it as `{{ PUBLIC_IP }}`.
 
@@ -90,7 +90,7 @@ $ aws ec2 describe-instances \
     | jq '.Reservations[0].Instances[0].PublicDnsName'
 ```
 
-**8. Log-in** 
+**8. Log-in**
 
 Fill-in `{{ PUBLIC_IP }}` from previous step.
 

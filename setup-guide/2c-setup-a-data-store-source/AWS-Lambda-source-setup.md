@@ -1,6 +1,6 @@
 [**HOME**](Home) » [**SNOWPLOW SETUP GUIDE**](Setting-up-Snowplow) » [**Step 2c: Setup a Data Store Source**](Setting-up-a-Data-Store-Source) » **AWS Lambda source setup**
 
-##Overview
+## Overview
 
 This tool builds into a single zip file which can be uploaded as a new [AWS Lambda](http://docs.aws.amazon.com/lambda/latest/dg/welcome.html) function. The description you give your Lambda will be used as your collector endpoint (an URL). This means the Lambda you create will need the ability to perform `lambda:GetFunctionConfiguration` on itself, amongst the other normal AWS lambda permissions.
 
@@ -32,8 +32,8 @@ s3:
         - bucket-c
 ```
 
-The `collector` field is the URL of your collector, for example `http://com.acme:8080/`. Under `s3` the `buckets` field is an array of the buckets you wish to monitor. 
-These buckets must exist prior to run and will not be created by the script. 
+The `collector` field is the URL of your collector, for example `http://com.acme:8080/`. Under `s3` the `buckets` field is an array of the buckets you wish to monitor.
+These buckets must exist prior to run and will not be created by the script.
 
 The `app_id` field is the namespace to give your events, for example `com.snowplow.s3lambda`.
 

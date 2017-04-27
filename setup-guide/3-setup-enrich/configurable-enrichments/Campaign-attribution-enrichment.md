@@ -4,10 +4,10 @@
 
 ### Compatibility
 
-JSON Schema   [iglu:com.snowplowanalytics.snowplow/campaign_attribution/jsonschema/1-0-0][schema-1]  
-Compatibility 0.9.6+  
-JSON Schema   [iglu:com.snowplowanalytics.snowplow/campaign_attribution/jsonschema/1-0-1][schema-2]  
-Compatibility r63+  
+JSON Schema   [iglu:com.snowplowanalytics.snowplow/campaign_attribution/jsonschema/1-0-0][schema-1]
+Compatibility 0.9.6+
+JSON Schema   [iglu:com.snowplowanalytics.snowplow/campaign_attribution/jsonschema/1-0-1][schema-2]
+Compatibility r63+
 
 ### Overview
 
@@ -142,17 +142,17 @@ Then for a querystring containing `...&customclid=abc&...` the `mkt_clickid` fie
 
 The "mapping" field is currently not implemented. In the future, setting it to "script" will indicate that the enrichment uses custom JavaScript to extract the campaign fields from the querystring.
 
-###Data sources
+### Data sources
 
 The input values for this enrichment come from querystring of `url` parameter. It is mapped to `page_urlquery` field in `atomic.events` table.
 
-###Algorithm
+### Algorithm
 
 The enrichment is straightforward here. If the enrichment is enabled the query string is parsed and the five marketing campaign fields `mkt_medium`, `mkt_source`, `mkt_term`, `mkt_content`, and `mkt_campaign` are populated with the extracted values the mapping of which is determined by one of the above corresponding schemas. If multiple acceptable parameter names for the same field are found in the querystring, the first one listed in the configuration JSON will take precedence.
 
 Additionally, JSON schema 1-0-1 allows to add `mkt_clickid` and `mkt_network` fields which correspond to the click ID and the network responsible for the click. One of the three parameters (if found in querystring) `gclid`, `msclkid`, or `dclid` are mapped to Google, Microsoft, and DoubleClick respectively. The custom network could be introduced if it corresponds to `mktClickId` field of JSON schema.
 
-###Data generated
+### Data generated
 
 Below is the summary of the fields in `atomic.events` table driven by the result of this enrichment (no dedicated table).
 

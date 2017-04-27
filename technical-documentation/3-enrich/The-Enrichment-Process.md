@@ -1,6 +1,6 @@
 [**HOME**](Home) > [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow-technical-documentation) > [**Enrichment**](Enrichment) > The Enrichment Process
 
-###Overview
+### Overview
 
 Enrichment process parses raw Snowplow events and performs the following:
 
@@ -36,7 +36,7 @@ The raw data undergoing "dimension widening" (enrichment) listed as per followin
 
 <a name="hardcoded-enrichment" />
 
-###Hardcoded enrichment
+### Hardcoded enrichment
 
 The following fields are populated depending on whether the tracker provided the corresponding value or not.
 
@@ -91,7 +91,7 @@ Finally, contexts, unstructured events and the relevant configurable enrichments
 
 <a name="configurable-enrichment" />
 
-###Configurable enrichment
+### Configurable enrichment
 
 The configurable enrichment are listed below. Follow the corresponding links to find out more.
 

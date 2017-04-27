@@ -1,6 +1,6 @@
 [**HOME**](Home) » [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow-technical-documentation) » [Enrichment](Enrichment) » Shredding
 
-##Overview
+## Overview
 
 Snowplow has a Shredding process which consists of three phases:
 

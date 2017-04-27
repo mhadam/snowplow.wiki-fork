@@ -92,11 +92,11 @@ The "parameters" fields are as follows:
 
 * "script": Your JavaScript function, Base64 encoded. You can use either URL-safe or regular Base64 encoding
 
-###Data sources
+### Data sources
 
 The data source for this enrichment is the entire `enriched/good` event in the form of [Snowplow Plain Old Java Object][enriched-event-pojo] produced during common enrichment process.
 
-###Algorithm
+### Algorithm
 
 This enrichment uses the [Rhino JavaScript engine][rhino] to execute your JavaScript. Your JavaScript is pre-compiled so that your code should approach native Java speeds.
 
@@ -124,7 +124,7 @@ Don't:
 * include CPU-intensive tasks without being aware of the impact on your event processing time
 * allow untrusted parties to write your script - the script has access to the Java standard library and therefore to your filesystem.
 
-###Data generated
+### Data generated
 
 As during the JavaScript enrichment process the new context is added to `derived_contexts` of the `enriched/good` event, the data generated will end up in its own table determined by the custom self-describing JSON provided by the user with `process(event)` function encoded in [`javascript_script_config`](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/javascript_script_config/jsonschema/1-0-0) file.
 
