@@ -1,4 +1,5 @@
 <a name="top" />
+
 ## Overview
 
 Setting up permissions in IAM for the user(s) installing Snowplow is an 3 step process:
@@ -15,6 +16,7 @@ Setting up permissions in IAM for the user(s) installing Snowplow is an 3 step p
 _Warning: these permissions are still more permissive than they need to be. We will be putting in time to narrow them down further over the coming weeks._
 
 <a name="create-group" />
+
 ## 1. Setup the IAM group
 
 ### Initial group configuration
@@ -48,6 +50,7 @@ Let's give it a _Policy Name_ of `snowplow-policy-setup-infrastructure`:
 Depending on what Pipeline needs to be setup you will need slightly varying permissions.
 
 <a name="batch-perms" />
+
 #### Batch Permissions
 
 The following permissions are needed for all batch proccessing operations:
@@ -101,6 +104,7 @@ Paste the following JSON into the _Policy Document_ text area:
 ```
 
 <a name="kinesis-perms" />
+
 #### Kinesis Permissions
 
 For the Kinesis Pipeline ending in an Elasticsearch Cluster you will need these permissions:
@@ -146,6 +150,7 @@ Paste the following JSON into the _Policy Document_ text area:
 ```
 
 <a name="combined-perms" />
+
 #### Kinesis & Batch Permissions
 
 For the Kinesis Pipeline ending in the LZO S3 Sink with events from this sink then being processed in batches you will need these permissions:
@@ -238,6 +243,7 @@ Provide these credentials in a secure way - **not** via email - to whoever is se
 Back to [top](#top).
 
 <a name="enable-login" />
+
 ## 2. Allow the IAM user to login
 
 For much of the Snowplow setup process, the IAM user you have setup above will need access to the Amazon Web Services control panel.
