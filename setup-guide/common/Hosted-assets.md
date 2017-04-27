@@ -12,7 +12,7 @@ We are steadily moving over to [Bintray][bintray] for hosting binaries and artif
 
 To make operating Snowplow easier, the EmrEtlRunner and StorageLoader apps are now available as prebuilt executables in a single zipfile here:
 
-    http://dl.bintray.com/snowplow/snowplow-generic/snowplow_emr_r87_chichen_itza.zip
+    http://dl.bintray.com/snowplow/snowplow-generic/snowplow_emr_r88_angkor_wat.zip
 
 Right-click on this [Download link][emr-download] to save it down locally.
 
