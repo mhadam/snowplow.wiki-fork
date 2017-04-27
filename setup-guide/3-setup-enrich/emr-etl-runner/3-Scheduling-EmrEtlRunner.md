@@ -29,14 +29,14 @@ To consider your different scheduling options in turn:
 
 ## 2. cron
 
-[[/images/warning.png]] | Running EmrEtlRunner as *Ruby* (rather than *JRuby* apps) is no longer actively supported. The latest version of the EmrEtlRunner is available from our Bintray [here](http://dl.bintray.com/snowplow/snowplow-generic/snowplow_emr_r77_great_auk.zip).
+[[/images/warning.png]] | Running EmrEtlRunner as *Ruby* (rather than *JRuby* apps) is no longer actively supported. The latest version of the EmrEtlRunner is available from our Bintray [here](http://dl.bintray.com/snowplow/snowplow-generic/snowplow_emr_r88_ankgor_wat.zip).
 ---|:---
 
 The recommended way of scheduling the ETL process is as a daily cronjob.
 
-**Note**: The below reference to `snowplow-emr-etl-runner.sh` script is provided in case you are still using the older version of *EmrEtlRunner*. It's a better solution to use [`snowplow-runner-and-loader.sh`](https://github.com/snowplow/snowplow/blob/r88-angkor-wat/4-storage/storage-loader/bin/snowplow-runner-and-loader.sh) script which synchronizes EmrEtlRunner and [StorageLoader](1-Installing-the-StorageLoader). You might skip these instructions altogether and return to this topic on [Scheduling the StorageLoader](3-scheduling-the-storageloader) page.
+**Note**: The below reference to `snowplow-emr-etl-runner.sh` script is provided in case you are still using the older version of *EmrEtlRunner*. It's a better solution to use [`snowplow-runner-and-loader.sh`](https://github.com/snowplow/snowplow/tree/master/4-storage/storage-loader/bin/snowplow-runner-and-loader.sh) script which synchronizes EmrEtlRunner and [StorageLoader](1-Installing-the-StorageLoader). You might skip these instructions altogether and return to this topic on [Scheduling the StorageLoader](3-scheduling-the-storageloader) page.
 
-If you are still using the shell script available in the Snowplow GitHub repository at 
+If you are still using the shell script available in the Snowplow GitHub repository at
 [`/3-enrich/emr-etl-runner/bin/snowplow-emr-etl-runner.sh`][bash-script] you need to edit this script and update the three variables:
 
     rvm_path=/path/to/.rvm # Typically in the $HOME of the user who installed RVM
@@ -48,8 +48,8 @@ So for example if you installed RVM as the `admin` user, then you would set:
 
     rvm_path=/home/admin/.rvm
 
-Now, assuming you're using the excellent [cronic][cronic] as a wrapper for 
-your cronjobs, and that both cronic and Bundler are on your path, you can 
+Now, assuming you're using the excellent [cronic][cronic] as a wrapper for
+your cronjobs, and that both cronic and Bundler are on your path, you can
 configure your cronjob like so:
 
     0 4   * * *   root    cronic /path/to/snowplow/3-enrich/bin/snowplow-emr-etl-runner.sh
@@ -95,7 +95,7 @@ Now you have installed and scheduled [EmrEtlRunner][emr-etl-runner], you have al
 [nokogiri-install]: http://nokogiri.org/tutorials/installing_nokogiri.html
 [rubygems-install]: http://docs.rubygems.org/read/chapter/3
 
-[config-yml]: https://github.com/snowplow/snowplow/blob/master/3-enrich/emr-etl-runner/config/config.yml
+[config-yml]: https://github.com/snowplow/snowplow/tree/master/3-enrich/emr-etl-runner/config/config.yml
 [bash-script]: https://github.com/snowplow/snowplow/blob/r76-changeable-hawk-eagle/3-enrich/emr-etl-runner/bin/snowplow-emr-etl-runner.sh
 
 [cronic]: http://habilis.net/cronic/

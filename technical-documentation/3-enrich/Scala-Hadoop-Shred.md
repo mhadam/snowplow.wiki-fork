@@ -118,10 +118,8 @@ in order to correctly populate `event_fingerprint` property.
 
 #### 3.3 Cross-batch natural de-duplication
 
-#### 3.3 Cross-batch natural de-duplication
-
-With cross-batch natural de-duplication, we have a challenge: we need to track events across multiple ETL processing batches to detect duplicates. 
-We don't need to store the whole event - just the `event_id` and the `event_fingerprint` metadata. 
+With cross-batch natural de-duplication, we have a challenge: we need to track events across multiple ETL processing batches to detect duplicates.
+We don't need to store the whole event - just the `event_id` and the `event_fingerprint` metadata.
 And we need to store these in a database that allows fast random access - we chose Amazon DynamoDB, a fully managed NoSQL database service.
 
 ##### DynamoDB table design
@@ -135,7 +133,7 @@ We store the event metadata in a DynamoDB table with the following attributes:
 
 A lookup into this table will tell us if the event we are looking has been seen before based on `event_id` and `event_fingerprint`.
 
-We store the `etl_timestamp` to prevent issues in the case of a failed run. 
+We store the `etl_timestamp` to prevent issues in the case of a failed run.
 If a run fails during Hadoop Shred and is then rerun, we don't want the rerun to consider rows in the DynamoDB table which were written as part of the prior failed run; otherwise all events in the rerun would be rejected as dupes!
 
 ##### Check-and-set algorithm
@@ -152,16 +150,10 @@ If we discover a natural duplicate, then we delete it. We know that we have an "
 
 In the code, we perform this check after we have grouped the batch by `event_id` and `event_fingerprint`; this ensures that all check-and-set requests to a specific `event_id-event_fingerprint` pair in DynamoDB will come from a single mapper.
 
-##### Error handling
-
-The major failure states will be operational issues - for example a sudden event spike causing DynamoDB throughput exceptions. 
-Hadoop Shred will attempt back-off-and-retry in the case of an error; if three re-attempts fail, then Hadoop Shred will fail the whole job. 
-This is preferable to allowing duplicates to land in Redshift, where they can cause Cartesian product explosions.
-
 ##### Enabling
 
-To enable cross-batch natural de-duplication you must provide a DynamoDB table configuration to EmrEtlRunner. 
-If this is not provided, then cross-batch natural de-duplication will be disabled. 
+To enable cross-batch natural de-duplication you must provide a DynamoDB table configuration to EmrEtlRunner and provide [necessary rights][dynamodb-setup-guide] in IAM.
+If this is not provided, then cross-batch natural de-duplication will be disabled.
 In-batch de-duplication will still work however.
 
 To avoid "cold start" problem you may want to use [[Event-manifest-populator]] Spark job, which backpopulates duplicate storage with events from specified point in time.
@@ -171,9 +163,17 @@ To avoid "cold start" problem you may want to use [[Event-manifest-populator]] S
 To make sure DynamoDB table is not going to be overpopulated we're using [DynamoDB Time-to-Live][dynamodb-ttl] feature, which provides automatic cleanup after specified time.
 For event manifests this time is etl timestamp plus 180 days and stored in `ttl` attribute.
 
+##### Costs and performance penalty
+
+Cross-batch deduplication uses DynamoDB as transient storage and therefore has associated AWS costs.
+Default write capacity is 100 units, which means whole Hadoop Shred will be throttled by AWS DynamoDB.
+Rough cost of default setup is 50USD per month, however throughput can be [tweaked][dynamodb-setup-guide] according to used needs.
+
 #### 3.4 Cross-batch synthetic de-duplication
 
 This section hasn't been written yet.
+
+[dynamodb-setup-guide]: https://github.com/snowplow/snowplow/wiki/Setting-up-Amazon-DynamoDB
 
 [redshift-copy]: http://docs.aws.amazon.com/redshift/latest/dg/copy-parameters-data-source-s3.html
 [dynamodb-ttl]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/TTL.html
@@ -189,7 +189,7 @@ This section hasn't been written yet.
 [dealing-with-duplicate-event-ids]: http://snowplowanalytics.com/blog/2015/08/19/dealing-with-duplicate-event-ids/
 [r76-release]: http://snowplowanalytics.com/blog/2016/01/26/snowplow-r76-changeable-hawk-eagle-released/#deduplication
 [r86-release]: http://snowplowanalytics.com/blog/2016/12/20/snowplow-r86-petra-released/
-[r88-release]: http://snowplowanalytics.com/blog/2017/04/05/snowplow-r88-angkor-wat-released/
+[r88-release]: http://snowplowanalytics.com/blog/2017/04/27/snowplow-r88-angkor-wat-released/
 [duplicate-schema]: https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/duplicate/jsonschema/1-0-0
 
 [dynamodb-cond-writes]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithItems.html#WorkingWithItems.ConditionalUpdate
