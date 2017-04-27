@@ -60,7 +60,7 @@ Right-click on this [Download link][hadoop-enrich-download] to save it down loca
 
 The Scala Hadoop Shred process uses a single jarfile containing the MapReduce job. This is made available in a public Amazon S3 bucket, for Snowplowers who are running their Hadoop Enrich & Shred process on Amazon EMR:
 
-    s3://snowplow-hosted-assets/3-enrich/scala-hadoop-shred/snowplow-hadoop-shred-0.10.0.jar
+    s3://snowplow-hosted-assets/3-enrich/scala-hadoop-shred/snowplow-hadoop-shred-0.11.0.jar
 
 Right-click on this [Download link][hadoop-shred-download] to save it down locally via CloudFront CDN.
 
@@ -140,7 +140,7 @@ Please see the [[Artifact repositories]] wiki page for more information.
 [snowplow-repo]: https://github.com/snowplow/snowplow
 [cc-download]: http://d2io1hx8u877l0.cloudfront.net/2-collectors/clojure-collector/clojure-collector-1.1.0-standalone.war
 [hadoop-enrich-download]: http://d2io1hx8u877l0.cloudfront.net/3-enrich/scala-hadoop-enrich/snowplow-hadoop-enrich-1.8.0.jar
-[hadoop-shred-download]: http://d2io1hx8u877l0.cloudfront.net/3-enrich/scala-hadoop-shred/snowplow-hadoop-shred-0.10.0.jar
+[hadoop-shred-download]: http://d2io1hx8u877l0.cloudfront.net/3-enrich/scala-hadoop-shred/snowplow-hadoop-shred-0.11.0.jar
 [hadoop-event-recovery-download]: http://d2io1hx8u877l0.cloudfront.net/3-enrich/hadoop-event-recovery/snowplow-hadoop-event-recovery-0.2.0.jar
 [glc-download]: http://d2io1hx8u877l0.cloudfront.net/third-party/maxmind/GeoLiteCity.dat
 [geolite]: http://dev.maxmind.com/geoip/legacy/geolite?rld=snowplow
@@ -153,4 +153,4 @@ Please see the [[Artifact repositories]] wiki page for more information.
 [se-download]: http://dl.bintray.com/snowplow/snowplow-generic/snowplow_stream_enrich_0.10.0.zip
 [kes-download-1x]: http://dl.bintray.com/snowplow/snowplow-generic/snowplow_kinesis_elasticsearch_sink_0.8.0_1x.zip
 [kes-download-2x]: http://dl.bintray.com/snowplow/snowplow-generic/snowplow_kinesis_elasticsearch_sink_0.8.0_2x.zip
-[emr-download]: http://dl.bintray.com/snowplow/snowplow-generic/snowplow_emr_r87_chichen_itza.zip
+[emr-download]: http://dl.bintray.com/snowplow/snowplow-generic/snowplow_emr_r88_angkor_wat.zip
