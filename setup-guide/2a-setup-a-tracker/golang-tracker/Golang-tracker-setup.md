@@ -9,6 +9,7 @@
 - 3. [Setup](#setup)
 
 <a name="overview" />
+
 ## 1. Overview
 
 The [Snowplow Golang Tracker](https://github.com/snowplow/snowplow-golang-tracker) lets you add analytics to your [Golang][golang]-based apps and servers.
@@ -18,6 +19,7 @@ Ready? Let's get started.
 [Back to top](#top)
 
 <a name="compatibility" />
+
 ## 2 Tracker compatibility
 
 The Snowplow Golang Tracker has been built and tested using Golang versions 1.3, 1.4, 1.5 and 1.6.
@@ -25,6 +27,7 @@ The Snowplow Golang Tracker has been built and tested using Golang versions 1.3,
 [Back to top](#top)
 
 <a name="setup" />
+
 ## 3. Setup
 
 The Tracker is hosted on Github and versions of the Tracker are fetched using [gopkg](http://labix.org/gopkg.in).

@@ -1,13 +1,19 @@
+<a name="top" />
+
 [**HOME**](Home) » [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow-technical-documentation) » [**Snowplow Analytics SDK**](Snowplow-Analytics-SDK) » Scala Analytics SDK
+
+- 1 [Overview](#overview)  
+- 2 [The JSON Event Transformer](#transformer)  
+- 3 [Examples](#example)  
+  - 3.1 [Using from Apache Spark](#spark)  
+  - 3.2 [Using from AWS Lambda](#lambda)  
+
+<a name="overview" />
 
 ## Overview
 
-The [Snowplow Analytics SDK for Scala](https://github.com/snowplow/snowplow-scala-analytics-sdk) lets you work with [Snowplow enriched events](https://github.com/snowplow/snowplow/wiki/canonical-event-model) in your Scala event processing, 
-data modeling and machine-learning jobs. You can use this SDK with [Apache Spark](http://spark.apache.org/), [AWS Lambda](https://aws.amazon.com/lambda/), [Apache Flink](https://flink.apache.org/), [Scalding](https://github.com/twitter/scalding), [Apache Samza](http://samza.apache.org/) and other JVM-compatible data processing frameworks.
-
-The Scala Analytics SDK makes it significantly easier to build applications that consume Snowplow enriched data directly from Kinesis or S3.
-
-The Snowplow enriched event is a relatively complex TSV string containing self-describing JSONs. Rather than work with this structure directly, Snowplow analytics SDKs ship with *event transformers*, which translate the Snowplow enriched event format into something more convenient for engineers and analysts.
+The Snowplow enriched event is a relatively complex TSV string containing self-describing JSONs. 
+Rather than work with this structure directly, Snowplow analytics SDKs ship with *event transformers*, which translate the Snowplow enriched event format into something more convenient for engineers and analysts.
 
 As the Snowplow enriched event format evolves towards a cleaner [Apache Avro](https://avro.apache.org/)-based structure, we will be updating this Analytics SDK to maintain compatibility across different enriched event versions.
 
@@ -18,13 +24,15 @@ Working with the Snowplow Scala Analytics SDK therefore has two major advantages
 
 Currently the Analytics SDK for Scala ships with one event transformer: the JSON Event Transformer. 
 
+<a name="transformer" />
+
 ## The JSON Event Transformer
 
 The JSON Event Transformer takes a Snowplow enriched event and converts it into a JSON ready for further processing. This transformer was adapted from the code used to load Snowplow events into Elasticsearch in the Kinesis real-time pipeline.
 
 The JSON Event Transformer converts a Snowplow enriched event into a single JSON like so:
 
-```
+```json
 { "app_id":"demo",
   "platform":"web","etl_tstamp":"2015-12-01T08:32:35.048Z",
   "collector_tstamp":"2015-12-01T04:00:54.000Z","dvce_tstamp":"2015-12-01T03:57:08.986Z",
@@ -36,7 +44,7 @@ The most complex piece of processing is the handling of the self-describing JSON
 
 For example, if an enriched event contained a `com.snowplowanalytics.snowplow/link_click/jsonschema/1-0-1`, then the final JSON would contain:
 
-```
+```json
 { "app_id":"demo","platform":"web","etl_tstamp":"2015-12-01T08:32:35.048Z",
   "unstruct_event_com_snowplowanalytics_snowplow_link_click_1": {
     "targetUrl":"http://www.example.com",
@@ -45,7 +53,11 @@ For example, if an enriched event contained a `com.snowplowanalytics.snowplow/li
   },...
 ```
 
-## Using the SDK
+<a name="example" />
+
+## Examples
+
+<a name="spark" />
 
 ### Using from Apache Spark
 
@@ -64,6 +76,8 @@ val events = input
 val dataframe = ctx.read.json(events)
 ```
 
+<a name="lambda" />
+
 ### Using from AWS Lambda
 
 The Scala Analytics SDK is a great fit for performing analytics-on-write, monitoring or alerting on Snowplow event streams using AWS Lambda.
@@ -81,3 +95,8 @@ def recordHandler(event: KinesisEvent) {
     json = EventTransformer.transform(line)
   } yield json
 ```
+
+[Back to top](#top)  
+[Back to Scala Analytics SDK contents][contents]
+
+[contents]: Scala-Analytics-SDK

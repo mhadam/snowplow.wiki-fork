@@ -1,4 +1,4 @@
-[**HOME**](Home) > [**SNOWPLOW SETUP GUIDE**](setting-up-snowplow) > [**Step 4: Setup alternative data stores**](setting-up-alternative-data-stores)
+[**HOME**](Home) » [**SNOWPLOW SETUP GUIDE**](setting-up-snowplow) » [**Step 4: Setup alternative data stores**](setting-up-alternative-data-stores)
 
 [**Setup Snowplow**](setting-up-snowplow)
 
@@ -26,7 +26,7 @@
 - [[Troubleshooting]]  
 - [[IAM Setup]]   
 - [[Hosted assets]]  
-- [Glossary of Terms](Glossary)
-- [[Upgrade Guide]]
-- [Snowplow Version Matrix](Snowplow-version-matrix)
-- [Batch Pipeline Steps](Batch-pipeline-steps) (block dataflow diagram)
+- [Glossary of Terms](Glossary)  
+- [[Upgrade Guide]]  
+- [Snowplow Version Matrix](Snowplow-version-matrix)  
+- [Batch Pipeline Steps](Batch-pipeline-steps) (block dataflow diagram)  

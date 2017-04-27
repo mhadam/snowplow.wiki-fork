@@ -101,7 +101,7 @@ where only the first two arguments are required. You would use it like this:
 snowplow_name_here('trackStructEvent', 'Mixes', 'Play', '', '', 20);
 ```
 
-Empty strings are provided for the label and value arguments to pad them out. (`Null` would also work.) They won't be added to the event. Neither will the context argument, which isn't provided at all.
+Empty strings are provided for the `label` and `property` arguments to pad them out. (`Null` would also work.) They won't be added to the event. Neither will the context argument, which isn't provided at all.
 
 [Back to top](#top)  
 [Back to JavaScript technical documentation contents][contents]
@@ -185,6 +185,8 @@ If your website spans multiple subdomains e.g.
 You will want to track user behaviour across all those subdomains, rather than within each individually. As a result, it is important that the domain for your first party cookies is set to '.mysite.com' rather than 'www.mysite.com'. By doing so, any values that are stored on the cookie on one of subdomain will be accessible on all the others.
 
 Set the cookie domain for the tracker instance using the `cookieDomain` field of the argmap. If this field is not set, the cookies will not be given a domain.
+
+**WARNING**: *Changing the cookie domain will reset all existing cookies. As a result, it might be a major one-time disruption to data analytics because all visitors to the website will receive a new `domain_userid`.*
 
 <a name="cookie-name" />
 

@@ -1,6 +1,6 @@
 <a name="top" />
 
-[**HOME**](Home) > [**SNOWPLOW SETUP GUIDE**](Setting-up-Snowplow) > [**Step 1: Setup a Collector**](Setting-up-a-collector)
+[HOME](Home) » [SNOWPLOW SETUP GUIDE](Setting-up-Snowplow) » Step 1: Setup a Collector
 
 [[https://d3i6fms1cm1j0i.cloudfront.net/github-wiki/images/snowplow-architecture-2-collectors.png]]
 
@@ -10,40 +10,42 @@ The Snowplow collector receives data from Snowplow trackers and logs that data t
 2. [Setup a Collector](#setup)
 
 <a name="choose" />
+
 ## 1. Choose a Collector 
 
 There are currently three collectors available:
 
 | **Collector**                                  | **Description**                                     | **Status**       |
 |:-----------------------------------------------|:----------------------------------------------------|:-----------------|
-| [Cloudfront Collector] [cloudfront-collector]  | A simple, robust and scalable collector powered by AWS Cloudfront | Production-ready |
-| [Clojure Collector] [clojure-collector]        | A Clojure-based collector that enables user tracking across domains. Powered by Amazon Elastic Beanstalk | Production-ready |
-| [Scala Stream Collector] [scala-stream-collector]        | A Scala-based collector that enables user tracking across domains. Powered by Amazon Kinesis | Production-ready |
+| [Cloudfront Collector][cloudfront-collector]  | A simple, robust and scalable collector powered by AWS Cloudfront | Production-ready |
+| [Clojure Collector][clojure-collector]        | A Clojure-based collector that enables user tracking across domains. Powered by Amazon Elastic Beanstalk | Production-ready |
+| [Scala Stream Collector][scala-stream-collector]        | A Scala-based collector that enables user tracking across domains. Powered by Amazon Kinesis | Production-ready |
 
 ### Do you want to track data from mobile apps, application servers and/or 3rd party webhooks?
 
-If so we recommend setting up the [Clojure collector] [clojure-collector] or [Scala Stream Collector] [scala-stream-collector] as these support POST requests as well as GET requests.
+If so we recommend setting up the [Clojure collector][clojure-collector] or [Scala Stream Collector][scala-stream-collector] as these support POST requests as well as GET requests.
 
 ### Are you setting up Snowplow to track users across a single domain, or multiple domains?
 
-If you are tracking users across multiple domains, we recommending setting up the [Clojure collector] [clojure-collector] or [Scala Stream Collector] [scala-stream-collector]. This sets `user_id`s server side, so you can reliably track user journeys across multiple domains. (In contrast, the [Cloudfront collector] [cloudfront-collector] sets them client side, so users get assigned different `user_id`s on different domains.)
+If you are tracking users across multiple domains, we recommending setting up the [Clojure collector][clojure-collector] or [Scala Stream Collector][scala-stream-collector]. This sets `user_id`s server side, so you can reliably track user journeys across multiple domains. (In contrast, the [Cloudfront collector][cloudfront-collector] sets them client side, so users get assigned different `user_id`s on different domains.)
 
-If you are tracking users across a single domain and don't require mobile app or server side tracking, we recommend setting up the [Cloudfront collector] [cloudfront-collector]. 
+If you are tracking users across a single domain and don't require a mobile app or server-side tracking, we recommend setting up the [Cloudfront collector][cloudfront-collector]. 
 
 ### Do you want to experiment with real-time event analytics?
 
-Then check out the [Scala Stream Collector] [scala-stream-collector].
+Then check out the [Scala Stream Collector][scala-stream-collector].
 
 <a name="setup" />
+
 ## 2. Setup your Collector
 
-1. [Setup the Cloudfront Collector now!] [cloudfront-collector]
-2. [Setup the Clojure Collector now!] [clojure-collector]
-3. [Setup the Scala Stream Collector now!] [scala-stream-collector]
+1. [Setup the Cloudfront Collector now!][cloudfront-collector]
+2. [Setup the Clojure Collector now!][clojure-collector]
+3. [Setup the Scala Stream Collector now!][scala-stream-collector]
 
-Setup your collector? Then proceed to [step 2: setup a tracker] [tracker-setup].
+Setup your collector? Then proceed to [step 2: setup a tracker][tracker-setup].
 
-[Return to the setup guide] [setup-guide].
+[Return to the setup guide][setup-guide].
 
 [cloudfront-collector]: Setting-up-the-Cloudfront-collector
 [clojure-collector]: Setting-up-the-Clojure-collector

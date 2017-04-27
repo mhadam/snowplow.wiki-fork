@@ -1,6 +1,6 @@
 <a name="top" />
 
-[**HOME**](Home) > [**SNOWPLOW SETUP GUIDE**](Setting-up-Snowplow) > [**Step 4: setting up alternative data stores**](Setting-up-alternative-data-stores) > Setup PostgreSQL
+[**HOME**](Home) » [**SNOWPLOW SETUP GUIDE**](Setting-up-Snowplow) » [**Step 4: setting up alternative data stores**](Setting-up-alternative-data-stores) » Setup PostgreSQL
 
 ## Contents
 
@@ -10,11 +10,13 @@
 4. [Next steps](#next-steps)
 
 <a name="ec2" />
+
 ## 1. Setting up PostgreSQL on EC2
 
 **Note**: We recommend running all Snowplow AWS operations through an IAM user with the bare minimum permissions required to run Snowplow. Please see our [IAM user setup page](IAM-setup) for more information on doing this.
 
 <a name="1.1" />
+
 ### 1.1 Setup an EC2 instance to run PostgreSQL server
 
 If you do not have a server / EC2 instance already available to run PostgreSQL, you will need to create one. (If you do have one, skip to the next step, [installing PostgreSQL](#1.2)). 
@@ -68,13 +70,14 @@ Once downloaded (in the form of a `.pem` file), you will need to make sure it is
 Click on **Launch Instances** button to complete the setup and start the instance.
 
 <a name="1.2" />
+
 ### 1.2 Install PostgreSQL
 
 #### 1.2.1 SSH into your EC2 instance
 
-To install PostgreSQL, you need to SSH into the instance that you want to setup PostgreSQL on, and install Postres. In this tutorial, we're going to connect via a standalone SSH client, but you can also connect through the web browser.(For full instructions on the different connection options, see the [Amazon guide][amazon-emr-guide].)
+To install PostgreSQL, you need to SSH into the instance that you want to set up PostgreSQL on, and install Postres. In this tutorial, we're going to connect via a standalone SSH client, but you can also connect through the web browser.(For full instructions on the different connection options, see the [Amazon guide][amazon-emr-guide].)
 
-To do that, go into the EC2 section of the AWS dashboard. Click on **Instances** link on the left hand menu. Right click on the instance you want to setup PostgreSQL on and click **Connect**. In the dialogue box that appears, ensure to select **A standalone SSH client** in ***I would like to connect with*** section:
+To do that, go into the EC2 section of the AWS dashboard. Click on **Instances** link on the left-hand menu. Right click on the instance you want to set up PostgreSQL on and click **Connect**. In the dialogue box that appears, ensure to select **A standalone SSH client** in ***I would like to connect with*** section:
 
 [[/setup-guide/images/postgresql/connect-with-standalone-ssh-client.jpg]]
 
@@ -171,7 +174,7 @@ And add a password for your PostgreSQL admin:
 
 	ALTER USER postgres WITH PASSWORD '$password';
 
-Now we need to create user credentials for our differnet users. Power users will be able to do anything (these are really admins.) "Other users" will be suitable for analysts who wish to query the data. We also create a particular user with limited access for the storageloader - these credentials will be used just to load Snowplow data into Postgres.
+Now we need to create user credentials for our different users. Power users will be able to do anything (these are really admins.) "Other users" will be suitable for analysts who wish to query the data. We also create a particular user with limited access for the storageloader - these credentials will be used just to load Snowplow data into Postgres.
 
 ```sql
 CREATE USER power_user SUPERUSER;
@@ -185,6 +188,7 @@ CREATE USER storageloader PASSWORD '$storageloaderpassword';
 We can now exit from Postgres with `\q`. Setup is complete: we are ready to connect to our database remotely.
 
 <a name="security-group" />
+
 #### 1.2.3 Ensure that EC2 enables remote connections to the PostgreSQL port
 
 Before you can connect to PostgreSQL remotely, you need to ensure that you have enabled access to the port in your EC2 security groups settings.
@@ -221,9 +225,10 @@ You are now ready to [setup the Snowplow events table and views] (#events-table)
 Back to [top](#top).
 
 <a name="debian" />
+
 ## 2. Setting up PostgreSQL on Debian / Ubuntu
 
-*Thanks to [Simon Rumble] [simon-rumble] for providing the following instructions:
+*Thanks to [Simon Rumble][simon-rumble] for providing the following instructions:
 
 Download PostgreSQL:
 
@@ -248,7 +253,7 @@ Log into PostgreSQL:
 
 Update your Postres user credentials:
 
-Now we need to create user credentials for our differnet users. Power users will be able to do anything (these are really admins.) "Other users" will be suitable for analysts who wish to query the data. We also create a particular user with limited access for the storageloader - these credentials will be used just to load Snowplow data into Postgres.
+Now we need to create user credentials for our different users. Power users will be able to do anything (these are really admins.) "Other users" will be suitable for analysts who wish to query the data. We also create a particular user with limited access for the storageloader - these credentials will be used just to load Snowplow data into Postgres.
 
 ```sql
 CREATE USER power_user SUPERUSER;
@@ -269,6 +274,7 @@ You can now Snowplow events table as described in the [next step](#events-table)
 Back to [top](#top).
 
 <a name="events-table" />
+
 ## 3. Create the Snowplow events table and views in PostgreSQL
 
 Now that PostgreSQL has been setup, we need to create the table for the Snowplow events, and then all the different views that ship with Snowplow. 
@@ -276,7 +282,7 @@ Now that PostgreSQL has been setup, we need to create the table for the Snowplow
 [[/images/warning.png]] | Note we are working on new data models and recipes that are more specific than we currently have. They will make use of all our latest features and enhancements. 
 ---|:---
 
-First, let's create the `atomic.events` table, where the actual Snowplow data will live. The SQL for creating the atomic schema and table can be found [here] [postgres-table-def]. Either copy and paste that SQL into PSQL / Navicat, or you can run that file into PSQL at the command line. To do this, navigate to your Snowplow repo, then:
+First, let's create the `atomic.events` table, where the actual Snowplow data will live. The SQL for creating the atomic schema and table can be found [here][postgres-table-def]. Either copy and paste that SQL into PSQL / Navicat, or you can run that file into PSQL at the command line. To do this, navigate to your Snowplow repo, then:
 
 	$ cd 4-storage/postgres-storage/sql
 	$ psql -h <HOSTNAME> -U power_user -d snowplow -p <PORT> -f atomic-def.sql
@@ -384,6 +390,7 @@ Now you should be able to connect to the database as `other_user` and use the co
 Back to [top](#top).
 
 <a name="next-steps" />
+
 ## 4. Next steps
 
 Now you have setup PostgreSQL, you are ready to [setup the StorageLoader][setup-storageloader] to automate the regular loading of Snowplow data into the PostgreSQL events table.

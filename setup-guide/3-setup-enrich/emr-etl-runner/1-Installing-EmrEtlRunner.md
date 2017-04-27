@@ -10,6 +10,7 @@
 6. [Next steps](#next-steps)
 
 <a name="assumptions"/>
+
 ## 1. Assumptions
 
 This guide assumes that you have administrator access to a Unix-based server (e.g. Ubuntu, OS X, Fedora) on which you can install EmrEtlRunner and schedule a regular cronjob.
@@ -19,6 +20,7 @@ You might wish to try out the [steps](Setting-up-EC2-instance-for-EmrEtlRunner-a
 _In theory EmrEtlRunner can be deployed onto a Windows-based server, using the Windows Task Scheduler instead of cron, but this has not been tested or documented._
 
 <a name="dependencies"/>
+
 ## 2. Dependencies
 
 ### 2.1 Hardware
@@ -38,6 +40,7 @@ You will also need an **EC2 key pair** setup in your Amazon EMR account.
 For details on how to do this, please see [Create a Key Pair](http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/EMR_SetUp_KeyPair.html). Make sure that you setup the EC2 key pair inside the region in which you will be running your ETL jobs.
 
 <a name="s3-buckets"/>
+
 ### 2.4 S3 locations
 
 EmrEtlRunner processes data through three distinct states:
@@ -53,6 +56,7 @@ For all other S3 locations, you can specify paths within a single S3 bucket that
 Done? Right, now we can install EmrEtlRunner.
 
 <a name="installation"/>
+
 ## 3. Installation
 
 We host EmrEtlRunner on the distribution platform [JFrog Bintray](https://bintray.com/). You can get a copy of it as shown below.
@@ -72,9 +76,10 @@ $ unzip snowplow_emr_{{RELEASE_VERSION}}.zip
 You will see two files `snowplow-emr-etl-runner` and `snowplow-storage-loader` where the first one is the actual EmrEtlRunner.
 
 <a name="configuration"/>
+
 ## 4. Configuration
 
-EmrEtlRunner requires a YAML format configuration file to run. There is a configuration file template available in the Snowplow GitHub repository at [`/3-enrich/emr-etl-runner/config/config.yml.sample`] [config-yml]. See [[Common configuration]] more information on how to write this file.
+EmrEtlRunner requires a YAML format configuration file to run. There is a configuration file template available in the Snowplow GitHub repository at [`/3-enrich/emr-etl-runner/config/config.yml.sample`][config-yml]. See [[Common configuration]] more information on how to write this file.
 
 ### Storage targets
 
@@ -85,14 +90,16 @@ Storages for data can be configured using storage targets JSONs. Configuration f
 You will also need an Iglu resolver configuration file. This is where we list the schema repositories to use to retrieve JSON Schemas for validation. For more information on this, see the [wiki page for Configuring shredding](6-Configuring-shredding).
 
 <a name="enrichments" />
+
 ## 5. Configuring enrichments
 
 If you wish to use Snowplow enrichments, see the [wiki page for configuring enrichments](5-Configuring-enrichments).
 
 <a name="next-steps" />
+
 ## 6. Next steps
 
-All done installing EmrEtlRunner? Then [learn how to use it] [using-emretlrunner]
+All done installing EmrEtlRunner? Then [learn how to use it][using-emretlrunner]
 
 [git-install]: http://git-scm.com/book/en/Getting-Started-Installing-Git
 [config-yml]: https://github.com/snowplow/snowplow/blob/master/3-enrich/emr-etl-runner/config/config.yml.sample

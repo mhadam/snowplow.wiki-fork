@@ -21,6 +21,7 @@ Documentation for older version of this tracker is available:
   - 3.4 [SBT](#sbt)
 
 <a name="overview" />
+
 ## 1. Overview
 
 The [Snowplow Java Tracker](https://github.com/snowplow/snowplow-java-tracker) lets you add analytics to your [Java] [java]-based desktop and server apps, servlets and games.
@@ -32,9 +33,11 @@ Ready? Let's get started.
 [Back to top](#top)
 
 <a name="integration-options" />
+
 ## 2. Integration options
 
 <a name="compatibility" />
+
 ### 2.1 Tracker compatibility
 
 The Snowplow Java Tracker has been built and tested using JDK7 (JRE 1.7), so should work within any Java application built using JDK7 upwards.
@@ -42,25 +45,29 @@ The Snowplow Java Tracker has been built and tested using JDK7 (JRE 1.7), so sho
 [Back to top](#top)
 
 <a name="dependencies" />
+
 ### 2.2 Dependencies
 
-To minimize jar bloat, we have tried to keep external dependencies to a minimum. For the full list of dependencies, please see our [Gradle build file] [gradle-build].
+To minimize jar bloat, we have tried to keep external dependencies to a minimum. For the full list of dependencies, please see our [Gradle build file][gradle-build].
 
 [Back to top](#top)
 
 <a name="setup" />
+
 ## 3. Setup
 
 <a name="hosting" />
+
 ### 3.1 Hosting
 
-The Tracker is published to Snowplow's [hosted Maven repository] [maven-snplow], which should make it easy to add it as a dependency into your own Java app.
+The Tracker is published to Snowplow's [hosted Maven repository][maven-snplow], which should make it easy to add it as a dependency into your own Java app.
 
 The current version of the Snowplow Java Tracker is 0.8.0.
 
 You can also manually insert the Tracker by downloading the jar directly: [snowplow-java-tracker-0.8.0.jar](http://maven.snplow.com/releases/com/snowplowanalytics/snowplow-java-tracker/0.8.0/snowplow-java-tracker-0.8.0.jar)
 
 <a name="maven" />
+
 ### 3.2 Maven
 
 If you are using Maven for building your Java application, then add the following code into your `HOME/.m2/settings.xml` to be able to use this repository:
@@ -99,6 +106,7 @@ Then add into your project's `pom.xml`:
 ```
 
 <a name="gradle" />
+
 ### 3.3 Gradle
 
 If you are using Gradle in your own Java application, then add our Maven repository in your `build.gradle` file:
@@ -123,6 +131,7 @@ dependencies {
 ```
 
 <a name="sbt" />
+
 ### 3.4 SBT
 
 The Snowplow Java Tracker is also usable from Scala. Add this to your SBT config:

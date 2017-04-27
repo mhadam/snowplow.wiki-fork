@@ -2,21 +2,21 @@ As part of our commitment to a loosely-coupled architecture for Snowplow, where 
 
 We publish these code components and libraries to the following artifact repositories:
 
-1. **[RubyGems.org] [rubygems]** - for all Ruby libraries
-2. **[maven.snplow.com] [maven-snplow]** - for all Java, Scala and Clojure libraries
+1. **[RubyGems.org][rubygems]** - for all Ruby libraries
+2. **[maven.snplow.com][maven-snplow]** - for all Java, Scala and Clojure libraries
 
 To take each in turn:
 
 ## RubyGems.org
 
-RubyGems.org is the Ruby community's gem hosting service. You can find all of our published libraries listed under [our snowplow username] [rubygems-snowplow].
+RubyGems.org is the Ruby community's gem hosting service. You can find all of our published libraries listed under [our snowplow username][rubygems-snowplow].
 
 ### Available libraries
 
 Current libraries are:
 
-1. [referer-parser] [referer-parser-rubygems] - extracts search marketing attribution data from referrer URLs ([GitHub repo] [referer-parser-github])
-2. [Infobright Loader] [irl-rubygems] - our data loader for Infobright ([GitHub repo] [irl-github])
+1. [referer-parser][referer-parser-rubygems] - extracts search marketing attribution data from referrer URLs ([GitHub repo][referer-parser-github])
+2. [Infobright Loader][irl-rubygems] - our data loader for Infobright ([GitHub repo][irl-github])
 
 ### Using in your project
 
@@ -32,15 +32,15 @@ And then execute:
 
 ## maven.snplow.com
 
-[maven.snplow.com] [maven-snplow] is our self-hosted Maven repository, where we publish jars for Java, Scala and Clojure libraries.
+[maven.snplow.com][maven-snplow] is our self-hosted Maven repository, where we publish jars for Java, Scala and Clojure libraries.
 
 ### Available libraries
 
 There are three currently:
 
-1. [Scala Util] [scala-util-maven] - reusable Scala code from Snowplow Analytics ([GitHub repo] [scala-util-github])
-2. [RefererParser] [referer-parser-maven] - referer URL parsing in Java/Scala ([GitHub repo] [referer-parser-github])
-3. [Scala MaxMind Geo-IP] [scala-maxmind-geoip-maven] - Scala wrapper for the MaxMind Java Geo-IP library ([GitHub repo] [scala-maxmind-repo-github])
+1. [Scala Util][scala-util-maven] - reusable Scala code from Snowplow Analytics ([GitHub repo][scala-util-github])
+2. [RefererParser][referer-parser-maven] - referer URL parsing in Java/Scala ([GitHub repo][referer-parser-github])
+3. [Scala MaxMind Geo-IP][scala-maxmind-geoip-maven] - Scala wrapper for the MaxMind Java Geo-IP library ([GitHub repo][scala-maxmind-repo-github])
 
 ### Using in your project
 

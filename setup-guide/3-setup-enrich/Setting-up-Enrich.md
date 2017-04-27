@@ -11,6 +11,7 @@ and [stores enriched data](Setting-up-alternative-data-storage) in a persistent 
 2. [Setup your Enrichment process](#setup)
 
 <a name="choose" />
+
 ## 1. Choose an Enrichment process
 
 There are currently two Enrichment processes available for setup:
@@ -21,6 +22,7 @@ There are currently two Enrichment processes available for setup:
 | [Stream Enrich](setting-up-stream-enrich) | A Scala application that reads Thrift events from a Kinesis stream and outputs back to a Kinesis stream | Production-ready |
 
 <a name="setup" />
+
 ## 2. Setup your Enrichment
 
 1. [Setup EmrEtlRunner](setting-up-EmrEtlRunner)

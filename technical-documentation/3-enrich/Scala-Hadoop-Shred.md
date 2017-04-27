@@ -118,6 +118,8 @@ in order to correctly populate `event_fingerprint` property.
 
 #### 3.3 Cross-batch natural de-duplication
 
+#### 3.3 Cross-batch natural de-duplication
+
 With cross-batch natural de-duplication, we have a challenge: we need to track events across multiple ETL processing batches to detect duplicates. 
 We don't need to store the whole event - just the `event_id` and the `event_fingerprint` metadata. 
 And we need to store these in a database that allows fast random access - we chose Amazon DynamoDB, a fully managed NoSQL database service.
