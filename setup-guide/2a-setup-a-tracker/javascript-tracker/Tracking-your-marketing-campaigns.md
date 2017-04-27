@@ -11,6 +11,7 @@ In order to ensure that the campaigns you setup are correctly tracked by Snowplo
 2. [Example: tracking AdWords campaigns with Snowplow](#adwords)
 
 <a name="overview" />
+
 ### 1. Campaign tracking with Snowplow: an overview
 
 Your different campaigns (PPC campaigns, display ads, email marketing messages, Facebook campaigns etc.) will include one or more links to your website e.g.:
@@ -35,9 +36,10 @@ As mentioned earlier, Snowplow uses the same query parameters used by Google Ana
 | `utm_term  `         | Campaign term(s)      | Used for search marketing in particular, this field is used to identify the search terms that triggered the ad being displayed in the search results. |
 | `utm_content`        | Campaign content      | Used either to differentiate similar content or two links in the same ad. (So that it is possible to identify which is generating more traffic.) |
 
-The parameters are descibed in the [Google Analytics help page] [gahelppage]. Google also provides a [urlbuilder] [gaurlbuilder] which can be used to construct the URL incl. query parameters to use in your campaigns.
+The parameters are descibed in the [Google Analytics help page][gahelppage]. Google also provides a [urlbuilder][gaurlbuilder] which can be used to construct the URL incl. query parameters to use in your campaigns.
 
 <a name="adwords" />
+
 ### 2. Tracking AdWords campaigns in Snowplow
 
 As an example, we'll walk through the process of configuring AdWords to append the relevant parameters on ad links.
@@ -51,7 +53,7 @@ When tracking AdWords campaigns in Snowplow, 2 things should be highlighted:
 
 When setting up or editing an ad in AdWords, you can specify a link to the landing page a user is directed to on clicking the ad:
 
-![adwordsediturl] [gaadwordsediturl]
+![adwordsediturl][gaadwordsediturl]
 
 Assume that the landing page URL is:
 
@@ -63,11 +65,11 @@ First let's identify the source of this campaign as Google AdWords, by updating 
 
 	http://mysite.com/myproduct.html?utm_source=Google
 
-We might want to distinguish ads from Google Search results with results from the Google content network. In this case, we can use [ValueTrack parameters] [gavaluetrackparameters] as follows:
+We might want to distinguish ads from Google Search results with results from the Google content network. In this case, we can use [ValueTrack parameters][gavaluetrackparameters] as follows:
 
 	http://mysite.com/myproduct.html?utm_source=Google{ifsearch:Search}{ifcontent:Content}
 
-The above makes use of the [Value Click parameters] [gavaluetrackparameters]. These are set when an ad is shown: if the ad is shown on the Google Display Network the link will read:
+The above makes use of the [Value Click parameters][gavaluetrackparameters]. These are set when an ad is shown: if the ad is shown on the Google Display Network the link will read:
 
 	http://mysite.com/myproduct.html?utm_source=GoogleSearch
 
@@ -91,7 +93,7 @@ A sensible campaign name / ID is the campaign name given in Google AdWords. If t
 
 ##### 4. Adding utm_term
 
-It is valuable to know which keywords a user entered in his / her search query to trigger the ad being shown. (Or if it's the display network, which words on the web page triggered the ad.) Because a single ad may have many different keywords associated with it, this value needs to be set dynamically when an ad is shown. Fortunately, Google has provided a [value parameter] [gavalueparameters] that does just that: `{keyword}`. Hence, all we have to do is add `&utm_term={keyword}` to our link:
+It is valuable to know which keywords a user entered in his / her search query to trigger the ad being shown. (Or if it's the display network, which words on the web page triggered the ad.) Because a single ad may have many different keywords associated with it, this value needs to be set dynamically when an ad is shown. Fortunately, Google has provided a [value parameter][gavalueparameters] that does just that: `{keyword}`. Hence, all we have to do is add `&utm_term={keyword}` to our link:
 
 	http://mysite.com/myproduct.html?utm_source=Google{ifsearch:Search}{ifcontent:Content}&utm_medium=cpc&utm_campaign=handbag-summer-2012-promotion&utm_term={keyword}
 
@@ -107,11 +109,11 @@ In the analysis phase, we can then look this creative id up via the AdWords API,
 
 Hopefully setting up other marketing channels to include the query parameters necessary to do campaign tracking with Snowplow should be straightforward, and work in a similar fashion to AdWords.
 
-Finished setting up the [JavaScript Tracker] (javascript-tracker-setup)? Then you are ready to [setup EmrEtlRunner] (Setting-up-Snowplow#wiki-step3).
+Finished setting up the [JavaScript Tracker](javascript-tracker-setup)? Then you are ready to [setup EmrEtlRunner](Setting-up-Snowplow#wiki-step3).
 
-Return to the [setup guide] (Setting-up-Snowplow).
+Return to the [setup guide](Setting-up-Snowplow).
 
-[gahelppage]: https://support.google.com/analytics/bin/answer.py?hl=en&answer=1033863&ctx=cb&src=cb&cbid=-oxeewb61m1du&cbrank=1 
+[gahelppage]: https://support.google.com/analytics/bin/answer.py?hl=en&answer=1033863&ctx=cb&src=cb&cbid=-oxeewb61m1du&cbrank=1
 [gaurlbuilder]: https://support.google.com/analytics/bin/answer.py?hl=en&answer=1033867
 [gavaluetrackparameters]: http://support.google.com/adwords/bin/answer.py?hl=en&answer=2375447
 [gaadwordsediturl]: /snowplow/snowplow/wiki/setup-guide/images/adwords-query-string.png

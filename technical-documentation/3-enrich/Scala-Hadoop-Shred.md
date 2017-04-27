@@ -1,9 +1,9 @@
-[**HOME**](Home) > [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow technical documentation) > [**Enrichment**](Enrichment) > Scala Hadoop Shred
+[**HOME**](Home) > [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow-technical-documentation) > [**Enrichment**](Enrichment) > Scala Hadoop Shred
 
 <a name="overview">
 ### 1. Overview
 
-Scala Hadoop Shred is Hadoop job, written in [Scalding][scalding] (Scala API
+Scala Hadoop Shred is Hadoop job, written in [Scalding][scalding](Scala API
 for [Cascading][cascading]) and allowing you to split (shred) Snowplow enriched
 event, produced by Scala Hadoop Enrich into separate enrities. Scala Hadoop
 Shred utilizes the [scala-common-enrich][sce] Scala project to load enriched
@@ -58,7 +58,7 @@ More details on what shredding is can be found on dedicated
 ### 3. Deduplication
 
 Duplicates is common problem in event pipelines, it is described
-[many][dealing-with-duplicate-event-ids] [times][r76-release]. Basically
+[many][dealing-with-duplicate-event-ids][times][r76-release]. Basically
 problem is that we cannot guarantee that every event has unique `UUID` because
 
 1. we have no exactly-once-delivery guarantee
@@ -69,7 +69,7 @@ There are four strategies planned for Scala Hadoop Shred's deduplication:
 
 | Strategy                             | Batch?      | Same event ID? | Same event fingerprint? | Availability                              |
 |--------------------------------------|-------------|----------------|-------------------------|-------------------------------------------|
-| In-batch natural de-duplication      | In-batch    | Yes            | Yes                     | [R76 Changeable Hawk-Eagle] [r76-release] |
+| In-batch natural de-duplication      | In-batch    | Yes            | Yes                     | [R76 Changeable Hawk-Eagle][r76-release] |
 | In-batch synthetic de-duplication    | In-batch    | Yes            | No                      | [R86 Petra][r86-release]                                 |
 | Cross-batch natural de-duplication   | Cross-batch | Yes            | Yes                     | Planned                                   |
 | Cross-batch synthetic de-duplication | Cross-batch | Yes            | No                      | Planned                                   |
@@ -130,7 +130,7 @@ We store the `etl_timestamp` to prevent issues in the case of a failed run. If a
 
 #### Check-and-set algorithm
 
-It is clear when we read the event metadata from DynamoDB: during the Hadoop Shred process. But when do we write the event metadata for this run back to DynamoDB? Instead of doing all the reads and then doing all the writes, we decided to use DynamoDB's [conditional update] [dynamodb-cond-writes] to perform a check-and-set operation inside Hadoop Shred, on a per-event basis.
+It is clear when we read the event metadata from DynamoDB: during the Hadoop Shred process. But when do we write the event metadata for this run back to DynamoDB? Instead of doing all the reads and then doing all the writes, we decided to use DynamoDB's [conditional update][dynamodb-cond-writes] to perform a check-and-set operation inside Hadoop Shred, on a per-event basis.
 
 The algorithm is simple:
 

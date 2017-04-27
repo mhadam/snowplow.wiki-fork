@@ -1,4 +1,4 @@
-[**HOME**](Home) > [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow technical documentation) > [**Storage**](storage documentation) > Storage in Infobright
+[**HOME**](Home) > [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow-technical-documentation) > [**Storage**](storage-documentation) > Storage in Infobright
 
 Please note: Snowplow dropped support for loading data into Infobright with version 0.8.0. We plan to add back Infobright support at a later date, however, this is low priority.
 
@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS events_009 (
 	`collector_dt` date,
 	`collector_tm` time,
 	`dvce_dt` date,
-	`dvce_tm` time, 
+	`dvce_tm` time,
 	`dvce_epoch` bigint,
 	-- Event
 	`event` varchar(128) comment 'lookup',

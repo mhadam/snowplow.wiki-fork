@@ -1,10 +1,10 @@
-[**HOME**](Home) > [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow technical documentation) > [**Enrichment**](Enrichment) > EmrEtlRunner
+[**HOME**](Home) > [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow-technical-documentation) > [**Enrichment**](Enrichment) > EmrEtlRunner
 
 ## An overview of how EmrEtlRunner instruments the enrichment process
 
 [[/technical-documentation/images/emr-etl-runner-steps.png]]
 
-Raw collector logs that need to be processed are identified in the in-bucket. (This is the bucket that the collector log files are generated in: it's location is specified in the [EmrEtlRunner config file] [config-file].)
+Raw collector logs that need to be processed are identified in the in-bucket. (This is the bucket that the collector log files are generated in: it's location is specified in the [EmrEtlRunner config file][config-file].)
 
 EmrEtlRunner then triggers the Enrichment process to run. It spins up an EMR cluster (the size of which is determined by the [config file][config-file]), uploads the JAR with the Scalding Enrichment process on, and instructs EMR to:
 

@@ -1,6 +1,6 @@
 <a name="top" />
 
-[**HOME**](Home) > [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow technical documentation) > [**Trackers**](trackers) > Python Tracker
+[**HOME**](Home) > [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow-technical-documentation) > [**Trackers**](trackers) > Python Tracker
 
 *This page refers to version 0.3.0 of the Snowplow Python Tracker. Documentation for other versions is available:*
 
@@ -18,17 +18,17 @@
 
 ## Contents
 
-- 1. [Overview](#overview)  
-- 2. [Initialization](#init)  
+- 1. [Overview](#overview)
+- 2. [Initialization](#init)
   - 2.1 [Importing the module](#importing)
   - 2.2 [Creating a tracker](#create-tracker)
-    - 2.2.1 [`namespace](#namespace)  
+    - 2.2.1 [`namespace](#namespace)
     - 2.2.2 [`app_id`](#app-id)
     - 2.2.3 [`context_vendor`](#context-vendor)
     - 2.2.4 [`encode_base64`](#base64)
     - 2.2.5 [`contracts`](#contracts)
   - 2.3 [Creating multiple trackers](#multi-tracker)
-- 3. [Adding extra data](#add-data)  
+- 3. [Adding extra data](#add-data)
   - 3.1 [`set_platform()`](#set-platform)
   - 3.2 [`set_user_id()`](#set-user-id)
   - 3.3 [`set_screen_resolution()`](#set-screen-resolution)
@@ -48,6 +48,7 @@
     - 4.7.1 [Supported datatypes](#unstruct-datatypes)
 
 <a name="overview" />
+
 ## 1. Overview
 
 The [Snowplow Python Tracker](https://github.com/snowplow/snowplow-python-tracker) allows you to track Snowplow events from your Python apps and games.
@@ -57,11 +58,13 @@ The tracker should be straightforward to use if you are comfortable with Python 
 Note that this tracker has access to a more restricted set of Snowplow events than the [[JavaScript Tracker]] and covers almost all the events from the [[Lua Tracker]].
 
 <a name="init" />
+
 ## 2 Initialization
 
 Assuming you have completed the [[Python Tracker Setup]] for your Python project, you are now ready to initialize the Python Tracker.
 
 <a name="importing" />
+
 ### 2.1 Importing the module
 
 Require the Python Tracker's module into your Python code like so:
@@ -70,11 +73,12 @@ Require the Python Tracker's module into your Python code like so:
 from snowplow_tracker.tracker import Tracker
 ```
 
-That's it - you are now ready to initialize a tracker instance. 
+That's it - you are now ready to initialize a tracker instance.
 
 [Back to top](#top)
 
 <a name="create-tracker" />
+
 ### 2.2 Creating a tracker
 
 The simplest tracker initialization only requires you to provide the URI of the collector to which the tracker will log events:
@@ -90,9 +94,9 @@ There are other optional keyword arguments:
 | `collector_uri`      | The collector URI       | Yes           | `None`        |
 | `namespace`  | The name of the tracker instance     |  No           |  `None` |
 | `app_id` | The application ID          | No           | `None`         |
-| `context_vendor`     | [Context vendor] [context-vendor]  | No            | `None`        |
-| `encode_base64` | Whether to enable [base 64 encoding] [base64] | No | `True`  |
-| `contracts`  | Whether to enable [PyContracts] [contracts] | No | `True` |
+| `context_vendor`     | [Context vendor][context-vendor]  | No            | `None`        |
+| `encode_base64` | Whether to enable [base 64 encoding][base64] | No | `True`  |
+| `contracts`  | Whether to enable [PyContracts][contracts] | No | `True` |
 
 
 A more complete example:
@@ -104,26 +108,31 @@ tracker = Tracker("d3rkrsqld9gmqf.cloudfront.net", "cf", "com.my_company", False
 [Back to top](#top)
 
 <a name="namespace" />
+
 #### 2.2.1 `namespace`
 
 If provided, the `namespace` argument will be attached to every event fired by the new tracker. This allows you to later identify which tracker fired which event if you have multiple trackers running.
 
 <a name="app-id" />
+
 #### 2.2.2 `app_id
 
 The `app_id` argument lets you set the application ID to any string.
 
 <a name="context-vendor" />
+
 #### 2.2.3 'context_vendor`
 
 The `context_vendor` argument identifies the company which defined the [custom contexts](#custom-contexts) attached to events the tracker fires. It should be a string containing no characters other than lowercase letters, underscores and dots. It should be the company's reversed internet domain name - for example, "com.example" for custom contexts developed at a company with domain name "example.com". Whenever the new tracker fires an event with a custom context attached, the context vendor will also be attached. This helps to avoid confusion between custom contexts defined by different companies.
 
 <a name="base64" />
+
 #### 2.2.4 `encode_base64`
 
 By default, unstructured events and custom contexts are encoded into Base64 to ensure that no data is lost or corrupted. You can turn encoding on or off using the Boolean `encode_base64` argument.
 
 <a name="contracts" />
+
 #### 2.2.5 'contracts'
 
 Python is a dynamically typed language, but each of our methods expects its arguments to be of specific types and value ranges, and validates that to be the case. These checks are done using the [PyContracts][pycontracts] library.
@@ -137,9 +146,9 @@ t.set_color_depth("walrus")
 ```
 contracts.interface.ContractNotRespected: Breach for argument 'depth' to Tracker:set_color_depth().
 Expected type 'int', got 'str'.
-checking: Int      for value: Instance of str: 'walrus'   
-checking: $(Int)   for value: Instance of str: 'walrus'   
-checking: int      for value: Instance of str: 'walrus'   
+checking: Int      for value: Instance of str: 'walrus'
+checking: $(Int)   for value: Instance of str: 'walrus'
+checking: int      for value: Instance of str: 'walrus'
 Variables bound in inner context:
 - self: Instance of Tracker: <snowplow_tracker.tracker.Tracker object... [clip]
 
@@ -159,6 +168,7 @@ You can turn off type checking to improve performance by setting the `contracts`
 [Back to top](#top)
 
 <a name="multi-tracker" />
+
 ### 2.3 Creating multiple trackers
 
 Each tracker instance is completely sandboxed, so you can create multiple trackers as you see fit.
@@ -174,12 +184,13 @@ t2 = Tracker("my-company.c.snplow.com", "t2")
 t2.set_platform("cnsl")
 t2.track_screen_view("Game HUD", "23")
 
-t1.track_screen_view("Test", "23") # Back to first tracker 
+t1.track_screen_view("Test", "23") # Back to first tracker
 ```
 
 [Back to top](#top)
 
 <a name="add-data" />
+
 ## 3. Adding extra data
 
 You may have additional information about your application's environment, current user and so on, which you want to send to Snowplow with each event.
@@ -195,6 +206,7 @@ The tracker instance has a set of `set...()` methods to attach extra data to all
 We will discuss each of these in turn below:
 
 <a name="set-platform" />
+
 #### 3.1 Change the tracker's platform with `set_platform()`
 
 You can change the platform the tracker is running on by calling:
@@ -214,6 +226,7 @@ For a full list of supported platforms, please see the [[Snowplow Tracker Protoc
 [Back to top](#top)
 
 <a name="set-user-id" />
+
 ### 3.2 Set user ID with `set_user_id()`
 
 You can set the user ID to any string:
@@ -231,6 +244,7 @@ t.set_user_id("alexd")
 [Back to top](#top)
 
 <a name="set-screen-resolution" />
+
 ### 3.3 Set screen resolution with `set_screen_resolution()`
 
 If your Python code has access to the device's screen resolution, then you can pass this in to Snowplow too:
@@ -248,6 +262,7 @@ t.set_screen_resolution(1366, 768)
 [Back to top](#top)
 
 <a name="set-viewport" />
+
 ### 3.4 Set viewport dimensions with `set_viewport()`
 
 If your Python code has access to the device's screen resolution, then you can pass this in to Snowplow too:
@@ -265,6 +280,7 @@ t.set_viewport(300, 200)
 [Back to top](#top)
 
 <a name="set-color-depth" />
+
 ### 3.5 Set color depth with `set_color_depth()`
 
 If your Python code has access to the bit depth of the device's color palette for displaying images, then you can pass this in to Snowplow too:
@@ -282,6 +298,7 @@ t.set_color_depth(32)
 [Back to top](#top)
 
 <a name="set-lang" />
+
 ### 3.6 Set the language with `set_lang()`
 
 This method lets you pass a user's language in to Snowplow:
@@ -300,6 +317,7 @@ t.set_lang('en')
 
 
 <a name="events" />
+
 ## 4. Tracking specific events
 
 Snowplow has been built to enable you to track a wide range of events that occur when users interact with your websites and apps. We are constantly growing the range of functions available in order to capture that data more richly.
@@ -310,17 +328,19 @@ Tracking methods supported by the Python Tracker at a glance:
 |----------------------------------------------:|:-------------------------------------------------------|
 | [`track_page_view()`](#page-view)             | Track and record views of web pages. |
 | [`track__ecommerce_transaction()`](#ecommerce-transaction)   | Track an ecommerce transaction on transaction level. |
-| [`track_ecommerce_transaction_item()`](#ecommerce-transaction-item)          | Track an ecommerce transaction on item level. 
+| [`track_ecommerce_transaction_item()`](#ecommerce-transaction-item)          | Track an ecommerce transaction on item level.
 | [`track_screen_view()`](#screen-view)         | Track the user viewing a screen within the application |
 | [`track_struct_event()`](#struct-event)       | Track a Snowplow custom structured event               |
 | [`track_unstruct_event()`](#unstruct-event)   | Track a Snowplow custom unstructured event             |
 
 <a name="common" />
+
 ### 4.1 Common
 
 All events are tracked with specific methods on the tracker instance, of the form `track_XXX()`, where `XXX` is the name of the event to track.
 
 <a name="custom-contexts" />
+
 ### 4.1.2 Custom contexts
 
 In short, custom contexts let you add additional information about the circumstances surrounding an event in the form of a Python dictionary object. Each tracking method accepts an additional optional contexts parameter after all the parameters specific to that method:
@@ -332,10 +352,10 @@ def track_page_view(self, page_url, page_title=None, referrer=None, context=None
 The context argument is a Python dictionary. Each of its keys is the name of a context, and each of its values is the flat (not nested) dictionary for that context. So if a visitor arrives on a page advertising a movie, the context argument might look like this:
 
 ```python
-{ "movie_poster": { # Context entry 
-    "movie_name": "Solaris", 
-    "poster_country": "JP", 
-    "poster_year": new Date(1978, 1, 1) 
+{ "movie_poster": { # Context entry
+    "movie_name": "Solaris",
+    "poster_country": "JP",
+    "poster_year": new Date(1978, 1, 1)
   }
 }
 ```
@@ -343,7 +363,7 @@ The context argument is a Python dictionary. Each of its keys is the name of a c
 This is how to fire a page view event with the above custom context:
 
 ```python
-t.track_page_view("http://www.films.com", "Homepage", context={ 
+t.track_page_view("http://www.films.com", "Homepage", context={
     "movie_poster": {
         "movie_name": "Solaris",
         "poster_country": "JP",
@@ -353,6 +373,7 @@ t.track_page_view("http://www.films.com", "Homepage", context={
 ```
 
 <a name="tstamp-arg" />
+
 ### 4.1.2 Optional timestamp argument
 
 Each `track...()` method supports an optional timestamp as its final argument; this allows you to manually override the timestamp attached to this event.
@@ -376,6 +397,7 @@ Timestamp is counted in seconds since the Unix epoch - the same format as genera
 [Back to top](#top)
 
 <a name="screen-view" />
+
 ### 4.2 Track screen views with `track_screen_view()`
 
 **Warning:** this feature is implemented in the Lua and Python tracker, but it is **not** currently supported in the Enrichment, Storage or Analytics stages in the Snowplow data pipeline. As a result, if you use this feature, you will log screen views to your collector logs, but these will not be parsed and loaded into e.g. Redshift to analyse. (Adding this capability is on the roadmap.)
@@ -398,6 +420,7 @@ t.track_screen_view("HUD > Save Game", "screen23", 1368725287)
 [Back to top](#top)
 
 <a name="page-view" />
+
 ### 4.3 Track pageviews with `track_page_view()`
 
 Use `track_page_view()` to track a user viewing a page within your app.
@@ -420,6 +443,7 @@ t.track_page_view("www.example.com", "example", "www.referrer.com")
 [Back to top](#top)
 
 <a name="ecommerce-transaction" />
+
 ### 4.4 Track ecommerce transactions with `track-ecommerce-transaction()`
 
 Use `track_ecommerce_transaction()` to track an ecommerce transaction on the transaction level.
@@ -438,7 +462,7 @@ Arguments:
 | `context`    | Custom context for the event        | No            | Dict                    |
 | `tstamp`         | When the transaction event occurred  | No            | Positive integer         |
 
-Examples: 
+Examples:
 
 ```python
 t.track_ecommerce_transaction("order-456", 142, None, 20, 12.99, "London", None, "United Kingdom")
@@ -451,6 +475,7 @@ t.track_ecommerce_transaction("order-456", 142, tr_city="Paris", tr_country="Fra
 [Back to top](#top)
 
 <a name="ecommerce-transaction-item" />
+
 ### 4.5 Track ecommerce transactions with `track_ecommerce_transaction_item()`
 
 Use `track_ecommerce_transaction_item()` to track an individual line item within an ecommerce transaction.
@@ -477,6 +502,7 @@ t.track_ecommerce_transaction_item("order-789", "2001", 49.99, 1, "Green shoes",
 [Back to top](#top)
 
 <a name="struct-event" />
+
 ### 4.6 Track structured events with `track_struct_event()`
 
 Use `track_struct_event()` to track a custom event happening in your app which fits the Google Analytics-style structure of having up to five fields (with only the first two required):
@@ -500,6 +526,7 @@ t.track_struct_event("shop", "add-to-basket", None, "pcs", 2)
 [Back to top](#top)
 
 <a name="unstruct-event" />
+
 ### 4.7 Track unstructured events with `track_unstruct_event()`
 
 **Warning:** this feature is implemented in the Python tracker, but it is **not** currently supported in the Enrichment, Storage or Analytics stages in the Snowplow data pipeline. As a result, if you use this feature, you will log unstructured events to your collector logs, but these will not be parsed and loaded into e.g. Redshift to analyse. (Adding this capability is on the roadmap.)
@@ -526,7 +553,7 @@ t.track_unstruct_event("save-game", "com.example_company", {
     "save_id": "4321",
     "level": 23,
     "difficultyLevel": "HARD",
-    "dl_content": true 
+    "dl_content": true
     }, 1369330929 )
 ```
 
@@ -537,6 +564,7 @@ The event vendor is the reversed domain name of the company which defined the ev
 [Back to top](#top)
 
 <a name="unstruct-datatypes" />
+
 #### 4.7.1 Supported datatypes
 
 Snowplow unstructured events support a relatively rich set of datatypes. Because these datatypes do not always map directly onto Python datatypes, we have introduced some "type suffixes" for the Python property names, so that Snowplow knows what Snowplow data types the Python data types map onto:
@@ -596,7 +624,7 @@ To track a Floating point number, use a Python number; adding a type suffix is o
 
 ```python
 {
-    "price$int" = 4.99, 
+    "price$int" = 4.99,
     "sales_tax" = 49.99 # Same as sales_tax$flt = ...
 }
 ```

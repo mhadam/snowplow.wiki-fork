@@ -47,8 +47,8 @@
     - 5.2.1 [`trackPageView`](#page-view)
     - 5.2.2 [`trackEcommerceTransaction`](#ecommerce-transaction)
       - 5.2.2.1 [`trackEcommerceTransactionItem`](#ecommerce-item)
-    - 5.2.3 [`trackScreenView`](#screen-view) 
-    - 5.2.4 [`trackStructEvent`](#struct-event)  
+    - 5.2.3 [`trackScreenView`](#screen-view)
+    - 5.2.4 [`trackStructEvent`](#struct-event)
     - 5.2.5 [`trackUnstructEvent`](#unstruct-event)
   - 5.3 [Extra Functions](#extra-functions)
     - 5.3.1 [`flushEmitters`](#flush-emitters)
@@ -103,7 +103,7 @@ Other Tracker arguments:
 | `subject`       | The user being tracked                        | Yes         | `Subject()`   |
 | `namespace`     | The name of the tracker instance              | No          | `None`        |
 | `app_id`        | The application ID                            | No          | `None`        |
-| `encode_base64` | Whether to enable [base 64 encoding] [base64] | No          | `True`        |
+| `encode_base64` | Whether to enable [base 64 encoding][base64] | No          | `True`        |
 
 Another example using all of the allowed arguments:
 
@@ -544,7 +544,7 @@ To enable debug mode for any of the emitters, append a boolean to the end of the
 $emitter = new SyncEmitter($collector_uri, "http", "POST", 50, true); # Add true as the last argument!
 ```
 
-By default, debug mode will create a new directory called `/debug/` in the root of the tracker's directory. It will then create a log file with the following structure; `sync-events-log-[[random number]].log`: i.e. the type of emitter and a randomized number to prevent it from being accidentally overwritten.  
+By default, debug mode will create a new directory called `/debug/` in the root of the tracker's directory. It will then create a log file with the following structure; `sync-events-log-[[random number]].log`: i.e. the type of emitter and a randomized number to prevent it from being accidentally overwritten.
 
 If physically storing the information is not possible due to not having the correct write permissions or simply not wanted it can be turned off by updating the following value in the Constants class:
 
@@ -635,7 +635,7 @@ An example of a Context Array Structure:
 array(
     "schema" => "iglu:com.acme_company/movie_poster/jsonschema/2-1-1",
     "data" => array(
-        "movie_name" => "Solaris", 
+        "movie_name" => "Solaris",
         "poster_country" => "JP"
     )
 )
@@ -645,14 +645,14 @@ This is how to fire a page view event with the above custom context:
 
 ```php
 $tracker->trackPageView(
-    "http://www.films.com", 
-    "Homepage", 
+    "http://www.films.com",
+    "Homepage",
     NULL,
     array(
         array(
             "schema" => "iglu:com.acme_company/movie_poster/jsonschema/2-1-1",
             "data" => array(
-                "movie_name" => "Solaris", 
+                "movie_name" => "Solaris",
                 "poster_country" => "JP"
             )
         )
@@ -731,7 +731,7 @@ Arguments:
 | `$shipping`    | Delivery cost charged                | No            | Int or Float      |
 | `$city`        | Delivery address city                | No            | String            |
 | `$state`       | Delivery address state               | No            | String            |
-| `$country`     | Delivery address country             | No            | String            | 
+| `$country`     | Delivery address country             | No            | String            |
 | `$items`       | Items in the transaction             | Yes           | Array             |
 | `$context`     | Custom context for the event         | No            | Array             |
 | `$tstamp`      | When the transaction event occurred  | No            | Positive integer  |
@@ -819,7 +819,7 @@ Track a custom event happening in your app which fits the Google Analytics-style
 
 Function:
 ```php
-public function trackStructEvent($category, $action, $label = NULL, $property = NULL, $value = NULL, 
+public function trackStructEvent($category, $action, $label = NULL, $property = NULL, $value = NULL,
                                  $context = NULL, $tstamp = NULL)
 ```
 
@@ -874,7 +874,7 @@ $tracker->trackUnstructEvent(
             "save_id" => "4321",
             "level" => 23,
             "difficultyLevel" => "HARD",
-            "dl_content" => true 
+            "dl_content" => true
         )
     ),
     NULL,

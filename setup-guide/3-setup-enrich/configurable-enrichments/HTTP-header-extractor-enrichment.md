@@ -4,9 +4,9 @@
 
 ### Compatibility
 
-JSON Schema   [iglu:com.snowplowanalytics.snowplow.enrichments/http_header_extractor_config/jsonschema/1-0-0][schema]  
-Compatibility r79+, Scala Stream Collector only  
-Data provider None 
+JSON Schema   [iglu:com.snowplowanalytics.snowplow.enrichments/http_header_extractor_config/jsonschema/1-0-0][schema]
+Compatibility r79+, Scala Stream Collector only
+Data provider None
 
 ### Overview
 
@@ -14,7 +14,7 @@ This enrichment allows to capture and store any header from HTTP request sent by
 HTTP are stored headers in the Thrift raw event payload by the Scala Stream Collector.
 
 This community-contributed enrichment lets you specify headers that you want to extract if found;
-each extracted header will end up a single derived context in the JSON Schema [org.ietf/http_header/jsonschema/1-0-0] [http-header-schema].
+each extracted header will end up a single derived context in the JSON Schema [org.ietf/http_header/jsonschema/1-0-0][http-header-schema].
 
 ### Example
 
@@ -36,7 +36,7 @@ Below configuration allows to extract all headers present in HTTP request, inclu
 
 ###Data sources
 
-The data source for this enrichment is HTTP headers captured by the Scala Stream Collector and thus present in the Thrift raw event payload. 
+The data source for this enrichment is HTTP headers captured by the Scala Stream Collector and thus present in the Thrift raw event payload.
 
 **Note**: This enrichment only works with events recorded by the Scala Stream Collector - the CloudFront and Clojure Collectors do not capture HTTP headers.
 
@@ -48,7 +48,7 @@ The HTTP headers from the event payload are examined for presence and once patte
 
 ###Data generated
 
-As each key-value pair corresponding to the header is represented as a `derived_contexts` correlated to the JSON Schema [org.ietf/http_header/jsonschema/1-0-0] [http-header-schema], the output of this enrichment is a separate entity with the `data.name` and `data.value` fields where `data.name` is the name of the header and `data.value` is its value.
+As each key-value pair corresponding to the header is represented as a `derived_contexts` correlated to the JSON Schema [org.ietf/http_header/jsonschema/1-0-0][http-header-schema], the output of this enrichment is a separate entity with the `data.name` and `data.value` fields where `data.name` is the name of the header and `data.value` is its value.
 
 If EMR enrichment is engaged (as opposed to Kinesis) the generated data ends up in `org_ietf_http_header_1` table.
 

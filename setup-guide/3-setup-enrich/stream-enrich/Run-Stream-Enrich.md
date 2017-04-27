@@ -4,7 +4,7 @@
 
 **This documentation is for version 0.5.0 of Stream Enrich. Documentation for other versions is available:**
 
-**[Version 0.1.0][v0.1]**  
+**[Version 0.1.0][v0.1]**
 **[Version 0.3.0][v0.3]**
 
 ## Running
@@ -35,7 +35,7 @@ When developing the [Scala collector](Setting-up-the-Scala-Stream-Collector) and
 This has a nice side-effect: it is possible to run Snowplow in a "local mode", where you simply pipe the output of Scala Stream Collector directly into Stream Enrich, and can then see the generated enriched events printed to your console. You can run Snowplow in local mode with a shell script like this:
 
 ```sh
-	
+
 #!/bin/sh
 
 echo "Piping local collector into local enrichment..."
@@ -54,7 +54,7 @@ Stream Enrich uses [slf4j logging][logging]. If you run the executable jarfile u
     $ java -jar -Dorg.slf4j.simpleLogger.defaultLogLevel=debug \
         snowplow-stream-enrich-0.x.0 --config my.conf --resolver file:resolver.json
 
-This will also affect messages logged by the [Kinesis Client Library][kcl] (which Stream Enrich uses to read from Kinesis.)
+This will also affect messages logged by the [Kinesis Client Library][kcl](which Stream Enrich uses to read from Kinesis.)
 
 ## All done?
 

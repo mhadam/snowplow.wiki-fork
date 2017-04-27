@@ -4,15 +4,15 @@
 
 ### Compatibility
 
-JSON Schema   [iglu:com.snowplowanalytics.snowplow/cookie_extractor_config/jsonschema/1-0-0][schema]  
-Compatibility r72+, Scala Stream Collector only  
-Data provider None 
+JSON Schema   [iglu:com.snowplowanalytics.snowplow/cookie_extractor_config/jsonschema/1-0-0][schema]
+Compatibility r72+, Scala Stream Collector only
+Data provider None
 
 ### Overview
 
 One powerful attribute of having Snowplow event collection on your own domain (e.g. `events.snowplowanalytics.com`) is the ability to capture first-party cookies set by other services on your domain such as ad servers or CMSes; these cookies are stored as HTTP headers in the Thrift raw event payload by the Scala Stream Collector.
 
-This community-contributed enrichment lets you specify cookies that you want to extract if found; each extracted cookie will end up a single derived context in the JSON Schema [org.ietf/http_cookie/jsonschema/1-0-0] [http-cookie-schema].
+This community-contributed enrichment lets you specify cookies that you want to extract if found; each extracted cookie will end up a single derived context in the JSON Schema [org.ietf/http_cookie/jsonschema/1-0-0][http-cookie-schema].
 
 ### Example
 
@@ -30,7 +30,7 @@ This community-contributed enrichment lets you specify cookies that you want to 
 }
 ```
 
-This default configuration is capturing the Scala Stream Collector's own `sp` cookie - in practice you would probably extract other more valuable cookies available on your company domain. 
+This default configuration is capturing the Scala Stream Collector's own `sp` cookie - in practice you would probably extract other more valuable cookies available on your company domain.
 
 ###Data sources
 
@@ -46,7 +46,7 @@ The HTTP headers from the event payload are examined for presence of the cookie(
 
 ###Data generated
 
-As each key-value pair corresponding to the cookie is represented as a `derived_contexts` correlated to the JSON Schema [org.ietf/http_cookie/jsonschema/1-0-0] [http-cookie-schema], the output of this enrichment is a separate entity with the `data.name` and `data.value` fields where `data.name` is the name of the cookie and `data.value` is its value.
+As each key-value pair corresponding to the cookie is represented as a `derived_contexts` correlated to the JSON Schema [org.ietf/http_cookie/jsonschema/1-0-0][http-cookie-schema], the output of this enrichment is a separate entity with the `data.name` and `data.value` fields where `data.name` is the name of the cookie and `data.value` is its value.
 
 If EMR enrichment is engaged (as opposed to Kinesis) the generated data ends up in `org_ietf_http_cookie_1` table.
 

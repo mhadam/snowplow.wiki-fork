@@ -4,9 +4,9 @@
 
 ### Compatibility
 
-JSON Schema   [iglu:com.snowplowanalytics.snowplow.enrichments/weather_enrichment_config/jsonschema/1-0-0][schema]  
-Compatibility R74+  
-Data provider [OpenWeatherMap][owm]  
+JSON Schema   [iglu:com.snowplowanalytics.snowplow.enrichments/weather_enrichment_config/jsonschema/1-0-0][schema]
+Compatibility R74+
+Data provider [OpenWeatherMap][owm]
 
 
 ### Overview
@@ -15,7 +15,7 @@ This enrichment uses OpenWeatherMap service to look up weather conditions in whi
 
 There are five possible fields you can add to the "parameters" section of the enrichment configuration JSON: "apiKey", "cacheSize", "geoPrecision", "apiHost", and "timeout".
 
-* `apiKey` is your key you need to [obtain] [owm-signup] from OpenWeatherMap. Notice that free key coulnd't be used for weather enrichment, you need to subscribe [paid plan] [owm-price].
+* `apiKey` is your key you need to [obtain][owm-signup] from OpenWeatherMap. Notice that free key coulnd't be used for weather enrichment, you need to subscribe [paid plan][owm-price].
 * `cacheSize` is amount of requests underlying client need to store. Usually it's amount requests for your plan, plus 1% for errors
 * `timeout` is a time in seconds after which request should be considered failed. Notice that failed weather enrichment will filter out whole your event, whether this failure be timeout or invalid API key
 * `apiHost` is one several (history.openweathermap.org, api.openweathermap.org, pro.openweathermap.org) API hosts. For most cases history.openweathermap.org should be fine
@@ -23,7 +23,7 @@ There are five possible fields you can add to the "parameters" section of the en
 
 ### Example
 
-Here's pretty common configuration suited for [starter plan] [owm-price]:
+Here's pretty common configuration suited for [starter plan][owm-price]:
 
 ```json
 {
@@ -45,7 +45,7 @@ Here's pretty common configuration suited for [starter plan] [owm-price]:
 
 ###Data sources
 
-To produce the enriched weather-related data, the values of `latitude`, `longitude`, and `time` are passed with API request to OpenWeatherMap.  
+To produce the enriched weather-related data, the values of `latitude`, `longitude`, and `time` are passed with API request to OpenWeatherMap.
 
 Ultimately `ip` parameter (mapped to `user_ipaddress`) is used to obtain latitude and longitude geographical coordinates. It is achieved by yet another enrichment, namely [`IP lookups enrichment`](IP-lookups-enrichment), which produces `geo_latitude` and `geo_longitude`.
 
@@ -98,7 +98,7 @@ Below is the summary of the output fields for the dedicated `org_openweathermap_
 Field | Purpose
 :---|:---
 `clouds.all` | Cloudiness, %
-`dt` | Time of data calculation, UTC      
+`dt` | Time of data calculation, UTC
 `main.humidity` | Humidity, %
 `main.pressure` | Atmospheric pressure (on the sea level, if there is no `sea_level` or `grnd_level` data), hPa
 `main.temp` | Temperature, Kelvin
@@ -106,11 +106,11 @@ Field | Purpose
 `main.temp_min` | Minimum temperature at the moment. This is deviation from current temp that is possible for large cities and megalopolises geographically expanded.
 `main.grnd_level` | Atmospheric pressure on the ground level, hPa
 `main.sea_level` | Atmospheric pressure on the sea level, hPa
-`rain.1h` | Rain volume for the last 1 hour 
+`rain.1h` | Rain volume for the last 1 hour
 `rain.3h` | Rain volume for the last 3 hours
-`snow.1h` | Snow volume for the last 1 hour   
+`snow.1h` | Snow volume for the last 1 hour
 `snow.3h` | Snow volume for the last 3 hours
-`weather` | Weather condition   
+`weather` | Weather condition
 `wind.deg` | Wind direction, degrees (meteorological)
 `wind.gust` | Wind gust, meter/sec
 `wind.speed` | Wind speed, meter/sec

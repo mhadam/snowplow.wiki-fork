@@ -18,7 +18,7 @@ This page refers to version 0.6.2 of the Snowplow Objective-C Tracker, which is 
 - 2. [Initialization](#init)
   - 2.1 [Importing the library](#importing)
   - 2.2 [Creating a tracker](#create-tracker)
-    - 2.2.1 [`SPEmitter`](#emitter)  
+    - 2.2.1 [`SPEmitter`](#emitter)
     - 2.2.2 [`namespace`](#namespace)
     - 2.2.3 [`appId`](#app-id)
     - 2.2.4 [`base64Encoded`](#base64)
@@ -169,6 +169,7 @@ Please note that with the release of iOS 9, tvOS 9 and OS-x 10.11 Apple's Applic
 Assuming you have completed the [[iOS Tracker Setup]] for your project, you are now ready to initialze the Snowplow Tracker.
 
 <a name="importing" />
+
 ## 2.1 Importing the library
 
 Adding the library into your project is as simple as adding the headers into your class file:
@@ -192,7 +193,7 @@ If you have statically added the library you will need to further amend your syn
 #import "SnowplowTracker/SPEmitter.h"
 ```
 
-That's it - you are now ready to initialize a tracker instance. 
+That's it - you are now ready to initialize a tracker instance.
 
 [Back to top](#top)
 
@@ -540,7 +541,7 @@ The `context` argument should consist of a `NSMutableArray` of `NSDictionary` re
 If a visitor arrives on a page advertising a movie, the context dictionary might look like this:
 
 ```json
-{ 
+{
   "schema": "iglu:com.acme_company/movie_poster/jsonschema/2-1-1",
   "data": {
     "movieName": "The Guns of Navarone",
@@ -702,14 +703,14 @@ Arguments:
 | `setShipping`    | Delivery cost charged                | No            | double          |
 | `setCity`        | Delivery address city                | No            | NSString*       |
 | `setState`       | Delivery address state               | No            | NSString*       |
-| `setCountry`     | Delivery address country             | No            | NSString*       | 
+| `setCountry`     | Delivery address country             | No            | NSString*       |
 | `setCurrency`    | Transaction currency                 | No            | NSString*       |
 | `setItems`       | Items in the transaction             | Yes           | NSArray*        |
 | `setContexts`    | Custom context for the event         | No            | NSMutableArray* |
 | `setTimestamp`   | Optional timestamp for the event     | No            | NSInteger       |
 | `setEventId`     | Optional event id for the event      | No            | NSString*       |
 
-`trackEcommerceEvent:` fires multiple events: one "transaction" event for the transaction as a whole, and one "transaction item" event for each element of the `items` array. Each transaction item event will have the same timestamp, orderId, and currency as the main transaction event. 
+`trackEcommerceEvent:` fires multiple events: one "transaction" event for the transaction as a whole, and one "transaction item" event for each element of the `items` array. Each transaction item event will have the same timestamp, orderId, and currency as the main transaction event.
 
 The `items` argument is an `NSArray` containing an `SPEcommerceItem` for each item in the transaction. There is a convenience object for each item called `SPEcommerceItem:`. Arguments:
 
@@ -742,7 +743,7 @@ NSMutableArray *itemArray = [NSMutableArray array];
   [builder setQuantity:1];
   [builder setCurrency:currency];
 }]];
-  
+
 SPEcommerce *event = [SPEcommerce build:^(id<SPEcommTransactionBuilder> builder) {
   [builder setOrderId:transactionID];
   [builder setTotalValue:350];

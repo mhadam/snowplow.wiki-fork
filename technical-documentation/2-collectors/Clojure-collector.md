@@ -1,23 +1,23 @@
-[**HOME**](Home) > [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow technical documentation) > [**Collectors**](collectors)
+[**HOME**](Home) > [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow-technical-documentation) > [**Collectors**](collectors)
 
 ## Introduction
 
-The Clojure-based collector is a Snowplow event collector for [Snowplow] [snowplow], written in Clojure. It is typically used in place of Snowplow's [CloudFront-based collector] [cloudfront-collector] when site visitors need to be uniquely identified across multiple different domains (e.g. on a content or ad network).
+The Clojure-based collector is a Snowplow event collector for [Snowplow][snowplow], written in Clojure. It is typically used in place of Snowplow's [CloudFront-based collector][cloudfront-collector] when site visitors need to be uniquely identified across multiple different domains (e.g. on a content or ad network).
 
-It is designed to be easily runnable on [Amazon Elastic Beanstalk] [elastic-beanstalk].
+It is designed to be easily runnable on [Amazon Elastic Beanstalk][elastic-beanstalk].
 
 ## How it works
 
 There are two key aspects to the Clojure Collector:
 
 1. **User identification** - how users are uniquely identified across domains
-2. **Event logging** - how Snowplow events are logged ready for Enrichment 
+2. **Event logging** - how Snowplow events are logged ready for Enrichment
 
 ### User identification
 
 The Clojure Collector allows the use of a third-party cookie, making user tracking across domains possible. The CloudFront Collector does not support cross domain tracking of users because user ids are set client-side, whereas the Clojure Collector sets them server-side.
 
-In a nutshell: the Clojure Collector receives events from the [Snowplow JavaScript tracker] [snowplow-js], sets/updates a third-party user tracking cookie, and returns the pixel to the client. The ID in this third-party user tracking cookie is stored in the `network_userid` field in Snowplow events.
+In a nutshell: the Clojure Collector receives events from the [Snowplow JavaScript tracker][snowplow-js], sets/updates a third-party user tracking cookie, and returns the pixel to the client. The ID in this third-party user tracking cookie is stored in the `network_userid` field in Snowplow events.
 
 In pseudocode terms:
 
@@ -52,8 +52,8 @@ To run it locally:
 
 ## See also
 
-* [GitHub repository] [github-repo]
-* [Setup guide] [setup-guide]
+* [GitHub repository][github-repo]
+* [Setup guide][setup-guide]
 
 [snowplow]: http://snowplowanalytics.com
 [cloudfront-collector]: https://github.com/snowplow/snowplow/tree/master/2-collectors/cloudfront-collector

@@ -19,9 +19,9 @@
 
 ### 1.1 Setup an EC2 instance to run PostgreSQL server
 
-If you do not have a server / EC2 instance already available to run PostgreSQL, you will need to create one. (If you do have one, skip to the next step, [installing PostgreSQL](#1.2)). 
+If you do not have a server / EC2 instance already available to run PostgreSQL, you will need to create one. (If you do have one, skip to the next step, [installing PostgreSQL](#1.2)).
 
-Log into the AWS console, navigate to the EC2 section and go either to **EC2 Dashboard** or **Instances**: 
+Log into the AWS console, navigate to the EC2 section and go either to **EC2 Dashboard** or **Instances**:
 
 [[/setup-guide/images/postgresql/aws-ec2-console.jpg]]
 
@@ -100,7 +100,7 @@ You should see something like this:
 	https://aws.amazon.com/amazon-linux-ami/2013.03-release-notes/
 	There are 6 security update(s) out of 11 total update(s) available
 	Run "sudo yum update" to apply all updates.
-	[ec2-user@ip-10-34-176-225 ~]$ 
+	[ec2-user@ip-10-34-176-225 ~]$
 
 
 #### 1.2.2 Download and install PostgreSQL on the instance
@@ -137,7 +137,7 @@ To read this:
 	# IPv4 local connections:
 	host    all             power_user      0.0.0.0/0               md5
 	host    all             other_user      0.0.0.0/0               md5
-	host    all             storageLoader   0.0.0.0/0               md5 
+	host    all             storageLoader   0.0.0.0/0               md5
 	# IPv6 local connections:
 	host    all             all             ::1/128                 md5
 
@@ -166,7 +166,7 @@ Now start the server:
 	$ sudo service postgresql start
 
 Log into the server:
-	
+
 	$ sudo su - postgres
 	$ psql -U postgres
 
@@ -220,7 +220,7 @@ Select either the username `power_user` and associated password you created in t
 
 You should now be able to either test the connection or click **OK** to save the connection. You can then double click it to go into the database.
 
-You are now ready to [setup the Snowplow events table and views] (#events-table).
+You are now ready to [setup the Snowplow events table and views](#events-table).
 
 Back to [top](#top).
 
@@ -277,9 +277,9 @@ Back to [top](#top).
 
 ## 3. Create the Snowplow events table and views in PostgreSQL
 
-Now that PostgreSQL has been setup, we need to create the table for the Snowplow events, and then all the different views that ship with Snowplow. 
+Now that PostgreSQL has been setup, we need to create the table for the Snowplow events, and then all the different views that ship with Snowplow.
 
-[[/images/warning.png]] | Note we are working on new data models and recipes that are more specific than we currently have. They will make use of all our latest features and enhancements. 
+[[/images/warning.png]] | Note we are working on new data models and recipes that are more specific than we currently have. They will make use of all our latest features and enhancements.
 ---|:---
 
 First, let's create the `atomic.events` table, where the actual Snowplow data will live. The SQL for creating the atomic schema and table can be found [here][postgres-table-def]. Either copy and paste that SQL into PSQL / Navicat, or you can run that file into PSQL at the command line. To do this, navigate to your Snowplow repo, then:

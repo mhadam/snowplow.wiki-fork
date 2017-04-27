@@ -10,9 +10,9 @@ Documentation for older version of this tracker is available:
 
 ## Contents
 
-- 1. [Overview](#overview)  
+- 1. [Overview](#overview)
 - 2. [Integration options](#integration-options)
-  - 2.1 [Tracker compatibility](#compatibility)  
+  - 2.1 [Tracker compatibility](#compatibility)
   - 2.2 [Dependencies](#dependencies)
 - 3. [Setup](#setup)
   - 3.1 [Hosting](#hosting)
@@ -24,7 +24,7 @@ Documentation for older version of this tracker is available:
 
 ## 1. Overview
 
-The [Snowplow Java Tracker](https://github.com/snowplow/snowplow-java-tracker) lets you add analytics to your [Java] [java]-based desktop and server apps, servlets and games.
+The [Snowplow Java Tracker](https://github.com/snowplow/snowplow-java-tracker) lets you add analytics to your [Java][java]-based desktop and server apps, servlets and games.
 
 The Tracker should be relatively straightforward to setup if you are familiar with Java development.
 
@@ -147,7 +147,7 @@ val snowplowTracker = "com.snowplowanalytics"  % "snowplow-java-tracker"  % "0.8
 Done? Now read the [Java Tracker API](Java-Tracker) to start tracking events.
 
 [java]: http://www.java.com/en/
-[java-0.7]: https://github.com/snowplow/snowplow/wiki/Java-Tracker-Setup-0.7 
+[java-0.7]: https://github.com/snowplow/snowplow/wiki/Java-Tracker-Setup-0.7
 
 [gradle-build]: https://github.com/snowplow/snowplow-java-tracker/blob/master/build.gradle
-[maven-snplow]: http://maven.snplow.com 
+[maven-snplow]: http://maven.snplow.com

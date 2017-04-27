@@ -1,8 +1,8 @@
-[**HOME**](Home) > [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow technical documentation) > [**Enrichment**](Enrichment) > [[Stream Enrich]]
+[**HOME**](Home) > [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow-technical-documentation) > [**Enrichment**](Enrichment) > [[Stream Enrich]]
 
 ##Overview
 
-Stream Enrich is an [Amazon Kinesis] [kinesis] app, written in Scala and using the Kinesis Client Library, which:
+Stream Enrich is an [Amazon Kinesis][kinesis] app, written in Scala and using the Kinesis Client Library, which:
 
 1. **Reads** raw Snowplow events off a Kinesis stream populated by the Scala Stream Collector
 2. **Validates** each raw event
@@ -114,7 +114,7 @@ The result of the enrichment process is a TSV representation of the event breakd
 ----------
 
 - `page_urlscheme`: String
-- `page_urlhost`: String  
+- `page_urlhost`: String
 - `page_urlport`: Integer
 - `page_urlpath`: String
 - `page_urlquery`: String
@@ -126,12 +126,12 @@ The result of the enrichment process is a TSV representation of the event breakd
 
 ----------
 
-- `refr_urlscheme`: String  
-- `refr_urlhost`: String  
+- `refr_urlscheme`: String
+- `refr_urlhost`: String
 - `refr_urlport`: Integer
 - `refr_urlpath`: String
 - `refr_urlquery`: String
-- `refr_urlfragment`: String 
+- `refr_urlfragment`: String
 
 <br>
 
@@ -221,7 +221,7 @@ The result of the enrichment process is a TSV representation of the event breakd
 - `pp_xoffset_max`: Integer
 - `pp_yoffset_min`: Integer
 - `pp_yoffset_max`: Integer
-  
+
 <br>
 
 **User Agent**
@@ -298,8 +298,8 @@ The result of the enrichment process is a TSV representation of the event breakd
 
 ----------
 
-- `doc_charset`: String 
-- `doc_width`: Integer 
+- `doc_charset`: String
+- `doc_width`: Integer
 - `doc_height`: Integer
 
 <br>
@@ -412,7 +412,7 @@ Geolocation
 
 ----------
 
-- `true_tstamp`: String 
+- `true_tstamp`: String
 
 
 # See also:

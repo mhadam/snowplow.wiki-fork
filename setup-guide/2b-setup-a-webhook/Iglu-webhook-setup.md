@@ -4,29 +4,32 @@
 
 ## Contents
 
-- 1. [Overview](#overview)  
+- 1. [Overview](#overview)
   - 1.1 [Compatibility](#compat)
 - 2. [Setup](#setup)
   - 2.1 [Your webhook](#setup-webhook)
   - 2.2 [Snowplow Redshift](#setup-redshift)
 
 <a name="overview" />
+
 ## 1. Overview
 
-This webhook adapter lets you track events sent via a `GET` or `POST` request containing an [Iglu] [iglu]-compatible event payload.
+This webhook adapter lets you track events sent via a `GET` or `POST` request containing an [Iglu][iglu]-compatible event payload.
 
-You can use this adapter with vendors who allow you define your **own** event types for "postback". An example of a vendor who supports this is [AD-X Tracking] [adxtracking-website].
+You can use this adapter with vendors who allow you define your **own** event types for "postback". An example of a vendor who supports this is [AD-X Tracking][adxtracking-website].
 
 For the technical implementation, see [[Iglu webhook adapter]].
 
 <a name="compat" />
+
 ### 1.1 Compatibility
 
-* [Snowplow 0.9.11] [snowplow-0.9.11]+ (all collectors)
+* [Snowplow 0.9.11][snowplow-0.9.11]+ (all collectors)
 * Iglu self-describing JSON
-* Iglu Webhook `POST` support - [Snowplow R83 Bald Eagle] [snowplow-r83]
+* Iglu Webhook `POST` support - [Snowplow R83 Bald Eagle][snowplow-r83]
 
 <a name="setup" />
+
 ## 2. Setup
 
 Integrating Iglu-compatible webhooks into Snowplow is a two-stage process:
@@ -35,6 +38,7 @@ Integrating Iglu-compatible webhooks into Snowplow is a two-stage process:
 2. (Optional) Setup the appropriate JSON Schema, JSON Paths file and Redshift table definition for each Iglu-compatible event you are sending through
 
 <a name="setup-webhook" />
+
 ## 2.1 Your webhook
 
 The Iglu webhook adapter supports events send in as `GET` and `POST` requests.
@@ -57,7 +61,7 @@ iglu:com.acme.postbacks/install_error/jsonschema/1-0-0
 
 ### 2.1.3 Optional fields
 
-If you want to specify which app these events belong to, add an `aid` parameter as taken from the [Snowplow Tracker Protocol] [tracker-protocol]:
+If you want to specify which app these events belong to, add an `aid` parameter as taken from the [Snowplow Tracker Protocol][tracker-protocol]:
 
 ```
 ...&aid=<company code>&...
@@ -69,7 +73,7 @@ You can also manually override the event's `platform` parameter like so:
 ...&p=<platform code>&...
 ```
 
-Supported platform codes can again be found in the [Snowplow Tracker Protocol] [tracker-protocol]; if not set, then the value for `platform` will default to `srv` for a server-side application.
+Supported platform codes can again be found in the [Snowplow Tracker Protocol][tracker-protocol]; if not set, then the value for `platform` will default to `srv` for a server-side application.
 
 ### 2.1.4 Example `GET` request
 
@@ -149,6 +153,7 @@ As with the `GET` request above you can also attach extra information into the q
 * `eid=` : A custom event ID
 
 <a name="setup-redshift" />
+
 ## 2.2 Redshift
 
 If you are running the Snowplow batch (Hadoop) flow with Amazon Redshift, then you will need to define for each Iglu-compatible event:

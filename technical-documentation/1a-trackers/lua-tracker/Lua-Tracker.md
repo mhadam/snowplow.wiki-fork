@@ -1,17 +1,17 @@
 <a name="top" />
 
-[**HOME**](Home) > [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow technical documentation) > [**Trackers**](trackers) > Lua Tracker
+[**HOME**](Home) > [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow-technical-documentation) > [**Trackers**](trackers) > Lua Tracker
 
 ## Contents
 
-- 1. [Overview](#overview)  
-- 2. [Initialization](#init)  
+- 1. [Overview](#overview)
+- 2. [Initialization](#init)
   - 2.1 [Requiring the module](#requiring)
-  - 2.2 [Creating a tracker](#create-tracker)  
-    - 2.2.1 [`newTrackerForCf()`](#create-cf)  
+  - 2.2 [Creating a tracker](#create-tracker)
+    - 2.2.1 [`newTrackerForCf()`](#create-cf)
     - 2.2.2 [`newTrackerForUri()`](#create-uri)
   - 2.3 [Creating multiple trackers](#multi-tracker)
-- 3. [Configuration](#config)  
+- 3. [Configuration](#config)
   - 3.1 [Configuring your tracker](#configure-tracker)
     - 3.1.1 [`platform()`](#platform)
     - 3.1.2 [`encodeBase64()`](#encode-base64)
@@ -31,6 +31,7 @@
     - 4.4.1 [Supported datatypes](#unstruct-datatypes)
 
 <a name="overview" />
+
 ## 1. Overview
 
 The [Snowplow Lua Tracker](https://github.com/snowplow/snowplow-lua-tracker) allows you to track Snowplow events from your Lua-based applications, Lua web servers/frameworks, or from the Lua scripting layer within your games or apps.
@@ -40,11 +41,13 @@ The tracker should be straightforward to use if you are comfortable with Lua dev
 Note that this tracker has access to a more restricted set of Snowplow events than the [[JavaScript Tracker]].
 
 <a name="init" />
+
 ## 2 Initialization
 
 Assuming you have completed the [[Lua Tracker Setup]] for your Lua project, you are now ready to initialize the Lua Tracker.
 
 <a name="requiring" />
+
 ### 2.1 Requiring the module
 
 Require the Lua Tracker"s module into your Lua code like so:
@@ -53,11 +56,12 @@ Require the Lua Tracker"s module into your Lua code like so:
 local snowplow = require( "snowplow" )
 ```
 
-That's it - you are now ready to initialize a tracker instance. 
+That's it - you are now ready to initialize a tracker instance.
 
 [Back to top](#top)
 
 <a name="create-tracker" />
+
 ### 2.2 Creating a tracker
 
 There are two different versions of the tracker constructor, depending on which type of collector you want to log events to.
@@ -65,6 +69,7 @@ There are two different versions of the tracker constructor, depending on which 
 If you are using a Cloudfront collector, use [newTrackerForCf()](#create-cf) to initialize your tracker instance. If you are using any other collector (e.g. the Clojure Collector or the Scala Stream Collector), then you should use [newTrackerForUri()](#create-uri).
 
 <a name="create-cf" />
+
 #### 2.2.1 Create a tracker logging to Cloudfront with `newTrackerForCf()`
 
 You can initialize a tracker instance for a Cloudfront collector with:
@@ -84,6 +89,7 @@ This completes the initialization of your tracker instance.
 [Back to top](#top)
 
 <a name="create-uri" />
+
 #### 2.2.2 Create a tracker logging to a non-CloudFront collector using `newTrackerForUri()`
 
 You can initialize a tracker instance for a non-Cloudfront collector with:
@@ -103,6 +109,7 @@ This completes the initialization of your tracker instance.
 [Back to top](#top)
 
 <a name="multi-tracker" />
+
 ### 2.3 Creating multiple trackers
 
 Each tracker instance is completely sandboxed, so you can create multiple trackers as you see fit.
@@ -118,15 +125,17 @@ local t2 = snowplow.newTrackerForUri( "cc-endpoint.mysite.com" )
 t2:platform( "cnsl" )
 t2:trackScreenView( "Game HUD", "23" )
 
-t1:trackScreenView( "Test", "23" ) -- Back to first tracker 
+t1:trackScreenView( "Test", "23" ) -- Back to first tracker
 ```
 
 [Back to top](#top)
 
 <a name="config" />
+
 ## 3. Configuration
 
 <a name="configure-tracker" />
+
 ### 3.1 Configuring your tracker
 
 Each tracker instance is initialized with sensible defaults:
@@ -137,6 +146,7 @@ Each tracker instance is initialized with sensible defaults:
 However you can change either of these defaults:
 
 <a name="platform" />
+
 #### 3.1.1 Change the tracker"s platform with `platform()`
 
 You can change the platform the tracker is running on by calling:
@@ -156,6 +166,7 @@ For a full list of supported platforms, please see the [[Snowplow Tracker Protoc
 [Back to top](#top)
 
 <a name="encode-base64" />
+
 #### 3.1.2 Disable Base64-encoding with `encodeBase64()`
 
 You can set whether or not to Base64-encode property data for unstructured events by calling:
@@ -173,6 +184,7 @@ t:encodeBase64( false )
 [Back to top](#top)
 
 <a name="add-data" />
+
 ## 3.2 Adding extra data
 
 You may have additional information about your application"s environment, current user and so on, which you want to send to Snowplow with each event.
@@ -187,6 +199,7 @@ The tracker instance has a set of `set...()` methods to attach extra data to all
 We will discuss each of these in turn below:
 
 <a name="set-app-id" />
+
 ### 3.2.1 Set application ID with `setAppId()`
 
 You can set the application ID to any string:
@@ -204,6 +217,7 @@ t:setAppId( "wow-addon-1" )
 [Back to top](#top)
 
 <a name="set-user-id" />
+
 ### 3.2.2 Set user ID with `setUserId()`
 
 You can set the user ID to any string:
@@ -221,6 +235,7 @@ t:setUserId( "alexd" )
 [Back to top](#top)
 
 <a name="set-screen-res" />
+
 ### 3.2.3 Set screen resolution with `setScreenResolution()`
 
 If your Lua code has access to the device"s screen resolution, then you can pass this in to Snowplow too:
@@ -238,6 +253,7 @@ t:setScreenResolution( 1366, 768 )
 [Back to top](#top)
 
 <a name="set-color-depth" />
+
 ### 3.2.4 Set color depth with `setColorDepth()`
 
 If your Lua code has access to the bit depth of the device"s color palette for displaying images, then you can pass this in to Snowplow too:
@@ -255,6 +271,7 @@ t:setColorDepth( 32 )
 [Back to top](#top)
 
 <a name="events" />
+
 ## 4. Tracking specific events
 
 Snowplow has been built to enable you to track a wide range of events that occur when users interact with your websites and apps. We are constantly growing the range of functions available in order to capture that data more richly.
@@ -268,11 +285,13 @@ Tracking methods supported by the Lua Tracker at a glance:
 | [`trackUnstructEvent()`](#unstruct-event) | Track a Snowplow custom unstructured event             |
 
 <a name="common" />
+
 ### 4.1 Common
 
 All events are tracked with specific methods on the tracker instance, of the form `track...()`, where `XXX` is the name of the event to track.
 
 <a name="validation" />
+
 ### 4.1.1 Argument validation
 
 Lua is a dynamically typed language, but each of our `track...()` methods expects its arguments to be of specific types and value ranges, and validates that to be the case.
@@ -297,6 +316,7 @@ We specify the types and value ranges required for each argument below.
 [Back to top](#top)
 
 <a name="tstamp-arg" />
+
 ### 4.1.2 Optional timestamp argument
 
 Each `track...()` method supports an optional timestamp as its final argument; this allows you to manually override the timestamp attached to this event.
@@ -314,6 +334,7 @@ Timestamp is counted in seconds since the Unix epoch - the same format as genera
 [Back to top](#top)
 
 <a name="ret-vals" />
+
 ### 4.1.3 Return values
 
 Each `track...()` method has the same return signature, returning two values:
@@ -330,6 +351,7 @@ These values are as follows:
 [Back to top](#top)
 
 <a name="screen-view" />
+
 ### 4.2 Track screen views with `trackScreenView()`
 
 Use `trackScreenView()` to track a user viewing a screen (or equivalent) within your app. Arguments are:
@@ -349,6 +371,7 @@ local s, msg = t:trackScreenView( "HUD > Save Game", "screen23", 1368725287 )
 [Back to top](#top)
 
 <a name="struct-event" />
+
 ### 4.3 Track structured events with `trackStructEvent()`
 
 Use `trackStructEvent()` to track a custom event happening in your app which fits the Google Analytics-style structure of having up to five fields (with only the first two required):
@@ -371,6 +394,7 @@ local s, msg = t:trackStructEvent( "shop", "add-to-basket", nil, "pcs", 2, 13693
 [Back to top](#top)
 
 <a name="unstruct-event" />
+
 ### 4.4 Track unstructured events with `trackUnstructEvent()`
 
 Use `trackUnstructEvent()` to track a custom event which consists of a name and an unstructured set of properties. This is useful when:
@@ -393,7 +417,7 @@ local s, msg = t:trackUnstructEvent( "save-game", {
                    save_id = "4321",
                    level = 23,
                    difficultyLevel = "HARD",
-                   dl_content = true 
+                   dl_content = true
                  }, 1369330929 )
 ```
 
@@ -402,6 +426,7 @@ The properties table consists of a set of individual `name = value` pairs. The s
 [Back to top](#top)
 
 <a name="unstruct-datatypes" />
+
 #### 4.4.1 Supported datatypes
 
 Snowplow unstructured events support a relatively rich set of datatypes. Because these datatypes do not always map directly onto Lua datatypes, we have introduced some "type suffixes" for the Lua property names, so that Snowplow knows what Snowplow data types the Lua data types map onto:
@@ -461,7 +486,7 @@ To track a Floating point number, use a Lua number; adding a type suffix is opti
 
 ```lua
 {
-    price_INT = 4.99, 
+    price_INT = 4.99,
     sales_tax = 49.99 -- Same as sales_tax_FLT = ...
 }
 ```

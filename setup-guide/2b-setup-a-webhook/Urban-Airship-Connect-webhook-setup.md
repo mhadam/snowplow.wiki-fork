@@ -12,11 +12,12 @@
   - 2.3 [EmrEtlRunner](#setup-emr-etl-runner)
 
 <a name="overview" />
+
 ## 1. Overview
 
 **Technically this is not a webhook as it is integrated via S3, but we include it in this section for ease of discovery.**
 
-This webhook integration lets you track a variety of events logged by [UrbanAirship Connect] [urbanairship-website].
+This webhook integration lets you track a variety of events logged by [UrbanAirship Connect][urbanairship-website].
 
 Available events are:
 
@@ -40,12 +41,14 @@ Available events are:
 For the technical implementation details, see [[Urban Airship Connect webhook adapter]].
 
 <a name="compat" />
+
 ### 1.1 Compatibility
 
 * [Snowplow 75 Long-Legged Buzzard][snowplow-release]
 * [UrbanAirship Connect S3 Integration][urbanairship-webhooks]
 
 <a name="setup" />
+
 ## 2. Setup
 
 Integrating UrbanAirship Connect's webhooks into Snowplow is a three-stage process:
@@ -55,37 +58,40 @@ Integrating UrbanAirship Connect's webhooks into Snowplow is a three-stage proce
 3. Configure EmrEtlRunner to load UrbanAirship events
 
 <a name="setup-urbanairship" />
+
 ## 2.1 UrbanAirship Connect
 
 You'll need to log into your UrbanAirship account and set up integrations to a S3 bucket first.
 
 <a name="setup-redshift" />
+
 ## 2.2 Redshift
 
 If you are running the Snowplow batch (Hadoop) flow with Amazon Redshift, then you should deploy the relevant event tables into your Amazon Redshift.
 
 You can find the table definitions here:
 
-* [com_urbanairship_CLOSE_1.sql] [CLOSE-sql]
-* [com_urbanairship_CUSTOM_1.sql] [CUSTOM-sql]                   
-* [com_urbanairship_FIRST_OPEN_1.sql] [FIRST_OPEN-sql]                
-* [com_urbanairship_IN_APP_MESSAGE_DISPLAY_1.sql] [IN_APP_MESSAGE_DISPLAY-sql]                  
-* [com_urbansirship_IN_APP_MESSAGE_EXPIRATION_1.sql] [IN_APP_MESSAGE_EXPIRATION-sql]                     
-* [com_urbanairship_IN_APP_MESSAGE_RESOLUTION_1.sql] [IN_APP_MESSAGE_RESOLUTION-sql]                          
-* [com_urbanairship_LOCATION_1.sql] [LOCATION-sql]                        
-* [com_urbanairship_OPEN_1.sql] [OPEN-sql]            
-* [com_urbanairship_PUSH_BODY_1.sql] [PUSH_BODY-sql]            
-* [com_urbanairship_REGION_1.sql] [REGION-sql]
-* [com_urbanairship_RICH_DELETE_1.sql] [RICH_DELETE-sql]
-* [com_urbanairship_RICH_DELIVERY_1.sql] [RICH_DELIVERY-sql]
-* [com_urbanairship_RICH_READ_1.sql] [RICH_READ-sql]
-* [com_urbanairship_SEND_1.sql] [SEND-sql]
-* [com_urbanairship_TAG_CHANGE_1.sql] [TAG_CHANGE-sql]
-* [com_urbanairship_UNINSTALL_1.sql] [UNINSTALL-sql]
+* [com_urbanairship_CLOSE_1.sql][CLOSE-sql]
+* [com_urbanairship_CUSTOM_1.sql][CUSTOM-sql]
+* [com_urbanairship_FIRST_OPEN_1.sql][FIRST_OPEN-sql]
+* [com_urbanairship_IN_APP_MESSAGE_DISPLAY_1.sql][IN_APP_MESSAGE_DISPLAY-sql]
+* [com_urbansirship_IN_APP_MESSAGE_EXPIRATION_1.sql][IN_APP_MESSAGE_EXPIRATION-sql]
+* [com_urbanairship_IN_APP_MESSAGE_RESOLUTION_1.sql][IN_APP_MESSAGE_RESOLUTION-sql]
+* [com_urbanairship_LOCATION_1.sql][LOCATION-sql]
+* [com_urbanairship_OPEN_1.sql][OPEN-sql]
+* [com_urbanairship_PUSH_BODY_1.sql][PUSH_BODY-sql]
+* [com_urbanairship_REGION_1.sql][REGION-sql]
+* [com_urbanairship_RICH_DELETE_1.sql][RICH_DELETE-sql]
+* [com_urbanairship_RICH_DELIVERY_1.sql][RICH_DELIVERY-sql]
+* [com_urbanairship_RICH_READ_1.sql][RICH_READ-sql]
+* [com_urbanairship_SEND_1.sql][SEND-sql]
+* [com_urbanairship_TAG_CHANGE_1.sql][TAG_CHANGE-sql]
+* [com_urbanairship_UNINSTALL_1.sql][UNINSTALL-sql]
 
 Make sure to deploy this table into the same schema as your `events` table.
 
 <a name="setup-emr-etl-runner" />
+
 # 2.3 EmrEtlRunner
 
 The minimum Hadoop enrich job version is *0.19.0*. You'll need to set the version you're using to be at least this. This setting can be found in the file `config.yml`
@@ -109,7 +115,7 @@ raw:
     - s3://bucket-specified-in-urban-airship
 ```
 
-For a complete example, see our [sample `config.yml` template] [emretlrunner-config-yml].
+For a complete example, see our [sample `config.yml` template][emretlrunner-config-yml].
 
 That's it - with these tables deployed and your configuration set up, your UrbanAirship Connect events will be ingested by running EmrEtlRunner.
 

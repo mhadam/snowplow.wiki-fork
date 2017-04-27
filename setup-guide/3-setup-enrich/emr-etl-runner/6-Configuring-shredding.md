@@ -6,6 +6,7 @@
 4. [Next steps](#next-steps)
 
 <a name="overview"/>
+
 ## 1. Overview
 
 Snowplow has a [Shredding process](Shredding) for Redshift which contributes to the following three phases:
@@ -19,6 +20,7 @@ The first two phases are instrumented by EmrEtlRunner; in this page we will expl
 **Note: Even though the first phase is required only if you want to shred your own unstructured event JSONs and context JSONs, the second phase will be beneficial to data modeling and analysis. If none of it is required and you are only shredding Snowplow-authored JSONs like link clicks and ad impressions, then you can skip this page and go straight to [Loading shredded types](4-Loading-shredded-types).**
 
 <a name="pre-reqs"/>
+
 ## 2. Pre-requisites
 
 First off, we assume that all JSONs you are sending as unstructured events and contexts are self-describing JSONs. To find out more about self-describing JSONs:
@@ -45,6 +47,7 @@ Thirdly, we assume that you have setup your own Iglu schema registry to host you
 You are now ready to configure EmrEtlRunner for shredding.
 
 <a name="configure"/>
+
 ## 3. Configuring EmrEtlRunner
 
 The relevant section of the EmrEtlRunner's [`config.yml`](https://github.com/snowplow/snowplow/blob/master/3-enrich/emr-etl-runner/config/config.yml.sample) is:
@@ -59,7 +62,7 @@ shredded:
 
 The configuration file is referenced with `--config` option to EmrEtlRunner.
 
-Please make sure that these shredded buckets are set correctly. 
+Please make sure that these shredded buckets are set correctly.
 
 Next, we let EmrEtlRunner know about your Iglu schema registry, so that schemas can be retrieved from there as well as from Iglu Central. Add your own registry to the repositories array in  [`iglu_resolver.json`](https://github.com/snowplow/snowplow/blob/master/3-enrich/config/iglu_resolver.json) file:
 
@@ -82,7 +85,7 @@ Next, we let EmrEtlRunner know about your Iglu schema registry, so that schemas 
       #custom section starts here -->
       ,
       {
-       ... 
+       ...
       }
       #custom section ends here <--
     ]
@@ -95,6 +98,7 @@ You must add an extra entr(-y/ies) in the `repositories:` array pointing to your
 For more information on how to customize the `iglu_resolver.json` file, please review the [Iglu client configuration](https://github.com/snowplow/iglu/wiki/Iglu-client-configuration) wiki page.
 
 <a name="next-steps"/>
+
 ## 4. Next steps
 
 That's it for configuring EmrEtlRunner for shredding. Next, please refer to the [Loading shredded types](4-Loading-shredded-types) wiki page to understand how to configure StorageLoader.

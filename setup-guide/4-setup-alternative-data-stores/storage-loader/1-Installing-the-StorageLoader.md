@@ -7,6 +7,7 @@
 5. [Next steps](#next-steps)
 
 <a name="assumptions" />
+
 ## 1. Assumptions
 
 This guide assumes that you have administrator access to a Unix-based server (e.g. Ubuntu, OS X, Fedora) which you can install StorageLoader on.
@@ -14,6 +15,7 @@ This guide assumes that you have administrator access to a Unix-based server (e.
 You might wish to try out the [steps](Setting-up-EC2-instance-for-EmrEtlRunner-and-StorageLoader) showing you how an EC2 instance could be set up via [AWS CLI](https://aws.amazon.com/cli/).
 
 <a name="dependencies"/>
+
 ## 2. Dependencies
 
 ### 2.1 Software
@@ -23,6 +25,7 @@ The StorageLoader requires Java 7+ to run.
 Make sure that if you are loading Snowplow events into a PostgreSQL database, then the StorageLoader **must be run on the same server running PostgreSQL**. That is because it downloads the files locally, and Postgres needs to be able to ingest the data from the local file system.
 
 <a name="s3-buckets"/>
+
 ### 2.2 S3 buckets
 
 StorageLoader moves the Snowplow event files through three distinct S3 buckets during
@@ -42,6 +45,7 @@ AWS region as your In Bucket.
 Right, now we can install StorageLoader.
 
 <a name="installation"/>
+
 ## 3. Installation
 
 We host StorageLoader on the distribution platform [JFrog Bintray](https://bintray.com/). If you completed [EmrEtlRunner installation](1-Installing-EmrEtlRunner) then this step could be skipped. Otherwise you can get a copy of the StorageLoader as shown below.
@@ -61,11 +65,13 @@ $ unzip snowplow_emr_r77_great_auk.zip
 You will see two files `snowplow-emr-etl-runner` and `snowplow-storage-loader` where the second one is the actual StorageLoader.
 
 <a name="configuration"/>
+
 ## 4. Configuration
 
 StorageLoader requires a YAML format configuration file to run. This should be the same file you use to configure the EmrEtlRunner. See [[Common configuration]] more information on its format.
 
 <a name="next-steps" />
+
 ## 5. Next steps
 
 All done? You have the StorageLoader installed! Now find out [how to use it](2-using-the-storageloader).

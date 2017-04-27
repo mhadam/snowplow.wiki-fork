@@ -10,7 +10,7 @@ This page helps you to diagnose what is going wrong, and gives suggestions for f
 
 An error running the ETL job on Elastic MapReduce looks like this:
 
-    ------------------ 
+    ------------------
     Waiting a minute to allow S3 to settle (eventual consistency)
     Initializing EMR jobflow
     EMR jobflow j-397K2WS5ZTOOT failed, check Amazon logs for details. Data files not archived.
@@ -18,9 +18,10 @@ An error running the ETL job on Elastic MapReduce looks like this:
 
 This tells you that you have a problem with your ETL job - continue to the next section, [Diagnosing an ETL job failure](#diagnose-etl-job).
 
-On the other hand, when S3 file copy operations fail repeatedly, you will see errors (e.g. "500 InternalServerErrors") reported by [Sluice] [sluice], which is the library we use to handle S3 file operations. In this case, jump to the final section, [Fixing S3 file copy failures](#filecopy-failure).
+On the other hand, when S3 file copy operations fail repeatedly, you will see errors (e.g. "500 InternalServerErrors") reported by [Sluice][sluice], which is the library we use to handle S3 file operations. In this case, jump to the final section, [Fixing S3 file copy failures](#filecopy-failure).
 
 <a name="diagnose-etl-job"/>
+
 ### Diagnosing an ETL job failure
 
 **If you haven't successfully run EmrEtlRunner before, it's 95% likely that the problem is a misconfiguration in your `config.yml` file. Please double-check this before proceeding.**
@@ -45,6 +46,7 @@ On the other hand, if your job started but encountered errors part way through, 
 To find out what happened, we will need to dig into the Hadoop logs for the step - please continue to the next section, [Checking the Hadoop logs for errors](#check-hadoop-logs).
 
 <a name="check-hadoop-logs"/>
+
 ### Checking the Hadoop logs for errors
 
 Elastic MapReduce saves all Hadoop logs into your Log Bucket. To check them for errors, follow these steps:
@@ -89,6 +91,7 @@ In fact this error was caused by [this bug in the Clojure Collector](#https://gi
 If you go through the above process and discover a log row which our ETL process cannot handle, please [raise a ticket](#https://github.com/snowplow/snowplow/issues/new) in our GitHub repository, making sure to include the full log row in your description.
 
 <a name="filecopy-failure"/>
+
 ### S3 file copy operation errors
 
 Occasionally Amazon S3 fails repeatedly to perform a file operation, causing EmrEtlRunner to die. If this happens, you need to rerun your EmrEtlRunner - hopefully the file copy error will not recur.

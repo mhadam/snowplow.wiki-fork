@@ -1,4 +1,4 @@
-[**HOME**](Home) » [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow technical documentation) » [**Storage**](storage documentation) » The StorageLoader
+[**HOME**](Home) » [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow-technical-documentation) » [**Storage**](storage-documentation) » The StorageLoader
 
 ## An overview of how the StorageLoader instruments the loading of data from S3 into Redshift
 
@@ -9,7 +9,7 @@
 
 The StorageLoader is configured via the [configuration file][config-file] shared with [[EmrEtlRunner]]. For more information, see the guide to [setting up the StorageLoader][storage-loader-setup].
 
-##The StorageLoader role in ETL process
+## The StorageLoader role in ETL process
 
 The enriched files contain the tab-separated values contributing to `atomic.events` and custom tables. The [shredding process](Shredding)
 
@@ -19,14 +19,14 @@ The enriched files contain the tab-separated values contributing to `atomic.even
 4. adds metadata to these JSONs to track their origins;
 5. writes these JSONs out to nested folders on S3 dependent on their schema.
 
-As a result the **enriched good** file is "shredded" into a few **shredded good** files (provided the event file contained data from at least one of the following: [custom self-describing events](Custom-events#unstructured-event), [contexts](Contexts-overview), [configurable enrichments](configurable-enrichments)): 
+As a result the **enriched good** file is "shredded" into a few **shredded good** files (provided the event file contained data from at least one of the following: [custom self-describing events](Custom-events#unstructured-event), [contexts](Contexts-overview), [configurable enrichments](configurable-enrichments)):
 
 1. a TSV formatted file containing the data for `atomic.events` table;
 2. possibly one or more JSON files related to custom user specific (self-describing) events extracted from `unstruct_event` field of the enriched good file;
 3. possibly one or more JSON files related to custom contexts extracted from `contexts` filed of the enriched good file;
 4. possibly one or more JSON files related to configurable enrichments (if any was enabled) extracted from `derived_contexts` field of the enriched good file.
 
-Those files end up in S3 and are used to load the data into Redshift tables dedicated to each of the above files under the StorageLoader orchestration. 
+Those files end up in S3 and are used to load the data into Redshift tables dedicated to each of the above files under the StorageLoader orchestration.
 
 The whole process could be depicted with the following dataflow diagram.
 

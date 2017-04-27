@@ -18,15 +18,15 @@ Snowplow has been technically designed to:
 For documentation geared towards business, product and analytics folk, please see the [Snowplow website](http://snowplowanalytics.com).
 
 This wiki is the main source of documentation for **developers** working with (or contributing to) the Snowplow project. Sections include:
-* [[About Snowplow|Snowplow-overview]] (this section) - introducing Snowplow, why we built it and what it does
+* [[About Snowplow|Snowplow-overview]](this section) - introducing Snowplow, why we built it and what it does
 * [[Project and Community|Snowplow-project-and-community]] - the open-source project, our community and how to contribute
 * [[Setup Guide|Setting-up-snowplow]] - a step-by-step guide to setting up and running Snowplow
 * [[Technical Documentation|Snowplow-technical-documentation]] - technical documentation on Snowplow and its five sub-systems
 
 ### Additional support / resources
 
-* [[Talk to us]] (and other community members) through various channels
-* The team at digital consultancy Keplar have [blogged extensively about Snowplow](http://www.keplarllp.com/blog/category/snowplow)  
-* Snowplow Analytics Ltd ([contact] [contact]) provides consultancy services around Snowplow, including setup and business consultancy to use Snowplow data to drive customer understanding and growth in customer value and volume. 
+* [[Talk to us]](and other community members) through various channels
+* The team at digital consultancy Keplar have [blogged extensively about Snowplow](http://www.keplarllp.com/blog/category/snowplow)
+* Snowplow Analytics Ltd ([contact][contact]) provides consultancy services around Snowplow, including setup and business consultancy to use Snowplow data to drive customer understanding and growth in customer value and volume.
 
 [contact]: mailto:services@snowplowanalytics.com

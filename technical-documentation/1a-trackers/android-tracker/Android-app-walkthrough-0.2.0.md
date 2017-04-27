@@ -13,6 +13,7 @@ For previous versions:
 - 3. [Code Review](#review)
 
 <a name="overview" />
+
 ## 1. Overview
 
 Before we get started please [download the APK][download-apk] and install it on your Android device.  You will need to allow installation from [unknown sources][unknown-sources] before it will proceed.
@@ -24,6 +25,7 @@ For help in setting up a local endpoint please go [here][testing].
 [Back to top](#top)
 
 <a name="walkthrough" />
+
 ## 2. App Walkthrough
 
 The main screen:
@@ -68,6 +70,7 @@ In the last frame you will now notice that we have successfully sent all of our 
 [Back to top](#top)
 
 <a name="review" />
+
 ## 3. Code Review
 
 Now that we have seen the application in action we can walkthrough what's happening and work on how to integrate it into your codebase.  For some example classes please have a look at the [integration guide][integration].  In the integration guide you will see some very bare-bones implementations of both the Classic and RxJava Trackers, these both use all of the default settings however you are encouraged to test the settings until you have something that works for you!

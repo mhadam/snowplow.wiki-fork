@@ -6,8 +6,8 @@
 
 ### Compatibility
 
-JSON Schema   [iglu:com.snowplowanalytics.snowplow/javascript_script_config/jsonschema/1-0-0][schema]  
-Compatibility r66+  
+JSON Schema   [iglu:com.snowplowanalytics.snowplow/javascript_script_config/jsonschema/1-0-0][schema]
+Compatibility r66+
 Data provider None
 
 ### Overview
@@ -26,7 +26,7 @@ This is the field which this enrichment will augment:
 
 Your JavaScript must include a function, `process(event)`, which:
 
-* Takes a [Snowplow enriched event POJO] [enriched-event-pojo] (Plain Old Java Object) as its sole argument
+* Takes a [Snowplow enriched event POJO][enriched-event-pojo](Plain Old Java Object) as its sole argument
 * Returns a JavaScript array of valid self-describing JSONs, which will be added to the `derived_contexts` field in the enriched event
 * Returns `[]` or `null` if there are no contexts to add to this event
 * Can `throw` exceptions but note that throwing an exception will cause the entire enriched event to end up in the Bad Bucket or Bad Stream
@@ -67,8 +67,8 @@ function process(event) {
 
 Please note:
 
-* You must use a Java-style getter to retrieve the `app_id` from the event ([more information] [rhino-experiments])
-* We have to convert the uppercased `appId` back to a JavaScript String (from a Java String) before we return it ([more information] [string-gotcha])
+* You must use a Java-style getter to retrieve the `app_id` from the event ([more information][rhino-experiments])
+* We have to convert the uppercased `appId` back to a JavaScript String (from a Java String) before we return it ([more information][string-gotcha])
 
 #### JSON configuration file
 
@@ -94,15 +94,15 @@ The "parameters" fields are as follows:
 
 ###Data sources
 
-The data source for this enrichment is the entire `enriched/good` event in the form of [Snowplow Plain Old Java Object] [enriched-event-pojo] produced during common enrichment process.
+The data source for this enrichment is the entire `enriched/good` event in the form of [Snowplow Plain Old Java Object][enriched-event-pojo] produced during common enrichment process.
 
 ###Algorithm
 
-This enrichment uses the [Rhino JavaScript engine] [rhino] to execute your JavaScript. Your JavaScript is pre-compiled so that your code should approach native Java speeds.
+This enrichment uses the [Rhino JavaScript engine][rhino] to execute your JavaScript. Your JavaScript is pre-compiled so that your code should approach native Java speeds.
 
-The `process` function is passed the exact [Snowplow enriched event POJO] [enriched-event-pojo]. The return value from the `process` function is converted into a JSON string (using `JSON.stringify`) in JavaScript before being retrieved in our Scala code. Our Scala code confirms that the return value is either null or an empty or non-empty array of Objects. No validation of the self-describing JSONs is performed.
+The `process` function is passed the exact [Snowplow enriched event POJO][enriched-event-pojo]. The return value from the `process` function is converted into a JSON string (using `JSON.stringify`) in JavaScript before being retrieved in our Scala code. Our Scala code confirms that the return value is either null or an empty or non-empty array of Objects. No validation of the self-describing JSONs is performed.
 
-You can review the exact Scala code which executes your JavaScript script in the [JavascriptScriptEnrichment.scala] [enrichment-scala] file.
+You can review the exact Scala code which executes your JavaScript script in the [JavascriptScriptEnrichment.scala][enrichment-scala] file.
 
 #### Do's and Don'ts
 
@@ -110,7 +110,7 @@ This is our most powerful enrichment yet - here are some do's and don'ts to avoi
 
 Do:
 
-* use [Snowplow version tags] [snowplow-tags] to confirm the fields available in your Snowplow version's enriched event POJO
+* use [Snowplow version tags][snowplow-tags] to confirm the fields available in your Snowplow version's enriched event POJO
 * return as many contexts as you want
 * throw an exception if you want this enriched event to end up in the Bad Bucket or Bad Stream
 * include minified, self-contained JavaScript libraries that your `process(event)` function needs

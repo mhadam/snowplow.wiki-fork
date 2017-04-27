@@ -14,14 +14,14 @@ If you would like to contribute, we ask you to:
 
 We have two different Contributor License Agreements (CLAs), depending on whether you are contributing in a personal or professional capacity. Both are based on the Apache Software Foundation's own CLAs, with modifications:
 
-1. [Individual Contributor License Agreement v1.0] [indiv-cla]
-2. [Software Grant and Corporate Contributor License Agreement v1.0] [corp-cla]
+1. [Individual Contributor License Agreement v1.0][indiv-cla]
+2. [Software Grant and Corporate Contributor License Agreement v1.0][corp-cla]
 
 Please complete and sign the most appropriate CLA for you. For more information, see our dedicated page on our [Contributor License Agreements](CLA).
 
 ## 2. Join the conversation
 
-Have an idea for Snowplow? Found a bug? We encourage you to start a conversation on the [Snowplow Discourse] [discourse] or to file a [new issue on GitHub] [new-issue] before writing code. Announcing what you're working on (or even just your need or pain points) starts a collaborative process to identify general solutions and helps us all avoid duplicating effort.
+Have an idea for Snowplow? Found a bug? We encourage you to start a conversation on the [Snowplow Discourse][discourse] or to file a [new issue on GitHub][new-issue] before writing code. Announcing what you're working on (or even just your need or pain points) starts a collaborative process to identify general solutions and helps us all avoid duplicating effort.
 
 Let's build Snowplow and grow our community, together. You can find other ways of joining the conversation on our [[Talk to us]] page.
 

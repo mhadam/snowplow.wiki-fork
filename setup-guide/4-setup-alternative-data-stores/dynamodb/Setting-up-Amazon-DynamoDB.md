@@ -11,6 +11,7 @@
 **Note**: We recommend running all Snowplow AWS operations through an IAM user with the bare minimum permissions required to run Snowplow. Please see our [IAM user setup page](IAM-setup) for more information on doing this.
 
 <a name="policy" />
+
 ## 1. Creating Amazon DynamoDB table
 
 If [[Scala Hadoop Shred]] won't find a specified table - it will try to create it with default provisioned throughput, which might be not sufficient. This step is optional, but recommended.
@@ -30,6 +31,7 @@ After table is created, write down "Amazon Resource Name (ARN)" in "Overview" ta
 [[/setup-guide/images/dynamodb-setup-guide/table-arn.png]]
 
 <a name="policy" />
+
 ## 2. Setting up IAM Policy
 
 Log into the AWS console, navigate to the IAM section and go to **Policies**:
@@ -66,6 +68,7 @@ Notice element in `Resourse` array. It must be changed to your ARN from previous
 Back to [top](#top).
 
 <a name="next-steps" />
+
 ## 3. Next steps
 
 Now you have setup DynamoDB, you are ready to run [[Scala Hadoop Shred]] job with cross-batch de-duplication.

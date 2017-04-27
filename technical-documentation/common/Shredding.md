@@ -1,4 +1,4 @@
-[**HOME**](Home) » [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow technical documentation) » [Enrichment](Enrichment) » Shredding
+[**HOME**](Home) » [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow-technical-documentation) » [Enrichment](Enrichment) » Shredding
 
 ##Overview
 
@@ -22,7 +22,7 @@ The shredding flow and main components are highlighted in blue on the right-hand
 
 Iglu is a schema repository technology which holds the JSON Schemas against which self-describing events (also called unstructured events) and context JSONs are validated.
 
-For more information on Iglu, see the [Iglu wiki] [iglu-wiki].
+For more information on Iglu, see the [Iglu wiki][iglu-wiki].
 
 ### 1. Scala Hadoop Shred
 
@@ -42,7 +42,7 @@ For a given ETL run of events being processed, Hadoop Shred will now keep only o
 
 Note:
 
-- We do not yet tackle “synthetic dupes” - this is where two events have the same event ID but different event fingerprints. 
+- We do not yet tackle “synthetic dupes” - this is where two events have the same event ID but different event fingerprints.
 - If natural duplicates exist across ETL runs, these will not be de-duplicated currently. This is something we hope to explore soon.
 
 More technical information about Scala Hadoop Shred can be found on dedicated [Scala Hadoop Shred](Scala Hadoop Shred) page.
