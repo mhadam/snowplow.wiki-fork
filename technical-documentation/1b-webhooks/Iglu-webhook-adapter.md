@@ -1,4 +1,4 @@
-[**HOME**](Home) > [**SNOWPLOW TECHNICAL DOCUMENTATION**](../SnowPlow-technical-documentation) > [**Webhooks**](Webhooks) > Iglu webhook adapter
+[**HOME**](Home) > [**SNOWPLOW TECHNICAL DOCUMENTATION**](SnowPlow-technical-documentation) > [**Webhooks**](Webhooks) > Iglu webhook adapter
 
 ## Contents
 
