@@ -52,7 +52,7 @@ For easier navigation, please, follow the links below.
 
 <a name="r87" />
 
-## Snowplow 86 Chichen Itza
+## Snowplow 87 Chichen Itza
 
 This release contains a wide array of new features, stability enhancements and performance improvements for EmrEtlRunner and StorageLoader. As of this release EmrEtlRunner lets you specify EBS volumes for your Hadoop worker nodes; meanwhile StorageLoader now writes to a dedicated manifest table to record each load.
 
