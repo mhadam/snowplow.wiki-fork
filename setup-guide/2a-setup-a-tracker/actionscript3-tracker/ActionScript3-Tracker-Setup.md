@@ -4,11 +4,11 @@
 
 ## Contents
 
-- 1. [Overview](#overview)  
-- 2. [Integration options](#integration-options)
+- 1 [Overview](#overview)  
+- 2 [Integration options](#integration-options)
   - 2.1 [Tracker compatibility](#compatibility)  
   - 2.2 [Dependencies](#dependencies)
-- 3. [Setup](#setup)
+- 3 [Setup](#setup)
   - 3.1 [Hosting](#hosting)
   - 3.2 [FlashBuilder](#flashbuilder)
 
@@ -72,7 +72,7 @@ If you are using FlashBuilder for building your Flash application, then either:
 
 The binary is available for download from our public BinTray repository. Installation steps as follows:
 
-1. Download the [snowplow_actionscript3_tracker_0.1.0.zip] [bintray-snowplow-as3] file
+1. Download the [snowplow_actionscript3_tracker_0.1.0.zip][bintray-snowplow-as3] file
 2. Unzip the binary (.SWC) file
 3. Include it in your project under "Properties > Build Path > Library Path > Add SWC..."
 
@@ -80,7 +80,7 @@ The binary is available for download from our public BinTray repository. Install
 
 You can also install this Flash analytics SDK from source:
 
-1. Download the project source code from GitHub under the [0.1.0 tag] [source-snowplow-as3]
+1. Download the project source code from GitHub under the [0.1.0 tag][source-snowplow-as3]
 2. Import the source into your FlashBuilder project using "Import > Other... > Existing Projects into Workspace"
 3. Link this new project to your project using "Properties > Build Path > Library Path > Add Project..."
 
