@@ -4,12 +4,12 @@
 
 ## Contents
 
-- 1. [Overview](#overview)
-- 2. [Integration options](#integration-options)
+- 1 [Overview](#overview)
+- 2 [Integration options](#integration-options)
   - 2.1 [Tracker compatibility](#compatibility)
   - 2.2 [Dependencies](#dependencies)
   - 2.3 [Documented environments](#documented-envs)
-- 3. [Setup](#setup)
+- 3 [Setup](#setup)
   - 3.1 [LuaRocks](#luarocks)
   - 3.2 [Debian/Ubuntu](#deb-ubuntu)
   - 3.3 [Embedded environments](#embed-envs)
