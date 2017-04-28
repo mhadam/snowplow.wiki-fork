@@ -11,7 +11,7 @@
 ## 1. Overview
 
 Running the StorageLoader is very straightforward - please review the
-command-line options in the next section. 
+command-line options in the next section.
 
 <a name="cli-options"/>
 
@@ -23,12 +23,15 @@ The StorageLoader is an executable jar:
 
 The command-line options for StorageLoader look like this:
 
-    Usage: snowplow-storage-loader [options]
-
     Specific options:
-        -c, --config CONFIG              configuration file
-        -i, --include compupdate,vacuum                            include optional work step(s)
-        -s, --skip download|delete,load,analyze,archive_enriched   skip work step(s)
+        -c, --config CONFIG              configuration fgle
+        -b CONFIG,                       base64-encoded configuration string
+            --base64-config-string
+        -t, --targets TARGETS_DIR        targets directory
+        -i, --include compupdate,vacuum  include optional work step(s)
+        -s download|delete,load,shred,analyze,archive_enriched,
+            --skip                       skip work step(s)
+        -r, --resolver RESOLVER          Iglu resolver config file
 
     Common options:
         -h, --help                       Show this message
@@ -55,10 +58,10 @@ $ cat config/config.yml | ./snowplow-storage-loader --config -
 ## 3. Running
 
 As per the above, running StorageLoader is a matter of populating
-your configuration file, let's call it `my-config.yml` for this
-example, and then invoking StorageLoader like so: 
+your storage [targets configurations][storage-targets] (`config/targets/`) and [configuration file][common-configuration], (`my-config.yml`) for this
+example, and then invoking StorageLoader like so:
 
-    $ ./snowplow-storage-loader --config my-config.yml --skip analyze
+    $ ./snowplow-storage-loader --config my-config.yml --targets config/targets/ --skip analyze
 
 The `--skip analyze` is required because in Redshift only the table owner or superuser can ANALYZE a table, not our `storageloader` user.
 
@@ -81,4 +84,6 @@ To install and configure `locate` on Debian/Ubuntu:
 
 All done? Then [schedule the StorageLoader](3-Scheduling-the-StorageLoader) to regularly migrate new data into your data store (e.g. Infobright or Redshift).
 
+[storage-targets]: https://github.com/snowplow/snowplow/wiki/Configuring-storage-targets
+[common-configuration]: https://github.com/snowplow/snowplow/wiki/Common-configuration
 [comprows]: http://docs.aws.amazon.com/redshift/latest/dg/r_COPY.html

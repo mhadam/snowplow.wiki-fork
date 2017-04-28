@@ -35,7 +35,7 @@ The EmrEtlRunner is an executable jar:
 The command-line options for EmrEtlRunner look like this:
 
     Usage: snowplow-emr-etl-runner [options]
-    
+
     Specific options:
         -c, --config CONFIG              configuration file
         -n, --enrichments ENRICHMENTS    enrichments directory
@@ -48,10 +48,10 @@ The command-line options for EmrEtlRunner look like this:
             --skip                       skip work step(s)
         -E, --process-enrich LOCATION    run enrichment only on specified location. Implies --skip staging,shred,archive_raw
         -S, --process-shred LOCATION     run shredding only on specified location. Implies --skip staging,enrich,archive_raw
-    
+
     * filters the raw event logs processed by EmrEtlRunner by their timestamp. Only
       supported with 'cloudfront' collector format currently.
-    
+
     Common options:
         -h, --help                       Show this message
         -v, --version                    Show version
@@ -75,7 +75,7 @@ Invoking EmrEtlRunner with just the `--config` option puts it into rolling
 mode, processing all the raw Snowplow event logs it can find in your In
 Bucket:
 
-    $ ./snowplow-emr-etl-runner --config config/config.yml --resolver config/resolver.json --enrichments config/enrichments
+    $ ./snowplow-emr-etl-runner --config config/config.yml --resolver config/resolver.json --enrichments config/enrichments --targets config/targets/
 
 ### 3.2 Timespan mode
 
@@ -86,7 +86,8 @@ and/or `--end` dates as well as the `--config` option, like so:
       --config config.yml \
       --resolver config/resolver.json \
       --start 2012-06-20 \
-      --end 2012-06-24 
+      --end 2012-06-24  \
+      --targets config/targets/
 
 This will run EmrEtlRunner on log files which have timestamps in the period
 20 June 2012 to 24 June 2012 inclusive.
