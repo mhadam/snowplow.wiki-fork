@@ -6,6 +6,7 @@ You can also use [Snowplow Version Matrix](Snowplow-version-matrix) as a guidanc
 
 For easier navigation, please, follow the links below.
 
+- [Snowplow 88 Angkor Wat released](#r88) (**r88**) 2017-04-27
 - [Snowplow 87 Chichen Itza](#r87) (**r87**) 2017-02-21
 - [Snowplow 86 Petra](#r86) (**r86**) 2016-12-20
 - [Snowplow 85 Metamorphosis](#r85) (**r85**) 2016-11-15
@@ -50,6 +51,75 @@ For easier navigation, please, follow the links below.
 - [Snowplow 0.9.1](#v0.9.1) (**v0.9.1**) 2014-04-11
 - [Snowplow 0.9.0](#v0.9.0) (**v0.9.0**) 2014-02-04
 
+<a name="r88" />
+
+## Snowplow 88 Angkor Wat
+
+This release introduces event de-duplication across different pipeline runs, powered by DynamoDB, along with an important refactoring of the batch pipeline configuration.
+
+### Upgrade steps
+
+#### Upgrading EmrEtlRunner and StorageLoader
+
+The latest version of the *EmrEtlRunner* and *StorageLoader* are available from our Bintray [here](http://dl.bintray.com/snowplow/snowplow-generic/snowplow_emr_r88_angkor_wat.zip).
+
+#### Creating new targets configuration
+
+Storage targets configuration JSONs can be generated from your existing `config.yml`, using the [`3-enrich/emr-etl-runner/config/convert_targets.rb`](https://github.com/snowplow/snowplow/blob/master/3-enrich/emr-etl-runner/config/convert_targets.rb) script. These files should be stored in a folder, for example called `targets`, alongside your existing `enrichments` folder.
+
+When complete, your folder layout will look something like this:
+
+```
+snowplow_config
+├── config.yml
+├── enrichments
+│   ├── campaign_attribution.json
+│   ├── ...
+│   ├── user_agent_utils_config.json
+├── iglu_resolver.json
+├── targets
+│   ├── duplicate_dynamodb.json
+│   ├── enriched_redshift.json
+```
+
+For complete examples, see our [storage target configuration JSONs](https://github.com/snowplow/snowplow/tree/master/4-storage/config/targets). The explanation of the properties are on the [wiki page](https://github.com/snowplow/snowplow/wiki/Configuring-storage-targets).
+
+#### Updating config.yml
+
+1. Remove whole `storage.targets` section (leaving `storage.download.folder`) from your `config.yml` file
+2. Update the `hadoop_shred` job version in your configuration YAML like so:
+
+```yaml
+versions:
+  hadoop_enrich: 1.8.0        # UNCHANGED
+  hadoop_shred: 0.11.0        # WAS 0.10.0
+  hadoop_elasticsearch: 0.1.0 # UNCHANGED
+```
+
+For a complete example, see our sample [`config.yml`](https://github.com/snowplow/snowplow/blob/r88-angkor-wat/3-enrich/emr-etl-runner/config/config.yml.sample) template.
+
+#### Update EmrEtlRunner and StorageLoader scripts
+
+1. Append the option `--targets $TARGETS_DIR` to both `snowplow-emr-etl-runner` and `snowplow-storage-loader` applications
+2. Append the option `--resolver $IGLU_RESOLVER` to `snowplow-storage-loader` application. This is required to validate the storage target configurations
+
+#### Enabling cross-batch de-duplication (optional)
+
+***Please be aware that enabling this will have a potentially high cost and performance impact on your Snowplow batch pipeline.***
+
+If you want to start to deduplicate events across batches you need to add a new [DynamoDB config target](https://github.com/snowplow/snowplow/blob/master/4-storage/config/targets/dynamodb.json) to your newly created `targets` directory.
+
+Optionally, before first run of Shred job with cross-batch deduplication, you may want to run [Event Manifest Populator](https://snowplowanalytics.com/blog/2017/04/27/snowplow-r88-angkor-wat-released/#dedupe-cold-start) to back-fill the DynamoDB table.
+
+When *Hadoop Shred* runs, if the table doesn’t exist then it will be automatically created with [provisioned throughput](http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ProvisionedThroughput.html) by default set to 100 write capacity units and 100 read capacity units and the required schema to store and deduplicate events.
+
+For relatively low (1M events per run) cases, the default settings will likely just work. However, we do *strongly recommend* monitoring the EMR job, and its AWS billing impact, closely and tweaking DynamoDB provisioned throughput and your EMR cluster specification accordingly.
+
+### Read more
+
+* [R88 Blog Post](https://snowplowanalytics.com/blog/2017/04/27/snowplow-r88-angkor-wat-released/)
+* [R88 Release Notes](https://github.com/snowplow/snowplow/releases/tag/r88-angkor-wat)
+
 <a name="r87" />
 
 ## Snowplow 87 Chichen Itza
@@ -84,7 +154,7 @@ For a complete example, see our sample [`config.yml`](https://github.com/snowplo
 
 #### Upgrading Redshift
 
-You will also need to deploy the following manifest table for Redshift: 
+You will also need to deploy the following manifest table for Redshift:
 
 - [4-storage/redshift-storage/sql/manifest-def.sql](https://github.com/snowplow/snowplow/blob/r87-chichen-itza/4-storage/redshift-storage/sql/manifest-def.sql)
 
@@ -163,9 +233,9 @@ collector {
     ...
 
     buffer {
-      byte-limit: 
+      byte-limit:
       record-limit:  # Not supported by Kafka; will be ignored
-      time-limit: 
+      time-limit:
     }
     ...
 
@@ -247,7 +317,7 @@ See our sample [`config.hocon`](https://github.com/snowplow/snowplow/blob/r84-st
 
 ## Snowplow 83 Bald Eagle
 
-This release introduces our powerful new [SQL Query Enrichment](https://github.com/snowplow/snowplow/wiki/SQL-Query-enrichment), long-awaited support for the EU Frankfurt AWS region (eu-central-1), plus `POST` support for our [Iglu webhook adapter](https://github.com/snowplow/snowplow/wiki/Iglu-webhook-adapter). 
+This release introduces our powerful new [SQL Query Enrichment](https://github.com/snowplow/snowplow/wiki/SQL-Query-enrichment), long-awaited support for the EU Frankfurt AWS region (eu-central-1), plus `POST` support for our [Iglu webhook adapter](https://github.com/snowplow/snowplow/wiki/Iglu-webhook-adapter).
 
 ### Upgrade steps
 
@@ -272,7 +342,7 @@ For a complete example, see our sample [`config.yml`](https://github.com/snowplo
 
 ## Snowplow 82 Tawny Eagle
 
-This is a real-time pipeline release. This release updates the Kinesis Elasticsearch Sink with support for sending events via HTTP, allowing us to support [Amazon Elasticsearch Service](https://aws.amazon.com/elasticsearch-service/). 
+This is a real-time pipeline release. This release updates the Kinesis Elasticsearch Sink with support for sending events via HTTP, allowing us to support [Amazon Elasticsearch Service](https://aws.amazon.com/elasticsearch-service/).
 
 ### Upgrade steps
 
@@ -313,7 +383,7 @@ Only the *Elasticsearch Sink* app has actually changed. The change does, however
 
 ## Snowplow 81 Kangaroo Island Emu
 
-This is a real-time pipeline release. At the heart of it is the [Hadoop Event Recovery project](https://github.com/snowplow/snowplow/master/3-enrich/hadoop-event-recovery), which allows you to fix up Snowplow bad rows and make them ready for reprocessing. 
+This is a real-time pipeline release. At the heart of it is the [Hadoop Event Recovery project](https://github.com/snowplow/snowplow/master/3-enrich/hadoop-event-recovery), which allows you to fix up Snowplow bad rows and make them ready for reprocessing.
 
 ### Upgrade steps
 
@@ -338,9 +408,9 @@ Only the *Stream Enrich* app has actually changed. The change is not breaking, s
 
 ## Snowplow 80 Southern Cassowary
 
-This is a real-time pipeline release which improves stability and brings the real-time pipeline up-to-date with our Hadoop pipeline. 
+This is a real-time pipeline release which improves stability and brings the real-time pipeline up-to-date with our Hadoop pipeline.
 
-As a result, you can now use R79 Black Swan’s *API Request Enrichment* and the *HTTP Header Extractor Enrichment* in your real-time pipeline. Also, you can now configure the number of records that the *Kinesis Client Library* should retrieve with each call to `GetRecords`. 
+As a result, you can now use R79 Black Swan’s *API Request Enrichment* and the *HTTP Header Extractor Enrichment* in your real-time pipeline. Also, you can now configure the number of records that the *Kinesis Client Library* should retrieve with each call to `GetRecords`.
 
 ### Upgrade steps
 
@@ -563,7 +633,7 @@ This release introduces an event de-duplication process which runs on Hadoop, an
 
 ### Upgrade steps
 
-Upgrading to this release is simple - the only changed components are the jar versions for Hadoop Enrich and Hadoop Shred. 
+Upgrading to this release is simple - the only changed components are the jar versions for Hadoop Enrich and Hadoop Shred.
 
 #### Configuration file
 
@@ -576,7 +646,7 @@ In the `config.yml` file for your EmrEtlRunner, update your `hadoop_enrich` and 
     hadoop_elasticsearch: 0.1.0 # Unchanged
 ```
 
-For a complete example, see our sample [`config.yml`](https://github.com/snowplow/snowplow/blob/r76-changeable-hawk-eagle/3-enrich/emr-etl-runner/config/config.yml.sample) template. 
+For a complete example, see our sample [`config.yml`](https://github.com/snowplow/snowplow/blob/r76-changeable-hawk-eagle/3-enrich/emr-etl-runner/config/config.yml.sample) template.
 
 ### Read more
 
@@ -1239,7 +1309,7 @@ Our recommended approach for upgrading is as follows:
 
 <a name="r62" />
 
-## Snowplow 62 Tropical Parula 
+## Snowplow 62 Tropical Parula
 
 This release is designed to fix an incompatibility issue between [r61](#r61)'s EmrEtlRunner and some older Elastic Beanstalk configurations. It also includes some other EmrEtlRunner improvements.
 
@@ -1350,7 +1420,7 @@ This release focuses on the Snowplow Kinesis flow, and includes:
 1. A new Kinesis “sink app” that reads the Scala Stream Collector’s Kinesis stream of raw events and stores these raw events in Amazon S3 in an optimized format
 2. An updated version of our Hadoop Enrichment process that supports as an input format the events stored in S3 by the new Kinesis sink app
 
-Together, these two features let you robustly archive your Kinesis event stream in S3, and process and re-process it at will using our tried-and-tested Hadoop Enrichment process. 
+Together, these two features let you robustly archive your Kinesis event stream in S3, and process and re-process it at will using our tried-and-tested Hadoop Enrichment process.
 
 *Up until now, all Snowplow releases have used semantic versioning. We will continue to use semantic versioning for Snowplow's many constituent applications and libraries, but our releases of the Snowplow platform as a whole will be known by their release number plus a codename. The codenames for 2015 will be birds in ascending order of size, starting with the Bee Hummingbird.*
 
@@ -1506,7 +1576,7 @@ In addition to enabling real-time loading of data into Elasticsearch, we have ma
 1. Bad rows of data are now loaded into a dedicated bad rows stream in Kinesis
 2. The real-time flow now runs the latest version of Scala Common Enrich, making it possible to employ the same configurable enrichments in the real-time flow that are currently available in the batch flow.
 
-This release also makes some improvements to Snowplow Common Enrich and Hadoop Enrich which should be invaluable for users of our batch-based event pipeline. 
+This release also makes some improvements to Snowplow Common Enrich and Hadoop Enrich which should be invaluable for users of our batch-based event pipeline.
 
 ### Upgrade steps
 
@@ -1735,7 +1805,7 @@ The Android Tracker also optionally sends a geolocation-related context relating
 
 This release is a "tidy-up" release which fixes some important bugs, particularly:
 
-1. A bug in v0.9.5 onwards which was preventing events containing multiple JSONs from being shredded successfully 
+1. A bug in v0.9.5 onwards which was preventing events containing multiple JSONs from being shredded successfully
 2. Our Hive table definition falling behind Snowplow 0.9.6’s enriched event format updates
 3. A bug in EmrEtlRunner causing issues running Snowplow inside some VPC environments
 
@@ -1884,7 +1954,7 @@ $ cd snowplow/4-storage/storage-loader
 $ bundle install --deployment
 ```
 
-You also need to update the `config.yml` file for StorageLoader. 
+You also need to update the `config.yml` file for StorageLoader.
 
 #### New Snowplow-authored events
 
@@ -1917,7 +1987,7 @@ The new base model has some significant improvements over the old one:
 
 - Querying the data is much faster. When new Snowplow event data is loaded into Redshift, Looker automatically detects it and generates the relevant session-level and visitor-level derived tables, so that they are ready to be queried directly. We’ve tuned the derived tables with the relevant dist keys and sort keys to make sure any underlying table joins in Redshift are performant
 - New visualizations are now supported including geographic plots
-- Looker's new functionality around global filters: this makes it possible to drill into subsets of visitors by a range of dimensions, and see a wide range of different visualizations for that subset of users on the same screen, opening up new creative ways of exploring your Snowplow data 
+- Looker's new functionality around global filters: this makes it possible to drill into subsets of visitors by a range of dimensions, and see a wide range of different visualizations for that subset of users on the same screen, opening up new creative ways of exploring your Snowplow data
 - Metrics and dimensions have been renamed to make it easier for a new user unfamiliar with Snowplow to explore the data through Looker
 
 ### Upgrade steps
@@ -1964,7 +2034,7 @@ Once copied over, you should be able to start exploring the "events", "sessions"
 
 These release deals with incremental improvements to EmrEtlRunner, plus two important bug fixes for Clojure Collector users.
 
-The first Clojure Collector issue was a problem in the file move functionality in EmrEtlRunner, which was preventing Clojure Collector users from scaling beyond a single instance without data loss. 
+The first Clojure Collector issue was a problem in the file move functionality in EmrEtlRunner, which was preventing Clojure Collector users from scaling beyond a single instance without data loss.
 
 The second Clojure Collector issue involved the Elastic Beanstalk's Apache proxy's IP address(es) showing up in the `atomic.events` table in place of the expected end-user's IPs. We were unable to reproduce this issue when running multiple instances, so we do not believe this problem is as widespread.
 
@@ -1975,7 +2045,7 @@ Upgrading is a two-step process:
 1. Update EmrEtlRunner
 2. Update Clojure Collector [optional]
 
-#### EmrEtlRunner 
+#### EmrEtlRunner
 
 You need to update EmrEtlRunner to the code 0.7.0 on GitHub:
 
@@ -2041,7 +2111,7 @@ To upgrade to this release:
 
 ## Snowplow 0.9.2
 
-This release adds Snowplow support for the updated [CloudFront access log file format](http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/AccessLogs.html) introduced by Amazon on the morning of 29th April 2014. 
+This release adds Snowplow support for the updated [CloudFront access log file format](http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/AccessLogs.html) introduced by Amazon on the morning of 29th April 2014.
 
 If you currently use the Snowplow CloudFront-based event collector, you are recommended to upgrade to this release as soon as possible.
 
