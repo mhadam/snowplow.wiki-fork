@@ -1,25 +1,25 @@
 <a name="top" />
 
-[**HOME**](Home) > [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow-technical-documentation) > [**Trackers**](trackers) > Unity Tracker
+[**HOME**](Home) > [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow-technical-documentation) > [**Trackers**](trackers) > [**Unity Tracker**](Unity Tracker)
 
 This page refers to version 0.1.0 of the Snowplow Unity Tracker.
 
 ## Contents
 
-- 1. [Overview](#overview)
+- 1 [Overview](#overview)
   - 1.1 [Snowplow Pong Demo](#demo-app)
-- 2. [Initialization](#init)
+- 2 [Initialization](#init)
   - 2.1 [Importing the library](#importing)
   - 2.2 [Creating a tracker](#create-tracker)
-- 3. [Tracker](#tracker)
+- 3 [Tracker](#tracker)
   - 3.1 [Constructor](#t-constructor)
   - 3.2 [Functions](#t-functions)
     - 3.2.1 [`StartEventTracking()`](#t-start)
     - 3.2.2 [`StopEventTracking()`](#t-stop)
     - 3.2.3 [`Track(IEvent)`](#t-track)
-- 4. [Emitter](#emitter)
+- 4 [Emitter](#emitter)
   - 4.1 [Constructor](#e-constructor)
-- 5. [Subject](#subject)
+- 5 [Subject](#subject)
   - 5.1 [`SetUserId`](#set-user-id)
   - 5.2 [`SetResolution`](#set-screen-resolution)
   - 5.3 [`SetViewPort`](#set-viewport-dimensions)
@@ -30,11 +30,11 @@ This page refers to version 0.1.0 of the Snowplow Unity Tracker.
   - 5.8 [`SetUseragent`](#set-useragent)
   - 5.9 [`SetNetworkUserId`](#set-network-user-id)
   - 5.10 [`SetDomainUserId`](#set-domain-user-id)
-- 6. [Session](#session)
+- 6 [Session](#session)
   - 6.1 [Constructor](#s-constructor)
   - 6.2 [Functions](#s-functions)
     - 6.2.1 [`SetBackground(bool)`](#s-set-background)
-- 7. [Event Tracking](#event-tracking)
+- 7 [Event Tracking](#event-tracking)
   - 7.1 [Events Types](#event-types)
     - 7.1.1 [`PageView`](#et-page-view)
     - 7.1.2 [`ScreenView`](#et-screen-view)
@@ -49,7 +49,7 @@ This page refers to version 0.1.0 of the Snowplow Unity Tracker.
     - 7.2.3 [`GeoLocationContext`](#ct-geo-location)
     - 7.2.4 [`GenericContext`](#ct-generic)
   - 7.3 [`SelfDescribingJson`](#self-describing-json)
-- 8. [Utilities](#utilities)
+- 8 [Utilities](#utilities)
   - 8.1 [Log](#log)
   - 8.2 [ConcurrentQueue](#concurrent)
 
