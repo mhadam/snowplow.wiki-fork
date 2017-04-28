@@ -83,7 +83,7 @@ EmrEtlRunner requires a YAML format configuration file to run. There is a config
 
 ### Storage targets
 
-Storages for data can be configured using storage targets JSONs. Configuration file templates available in the Snowplow GitHub repository at [`/4-storage/config/targets` directory] [targets-jsons]
+Storages for data can be configured using storage targets JSONs. Configuration file templates available in the Snowplow GitHub repository at [`/4-storage/config/targets` directory][targets-jsons]
 
 ### Iglu
 
