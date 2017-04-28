@@ -1,6 +1,6 @@
 <a name="top" />
 
-[**HOME**](Home) > [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow-technical-documentation) > [**Trackers**](trackers) > Scala Tracker
+[**HOME**](Home) > [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow-technical-documentation) > [**Trackers**](trackers) > [**Scala Tracker**](Scala-Tracker)
 
 **This page refers to version 0.3.0 of the Snowplow Scala Tracker. Documentation for other versions is available:**
 
@@ -9,17 +9,17 @@
 
 ## Contents
 
-- 1. [Overview](#overview)
-- 2. [Initialization](#init)
-  - 2.1. [Tracker](#tracker-init)
-  - 2.2. [Subject](#subject)
-  - 2.3. [EC2 Context](#ec2)
-- 3. [Sending events](#events)
+- 1 [Overview](#overview)
+- 2 [Initialization](#init)
+  - 2.1 [Tracker](#tracker-init)
+  - 2.2 [Subject](#subject)
+  - 2.3 [EC2 Context](#ec2)
+- 3 [Sending events](#events)
   - 3.1 [`trackSelfDescribingEvent`](#trackSelfDescribingEvent)
   - 3.2 [`trackStructEvent`](#trackStructEvent)
   - 3.3 [`trackPageView`](#trackPageView)
   - 3.4 [Setting timestamp](#timestamp)
-- 4. [Subject methods](#subject)
+- 4 [Subject methods](#subject)
 
 <a name="overview" />
 
