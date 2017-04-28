@@ -6,9 +6,9 @@
 
 ## Contents
 
-- 1. [Overview](#overview)
-- 2. [Initialization](#init)
-- 3. [Configuration](#config)
+- 1 [Overview](#overview)
+- 2 [Initialization](#init)
+- 3 [Configuration](#config)
   - 3.1 [`setPlatform()`](#set-platform)
   - 3.2 [`setUserId()`](#set-user-id)
   - 3.3 [`setScreenResolution()`](#set-screen-resolution)
@@ -16,7 +16,7 @@
   - 3.5 [`setColorDepth()`](#set-color-depth)
   - 3.6 [`setTimezone()`](#set-timezone)
   - 3.7 [`setLang()`](#set-lang)
-- 4. [Tracking specific events](#events)
+- 4 [Tracking specific events](#events)
   - 4.1 [Common](#common)
     - 4.1.1 [Optional arguments](#optional-arguments)
     - 4.1.2 [Custom contexts](#custom-contexts)
