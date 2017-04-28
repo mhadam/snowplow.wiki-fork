@@ -4,14 +4,14 @@
 
 ## Contents
 
-- 1. [Overview](#overview)
-- 2. [Before you start](#before-start)
+- 1 [Overview](#overview)
+- 2 [Before you start](#before-start)
   - 2.1 [Tracker compatibility](#compatibility)
   - 2.2 [Dependencies](#dependencies)
-- 3. [Setup](#setup)
+- 3 [Setup](#setup)
   - 3.1 [Installation](#installation)
   - 3.2 [Testing](#testing)
-- 4. [Integrating into your sketch](#integration)
+- 4 [Integrating into your sketch](#integration)
 
 <a name="overview" />
 
