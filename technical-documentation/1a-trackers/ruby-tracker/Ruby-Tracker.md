@@ -1,6 +1,6 @@
 <a name="top" />
 
-[**HOME**](Home) » [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow-technical-documentation) » [**Trackers**](trackers) » Ruby Tracker
+[**HOME**](Home) » [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow-technical-documentation) » [**Trackers**](trackers) » [**Ruby Tracker**](Ruby-Tracker)
 
 **This page refers to version 0.6.1 of the Snowplow Ruby Tracker. Documentation for other versions is available:**
 
@@ -13,8 +13,8 @@
 
 ## Contents
 
-- 1. [Overview](#overview)
-- 2. [Initialization](#init)
+- 1 [Overview](#overview)
+- 2 [Initialization](#init)
   - 2.1 [Requiring the module](#requiring)
   - 2.2 [Creating a tracker](#create-tracker)
   - 2.3 [Creating multiple trackers](#multi-tracker)
@@ -31,7 +31,7 @@
   - 3.10 [`set_domain_user_id`](#set-domain-user-id)
   - 3.11 [`set_network_user_id`](#set-network-user-id)
   - 3.12 [`set_fingerprint`](#set-fingerprint)
-- 4. [Tracking specific events](#events)
+- 4 [Tracking specific events](#events)
   - 4.1 [Common](#common)
     - 4.1.1 [Argument validation](#validation)
     - 4.1.2 [Optional context argument](#context-arg)
@@ -43,7 +43,7 @@
   - 4.5 [`track_struct_event`](#struct-event)
   - 4.6 [`track_unstruct_event`](#unstruct-event)
   - 4.7 [`track_self_describing_event`](#self-describing-event)
-- 5. [Emitters](#emitters)
+- 5 [Emitters](#emitters)
   - 5.1 [Overview](#emitters-overview)
   - 5.2 [The AsyncEmitter class](#async-emitter)
   - 5.3 [Multiple emitters](#multiple-emitters)
