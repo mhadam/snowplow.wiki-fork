@@ -4,9 +4,9 @@
 
 ## Contents
 
-- 1. [Overview](#overview)  
+- 1 [Overview](#overview)  
 - 2 [Dependencies](#dependencies)
-- 3. [Setup](#setup)
+- 3 [Setup](#setup)
   - 3.1 [RubyGems](#rubygems)
   - 3.2 [Installation](#installation)
 
