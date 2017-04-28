@@ -4,14 +4,14 @@
 
 ## Contents
 
-1. [Overview](#overview)  
-2. [Integration options](#integration-options)  
-  2.1 [Tracker compatibility](#compatibility)  
-  2.2 [Dependencies](#dependencies)  
-3. [Setup](#setup)  
-  3.1 [PyPI](#pypi)  
-  3.2 [pip](#pip)  
-  3.3 [easy_install](#easy_install)  
+- 1 [Overview](#overview)  
+- 2 [Integration options](#integration-options)  
+  - 2.1 [Tracker compatibility](#compatibility)  
+  - 2.2 [Dependencies](#dependencies)  
+- 3 [Setup](#setup)  
+  - 3.1 [PyPI](#pypi)  
+  - 3.2 [pip](#pip)  
+  - 3.3 [easy_install](#easy_install)  
 
 
 <a name="overview" />
