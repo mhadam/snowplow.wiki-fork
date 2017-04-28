@@ -4,14 +4,14 @@
 
 ## Contents
 
-- 1. [Overview](#overview)
-- 2. [Initialization](#init)
+- 1 [Overview](#overview)
+- 2 [Initialization](#init)
   - 2.1 [Requiring the module](#requiring)
   - 2.2 [Creating a tracker](#create-tracker)
     - 2.2.1 [`newTrackerForCf()`](#create-cf)
     - 2.2.2 [`newTrackerForUri()`](#create-uri)
   - 2.3 [Creating multiple trackers](#multi-tracker)
-- 3. [Configuration](#config)
+- 3 [Configuration](#config)
   - 3.1 [Configuring your tracker](#configure-tracker)
     - 3.1.1 [`platform()`](#platform)
     - 3.1.2 [`encodeBase64()`](#encode-base64)
@@ -20,7 +20,7 @@
     - 3.2.2 [`setUserId()`](#set-user-id)
     - 3.2.3 [`setScreenResolution()`](#set-screen-res)
     - 3.2.4 [`setColorDepth()`](#set-color-depth)
-- 4. [Tracking specific events](#events)
+- 4 [Tracking specific events](#events)
   - 4.1 [Common](#common)
     - 4.1.1 [Argument validation](#validation)
     - 4.1.2 [Optional timestamp argument](#tstamp-arg)
