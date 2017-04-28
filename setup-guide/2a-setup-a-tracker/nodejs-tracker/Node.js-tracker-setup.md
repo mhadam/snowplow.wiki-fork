@@ -4,10 +4,10 @@
 
 ## Contents
 
-- 1. [Overview](#overview)
-- 2. [Compatibility](#compatibility)
-- 3. [Installation](#installation)  
-- 4. [Next steps](#next-steps)
+- 1 [Overview](#overview)
+- 2 [Compatibility](#compatibility)
+- 3 [Installation](#installation)  
+- 4 [Next steps](#next-steps)
 
 <a name="overview" />
 
