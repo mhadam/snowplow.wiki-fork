@@ -152,7 +152,7 @@ In the code, we perform this check after we have grouped the batch by `event_id`
 
 ##### Enabling
 
-To enable cross-batch natural de-duplication you must provide a DynamoDB table configuration to EmrEtlRunner and provide [necessary rights][dynamodb-setup-guide] in IAM.
+To enable cross-batch natural de-duplication you must provide a DynamoDB table [configuration][dynamodb-storage-target] to EmrEtlRunner and provide [necessary rights][dynamodb-setup-guide] in IAM.
 If this is not provided, then cross-batch natural de-duplication will be disabled.
 In-batch de-duplication will still work however.
 
@@ -166,8 +166,8 @@ For event manifests this time is etl timestamp plus 180 days and stored in `ttl`
 ##### Costs and performance penalty
 
 Cross-batch deduplication uses DynamoDB as transient storage and therefore has associated AWS costs.
-Default write capacity is 100 units, which means whole Hadoop Shred will be throttled by AWS DynamoDB.
-Rough cost of default setup is 50USD per month, however throughput can be [tweaked][dynamodb-setup-guide] according to used needs.
+Default write capacity is 100 units, which means no matter how powerful your EMR cluster is - whole Hadoop Shred can be throttled by AWS DynamoDB.
+Rough cost of default setup is 50USD per month, however throughput can be [tweaked][dynamodb-setup-guide] according to your needs.
 
 #### 3.4 Cross-batch synthetic de-duplication
 
@@ -176,6 +176,7 @@ This section hasn't been written yet.
 [dynamodb-setup-guide]: https://github.com/snowplow/snowplow/wiki/Setting-up-Amazon-DynamoDB
 
 [redshift-copy]: http://docs.aws.amazon.com/redshift/latest/dg/copy-parameters-data-source-s3.html
+[dynamodb-cond-writes]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithItems.html#WorkingWithItems.ConditionalUpdate
 [dynamodb-ttl]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/TTL.html
 [ndjson]: http://ndjson.org/
 [scalding]: https://github.com/twitter/scalding
@@ -191,5 +192,4 @@ This section hasn't been written yet.
 [r86-release]: http://snowplowanalytics.com/blog/2016/12/20/snowplow-r86-petra-released/
 [r88-release]: http://snowplowanalytics.com/blog/2017/04/27/snowplow-r88-angkor-wat-released/
 [duplicate-schema]: https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/duplicate/jsonschema/1-0-0
-
-[dynamodb-cond-writes]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithItems.html#WorkingWithItems.ConditionalUpdate
+[dynamodb-storage-target]: https://github.com/snowplow/snowplow/wiki/Configuring-storage-targets#dynamodb
