@@ -4,8 +4,8 @@
 
 ## Contents
 
-- 1. [Overview](#overview)
-- 2. [Initialization](#init)
+- 1 [Overview](#overview)
+- 2 [Initialization](#init)
   - 2.1 [Import the library](#importing)
   - 2.2 [Creating a tracker](#create-tracker)
     - 2.2.1 [`RequireEmitter`](#emitter)
@@ -14,7 +14,7 @@
     - 2.2.4 [`OptionAppId`](#app-id)
     - 2.2.5 [`OptionPlatform`](#platform)
     - 2.2.6 [`OptionBase64Encode`](#base64)
-- 3. [Adding extra data: the Subject class](#subject-class)
+- 3 [Adding extra data: the Subject class](#subject-class)
   - 3.1 [`SetUserId`](#set-user-id)
   - 3.2 [`SetScreenResolution`](#set-screen-resolution)
   - 3.3 [`SetViewport`](#set-viewport-dimensions)
@@ -25,7 +25,7 @@
   - 3.8 [`SetUseragent`](#set-useragent)
   - 3.9 [`SetDomainUserId`](#set-domain)
   - 3.10 [`SetNetworkUserId`](#set-network)
-- 4. [Tracking specific events](#events)
+- 4 [Tracking specific events](#events)
   - 4.1 [Common](#common)
     - 4.1.1 [Custom contexts](#custom-contexts)
     - 4.1.2 [Optional timestamp argument](#tstamp-arg)
@@ -37,7 +37,7 @@
   - 4.5 [`TrackEcommerceTransaction()`](#ecommerce-transaction)
   - 4.6 [`TrackStructEvent()`](#struct-event)
   - 4.7 [`TrackTiming()`](#timing-event)
-- 5. [Emitters](#emitter)
+- 5 [Emitters](#emitter)
   - 5.1 [Under the hood](#emitter-inner-workings)
 
 <a name="overview" />
@@ -762,6 +762,7 @@ The OptionDbName can be any valid path on your host file system (that can be cre
 [Back to top](#top)
 
 <a name="emitter-inner-workings">
+
 ### 5.1 Under the hood
 
 Once the emitter receives an event from the Tracker a few things start to happen:
