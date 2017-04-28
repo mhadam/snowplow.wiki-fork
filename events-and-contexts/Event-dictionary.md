@@ -1,8 +1,8 @@
 [**HOME**](Home) » [**EVENTS AND CONTEXTS**](Events-and-Contexts) » Event Dictionary
 
-##Overview
+## Overview
 
-###What is an event dictionary?
+### What is an event dictionary?
 
 When we setup Snowplow, we need to make sure that we track all the events that are meaningful to our business, so that the data associated with those events is available in Snowplow for analysis.
 
@@ -14,7 +14,7 @@ An event dictionary is a crucial tool in both cases. It is a document that defin
 2. What data is captured when the event occurs, that represents the event. This is a data schema for the event
 3. Details on how the relevant Snowplow tracker has been setup to pass the event data into Snowplow
 
-###What is the purpose of an event dictionary?
+### What is the purpose of an event dictionary?
 
 Event dictionaries serve three purposes:
 
@@ -22,7 +22,7 @@ Event dictionaries serve three purposes:
 2. They aid technical setup: instrumentation (tracker setup) is driven by the event dictionary.
 3. They can assist both the product management and analytics development process, by ensuring that the analytics instrumentation "keeps up" with an evolving product.
 
-###Examples
+### Examples
 
 Before considering an example you might wish to brush up on your understanding of what [JSON](http://www.json.org/) and [JSON schema](http://json-schema.org/) are. Also we have introduced a [self-describing JSON](https://github.com/snowplow/iglu/wiki/Self-describing-JSONs) and as a result a [self-describing JSON schema](https://github.com/snowplow/iglu/wiki/Self-describing-JSON-Schemas).
 
@@ -76,11 +76,11 @@ When it comes to actual implementation of *event dictionaries* we prefer to call
 
 » Read more about building your own [schema registry](Schema-registry)
 
-##Further reading
+## Further reading
 
 Snowplow privides a number of predefined (most commonly used) events such as page views, link clicks, form submissions and so on. We built the corresponding schema registries (event dictionaries). Now we need to have some kind of storage to keep the JSON schemas in and be able to retrieve them when the data is validated and processed to ensure the data conforms to the requirements set in those JSON schemas. Thus, we come up with the idea of JSON schema repository which we called **Iglu**.
 
-Likewise once you produced JSON schemas for all the *custom* unstructured events (also called *self-describing events*) and contexts you would have to have your own JSON schema repository hosting your own JSON schemas. 
+Likewise once you produced JSON schemas for all the *custom* unstructured events (also called *self-describing events*) and contexts you would have to have your own JSON schema repository hosting your own JSON schemas.
 
 To find out more about the concepts mentioned above and ultimately how to set up your own Iglu repository for Snowplow to be able to handle custom unstructured events and contexts, follow the links below.
 

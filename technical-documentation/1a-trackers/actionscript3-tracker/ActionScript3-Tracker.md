@@ -4,11 +4,11 @@
 
 ## Contents
 
-- 1. [Overview](#overview)  
-- 2. [Initialization](#init)  
+- 1. [Overview](#overview)
+- 2. [Initialization](#init)
   - 2.1 [Importing the module](#importing)
   - 2.2 [Creating a tracker](#create-tracker)
-    - 2.2.1 [`emitter`](#emitter)  
+    - 2.2.1 [`emitter`](#emitter)
     - 2.2.2 [`subject`](#subject)
     - 2.2.3 [`namespace`](#namespace)
     - 2.2.4 [`appId`](#app-id)
@@ -69,7 +69,7 @@ import com.snowplowanalytics.snowplow.tracker.emitter.*;
 import com.snowplowanalytics.snowplow.tracker.payload.*;
 ```
 
-That's it - you are now ready to initialize a Tracker instance. 
+That's it - you are now ready to initialize a Tracker instance.
 
 [Back to top](#top)
 
@@ -163,7 +163,7 @@ The Subject class has a set of `set...()` methods to attach extra data relating 
 Here are some examples:
 
 ```java
-s1.setUserID("Kevin Gleason"); 
+s1.setUserID("Kevin Gleason");
 s1.setLanguage("en-gb");
 s1.setScreenResolution(1920, 1080);
 ```
@@ -330,11 +330,11 @@ The `context` argument should consist of a `Array` of `SchemaPayload` representi
 If a visitor arrives on a page advertising a movie, the context dictionary might look like this:
 
 ```json
-{ 
+{
   "schema": "iglu:com.acme_company/movie_poster/jsonschema/2-1-1",
   "data": {
-    "movie_name": "Solaris", 
-    "poster_country": "JP", 
+    "movie_name": "Solaris",
+    "poster_country": "JP",
     "poster_year": "1978"
   }
 }
@@ -426,7 +426,7 @@ Arguments:
 | `shipping`    | Delivery cost charged                | Yes           | Number                   |
 | `city`        | Delivery address city                | Yes           | String                   |
 | `state`       | Delivery address state               | Yes           | String                   |
-| `country`     | Delivery address country             | Yes           | String                   | 
+| `country`     | Delivery address country             | Yes           | String                   |
 | `currency`    | Transaction currency                 | Yes           | String                   |
 | `items`       | Items in the transaction             | Yes           | Array<TransactionItem>   |
 | `context`     | Custom context for the event         | No            | Object                   |
@@ -521,7 +521,7 @@ Example:
 t1.trackUnstructuredEvent(eventData, contextList);
 ```
 
-For more on JSON schema, see the [blog post] [self-describing-jsons].
+For more on JSON schema, see the [blog post][self-describing-jsons].
 
 [Back to top](#top)
 
@@ -549,6 +549,7 @@ var e2:Emitter = new Emitter("d3rkrsqld9gmqf.cloudfront.net", URLRequestMethod.P
 
 
 <a name="buffer" />
+
 ### 5.1 Using a buffer
 
 A buffer is used to group events together in bulk before sending them. This is useful to reduce network usage. By default, the AS3 Emitter does not buffer but instead sends events instantly as soon as they are created. You can use a buffer instead by calling setBufferOption with the number of events to batch together in the buffer:
@@ -599,7 +600,7 @@ An AS3 Emitter sends requests asynchronously. Flash does not support synchronous
 
 ###  5.4 Emitter callback
 
-The AS3 Emitter dispatches events when it succeeds or fails to flush the buffer. 
+The AS3 Emitter dispatches events when it succeeds or fails to flush the buffer.
 
 You can register event listeners for these events if you need to handle the success or failure case. Here is a sample bit of code to show how it could work:
 

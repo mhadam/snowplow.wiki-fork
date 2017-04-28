@@ -1,4 +1,4 @@
-[**HOME**](Home) > [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow technical documentation) > [**Collectors**](collectors)
+[**HOME**](Home) > [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow-technical-documentation) > [**Collectors**](collectors)
 
 ## Introduction
 
@@ -34,7 +34,7 @@ In pseudocode terms:
 
 ## Technical architecture
 
-The Scala Stream Collector is built on top of [Spray][spray] and [Akka][akka] actors. 
+The Scala Stream Collector is built on top of [Spray][spray] and [Akka][akka] actors.
 
 ## See also
 

@@ -4,8 +4,8 @@
 
 ### Compatibility
 
-JSON Schema   [iglu:com.snowplowanalytics.snowplow/event_fingerprint_config/jsonschema/1-0-0][schema]  
-Compatibility Release 71+  
+JSON Schema   [iglu:com.snowplowanalytics.snowplow/event_fingerprint_config/jsonschema/1-0-0][schema]
+Compatibility Release 71+
 Data provider None
 
 ### Overview
@@ -39,7 +39,7 @@ The `excludeParameters` field is a list of fields set by the tracker which shoul
 
 The `hashAlgorithm` field determines the algorithm that should be used to calculate the hash. At the moment, only "MD5" is supported.
 
-###Data sources
+### Data sources
 
 The input values for this enrichment are taken from all  the querystring fields except those extracted from  `excludedParameters` in [`event_fingerprint_enrichment.json`](https://github.com/snowplow/snowplow/blob/master/3-enrich/config/enrichments/event_fingerprint_enrichment.json).
 
@@ -47,11 +47,11 @@ Also the same JSON provides the name of the hash algorithm to apply.
 
 *Note*: The only algorithm currently supported is [MD5](https://en.wikipedia.org/wiki/MD5).
 
-###Algorithm
+### Algorithm
 
 All the key-value pairs from the querystring are sorted and appended and the hash is calculated on the final string.
 
-###Data generated
+### Data generated
 
 The resulted hash value ends up in `event_fingerprint` field of `atomic.events` table. It represents a unique fingerprint of the corresponding event and thus could be used at deduplication process.
 

@@ -12,6 +12,7 @@ This guide will explain how to configure your Zendesk account so that whenever a
 4. [Setting up an automation to track tickets being closed](#ticket-resolution)
 
 <a name="extension" />
+
 ## 1. Setting up a Cloudfront collector as a Zendesk extension
 
 You can configure Zendesk to automatically send GET requests to a collector. The first step is to set up a Zendesk "extension" pointing at the collector.
@@ -45,13 +46,14 @@ Select "Create Target" from the drop-down menu and click the Submit button.
 We have set up our collector as a Zendesk extension. We can now add triggers or automations which send GET requests to the collector whenever certain events occur.
 
 <a name="ticket-creation" />
+
 ## 2. Setting up a trigger to track ticket creation
 
 From the Admin page, select "Triggers" from the "BUSINESS RULES" menu:
 
 [[/setup-guide/images/webhooks/zendesk/business-rules.png]]
 
-Click "add trigger": 
+Click "add trigger":
 
 [[/setup-guide/images/webhooks/zendesk/add-trigger-button.png]]
 
@@ -72,6 +74,7 @@ Submit the new trigger. It should look something like this:
 [[/setup-guide/images/webhooks/zendesk/ticket-creation-trigger.png]]
 
 <a name="comment-creation" />
+
 # Set up a trigger to track ticket comment creation
 
 As before, navigate to the trigger creation page.
@@ -79,7 +82,7 @@ As before, navigate to the trigger creation page.
 Name the trigger something like "Comment-Creation-Trigger".
 
 From the drop-down menus in the "Meet all of the following conditions" section, add two conditions:
-* "Ticket: Is..." and "Updated" 
+* "Ticket: Is..." and "Updated"
 * "Ticket: Comment is..." and "Present (public or private)"
 
 In the "Perform these actions" section, select "Notifications: Notify target" and "Cloudfront-Collector".
@@ -95,6 +98,7 @@ Submit the new trigger. It should look something like this:
 [[/setup-guide/images/webhooks/zendesk/comment-creation-trigger.png]]
 
 <a name="ticket-resolution" />
+
 ## 4. Setting up an automation to track tickets being closed
 
 From the Admin page, select "Automations" from the "BUSINESS RULES" menu:

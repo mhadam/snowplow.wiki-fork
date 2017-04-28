@@ -4,20 +4,20 @@
 
 ## Contents
 
-- 1. [Overview](#overview)  
+- 1. [Overview](#overview)
 - 2. [Before you start](#before-start)
-  - 2.1 [Tracker compatibility](#compatibility)  
-  - 2.2 [Dependencies](#dependencies)  
+  - 2.1 [Tracker compatibility](#compatibility)
+  - 2.2 [Dependencies](#dependencies)
 - 3. [Setup](#setup)
-  - 3.1 [Installation](#installation)  
-  - 3.2 [Testing](#testing)  
+  - 3.1 [Installation](#installation)
+  - 3.2 [Testing](#testing)
 - 4. [Integrating into your sketch](#integration)
 
 <a name="overview" />
 
 ## 1. Overview
 
-The [Snowplow Arduino tracker](https://github.com/snowplow/snowplow-arduino-tracker) allows you to track Snowplow events from an IP-connected [Arduino] [arduino] board.
+The [Snowplow Arduino tracker](https://github.com/snowplow/snowplow-arduino-tracker) allows you to track Snowplow events from an IP-connected [Arduino][arduino] board.
 
 The tracker should be relatively straightforward to setup if you are familiar with Arduino development and integrating third-party libraries into your Arduino sketches.
 
@@ -111,7 +111,7 @@ You are now ready to integrate the Snowplow Arduino Tracker into your own sketch
 
 **2)** Read through the [Technical Documentation](Arduino-Tracker) for the Snowplow Arduino Tracker on this wiki. This will tell you exactly what tracking capabilities Snowplow can provide for your Arduino sketch
 
-For a standalone Arduino project which incorporates Snowplow tracking, please see [arduino-temp-tracker] [arduino-temp-tracker] on GitHub.
+For a standalone Arduino project which incorporates Snowplow tracking, please see [arduino-temp-tracker][arduino-temp-tracker] on GitHub.
 
 [Back to top](#top)
 

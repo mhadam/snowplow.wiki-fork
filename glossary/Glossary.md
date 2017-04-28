@@ -10,7 +10,8 @@
 
 <a name="A" />
 <a name="g-analytics" />
-####Analytics
+
+#### Analytics
 
 Once we have our data [modeled](#g-data-modeling) in tidy users, sessions, content items tables, we are ready to perform analysis on them.
 
@@ -23,29 +24,33 @@ Most companies that use Snowplow will perform analytics using a number of differ
 
 <a name="C" />
 <a name="g-collector" />
-####Collector
+
+#### Collector
 
 A collector receives data in the form of `GET` or `POST` requests from the [trackers](#g-tracker), and write the data to either logs or streams (for further processing).
 
 *Read [more](collectors) or go to the [top](#top)*
 
 <a name="g-context" />
-####Context
+
+#### Context
 
 A context is the group of [entities](#g-entity) associated with or describing the setting in which an [event](#g-event) has taken place. What makes contexts interesting is that they are common across multiple different event types. Thus, contexts provide a convenient way in Snowplow to schema common [entities](#g-entity) once, and then use those schemas across all the different [events](#g-event) where those [entities](#g-entity) are relevant.
 
-Across all our [trackers](#g-tracker), the approach is the same. Each context is a [self-describing JSON](#g-self-describing-json). We create an array of all the different contexts that we wish to pass into Snowplow, and then we pass those contexts in generally as the final argument on any track method that we call to capture the [event](#g-event). 
+Across all our [trackers](#g-tracker), the approach is the same. Each context is a [self-describing JSON](#g-self-describing-json). We create an array of all the different contexts that we wish to pass into Snowplow, and then we pass those contexts in generally as the final argument on any track method that we call to capture the [event](#g-event).
 
 *Read [more][contexts] or go to the [top](#top)*
 
 <a name="D" />
 <a name="g-data-analysis" />
-####Data analysis
+
+#### Data analysis
 
 *See [**Analytics**](#g-analytics)*
 
 <a name="g-data-collection" />
-####Data collection
+
+#### Data collection
 
 At data collection time, we aim to capture all the data required to accurately represent a particular [event](#g-event) that has just occurred.
 
@@ -61,12 +66,14 @@ For each of the above we want to collect as much data describing the [event](#g-
 *Read [more][data-collection] or go to the [top](#top)*
 
 <a name="g-data-enrichment" />
-####Data enrichment
+
+#### Data enrichment
 
 *See [**Enrichment**](#g-enrichment)*
 
 <a name="g-data-modeling" />
-####Data modeling
+
+#### Data modeling
 
 The data [collection](#g-data-collection) and [enrichment](#g-enrichment) process generates a data set that is an "event stream": a long list of packets of data, where each packet represents a single event.
 
@@ -84,7 +91,8 @@ We call this process of aggregating a "data modeling". At the end of the data mo
 
 <a name="E" />
 <a name="g-entity" />
-####Entity
+
+#### Entity
 
 In [event](#g-event) modeling terms, an entity is a thing or object which is somehow relevant to the event that we are observing. We use the word "entity" because the word "object" is too loaded - it has too many connotations.
 
@@ -93,7 +101,8 @@ There is a lot of confusion around the role of entities within [events](#g-event
 *Read [more][entities] or go to the [top](#top)*
 
 <a name="g-event" />
-####Event
+
+#### Event
 
 An event is something that occurred in a particular point in time. Examples of events include:
 
@@ -108,18 +117,19 @@ Snowplow is an event analytics platform. Once you have setup one or more Snowplo
 
 *Read [more][events] or go to the [top](#top)*
 
-####Event Dictionary
+#### Event Dictionary
 
 When we set up Snowplow, we need to make sure that we track all the [events](#g-event) that are meaningful to our business, so that the data associated with those events is available in Snowplow for analysis.
 
 When we come to analyse Snowplow data, we need to be able to look at the event data and understand, in an unambiguous way, what that data actually means i.e. what it represents.
 
-An event dictionary is a crucial tool in both cases. It is a document that defines the universe of events that a company is interested in tracking. 
+An event dictionary is a crucial tool in both cases. It is a document that defines the universe of events that a company is interested in tracking.
 
 *Read [more][event-dictionary] or go to the [top](#top)*
 
 <a name="g-enrichment" />
-####Enrichment
+
+#### Enrichment
 
 Data enrichment is sometimes referred to as "dimension widening". We are using 3rd party sources of data to enrich the data we originally collected about the event so that we have more context available for understanding that event, enabling us to perform richer [analysis](#g-analytics).
 
@@ -133,7 +143,8 @@ Data enrichment is sometimes referred to as "dimension widening". We are using 3
 
 <a name="H" />
 <a name="g-huskimo " />
-####Huskimo
+
+#### Huskimo
 
 Huskimo is an open-source product from the Snowplow team. It connects to third-party SaaS platforms (e.g [Singular](https://www.singular.net/), [Twilio](https://www.twilio.com/)), exports their data via API, and then uploads that data into your Redshift instance. Huskimo has a simple goal: to make essential datasets currently locked away inside various SaaS platforms available for [analysis](#g-analytics) inside Redshift.
 
@@ -143,17 +154,19 @@ Huskimo is a complement to Snowplow's built-in [webhook](#g-webhook) support. It
 
 <a name="I" />
 <a name="g-iglu" />
-####Iglu
+
+#### Iglu
 
 Iglu is a machine-readable, open-source *schema repository* for [JSON Schema](http://json-schema.org/) from the team at Snowplow Analytics. A schema repository (sometimes called a registry) is like *npm* or *Maven* or *git* but holds data schemas instead of software or code.
 
-Snowplow uses Iglu to store all the schemas associated with the different [events](#g-event) and [contexts](#g-context) that are captured via Snowplow. When an [event](#g-event) or [context](#g-context) is sent into Snowplow, it is sent with a reference to the schema for the [event](#g-event) or [context](#g-context), which points to the location of the schema for the [event](#g-event) or [context](#g-context) in Iglu. 
+Snowplow uses Iglu to store all the schemas associated with the different [events](#g-event) and [contexts](#g-context) that are captured via Snowplow. When an [event](#g-event) or [context](#g-context) is sent into Snowplow, it is sent with a reference to the schema for the [event](#g-event) or [context](#g-context), which points to the location of the schema for the [event](#g-event) or [context](#g-context) in Iglu.
 
 *Read [more][iglu] or go to the [top](#top)*
 
 <a name="P" />
 <a name="g-pipeline" />
-####Pipeline
+
+#### Pipeline
 
 The Snowplow pipeline is built to enable a very clean separation of the following steps in the *data processing flow*:
 
@@ -166,27 +179,30 @@ The Snowplow pipeline is built to enable a very clean separation of the followin
 
 <a name="S" />
 <a name="g-sauna" />
-####Sauna
+
+#### Sauna
 
 Sauna is an open-source decisioning and response framework from Snowplow Analytics team. Analysts and data scientists (and some data engineers) are the end users of Sauna: you want to use Sauna to automate responses to your event streams in third-party systems.
 
 *Read [more][sauna] or go to the [top](#top)*
 
 <a name="g-schema-ddl" />
-####Schema DDL
+
+#### Schema DDL
 
 Schema DDL is a set of generators for producing various DDL formats from [JSON Schemas](http://json-schema.org/). It's tightly coupled with other tools from [Snowplow Platform](#g-snowplow) like [Iglu](#g-iglu) and [Self-describing JSON](#g-self-describing-json) and used mostly in [Schema Guru](#g-schema-guru).
 
 *Read [more][schema-ddl] or go to the [top](#top)*
 
 <a name="g-schema-guru" />
-####Schema Guru
+
+#### Schema Guru
 
 Schema Guru is a tool (CLI, Spark job and web) allowing you to derive [JSON Schemas](http://json-schema.org/) from a set of JSON instances process and transform it into different data definition formats.
 
 Current primary features include:
 
-- deriviation of JSON Schema from set of JSON instances
+- derivation of JSON Schema from set of JSON instances
 - generation of [Redshift](http://aws.amazon.com/redshift/) table DDL and [JSONPaths file](http://docs.aws.amazon.com/redshift/latest/dg/copy-usage_notes-copy-from-json.html)
 
 Unlike other tools for deriving JSON Schemas, Schema Guru allows you to derive schema from an unlimited set of instances (making schemas much more precise), and supports many more JSON Schema validation properties.
@@ -196,7 +212,8 @@ Schema Guru is used heavily in association with Snowplow's own [Snowplow](#g-sno
 *Read [more][schema-guru] or go to the [top](#top)*
 
 <a name="g-schemaver" />
-####SchemaVer
+
+#### SchemaVer
 
 SchemaVer is Snowplow Team own schema versioning notion. It is defined as follows: `MODEL-REVISION-ADDITION`
 
@@ -207,7 +224,8 @@ SchemaVer is Snowplow Team own schema versioning notion. It is defined as follow
 *Read [more][schemaver] or go to the [top](#top)*
 
 <a name="g-self-describing-json" />
-####Self-describing JSON
+
+#### Self-describing JSON
 
 Self-describing JSON is an individual [JSON](http://www.json.org/) with its [JSON Schema](http://json-schema.org/). It generally looks like the one below:
 
@@ -219,6 +237,7 @@ Self-describing JSON is an individual [JSON](http://www.json.org/) with its [JSO
 	}
 }
 ```
+
 It differs from [standard JSON](http://www.json.org/) due to the following important changes :
 
 1. We have added a new top-level field, schema, which contains (in a space-efficient format) all the information required to uniquely identify the associated JSON Schema
@@ -227,7 +246,8 @@ It differs from [standard JSON](http://www.json.org/) due to the following impor
 *Read [more][self-describing-json] or go to the [top](#top)*
 
 <a name="g-shredding" />
-####Shredding
+
+#### Shredding
 
 [Snowplow](#g-snowplow) has a Shredding process (as part of [Enrichment](#g-enrichment) and [Storage](#g-storage) processes) which consists of two phases:
 
@@ -243,7 +263,8 @@ There are three great use cases to use the shredding functionality for:
 *Read [more][shredding] or go to the [top](#top)*
 
 <a name="g-snowplow" />
-####Snowplow
+
+#### Snowplow
 
 Snowplow is an enterprise-strength marketing and product [analytics](#g-analytics) platform. It does three things:
 
@@ -254,7 +275,8 @@ Snowplow is an enterprise-strength marketing and product [analytics](#g-analytic
 *Read [more](http://snowplowanalytics.com/) or go to the [top](#top)*
 
 <a name="g-storage">
-####Storage
+
+#### Storage
 
 The [enrichment](#g-enrichment) process takes raw Snowplow [collector](#g-collector) logs, tidies them up, enriches them (e.g. by adding Geo-IP data, and performing referrer parsing) and then writes the output of that process back to S3 as a cleaned up set of Snowplow event files. The data in these files can be analysed directly by any big data tool that runs on EMR.
 
@@ -265,7 +287,8 @@ There are therefore a number of different potential storage modules that Snowplo
 *Read [more](Storage-documentation) or go to the [top](#top)*
 
 <a name="g-structured-event" />
-####Structured event
+
+#### Structured event
 
 We follow Google five-variable tracking event structure. When you track a structured event, you get five parameters:
 
@@ -273,7 +296,7 @@ We follow Google five-variable tracking event structure. When you track a struct
 - *Action*: A string that is used to define the user in action for the category of object.
 - *Label*: An optional string which identifies the specific object being actioned.
 - *Property*: An optional string describing the object or the action performed on it.
-- *Value*: An optional numeric data to quantify or further describe the user action. 
+- *Value*: An optional numeric data to quantify or further describe the user action.
 
 For example, when tracking a custom structured event the specification for the `trackStructEvent` method (Javascript tracker) would follow the pattern:
 
@@ -285,7 +308,8 @@ snowplow_name_here('trackStructEvent', 'category','action','label','property','v
 
 <a name="T" />
 <a name="g-tracker" />
-####Tracker
+
+#### Tracker
 
 A tracker is client- or server-side libraries which track customer behaviour by sending Snowplow [events](#g-event) to a [Collector](#g-collector).
 
@@ -293,7 +317,8 @@ A tracker is client- or server-side libraries which track customer behaviour by 
 
 <a name="U" />
 <a name="g-unstructured-event" />
-####Unstructured event
+
+#### Unstructured event
 
 You may wish to track [events](#g-event) on your website or application which are not directly supported by Snowplow and which [structured event](#g-structured-event) tracking does not adequately capture. Your [event](#g-event) may have more than the five fields offered by `trackStructEvent`, or its fields may not fit into the *category-action-label-property-value* model. The solution is Snowplow's custom unstructured events. Unstructured events use [self-describing JSON](#g-self-describing-json) which can have arbitrarily many fields.
 
@@ -307,7 +332,8 @@ snowplow_name_here('trackUnstructEvent', <<SELF-DESCRIBING EVENT JSON>>);
 
 <a name="W" />
 <a name="g-webhook" />
-####Webhook
+
+#### Webhook
 
 Snowplow allows you to collect [events](#g-event) via the adapters (webhooks) of supported third-party software.
 

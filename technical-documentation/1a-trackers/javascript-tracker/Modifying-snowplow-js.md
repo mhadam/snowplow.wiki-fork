@@ -7,7 +7,7 @@ It may be necessary for you to make changes to `snowplow.js`. If you do, then yo
 To continue with this guide, you will need the following
 
 * Access to a Unix-like command line
-* Familiarity with and access to [Git] [git]
+* Familiarity with and access to [Git][git]
 * Node.js version 10 or above installed
 * npm version 1.4.0 or above installed
 * Some level of technical ability _ta2_, where `ta1 < ta2 < ninja`
@@ -51,9 +51,9 @@ To do this, please follow the testing instructions on [Testing the Javascript tr
 
 ## Next steps
 
-Finished setting up the [JavaScript Tracker] (javascript-tracker-setup)? Then you are ready to [setup EmrEtlRunner] (Setting-up-Snowplow#wiki-step3).
+Finished setting up the [JavaScript Tracker](javascript-tracker-setup)? Then you are ready to [setup EmrEtlRunner](Setting-up-Snowplow#wiki-step3).
 
-Return to the [setup guide] (Setting-up-Snowplow).
+Return to the [setup guide](Setting-up-Snowplow).
 
 [node-and-npm-installation]: https://gist.github.com/isaacs/579814
 [browerify]: http://browserify.org/

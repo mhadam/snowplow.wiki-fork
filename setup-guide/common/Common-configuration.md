@@ -107,7 +107,7 @@ The `region` variable should hold the AWS region in which your four data buckets
 Within the `s3` section, the `buckets` variables are as follows:
 
 * `assets:` holds the ETL job's static assets (HiveQL script plus Hive deserializer). You can leave this as-is (pointing to Snowplow   Analytics' [own public bucket containing these assets](Hosted-assets)) or replace this with your own private bucket containing the assets
-* `log:` is the bucket in which Amazon EMR will record processing information for this job run, including logging any errors  
+* `log:` is the bucket in which Amazon EMR will record processing information for this job run, including logging any errors
 * `raw:` is where you specify the paths through which your raw Snowplow events will flow. `in` is an array of one or more buckets containing raw events. For `processing:`, **always include a sub-folder on this variable (see below for why)**. `archive:` is where your raw Snowplow events will be moved after they have been successfully processed by Elastic MapReduce
 * `enriched:` is where you specify the paths through which your enriched Snowplow events will flow.
 * `shredded:` is where you specify the paths through which your shredded types will flow
@@ -167,7 +167,7 @@ This section of the config file is where we configure the operation of EMR. The 
 
 Make sure that the EC2 key you specify belongs in the region you specify, or else EMR won't be able to find the key. **It's strongly recommended that you choose the same Amazon region as your S3 buckets are located in.**
 
-Since 6th April 2015, all new Elastic MapReduce users have been required to use IAM roles with EMR. You can leave the two `..._role` fields as they are, however you must first create these default EMR roles using the AWS Command Line Interface ([installation-instructions] [install-aws-cli]), like so:
+Since 6th April 2015, all new Elastic MapReduce users have been required to use IAM roles with EMR. You can leave the two `..._role` fields as they are, however you must first create these default EMR roles using the AWS Command Line Interface ([installation-instructions][install-aws-cli]), like so:
 
     $ aws emr create-default-roles
 

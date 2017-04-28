@@ -10,11 +10,11 @@ This page refers to version 0.8.0+ of the Snowplow Java Tracker.
 
 ## Contents
 
-- 1. [Overview](#overview)  
-- 2. [Initialization](#init)  
+- 1. [Overview](#overview)
+- 2. [Initialization](#init)
   - 2.1 [Importing the module](#importing)
   - 2.2 [Creating a tracker](#create-tracker)
-    - 2.2.1 [`emitter`](#emitter)  
+    - 2.2.1 [`emitter`](#emitter)
     - 2.2.2 [`subject`](#subject)
     - 2.2.3 [`namespace`](#namespace)
     - 2.2.4 [`appId`](#app-id)
@@ -86,7 +86,7 @@ import com.snowplowanalytics.snowplow.tracker.emitter.*;
 import com.snowplowanalytics.snowplow.tracker.http.*;
 ```
 
-That's it - you are now ready to initialize a Tracker instance. 
+That's it - you are now ready to initialize a Tracker instance.
 
 [Back to top](#top)
 
@@ -237,7 +237,7 @@ Here are some examples:
 ```java
 // Init an empty Subject and add some values
 Subject s1 = new Subject.SubjectBuilder().build();
-s1.setUserId("Kevin Gleason"); 
+s1.setUserId("Kevin Gleason");
 s1.setLanguage("en-gb");
 s1.setScreenResolution(1920, 1080);
 
@@ -517,11 +517,11 @@ The `customContext` argument should consist of a `List` of `SelfDescribingJson` 
 If a visitor arrives on a page advertising a movie, the context dictionary might look like this:
 
 ```json
-{ 
+{
   "schema": "iglu:com.acme_company/movie_poster/jsonschema/2-1-1",
   "data": {
-    "movie_name": "Solaris", 
-    "poster_country": "JP", 
+    "movie_name": "Solaris",
+    "poster_country": "JP",
     "poster_year": "1978"
   }
 }
@@ -682,7 +682,7 @@ Arguments:
 | `shipping`     | Delivery cost charged                | No            | `Double`                   |
 | `city`         | Delivery address city                | No            | `String`                   |
 | `state`        | Delivery address state               | No            | `String`                   |
-| `country`      | Delivery address country             | No            | `String`                   | 
+| `country`      | Delivery address country             | No            | `String`                   |
 | `currency`     | Transaction currency                 | No            | `String`                   |
 | `items`        | Items in the transaction             | Yes           | `List<EcommerceTransactionItem>`    |
 | `items`        | Items in the transaction             | Yes           | `EcommerceTransactionItem...` |
@@ -972,7 +972,7 @@ Emiter batch = BatchEmitter.builder()
 
 <a name="http-client-adapters" />
 
-### 5.1 `HttpClientAdapters` 
+### 5.1 `HttpClientAdapters`
 
 We currently offer two different Http Clients that can be used to send events to our collectors.  Once created they need to be attached to the emitter in the `httpClientAdapter` builder argument.
 
@@ -1055,6 +1055,7 @@ The buffer size must be an integer greater than or equal to 1.
 [Back to top](#top)
 
 <a name="http-method" />
+
 ###  5.3 Choosing the HTTP method
 
 Choosing to send via GET or POST is as easy as building a particular type of Emitter.  If you want to send via GET then you will need to build a `SimpleEmitter`.  For sending via POST you will need to build a `BatchEmitter`.

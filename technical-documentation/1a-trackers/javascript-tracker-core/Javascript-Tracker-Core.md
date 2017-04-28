@@ -1,12 +1,12 @@
 <a name="top" />
 
-[**HOME**](Home) > [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow technical documentation) > [**Trackers**](trackers) > JavaScript Tracker Core
+[**HOME**](Home) > [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow-technical-documentation) > [**Trackers**](trackers) > JavaScript Tracker Core
 
 
 ## Contents
 
-- 1. [Overview](#overview)  
-- 2. [Initialization](#init)  
+- 1. [Overview](#overview)
+- 2. [Initialization](#init)
   - 2.1 [Importing/Requiring the module](#requiring)
   - 2.2 [Creating a tracker](#create-tracker)
 - 3 [Setter methods](#setter-methods)
@@ -31,8 +31,9 @@
    - 4.10 [`trackAdClick()`](#trackAdClick)
    - 4.11[`trackAdConversion()`](#trackAdConversion)
 
-  
+
 <a name="overview" />
+
 ## 1. Overview
 
 The [Snowplow JavaScript Tracker Core][repo] is an [npm][npm-page] module providing functionality common to both the server-side [Snowplow Node.js Tracker][server-tracker] and the client-side [Snowplow JavaScript Tracker][client-tracker]. It supports all the Snowplow event types. Custom contexts and timestamps can be added to all events.
@@ -42,9 +43,11 @@ It has two main types of method: setter methods and tracking methods. Setter met
 There is a setup guide [here][setup].
 
 <a name="init" />
+
 ## 2 Initialization
 
 <a name="requiring" />
+
 ### 2.1 Requiring the module
 
 Require the Snowplow Tracker Core module into your code like so:
@@ -54,9 +57,10 @@ var snowplowTrackerCore = require('snowplow-tracker-core');
 ```
 
 <a name="create-tracker" />
+
 ### 2.2 Creating a tracker core instance
 
-The tracker core constructor takes two parameters: 
+The tracker core constructor takes two parameters:
 
 * A boolean value indicating whether unstructured events and custom contexts should be base 64 encoded (which defaults to `true`)
 * An optional callback to be executed on every payload before it is returned
@@ -69,11 +73,13 @@ The above example would create a tracker core instance which doesn't use base 64
 
 
 <a name="setter-methods" />
+
 ## 3. Setter methods
 
 The core instance maintains a dictionary called `payloadPairs` containing persistent name-value pairs which are added to every payload. You can interact with these through the following methods:
 
 <a name="addPayloadPair" />
+
 ### 3.1 `addPayloadPair()`
 
 Adds a single name-value pair to `payloadPairs`.
@@ -83,6 +89,7 @@ t.addPayloadPair('myKey', 'myValue');
 ```
 
 <a name="addPayloadDict" />
+
 ### 3.2 `addPayloadDict()`
 
 Adds all the name-value pairs in a dictionary to `payloadPairs`.
@@ -95,6 +102,7 @@ t.addPayloadDict({
 ```
 
 <a name="resetPayloadPairs" />
+
 ### 3.3 `resetPayloadPairs()`
 
 Creates a new dictionary of payload pairs, removing all pre-existing name-value pairs. If no argument is provided, creates an empty dictionary.
@@ -107,6 +115,7 @@ t.resetPayloadPairs({
 ```
 
 <a name="other-setter-methods" />
+
 ### 3.4 Other setter methods
 
 For convenience, other setter methods are provided for certain fields. They all use `addPayloadPair`.
@@ -114,17 +123,18 @@ For convenience, other setter methods are provided for certain fields. They all 
 | **Method name**       | **Key added** | **Example**                             |
 |----------------------:|:--------------|:----------------------------------------|
 | `setTrackerVersion`   | `tv`          |`t.setTrackerVersion('js-3.0.0');`       |
-| `setTrackerNamespace` | `tna`         |`t.setTrackerNamespace('cloudfront-1');` | 
+| `setTrackerNamespace` | `tna`         |`t.setTrackerNamespace('cloudfront-1');` |
 | `setAppId`            | `aid`         |`t.setAppId('my-node-application');`     |
 | `setPlatform`         | `p`           |`t.setPlatform('web');`                  |
 | `setUserId`           | `uid`         |`t.setUserId('user-427')`                |
-| `setScreenResolution` | `res`         |`t.setScreenResolution(800, 600)`        | 
+| `setScreenResolution` | `res`         |`t.setScreenResolution(800, 600)`        |
 | `setViewport`         | `vp`          |`t.setViewport(307,250)`                 |
 | `setColorDepth`       | `cd`          |`t.setColorDepth(24)`                    |
 | `setTimezone`         | `tz`          |`t.setTimezone('Europe/London')`         |
 | `setIpAddress`        | `ip`          |`t.setIpAddress('37.347.12.457')`        |
 
 <a name="example" />
+
 ### 3.5 Example
 
 Some calls to setter methds, along with comments indicating the current state of the `payloadPairs` dictionary:
@@ -148,14 +158,17 @@ t.resetPayloadPairs({
 ```
 
 <a name="tracking-methods" />
+
 ### 4 Tracking methods
 
 <a name="common" />
+
 ### 4.1 Common features
 
 Any method whose name starts with `"track..."` is a tracking method which creates a payload for a single Snowplow event. The tracking methods have certain features in common.
 
 <a name="custom-contexts" />
+
 #### 4.1.1 Custom contexts
 
 Each tracking method's penultimate argument is an optional array of custom context dictionaries.
@@ -181,16 +194,19 @@ t.trackScreenView('title screen', 's-1342', myContexts);
 ```
 
 <a name="tstamp" />
+
 #### 4.1.2 Timestamp argument
 
 Each tracking method's final argument is an optional timestamp. It should be in milliseconds since the Unix epoch - the same format generated by `new Date().getTime()`. If you don't provide a timestamp for an event, the current time will be used.
 
 <a name="return" />
+
 #### 4.1.3 Return values
 
 When called, a tracker method will assemble a payload dictionary based on the arguments passed to it and the `payloadPairs` object, and will add a [version 4 UUID][uuid-4]. If you provided a callback function when constructing the core instance, that function will be passed the payload. (For example, the callback could be used to convert the payload to a querystring and send it to a Snowplow collector.) The payload will then be returned.
 
 <a name="trackScreenView" />
+
 ### 4.2 `trackScreenView()`
 
 | **Argument** | **Description**                     | **Required?** | **Type**                |
@@ -209,6 +225,7 @@ t.trackScreenView("HUD > Save Game", "screen23", null, 1368725287000);
 ```
 
 <a name="trackPageView" />
+
 ### 4.3 `trackPageView()`
 
 | **Argument** | **Description**                     | **Required?** | **Type**                |
@@ -226,6 +243,7 @@ t.trackPageView("www.example.com", "example", "www.referrer.com");
 ```
 
 <a name="trackEcommerceTransaction" />
+
 ### 4.4 `trackEcommerceTransaction()`
 
 | **Argument**  | **Description**                      | **Required?** | **Type**                 |
@@ -259,6 +277,7 @@ t.trackEcommerceTransaction(
 ```
 
 <a name="trackEcommerceTransactionItem" />
+
 ### 4.5 `trackEcommerceTransactionItem()`
 
 | **Field**  | **Description**                     | **Required?** | **Type**                 |
@@ -288,6 +307,7 @@ t.trackEcommerceTransactionItem(
 ```
 
 <a name="trackStructEvent" />
+
 ### 4.6 `trackStructEvent()`
 
 | **Argument** | **Description**                                                  | **Required?** | **Type**         |
@@ -307,6 +327,7 @@ t.trackStructEvent("shop", "add-to-basket", null, "pcs", 2);
 ```
 
 <a name="trackUnstructEvent" />
+
 ### 4.7 `trackUnstructEvent()`
 
 | **Argument**   | **Description**                      | **Required?** | **Type**                |
@@ -324,12 +345,13 @@ t.trackUnstructEvent({
     "save_id": "4321",
     "level": 23,
     "difficultyLevel": "HARD",
-    "dl_content": true 
+    "dl_content": true
   }
 })
 ```
 
 <a name="trackLinkClick" />
+
 ### 4.8 `trackLinkClick()`
 
 | **Field**        | **Description**                     | **Required?** | **Type**                 |
@@ -351,6 +373,7 @@ t.trackLinkClick(
 ```
 
 <a name="trackAdImpression" />
+
 ### 4.9 `trackAdImpression()`
 
 | **Name**       | **Description**  | **Required?**                           | **Type**
@@ -369,7 +392,7 @@ Example:
 ```js
 t.trackAdImpression(
     '67965967893',             // impressionId
-    'cpm',                     // costModel - 'cpa', 'cpc', or 'cpm'    
+    'cpm',                     // costModel - 'cpa', 'cpc', or 'cpm'
      5.5,                      // cost
     'http://www.example.com',  // targetUrl
     '23',                      // bannerId
@@ -380,6 +403,7 @@ t.trackAdImpression(
 ```
 
 <a name="trackAdClick" />
+
 ### 4.10 `trackAdClick()`
 
 | **Name**       | **Description**                            | **Required?** | **Type**
@@ -399,7 +423,7 @@ Example:
 t.trackAdClick(
     'http://www.example.com',  // targetUrl
     '12243253',                // clickId
-    'cpm',                     // costModel    
+    'cpm',                     // costModel
      2.5,                      // cost
     '23',                      // bannerId
     '7',                       // zoneId
@@ -410,6 +434,7 @@ t.trackAdClick(
 ```
 
 <a name="trackAdConversion" />
+
 ### 4.11 `trackAdConversion()`
 
 | **Name**       | **Description**                            | **Required?** | **Type**             |

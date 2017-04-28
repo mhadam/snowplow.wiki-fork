@@ -1,6 +1,6 @@
 <a name="top" />
 
-[**HOME**](Home) > [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow technical documentation) > [**Trackers**](trackers) > iOS Tracker
+[**HOME**](Home) > [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow-technical-documentation) > [**Trackers**](trackers) > iOS Tracker
 
 This page refers to version 0.2.1 of the Snowplow iOS Tracker. Documentation for more recent versions is available:*
 
@@ -12,7 +12,7 @@ This page refers to version 0.2.1 of the Snowplow iOS Tracker. Documentation for
 - 2. [Initialization](#init)
   - 2.1 [Importing the library](#importing)
   - 2.2 [Creating a tracker](#create-tracker)
-    - 2.2.1 [`SnowplowRequest`](#emitter)  
+    - 2.2.1 [`SnowplowRequest`](#emitter)
     - 2.2.2 [`namespace`](#namespace)
     - 2.2.3 [`appId`](#app-id)
     - 2.2.4 [`base64Encoded`](#base64)
@@ -35,6 +35,7 @@ This page refers to version 0.2.1 of the Snowplow iOS Tracker. Documentation for
   - 5.3 [Sending HTTP requests](#http-request)
 
 <a name="overview" />
+
 ## 1. Overview
 
 The [Snowplow iOS Tracker](https://github.com/snowplow/snowplow-ios-tracker) allows you to track Snowplow events from your iOS apps and games. It supports iOS 7.0+.
@@ -46,11 +47,13 @@ You can also find detailed documentation for the method calls in the tracker cla
 [Back to top](#top)
 
 <a name="init" />
+
 ## 2. Initialization
 
 Assuming you have completed the [[iOS Tracker Setup]] for your project, you are now ready to initialze the Snowplow Tracker.
 
 <a name="importing" />
+
 ## 2.1 Importing the library
 
 Adding the library into your project is as simple as adding the headers into your class file:
@@ -59,11 +62,12 @@ Adding the library into your project is as simple as adding the headers into you
 #import <SnowplowRequest.h>
 ```
 
-That's it - you are now ready to initialize a tracker instance. 
+That's it - you are now ready to initialize a tracker instance.
 
 [Back to top](#top)
 
 <a name="create-tracker" />
+
 ### 2.2 Creating a tracker
 
 To instantiate a tracker in your code simply instantiate the `SnowplowTracker` class with the constructor:
@@ -89,21 +93,25 @@ SnowplowTracker *t1 = [[SnowplowTracker alloc] initWithCollector:collector appId
 [Back to top](#top)
 
 <a name="emitter" />
+
 #### 2.2.1 `collector`
 
 This is a single `SnowplowRequest` object that will be used to send all the tracking events created by the `SnowplowTracker` to a collector. See [Sending events](#emitters) for more on its configuration.
 
 <a name="namespace" />
+
 #### 2.2.2 `namespace`
 
 If provided, the `namespace` argument will be attached to every event fired by the new tracker. This allows you to later identify which tracker fired which event if you have multiple trackers running.
 
 <a name="app-id" />
+
 #### 2.2.3 `appId`
 
 The `appId` argument lets you set the application ID to any string.
 
 <a name="base64" />
+
 #### 2.2.4 `base64Encoded`
 
 By default, unstructured events and custom contexts are encoded into Base64 to ensure that no data is lost or corrupted. You can turn encoding on or off using the Boolean `base64Encoded` argument.
@@ -111,6 +119,7 @@ By default, unstructured events and custom contexts are encoded into Base64 to e
 [Back to top](#top)
 
 <a name="add-data" />
+
 ## 3. Adding extra data
 
 Unlike the other Trackers, the iOS tracker automatically collects your platform, screen resolution, viewport, color depth, timezone and language from the device. You can still however, set your user ID to properly track different users if you require it.
@@ -121,6 +130,7 @@ Unlike the other Trackers, the iOS tracker automatically collects your platform,
 [Back to top](#top)
 
 <a name="set-user-id" />
+
 ### 3.1 Set user ID with `setUserId`
 
 You can set the user ID to any string:
@@ -136,6 +146,7 @@ Example:
 ```
 
 <a name="sending-ifa" />
+
 ### 3.2 Sending IFA
 
 Apps that do not display advertisements are not allowed to access Apple's Identifier For Advertisers (IFA). For this reason, the Snowplow iOS Tracker will only send IFA as part of the `mobile_context` which is attached to each event **if** you have the `AdSupport.framework` included in your app (and are therefore intending to serve ads).
@@ -147,6 +158,7 @@ For the avoidance of doubt, you can also avoid sending IFA regardless of your ad
 * Add a macro defined as`SNOWPLOW_NO_IFA = 1`
 
 <a name="events" />
+
 ## 4. Tracking specific events
 
 Snowplow has been built to enable you to track a wide range of events that occur when users interact with your websites and apps. We are constantly growing the range of functions available in order to capture that data more richly.
@@ -164,6 +176,7 @@ Tracking methods supported by the iOS Tracker at a glance:
 
 [Back to top](#top)
 <a name="common" />
+
 ### 4.1 Common
 
 All events are tracked with specific methods on the tracker instance, of the form `trackXXX()`, where `XXX` is the name of the event to track.
@@ -171,6 +184,7 @@ All events are tracked with specific methods on the tracker instance, of the for
 [Back to top](#top)
 
 <a name="custom-contexts" />
+
 ### 4.1.1 Custom contexts
 
 In short, custom contexts let you add additional information about the circumstances surrounding an event in the form of an NSDictionary object. Each tracking method accepts an additional optional contexts parameter after all the parameters specific to that method:
@@ -199,11 +213,11 @@ The `context` argument should consist of a `NSArray` of `NSDictionary` represent
 If a visitor arrives on a page advertising a movie, the context dictionary might look like this:
 
 ```json
-{ 
+{
   "schema": "iglu:com.acme_company/movie_poster/jsonschema/2.1.1",
   "data": {
-    "movie_name": "The Guns of Navarone", 
-    "poster_country": "US", 
+    "movie_name": "The Guns of Navarone",
+    "poster_country": "US",
     "poster_year": "1961"
   }
 }
@@ -214,6 +228,7 @@ If a visitor arrives on a page advertising a movie, the context dictionary might
 [Back to top](#top)
 
 <a name="tstamp-arg" />
+
 ### 4.1.2 Optional timestamp & context argument
 
 In all the trackers, we offer a way to set the timestamp if you want the event to show as tracked at a specific time. If you don't, we create a timestamp while the event is being tracked.
@@ -229,6 +244,7 @@ Here is an example:
 [Back to top](#top)
 
 <a name="return-value" />
+
 ### 4.1.3 Tracker method return values
 
 To be confirmed. As of now, trackers do not return anything.
@@ -236,6 +252,7 @@ To be confirmed. As of now, trackers do not return anything.
 [Back to top](#top)
 
 <a name="screen-view" />
+
 ### 4.2 Track screen views with `trackScreenView:`
 
 Use `trackScreenView:` to track a user viewing a screen (or equivalent) within your app. Arguments are:
@@ -258,6 +275,7 @@ Example:
 [Back to top](#top)
 
 <a name="page-view" />
+
 ### 4.3 Track pageviews with `trackPageView:`
 
 Use `trackPageView:` to track a user viewing a page within your app.
@@ -282,6 +300,7 @@ Example:
 [Back to top](#top)
 
 <a name="ecommerce-transaction" />
+
 ### 4.4 Track ecommerce transactions with `trackEcommerceTransaction:`
 
 Use `trackEcommerceTransaction:` to track an ecommerce transaction.
@@ -296,13 +315,13 @@ Arguments:
 | `shipping`    | Delivery cost charged                | No            | float           |
 | `city`        | Delivery address city                | No            | NSString*       |
 | `state`       | Delivery address state               | No            | NSString*       |
-| `country`     | Delivery address country             | No            | NSString*       | 
+| `country`     | Delivery address country             | No            | NSString*       |
 | `currency`    | Transaction currency                 | No            | NSString*       |
 | `items`       | Items in the transaction             | Yes           | NSMutableArray* |
 | `context`     | Custom context for the event         | No            | NSMutableArray* |
 | `tstamp`      | When the transaction event occurred  | No            | double          |
 
-`trackEcommerceTransaction:` fires multiple events: one "transaction" event for the transaction as a whole, and one "transaction item" event for each element of the `items` array. Each transaction item event will have the same timestamp, orderId, and currency as the main transaction event. 
+`trackEcommerceTransaction:` fires multiple events: one "transaction" event for the transaction as a whole, and one "transaction item" event for each element of the `items` array. Each transaction item event will have the same timestamp, orderId, and currency as the main transaction event.
 
 The `items` argument is an `NSMutableArray` containing an `NSDictionary` for each item in the transaction. There is a convenience constructor for each item called `trackEcommerceTransactionItem:`. Arguments:
 
@@ -323,7 +342,7 @@ Example of tracking a transaction containing one item:
 ```objective-c
 NSString *transactionID = @"6a8078be";
 NSMutableArray *itemArray = [NSMutableArray array];
-  
+
 [itemArray addObject:[t trackEcommerceTransactionItem:transactionID
                                                   sku:@"pbz0026"
                                                  name:@"Hot Chocolate"
@@ -331,8 +350,8 @@ NSMutableArray *itemArray = [NSMutableArray array];
                                                 price:0.75F
                                              quantity:1
                                              currency:@"USD"]];
-[t trackEcommerceTransaction:transactionID 
-                  totalValue:350 
+[t trackEcommerceTransaction:transactionID
+                  totalValue:350
                  affiliation:@"no_affiliate"
                     taxValue:10
                     shipping:15
@@ -346,6 +365,7 @@ NSMutableArray *itemArray = [NSMutableArray array];
 [Back to top](#top)
 
 <a name="struct-event" />
+
 ### 4.5 Track structured events with `trackStructuredEvent:`
 
 Use `trackStructuredEvent:` to track a custom event happening in your app which fits the Google Analytics-style structure of having up to five fields (with only the first two required):
@@ -370,6 +390,7 @@ Example:
 [Back to top](#top)
 
 <a name="unstruct-event" />
+
 ### 4.6 Track unstructured events with `trackUnstructuredEvent:`
 
 Custom unstructured events are a flexible tool that enable Snowplow users to define their own event types and send them into Snowplow.
@@ -410,18 +431,19 @@ tracker trackUnstructuredEvent:eventJson
                       timestamp:12345678;
 ```
 
-For more on JSON schema, see the [blog post] [self-describing-jsons].
+For more on JSON schema, see the [blog post][self-describing-jsons].
 
 [Back to top](#top)
 
 <a name="emitters" />
+
 ## 5. Sending events: `SnowplowRequest`
 Events created by the Tracker are sent to a collector using a `SnowplowRequest` instance. You can create one using one of the init methods:
 ```objective-c
-- (id) initWithURLRequest:(NSURL *)url 
+- (id) initWithURLRequest:(NSURL *)url
                httpMethod:(NSString *)method
              bufferOption:(enum SnowplowBufferOptions)option;
-- (id) initWithURLRequest:(NSURL *)url 
+- (id) initWithURLRequest:(NSURL *)url
                httpMethod:(NSString* )method;
 ```
 
@@ -437,6 +459,7 @@ SnowplowRequest emitter2 = [[SnowplowRequest alloc] initWithURLRequest:url
 ```
 
 <a name="buffer" />
+
 ### 5.1 Using a buffer
 A buffer is used to group events together in bulk before sending them. This is especially handy to reduce network usage. By default, the SnowplowRequest buffers up to 10 events before sending them.
 
@@ -461,6 +484,7 @@ Here are all the posibile options that you can use:
 | `SnowplowBufferDefault`    | Sends events in a group when 10 events are created |
 
 <a name="http-method" />
+
 ### 5.2 Choosing the HTTP method
 
 Snowplow supports receiving events via GET requests, but will soon have POST support. In a GET request, each event is sent in individual request. With POST requests, events are bundled together in one request.
@@ -472,6 +496,7 @@ Here are all the posibile options that you can use:
 | `@"POST"`   | Events are sent in a group when 10 events are received in one POST request |
 
 <a name="http-request" />
+
 ### 5.3 Sending HTTP requests
 
 You can set this during the creation of a `SnowplowRequest` object:

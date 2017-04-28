@@ -1,4 +1,4 @@
-[**HOME**](Home) > [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow technical documentation) > [**Storage**](storage documentation) > Storage in S3
+[**HOME**](Home) > [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow-technical-documentation) > [**Storage**](storage-documentation) > Storage in S3
 
 As standard, the [Enrichment Process](The Enrichment Process) outputs Snowplow data to Snowplow event files in S3. These are tab-delimited files that are:
 

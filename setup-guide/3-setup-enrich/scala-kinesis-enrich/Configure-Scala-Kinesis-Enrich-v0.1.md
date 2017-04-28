@@ -4,7 +4,7 @@
 
 *This page refers to version 0.1.0 of Scala Kinesis Enrich. Documentation for other versions is available:*
 
-*[Version 0.2][v0.2] (not yet released)*
+*[Version 0.2][v0.2](not yet released)*
 
 Scala Kinesis Enrich has a number of configuration options available.
 
@@ -12,7 +12,7 @@ Scala Kinesis Enrich has a number of configuration options available.
 
 ### Template
 
-Download a template configuration file from GitHub: [config.hocon.sample] [app-conf].
+Download a template configuration file from GitHub: [config.hocon.sample][app-conf].
 
 Now open the `config.hocon.sample` file in your editor of choice.
 

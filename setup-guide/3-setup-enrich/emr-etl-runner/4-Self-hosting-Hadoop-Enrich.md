@@ -9,6 +9,7 @@
 5. [Next steps](#next-steps)
 
 <a name="usage-overview"/>
+
 ## 1. Overview
 
 EmrEtlRunner runs Hadoop Enrich resources which are publicly hosted on Amazon S3 by Snowplow - please see the [[Hosted assets]] page for details. For most users, this will be fine. However, there are some cases where you will need to self-host the Hadoop Enrich process in your own Amazon S3 bucket. Two examples are:
@@ -19,6 +20,7 @@ EmrEtlRunner runs Hadoop Enrich resources which are publicly hosted on Amazon S3
 For self-hosting instructions read on.
 
 <a name="bucket-setup"/>
+
 ## 2. Bucket and directory setup
 
 First create a new S3 bucket, for example:
@@ -35,6 +37,7 @@ Now create the following two directory structures:
 That's it - you are now ready to upload your files.
 
 <a name="files"/>
+
 ## 3. Uploading files
 
 ### 3.1 MaxMind database
@@ -60,6 +63,7 @@ If you are using a custom fork of the Hadoop Enrich process, then upload your as
     s3://[mycompanyname]-snowplow-hosted-assets/3-enrich/scala-hadoop-enrich/snowplow-hadoop-enrich-[version]-[fork].jar
 
 <a name="configure"/>
+
 ## 4. Configuring EmrEtlRunner
 
 In your `config.yml` file, set `s3.buckets.assets` to your own bucket name:
@@ -80,6 +84,7 @@ enrich:
 ```
 
 <a name="next-steps" />
+
 ## 5. Next steps
 
 And that's it - you should now be able to run EmrEtlRunner against the custom/commercial assets hosted in your own dedicated S3 bucket.

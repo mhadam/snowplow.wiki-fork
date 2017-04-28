@@ -1,12 +1,13 @@
 <a name="top" />
 
-[**HOME**](Home) > [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow technical documentation) > [**Trackers**](trackers) > [**JavaScript Tracker**](Javascript-Tracker) > General parameters
+[**HOME**](Home) > [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow-technical-documentation) > [**Trackers**](trackers) > [**JavaScript Tracker**](Javascript-Tracker) > General parameters
 
-*This page refers to version 2.0.0 of the Snowplow JavaScript Tracker.*  
-*Click [here] [general-parameters-v1] for the corresponding documentation for version 1.*  
-*Click [here] [general-parameters] for the corresponding documentation for version 2.1.1.*  
+*This page refers to version 2.0.0 of the Snowplow JavaScript Tracker.*
+*Click [here][general-parameters-v1] for the corresponding documentation for version 1.*
+*Click [here][general-parameters] for the corresponding documentation for version 2.1.1.*
 
 <a name="general" />
+
 ## 2. General parameters
   - 2.1 [Loading Snowplow.js](#loading)
   - 2.2 [Initialising a tracker](#initialisation)
@@ -32,6 +33,7 @@
   - 2.5 [How the Tracker uses cookies](#cookies)
 
 <a name="loading"/>
+
 ### 2.1 Loading Snowplow.js
 
 Use the following tag to your page to load Snowplow.js:
@@ -69,10 +71,11 @@ snowplow_name_here('trackStructEvent', 'Mixes', 'Play', '', '', 20);
 
 Empty strings are provided for the label and value arguments to pad them out. (`Null` would also work.) They won't be added to the event. Neither will the context argument, which isn't provided at all.
 
-[Back to top](#top)  
+[Back to top](#top)
 [Back to JavaScript technical documentation contents][contents]
 
 <a name="initialisation" />
+
 ### 2.2 Initialising a tracker
 
 Tracker initialisation takes three arguments:
@@ -112,15 +115,18 @@ snowplow_name_here("newTracker", "cf", "d3rkrsqld9gmqf.cloudfront.net", {
 We will now go through the various argmap parameters. Note that these are all optional. In fact, you aren't required to provide any argmap at all.
 
 <a name="app-id" />
+
 #### 2.2.1 Setting the application ID
 
 Set the application ID using the `appId` field of the argmap. This will be attached to every event the tracker fires. You can set different application IDs on different parts of your site. You can then distinguish events that occur on different applications by grouping results based on `application_id`.
 
 <a name="platform" />
+
 #### 2.2.2 Setting the platform
-Set the application platform using the `platform` field of the argmap. This will be attached to every event the tracker fires. Its default value is "web". For a list of supported platforms, please see the [Snowplow Tracker Protocol] [snowplow-tracker-protocol]. 
+Set the application platform using the `platform` field of the argmap. This will be attached to every event the tracker fires. Its default value is "web". For a list of supported platforms, please see the [Snowplow Tracker Protocol][snowplow-tracker-protocol].
 
 <a name="cookie-domain" />
+
 #### 2.2.3 Configuring the cookie domain
 
 If your website spans multiple subdomains e.g.
@@ -134,6 +140,7 @@ You will want to track user behaviour across all those subdomains, rather than w
 Set the cookie domain for the tracker instance using the `cookieDomain` field of the argmap. If this field is not set, the cookies will not be given a domain.
 
 <a name="cookie-name" />
+
 #### 2.2.4 Configuring the cookie name
 
 Set the cookie name for the tracker instance using the `cookieName` field of the argmap. The default is "_sp_". Snowplow uses two cookies, a domain cookie and a session cookie. In the default case, their names are "_sp_id" and "_sp_ses" respectively. If you are upgrading from an earlier version of Snowplow, you should use the default cookie name so that the cookies set by the earlier version are still remembered. Otherwise you should provide a new name to prevent clashes with other Snowplow users on the same page.
@@ -143,21 +150,25 @@ Set the cookie name for the tracker instance using the `cookieName` field of the
 By default, unstructured events and custom contexts are encoded into Base64 to ensure that no data is lost or corrupted. You can turn encoding on or off using the `encodeBase64` field of the argmap.
 
 <a name="respect-do-not-track" />
+
 #### 2.2.6 Respecting Do Not Track
 
 Most browsers have a Do Not Track option which allows users to express a preference not to be tracked. You can respect that preference by setting the `respectDoNotTrack` field of the argmap to `true`. This prevents cookies from being sent and events from being fired.
 
 <a name="user-fingerprint" />
+
 #### 2.2.7 User fingerprinting
 
 By default, the tracker generates a user fingerprint based on various browser features. This fingerprint is likely to be unique and so can be used to track anonymous users. You can turn user fingerprinting off by setting the `userFingerprint` field of the argmap to `false`.
 
 <a name="user-fingerprint-seed" />
+
 #### 2.2.8 Setting the user fingerprint seed
 
 The `userFingerprintSeed` field of the the argmap lets you choose the hash seed used to generate the user fingerprint. If this is not specified, the default is 123412414.
 
 <a name="page-unload-timer" />
+
 #### 2.2.9 Setting the page unload pause
 
 Whenever the Snowplow Javascript Tracker fires an event, it automatically starts a 500 millisecond timer running. If the user clicks on a link or refreshes the page during this period (or, more likely, if the event was triggered by the user clicking a link), the page will wait until the timer is finished before unloading. 500 milliseconds is usually enough to ensure the event has time to be sent.
@@ -165,17 +176,20 @@ Whenever the Snowplow Javascript Tracker fires an event, it automatically starts
 You can change the pause length (in milliseconds) using the `pageUnloadTimer` of the argmap. The above example completely eliminates the pause. This does make it unlikely that events triggered by link clicks will be sent.
 
 <a name="write-cookies" />
+
 #### 2.2.10 Altering cookies
 
 The `writeCookies` argument is a boolean value which determines whether the tracker instance will be able to alter cookies or add new ones. It does not affect whether the tracker instance will read cookies, so if it is turned off but Snowplow cookies with the tracker's configured cookie name already exist for the page, the tracker will continue to report those cookies' values. If you do use this argument, be careful - if two trackers on the same page are both initialised with the same cookie name and with `writeCookies` turned on, inaccurate data will result from them both trying to alter the same cookies. Note that you will always be fine if the `writeCookies` argument is not set - because the default behaviour avoids these problems.
 
-[Back to top](#top)  
+[Back to top](#top)
 [Back to JavaScript technical documentation contents][contents]
 
 <a name="other-methods" />
+
 ### 2.3 Other parameters
 
 <a name="user-id" />
+
 #### 2.3.1 Setting the user ID
 
 The JavaScript Tracker automatically sets a `domain_userid` based on a first party cookie.
@@ -187,6 +201,7 @@ Typically, companies do this at points in the customer journey when the user ide
 Note: this will only set the user ID on further events fired while the user is on this page; if you want events on another page to record this user ID too, you must call `setUserId` on the other page as well.
 
 <a name="set-user-id" />
+
 ##### 2.3.1.1 `setUserId`
 
 `setUserId` is the simplest of the four methods. It sets the business user ID to a string of your choice:
@@ -196,6 +211,7 @@ snowplow_name_here('setUserId', 'joe.blogs@email.com');
 ```
 
 <a name="set-user-id-from-location" />
+
 ##### 2.3.1.1 `setUserIdFromLocation`
 
 `setUserIdFromLocation` lets you set the user ID based on a querystring field of your choice. For example, if the URL is `http://www.mysite.com/home?id=user345`, then the following code would set the user ID to "user345":
@@ -205,6 +221,7 @@ snowplow_name_here('setUserIdFromLocation', 'id');
 ```
 
 <a name="set-user-id-from-referrer" />
+
 ##### 2.3.1.1 `setUserIdFromReferrer`
 
 `setUserIdFromReferrer functions in the same way as `setUserIdFromLocation`, except that it uses the referrer querystring rather than the querystring of the current page.
@@ -215,6 +232,7 @@ snowplow_name_here('setUserIdFromReferrer', 'id');
 ```
 
 <a name="set-user-id-from-cookie" />
+
 ##### 2.3.1.1 `setUserIdFromCookie`
 
 Use `setUserIdFromCookie` to set the value of a cookie as the user ID. For example, if you have a cookie called "cookieid" whose value is "user123", the following code would set the user ID to "user123":
@@ -223,10 +241,11 @@ Use `setUserIdFromCookie` to set the value of a cookie as the user ID. For examp
 snowplow_name_here('setUserIdFromCookie', 'cookieid');
 ```
 
-[Back to top](#top)  
+[Back to top](#top)
 [Back to JavaScript technical documentation contents][contents]
 
 <a name="custom-url" />
+
 #### 2.3.2 Setting a custom URL with `setCustomUrl`
 
 The Snowplow JavaScript Tracker automatically tracks the page URL on any event tracked. However, in certain situations, you may want to override the actual URL with a custom value. (For example, this might be desirable if your CMS spits out particularly ugly URLs that are hard to unpick at analysis time.) In that case, you can override the default value using the `setCustomUrl` function.
@@ -238,6 +257,7 @@ snowplow_name_here('setCustomUrl', 'http://mysite.com/checkout-page');
 ```
 
 <a name="cookie-timeout" />
+
 #### 2.3.3 Configuring cookie timeouts using `setSessionCookieTimeout`
 
 The JavaScript Tracker sets two cookies: a visitor cookie and a session cookie. The visitor cookie contains all persistent information about the user, including a visit count (the number of times the user has visited the site). It lasts for two years. The session cookie is specific to an individual session. By default, it expires after 30 minutes pass with no event fired. Whenever a Snowplow event is fired, if no session cookie is found, the Tracker takes this to mean that a new session has started. It therefore increments the visitor cookie's visit count. If the user leaves the site and returns before the 30 minutes is up, the visit count is not incremented.
@@ -252,10 +272,11 @@ snowplow_name_here('setSessionCookieTimeout', 3600);
 
 The above code would cause the session cookie to last for one hour.
 
-[Back to top](#top)  
+[Back to top](#top)
 [Back to JavaScript technical documentation contents][contents]
 
 <a name="multiple-trackers" />
+
 ### 2.4 Managing multiple trackers
 
 You have more than one tracker instance running on the same page at once. This may be useful if you want to log events to different collectors. By default, any Snowplow method you call will be executed by every tracker you have created so far:
@@ -302,13 +323,14 @@ snowplow_name_here('trackPageView:cf1;cf2');
 ```
 
 <a name="cookies" />
+
 ### 2.5 How the Tracker uses cookies
 
 Unless you have enabled `respectDoNotTrack` in the configuration argmap, the tracker will use cookies to persist information. There are two first party cookies: the session cookie and the ID cookie. By default their names are prefixed with "_sp_", but you can change this using the "cookieName" field in the argmap.
 
 #### The session cookie
 
-Called _sp_ses by default, the only purpose of this cookie is to differentiate between different visits. Whenever an event is fired, the session cookie is set to expire in 30 minutes. (This value can be altered using `setSessionCookieTimeout`.) 
+Called _sp_ses by default, the only purpose of this cookie is to differentiate between different visits. Whenever an event is fired, the session cookie is set to expire in 30 minutes. (This value can be altered using `setSessionCookieTimeout`.)
 
 If no session cookie is already present when an event fires, the tracker treats this as an indication that long enough has passed since the user last visited that this session should be treated as a new session rather than a continuation of the previous session. The `visitCount` (how many times the user has visited) is increased by one and the `lastVisitTs` (the timestamp for the last session) is updated.
 

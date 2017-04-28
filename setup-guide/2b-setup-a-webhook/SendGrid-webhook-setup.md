@@ -11,9 +11,10 @@
   - 2.2 [Snowplow Redshift](#setup-redshift)
 
 <a name="overview" />
+
 ## 1. Overview
 
-This webhook integration lets you track a variety of events logged by [SendGrid] [sendgrid-website].
+This webhook integration lets you track a variety of events logged by [SendGrid][sendgrid-website].
 
 Available events are:
 
@@ -32,12 +33,14 @@ Available events are:
 For the technical implementation, see [[SendGrid webhook adapter]].
 
 <a name="compat" />
+
 ### 1.1 Compatibility
 
 * [Snowplow 75 Long-Legged Buzzard][snowplow-release] + (`POST`-capable collectors for event processing, will require `GET` for initial webhook validation)
-* [SendGrid webhook API] [sendgrid-webhooks]
+* [SendGrid webhook API][sendgrid-webhooks]
 
 <a name="setup" />
+
 ## 2. Setup
 
 Integrating SendGrid's webhooks into Snowplow is a two-stage process:
@@ -46,6 +49,7 @@ Integrating SendGrid's webhooks into Snowplow is a two-stage process:
 2. (Optional) Create the SendGrid events tables for Amazon Redshift
 
 <a name="setup-sendgrid" />
+
 ## 2.1 SendGrid
 
 First login to SendGrid. Select **Settings** from the menu panel along the left hand side of the screen. You should then navigate in the expanded list to the
@@ -71,28 +75,29 @@ If you want, you can also manually override the event's `platform` parameter by 
 http://<collector host>/com.sendgrid/v3?p=<platform code>
 ```
 
-Supported platform codes can again be found in the [Snowplow Tracker Protocol] [tracker-protocol]; if not set, then the value for `platform` will default to `srv` for a server-side application.
+Supported platform codes can again be found in the [Snowplow Tracker Protocol][tracker-protocol]; if not set, then the value for `platform` will default to `srv` for a server-side application.
 
 Before we save our SendGrid webhook we can configure what types of events SendGrid will send to our webhook and what channels will trigger these events.  Simply select the boxes that are applicable to you and SendGrid will send these events to our webhook.
 
 <a name="setup-redshift" />
+
 ## 2.2 Redshift
 
 If you are running the Snowplow batch (Hadoop) flow with Amazon Redshift, then you should deploy the relevant event tables into your Amazon Redshift.
 
 You can find the table definitions here:
 
-* [com_sendgrid_processed_1.sql] [processed-sql]
-* [com_sendgrid_dropped_1.sql] [dropped-sql]                   
-* [com_sendgrid_delivered_1.sql] [delivered-sql]                
-* [com_sendgrid_deferred_1.sql] [deferred-sql]                  
-* [com_sendgrgid_bounce_1.sql] [bounce-sql]                     
-* [com_sendgrid_open_1.sql] [open-sql]                          
-* [com_sendgrid_click_1.sql] [click-sql]                        
-* [com_sendgrid_spam_report_1.sql] [spam_report-sql]            
-* [com_sendgrid_unsubscribe_1.sql] [unsubscribe-sql]            
-* [com_sendgrid_group_unsubscribe_1.sql] [group_unsubscribe-sql]
-* [com_sendgrid_resubscribe_1.sql] [group_resubscribe-sql]
+* [com_sendgrid_processed_1.sql][processed-sql]
+* [com_sendgrid_dropped_1.sql][dropped-sql]
+* [com_sendgrid_delivered_1.sql][delivered-sql]
+* [com_sendgrid_deferred_1.sql][deferred-sql]
+* [com_sendgrgid_bounce_1.sql][bounce-sql]
+* [com_sendgrid_open_1.sql][open-sql]
+* [com_sendgrid_click_1.sql][click-sql]
+* [com_sendgrid_spam_report_1.sql][spam_report-sql]
+* [com_sendgrid_unsubscribe_1.sql][unsubscribe-sql]
+* [com_sendgrid_group_unsubscribe_1.sql][group_unsubscribe-sql]
+* [com_sendgrid_resubscribe_1.sql][group_resubscribe-sql]
 
 Make sure to deploy this table into the same schema as your `events` table.
 

@@ -182,7 +182,7 @@ Import the Android Tracker's classes into your Android code like so:
 import com.snowplowanalytics.snowplow.tracker.*;
 ```
 
-That's it - you are now ready to initialize a Tracker instance. 
+That's it - you are now ready to initialize a Tracker instance.
 
 [Back to top](#top)
 
@@ -547,7 +547,7 @@ Here are some examples:
 ```java
 Subject s1 = new Subject.SubjectBuilder().build();
 
-s1.setUserID("Kevin Gleason"); 
+s1.setUserID("Kevin Gleason");
 s1.setLanguage("en-gb");
 s1.setScreenResolution(1920, 1080);
 ```
@@ -890,7 +890,7 @@ __NOTE__: If you are building for Android API 24+ you will need to request the l
 
 ## 3.3 Getting the Android Idfa Code
 
-__NOTE__: For this code to be available you must include the following library dependency: 
+__NOTE__: For this code to be available you must include the following library dependency:
 
 * `compile 'com.google.android.gms:play-services-analytics:9.4.0'
 
@@ -975,11 +975,11 @@ The `customContext` argument should consist of a `List` of `SelfDescribingJson` 
 If a visitor arrives on a page advertising a movie, the context dictionary might look like this:
 
 ```json
-{ 
+{
   "schema": "iglu:com.acme_company/movie_poster/jsonschema/2-1-1",
   "data": {
-    "movie_name": "Solaris", 
-    "poster_country": "JP", 
+    "movie_name": "Solaris",
+    "poster_country": "JP",
     "poster_year": "1978"
   }
 }
@@ -1120,7 +1120,7 @@ Arguments:
 | `shipping`     | Delivery cost charged                | No            | `Double`                   |
 | `city`         | Delivery address city                | No            | `String`                   |
 | `state`        | Delivery address state               | No            | `String`                   |
-| `country`      | Delivery address country             | No            | `String`                   | 
+| `country`      | Delivery address country             | No            | `String`                   |
 | `currency`     | Transaction currency                 | No            | `String`                   |
 | `items`        | Items in the transaction             | Yes           | `List<EcommerceTransactionItem>`    |
 | `items`        | Items in the transaction             | Yes           | `EcommerceTransactionItem...` |
@@ -1331,7 +1331,7 @@ t1.track(SelfDescribing.builder()
     .build();
 ```
 
-For more on JSON schema, see the [blog post] [self-describing-jsons].
+For more on JSON schema, see the [blog post][self-describing-jsons].
 
 [Back to top](#top)
 
@@ -1461,7 +1461,7 @@ The current Emitter flow goes as follows:
    - This defaults to every 5 seconds
 4. If there are events in the SQLite database the emitter will grab up to 250 (default) events from the database and begin sending.
 5. Once it has finished sending it will again check for events
-6. If there are no events to be sent 5 (default) times in a row, it will shut itself down 
+6. If there are no events to be sent 5 (default) times in a row, it will shut itself down
 7. On receiving a new event the Emitter checks again if it is online and will then begin sending again
 8. If there are only errors in sending, the events will not be deleted from the database and the emitter will then be shutdown
    - If there are some successes it will not shutdown.

@@ -1,6 +1,6 @@
 [**HOME**](Home) » [**EVENTS AND CONTEXTS**](Events-and-Contexts) » [Event Dictionary](Event-dictionary) » Iglu Schema Registry
 
-##Overview
+## Overview
 
 **Iglu** is a machine-readable, open-source schema registry for [JSON schema](http://json-schema.org/) and Thrift schema from the team at [Snowplow Analytics](http://snowplowanalytics.com/). A schema registry is like *npm* or *Maven* or *git* but holds data schemas instead of software or code.
 
@@ -10,13 +10,13 @@ Iglu consists of three key technical aspects:
 2. [Iglu clients](https://github.com/snowplow/iglu/wiki/Iglu-clients) that can resolve schemas from one or more Iglu registries
 3. [Iglu registries](https://github.com/snowplow/iglu/wiki/Iglu-repositories) that can host a set of [self-describing JSON schemas](http://snowplowanalytics.com/blog/2014/05/15/introducing-self-describing-jsons/)
 
-##Iglu explained
+## Iglu explained
 
 **Iglu** is built on a set of technical design decisions. It is this set of design decisions that allow Iglu clients and registries to interoperate. Please review the following design documents:
 
 - [**Self-describing JSON schema**](https://github.com/snowplow/iglu/wiki/Self-describing-JSON-Schemas) - simple extensions to JSON schema which semantically identify and version a given JSON schema
 - [**Self-describing JSON**](https://github.com/snowplow/iglu/wiki/Self-describing-JSONs) - a standardized JSON format which co-locates a reference to the instance's JSON schema alongside the instance's data
-- [**SchemaVer**](https://github.com/snowplow/iglu/wiki/SchemaVer) - how we semantically version schemas - 
+- [**SchemaVer**](https://github.com/snowplow/iglu/wiki/SchemaVer) - how we semantically version schemas -
 *Schema resolution* - our public algorithm for how we determine in which order we check Iglu registries for a given schema
 
 **Iglu clients** are used for interacting with Iglu server repos and for resolving schemas in embedded and remote Iglu schema registries.
@@ -46,7 +46,7 @@ Under the covers, Iglu Central is built and run as a **static Iglu registry**, h
 
 The **deployment process** for Iglu Central is documented on [this wiki](https://github.com/snowplow/iglu/wiki/Iglu-Central-setup) in case a user wants to setup a public mirror or private instance of Iglu Central.
 
-###Further reading
+### Further reading
 
 To find out more about the concepts mentioned above and ultimately how to set up custom events and contexts and send them to Snowplow pipeline, follow the links below.
 

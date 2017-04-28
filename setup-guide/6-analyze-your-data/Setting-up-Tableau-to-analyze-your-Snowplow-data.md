@@ -11,6 +11,7 @@
 5. [Next steps](#next-steps)
 
 <a name="what-and-why" />
+
 ## 1. What is Tableau, and why use it to analyze / visualize Snowplow data?
 
 Tableau is a Business Intelligence program, in the mould of Microstrategy or Pentaho. These types of software make it possible for users to perform [OLAP analysis][olap], which typically involves aggregating data by different dimensions and metrics, visualizing that data graphically, and then exploring relationships in the data by slicing and dicing different metrics by different dimensions.
@@ -21,23 +22,25 @@ Tableau has a number of strengths which account for why we prefer it to other BI
 * The interface is *fast*. You can setup Tableau workbooks to query the data directly in Redshift, in which case the querying speed is determined by the speed at which Redshift works. (Which is pretty good.) You can also, however, import some or all of the data (depending on the volume you're handling) into Tableau's in-memory engine, in which case analysis is blindingly fast
 * Simple to deploy: Tableau desktop can be employed as a standalone application. You connect to directly to Snowplow data (e.g. in Redshift). There is no need to setup associated servers to manage a data pipeline from Snowplow to Tableau (although Tableau server is available as an option). There is no requirement to manage any metadata around Snowplow. Instead, you grab the Snowplow data directly, and start visualizing it instantly
 
-Like most other BI tools: Tableau has limitations when used outside of traditional OLAP analysis: we do not recommend it for statistical analysis (although it has some basic capabilities) or more bespoke graphs. For this type of capability, we recommend [R] [r].
+Like most other BI tools: Tableau has limitations when used outside of traditional OLAP analysis: we do not recommend it for statistical analysis (although it has some basic capabilities) or more bespoke graphs. For this type of capability, we recommend [R][r].
 
 Back to [top](#top)
 
 
 <a name="setup" />
+
 ## 2. Download and get started with Tableau
 
-If you are not already using Tableau, you can download a 30 day trial version of the desktop product from the [Tableau website] [tableau-trial].
+If you are not already using Tableau, you can download a 30 day trial version of the desktop product from the [Tableau website][tableau-trial].
 
 Note: Tableau desktop **only** works on Windows. If you're using Linux or a Mac, you can run Tableau in a Virtual Machine, but you really want to make available as much RAM as possible to keep the analysis on the large Snowplow datasets snappy.
 
-Installing Tableau desktop for windows is straightforward: simply [download the executable] [tableau-trial] and run it.
+Installing Tableau desktop for windows is straightforward: simply [download the executable][tableau-trial] and run it.
 
 Back to [top](#top)
 
 <a name="redshift" />
+
 ## 3. Connecting Tableau to Snowplow data in Redshift
 
 Launch Tableau, and select **Connect to data** from the left hand menu:
@@ -52,7 +55,7 @@ Tableau then asks for the details of the Redshift cluster we wish to connect to:
 
 [[/setup-guide/images/tableau/3.JPG]]
 
-We can fetch these details directly from the AWS console. Log into [console.aws.amazon.com] [aws-console], select **Redshift** from the list of services and then select the Redshift cluster you want to connect to. The details of the cluster you need to connect Tableau are listed under **Cluster Database Properties**:
+We can fetch these details directly from the AWS console. Log into [console.aws.amazon.com][aws-console], select **Redshift** from the list of services and then select the Redshift cluster you want to connect to. The details of the cluster you need to connect Tableau are listed under **Cluster Database Properties**:
 
 [[/setup-guide/images/tableau/4.JPG]]
 
@@ -74,13 +77,14 @@ We can fetch these details directly from the AWS console. Log into [console.aws.
 
 [[/setup-guide/images/tableau/7.JPG]]
 
-**Troubleshooting your connection**: For security, Amazon only lets computers access a Redshift cluster where those computers are located at an IP address that has been white-listed. Hence, in order to connect Tableau, you must make sure that the machine running Tableau is on a white-listed IP address. Instructions on how to white-list IP addresses in Redshift are given [here] [white-list-ip-address].
+**Troubleshooting your connection**: For security, Amazon only lets computers access a Redshift cluster where those computers are located at an IP address that has been white-listed. Hence, in order to connect Tableau, you must make sure that the machine running Tableau is on a white-listed IP address. Instructions on how to white-list IP addresses in Redshift are given [here][white-list-ip-address].
 
 **A note about Tableau Redshift support**: At the time of writing this guide, the latest stable release of Tableau (0.8.0) does *not* explicitly support Amazon Redshift. This guide was put together on the basis of a pre-release version of the next update, which *does* support Redshift.
 
 Back to [top](#top)
 
 <a name="1st-analysis" />
+
 ## 4. Getting started analyzing Snowplow data in Tableau
 
 ### 4.1 Plotting our first graph: number of uniques over time
@@ -97,7 +101,7 @@ Tableau helpfully tells us that are calculation if valid:
 
 [[/setup-guide/images/tableau/8.JPG]]
 
-Select OK. The new field appears in the Measures pane. We can now drag it into the main part of the screen, where it says "Drop field here": 
+Select OK. The new field appears in the Measures pane. We can now drag it into the main part of the screen, where it says "Drop field here":
 
 [[/setup-guide/images/tableau/9.JPG]]
 
@@ -143,9 +147,9 @@ You can paste in any Redshift compatible SQL query to generate a specific slice 
 	AND (event = 'page_ping' OR event = 'page_view')
 	ORDER BY domain_userid, tstamp
 
-was used to grab the data for a single visitor. That was then used in Tableau to visualize that user journey. (To see the actual visualization, refer to the [analytics recipe] [individual-customer-visualisation].)
+was used to grab the data for a single visitor. That was then used in Tableau to visualize that user journey. (To see the actual visualization, refer to the [analytics recipe][individual-customer-visualisation].)
 
-To give a more complicated example: to perform the [product page analytics] [pp-analytics] described in [this recipe post] [pp-analytics], we pasted in the query given at the bottom of the recipe i.e.
+To give a more complicated example: to perform the [product page analytics][pp-analytics] described in [this recipe post][pp-analytics], we pasted in the query given at the bottom of the recipe i.e.
 
 	SELECT
 	pv.page_urlpath,
@@ -153,19 +157,19 @@ To give a more complicated example: to perform the [product page analytics] [pp-
 	ab.uniques_that_add_to_basket,
 	t.uniques_that_purchase
 	FROM (
-		SELECT 
+		SELECT
 		page_urlpath,
 		COUNT(DISTINCT(domain_userid)) AS unique_visitors,
 		COUNT(*) AS page_views
 		FROM "events"
 		WHERE (                                    # Only display results for *product* pages
-			(page_urlpath LIKE '/tarot-cards/%' ) 
-			OR ( page_urlpath LIKE '/oracles/%' ) 
+			(page_urlpath LIKE '/tarot-cards/%' )
+			OR ( page_urlpath LIKE '/oracles/%' )
 			OR (page_urlpath LIKE '/pendula/%')
 			OR (page_urlpath LIKE '/jewellery/%')
 		) AND "event" = 'page_view'
 		AND page_urlhost = 'www.psychicbazaar.com' # Only display results for the *production website*
-		GROUP BY page_urlpath	
+		GROUP BY page_urlpath
 	) pv
 	LEFT JOIN (
 		SELECT
@@ -176,8 +180,8 @@ To give a more complicated example: to perform the [product page analytics] [pp-
 		SUM(ev_property) AS number_of_products_added_to_baket
 		FROM events
 		WHERE (                                    # Only display results for *product* pages
-			(page_urlpath LIKE '/tarot-cards/%' ) 
-			OR ( page_urlpath LIKE '/oracles/%' ) 
+			(page_urlpath LIKE '/tarot-cards/%' )
+			OR ( page_urlpath LIKE '/oracles/%' )
 			OR (page_urlpath LIKE '/pendula/%')
 			OR (page_urlpath LIKE '/jewellery/%'))
 		AND "event" = 'struct'
@@ -208,13 +212,14 @@ When you fetch smaller data sets from Snowplow / Redshift, you can ask Tableau t
 Back to [top](#top)
 
 <a name="next-steps" />
+
 ## 5. Next steps
 
-There is a huge number of ways you can interrogate Snowplow data using Tableau. For some ideas, see the [Analytics Cookbook] [cookbook] and the following blog posts for some examples:
+There is a huge number of ways you can interrogate Snowplow data using Tableau. For some ideas, see the [Analytics Cookbook][cookbook] and the following blog posts for some examples:
 
 * [Performing web analytics on Snowplow dadta using Tableau - a video demo](http://snowplowanalytics.com/blog/2012/10/24/web-analytics-with-tableau-and-snowplow/)
-* [Funnel analysis with Snowplow] (http://snowplowanalytics.com/blog/2013/04/23/performing-funnel-analysis-with-snowplow/)
-* [Measuring content page performance] (http://snowplowanalytics.com/blog/2013/04/12/online-catalog-analytics-with-snowplow/)
+* [Funnel analysis with Snowplow](http://snowplowanalytics.com/blog/2013/04/23/performing-funnel-analysis-with-snowplow/)
+* [Measuring content page performance](http://snowplowanalytics.com/blog/2013/04/12/online-catalog-analytics-with-snowplow/)
 
 Back ot [top](#top)
 

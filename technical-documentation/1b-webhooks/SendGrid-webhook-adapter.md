@@ -1,6 +1,6 @@
 <a name="top" />
 
-[**HOME**](Home) > [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow technical documentation) > [**Webhooks**](Webhooks) > SendGrid webhook adapter
+[**HOME**](Home) > [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow-technical-documentation) > [**Webhooks**](Webhooks) > SendGrid webhook adapter
 
 ## Contents
 
@@ -12,14 +12,17 @@
 - 4. [See also](#see-also)
 
 <a name="overview" />
+
 ## 1. Overview
 
-This webhook adapter lets you track a variety of events logged by [SendGrid] [sendgrid-website].
+This webhook adapter lets you track a variety of events logged by [SendGrid][sendgrid-website].
 
 <a name="implementation" />
+
 ## 2. Implementation
 
 <a name="source" />
+
 ### 2.1 Event source
 
 Details of the SendGrid webhook format as of 12th November 2015.
@@ -27,33 +30,36 @@ Details of the SendGrid webhook format as of 12th November 2015.
 SendGrid sends events as a `POST` request with all information in the body, with `application/json` as the content type.
 
 <a name="adapter" />
+
 ### 2.2 Snowplow adapter
 
-Implementation: [SendGrid] [sendgrid-adapter]
+Implementation: [SendGrid][sendgrid-adapter]
 
 SendGrid webhook support was implemented in [Snowplow 75 Long-Legged Buzzard][snowplow-release].
 
 <a name="events" />
+
 ## 3. Events
 
 All resources for this webhook's events:
 
 | **Event**         | **JSON Schema**                                            | **JSON Paths**                                             | **Redshift Table**                                            |
 |:------------------|:-----------------------------------------------------------|:-----------------------------------------------------------|:--------------------------------------------------------------|
-| Processed         | [processed 1-0-0] [processed-json-schema]                  | [processed_1.json] [processed-json-paths]                  | [com_sendgrid_processed_1.sql] [processed-sql]                |
-| Dropped           | [dropped 1-0-0] [dropped-json-schema]                      | [dropped_1.json] [dropped-json-paths]                      | [com_sendgrid_dropped_1.sql] [dropped-sql]                    |
-| Delivered         | [delivered 1-0-0] [delivered-json-schema]                  | [delivered_1.json] [delivered-json-paths]                  | [com_sendgrid_delivered_1.sql] [delivered-sql]                |
-| Deferred          | [deferred 1-0-0] [deferred-json-schema]                    | [deferred_1.json] [deferred-json-paths]                    | [com_sendgrid_deferred_1.sql] [deferred-sql]                  |
-| Bounce            | [bounce 1-0-0] [bounce-json-schema]                        | [bounce_1.json] [bounce-json-paths]                        | [com_sendgrgid_bounce_1.sql] [bounce-sql]                     |
-| Open              | [open 1-0-0] [open-json-schema]                            | [open_1.json] [open-json-paths]                            | [com_sendgrid_open_1.sql] [open-sql]                          |
-| Click             | [click 1-0-0] [click-json-schema]                          | [click_1.json] [click-json-paths]                          | [com_sendgrid_click_1.sql] [click-sql]                        |
-| Spam Report       | [spam_report 1-0-0] [spam_report-json-schema]              | [spam_report_1.json] [spam_report-json-paths]              | [com_sendgrid_spam_report_1.sql] [spam_report-sql]            |
-| Unsubscribe       | [unsubscribe 1-0-0] [unsubscribe-json-schema]              | [unsubscribe_1.json] [unsubscribe-json-paths]              | [com_sendgrid_unsubscribe_1.sql] [unsubscribe-sql]            |
-| Group Unsubscribe | [group_unsubscribe 1-0-0] [group_unsubscribe-json-schema]  | [group_unsubscribe_1.json] [group_unsubscribe-json-paths]  | [com_sendgrid_group_unsubscribe_1.sql] [group_unsubscribe-sql]|
-| Group Resubscribe | [group_resubscribe 1-0-0] [group_resubscribe-json-schema]  | [group_resubscribe_1.json] [group_resubscribe-json-paths]  | [com_sendgrid_resubscribe_1.sql] [group_resubscribe-sql]      |
+| Processed         | [processed 1-0-0][processed-json-schema]                  | [processed_1.json][processed-json-paths]                  | [com_sendgrid_processed_1.sql][processed-sql]                |
+| Dropped           | [dropped 1-0-0][dropped-json-schema]                      | [dropped_1.json][dropped-json-paths]                      | [com_sendgrid_dropped_1.sql][dropped-sql]                    |
+| Delivered         | [delivered 1-0-0][delivered-json-schema]                  | [delivered_1.json][delivered-json-paths]                  | [com_sendgrid_delivered_1.sql][delivered-sql]                |
+| Deferred          | [deferred 1-0-0][deferred-json-schema]                    | [deferred_1.json][deferred-json-paths]                    | [com_sendgrid_deferred_1.sql][deferred-sql]                  |
+| Bounce            | [bounce 1-0-0][bounce-json-schema]                        | [bounce_1.json][bounce-json-paths]                        | [com_sendgrgid_bounce_1.sql][bounce-sql]                     |
+| Open              | [open 1-0-0][open-json-schema]                            | [open_1.json][open-json-paths]                            | [com_sendgrid_open_1.sql][open-sql]                          |
+| Click             | [click 1-0-0][click-json-schema]                          | [click_1.json][click-json-paths]                          | [com_sendgrid_click_1.sql][click-sql]                        |
+| Spam Report       | [spam_report 1-0-0][spam_report-json-schema]              | [spam_report_1.json][spam_report-json-paths]              | [com_sendgrid_spam_report_1.sql][spam_report-sql]            |
+| Unsubscribe       | [unsubscribe 1-0-0][unsubscribe-json-schema]              | [unsubscribe_1.json][unsubscribe-json-paths]              | [com_sendgrid_unsubscribe_1.sql][unsubscribe-sql]            |
+| Group Unsubscribe | [group_unsubscribe 1-0-0][group_unsubscribe-json-schema]  | [group_unsubscribe_1.json][group_unsubscribe-json-paths]  | [com_sendgrid_group_unsubscribe_1.sql][group_unsubscribe-sql]|
+| Group Resubscribe | [group_resubscribe 1-0-0][group_resubscribe-json-schema]  | [group_resubscribe_1.json][group_resubscribe-json-paths]  | [com_sendgrid_resubscribe_1.sql][group_resubscribe-sql]      |
 
 
 <a name="see-also" />
+
 ## 4. See also
 
 [[SendGrid webhook setup]]

@@ -12,6 +12,7 @@ This setup guide is divided into three sections:
 If you have already setup Google Tag Manager on your website, you can proceed directly to [section 2](#snowplow-setup). However, we recommend at least skimming the section on [setting up Google Tag Manager](#setup-gtm), as we've seen a number of companies implement this badly, with the end result that they cannot pass all the data they would like to Snowplow tags for analysis later.
 
 <a name="setup-gtm" />
+
 ## 1. Setting up Google Tag Manager (GTM)
 
 ### Overview
@@ -28,9 +29,10 @@ There are six steps to setting up GTM to the point you can integrate Snowplow (o
 Typically, the steps people get wrong (or miss out alltogether) are steps 3-6. Getting them right is critical, however, because if you do not setup a robust mechanism for passing **all** the relevant data you want to report on in Snowplow (or any other web analytics program) into GTM, then GTM will not be able to pass that data into Snowplow, in turn. Either you will need to go back to your webmaster to add additional lines to your HTML / JavaScript to pass the missing data points later, or you'll be forced to perform analysis without them. Managing the data pipeline between your website(s) and GTM is key.
 
 <a name="1.1" />
+
 ### 1.1 Create a Google Tag Manager account
 
-Creating a Google Tag Manager account is very simple. Log on to [[http://www.google.com/tagmanager/]] and select the **SIGN IN** button. Once you have signed up, elect to create a **New Account**. Give the account a name. Then within it, create a **Container** and select your platform. 
+Creating a Google Tag Manager account is very simple. Log on to [[http://www.google.com/tagmanager/]] and select the **SIGN IN** button. Once you have signed up, elect to create a **New Account**. Give the account a name. Then within it, create a **Container** and select your platform.
 
 [[/setup-guide/images/gtm/1-create-account.png]]
 
@@ -40,6 +42,7 @@ In general, you'll only need to setup a single account, and most likely a single
 2. An account is a grouping of containers for administrative purposes. In general, one account is all you would need. If you work with different teams to manage different containers, then it makes sense to group the containers used by each team into a single account, with each team member being granted access to the account.
 
 <a name="1.2" />
+
 ### 1.2 Integrating the container tag on your website
 
 Once you have created a container, Google will provide you with the actual container tag. You will need to integrate this on every web page on your website(s), in place of any tags that are currently directly integrated on those web pages. (These will need to be migrated into GTM.)
@@ -49,9 +52,10 @@ Once you have created a container, Google will provide you with the actual conta
 The embed code needs to be inserted on your web pages immediately after the opening `<body>` tag.
 
 <a name="1.3" />
+
 ### 1.3 Work out what data to pass to Google Tag Manager from your website, using the `dataLayer`
 
-The [`dataLayer`] [datalayer] is a JSON that contains name value pairs of data points you wish to pass from your website into GTM. (And GTM can then, in turn, pass on to any tags that are managed in GTM, including Snowplow tags.)
+The [`dataLayer`][datalayer] is a JSON that contains name value pairs of data points you wish to pass from your website into GTM. (And GTM can then, in turn, pass on to any tags that are managed in GTM, including Snowplow tags.)
 
 Working out what data should be passed into the `dataLayer` is critical to ensuring that your GTM installation lasts. Getting it right, however, is not trivial. On the one hand, you need to be as comprehensive as possible: you need to identify every data point you might want to interrogate in your web analytics and make sure it is passed into the `dataLayer`. Otherwise it will not be possible to pass it on to Snowplow to use in analytics later.
 
@@ -66,6 +70,7 @@ We recommend erring on the side of comprehensiveness: the cost of passing data i
 5. The list of objects, data points, and events on the user journeys, should be documented. Those documents will be used in the next step, working out how to [structure the data in the `dataLayer`](#1.4)
 
 <a name="1.4" />
+
 ### 1.4 Work out how to structure the data passed into `dataLayer`
 
 Broadly speaking, there are two occasions we can pass data points into the `dataLayer`:
@@ -133,12 +138,13 @@ Now that we know *what* data we want to capture in the `dataLayer`, and *when* w
 
 #### Note: GA suggestions for data points and field names in the `dataLayer`
 
-Google has a number of suggestions for what fields should be captured in the `dataLayer`, and how they should be labelled. Those can be found [here] [datalayer].
+Google has a number of suggestions for what fields should be captured in the `dataLayer`, and how they should be labelled. Those can be found [here][datalayer].
 
 For the most part, these are just *suggestions*. However, some of them are more than that. For example, if you want to use either Google Analytics ecommerce tracking, or Snowplow's own ecommerce tracking (which is closely modelled on Google's approach), you will need to set *specific* variables in your `dataLayer`. Instructions on how to do this is covered below in the corresponding section on [ecommerce tracking](#ecommerce).
 
 
 <a name="1.5" />
+
 ### 1.5 Integrate the `dataLayer` onto your website
 
 Now that we've decided (and documented) what data to push to the `dataLayer`, and when, your webmaster should be in a position to integrate the `dataLayer` calls into your website.
@@ -146,11 +152,12 @@ Now that we've decided (and documented) what data to push to the `dataLayer`, an
 Note - although we've separated this step out from step 1.2 [integrating your container tag on your website](#1.2), in practice you'd want to carry out both these steps simultaneously.
 
 <a name="1.6" />
+
 ### 1.6 Create variables stored in the `dataLayer` in the GTM UI
 
 Passing data into GTM via the `dataLayer` is great - but to get any value from that data, we need to be able to pass it on to the tags that GTM manages, including Snowplow.
 
-Doing so is simple, if a little time consuming. For every top-level data field passed into GTM (e.g. `products`, `videoId` etc.), we need to create a `dataLayer` variable in GTM. The value of this variable will be set when the value is passed into the `dataLayer`, and we'll be able to pass the variable into any tags that are setup in GTM. (Instructions on how to do this for Snowplow tags will be given in the section on [integrating Snowplow] (#snowplow-setup) below.)
+Doing so is simple, if a little time consuming. For every top-level data field passed into GTM (e.g. `products`, `videoId` etc.), we need to create a `dataLayer` variable in GTM. The value of this variable will be set when the value is passed into the `dataLayer`, and we'll be able to pass the variable into any tags that are setup in GTM. (Instructions on how to do this for Snowplow tags will be given in the section on [integrating Snowplow](#snowplow-setup) below.)
 
 > [**Variables**](https://support.google.com/tagmanager/answer/6106899) are name-value pairs for which the value is populated during runtime. For example, the predefined variable named "url" has been defined such that its value is the current page URL.
 
@@ -162,7 +169,7 @@ To create a new custom variable in GTM, click on the **NEW** button at the botto
 
 [[/setup-guide/images/gtm/create-macro-1.png]]
 
-Give your variable an appropriate name. For simplicity, we always use the same name used in the `dataLayer`, although that is not a requirement. Select **Data Layer Variable** type. Then enter the name of the variable, exactly as used in the HTML / JavaScript. (This is case sensitive.) 
+Give your variable an appropriate name. For simplicity, we always use the same name used in the `dataLayer`, although that is not a requirement. Select **Data Layer Variable** type. Then enter the name of the variable, exactly as used in the HTML / JavaScript. (This is case sensitive.)
 
 [[/setup-guide/images/gtm/create-macro-2.png]]
 
@@ -179,6 +186,7 @@ GTM comes pre-configured with a few (built-in) variables already, in particular 
 [Back to top](#top)
 
 <a name="snowplow-setup" />
+
 ## 2. Integrating Snowplow JavaScript tracking tags with Google Tag Manager
 
 1. [Integrating Snowplow page tracking tags](#page)
@@ -188,6 +196,7 @@ GTM comes pre-configured with a few (built-in) variables already, in particular 
 5. [Publishing changes to GTM](#publish)
 
 <a name="page" />
+
 ### 2.1 Integrating Snowplow page tracking tags
 
 This is the simplest tag to integrate.
@@ -255,6 +264,7 @@ Now you're done - click **Create Tag**. The new tag should be listed in the cont
 **Note**: although set up, the tag won't fire until this update is **published**. We cover how to publish the configurations made above in [section 2.4 below](#other-events).
 
 <a name="events" />
+
 ### 2.2 Integrating Snowplow structured event tracking tags
 
 This is best explained through an example. Let's assume, again, that we are implementing Snowplow on a Youtube-like video site. There will be a large number of possible events that occur on a user journey including searching for a video, playing a video, pausing a video, liking a video, uploading a video, sharing a video etc... As per steps [1.3](#1.3), [1.4](#1.4) and [1.5](#1.5), each time one of these events occurs, the event is logged in the `dataLayer` along with the associated data. For example, for a 'video play', the following JavaScript would execute:
@@ -267,13 +277,13 @@ dataLayer.push(
 );
 ```
 
-We now need to set up the Snowplow event tracking tag to fire for each of the types of event identified, and use the five [event tracking fields] [event-tracking] to pass the data into Snowplow. Those fields are documented [here] [event-tracking], but for ease we list them below:
+We now need to set up the Snowplow event tracking tag to fire for each of the types of event identified, and use the five [event tracking fields][event-tracking] to pass the data into Snowplow. Those fields are documented [here][event-tracking], but for ease we list them below:
 
 1. Event category
 2. Event action
-3. Event label 
+3. Event label
 4. Event property
-5. Event value 
+5. Event value
 
 Let's work through the process for our `playVideo` event type. From the main Tag Manager screen, click the **New** button. Give the tag a suitable name e.g. 'Snowplow playVideo event' and select the **Custom HTML Tag** as we showed you earlier.
 
@@ -319,7 +329,7 @@ window.snowplow('trackStructEvent', 'video', 'playVideo', {{videoId}}, {{videoFo
 </script>
 ```
 
-The above code will dynamically insert the values in the `dataLayer` for `videoId` and `videoFormat` into the tag, which will pass the data into Snowplow. Note that this will only work if you have setup the corresponding variables in GTM for `videoId` and `videoFormat`, as documented in [section 1.6] (#1.6).
+The above code will dynamically insert the values in the `dataLayer` for `videoId` and `videoFormat` into the tag, which will pass the data into Snowplow. Note that this will only work if you have setup the corresponding variables in GTM for `videoId` and `videoFormat`, as documented in [section 1.6](#1.6).
 
 [[/setup-guide/images/gtm/event-tracking-1.png]]
 
@@ -347,13 +357,13 @@ You now need to repeat the above process for each of the different types of even
 
 1. Create a new tag in GTM i.e. `Snowplow shareVideo event`, `Snowplow uploadVideo event`
 2. Paste in the Snowplow event tracking code, but map the fields for the specific events into the 5 Snowplow event tracking fields
-3. Trigger the tag to fire when e.g. `event: uploadVideo` is passed into the `dataLayer` 
+3. Trigger the tag to fire when e.g. `event: uploadVideo` is passed into the `dataLayer`
 
 Once you have completed creating all the tags, you will need to [publish the updates](#publish) (as detailed [below](#publish)) in order to push the changes live.
 
 #### An alternative, less time-consuming approach
 
-The above approach is time consuming because it requires that you create a Snowplow tag in GTM for every different type of event identified in the `dataLayer`. 
+The above approach is time consuming because it requires that you create a Snowplow tag in GTM for every different type of event identified in the `dataLayer`.
 
 An alternative approach would be not to distinguish different types of event in the `dataLayer`. Instead, for every type of custom event, use the same set of fields in the `dataLayer` that correspond to the five Snowplow event tracking fields i.e.:
 
@@ -379,28 +389,29 @@ window.snowplow('trackStructEvent', '{{eventCategory}}', '{{eventAction}}', '{{e
 
 There are several reasons we do not recommend this approach:
 
-1. Although time consuming, the exercise of identifying all the relevant events that can occur on a user's journey, and all the data points that are associated with each, is incredibly useful. At analysis time, you would use the same mapping used to match those data points against the generic Snowplow event fields, to map them back into their 'idealised structure'. 
+1. Although time consuming, the exercise of identifying all the relevant events that can occur on a user's journey, and all the data points that are associated with each, is incredibly useful. At analysis time, you would use the same mapping used to match those data points against the generic Snowplow event fields, to map them back into their 'idealised structure'.
 2. We're working to improve Snowplow all the time. If the current event tracking isn't flexible enough to accommodate your needs, it's highly likely that a future version will be. If you're not capturing all the data that you ideally want to be reporting on, in GTM, then when we upgrade Snowplow, you won't be able to take advantage without updating your GTM implementation.
 3. The whole point of using a tag management platform like GTM is to manage all your tags. The alternative approach outlined above is a Snowplow specific hack and will not necessarily work for other tags that are managed through GTM. In order to make it as easy as possible manage the widest variety of tags, you should pass all the data you might want to share with your tags into GTM in a sensible, comprehensible format, rather than one geared around a specific providers tag.
 
 <a name="ecommerce" />
+
 ### 2.3 Integrating Snowplow ecommerce tracking tags
 
-Snowplow's [ecommerce tracking] [ecom-tracking] closely follows ecommerce tracking as implemented in Google Analytics. We have done this to make implementing Snowplow alongside GA as easy as possible.
+Snowplow's [ecommerce tracking][ecom-tracking] closely follows ecommerce tracking as implemented in Google Analytics. We have done this to make implementing Snowplow alongside GA as easy as possible.
 
 Because of this, however, it is important that you follow Google's specified approach to pushing transaction related data into the `dataLayer`, using the same field names and data structures used by Google. These are listed on the [Google website][gtm-vars] and are repeated below for clarity:
 
 | **Variable name**       | **Description**                 |
 |:------------------------|---------------------------------|
 | `transactionId`         | Unique transaction ID           |
-| `transactionAffiliation`| Affiliation or store name       | 
+| `transactionAffiliation`| Affiliation or store name       |
 | `transactionTotal`      | Transaction value               |
 | `transactionShipping`   | Shipping charge                 |
 | `transactionTax`        | Tax (VAT) charge                |
 | `transactionPaymentType` | Payment type (e.g. credit card)|
 | `transactionCurrency`   | Currency of transaction         |
 | `transactionShippingMethod` | Selected shipping method    |
-| `transactionPromoCode`  | Discount or promotion codes used | 
+| `transactionPromoCode`  | Discount or promotion codes used |
 | `transactionProducts`   | List of items purchased in the transaction (provided to the `dataLayer` as an array) |
 
 The following data is supported for each of the products in the `transactionProducts` array:
@@ -439,7 +450,7 @@ dataLayer.push({
 	],
 	'transactionCity': 'London',
 	'transactionCountry': 'United Kingdom'
-}); 
+});
 ```
 
 As described in [section 1.6](#1.6), we need to create variables in GTM for each of the fields listed in the above three tables i.e. `transactionId`, `transactionAffiliation`... `transactionCountry`. To recap on the process:
@@ -496,17 +507,19 @@ The tag setup is now complete:
 Save the tag. We are now ready to publish the changes. This is covered in the [next section](#publish).
 
 <a name="other-events" />
+
 ### 2.4 Tracking other events (campaigns, page pings etc.)
 
 As well as the page view, structured events and ecommerce event tracking tags, Snowplow has specific functionality to enable the capture of other event data including:
 
-1. [Page pings] (2-Specific-event-tracking-with-the-Javascript-tracker#wiki-pagepings). Use this to track how long visitors dwell on each page on your site, and how they scroll of pages over time.
+1. [Page pings](2-Specific-event-tracking-with-the-Javascript-tracker#wiki-pagepings). Use this to track how long visitors dwell on each page on your site, and how they scroll of pages over time.
 
-Detailed documentation on how to capture the complete range of events possible with Snowplow can be found in the [[Javascript Tracker]] section of the [Technical Documentation] (snowplow-technical-documentation).
+Detailed documentation on how to capture the complete range of events possible with Snowplow can be found in the [[Javascript Tracker]] section of the [Technical Documentation](snowplow-technical-documentation).
 
 Note: we recommend after you finish consulting the technical documentation related to the events supported by the JavaScript Tracker that you return to the setup guide to complete the setup.
 
 <a name="publish" />
+
 ### 2.5 Publishing changes to GTM
 
 Once you have setup all your tags, triggers and variables in GTM, you need to publish the changes before they will take effect on your website(s).
@@ -531,7 +544,7 @@ The location field contains the links to the problematic configuration. Follow t
 
 [[/setup-guide/images/gtm/publish-3.png]]
 
-Now load a web page with the container in a tab in the same browser. You should see an additional GTM interface in the bottom half of the screen that indicates when different tags defined in the UI have been fired. 
+Now load a web page with the container in a tab in the same browser. You should see an additional GTM interface in the bottom half of the screen that indicates when different tags defined in the UI have been fired.
 
 [[/setup-guide/images/gtm-debug.png]]
 
@@ -542,11 +555,13 @@ In the event that it is not working as expected, you can go back and make the ch
 [Back to top](#top)
 
 <a name="enhanced-ecommerce" />
+
 ## 3. Integrating Snowplow JavaScript tracking tags with enhanced ecommerce
 
 You can send [enhanced ecommerce][enhancedEcommerce] data to Snowplow as well as Google Analytics. For more information, see [Integrating JavaScript tags with enhanced ecommerce](https://github.com/snowplow/snowplow/wiki/Integrating-Javascript-tags-with-enhanced-ecommerce).
 
 <a name="next-steps" />
+
 ## 4. Next steps
 
 Now you have setup the JavaScript tracking tags, you are in a position to [test that they fire](testing the javascript tracker is firing).

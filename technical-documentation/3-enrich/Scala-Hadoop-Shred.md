@@ -4,7 +4,7 @@
 
 ### 1. Overview
 
-Scala Hadoop Shred is Hadoop job, written in [Scalding][scalding] (Scala API
+Scala Hadoop Shred is Hadoop job, written in [Scalding][scalding](Scala API
 for [Cascading][cascading]) and allowing you to split (shred) Snowplow enriched
 event, produced by Scala Hadoop Enrich into separate enrities. Scala Hadoop
 Shred utilizes the [scala-common-enrich][sce] Scala project to load enriched

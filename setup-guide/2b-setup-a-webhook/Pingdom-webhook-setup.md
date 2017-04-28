@@ -4,16 +4,17 @@
 
 ## Contents
 
-- 1. [Overview](#overview)  
+- 1. [Overview](#overview)
   - 1.1 [Compatibility](#compat)
 - 2. [Setup](#setup)
   - 2.1 [Pingdom](#setup-pingdom)
   - 2.2 [Snowplow Redshift](#setup-redshift)
 
 <a name="overview" />
+
 ## 1. Overview
 
-This webhook integration lets you track a variety of events logged by [Pingdom] [pingdom-website].
+This webhook integration lets you track a variety of events logged by [Pingdom][pingdom-website].
 
 Available events are:
 
@@ -23,12 +24,14 @@ Available events are:
 For the technical implementation, see [[Pingdom webhook adapter]].
 
 <a name="compat" />
+
 ### 1.1 Compatibility
 
-* [Snowplow 0.9.14] [snowplow-0.9.14]+ (`POST`-capable collectors only)
-* [Pingdom webhook API] [pingdom-webhooks]
+* [Snowplow 0.9.14][snowplow-0.9.14]+ (`POST`-capable collectors only)
+* [Pingdom webhook API][pingdom-webhooks]
 
 <a name="setup" />
+
 ## 2. Setup
 
 Integrating Pingdom's webhooks into Snowplow is a two-stage process:
@@ -37,6 +40,7 @@ Integrating Pingdom's webhooks into Snowplow is a two-stage process:
 2. (Optional) Create the Pingdom events tables into Amazon Redshift
 
 <a name="setup-pingdom" />
+
 ## 2.1 Pingdom
 
 First login to your Pingdom account and click on the **Alerting** button which will be on the left hand side of the screen.
@@ -59,7 +63,7 @@ For the **Webhook URL** field you will need to provide the URI to your Snowplow 
 http://<collector host>/com.pingdom/v1?aid=<company code>
 ```
 
-The `aid=` name-value pair in your URI's querystring is optional; this is the `app_id` parameter taken from the [Snowplow Tracker Protocol] [tracker-protocol]. You can use it to specify which company in Pingdom these call complete events belong to. Putting it all together, our setup screen now looks like this:
+The `aid=` name-value pair in your URI's querystring is optional; this is the `app_id` parameter taken from the [Snowplow Tracker Protocol][tracker-protocol]. You can use it to specify which company in Pingdom these call complete events belong to. Putting it all together, our setup screen now looks like this:
 
 [[/setup-guide/images/webhooks/pingdom/pingdom-2.png]]
 
@@ -69,7 +73,7 @@ If you want, you can also manually override the event's `platform` parameter lik
 http://<collector host>/com.pingdom/v1?aid=<company code>&p=<platform code>
 ```
 
-Supported platform codes can again be found in the [Snowplow Tracker Protocol] [tracker-protocol]; if not set, then the value for `platform` will default to `srv` for a server-side application.
+Supported platform codes can again be found in the [Snowplow Tracker Protocol][tracker-protocol]; if not set, then the value for `platform` will default to `srv` for a server-side application.
 
 After we have finished adding the contact method simply click **Save Settings**.
 
@@ -78,7 +82,7 @@ After we have finished adding the contact method simply click **Save Settings**.
 You will now need to add this endpoint to your **Alert Policies** for the webhook to be used.
 
 Navigate to the **Alert Policies** page by clicking the **Alert Policies** button in the **Alerting** submenu.
-* If you have not set up an **Alert Policy** before please consult this guide before continuing: [Setting up Pingdom Alerts] [pingdom-alerts]
+* If you have not set up an **Alert Policy** before please consult this guide before continuing: [Setting up Pingdom Alerts][pingdom-alerts]
 
 Now select the policy which you want the webhook to be activated from (click anywhere on the row with the policy), or create an entirely new policy for the webhook.
 
@@ -92,17 +96,18 @@ Now click in the **Add more people (cc)** field and type in the name that you ga
 
 Save the changes you have made to the policy, anything being monitored that has this policy assigned will now trigger the webhook as well!
 
-There are other configurations for how you can send information from Pingdom we suggest having a look at the [Pingdom webhook API] [pingdom-webhooks] for more information on contact methods and settings if this method does not suit your needs.
+There are other configurations for how you can send information from Pingdom we suggest having a look at the [Pingdom webhook API][pingdom-webhooks] for more information on contact methods and settings if this method does not suit your needs.
 
 <a name="setup-redshift" />
+
 ## 2.2 Redshift
 
 If you are running the Snowplow batch (Hadoop) flow with Amazon Redshift, then you should deploy the relevent event tables into your Amazon Redshift.
 
 You can find the table definitions here:
 
-* [incident_assign_1.sql] [assign]
-* [incident_notify_of_close_1.sql] [close]
+* [incident_assign_1.sql][assign]
+* [incident_notify_of_close_1.sql][close]
 
 Make sure to deploy this table into the same schema as your `events` table.
 

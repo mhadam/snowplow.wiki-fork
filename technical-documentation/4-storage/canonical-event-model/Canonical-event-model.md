@@ -1,6 +1,7 @@
-[**HOME**](Home) > [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow technical documentation) > [**Storage**](storage documentation) > Canonical Event Model
+[**HOME**](Home) > [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow-technical-documentation) > [**Storage**](storage-documentation) > Canonical Event Model
 
 <a name="top" />
+
 # Canonical event model
 
 This relates to the Canonical Event Model from Snowplow Release 73 Cuban Macaw onwards. For previous versions:
@@ -11,12 +12,13 @@ This relates to the Canonical Event Model from Snowplow Release 73 Cuban Macaw o
 
 Table of contents:
 
-1. [Overview](#overview)  
-2. [The Snowplow canonical data structure: understanding the individual fields](#model)  
-3. [A note about data storage formats](#note)  
-4. [Specific unstructured events and custom contexts](#specific-unstruct-events-contexts)  
+1. [Overview](#overview)
+2. [The Snowplow canonical data structure: understanding the individual fields](#model)
+3. [A note about data storage formats](#note)
+4. [Specific unstructured events and custom contexts](#specific-unstruct-events-contexts)
 
 <a name="overview" />
+
 ## 1. Overview
 
 In order to analyse Snowplow data, it is important to understand how it is structured. We have tried to make the structure of Snowplow data as simple, logical, and easy-to-query as possible.
@@ -30,40 +32,43 @@ In order to analyse Snowplow data, it is important to understand how it is struc
 * **Immutable log**. The Snowplow data table is designed to be immutable: the data in each line should not change over time. Data points that we would expect to change over time (e.g. what cohort a particular user belongs to, how we classify a particular visitor) can be derived from Snowplow data. However, our recommendation is that these derived fields should be defined and calculated at analysis time, stored in a separate table and joined to the *Snowplow events table* when performing any analysis
 
 <a name="model" />
+
 ## 2. The Snowplow canonical data structure: understanding the individual fields
 
-- 2.1 [**Common fields (platform and event independent)**](#common)  
-  - 2.1.1 [Application fields](#application)  
-  - 2.1.2 [Date / time fields](#date-time)  
-  - 2.1.3 [Event / transaction fields](#eventtransaction)  
-  - 2.1.4 [Snowplow version fields](#version)  
-  - 2.1.5 [User-related fields](#user)  
-  - 2.1.6 [Device and operating system fields](#device)  
+- 2.1 [**Common fields (platform and event independent)**](#common)
+  - 2.1.1 [Application fields](#application)
+  - 2.1.2 [Date / time fields](#date-time)
+  - 2.1.3 [Event / transaction fields](#eventtransaction)
+  - 2.1.4 [Snowplow version fields](#version)
+  - 2.1.5 [User-related fields](#user)
+  - 2.1.6 [Device and operating system fields](#device)
   - 2.1.7 [Location fields](#location)
   - 2.1.8 [IP address-based fields](#ip)
   - 2.1.9 [Metadata fields](#metadata)
-- 2.2 [**Platform-specific fields**](#platform)  
-  - 2.2.1 [Web-specific fields](#web)  
+- 2.2 [**Platform-specific fields**](#platform)
+  - 2.2.1 [Web-specific fields](#web)
 - 2.3 [**Event-specific fields**](#event)
-  - 2.3.1 [Page views](#pageview)  
-  - 2.3.2 [Page pings](#pagepings)  
-  - 2.3.3 [Ecommerce transations](#ecomm)   
-  - 2.3.4 [Error tracking](#error)  
-  - 2.3.5 [Custom structured events](#customstruct)  
+  - 2.3.1 [Page views](#pageview)
+  - 2.3.2 [Page pings](#pagepings)
+  - 2.3.3 [Ecommerce transations](#ecomm)
+  - 2.3.4 [Error tracking](#error)
+  - 2.3.5 [Custom structured events](#customstruct)
   - 2.3.6 [Custom unstructured events](#customunstruct)
   - 2.3.7 [Custom contexts](#customcontexts)
 - 2.4 [**Specific unstructured events**](#specific-unstruct-events-contexts)
 
 <a name="common" />
+
 ### 2.1 Common fields (platform and event independent)
 
 <a name="application" />
+
 #### 2.1.1 Application fields
 
 | **Field**       | **Type** | **Description** | **Reqd?** | **Example**    |
 |:----------------|:---------|:----------------|:----------|:---------------|
 | `app_id`        | text     | Application ID  | Yes       | 'angry-birds'  |
-| `platform`      | text     | Platform        | Yes       | 'web'          |    
+| `platform`      | text     | Platform        | Yes       | 'web'          |
 
 The application ID is used to distinguish different applications that are being tracked by the same Snowplow stack, e.g. `production` versus `dev`.
 
@@ -72,6 +77,7 @@ The platform ID is used to distinguish the same app running on different platfor
 Back to [top](#top).
 
 <a name="date-time" />
+
 #### 2.1.2 Date / time fields
 
 | **Field**       | **Type** | **Description** | **Reqd?** | **Example**    |
@@ -87,6 +93,7 @@ Back to [top](#top).
 Back to [top](#top).
 
 <a name="eventtransaction" />
+
 #### 2.1.3 Event / transaction fields
 
 | **Field**       | **Type** | **Description** | **Reqd?** | **Example**    |
@@ -96,11 +103,12 @@ Back to [top](#top).
 | `txn_id`        | int      | Transaction ID set client-side, used to de-dupe records | No | 421828 |
 | `event_fingerprint`        | text      | Hash client-set event fields | No | AADCE520E20C2899F4CED228A79A3083 |
 
-A complete list of event types is given [here] (#event).
+A complete list of event types is given [here](#event).
 
 Back to [top](#top).
 
 <a name="version" />
+
 #### 2.1.4 Snowplow version fields
 
 | **Field**       | **Type** | **Description** | **Reqd?** | **Example**    |
@@ -116,6 +124,7 @@ Some Snowplow Trackers allow the user to name each specific Tracker instance. `n
 Back to [top](#top).
 
 <a name="user" />
+
 #### 2.1.5 User-related fields
 
 | **Field**       | **Type** | **Description** | **Reqd?** | **Example**    |
@@ -133,6 +142,7 @@ Back to [top](#top).
 Back to [top](#top).
 
 <a name="device" />
+
 #### 2.1.6 Device and operating system fields
 
 | **Field**       | **Type** | **Description** | **Reqd?** | **Example**    |
@@ -142,13 +152,14 @@ Back to [top](#top).
 | `dvce_ismobile` | boolean  | Is the device mobile? | No  | 1              |
 | `dvce_screenheight` | int  | Screen height in pixels | No | 1024           |
 | `dvce_screenwidth`  | int  | Screen width in pixels  | No | 1900           |
-| `os_name`       | text     | Name of operating system | No | 'Android'      | 
+| `os_name`       | text     | Name of operating system | No | 'Android'      |
 | `os_family`     | text     | Operating system family | No | 'Linux'        |
 | `os_manufacturer` | text   | Company responsible for OS | No | 'Apple'        |
 
 Back to [top](#top).
 
 <a name="location" />
+
 #### 2.1.7 Location fields
 
 | **Field**       | **Type** | **Description** | **Reqd?** | **Example**    |
@@ -163,6 +174,7 @@ Back to [top](#top).
 | `geo_timezone` | text     | Visitor timezone name | No | 'Europe/London'      |
 
 <a name="ip" />
+
 #### 2.1.8 IP address-based fields
 
 | **Field**       | **Type** | **Description** | **Reqd?** | **Example**    |
@@ -173,6 +185,7 @@ Back to [top](#top).
 | `ip_netspeed`  | text     | Visitor's connection type | No | 'Cable/DSL'           |
 
 <a name="metadata" />
+
 #### 2.1.9 Metadata fields
 
 Fields containing information about the event type.
@@ -185,9 +198,11 @@ Fields containing information about the event type.
 | `event_version` | text     | Version of event schema | No        | '1-0-2'           |
 
 <a name="platform" />
+
 ### 2.2 Platform-specific fields
 
 <a name="web" />
+
 #### 2.2.1 Web-specific fields
 
 | **Field**       | **Type** | **Description** | **Reqd?** | **Example**    |
@@ -216,7 +231,7 @@ Fields containing information about the event type.
 | **Document fields** |      |                 |           |           |                |
 | `doc_charset`   | text     | The page’s character encoding | No | , 'UTF-8' |
 | `doc_width`     | int      | The page's width in pixels  | No | 1024       |
-| `doc_height`    | int      | The page's height in pixels | No | 3000       | 
+| `doc_height`    | int      | The page's height in pixels | No | 3000       |
 | **Marketing / traffic source fields** |          |                 |           |           |                |
 | `mkt_medium`    | text     | Type of traffic source | No | 'cpc', 'affiliate', 'organic', 'social' |
 | `mkt_source`    | text     | The company / website where the traffic came from | No | 'Google', 'Facebook' |
@@ -254,6 +269,7 @@ See [issue 94](https://github.com/snowplow/snowplow/issues/94) for more details 
 Back to [top](#top).
 
 <a name="event" />
+
 ### 2.3 Event-specific fields
 
 Snowplow includes specific fields to capture data associated with specific events.
@@ -274,6 +290,7 @@ Snowplow currently supports (or will support in the near future) the following e
 Details of which fields are available for which events are given below:
 
 <a name="pageview" />
+
 #### 2.3.1 Page views
 
 There are currently no fields that are specific to `page_view` events: all the fields that are required are part of the standard fields available for any [web-based event](#web) e.g. `page_urlscheme`, `page_title`.
@@ -281,20 +298,22 @@ There are currently no fields that are specific to `page_view` events: all the f
 Back to [top](#top).
 
 <a name="pagepings" />
+
 #### 2.3.2 Page pings
 
 There are four additional fields included with page pings that indicate how a user has scrolled over a web page since the last page ping:
 
 | **Field**       | **Type** | **Description** | **Reqd?** | **Example**    |
 |:----------------|:---------|:----------------|:----------|:---------------|
-| `pp_xoffset_min`| integer  | Minimum page x offset seen in the last ping period | No | 0 | 
-| `pp_xoffset_max`| integer  | Maximum page x offset seen in the last ping period | No | 100 | 
-| `pp_yoffset_min`| integer  | Minimum page y offset seen in the last ping period | No | 0 | 
-| `pp_yoffset_max`| integer  | Maximum page y offset seen in the last ping period | No | 200 | 
+| `pp_xoffset_min`| integer  | Minimum page x offset seen in the last ping period | No | 0 |
+| `pp_xoffset_max`| integer  | Maximum page x offset seen in the last ping period | No | 100 |
+| `pp_yoffset_min`| integer  | Minimum page y offset seen in the last ping period | No | 0 |
+| `pp_yoffset_max`| integer  | Maximum page y offset seen in the last ping period | No | 200 |
 
 Back to [top](#top).
 
 <a name="ecomm" />
+
 #### 2.3.3 Ecommerce transactions
 
 There are a large number of fields specifically for transaction events.
@@ -330,6 +349,7 @@ Fields that start `tr_` relate to the transaction as a whole. Fields that start 
 Back to [top](#top).
 
 <a name="error" />
+
 #### 2.3.4 Error tracking
 
 This has not been implemented yet.
@@ -337,6 +357,7 @@ This has not been implemented yet.
 Back to [top](#top).
 
 <a name="customstruct" />
+
 #### 2.3.5 Custom structured events
 
 If you wish to track an event that Snowplow does not recognise as a first class citizen (i.e. one of the events listed above), then you can track them using the generic 'custom structured events'. There are five fields that are available to store data related to custom events:
@@ -355,13 +376,14 @@ See [issue 74](https://github.com/snowplow/snowplow/issues/74) for additional in
 Back to [top](#top).
 
 <a name="customunstruct" />
+
 #### 2.3.6 Custom unstructured events
 
 Custom unstructured events are a flexible tool that enable Snowplow users to define their own event types and send them into Snowplow.
 
-When a user sends in a custom unstructured event, they do so as a JSON of name-value properties that conforms to a JSON schema defined for the event earlier. 
+When a user sends in a custom unstructured event, they do so as a JSON of name-value properties that conforms to a JSON schema defined for the event earlier.
 
-The unstructured event is not part of the `atomic.events` table; instead, for users running on Redshift, it is shredded into its own table. The fields in this table will be determined by the JSON schema defined for the event in advance. Users can query just the table for that particular unstructured event, if that's all that's required for their analysis, or join that table back to the `atomic.events` table by 
+The unstructured event is not part of the `atomic.events` table; instead, for users running on Redshift, it is shredded into its own table. The fields in this table will be determined by the JSON schema defined for the event in advance. Users can query just the table for that particular unstructured event, if that's all that's required for their analysis, or join that table back to the `atomic.events` table by
 
 ```
 atomic.my_example_unstructured_event_table.root_id = atomic.events.event_id
@@ -370,9 +392,10 @@ atomic.my_example_unstructured_event_table.root_id = atomic.events.event_id
 Back to [top](#top).
 
 <a name="customcontexts" />
+
 #### 2.3.7 Contexts
 
-Contexts enable Snowplow users to define their own entities that are related to events, and fields that are related to each of those entities. For example, an online retailer may choose to define a `user` context, to store information about a particular user, which might include data points like the users Facebook ID, age, membership details etc. In addition, they may also define a `product` context, with product data e.g. SKU, name, created date, description, tags etc. 
+Contexts enable Snowplow users to define their own entities that are related to events, and fields that are related to each of those entities. For example, an online retailer may choose to define a `user` context, to store information about a particular user, which might include data points like the users Facebook ID, age, membership details etc. In addition, they may also define a `product` context, with product data e.g. SKU, name, created date, description, tags etc.
 
 An event can have any number of custom contexts attached. Each context is passed into Snowplow as a JSON. Additionally, the Snowplow Enrichment process can derive additional contexts.
 
@@ -381,6 +404,7 @@ Contexts are not part of the `atomic.events` table; instead, for users running o
 Back to [top](#top).
 
 <a name="specific-unstruct-events-contexts" />
+
 ### 2.4 Specific unstructured events and custom contexts
 
 These are also a variety of unstructured events and custom contexts defined by Snowplow. You can find their schemas [here][snowplow-schemas].
@@ -388,6 +412,7 @@ These are also a variety of unstructured events and custom contexts defined by S
 Back to [top](#top).
 
 <a name="note" />
+
 ## 3. A note about storage data formats
 
 * Currently, Snowplow data is stored in S3 (for processing in Apache Hive, Pig, and / or Mahout), Redshift and PostgreSQL (for processing by any SQL-compatible analytics package).

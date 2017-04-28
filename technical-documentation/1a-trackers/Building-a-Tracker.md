@@ -1,4 +1,4 @@
-[**HOME**](Home) > [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow technical documentation) > [**Trackers**](trackers) > Building a Tracker
+[**HOME**](Home) > [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow-technical-documentation) > [**Trackers**](trackers) > Building a Tracker
 
 ## Building a Tracker
 
@@ -69,7 +69,7 @@ The body of the POST request should be a [self-describing JSON](http://snowplowa
 }
 ```
 
-The inner `data` field is an array of JSONs, each corresponding to a single individual event. 
+The inner `data` field is an array of JSONs, each corresponding to a single individual event.
 
 
 ### Create a Tracker class

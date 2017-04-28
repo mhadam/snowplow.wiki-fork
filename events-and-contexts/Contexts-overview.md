@@ -9,9 +9,9 @@ When an **event** occurs, it generally involves a number of *entities*, and take
 3. A variation on the web page that was part of an A/B test
 4. A set of e.g. products that were returned from the search
 
-All the above are examples of "contexts". 
+All the above are examples of "contexts".
 
-> A **context** is the group of entities associated with or describing the setting in which an event has taken place. 
+> A **context** is the group of entities associated with or describing the setting in which an event has taken place.
 
 What makes contexts interesting is that they are common across multiple different event types. For example, the following events for a retailer will all involve a "product" context:
 
@@ -76,7 +76,7 @@ Contexts provide a convenient way in Snowplow to schema common entities once, an
 
 Moreover, *multiple* contexts of either different or the same type can be sent with a single event. For example, you could send multiple product impressions (one for each product) with a page view event (say, if a user has loaded a catalogue page) or a transaction event (if a user has multiple line items in a transaction).
 
-We distiguish 2 types of contexts:
+We distinguish 2 types of contexts:
 
 - [Predefined contexts](#predefined-contexts)
 - [Custom contexts](#custom-contexts)
@@ -84,7 +84,8 @@ We distiguish 2 types of contexts:
 A contexts can be added to any event (function) as a last parameter (argument).
 
 <a name="predefined-contexts" />
-##Predefined contexts
+
+## Predefined contexts
 
 Predefined contexts are Snowplow authored web contexts and are available with JavaScript tracker. They are enabled at the tracker initialization step and thus the associated data will be added automatically to any Snowplow event fired on the page.
 
@@ -106,7 +107,8 @@ snowplow_name_here("newTracker", "cf", "d3rkrsqld9gmqf.cloudfront.net", {
 See [Javascript tracker](1-General-parameters-for-the-Javascript-tracker#2214-adding-predefined-contexts) for the specific parameters to be used with predefined contexts.
 
 <a name="custom-contexts" />
-##Custom contexts
+
+## Custom contexts
 
 Custom contexts let you add additional information about the circumstances surrounding an event in the form of a dictionary. More specifically, a dictionary is represented with a [self-describing JSON](http://snowplowanalytics.com/blog/2014/05/15/introducing-self-describing-jsons/).
 
@@ -140,7 +142,7 @@ A few dos and don'ts for the *JSON*s inside each context entry JSONs:
 
 » Read more about [custom contexts](Custom-contexts)
 
-##Further reading
+## Further reading
 
 To find out more about the concepts mentioned above and ultimately how to set up custom contexts and send them to Snowplow pipeline, follow the links below.
 

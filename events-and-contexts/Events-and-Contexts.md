@@ -1,11 +1,11 @@
 [**HOME**](Home) » **EVENTS AND CONTEXTS**
 
-##Overview
+## Overview
 
 **Snowplow** is an *event analytics platform*. Once you have set up one or more [Snowplow trackers](Setting-up-a-tracker), every time an event occurs, Snowplow should spot the event, generate a packet of data (context) to describe the event, and send that event into the *Snowplow data pipeline*.
 
 > The **Snowplow pipeline** is built to enable a very clean separation of the following steps in the data processing flow:
-> 
+>
 > - [Data collection](setting-up-a-collector)
 > - [Data enrichment](setting-up-enrich)
 > - [Data modelling](getting-started-with-data-modeling)
@@ -30,13 +30,13 @@ When it comes to actual implementation of *event dictionaries* we prefer to call
 
 When an **event** occurs, it generally involves a number of **entities**, and takes place in a particular setting. Those entities we call **contexts**.
 
-> A **context** is the group of entities associated with or describing the setting in which an **event** has taken place. 
+> A **context** is the group of entities associated with or describing the setting in which an **event** has taken place.
 
 In fact, we can consider an event a *named context* where "named" means a name given to a specific event. That is it signifies an action for which we gave a specific name and we are interested in a bunch of data (context) characterising the event.
 
 Due to the nature of *custom* (as well as Snowplow authored) events/contexts there has to be some mechanism in place ensuring validity of the captured data. JSON schema plays a significant part in this mechanism. Both events and contexts have schemas which define what data is recorded about the event, or context, at data capture time.
 
-> **JSON schema** specifies a *JSON*-based format to define the structure of JSON data for validation, documentation, and interaction control. 
+> **JSON schema** specifies a *JSON*-based format to define the structure of JSON data for validation, documentation, and interaction control.
 
 <p></p>
 
@@ -49,7 +49,7 @@ Snowplow requires that you put together schemas for your events and contexts, ah
 
 **Iglu** is a key technology for making this possible. It is machine-readable, open-source *schema registry* for JSON and Thrift schemas from the team at Snowplow Analytics. A schema registry is like [Git](https://en.wikipedia.org/wiki/Git_(software)) but holds data schemas instead of software or code.
 
-###Further reading
+### Further reading
 
 To find out more about the concepts mentioned above and ultimately how to set up custom events and contexts and send them to Snowplow pipeline, follow the links below.
 

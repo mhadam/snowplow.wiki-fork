@@ -4,19 +4,19 @@
 
 **This page refers to version 0.6.1 of the Snowplow Ruby Tracker. Documentation for other versions is available:**
 
-*[Version 0.2][ruby-0.2]*  
-*[Version 0.3][ruby-0.3]*  
-*[Version 0.4][ruby-0.4]*  
-*[Version 0.5][ruby-0.5]* 
+*[Version 0.2][ruby-0.2]*
+*[Version 0.3][ruby-0.3]*
+*[Version 0.4][ruby-0.4]*
+*[Version 0.5][ruby-0.5]*
 
 **Please note** that this version of the Ruby Tracker is dependent upon the [Snowplow 0.9.14 release][snowplow-0.9.14]. You will need to be running version 0.9.14 or later of Snowplow for events sent by the tracker using POST to be successfully processed. Snowplow 0.9.14 contains updates to the Hadoop Enrich and Scala Hadoop Shred jobs to allow the newer self-describing JSON version which the Ruby Tracker sends for POSTs. For more information, please refer to tickets [#1220][issue-1220] and [#1231][issue-1231].
 
 ## Contents
 
-- 1. [Overview](#overview)  
-- 2. [Initialization](#init)  
+- 1. [Overview](#overview)
+- 2. [Initialization](#init)
   - 2.1 [Requiring the module](#requiring)
-  - 2.2 [Creating a tracker](#create-tracker)  
+  - 2.2 [Creating a tracker](#create-tracker)
   - 2.3 [Creating multiple trackers](#multi-tracker)
 - 3 [Adding extra data](#add-data)
   - 3.1 [`set_platform`](#set-platform)
@@ -136,7 +136,7 @@ t2 = SnowplowTracker::Tracker.new(SnowplowTracker::AsyncEmitter.new("my-company.
 t2.set_platform("cnsl")
 t2.track_screen_view("Game HUD", "23")
 
-t1.track_screen_view("Test", "23") # Back to first tracker 
+t1.track_screen_view("Test", "23") # Back to first tracker
 ```
 
 [Back to top](#top)
@@ -152,7 +152,7 @@ You can configure the a tracker instance with additional information about your 
 | [`set_platform`](#set-platform)                   | Set the application platform     |
 | [`set_user_id`](#set-user-id)                     | Set the user ID                   |
 | [`set_screen_resolution`](#set-screen-resolution) | Set the screen resolution          |
-| [`set_viewport`](#set-viewport)                   | Set the viewport dimensions  | 
+| [`set_viewport`](#set-viewport)                   | Set the viewport dimensions  |
 | [`set_color_depth`](#set-color-depth)             | Set the screen color depth |
 | [`set_timezone`](#set-timezone)                   | Set the timezone               |
 | [`set_lang`](#set-language)                       | Set the language             |
@@ -281,6 +281,7 @@ tracker.set_ip_address('34.633.11.139')
 ```
 
 <a name="set-useragent" />
+
 ### 3.9 Setting the useragent with `set_useragent`
 
 If you have access to the user's useragent (sometimes called "browser string"), you can set it like this:
@@ -290,6 +291,7 @@ tracker.set_useragent('Mozilla/5.0 (Windows NT 5.1; rv:23.0) Gecko/20100101 Fire
 ```
 
 <a name="set-domain-user-id" />
+
 ### 3.10 Setting the domain user ID with `set_domain_user_id`
 
 The `domain_userid` field of the Snowplow event model corresponds to the ID stored in the first party cookie set by the Snowplow JavaScript Tracker. If you want to match up server-side events with client-side events, you can set the domain user ID for server-side events like this:
@@ -317,6 +319,7 @@ The first argument is the cookies object (see the [documentation](http://api.rub
 If you used the "cookieName" configuration option of the Snowplow JavaScript Tracker, replace "_sp_" with the same string you passed as the cookieName.
 
 <a name="set-network-user-id" />
+
 ### 3.11 Setting the network user ID with `set_network_user_id`
 
 The `network_user_id` field of the Snowplow event model corresponds to the ID stored in the third party cookie set by the Snowplow Clojure Collector. You can set the network user ID for server-side events like this:
@@ -348,7 +351,7 @@ Tracking methods supported by the Ruby Tracker at a glance:
 | **Function**                                  | **Description**                                        |
 |----------------------------------------------:|:-------------------------------------------------------|
 | [`track_page_view`](#page-view)             | Track and record views of web pages.                   |
-| [`track_ecommerce_transaction`](#ecommerce-transaction)   | Track an ecommerce transaction          | 
+| [`track_ecommerce_transaction`](#ecommerce-transaction)   | Track an ecommerce transaction          |
 | [`track_screen_view`](#screen-view)         | Track the user viewing a screen within the application |
 | [`track_struct_event`](#struct-event)       | Track a Snowplow custom structured event               |
 | [`track_self_describing_event`](#self-describing-event)   | Track a Snowplow custom unstructured event             |
@@ -371,7 +374,7 @@ Each `track_XXX` method expects arguments of a certain type. The types are valid
 
 #### 4.1.2 Optional context argument
 
-Each `track_XXX` method has `context` as its penultimate optional parameter. This is for an optional non-empty array of [self-describing custom context JSONs][self-describing-jsons] attached to the event. Each element of the `context` argument should be a `SelfDescribingJson` with two fields: the "schema", pointing to the JSON schema against which the context will be validated, and the "data", containing the context data itself. The "data" field should contain a flat hash of key-value pairs.  
+Each `track_XXX` method has `context` as its penultimate optional parameter. This is for an optional non-empty array of [self-describing custom context JSONs][self-describing-jsons] attached to the event. Each element of the `context` argument should be a `SelfDescribingJson` with two fields: the "schema", pointing to the JSON schema against which the context will be validated, and the "data", containing the context data itself. The "data" field should contain a flat hash of key-value pairs.
 
 **Important:**
 * Even if only one custom context is being attached to an event, it still needs to be wrapped in an array.
@@ -387,7 +390,7 @@ For example, an array containing two custom contexts relating to the event of a 
     {
       'movie_name' => 'Solaris',
       'poster_country' => 'JP',
-      'poster_year$dt' => new Date(1978, 1, 1)  
+      'poster_year$dt' => new Date(1978, 1, 1)
     }
   ),
 
@@ -418,10 +421,10 @@ As of version 0.6.0, providing a `SnowplowTracker::TrueTimestamp` object as the 
 e = SnowplowTracker::Emitter.new('com.acme')
 t = SnowplowTracker::Tracker.new(e)
 
-t.track_page_view('http://example.com', 
+t.track_page_view('http://example.com',
                   'Snowplow Ruby Tracker 0.6.0 released',
-                  'http://www.referrer.com', 
-                   nil, 
+                  'http://www.referrer.com',
+                   nil,
                    SnowplowTracker::TrueTimestamp.new(1471419787572))
 ```
 
@@ -431,10 +434,10 @@ will send a page view event with a true timestamp to a collector at 'com.acme'. 
 e = SnowplowTracker::Emitter.new('com.acme')
 t = SnowplowTracker::Tracker.new(e)
 
-t.track_page_view('http://example.com', 
+t.track_page_view('http://example.com',
                   'Snowplow Ruby Tracker 0.6.0 released',
-                  'http://www.referrer.com', 
-                   nil, 
+                  'http://www.referrer.com',
+                   nil,
                    1471419787572)
 ```
 
@@ -452,7 +455,7 @@ tracker.track_page_view('http://www.film_company.com/movie_poster', nil, nil, [
     {
       'movie_name' => 'Solaris',
       'poster_country' => 'JP',
-      'poster_year$dt' => new Date(1978, 1, 1)  
+      'poster_year$dt' => new Date(1978, 1, 1)
     }
   ),
 
@@ -660,7 +663,7 @@ tracker.track_self_describing_event(SnowplowTracker::SelfDescribingJson.new(
     "saveId" => "4321",
     "level" => 23,
     "difficultyLevel" => "HARD",
-    "dlContent" => true 
+    "dlContent" => true
   }
 ))
 ```
@@ -681,7 +684,7 @@ Tracker instances must be initialized with an emitter. This section will go into
 
 ### 5.1. Overview
 
-Each tracker instance must now be initialized with an Emitter which is responsible for firing events to a Collector. An Emitter instance is initialized with two arguments: an endpoint and an optional configuration hash. 
+Each tracker instance must now be initialized with an Emitter which is responsible for firing events to a Collector. An Emitter instance is initialized with two arguments: an endpoint and an optional configuration hash.
 
 A simple example with just an endpoint:
 
@@ -700,10 +703,10 @@ my_emitter = SnowplowTracker::AsyncEmitter.new('d3rkrsqld9gmqf.cloudfront.net', 
   :method => 'post',
   :port => 80,
   :buffer_size => 0,
-  :on_success => lambda { |success_count| 
+  :on_success => lambda { |success_count|
     puts '#{success_count} events sent successfully'
   },
-  :on_failure => lambda { |success_count, failures| 
+  :on_failure => lambda { |success_count, failures|
     puts '#{success_count} events sent successfully, #{failures.size} events sent unsuccessfully'
   },
   :thread_count => 10
@@ -792,6 +795,7 @@ You may wish to add backoff logic to delay the resending.
 The Snowplow Ruby Tracker uses the [Ruby Contracts gem][contracts] for typechecking. As of version 0.6.0 these cannot be turned off.
 
 <a name="logging" />
+
 ## 7. Logging
 
 The emitters.rb module has Ruby logging enabled to give you information about requests being sent. The logger prints messages about what emitters are doing. By default, only messages with priority "INFO" or higher will be logged.

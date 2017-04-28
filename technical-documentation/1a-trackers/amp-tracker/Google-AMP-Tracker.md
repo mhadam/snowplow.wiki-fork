@@ -4,22 +4,22 @@
 
 ## Contents
 
-- 1. [Overview](#overview)  
-- 2. [Standard variables](#vars)  
-  - 2.1 [collectorHost](#collectorHost)  
-  - 2.2 [appId](#appId)  
-- 3. [Tracking events](#events)  
-  - 2.1 [Page view](#pageView)  
-  - 2.2 [Structured event](#structEvent)  
-- 4. [Analytics](#analytics)  
+- 1. [Overview](#overview)
+- 2. [Standard variables](#vars)
+  - 2.1 [collectorHost](#collectorHost)
+  - 2.2 [appId](#appId)
+- 3. [Tracking events](#events)
+  - 2.1 [Page view](#pageView)
+  - 2.2 [Structured event](#structEvent)
+- 4. [Analytics](#analytics)
 
 <a name="overview" />
 
 ## 1. Overview
 
-Snowplow is collaborating with Google on their [Accelerated Mobile Pages Project][amp] (AMPP or AMP for short). AMP is an open source (Apache License 2.0) initiative to improve the mobile web experience by optimizing web pages for mobile devices.
+Snowplow is collaborating with Google on their [Accelerated Mobile Pages Project][amp](AMPP or AMP for short). AMP is an open source (Apache License 2.0) initiative to improve the mobile web experience by optimizing web pages for mobile devices.
 
-To learn more about analytics for AMP pages see the [amp-analytics] [amp-analytics] reference. For general information about AMP see [What Is AMP?][amp-what] on the [Accelerated Mobile Pages (AMP) Project][amp] site.
+To learn more about analytics for AMP pages see the [amp-analytics][amp-analytics] reference. For general information about AMP see [What Is AMP?][amp-what] on the [Accelerated Mobile Pages (AMP) Project][amp] site.
 
 Snowplow is natively integrated into the project, so pages optimized with AMP HTML can be tracked in Snowplow by adding the appropriate `amp-analytics` tag to your pages:
 

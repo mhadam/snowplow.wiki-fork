@@ -31,7 +31,7 @@ See [[Hosted assets]] for the zipfile to download.
 
 ### Option 2: compile from source
 
-Alternatively, you can build it from the source files. To do so, you will need [scala][scala] and [sbt][sbt] installed. 
+Alternatively, you can build it from the source files. To do so, you will need [scala][scala] and [sbt][sbt] installed.
 
 To do so, clone the Snowplow repo:
 
@@ -109,7 +109,7 @@ $ ./kinesis-lzo-sink-0.4.0 --config my.conf
 
 This will start the process of reading events from Kinesis, compressing them, and writing them to S3.
 
-##Further reading
+## Further reading
 
 - [Kinesis at-least-once processing](Kinesis-at-least-once-processing)
 

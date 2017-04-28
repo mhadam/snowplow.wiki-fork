@@ -12,7 +12,7 @@ This page refers to version 0.6.2 of the Snowplow Objective-C Tracker, which is 
 
 - 1. [Overview](#overview)
 - 2. [Integration options](#integration-options)
-  - 2.1 [Tracker compatibility](#compatibility)  
+  - 2.1 [Tracker compatibility](#compatibility)
   - 2.2 [Dependencies](#dependencies)
 - 3. [Setup](#setup)
   - 3.1 [CocoaPods](#cocoapods)
@@ -27,7 +27,7 @@ This page refers to version 0.6.2 of the Snowplow Objective-C Tracker, which is 
 
 ## 1. Overvew
 
-The [Snowplow Objective-C Tracker](https://github.com/snowplow/snowplow-objc-tracker) lets you add analytics to your [iOS] [ios], [OSX][osx] and [tvOS][tvos] applications.
+The [Snowplow Objective-C Tracker](https://github.com/snowplow/snowplow-objc-tracker) lets you add analytics to your [iOS][ios], [OSX][osx] and [tvOS][tvos] applications.
 
 The Tracker should be relatively straightforward to setup if you are familiar with iOS/OSX development using CocoaPods.
 
@@ -91,7 +91,7 @@ First, git clone the latest version of the tracker to your local machine:
 
     git clone https://github.com/snowplow/snowplow-objc-tracker.git
 
-If you don't have git installed locally, [install it] [git] first.
+If you don't have git installed locally, [install it][git] first.
 
 #### Copy the tracker into your project
 
@@ -113,7 +113,7 @@ Make sure that the suggested options for adding `Snowplow` are set **Create grou
 
 #### 3.2.1 Add the FMDB dependency
 
-The tracker is dependent on [FMDB] [fmdb] version 2.3, an Objective-C wrapper around SQLite.
+The tracker is dependent on [FMDB][fmdb] version 2.3, an Objective-C wrapper around SQLite.
 
 As before, git clone the dependency and copy the source into your XCode project's folder:
 
@@ -143,7 +143,7 @@ to:
 
 #### 3.2.2 Add the Reachability dependency
 
-For iOS only, the tracker is dependent on [Reachability] [reach] version 3.2, a drop in replacement for Apple's Reachability class.
+For iOS only, the tracker is dependent on [Reachability][reach] version 3.2, a drop in replacement for Apple's Reachability class.
 
 As before, git clone the dependency and copy the source into your XCode project's folder:
 
@@ -242,7 +242,7 @@ This portion was based on the developers guide from Apple on [importing static l
 
 #### 3.3.1 Add the OpenIDFA dependency
 
-If you are embedding this app in an iOS app, then you will need to add [OpenIDFA] [openidfa], which has been intentionally excluded from the Static Library.
+If you are embedding this app in an iOS app, then you will need to add [OpenIDFA][openidfa], which has been intentionally excluded from the Static Library.
 
 **Do not add OpenIDFA for a OS-X app.**
 

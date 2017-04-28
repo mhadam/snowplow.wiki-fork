@@ -10,7 +10,7 @@ The Scala Stream Collector has a number of configuration options available.
 
 ### Template
 
-Download a template configuration file from GitHub: [config.hocon.sample] [app-conf].
+Download a template configuration file from GitHub: [config.hocon.sample][app-conf].
 
 Now open the `config.hocon.sample` file in your editor of choice.
 

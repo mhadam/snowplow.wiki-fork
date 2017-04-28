@@ -8,7 +8,7 @@ Snowplow supports storing your data into four different data stores:
 
 | **Storage**               | **Description**                                     | **Status**       |
 |:--------------------------|:----------------------------------------------------|:-----------------|
-| S3 (EMR, [Kinesis][kinesis]) | Data is stored in the S3 file system where it can be analysed using [EMR][emr] (e.g. Hive, Pig, Mahout) | Production-ready |
+| S3 (EMR, [Kinesis][kinesis]) | Data is stored in the S3 file system where it can be analysed using [EMR][emr](e.g. Hive, Pig, Mahout) | Production-ready |
 | [Redshift][setup-redshift]| A columnar database offered as a service on EMR. Optimized for performing OLAP analysis. Scales to Petabytes | Production-ready |
 | [PostgreSQL][setup-postgres]| A popular, open source, RDBMS database              | Production-ready |
 | [Elasticsearch][setup-elasticsearch] | A search server for JSON documents          | Production-ready |

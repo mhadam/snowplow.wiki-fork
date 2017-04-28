@@ -11,6 +11,7 @@ The following example classes are using the bare minimum of settings for buildin
 - 3. [Tracking Events](#events)
 
 <a name="classic" />
+
 ## 1. Classic Tracker
 
 You will need to have imported the following library into your project:
@@ -61,6 +62,7 @@ public class TrackerBuilderClassic {
 [Back to top](#top)
 
 <a name="rx-java" />
+
 ## 2. RxJava tracker
 
 You will need to have imported the following library into your project:
@@ -111,6 +113,7 @@ public class TrackerBuilderRx {
 [Back to top](#top)
 
 <a name="events" />
+
 ## 3. Tracking Events
 
 Once you have successfully built your Tracker object you can track events with calls like the following:

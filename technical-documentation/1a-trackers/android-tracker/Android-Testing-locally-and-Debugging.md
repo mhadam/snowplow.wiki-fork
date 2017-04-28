@@ -1,6 +1,6 @@
 <a name="top" />
 
-This page refers to instructions on testing the Android Tracker locally and debugging any issues that might crop up.  
+This page refers to instructions on testing the Android Tracker locally and debugging any issues that might crop up.
 These instuctions are aimed at version 0.5.0 of the Android Tracker.
 
 For instructions of previous versions:
@@ -13,6 +13,7 @@ For instructions of previous versions:
 - 2. [Common Issues](#issues)
 
 <a name="testing-locally" />
+
 ## 1. Testing Locally
 
 To test the Android Tracker locally we use a combination of two softwares: [Mountebank][mountebank] and [Ngrok][ngrok].
@@ -45,6 +46,7 @@ Once you have it running you can supply the tunnel URL for all logging of events
 [Back to top](#top)
 
 <a name="issues" />
+
 ## 2. Common Issues
 
 This section will detail how to handle common problems with running the local testing setup.
@@ -52,9 +54,10 @@ This section will detail how to handle common problems with running the local te
 [Back to top](#top)
 
 <a name="port-conflicts" />
+
 ### 2.1 Port Conflicts
 
-If you are already using ports `2525` or `4040` your vagrant up will fail.  Easiest way to resolve this is to stop any services running on these ports and then attempt to vagrant up again.  
+If you are already using ports `2525` or `4040` your vagrant up will fail.  Easiest way to resolve this is to stop any services running on these ports and then attempt to vagrant up again.
 
 However if this is not an option you will need to edit the `Vagrantfile` in the root of the project:
 
@@ -66,6 +69,7 @@ config.vm.network "forwarded_port", guest: 2525, host: 2525 ## Change the host t
 [Back to top](#top)
 
 <a name="events-failing" />
+
 ### 2.2 Sending failures
 
 If you have successfully started Ngrok and you have an endpoint but your events are not getting there chances are that Mountebank as failed to start properly.

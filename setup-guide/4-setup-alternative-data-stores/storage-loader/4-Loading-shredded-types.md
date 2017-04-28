@@ -8,6 +8,7 @@
 6. [Next steps](#next-steps)
 
 <a name="overview"/>
+
 ## 1. Overview
 
 Snowplow has a [Shredding process](Shredding) for Redshift which consists of three phases:
@@ -19,6 +20,7 @@ Snowplow has a [Shredding process](Shredding) for Redshift which consists of thr
 The third phase is instrumented by StorageLoader and is documented on this wiki page; to configure the first phase, visit the [Configuring shredding](5-Configuring-shredding) wiki page (second phase requires no configuration).
 
 <a name="snowplow-jsons"/>
+
 ## 2. Loading Snowplow-authored JSONs
 
 Loading Snowplow-authored JSONs is straightforward: Snowplow provides pre-made Redshift table definitions for all Snowplow-authored JSONs. You can find these here:
@@ -30,6 +32,7 @@ For example, if you have link click tracking enabled in the JavaScript Tracker, 
 Each table needs to be loaded using a JSON Paths file. Snowplow hosts JSON Paths files for all Snowplow-authored JSONs. StorageLoader will automatically locate these JSON Paths files and use them to load shredded types into Redshift.
 
 <a name="overview"/>
+
 ## 3. Defining and installing a new table
 
 ### 3.1 Overview
@@ -108,6 +111,7 @@ These keys are designed to make JOINs from these tables back to `atomic.events` 
 Install the table into your Redshift database. The table must be stored in the same schema as your `events` table.
 
 <a name="jsonpaths"/>
+
 ## 4. Creating and uploading a JSON Paths file
 
 ### 4.1 Overview
@@ -123,7 +127,7 @@ To correspond to the table definition, each JSON Path file must start with the f
 ```json
 {
   "jsonpaths": [
-  
+
     "$.schema.vendor",
     "$.schema.name",
     "$.schema.format",
@@ -173,6 +177,7 @@ Store the JSON Paths file in a sub-folder named after the vendor, for example:
     s3://acme-jsonpaths-files/com.acme.website/anonymous_customer_1.json
 
 <a name="configure"/>
+
 ## 5. Configuring StorageLoader
 
 Now you need to update StorageLoader's `config.yml` to load the shredded types. First, make sure that your `jsonpath_assets:` points to the private S3 bucket you stored the JSON Paths file in section 4.
@@ -195,6 +200,7 @@ shredded:
 If you are using separate configuration files make sure this cross-checks with the corresponding paths in your EmrEtlRunner's `config.yml`.
 
 <a name="next-steps"/>
+
 ## 6. Next steps
 
 That's it for configuring StorageLoader for shredding. You should be ready to load shredded types into Redshift.

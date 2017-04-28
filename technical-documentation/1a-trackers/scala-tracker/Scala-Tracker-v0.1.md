@@ -1,15 +1,15 @@
 <a name="top" />
 
-[**HOME**](Home) > [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow technical documentation) > [**Trackers**](trackers) > Scala Tracker
+[**HOME**](Home) > [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow-technical-documentation) > [**Trackers**](trackers) > Scala Tracker
 
 **This page refers to version 0.1.0 of the Snowplow Scala Tracker. Documentation for other versions is available:**
 
-*[Version 0.2][scala-0.2]*  
-*[Version 0.3][scala-0.3]*  
+*[Version 0.2][scala-0.2]*
+*[Version 0.3][scala-0.3]*
 
 ## Contents
 
-- 1. [Overview](#overview)  
+- 1. [Overview](#overview)
 - 2. [Initialization](#init)
   - 2.1. [Tracker](#tracker-init)
   - 2.2. [Subject](#subject)
@@ -17,6 +17,7 @@
 - 4. [Subject methods](#subject)
 
 <a name="overview" />
+
 ## 1. Overview
 
 The Snowplow Scala Tracker allows you to track Snowplow events in your Scala apps and servers.
@@ -30,9 +31,11 @@ A subject represents a single user whose events are tracked, and holds data spec
 A tracker always has one active subject at a time associated with it. The default subject only has "platform=server" configured, but you can replace it with a subject containing more data. The tracker constructs events with that subject and sends them to one or more emitters, which sends them on to a Snowplow collector.
 
 <a name="init" />
+
 ## 2. Initialization
 
 <a name="tracker-init" />
+
 ### 2.1 Tracker
 
 Assuming you have completed the [[Scala Tracker Setup]], you are ready to initialize the Scala Tracker.
@@ -54,6 +57,7 @@ The above code:
 * creates a tracker which can be used to send events to all emitters
 
 <a name="subject" />
+
 ### 2.2 Subject
 
 You can configure a subject with extra data and attach it to the tracker so that the data will be attached to every event:
@@ -67,6 +71,7 @@ tracker.setSubject(subject)
 
 
 <a name="events" />
+
 ## 3. Sending events
 
 Create a Snowplow unstructured event [self-describing JSON][self-describing-jsons] using the [json4s DSL][json4s-dsl]:
@@ -115,11 +120,13 @@ Currently supported methods are:
 + trackPageView
 
 <a name="subject" />
+
 ## 4. Subject methods
 
 A list of the methods used to add data to the Subject class.
 
 <a name="set-platform" />
+
 ### 4.1 Set the platform with `setPlatform`
 
 The default platform is `Server`. These are the available alternatives, all available in the package `com.snowplowanalytics.snowplow.scalatracker`:
@@ -142,6 +149,7 @@ subject.setPlatform(Tv)
 ```
 
 <a name="set-user-id" />
+
 ### 4.2 Set the user ID with `setUserId`
 
 You can make the user ID a string of your choice:
@@ -151,6 +159,7 @@ subject.setUserId("user-000563456")
 ```
 
 <a name="set-screen-resolution" />
+
 ### 4.3 Set the screen resolution with `setScreenResolution`
 
 If your Scala code has access to the device's screen resolution, you can pass it in to Snowplow. Both numbers should be positive integers; note the order is width followed by height. Example:
@@ -160,6 +169,7 @@ subject.setScreenResolution(1366, 768)
 ```
 
 <a name="set-viewport" />
+
 ### 4.4 Set the viewport dimensions with `setViewport`
 
 Similarly, you can pass the viewport dimensions in to Snowplow. Again, both numbers should be positive integers and the order is width followed by height. Example:
@@ -169,6 +179,7 @@ subject.setViewport(300, 200)
 ```
 
 <a name="set-color-depth" />
+
 ### 4.5 Set the color depth with `setColorDepth`
 
 If your Scala code has access to the bit depth of the device's color palette for displaying images, you can pass it in to Snowplow. The number should be a positive integer, in bits per pixel.
@@ -178,6 +189,7 @@ subject.setColorDepth(24)
 ```
 
 <a name="set-timezone" />
+
 ### 4.6 Setting the timezone with `setTimezone`
 
 If your Scala code has access to the timezone of the device, you can pass it in to Snowplow:
@@ -187,6 +199,7 @@ subject.setTimezone("Europe London")
 ```
 
 <a name="set-ip-address" />
+
 ### 4.8 Setting the IP address with `setIpAddress`
 
 If you have access to the user's IP address, you can set it like this:
@@ -196,6 +209,7 @@ subject.setIpAddresss("34.634.11.139")
 ```
 
 <a name="set-domain-user-id" />
+
 ### 4.9 Setting the domain user ID with `setDomainUserId`
 
 The `domain_userid` field of the Snowplow event model corresponds to the ID stored in the first party cookie set by the Snowplow JavaScript Tracker. If you want to match up server-side events with client-side events, you can set the domain user ID for server-side events like this:
@@ -205,6 +219,7 @@ subject.setDomainUserId("c7aadf5c60a5dff9")
 ```
 
 <a name="set-network-user-id" />
+
 ### 4.10 Setting the network user ID with `setNetworkUserId`
 
 The `network_user_id` field of the Snowplow event model corresponds to the ID stored in the third party cookie set by the Snowplow Clojure Collector and Scala Stream Collector. You can set the network user ID for server-side events like this:

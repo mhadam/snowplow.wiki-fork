@@ -6,8 +6,8 @@ At Snowplow, our daily lives wouldn't be nearly as productive without the genero
 
 | **Supported by**                 | **Description**                                                                               |
 |----------------------------------|-----------------------------------------------------------------------------------------------|
-| ![bizspark-logo] [bizspark-logo] | Snowplow Analytics Ltd is proud to be a member of the [Microsoft BizSpark Program] [bizspark] |
-| ![navicat-logo] [navicat-logo]   | [Navicat] [navicat] is our go-to database tool, so we were delighted to join Premiumsoft's Navicat Open Source Project License Program |
+| ![bizspark-logo][bizspark-logo] | Snowplow Analytics Ltd is proud to be a member of the [Microsoft BizSpark Program][bizspark] |
+| ![navicat-logo][navicat-logo]   | [Navicat][navicat] is our go-to database tool, so we were delighted to join Premiumsoft's Navicat Open Source Project License Program |
 
 ### Open source projects
 

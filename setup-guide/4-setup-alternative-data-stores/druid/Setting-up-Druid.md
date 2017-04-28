@@ -2,7 +2,7 @@
 
 [**HOME**](Home) > [**SNOWPLOW SETUP GUIDE**](Setting-up-Snowplow) > [**Step 4: setting up alternative data stores**](Setting-up-alternative-data-stores) > Setup Druid
 
-We support loading Snowplow events into [Druid] [druid] as part of the Snowplow Kinesis pipeline.
+We support loading Snowplow events into [Druid][druid] as part of the Snowplow Kinesis pipeline.
 
 We have two setup guides for working with Druid:
 
@@ -14,6 +14,7 @@ Both guides assume that you are using **Druid 0.8.3 Stable** - this is the versi
 TODO: move the below into the instance spec description
 
 <a name="prereq-java7" />
+
 ### 1.4 Java 7 of higher
 
 Each of your cluster machines must be running Java 7 or higher:

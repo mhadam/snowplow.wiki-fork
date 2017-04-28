@@ -4,11 +4,11 @@
 
 ## Contents
 
-- 1. [Overview](#overview)  
+- 1. [Overview](#overview)
 - 2. [Integration options](#integration-options)
-  - 2.1 [Tracker compatibility](#compatibility)  
-  - 2.2 [Dependencies](#dependencies)  
-  - 2.3 [Documented environments](#documented-envs)  
+  - 2.1 [Tracker compatibility](#compatibility)
+  - 2.2 [Dependencies](#dependencies)
+  - 2.3 [Documented environments](#documented-envs)
 - 3. [Setup](#setup)
   - 3.1 [LuaRocks](#luarocks)
   - 3.2 [Debian/Ubuntu](#deb-ubuntu)
@@ -18,7 +18,7 @@
 
 ## 1. Overview
 
-The [Snowplow Lua Tracker](https://github.com/snowplow/snowplow-lua-tracker) lets you add analytics to your [Lua] [lua]-based applications, Lua web servers/frameworks, or from the Lua scripting layer within your games or apps.
+The [Snowplow Lua Tracker](https://github.com/snowplow/snowplow-lua-tracker) lets you add analytics to your [Lua][lua]-based applications, Lua web servers/frameworks, or from the Lua scripting layer within your games or apps.
 
 The tracker should be relatively straightforward to setup if you are familiar with Lua development.
 
@@ -127,7 +127,7 @@ Done? Now read the [Lua Tracker API](Lua-Tracker) to start tracking events.
 
 For embedded Lua environments, you will first need to ensure that LuaSocket is available (or installable). Here are instructions for adding LuaSocket into some popular games, SDKs and other apps which use Lua:
 
-| **Game/app/SDK**              | **LuaSocket bundled?**      | **Installation instructions**                     | 
+| **Game/app/SDK**              | **LuaSocket bundled?**      | **Installation instructions**                     |
 |:------------------------------|:----------------------------|:--------------------------------------------------|
 | [cocos2d-x][cocos2d-x]       | No                          | [Installation instructions][cocos2d-x-socket]    |
 | [Garry's Mod][gmod]          | No                          | [Port of LuaSocket for GMod][gmod-socket]        |

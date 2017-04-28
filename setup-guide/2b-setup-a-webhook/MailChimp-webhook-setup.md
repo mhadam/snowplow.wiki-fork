@@ -4,16 +4,17 @@
 
 ## Contents
 
-- 1. [Overview](#overview)  
+- 1. [Overview](#overview)
   - 1.1 [Compatibility](#compat)
 - 2. [Setup](#setup)
   - 2.1 [MailChimp](#setup-mailchimp)
   - 2.2 [Snowplow Redshift](#setup-redshift)
 
 <a name="overview" />
+
 ## 1. Overview
 
-This webhook integration lets you track a variety of events logged by [MailChimp] [mailchimp-website].
+This webhook integration lets you track a variety of events logged by [MailChimp][mailchimp-website].
 
 Available events are:
 
@@ -27,12 +28,14 @@ Available events are:
 For the technical implementation, see [[MailChimp webhook adapter]].
 
 <a name="compat" />
+
 ### 1.1 Compatibility
 
-* [Snowplow 0.9.11] [snowplow-0.9.11]+ (`POST`-capable collectors for event processing, will require `GET` for initial webhook validation)
-* [MailChimp webhook API] [mailchimp-webhooks]
+* [Snowplow 0.9.11][snowplow-0.9.11]+ (`POST`-capable collectors for event processing, will require `GET` for initial webhook validation)
+* [MailChimp webhook API][mailchimp-webhooks]
 
 <a name="setup" />
+
 ## 2. Setup
 
 Integrating MailChimp's webhooks into Snowplow is a two-stage process:
@@ -41,9 +44,10 @@ Integrating MailChimp's webhooks into Snowplow is a two-stage process:
 2. (Optional) Create the MailChimp events tables into Amazon Redshift
 
 <a name="setup-mailchimp" />
+
 ## 2.1 MailChimp
 
-First login to MailChimp. Select **Lists** from the menu panel along the left handside of the screen.  
+First login to MailChimp. Select **Lists** from the menu panel along the left handside of the screen.
 
 Then select **Create List** in the top right hand corner and fill in the required fields to create a new list.
 
@@ -67,23 +71,24 @@ If you want, you can also manually override the event's `platform` parameter by 
 http://<collector host>/com.callrail/v1?p=<platform code>
 ```
 
-Supported platform codes can again be found in the [Snowplow Tracker Protocol] [tracker-protocol]; if not set, then the value for `platform` will default to `srv` for a server-side application.
+Supported platform codes can again be found in the [Snowplow Tracker Protocol][tracker-protocol]; if not set, then the value for `platform` will default to `srv` for a server-side application.
 
 Before we save our MailChimp webhook we can configure what types of events MailChimp will send to our webhook and what channels will trigger these events.  Simply select the boxes that are applicable to you and MailChimp will send these events to our webhook.
 
 <a name="setup-redshift" />
+
 ## 2.2 Redshift
 
 If you are running the Snowplow batch (Hadoop) flow with Amazon Redshift, then you should deploy the relevant event tables into your Amazon Redshift.
 
 You can find the table definitions here:
 
-* [com_mailchimp_subscribe_1.sql] [subscribe-sql]
-* [com_mailchimp_unsubscribe_1.sql] [unsubscribe-sql]
-* [com_mailchimp_profile_update_1.sql] [profile-sql]
-* [com_mailchimp_email_address_change_1.sql] [email-change-sql]
-* [com_mailchimp_cleaned_email_1.sql] [email-clean-sql]
-* [com_mailchimp_campaign_sending_status_1.sql] [campaign-sql]
+* [com_mailchimp_subscribe_1.sql][subscribe-sql]
+* [com_mailchimp_unsubscribe_1.sql][unsubscribe-sql]
+* [com_mailchimp_profile_update_1.sql][profile-sql]
+* [com_mailchimp_email_address_change_1.sql][email-change-sql]
+* [com_mailchimp_cleaned_email_1.sql][email-clean-sql]
+* [com_mailchimp_campaign_sending_status_1.sql][campaign-sql]
 
 Make sure to deploy this table into the same schema as your `events` table.
 

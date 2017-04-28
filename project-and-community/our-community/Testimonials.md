@@ -1,14 +1,14 @@
 *We see great promise in Snowplow Analytics, an open source web analytics platform that derives intelligent information from regular web analytics, based on open data principles and cloud storage.*
 
-[Thoughtworks Tech Radar May 2013] [thoughtworks]
+[Thoughtworks Tech Radar May 2013][thoughtworks]
 
 *#measure folks should all have a look @SnowPlowData. Great project being open source developing pretty quickly*
 
-[Phil Berryman, Simply Business] [simply-business]
+[Phil Berryman, Simply Business][simply-business]
 
 *We're loving Snowplow here @99designs*
 
-[Michael Tibben, 99 designs] [99designs]
+[Michael Tibben, 99 designs][99designs]
 
 *Having your granular web data end up in Redshift, ready to be enriched with other biz data sources is a beautiful, beautiful thing, and completely worth it*
 
