@@ -4,9 +4,9 @@
 
 ## Contents
 
-- 1. [Overview](#overview)  
-- 2. [Tracker compatibility](#compatibility)  
-- 3. [Setup](#setup)
+- 1 [Overview](#overview)  
+- 2 [Tracker compatibility](#compatibility)  
+- 3 [Setup](#setup)
 
 <a name="overview" />
 
