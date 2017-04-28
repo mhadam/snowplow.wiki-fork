@@ -2,7 +2,7 @@
 
 ## Contents
 
-- 1. [Installation](#install)
+- 1 [Installation](#install)
   - 1.1 [Composer](#composer)
 
 <a name="install" />
