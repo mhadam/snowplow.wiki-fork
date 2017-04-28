@@ -2,12 +2,7 @@
 
 [**HOME**](Home) > [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow-technical-documentation) > [**Trackers**](trackers) > Node.js tracker
 
-*This page refers to version 0.3.0 of the Snowplow Node.js Tracker.
-Documentation for earlier versions is available:
-
-[Version 0.1.0][v1]  
-[Version 0.2.0][v2]  
-
+*This page refers to version 0.2.0 of the Snowplow Node.js Tracker. Click [here][v1] for the corresponding documentation for version 0.1.0.*
 
 ## Contents
 
@@ -67,13 +62,9 @@ var e = emitter(
     if (error) {
       console.log("Request to Scala Stream Collector failed!");
     }
-  },
-  { maxSockets: 6 } // Node.js agentOptions object to tune performance
+  }
 );
 ```
-
-Note that last emitter's argument [`agentOptions`][agent-options] is default configuration object for Node.js HTTP module.
-It required to constrain `maxSockets` for bulk loads, which otherwise can lead to event loss.
 
 Initialise a tracker instance like this:
 
@@ -491,7 +482,4 @@ For more on JSON schema, see the [blog post][self-describing-jsons].
 [self-describing-jsons]: http://snowplowanalytics.com/blog/2014/05/15/introducing-self-describing-jsons/
 [tracker-core]: https://github.com/snowplow/snowplow/wiki/Javascript-Tracker-Core
 
-[v1]: https://github.com/snowplow/snowplow/wiki/Node.js-Tracker-v0.1.0
-[v2]: https://github.com/snowplow/snowplow/wiki/Node.js-Tracker-v0.2.0
-
-[agent-options]: https://nodejs.org/api/http.html#http_new_agent_options
+[v1]: https://github.com/snowplow/snowplow/wiki/Node.js-Tracker-v1
