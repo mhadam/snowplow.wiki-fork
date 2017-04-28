@@ -4,11 +4,11 @@
 
 ## Contents
 
-- 1. [Overview](#overview)  
-- 2. [Integration options](#integration-options)
+- 1 [Overview](#overview)  
+- 2 [Integration options](#integration-options)
   - 2.1 [Tracker compatibility](#compatibility)  
   - 2.2 [Dependencies](#dependencies)
-- 3. [Setup](#setup)
+- 3 [Setup](#setup)
   - 3.1 [Download](#download)
 
 <a name="overview" />
