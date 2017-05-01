@@ -4,8 +4,8 @@
 
 ## Contents
 
-- 1. [Overview](#overview)
-- 2. [General configuration and parameters](#general)
+- 1 [Overview](#overview)
+- 2 [General configuration and parameters](#general)
   - 2.1 [Initialization](#init)
     - 2.1.1 [Required headers](#headers)
     - 2.1.2 [Initialize SnowplowTracker](#snowplow-tracker-init)
@@ -14,7 +14,7 @@
     - 2.2.2 [`initUrl`](#initUrl)
   - 2.3 [Setting the user ID](#user-id)
     - 2.3.1 [`setUserId`](#setUserId)
-- 3. [Tracking specific events](#tracking-specific-events)
+- 3 [Tracking specific events](#tracking-specific-events)
   - 3.1 [Common](#common)
     - 3.1.1 [Return codes](#return-codes)
   - 3.2 [Tracking custom structured events](#custom-structured-events)
