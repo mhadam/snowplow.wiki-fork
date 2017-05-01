@@ -5,7 +5,7 @@
 [[https://d3i6fms1cm1j0i.cloudfront.net/github-wiki/images/snowplow-architecture-3-enrichment.png]]
 
 A Snowplow Enrich application processes data from a [Snowplow Collector](Setting-up-a-Collector),
-and [stores enriched data](Setting-up-alternative-data-storage) in a persistent database.
+and [stores enriched data](setting-up-alternative-data-stores) in a persistent database.
 
 1. [Choose a Enrichment process](#choose)
 2. [Setup your Enrichment process](#setup)
