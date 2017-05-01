@@ -10,8 +10,8 @@ This page refers to version 0.8.0+ of the Snowplow Java Tracker.
 
 ## Contents
 
-- 1. [Overview](#overview)
-- 2. [Initialization](#init)
+- 1 [Overview](#overview)
+- 2 [Initialization](#init)
   - 2.1 [Importing the module](#importing)
   - 2.2 [Creating a tracker](#create-tracker)
     - 2.2.1 [`emitter`](#emitter)
@@ -20,7 +20,7 @@ This page refers to version 0.8.0+ of the Snowplow Java Tracker.
     - 2.2.4 [`appId`](#app-id)
     - 2.2.5 [`base64Encoded`](#base64)
     - 2.2.6 [`platform`](#platform)
-- 3. [Adding extra data: the Subject class](#add-data)
+- 3 [Adding extra data: the Subject class](#add-data)
   - 3.1 [`setUserId`](#set-user-id)
   - 3.2 [`setScreenResolution`](#set-screen-resolution)
   - 3.3 [`setViewport`](#set-viewport-dimensions)
@@ -31,7 +31,7 @@ This page refers to version 0.8.0+ of the Snowplow Java Tracker.
   - 3.8 [`setUseragent`](#set-user-agent)
   - 3.9 [`setNetworkUserId`](#set-network-user-id)
   - 3.10 [`setDomainUserId`](#set-domain-user-id)
-- 4. [Tracking specific events](#events)
+- 4 [Tracking specific events](#events)
   - 4.1 [Common](#common)
     - 4.1.1 [Self-describing JSON](#self-describing-json)
     - 4.1.2 [Custom contexts](#custom-contexts)
