@@ -2,13 +2,13 @@
 
 ## Contents
 
-- 1. [Overview](#overview)  
-- 2. [Implementation](#implementation)  
+- 1 [Overview](#overview)  
+- 2 [Implementation](#implementation)  
   - 2.1 [Event source](#source)  
   - 2.2 [Example](#example)  
   - 2.3 [Snowplow adapter](#adapter)  
-- 3. [Events](#events)  
-- 4. [See also](#see-also)
+- 3 [Events](#events)  
+- 4 [See also](#see-also)
 
 <a name="overview" />
 
