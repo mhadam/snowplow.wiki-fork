@@ -1,4 +1,4 @@
-[**HOME**](Home) > [**SNOWPLOW SETUP GUIDE**](Setting-up-Snowplow) > [**Step 6: Get started analysing Snowplow data**](Getting-started-analyzing-Snowplow-data) > [Setting up ChartIO](Setting-up-ChartIO-to-visualize-your-data)
+[**HOME**](Home) > [**SNOWPLOW SETUP GUIDE**](Setting-up-Snowplow) > [**Step 6: Get started analyzing Snowplow data**](Getting-started-analyzing-Snowplow-data) > [Setting up ChartIO](Setting-up-ChartIO-to-visualize-your-data)
 
 <a name="top" />
 
