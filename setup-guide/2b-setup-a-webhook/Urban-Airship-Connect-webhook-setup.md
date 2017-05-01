@@ -4,9 +4,9 @@
 
 ## Contents
 
-- 1. [Overview](#overview)
+- 1 [Overview](#overview)
   - 1.1 [Compatibility](#compat)
-- 2. [Setup](#setup)
+- 2 [Setup](#setup)
   - 2.1 [UrbanAirship Connect](#setup-urbanairship)
   - 2.2 [Snowplow Redshift](#setup-redshift)
   - 2.3 [EmrEtlRunner](#setup-emr-etl-runner)
