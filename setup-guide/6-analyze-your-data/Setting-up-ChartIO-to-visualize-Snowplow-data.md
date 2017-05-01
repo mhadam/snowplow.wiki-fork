@@ -1,4 +1,4 @@
-[**HOME**](Home) > [**SNOWPLOW SETUP GUIDE**](Setting-up-Snowplow) > [**Step 5: Get started analysing Snowplow data**](Getting started analyzing Snowplow data) > [Setting up ChartIO](Setting-up-ChartIO-to-visualize-your-data)
+[**HOME**](Home) > [**SNOWPLOW SETUP GUIDE**](Setting-up-Snowplow) > [**Step 5: Get started analysing Snowplow data**](Getting-started-analyzing-Snowplow-data) > [Setting up ChartIO](Setting-up-ChartIO-to-visualize-your-data)
 
 <a name="top" />
 
@@ -220,11 +220,11 @@ Now click save (top right). Our new chart appears on our new dashboard. We can i
 
 <a name="next-steps" />
 
-## 4. Next steps
+## 6. Next steps
 
 Up and running with ChartIO on top of Snowplow? Visit the [Analytics Cookbook][analyst-cookbook] to find out about more ways to drive value from Snowplow data.
 
-Return to [getting started analysing your Snowplow data](Getting-started-analysing-Snowplow-data).
+Return to [getting started analysing your Snowplow data](Getting-started-analyzing-Snowplow-data).
 
 Return to the [setup guide](Setting-up-Snowplow#wiki-step5).
 
