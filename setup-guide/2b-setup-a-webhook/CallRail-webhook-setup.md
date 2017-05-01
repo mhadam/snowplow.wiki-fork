@@ -4,9 +4,9 @@
 
 ## Contents
 
-- 1. [Overview](#overview)
+- 1 [Overview](#overview)
   - 1.1 [Compatibility](#compat)
-- 2. [Setup](#setup)
+- 2 [Setup](#setup)
   - 2.1 [CallRail](#setup-callrail)
   - 2.2 [Snowplow Redshift](#setup-redshift)
 
