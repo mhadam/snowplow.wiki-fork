@@ -25,10 +25,10 @@ Local Testing:
 
 ## Contents
 
-- 1. [Overview](#overview)
+- 1 [Overview](#overview)
   - 1.1 [Demo App](#demo-app)
   - 1.2 [Client sessions](#client-sessions)
-- 2. [Initialization](#init)
+- 2 [Initialization](#init)
   - 2.1 [Importing the module](#importing)
   - 2.2 [Creating a tracker](#create-tracker)
     - 2.2.1 [Constructor Explained](#constructor-tracker)
@@ -54,7 +54,7 @@ Local Testing:
     - 2.4.2 [`pauseSessionChecking`](#shutdown-session)
     - 2.4.3 [`resumeEventTracking`](#start-data)
     - 2.4.4 [`pauseEventTracking`](#stop-data)
-- 3. [Adding extra data: the Subject class](#add-data-subject)
+- 3 [Adding extra data: the Subject class](#add-data-subject)
   - 3.1 [Subject setter functions](#subject-setters)
     - 3.1.1 [`setUserId`](#set-user-id)
     - 3.1.2 [`setScreenResolution`](#set-screen-resolution)
@@ -74,7 +74,7 @@ Local Testing:
     - 3.2.1 [`mobile_context`](#mobile-context)
     - 3.2.2 [`geolocation_context`](#geo-context)
   - 3.3 [Getting the AndroidIdfa](#android-idfa)
-- 4. [Tracking specific events](#events)
+- 4 [Tracking specific events](#events)
   - 4.1 [Common](#common)
     - 4.1.1 [Self-describing JSON](#self-describing-json)
     - 4.1.2 [Custom contexts](#custom-contexts)
