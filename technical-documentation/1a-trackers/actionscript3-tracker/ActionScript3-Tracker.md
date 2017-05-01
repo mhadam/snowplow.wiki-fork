@@ -4,8 +4,8 @@
 
 ## Contents
 
-- 1. [Overview](#overview)
-- 2. [Initialization](#init)
+- 1 [Overview](#overview)
+- 2 [Initialization](#init)
   - 2.1 [Importing the module](#importing)
   - 2.2 [Creating a tracker](#create-tracker)
     - 2.2.1 [`emitter`](#emitter)
@@ -14,14 +14,14 @@
     - 2.2.4 [`appId`](#app-id)
     - 2.2.5 [`base64Encoded`](#base64)
     - 2.2.6 [`setPlatform`](#set-platform)
-- 3. [Adding extra data: the Subject class](#add-data)
+- 3 [Adding extra data: the Subject class](#add-data)
   - 3.2 [`setUserId`](#set-user-id)
   - 3.3 [`setScreenResolution`](#set-screen-resolution)
   - 3.4 [`setViewport`](#set-viewport-dimensions)
   - 3.5 [`setColorDepth`](#set-color-depth)
   - 3.6 [`setTimezone`](#set-timezone)
   - 3.7 [`setLanguage`](#set-lang)
-- 4. [Tracking specific events](#events)
+- 4 [Tracking specific events](#events)
   - 4.1 [Common](#common)
     - 4.1.1 [Custom contexts](#custom-contexts)
     - 4.1.2 [Optional timestamp argument](#tstamp-arg)
