@@ -4,8 +4,8 @@
 
 ## Contents
 
-- 1. [Overview](#overview)
-- 2. [Initialization](#init)
+- 1 [Overview](#overview)
+- 2 [Initialization](#init)
   - 2.1 [Import the library](#importing)
   - 2.2 [Creating a tracker](#create-tracker)
     - 2.2.1 [`emitter`](#emitter)
@@ -16,14 +16,14 @@
     - 2.2.6 [`name_space`](#name-space)
     - 2.2.7 [`use_base64`](#base64)
     - 2.2.8 [`desktop_context`](#desktop-context)
-- 3. [Adding extra data: the Subject class](#subject-class)
+- 3 [Adding extra data: the Subject class](#subject-class)
   - 3.1 [`set_user_id`](#set-user-id)
   - 3.2 [`set_screen_resolution`](#set-screen-resolution)
   - 3.3 [`set_viewport`](#set-viewport-dimensions)
   - 3.4 [`set_color_depth`](#set-color-depth)
   - 3.5 [`set_timezone`](#set-timezone)
   - 3.6 [`set_language`](#set-lang)
-- 4. [Tracking specific events](#events)
+- 4 [Tracking specific events](#events)
   - 4.1 [Common](#common)
     - 4.1.1 [Custom contexts](#custom-contexts)
     - 4.1.2 [Optional timestamp argument](#tstamp-arg)
@@ -33,9 +33,9 @@
   - 4.3 [`track_screen_view()`](#screen-view)
   - 4.4 [`track_struct_event()`](#struct-event)
   - 4.5 [`track_timing()`](#timing-event)
-- 5. [Emitters](#emitter)
+- 5 [Emitters](#emitter)
   - 5.1 [Under the hood](#emitter-inner-workings)
-- 6. [Client Sessions](#sessions)
+- 6 [Client Sessions](#sessions)
 
 <a name="overview" />
 
@@ -581,6 +581,7 @@ The `db_name` can be any valid path on your host file system (that can be create
 [Back to top](#top)
 
 <a name="emitter-inner-workings">
+
 ### 5.1 Under the hood
 
 Once the emitter receives an event from the Tracker a few things start to happen:
