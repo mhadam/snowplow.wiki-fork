@@ -1,6 +1,6 @@
 <a name="top" />
 
-[**HOME**](Home) > [**SNOWPLOW SETUP GUIDE**](Setting-up-Snowplow) > [**Step 5: Get started analyzing Snowplow data**](Getting started analyzing Snowplow data) > Setting up the prebuilt views (cubes and recipes) in Redshift and PostgreSQL
+[**HOME**](Home) > [**SNOWPLOW SETUP GUIDE**](Setting-up-Snowplow) > [**Step 5: Get started analyzing Snowplow data**](Getting-started-analyzing-Snowplow-data) > Setting up the prebuilt views (cubes and recipes) in Redshift and PostgreSQL
 
 ## Introduction
 
