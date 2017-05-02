@@ -2,15 +2,14 @@
 
 [**HOME**](Home) > [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow-technical-documentation) > [**Trackers**](trackers) > [**JavaScript Tracker**](Javascript-Tracker) > Specific event tracking
 
-*This page refers to version 2.8.0 of the Snowplow JavaScript Tracker.*
-*Click [here][specific-events-v1] for the corresponding documentation for version 1.*
-*Click [here][specific-events-v2.0] for the corresponding documentation for version 2.0.*
-*Click [here][specific-events-v2.2] for the corresponding documentation for version 2.2.2.*
-*Click [here][specific-events-v2.3] for the corresponding documentation for version 2.3.0.*
-*Click [here][specific-events-v2.4] for the corresponding documentation for version 2.4.3.*
-*Click [here][specific-events-v2.5] for the corresponding documentation for version 2.5.3.*
-*Click [here][specific-events-v2.6] for the corresponding documentation for version 2.6.2.*
-*Click [here][specific-events-v2.7] for the corresponding documentation for version 2.7.2.*
+*This page refers to version 2.7.2 of the Snowplow JavaScript Tracker.*  
+*Click [here][specific-events-v1] for the corresponding documentation for version 1.*  
+*Click [here][specific-events-v2.0] for the corresponding documentation for version 2.0.*  
+*Click [here][specific-events-v2.2] for the corresponding documentation for version 2.2.2.*  
+*Click [here][specific-events-v2.3] for the corresponding documentation for version 2.3.0.*  
+*Click [here][specific-events-v2.4] for the corresponding documentation for version 2.4.3.*  
+*Click [here][specific-events-v2.5] for the corresponding documentation for version 2.5.3.*  
+*Click [here][specific-events-v2.6] for the corresponding documentation for version 2.6.2.*  
 
 <a name="tracking-specific-events" />
 
@@ -18,29 +17,29 @@
 
 Snowplow has been built to enable users to track a wide range of events that occur when consumers interact with their websites and webapps. We are constantly growing the range of functions available in order to capture that data more richly.
 
-  - 3.1 [Pageviews](#page)
-    - 3.1.1 [`trackPageView`](#trackPageView)
-  - 3.2 [Pagepings](#pagepings)
-    - 3.2.1 [`enableActivityTracking`](#enableActivityTracking)
-  - 3.3 [Ecommerce transaction tracking](#ecommerce)
-    - 3.3.1 [`addTrans`](#addTrans)
-    - 3.3.2 [`addItem`](#addItem)
-    - 3.3.3 [`trackTrans`](#trackTrans)
+  - 3.1 [Pageviews](#page)  
+    - 3.1.1 [`trackPageView`](#trackPageView)  
+  - 3.2 [Pagepings](#pagepings)  
+    - 3.2.1 [`enableActivityTracking`](#enableActivityTracking)  
+  - 3.3 [Ecommerce transaction tracking](#ecommerce)  
+    - 3.3.1 [`addTrans`](#addTrans)  
+    - 3.3.2 [`addItem`](#addItem)  
+    - 3.3.3 [`trackTrans`](#trackTrans)  
     - 3.3.4 [Pulling it all together: an example](#ecomm-example)
   - 3.4 [Social tracking](#social)
     - 3.4.1 [`trackSocialInteraction`](#trackSocial)
-  - 3.5 [Campaign tracking](#campaign)
-    - 3.5.1 [Identifying paid sources](#identifying-paid-sources)
+  - 3.5 [Campaign tracking](#campaign)  
+    - 3.5.1 [Identifying paid sources](#identifying-paid-sources)  
     - 3.5.2 [Anatomy of the query parameter](#anatomy-of-the-query-parameters)
   - 3.6 [Ad tracking methods](#ad-tracking)
     - 3.6.1 [`trackAdImpression`](#adImpression)
     - 3.6.2 [`trackAdClick`](#adClick)
     - 3.6.3 [`trackAdConversion`](#adConversion)
     - 3.6.4 [Example: implementing impression tracking with Snowplow and OpenX](#ad-example)
-  - 3.7 [Tracking custom structured events](#custom-structured-events)
+  - 3.7 [Tracking custom structured events](#custom-structured-events)  
     - 3.7.1 [`trackStructEvent`](#trackStructEvent)
   - 3.8 [Tracking custom self-describing (unstructured) events](#38-tracking-custom-self-describing-unstructured-events)
-    - 3.8.1 [`trackSelfDescribingEvent`](#381-trackselfdescribingevent)
+    - 3.8.1 [`trackSelfDescribingEvent`](#381-trackselfdescribingevent)   
   - 3.9 [Link click tracking](#link-click-tracking)
     - 3.9.1 [`enableLinkClickTracking`](#enableLinkClickTracking)
     - 3.9.2 [`refreshLinkClickTracking`](#refreshLinkClickTracking)
@@ -141,7 +140,7 @@ window.snowplow(
 
 The page view and every subsequent page ping will have both a static_context and a dynamic_context attached. The static_contexts will all have the same staticValue, but the dynamic_contexts will have different dynamicValues since a new context is created for every event.
 
-[Back to top](#top)
+[Back to top](#top)  
 [Back to JavaScript technical documentation contents][contents]
 
 <a name="pagepings" />
@@ -176,10 +175,8 @@ Notes:
 
 * In general this is executed as part of the main Snowplow tracking tag. As a result, you can elect to enable this on specific pages.
 * The `enableActivityTracking` method **must** be called *before* the `trackPageView` method.
-* Activity tracking will be disabled if either `minimumVisitLength` or
-`heartBeat` is not integer. This is to prevent relentless callbacks.
 
-[Back to top](#top)
+[Back to top](#top)  
 [Back to JavaScript technical documentation contents][contents]
 
 <a name="ecommerce" />
@@ -228,7 +225,7 @@ snowplow_name_here('addTrans',
 
 `addTrans` can also be passed an array of custom contexts as an additional final parameter. See [Contexts](#custom-contexts) for more information.
 
-[Back to top](#top)
+[Back to top](#top)  
 [Back to JavaScript technical documentation contents][contents]
 
 <a name="addItem" />
@@ -332,7 +329,7 @@ snowplow_name_here('trackTrans');
 </html>
 ```
 
-[Back to top](#top)
+[Back to top](#top)  
 [Back to JavaScript technical documentation contents][contents]
 
 <a name="social" />
@@ -373,7 +370,7 @@ snowplow_name_here('trackSocialInteraction', 'like', 'facebook');
 
 `trackSocialInteraction` can also be passed an array of custom contexts as an additional final parameter. See [Contexts](#custom-contexts) for more information.
 
-[Back to top](#top)
+[Back to top](#top)  
 [Back to JavaScript technical documentation contents][contents]
 
 <a name="campaign" />
@@ -426,7 +423,7 @@ Snowplow uses the same query parameters used by Google Analytics. Because of thi
 The parameters are descibed in the [Google Analytics help page][gahelppage]. Google also provides a [urlbuilder][gaurlbuilder] which can be used to construct the URL incl. query parameters to use in your campaigns.
 
 
-[Back to top](#top)
+[Back to top](#top)  
 [Back to JavaScript technical documentation contents][contents]
 
 <a name="ad-tracking" />
@@ -508,7 +505,7 @@ An example:
 snowplow_name_here('trackAdImpression:' + rnd,
 
     '67965967893',             // impressionId
-    'cpm',                     // costModel - 'cpa', 'cpc', or 'cpm'
+    'cpm',                     // costModel - 'cpa', 'cpc', or 'cpm'    
      5.5,                      // cost
     'http://www.example.com',  // targetUrl
     '23',                      // bannerId
@@ -548,7 +545,7 @@ snowplow_name_here('trackAdClick:' + rnd,
 
     'http://www.example.com',  // targetUrl
     '12243253',                // clickId
-    'cpm',                     // costModel
+    'cpm',                     // costModel    
      2.5,                      // cost
     '23',                      // bannerId
     '7',                       // zoneId
@@ -682,7 +679,7 @@ Note that in the above example no value is set for the `event property`.
 
 `trackStructEvent` can also be passed an array of custom contexts as an additional final parameter. See [Contexts](#custom-contexts) for more information.
 
-[Back to top](#top)
+[Back to top](#top)  
 [Back to JavaScript technical documentation contents][contents]
 
 <a name="custom-selfdescribing-events" />
@@ -734,7 +731,7 @@ The `data` field should be flat, not nested.
 
 `trackSelfDescribingEvent` can also be passed an array of custom contexts as an additional final parameter. See [Contexts](#custom-contexts) for more information.
 
-[Back to top](#top)
+[Back to top](#top)  
 [Back to JavaScript technical documentation contents][contents]
 
 <a name="link-click-tracking" />
@@ -851,7 +848,7 @@ snowplow_name_here('trackLinkCLick', 'http://www.example.com', 'first-link', ['c
 
 `trackLinkClick` can also be passed an array of custom contexts as an additional final parameter. See [Contexts](#custom-contexts) for more information.
 
-[Back to top](#top)
+[Back to top](#top)  
 [Back to JavaScript technical documentation contents][contents]
 
 <a name="form-tracking" />
@@ -881,8 +878,6 @@ snowplow('enableFormTracking');
 ```
 
 This will only work for form elements which exist when it is called. If you are creating a form programatically, call `enableFormTracking` again after adding it to the document to track it. (You can call `enableFormTracking` multiple times without risk of duplicated events.)
-
-Note that events on password fields will not be tracked.
 
 <a name="custom-form-tracking" />
 
@@ -1361,7 +1356,7 @@ snowplow_name_here('enableErrorTracking')
 
 Application error events are implemented as Snowplow unstructured events. [Here][application_error] is the schema for a `application_error` event.
 
-[Back to top](#top)
+[Back to top](#top)  
 [Back to JavaScript technical documentation contents][contents]
 
 <a name="trueTimestamps" />
@@ -1419,7 +1414,7 @@ window.snowplow_name_here('trackSelfDescribingEvent', {
 }, null, {type: 'ttm', value: 1482511723});
 ```
 
-[Back to top](#top)
+[Back to top](#top)  
 [Back to JavaScript technical documentation contents][contents]
 
 [contents]: Javascript-Tracker
@@ -1430,7 +1425,6 @@ window.snowplow_name_here('trackSelfDescribingEvent', {
 [specific-events-v2.4]: https://github.com/snowplow/snowplow/wiki/2-Specific-event-tracking-with-the-Javascript-tracker-v2.4
 [specific-events-v2.5]: https://github.com/snowplow/snowplow/wiki/2-Specific-event-tracking-with-the-Javascript-tracker-v2.5
 [specific-events-v2.6]: https://github.com/snowplow/snowplow/wiki/2-Specific-event-tracking-with-the-Javascript-tracker-v2.6
-[specific-events-v2.6]: https://github.com/snowplow/snowplow/wiki/2-Specific-event-tracking-with-the-Javascript-tracker-v2.7
 [multiple-trackers]: https://github.com/snowplow/snowplow/wiki/1-General-parameters-for-the-Javascript-tracker#24-managing-multiple-trackers
 [json-schema]: http://json-schema.org/
 [self-describing-jsons]: http://snowplowanalytics.com/blog/2014/05/15/introducing-self-describing-jsons/

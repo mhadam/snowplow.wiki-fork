@@ -146,6 +146,40 @@ snowplow(function () {
 })
 ```
 
+<a name="get-cookie-name" />
+
+#### 4.2.5 `getCookieName`
+
+The `getCookieName` method returns the complete cookie name for the domain or
+session cookie:
+
+```javascript
+// Access the tracker instance inside a callback
+snowplow(function () {
+	var cf = this.cf;
+	var cookieName = cf.getCookieName('id');
+	doSomethingWith(cookieName);
+})
+```
+
+The argument corresponds to the basename of the cookie: 'id' for the domain
+cookie, 'ses' for the session cookie.
+
+<a name="get-page-view-id" />
+
+#### 4.2.6 `getPageViewId`
+
+The `getPageViewId` method returns the page view id:
+
+```javascript
+// Access the tracker instance inside a callback
+snowplow(function () {
+	var cf = this.cf;
+	var pageViewId = cf.getPageViewId();
+	doSomethingWith(pageViewId);
+})
+```
+
 <a name="ga" />
 
 ### 4.3 Extracting the Google Analytics cookie ID

@@ -2,15 +2,14 @@
 
 [**HOME**](Home) » [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow-technical-documentation) » [**Trackers**](trackers) » [**JavaScript Tracker**](Javascript-Tracker) » General parameters
 
-*This page refers to version 2.8.0 of the Snowplow JavaScript Tracker.*
-*Click [here][general-parameters-v1] for the corresponding documentation for version 1.*
-*Click [here][general-parameters-v2.0] for the corresponding documentation for version 2.1.1.*
-*Click [here][general-parameters-v2.2] for the corresponding documentation for version 2.2.2.*
-*Click [here][general-parameters-v2.3] for the corresponding documentation for version 2.3.0.*
-*Click [here][general-parameters-v2.4] for the corresponding documentation for version 2.4.3.*
-*Click [here][general-parameters-v2.5] for the corresponding documentation for version 2.5.3.*
-*Click [here][general-parameters-v2.6] for the corresponding documentation for version 2.6.2.*
-*Click [here][general-parameters-v2.7] for the corresponding documentation for version 2.7.2.*
+*This page refers to version 2.7.2 of the Snowplow JavaScript Tracker.*  
+*Click [here][general-parameters-v1] for the corresponding documentation for version 1.*  
+*Click [here][general-parameters-v2.0] for the corresponding documentation for version 2.1.1.*  
+*Click [here][general-parameters-v2.2] for the corresponding documentation for version 2.2.2.*  
+*Click [here][general-parameters-v2.3] for the corresponding documentation for version 2.3.0.*  
+*Click [here][general-parameters-v2.4] for the corresponding documentation for version 2.4.3.*  
+*Click [here][general-parameters-v2.5] for the corresponding documentation for version 2.5.3.*  
+*Click [here][general-parameters-v2.6] for the corresponding documentation for version 2.6.2.*  
 
 <a name="general"></a>
 
@@ -24,30 +23,28 @@
     - 2.2.4 [Configuring the cookie name](#cookie-name)
     - 2.2.5 [Configuring base 64 encoding](#base-64)
     - 2.2.6 [Respecting Do Not Track](#respect-do-not-track)
-    - 2.2.7 [Opt-out cookie](#opt-out)
-    - 2.2.8 [User fingerprinting](#user-fingerprint)
-    - 2.2.9 [Setting the user fingerprint seed](#user-fingerprint-seed)
-    - 2.2.10 [Setting the page unload pause](#page-unload-timer)
-    - 2.2.11 [Setting the event request protocol](#force-secure-tracker)
-    - 2.2.12 [Setting an unsecure event request protocol](#force-unsecure-tracker)
-    - 2.2.13 [Configuring the session cookie duration](#session-cookie-duration)
-    - 2.2.14 [Configuring the storage strategy](#storage-strategy)
-    - 2.2.15 [Adding predefined contexts](#predefined-contexts)
-      - 2.2.15.1 [webPage context](#webPage)
-      - 2.2.15.2 [performanceTiming context](#performanceTiming)
-      - 2.2.15.3 [gaCookies context](#gaCookies)
-      - 2.2.15.4 [geolocation context](#geolocation)
-      - 2.2.15.5 [augurIdentityLite context](#augurIdentityLite)
-      - 2.2.15.6 [optimizelyExperiments context](#optimizelyExperiments)
-      - 2.2.15.7 [optimizelyStates context](#optimizelyStates)
-      - 2.2.15.8 [optimizelyVariations context](#optimizelyVariations)
-      - 2.2.15.9 [optimizelyVisitor context](#optimizelyVisitor)
-      - 2.2.15.10 [optimizelyAudiences context](#optimizelyAudiences)
-      - 2.2.15.11 [optimizelyDimensions context](#optimizelyDimensions)
-      - 2.2.15.12 [optimizelySummary context](#optimizelySummary)
-      - 2.2.15.13 [optimizelyXSummary context(#optimizelyXSummary)
-      - 2.2.15.14 [parrable context](#parrable)
-    - 2.2.16 [POST support](#post)
+    - 2.2.7 [User fingerprinting](#user-fingerprint)
+    - 2.2.8 [Setting the user fingerprint seed](#user-fingerprint-seed)
+    - 2.2.9 [Setting the page unload pause](#page-unload-timer)
+    - 2.2.10 [Setting the event request protocol](#force-secure-tracker)
+    - 2.2.11 [Setting an unsecure event request protocol](#force-unsecure-tracker)
+    - 2.2.12 [Configuring the session cookie duration](#session-cookie-duration)
+    - 2.2.13 [Configuring localStorage](#configuring-local-storage)
+    - 2.2.14 [Adding predefined contexts](#predefined-contexts)
+      - 2.2.14.1 [webPage context](#webPage)
+      - 2.2.14.2 [performanceTiming context](#performanceTiming)
+      - 2.2.14.3 [gaCookies context](#gaCookies)
+      - 2.2.14.4 [geolocation context](#geolocation)
+      - 2.2.14.5 [augurIdentityLite context](#augurIdentityLite)
+      - 2.2.14.6 [optimizelyExperiments context](#optimizelyExperiments)
+      - 2.2.14.7 [optimizelyStates context](#optimizelyStates)
+      - 2.2.14.8 [optimizelyVariations context](#optimizelyVariations)
+      - 2.2.14.9 [optimizelyVisitor context](#optimizelyVisitor)
+      - 2.2.14.10 [optimizelyAudiences context](#optimizelyAudiences)
+      - 2.2.14.11 [optimizelyDimensions context](#optimizelyDimensions)
+      - 2.2.14.12 [optimizelySummary context](#optimizelySummary)
+    - 2.2.15 [POST support](#post)
+    - 2.2.16 [Disabling cookies](#use-cookies)
     - 2.2.17 [Configuring cross-domain tracking](#cross-domain)
     - 2.2.18 [Configuring the maximum payload size in bytes](#maxPostBytes)
     - 2.2.19 [Automatically discover and set the root domain](#discoverRootDomain)
@@ -61,10 +58,11 @@
     - 2.3.2 [Setting a custom page URL and referrer URL](#custom-url)
   - 2.4 [Setting onload callbacks](#callback)
   - 2.5 [Managing multiple trackers](#multiple-trackers)
-  - 2.6 [How the Tracker stores state](#state)
+  - 2.6 [How the Tracker uses cookies](#cookies)
   - 2.7 [Getting the user ID from the first-party cookie](#get-id)
-  - 2.8 [Optional timestamp argument](#timestamp)
-  - 2.9 [Preserving pageViewId](#preservePageViewId)
+  - 2.8 [How the Tracker uses localStorage](#local-storage)
+  - 2.9 [Optional timestamp argument](#timestamp)
+  - 2.10 [Preserving pageViewId](#preservePageViewId)
 
 <a name="loading" />
 
@@ -105,7 +103,7 @@ snowplow_name_here('trackStructEvent', 'Mixes', 'Play', '', '', 20);
 
 Empty strings are provided for the label and value arguments to pad them out. (`Null` would also work.) They won't be added to the event. Neither will the context argument, which isn't provided at all.
 
-[Back to top](#top)
+[Back to top](#top)  
 [Back to JavaScript technical documentation contents][contents]
 
 <a name="initialisation" />
@@ -144,15 +142,14 @@ snowplow_name_here("newTracker", "cf", "d3rkrsqld9gmqf.cloudfront.net", {
   userFingerprintSeed: 6385926734,
   pageUnloadTimer: 0,
   forceSecureTracker: true,
+  useCookies: true,
   post: true,
   bufferSize: 5,
   maxPostBytes: 45000,
   crossDomainLinker: function (linkElement) {
-    return (linkElement.href === "http://acme.de" || linkElement.id === "crossDomainLink");
+    return (linkElement.href === "http://acme.de" || linkElement.id === "crossDomainLink"); 
   },
   cookieLifetime: 86400 * 31,
-  stateStorageStrategy: "cookie",
-  respectOptOutCookie: false,
   contexts: {
     webPage: true,
     performanceTiming: true,
@@ -173,7 +170,7 @@ Set the application ID using the `appId` field of the argmap. This will be attac
 <a name="platform" />
 
 #### 2.2.2 Setting the platform
-Set the application platform using the `platform` field of the argmap. This will be attached to every event the tracker fires. Its default value is "web". For a list of supported platforms, please see the [Snowplow Tracker Protocol][snowplow-tracker-protocol].
+Set the application platform using the `platform` field of the argmap. This will be attached to every event the tracker fires. Its default value is "web". For a list of supported platforms, please see the [Snowplow Tracker Protocol][snowplow-tracker-protocol]. 
 
 <a name="cookie-domain" />
 
@@ -195,11 +192,6 @@ Set the cookie domain for the tracker instance using the `cookieDomain` field of
 
 Set the cookie name for the tracker instance using the `cookieName` field of the argmap. The default is "_sp_". Snowplow uses two cookies, a domain cookie and a session cookie. In the default case, their names are "_sp_id" and "_sp_ses" respectively. If you are upgrading from an earlier version of Snowplow, you should use the default cookie name so that the cookies set by the earlier version are still remembered. Otherwise you should provide a new name to prevent clashes with other Snowplow users on the same page.
 
-Once set, you can retrieve a cookie name thanks to the `getCookieName(basename)`
-method where basename is id or ses for the domain and session cookie
-respectively. As an example, you can retrieve the complete name of the domain
-cookie with `getCookieName('id')`.
-
 <a name="base-64">
 
 #### 2.2.5 Configuring base 64 encoding
@@ -211,29 +203,21 @@ By default, self-describing events and custom contexts are encoded into Base64 t
 
 Most browsers have a Do Not Track option which allows users to express a preference not to be tracked. You can respect that preference by setting the `respectDoNotTrack` field of the argmap to `true`. This prevents cookies from being sent and events from being fired.
 
-<a name="opt-out" />
-
-#### 2.2.7 Opt-out cookie
-
-It is possible to set an opt-out cookie in order not to track anything similarly
-to Do Not Track through `setOptOutCookie(cookieName)`. If this cookie is set,
-cookies won't be stored and events won't be fired.
-
 <a name="user-fingerprint" />
 
-#### 2.2.8 User fingerprinting
+#### 2.2.7 User fingerprinting
 
 By default, the tracker generates a user fingerprint based on various browser features. This fingerprint is likely to be unique and so can be used to track anonymous users. You can turn user fingerprinting off by setting the `userFingerprint` field of the argmap to `false`.
 
 <a name="user-fingerprint-seed" />
 
-#### 2.2.9 Setting the user fingerprint seed
+#### 2.2.8 Setting the user fingerprint seed
 
 The `userFingerprintSeed` field of the the argmap lets you choose the hash seed used to generate the user fingerprint. If this is not specified, the default is 123412414.
 
 <a name="page-unload-timer" />
 
-#### 2.2.10 Setting the page unload pause
+#### 2.2.9 Setting the page unload pause
 
 Whenever the Snowplow Javascript Tracker fires an event, it automatically starts a 500 millisecond timer running. If the user clicks on a link or refreshes the page during this period (or, more likely, if the event was triggered by the user clicking a link), the page will wait until either the event is sent or the timer is finished before unloading. 500 milliseconds is usually enough to ensure the event has time to be sent.
 
@@ -243,13 +227,13 @@ See also [How the Tracker uses `localStorage`](#local-storage) for an explanatio
 
 <a name="force-secure-tracker" />
 
-#### 2.2.11 Setting the event request protocol
+#### 2.2.10 Setting the event request protocol
 
 Normally the protocol (http or https) used by the Tracker to send events to a collector is the same as the protocol of the current page. You can force it to use https by setting the `forceSecureTracker` field of the argmap to `true`.
 
 <a name="force-unsecure-tracker" />
 
-#### 2.2.12 Setting an unsecure event request protocol
+#### 2.2.11 Setting an unsecure event request protocol
 
 Normally the protocol (http or https) used by the Tracker to send events to a collector is the same as the protocol of the current page. You can force it to use http by setting the `forceUnsecureTracker` field of the argmap to `true`.  If `forceSecureTracker` is activated this argument is ignored.
 
@@ -257,7 +241,7 @@ __NOTE__: This argument should only be used for testing purposes as it creates s
 
 <a name="session-cookie-duration" />
 
-#### 2.2.13 Configuring the session cookie duration
+#### 2.2.12 Configuring the session cookie duration
 
 Whenever an event fires, the Tracker creates a session cookie. If the cookie didn't previously exist, the Tracker interprets this as the start of a new session.
 
@@ -273,34 +257,27 @@ By default the session cookie expires after 30 minutes. This means that a user l
 
 would set the session cookie lifespan to an hour.
 
-<a name="storage-strategy" />
+<a name="configuring-local-storage" />
 
-#### 2.2.14 Configuring the storage strategy
+#### 2.2.13 Configuring localStorage
 
-Three strategies are made available to store the Tracker's state: cookies, local
-storage or no storage at all. You can set the strategy with the help of the
-`stateStorageStrategy` parameter in the argmap to "cookie" (the default),
-"localStorage" or "none" respectively.
-
-When choosing local storage, the Tracker will additionally store events in
-local storage before sending them so that they can be recovered if the user
-leaves the page before they are sent.
+By default the Tracker will [store events in `localStorage`](#local-storage) before sending them so that they can be recovered if the user leaves the page before they are sent. You can disable this feature by setting a `useLocalStorage: false` field in the argmap.
 
 <a name="predefined-contexts" />
 
-#### 2.2.15 Adding predefined contexts
+#### 2.2.14 Adding predefined contexts
 
-The JavaScript Tracker comes with many predefined contexts which you can automatically add to every event you send. To enable them, simply add them to the `contexts` field of the argmap as above.
+The JavaScript Tracker comes with four predefined contexts which you can automatically add to every event you send. To enable them, simply add them to the `contexts` field of the argmap as above.
 
 <a name="webPage" />
 
-##### 2.2.15.1 webPage context
+##### 2.2.14.1 webPage context
 
 When the JavaScript Tracker loads on a page, it generates a new page view UUID. If the webPage context is enabled, then a context containing this UUID is attached to every page view.
 
 <a name="performanceTiming" />
 
-##### 2.2.15.2 performanceTiming context
+##### 2.2.14.2 performanceTiming context
 
 If this context is enabled, the JavaScript Tracker will use the create a context JSON from the `window.performance.timing` object, along with the Chrome `firstPaintTime` field (renamed to `"chromeFirstPaint"`) if it exists. This data can be used to calculate page performance metrics.
 
@@ -310,13 +287,13 @@ For more information on the Navigation Timing API, see [the specification][perfo
 
 <a name="gaCookies" />
 
-##### 2.2.15.3 gaCookies context
+##### 2.2.14.3 gaCookies context
 
 If this context is enabled, the JavaScript Tracker will look for Google Analytics cookies (specifically the "__utma", "__utmb", "__utmc", "__utmv", "__utmz", and "_ga" cookies) and combine their values into a JSON which gets sent with every event.
 
 <a name="geolocation" />
 
-##### 2.2.15.4 geolocation context
+##### 2.2.14.4 geolocation context
 
 If this context is enabled, the JavaScript Tracker will attempt to create a context from the visitor's geolocation information. If the visitor has not already given or denied the website permission to use their geolocation information, a prompt will appear. If they give permission, then all events from that moment on will include their geolocation information.
 
@@ -324,23 +301,23 @@ For more information on the geolocation API, see [the specification][geolocation
 
 <a name="augurIdentityLite" />
 
-##### 2.2.15.5 augurIdentityLite context
+##### 2.2.14.5 augurIdentityLite context
 
-If this context is enabled the JavaScript Tracker will use the `window['augur']` object to create a context JSON.
+If this context is enabled the JavaScript Tracker will use the `window['augur']` object to create a context JSON.  
 
 To see what will be captured please see the JsonSchema file [io.augur.snowplow/identity_lite/jsonschema/1-0-0](https://raw.githubusercontent.com/snowplow/iglu-central/master/schemas/io.augur.snowplow/identity_lite/jsonschema/1-0-0).
 
 <a name="optimizelyExperiments" />
 
-##### 2.2.15.6 optimizelyExperiments context
+##### 2.2.14.6 optimizelyExperiments context
 
-If this context is enabled the JavaScript Tracker will use the `window['optimizely'].data.experiments` object to create an array of context JSONs; one for each sub-object.
+If this context is enabled the JavaScript Tracker will use the `window['optimizely'].data.experiments` object to create an array of context JSONs; one for each sub-object.  
 
 To see what will be captured please see the JsonSchema file [com.optimizely/experiment/jsonschema/1-0-0](https://raw.githubusercontent.com/snowplow/iglu-central/master/schemas/com.optimizely/experiment/jsonschema/1-0-0).
 
 <a name="optimizelyStates" />
 
-##### 2.2.15.7 optimizelyStates context
+##### 2.2.14.7 optimizelyStates context
 
 If this context is enabled the JavaScript Tracker will use the `window['optimizely'].data.state` object to create an array of context JSONs; one for each sub-object.
 
@@ -348,15 +325,15 @@ To see what will be captured please see the JsonSchema file [com.optimizely/stat
 
 <a name="optimizelyVariations" />
 
-##### 2.2.15.8 optimizelyVariations context
+##### 2.2.14.8 optimizelyVariations context
 
-If this context is enabled the JavaScript Tracker will use the `window['optimizely'].data.variations` object to create an array of context JSONs; one for each sub-object.
+If this context is enabled the JavaScript Tracker will use the `window['optimizely'].data.variations` object to create an array of context JSONs; one for each sub-object.  
 
 To see what will be captured please see the JsonSchema file [com.optimizely/variation/jsonschema/1-0-0](https://raw.githubusercontent.com/snowplow/iglu-central/master/schemas/com.optimizely/variation/jsonschema/1-0-0).
 
 <a name="optimizelyVisitor" />
 
-##### 2.2.15.9 optimizelyVisitor context
+##### 2.2.14.9 optimizelyVisitor context
 
 If this context is enabled the JavaScript Tracker will use the `window['optimizely'].data.visitor` object to create a context JSON.
 
@@ -364,23 +341,23 @@ To see what will be captured please see the JsonSchema file [com.optimizely/visi
 
 <a name="optimizelyAudiences" />
 
-##### 2.2.15.10 optimizelyAudiences context
+##### 2.2.14.10 optimizelyAudiences context
 
-If this context is enabled the JavaScript Tracker will use the `window['optimizely'].data.visitor.audiences` object to create an array of context JSONs; one for each sub-object.
+If this context is enabled the JavaScript Tracker will use the `window['optimizely'].data.visitor.audiences` object to create an array of context JSONs; one for each sub-object.  
 
 To see what will be captured please see the JsonSchema file [com.optimizely/visitor_audience/jsonschema/1-0-0](https://raw.githubusercontent.com/snowplow/iglu-central/master/schemas/com.optimizely/visitor_audience/jsonschema/1-0-0).
 
 <a name="optimizelyDimensions" />
 
-##### 2.2.15.11 optimizelyDimensions context
+##### 2.2.14.11 optimizelyDimensions context
 
-If this context is enabled the JavaScript Tracker will use the `window['optimizely'].data.visitor.dimensions` object to create an array of context JSONs; one for each sub-object.
+If this context is enabled the JavaScript Tracker will use the `window['optimizely'].data.visitor.dimensions` object to create an array of context JSONs; one for each sub-object.  
 
 To see what will be captured please see the JsonSchema file [com.optimizely/visitor_dimension/jsonschema/1-0-0](https://raw.githubusercontent.com/snowplow/iglu-central/master/schemas/com.optimizely/visitor_dimension/jsonschema/1-0-0).
 
 <a name="optimizelySummary" />
 
-##### 2.2.15.12 optimizelySummary context
+##### 2.2.14.11 optimizelySummary context
 
 Unlike previously mentioned Optimizely contexts this context doesn't attach existing in browser object, but constructs its own using only data necessary to join with [exported Optimizely][optimizely-export] data.
 
@@ -388,35 +365,10 @@ To see what will be captured please see the JsonSchema file [com.optimizely.snow
 
 We highly recommend to use this context instead of previous ones because it is has much smaller footprint and contains all necessary data.
 
-<a name="optimizelyXSummary" />
-
-##### 2.2.15.13 optimizelyXSummary context
-
-Support for OptimizelyX has been introduced in the tracker, you can have a look
-at the JsonSchema in [com.optimizely/optimizelyx_summary/jsonschema/1-0-0](
-https://raw.githubusercontent.com/snowplow/iglu-central/blob/master/schemas/com.optimizely/optimizelyx_summary/jsonschema/1-0-0)
-to see what is being captured.
-
-If you're planning on leveraging the context's variation names, you'll have
-to untick 'Mask descriptive names in project code and third-party integrations'
-in the OptimizelyX menu -> Settings -> Privacy. Otherwise, all variation names
-will be `null`.
-
-<a name="parrable" />
-
-##### 2.2.15.14 parrable context
-
-If this context is enabled, the JavaScript Tracker will use the
-`window['_hawk']` object to create a [Parrable](https://www.parrable.com/)
-context JSON.
-
-To see what will captured, please see the JsonSchema file
-[com.parrable/encrypted_payload/jsonschema/1-0-0](
-https://raw.githubusercontent.com/snowplow/iglu-central/master/schemas/com.parrable/encrypted_payload/jsonschema/1-0-0).
 
 <a name="post" />
 
-#### 2.2.16 POST support
+#### 2.2.15 POST support
 
 If you set the `post` field of the argmap to `true`, the tracker will send events using POST requests rather than GET requests. In browsers such as Internet Explorer 9 which do not support cross-origin XMLHttpRequests, the tracker will fall back to using GET.
 
@@ -436,6 +388,14 @@ For instance, if you wish to send several events at once, you might make the API
 
 Note that if `localStorage` is inaccessible or you are not using it to store data, the buffer size will always be 1 to prevent losing events when the user leaves the page.
 
+<a name="use-cookies" />
+
+#### 2.2.16 Disabling cookies
+
+You can prevent the Tracker from setting or reading first-party cookies by adding `useCookies: false` to the argmap.
+
+<a name="cross-domain" />
+
 #### 2.2.17 Configuring cross-domain tracking
 
 The JavaScript Tracker can add an additional parameter named "_sp" to the querystring of outbound links. Its value includes the domain user ID for the current page and the time at which the link was clicked. This makes these values visible in the "url" field of events sent by an instance of the JavaScript Tracker on the destination page. The enrichment process will use these values to populate the `refr_domain_userid` and `refr_dvce_tstamp` fields in Redshift for all events fired on the destination page.
@@ -445,7 +405,7 @@ You can configure which links get decorated this way using the `crossDomainLinke
 ```javascript
 {
   crossDomainLinker: function (linkElement) {
-    return (linkElement.href === "http://acme.de" || linkElement.id === "crossDomainLink");
+    return (linkElement.href === "http://acme.de" || linkElement.id === "crossDomainLink"); 
   }
 }
 ```
@@ -473,8 +433,8 @@ If you want to decorate every link, regardless of its destination:
 Note that the above will decorate "links" which are actually just JavaScript actions (with an `href` of `"javascript:void(0)"`). To exclude these links:
 
 ```javascript
-window.snowplow('crossDomainLinker', function(linkElement) {
-  return linkElement.href.indexOf('javascript:') < 0;
+window.snowplow('crossDomainLinker', function(linkElement) { 
+  return linkElement.href.indexOf('javascript:') < 0; 
 });
 ```
 
@@ -484,7 +444,7 @@ If further links get added to the page after the tracker has loaded, you can use
 
 ```javascript
 snowplow_name_here('crossDomainLinker', function () {
-  return (linkElement.href === "http://acme.de" || linkElement.id === "crossDomainLink");
+  return (linkElement.href === "http://acme.de" || linkElement.id === "crossDomainLink"); 
 });
 ```
 
@@ -513,7 +473,7 @@ __NOTE__: If you have been setting this manually please note that the automatic 
 #### 2.2.20 Configuring the cookies lifetime
 
 Whenever tracker initialized on your domain - it will set domain-specific visitor's cookies.
-By default, these cookies will be active for 2 years.
+By default, these cookies will be active for 2 years. 
 You can change this duration using `cookieLifetime` argmap parameter or `setVisitorCookieTimeout` method.
 
 ```javascript
@@ -529,7 +489,7 @@ snowplow_name_here('setVisitorCookieTimeout', 86400 * 30);  // 30 days
 If `cookieLifetime` is set to `0`, the cookie will expire at the end of the session (when the browser closes).
 If set to `-1`, the first-party cookies will be disabled.
 
-[Back to top](#top)
+[Back to top](#top)  
 [Back to JavaScript technical documentation contents][contents]
 
 <a name="other-methods" />
@@ -587,7 +547,7 @@ Use `setUserIdFromCookie` to set the value of a cookie as the user ID. For examp
 ```javascript
 snowplow_name_here('setUserIdFromCookie', 'cookieid');
 ```
-[Back to top](#top)
+[Back to top](#top)  
 [Back to JavaScript technical documentation contents][contents]
 
 <a name="custom-url" />
@@ -616,7 +576,7 @@ If you want to ensure that the original referrer is preserved even though your p
 snowplow_name_here('setReferrerUrl', document.referrer);
 ```
 
-[Back to top](#top)
+[Back to top](#top)  
 [Back to JavaScript technical documentation contents][contents]
 
 <a name="callback" />
@@ -701,22 +661,11 @@ snowplow_name_here('trackSelfDescribingEvent:cf2', 'com.acme_company' 'Viewed Pr
 snowplow_name_here('trackPageView:cf1;cf2');
 ```
 
-<a name="state" />
+<a name="cookies" />
 
-### 2.6 How the Tracker stores state
+### 2.6 How the Tracker uses cookies
 
-Unless you have enabled `respectDoNotTrack` in the configuration argmap, the
-tracker will persist information on the client. The location depends on
-the `stateStorageStrategy` field in the argmap. By default, information will
-be stored in cookie. Alternatively, you can specify "localStorage" to have the
-state stored in local storage. Finally, you can set `stateStorageStrategy` to
-none in order not to store anything client side.
-
-The stored state takes the form of two first party cookies: the session cookie
-and the ID cookie. By default their names are prefixed with "_sp_", but you can
-change this using the "cookieName" field in the argmap. Their names are suffixed
-with a hash of the current domain, so the full cookie names might look something
-like _sp_ses.4209 and _sp_id.4209.
+Unless you have enabled `respectDoNotTrack` in the configuration argmap, the tracker will use cookies to persist information. There are two first party cookies: the session cookie and the ID cookie. By default their names are prefixed with "_sp_", but you can change this using the "cookieName" field in the argmap. Their names are suffixed with a hash of the current domain, so the full cookie names might look something like _sp_ses.4209 and _sp_id.4209.
 
 #### The session cookie
 
@@ -770,11 +719,19 @@ function getSnowplowDuid(cookieName) {
 
 If you set a custom `cookieName` field in the argmap, pass that name into the function; otherwise call the function without arguments. Note that if the function is called before the cookie exists (i.e. when the user is visiting the page for the first time and sp.js has not yet loaded) if will return `false`.
 
+<a name="local-storage" />
+
+### 2.8 How the Tracker uses localStorage
+
+The Snowplow JavaScript Tracker uses `window.localStorage` to store events in case the user goes offline. Whenever the Tracker tries to fire an event, it first appends it to the queue in `localStorage`, and then sends events from the front of the queue until the queue is empty or an event fails to send.
+
+`localStorage` is only shared between pages with the exact same domain. So if a user clicks on an internal link to another page in the same domain but the link click event fails to send before the page unloads, the event will be available in `localStorage` to the destination page, and if sp.js is also loaded on that page, it will send the request. Note that the tracker on the second page must have the same Snowplow function name (e.g. "snowplow_name_here") and the same tracker namespace (e.g. "cf") as the tracker on the first page for this to work.
+
 <a name="timestamp" />
 
 ### 2.9 Optional timestamp argument
 
-Since 2.7.0 each `track...()` method supports an optional timestamp as its final argument; this allows you to manually override the timestamp attached to this event.
+Since 2.7.0 each `track...()` method supports an optional timestamp as its final argument; this allows you to manually override the timestamp attached to this event. 
 The timestamp should be in milliseconds since the Unix epoch.
 
 If you do not pass this timestamp in as an argument, then the JavaScript Tracker will use the current time to be the timestamp for the event.
@@ -818,7 +775,6 @@ snowplow_name_here("preservePageViewId")
 [general-parameters-v2.4]: https://github.com/snowplow/snowplow/wiki/1-General-parameters-for-the-Javascript-tracker-v2.4
 [general-parameters-v2.5]: https://github.com/snowplow/snowplow/wiki/1-General-parameters-for-the-Javascript-tracker-v2.5
 [general-parameters-v2.6]: https://github.com/snowplow/snowplow/wiki/1-General-parameters-for-the-Javascript-tracker-v2.6
-[general-parameters-v2.7]: https://github.com/snowplow/snowplow/wiki/1-General-parameters-for-the-Javascript-tracker-v2.7
 [snowplow-tracker-protocol]: https://github.com/snowplow/snowplow/wiki/SnowPlow-Tracker-Protocol
 [contexts]: https://github.com/snowplow/snowplow/wiki/2-Specific-event-tracking-with-the-Javascript-tracker-v1#custom-contexts
 [clojure-collector]: https://github.com/snowplow/snowplow/wiki/Clojure-collector
