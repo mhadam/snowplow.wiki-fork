@@ -1,4 +1,4 @@
-[**HOME**](Home) > [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow technical documentation) > [**Enrichment**](Enrichment) > Hadoop Event Recovery
+[**HOME**](Home) > [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow-technical-documentation) > [**Enrichment**](Enrichment) > Hadoop Event Recovery
 
 ### Overview
 
@@ -80,7 +80,7 @@ Converts a JSON string into a JavaScript object
 Input: Object
 Output: String
 
-Converts a JavaScript object into a JSON string. Use this instead of `JSON.stringify`. 
+Converts a JavaScript object into a JSON string. Use this instead of `JSON.stringify`.
 
 #### decodeBase64
 

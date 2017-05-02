@@ -1,4 +1,6 @@
-[**HOME**](Home) > [**SNOWPLOW SETUP GUIDE**](Setting-up-Snowplow) > [**Step 1: setup a Collector**](Setting-up-a-Collector) > [**Clojure collector setup**](setting-up-the-clojure-collector) > [[Additional configuration options]]
+[HOME](Home) » [SNOWPLOW SETUP GUIDE](Setting-up-Snowplow) » [Step 1: setup a Collector](Setting-up-a-Collector) » [Clojure collector setup](setting-up-the-clojure-collector) » [[Download the Clojure collector WAR file or compile it from source]] » [[Create a new application in Elastic Beanstalk and upload the WAR file into it]] » [[Enable logging to S3]] » [[Configuring the Clojure collector]] » [[Enable support for HTTPS]] » Additional configuration options
+
+---
 
 There are environment configuration parameters that you may want to consider tailoring to your specific needs. All of them can be accessed via the **Configuration** page of the Elastic Beanstalk UI.
 
@@ -20,7 +22,7 @@ Setting the environment to '*production*' will hide the status of the collector 
 
 #### 2. Setting the P3P policy header
 
-This can be entered directly into the same dialogue box as the environment name (see [3b i](#3bi) above), but the parameter  should be named either **PARAM2** or **SP_P3P** rather than **PARAM1** or **SP_ENV**.
+This can be entered directly into the same dialogue box as the environment name (see [3b i](#3bi) above), but the parameter should be named either **PARAM2** or **SP_P3P** rather than **PARAM1** or **SP_ENV**.
 
 If it is not set, the P3P policy header defaults to:
 
@@ -42,7 +44,7 @@ Please, refer to [RFC 6265](https://tools.ietf.org/html/rfc6265#section-5.1.3) f
 
 This can be entered into the same dialogue box as the [environment name](#3bi), [P3P policy header](#3bii) and [domain name](#3biii), by entering the value for the *Property Name* either **PARAM4** or **SP_DURATION**. The value entered should be an integer representing cookie duration measured in days.
 
-If no value is provided, cookies set default to expiring after one year (i.e. 365 days).
+If no value is provided, cookies set the default to expiring after one year (i.e. 365 days).
 
 If you set the value to `0`, the cookie will not be set at all.
 

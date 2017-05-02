@@ -1,14 +1,14 @@
 <a name="top" />
 
-[**HOME**](Home) > [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow technical documentation) > [**Trackers**](trackers) > CPP Tracker
+[**HOME**](Home) > [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow-technical-documentation) > [**Trackers**](trackers) > CPP Tracker
 
 ## Contents
 
-- 1. [Overview](#overview)  
-- 2. [Initialization](#init)  
+- 1 [Overview](#overview)
+- 2 [Initialization](#init)
   - 2.1 [Import the library](#importing)
   - 2.2 [Creating a tracker](#create-tracker)
-    - 2.2.1 [`emitter`](#emitter)  
+    - 2.2.1 [`emitter`](#emitter)
     - 2.2.2 [`subject`](#subject)
     - 2.2.3 [`client_session`](#client-session)
     - 2.2.4 [`platform`](#platform)
@@ -16,14 +16,14 @@
     - 2.2.6 [`name_space`](#name-space)
     - 2.2.7 [`use_base64`](#base64)
     - 2.2.8 [`desktop_context`](#desktop-context)
-- 3. [Adding extra data: the Subject class](#subject-class)
+- 3 [Adding extra data: the Subject class](#subject-class)
   - 3.1 [`set_user_id`](#set-user-id)
   - 3.2 [`set_screen_resolution`](#set-screen-resolution)
   - 3.3 [`set_viewport`](#set-viewport-dimensions)
   - 3.4 [`set_color_depth`](#set-color-depth)
   - 3.5 [`set_timezone`](#set-timezone)
   - 3.6 [`set_language`](#set-lang)
-- 4. [Tracking specific events](#events)
+- 4 [Tracking specific events](#events)
   - 4.1 [Common](#common)
     - 4.1.1 [Custom contexts](#custom-contexts)
     - 4.1.2 [Optional timestamp argument](#tstamp-arg)
@@ -33,11 +33,12 @@
   - 4.3 [`track_screen_view()`](#screen-view)
   - 4.4 [`track_struct_event()`](#struct-event)
   - 4.5 [`track_timing()`](#timing-event)
-- 5. [Emitters](#emitter)
+- 5 [Emitters](#emitter)
   - 5.1 [Under the hood](#emitter-inner-workings)
-- 6. [Client Sessions](#sessions)
+- 6 [Client Sessions](#sessions)
 
 <a name="overview" />
+
 ## 1. Overview
 
 The [Snowplow C++ Tracker](https://github.com/snowplow/snowplow-cpp-tracker) allows you to track Snowplow events from your C++ apps, games and servers.
@@ -47,11 +48,13 @@ There are three basic types of object you will create when using the Snowplow C+
 A subject represents a user whose events are tracked. A tracker constructs events and sends them to an emitter. The emitter then sends the event to the endpoint you configure; a valid Snowplow Collector.
 
 <a name="init" />
+
 ## 2 Initialization
 
 Assuming you have completed the [[CPP Tracker Setup]] for your project, you are now ready to initialize the C++ Tracker.
 
 <a name="importing" />
+
 ### 2.1 Import the library
 
 Import the C++ Tracker library like so:
@@ -63,6 +66,7 @@ Import the C++ Tracker library like so:
 That's it - you are now ready to initialize a tracker instance.
 
 <a name="create-tracker" />
+
 ### 2.2 Creating a tracker
 
 You will first need to create an Emitter to which events will be sent:
@@ -88,7 +92,7 @@ The optional tracker arguments:
 | `platform`           | The platform the Tracker is running on        | No            | `srv`        |
 | `app_id`             | The application ID                            | No            | ``           |
 | `name_space`         | The name of the tracker instance              | No            | ``           |
-| `use_base64`         | Whether to enable [base 64 encoding] [base64] | No            | `true`       |
+| `use_base64`         | Whether to enable [base 64 encoding][base64] | No            | `true`       |
 | `desktop_context`    | Whether to add a `desktop_context` to events  | No            | `true`       |
 
 A more complete example:
@@ -118,45 +122,53 @@ Tracker *t = Tracker::init(emitter, &subject, &client_session, &platform, &app_i
 __NOTE__: To ensure all of your events are sent before closing your application you can call the tracker flush function which is a blocking call that will send everything in the database and then will join the daemon thread to the calling thread.
 
 <a name="emitter" />
+
 #### 2.2.1 `emitter`
 
 Accepts an argument of an Emitter instance pointer; if the object is `NULL` will throw an exception. See [Emitters](#emitters) for more on emitter configuration.
 
 <a name="subject" />
+
 #### 2.2.2 `subject`
 
-The user which the Tracker will track. Accepts an argument of a [Subject](#subject-class) instance pointer. 
+The user which the Tracker will track. Accepts an argument of a [Subject](#subject-class) instance pointer.
 
 You don't need to set this during Tracker construction; you can use the `tracker.set_subject(...)` method afterwards. In fact, you don't need to create a subject at all. If you don't, though, your events won't contain user-specific data such as timezone and language.
 
 <a name="client-session" />
+
 #### 2.2.3 `client_session`
 
-The client sessions which the Tracker will attach to each event. Accepts an argument of a [ClientSession](#sessions) instance pointer. 
+The client sessions which the Tracker will attach to each event. Accepts an argument of a [ClientSession](#sessions) instance pointer.
 
 Adds the ability to attach a ClientSession context to each event that leaves the Tracker.  This object operates on a daemon thread and will persistently store information about the sessions that have occurred for the life of the application - unless the database is destroyed.
 
 <a name="platform" />
+
 #### 2.2.4 `platform`
 
 By default we assume the Tracker will be running in a server environment.  To override this provide your own platform string.
 
 <a name="app-id" />
+
 #### 2.2.5 `app_id`
 
 The `app_id` argument lets you set the application ID to any string.
 
 <a name="name-space" />
+
 #### 2.2.6 `name_space`
 
 If provided, the `name_space` argument will be attached to every event fired by the new tracker. This allows you to later identify which tracker fired which event if you have multiple trackers running.
 
 <a name="base64" />
+
 #### 2.2.7 `use_base64`
 
 By default, unstructured events and custom contexts are encoded using Base64 to ensure that no data is lost or corrupted.
 
 <a name="desktop-context" />
+
 #### 2.2.8 `desktop_context`
 
 The `desktop_context` gathers extra information about the device it is running on and sends it along with every event that is made by the Tracker.
@@ -180,6 +192,7 @@ For more information the raw JsonSchema can be found [here](https://raw.githubus
 [Back to top](#top)
 
 <a name="subject-class" />
+
 ## 3. Adding extra data: The Subject class
 
 You may have additional information about your application's environment, current user and so on, which you want to send to Snowplow with each event.
@@ -202,6 +215,7 @@ The Subject class has a set of `set...()` methods to attach extra data relating 
 We will discuss each of these in turn below:
 
 <a name="set-user-id" />
+
 ### 3.1 Set user ID with `set_user_id`
 
 You can set the user ID to any string:
@@ -219,6 +233,7 @@ s.set_user_id("alexd");
 [Back to top](#top)
 
 <a name="set-screen-resolution" />
+
 ### 3.2 Set screen resolution with `set_screen_resolution`
 
 If your code has access to the device's screen resolution, then you can pass this in to Snowplow too:
@@ -236,6 +251,7 @@ s.set_screen_resolution(1366, 768);
 [Back to top](#top)
 
 <a name="set-viewport-dimensions" />
+
 ### 3.3 Set viewport dimensions with `set_viewport`
 
 If your code has access to the viewport dimensions, then you can pass this in to Snowplow too:
@@ -253,6 +269,7 @@ s.set_viewport(300, 200);
 [Back to top](#top)
 
 <a name="set-color-depth" />
+
 ### 3.4 Set color depth with `set_color_depth`
 
 If your code has access to the bit depth of the device's color palette for displaying images, then you can pass this in to Snowplow too:
@@ -270,6 +287,7 @@ s.set_color_depth(32);
 [Back to top](#top)
 
 <a name="set-timezone" />
+
 ### 3.5 Set timezone with `set_timezone`
 
 This method lets you pass a user's timezone in to Snowplow:
@@ -287,6 +305,7 @@ s.set_timezone("Europe/London");
 [Back to top](#top)
 
 <a name="set-lang" />
+
 ### 3.6 Set the language with `set_language`
 
 This method lets you pass a user's language in to Snowplow:
@@ -304,6 +323,7 @@ s.set_language('en');
 [Back to top](#top)
 
 <a name="events" />
+
 ## 4. Tracking specific events
 
 Snowplow has been built to enable you to track a wide range of events that occur when users interact with your websites and apps. We are constantly growing the range of functions available in order to capture that data more richly.
@@ -318,11 +338,13 @@ Tracking methods supported by the C++ Tracker at a glance:
 | [`track_timing()`](#timing-event)                  | Track a timing event                                   |
 
 <a name="common" />
+
 ### 4.1 Common
 
 All events are tracked with specific methods on the tracker instance, of the form `track_xxx()`, where `xxx` is the name of the event to track.
 
 <a name="custom-contexts" />
+
 ### 4.1.1 Custom contexts
 
 In short, custom contexts let you add additional information about the circumstances surrounding an event in the form of a vector of SelfDescribingJson objects. Each tracking method accepts an additional optional contexts parameter, which should be a vector of contexts:
@@ -357,6 +379,7 @@ Note that even though there is only one custom context attached to the event, it
 __INFO__: We use the excellent json library from Github community member [Niels (nlohmann)](https://github.com/nlohmann) for all JSON parsing.  For more information on using this library please visit the [Technical information on Github](https://github.com/nlohmann/json).
 
 <a name="tstamp-arg" />
+
 ### 4.1.2 Optional timestamp argument
 
 Each `track...()` method supports an optional timestamp argument; this allows you to manually override the timestamp attached to this event. The timestamp should be in milliseconds since the Unix epoch.
@@ -373,6 +396,7 @@ Tracker::instance()->track_struct_event(se);
 ```
 
 <a name="true-tstamp-arg" />
+
 ### 4.1.3 Optional true-timestamp argument
 
 Each `track...()` method supports an optional true-timestamp argument; this allows you to provide the true-timestamp attached to this event to help with the timing of events in multiple timezones. The timestamp should be in milliseconds since the Unix epoch.
@@ -390,6 +414,7 @@ Tracker::instance()->track_struct_event(se);
 ```
 
 <a name="event-id-arg" />
+
 ### 4.1.4 Optional event ID argument
 
 Each `track...()` method supports an optional event id argument; this allows you to manually override the event ID attached to this event. The event ID should be a valid version 4 UUID string.
@@ -406,6 +431,7 @@ Tracker::instance()->track_struct_event(se);
 [Back to top](#top)
 
 <a name="unstruct-event" />
+
 ### 4.2 Track SelfDescribing/Unstructured events with `track_self_describing_event()`
 
 Use `track_self_describing_event()` to track a custom event which consists of a name and an unstructured set of properties. This is useful when:
@@ -436,11 +462,12 @@ Tracker::SelfDescribingEvent sde(sdj);
 Tracker::instance()->track_self_describing_event(sde);
 ```
 
-For more on JSON schema, see the [blog post] [self-describing-jsons].
+For more on JSON schema, see the [blog post][self-describing-jsons].
 
 [Back to top](#top)
 
 <a name="screen-view" />
+
 ### 4.3 Track screen views with `track_screen_view()`
 
 Use `track_screen_view()` to track a user viewing a screen (or equivalent) within your app:
@@ -470,6 +497,7 @@ Tracker::instance()->track_screen_view(sve);
 [Back to top](#top)
 
 <a name="struct-event" />
+
 ### 4.4 Track structured events with `TrackStructEvent()`
 
 Use `TrackStructEvent()` to track a custom event happening in your app which fits the Google Analytics-style structure of having up to five fields (with only the first two required):
@@ -499,6 +527,7 @@ Tracker::instance()->track_struct_event(se);
 [Back to top](#top)
 
 <a name="timing-event" />
+
 ### 4.5 Track timing events with `TrackTiming()`
 
 Use `TrackTiming()` to track a timing event.
@@ -526,6 +555,7 @@ Tracker::instance()->track_timing(te);
 [Back to top](#top)
 
 <a name="emitter" />
+
 ## 5. Emitters
 
 The Tracker instance must be initialized with an emitter. This section will go into more depth about the Emitter and how it works under the hood.
@@ -551,6 +581,7 @@ The `db_name` can be any valid path on your host file system (that can be create
 [Back to top](#top)
 
 <a name="emitter-inner-workings">
+
 ### 5.1 Under the hood
 
 Once the emitter receives an event from the Tracker a few things start to happen:
@@ -565,6 +596,7 @@ Once the emitter receives an event from the Tracker a few things start to happen
 [Back to top](#top)
 
 <a name="sessions" />
+
 ## 6. Client Sessions
 
 You can optionally decide to include Client Sessionization.  This object will keep track of your users sessions and can be configured to timeout after a certain amount of inactivity.  Activity is determined by how often events are sent with the Tracker - so you will need to send events to keep the current session active.

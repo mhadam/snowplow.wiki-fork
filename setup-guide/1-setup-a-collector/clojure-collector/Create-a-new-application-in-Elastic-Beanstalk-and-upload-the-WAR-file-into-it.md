@@ -1,4 +1,4 @@
-[**HOME**](Home) > [**SNOWPLOW SETUP GUIDE**](Setting-up-Snowplow) > [**Step 1: setup a Collector**](Setting-up-a-Collector) > [**Clojure collector setup**](setting-up-the-clojure-collector) > [[Create a new application in Elastic Beanstalk and upload the WAR file into it]]
+[**HOME**](Home) > [**SNOWPLOW SETUP GUIDE**](Setting-up-Snowplow) > [**Step 1: setup a Collector**](Setting-up-a-Collector) > [**Clojure collector setup**](setting-up-the-clojure-collector) > [[Download the Clojure collector WAR file or compile it from source]] » Create a new application in Elastic Beanstalk and upload the WAR file into it
 
 Amazon makes it easy to create a new application in Elastic Beanstalk and upload your `war` file into it. All of this is possible via the web UI.
 
@@ -12,11 +12,11 @@ Once you've selected your region, you're ready to create your application. Click
 
 [[/setup-guide/images/clojure-collector-setup-guide/1.jpg]]
 
-Next you will need to set up the appropriate environment for the application to run in. Hit **Create web server** button.
+Next, you will need to set up the appropriate environment for the application to run in. Hit **Create web server** button.
 
 [[/setup-guide/images/clojure-collector-setup-guide/2.jpg]]
 
-For the platform, select **Tomcat**. In this demo we picked a "*Single instance*". However, you could set up a load balanced, auto scaling environment.
+For the platform, select **Tomcat**. In this demo, we picked a "*Single instance*". However, you could set up a load balanced, auto scaling environment.
 
 [[/setup-guide/images/clojure-collector-setup-guide/3.jpg]]
 
@@ -32,7 +32,7 @@ The following screen should be left unmodified. We do **not** need a database to
 
 [[/setup-guide/images/clojure-collector-setup-guide/6.jpg]]
 
-Next we need to specify another set of configuration details. Set a suitable instance type (we recommend at least `m1.small`). If you have an EC2 key pair configured, you can enter the key pair name at this stage: this will enable you to use the key pair to SSH in should you wish. (This is not required, and can be added later without any difficulty.)
+Next, we need to specify another set of configuration details. Set a suitable instance type (we recommend at least `m1.small`). If you have an EC2 key pair configured, you can enter the key pair name at this stage: this will enable you to use the key pair to SSH in should you wish. (This is not required, and can be added later without any difficulty.)
 
 [[/setup-guide/images/clojure-collector-setup-guide/7.jpg]]
 
@@ -58,16 +58,16 @@ Elastic Beanstalk will start creating your environment followed by launching the
 
 [[/setup-guide/images/clojure-collector-setup-guide/11.jpg]]
 
-Once application is up and running the dashboard will present the *Recent Events* logs and hopefully report the successful launch.
+Once the application is up and running the dashboard will present the *Recent Events* logs and hopefully report the successful launch.
 
 [[/setup-guide/images/clojure-collector-setup-guide/12.jpg]]
 
-To test that all is working as expected click on the **URL** link at the very top of the Dashboard. (This is `http://cc-endpoint-demo.us-west-2.elasticbeanstalk.com` in the example above.) This should return a 404. If you add `/i` to the path (e.g. `http://cc-endpoint-demo.us-west-2.elasticbeanstalk.com/i`), right click on the window and select **Inspect Element** in Chrome or **Inspect with Firebug** in Firefox, you should be able to see if the cookie has been set:
+To test that all is working as expected, click on the **URL** link at the very top of the Dashboard. (This is `http://cc-endpoint-demo.us-west-2.elasticbeanstalk.com` in the example above.) This should return a 404. If you add `/i` to the path (e.g. `http://cc-endpoint-demo.us-west-2.elasticbeanstalk.com/i`), right click on the window and select **Inspect Element** in Chrome or **Inspect with Firebug** in Firefox, you should be able to see if the cookie has been set:
 
 [[/setup-guide/images/clojure-collector-setup-guide/8.png]]
 
 
-##Alternative approach: AWS CLI
+## Alternative approach: AWS CLI
 
 Alternatively, the above steps could be done via [AWS CLI](https://aws.amazon.com/cli/) in the following manner.
 

@@ -1,6 +1,6 @@
 <a name="top" />
 
-[**HOME**](Home) > [**SNOWPLOW SETUP GUIDE**](Setting-up-Snowplow) > [**Step 5: Get started analysing Snowplow data**](Getting started analyzing Snowplow data) > Setting up R to perform more sophisticated analysis on your data
+[**HOME**](Home) > [**SNOWPLOW SETUP GUIDE**](Setting-up-Snowplow) > [**Step 6: Get started analyzing Snowplow data**](Getting-started-analyzing-Snowplow-data) > Setting up R to perform more sophisticated analysis on your data
 
 ## Contents
 
@@ -11,11 +11,12 @@
 5. [Next steps](#next-steps)
 
 <a name="what-and-why" />
+
 ## 1. What is R, and why use it to analyze / visualize Snowplow data?
 
-R is free, open source software for performing statistical and graphical analysis. 
+R is free, open source software for performing statistical and graphical analysis.
 
-R is in many respects a very strange analytics environment for the newbie. (It is not really a 'program' or 'service' as such.) It is a programming language, and as a result, can be daunting to use for business analysts who do not have development experience. 
+R is in many respects a very strange analytics environment for the newbie. (It is not really a 'program' or 'service' as such.) It is a programming language, and as a result, can be daunting to use for business analysts who do not have development experience.
 
 However, R is not a straightforward tool for developers to use either: many features of the language are unique to R, even amongst other interpreted languages (like Python) and functional languages (like Scala or Haskell).
 
@@ -25,15 +26,16 @@ In spite of its 'unusualness', there is one very good reasons to use R to analyz
 2. **Statistical analysis**. R supports a staggering array of statistical analyzes: making it easy to run standard statistical tests on data to see if e.g. two groups of visitors behave in a way that is significantly different
 3. **Algorithmic analysis**. R libraries include a wide range of algorithmic analytical techniques including market basket analyzes, principle component analysis, to give just two that are relevant with web analytics data.
 
-Over time, we plan to build out the [Analytics Cookbook] [cookbook] to include tutorials explaining how to perform the above analyzes in R using Snowplow data.
+Over time, we plan to build out the [Analytics Cookbook][cookbook] to include tutorials explaining how to perform the above analyzes in R using Snowplow data.
 
 Back to [top](#top)
 
 
 <a name="setup" />
+
 ## 2. Download and get started with R
 
-To download and install R on Windows or Mac, visit the [download page] [download-r], choose a nearby mirror and select the download appropriate for your platform. Then run the installer once the download is completed. You can then launch R from your start/applications menu.
+To download and install R on Windows or Mac, visit the [download page][download-r], choose a nearby mirror and select the download appropriate for your platform. Then run the installer once the download is completed. You can then launch R from your start/applications menu.
 
 To install R on Ubuntu, add the following line to your `/etc/apt/sources.list` file:
 
@@ -41,20 +43,21 @@ To install R on Ubuntu, add the following line to your `/etc/apt/sources.list` f
 
 but swap out `<my.favorite.cran.mirror>` for your nearest mirror e.g. `deb http://cran.ma.imperial.ac.uk/bin/linux/ubuntu precise/`
 
-Then simply 
+Then simply
 
 	sudo apt-get update
 	sudo apt-get install r-base
 
 You can then launch R by typing
 
-	R 
+	R
 
 at the prompt.
 
 Back to [top](#top)
 
 <a name="redshift" />
+
 ## 3. Connecting R to Snowplow data in Redshift
 
 You can pull Snowplow data stored in Redshift directly into R using the `RPostgreSQL` package.
@@ -72,7 +75,7 @@ Then:
 	drv <- dbDriver("PostgreSQL")
 	con <- dbConnect(drv, host="<<ENTER HOST DETAILS HERE>>", port="<<ENTER PORT DETAILS HERE>>",dbname="<<ENTER DB NAME HERE>>", user="<<ENTER USERNAME HERE>>", password="<<ENTER PASSWORD HERE>>")
 
-Note: you can access the relevant host, port, dbname and username fields by logging into the AWS console [console.aws.amazon.com] [aws-console], selecting Redshift and then clicking on the cluster you use for Snowplow:
+Note: you can access the relevant host, port, dbname and username fields by logging into the AWS console [console.aws.amazon.com][aws-console], selecting Redshift and then clicking on the cluster you use for Snowplow:
 
 [[/setup-guide/images/tableau/4.JPG]]
 
@@ -106,7 +109,7 @@ You can now fetch Snowplow data directly from Redshift into a dataframe in R, by
 		GROUP BY domain_userid
 	) c ON a.domain_userid = c.domain_userid
 	LEFT JOIN (
-		SELECT 
+		SELECT
 		domain_userid,
 		1 AS shopper
 		FROM events_new
@@ -145,7 +148,7 @@ We can pull that data into R by executing the following at the R command prompt:
 			GROUP BY domain_userid
 		) c ON a.domain_userid = c.domain_userid
 		LEFT JOIN (
-			SELECT 
+			SELECT
 			domain_userid,
 			1 AS shopper
 			FROM events_new
@@ -157,13 +160,15 @@ We can pull that data into R by executing the following at the R command prompt:
 Back to [top](#top)
 
 <a name="1st-analysis" />
+
 ## 4. Getting started analysing Snowplow data in R
 
 A guide to getting started using R to perform analysis can be found [here][get-started-with-r] on the [Analytics Cookbook][get-started-with-r].
- 
+
 Back to [top](#top)
 
 <a name="next-steps" />
+
 ## 5. Next steps
 
 TO WRITE

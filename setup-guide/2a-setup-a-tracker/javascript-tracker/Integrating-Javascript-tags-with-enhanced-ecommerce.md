@@ -13,6 +13,7 @@ __Please visit__ the [technical documentation](https://github.com/snowplow/snowp
 5. [Creating the tag](#tag)
 
 <a name="overview" />
+
 ### 1. Overview
 
 This guide will show you how to configure Google Tag Manager to load the Snowplow JavaScript Tracker and send enhanced ecommerce data to Snowplow as well as Google without changing any of your calls to `dataLayer.push`. We will assume that you have already implemented the GTM `dataLayer` for enhanced ecommerce as described in the [Enhanced Ecommerce (UA) Developer Guide][enhancedEcommerceDeveloperGuide].
@@ -22,6 +23,7 @@ We also assume that any ecommerce-related call to `dataLayer.push` which does no
 If you are sending very large ecommerce events containing lots of impressions, the size of your events may exceed Internet Explorer's maximum querystring size for GET requests. In this case we recommend configuring the tracker to use POST instead as described [here](https://github.com/snowplow/snowplow/wiki/1-General-parameters-for-the-Javascript-tracker#post).
 
 <a name="variable" />
+
 ### 2. Creating the Data Layer Variable
 
 [[/setup-guide/images/enhanced-ecommerce/enhanced_ecommerce_variable.png]]
@@ -29,6 +31,7 @@ If you are sending very large ecommerce events containing lots of impressions, t
 In the Variables tab, create a Data Layer Variable. Set the name of this variable to "ecommerce". This variable will hold all ecommerce-related data and will be updated when you call `dataLayer.push` with a JSON containing the key "ecommerce".
 
 <a name="trigger" />
+
 ### 3. Creating the trigger
 
 [[/setup-guide/images/enhanced-ecommerce/enhanced_ecommerce_trigger.png]]
@@ -40,6 +43,7 @@ In the Triggers tab, Create a new trigger named "Enhanced Ecommerce". In the "Ch
 The regex should consist of "gtm.dom" together with every string which you set as a the value of the "event" key in the enhanced ecommerce objects you push to the data layer, separated by the "|" pipe character.
 
 <a name="script" />
+
 ### 4. Writing the JavaScript
 
 Your tag will fire both when the page loads and also every time an ecommerce event is pushed to the data layer.
@@ -64,7 +68,7 @@ You can also customize the part of the tag between the comments containing "!!!"
 
     // !!! Customizable section starts
     // Track page views, enable link clicks, and so on here
-      
+
     SNOWPLOW_NAME_HERE('newTracker', 'snplow1', 'MY_COLLECTOR', {
       'appId': 'snowplowweb',
       'cookieName': 'MY_COOKIE_NAME'
@@ -75,7 +79,7 @@ You can also customize the part of the tag between the comments containing "!!!"
 
     // !!! Customizable section ends
   }
-  
+
   var ecommerce = {{ecommerce}};
   var actions = [
     "click",
@@ -92,11 +96,11 @@ You can also customize the part of the tag between the comments containing "!!!"
   if (ecommerce) {
     sendEnhancedEcommerceEvent(ecommerce);
   }
-  
+
   function sendEnhancedEcommerceEvent(ecommerce) {
     var currencyCode = ecommerce.currencyCode;
     var relevantActions = [];
-    
+
     for (var i = 0; i < actions.length; i++) {
       if (ecommerce[actions[i]]) {
         relevantActions.push(actions[i]);
@@ -105,7 +109,7 @@ You can also customize the part of the tag between the comments containing "!!!"
     if (ecommerce.impressions) {
       for (var j = 0; j < ecommerce.impressions.length; j++) {
         var impression = ecommerce.impressions[j];
-        SNOWPLOW_NAME_HERE('addEnhancedEcommerceImpressionContext', 
+        SNOWPLOW_NAME_HERE('addEnhancedEcommerceImpressionContext',
           impression.id,
           impression.name,
           impression.list,
@@ -176,6 +180,7 @@ You can also customize the part of the tag between the comments containing "!!!"
 ```
 
 <a name="tag" />
+
 ### 5. Creating the tag
 
 [[/setup-guide/images/enhanced-ecommerce/enhanced_ecommerce_tag.png]]

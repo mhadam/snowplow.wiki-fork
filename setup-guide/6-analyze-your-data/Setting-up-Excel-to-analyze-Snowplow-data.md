@@ -1,6 +1,7 @@
-[**HOME**](Home) > [**SNOWPLOW SETUP GUIDE**](Setting-up-Snowplow) > [**Step 5: Get started analysing Snowplow data**](Getting started analyzing Snowplow data) > Setting up Excel to analyze Snowplow data
+[**HOME**](Home) > [**SNOWPLOW SETUP GUIDE**](Setting-up-Snowplow) > [**Step 6: Get started analyzing Snowplow data**](Getting-started-analyzing-Snowplow-data) > Setting up Excel to analyze Snowplow data
 
 <a name="top" />
+
 ## Contents
 
 1. [Why use Excel to analyze / visualize Snowplow data](#why)
@@ -11,6 +12,7 @@
 6. [Next steps](#next-steps)
 
 <a name="why" />
+
 ## 1. Why use Excel to analyze / visualize Snowplow data?
 
 Excel is the most popular BI / analysis tool in the world. *Every* analyst, and a large number of business, sales and marketing people are excellent at using Excel, but shy away from other tools.
@@ -20,6 +22,7 @@ By accessing your Snowplow data diretly from Excel, anyone who's familiar with E
 Back to [top](#top).
 
 <a name="redshift" />
+
 ## 2. Setting up Excel to directly fetch Snowplow data from Amazon Redshift
 
 *This guide walks through the process of setting up a fetching data directly into Excel from Amazon Redshift on a Windows PC. We have not tried to do this on an Mac.*
@@ -32,11 +35,12 @@ Setting up Excel so that you can grab live Snowplow data directly from Amazon Re
 4. [Use that connection to fetch Snowplow data from Excel, directly into your Excel workbook](#excel)
 
 <a name="driver" />
+
 ### 2.1 Install the Redshift ODBC driver
 
 If you have not already done so, you need to install an ODBC driver so Windows can talk to your Amazon Redshift cluster.
 
-At the time of writing, Amazon Redshift works with [version 8 of the PostgreSQL ODBC driver][odbc-driver]. If you do not already have the driver installed, then download it. The [32 bit version][32-bit-driver] is available [here][32-bit-driver]. The [64 bit version][64-bit-driver] is available [here] [64-bit-driver].
+At the time of writing, Amazon Redshift works with [version 8 of the PostgreSQL ODBC driver][odbc-driver]. If you do not already have the driver installed, then download it. The [32 bit version][32-bit-driver] is available [here][32-bit-driver]. The [64 bit version][64-bit-driver] is available [here][64-bit-driver].
 
 **Note:** it is very important that if you are using a 32 bit version of MS Excel, that you download the 32 bit version of the driver, and if you are using a 64 bit version of MS Excel, you download the 64 bit version of the driver. If you are running Excel 2013, click on the **File** menu and select **Account**. Press the **About Excel** button. In the example below you can see that we are running the 64 bit version:
 
@@ -52,16 +56,17 @@ Once completed, you can check that the driver is available in Windows. Open up y
 
 [[/setup-guide/images/excel/odbc-data-sources-drivers-listed.JPG]]
 
-Notice the listings for `PostgreSQL ANSI(x64)` and `PostgreSQL Unicode(x64)`. These are the drivers that have been, that we will use to connect to Redshift with. 
+Notice the listings for `PostgreSQL ANSI(x64)` and `PostgreSQL Unicode(x64)`. These are the drivers that have been, that we will use to connect to Redshift with.
 
 **Note:** if you are running a 64 bit version of Windows, but are running a 32 bit version of Excel, so have installed the 32 bit driver, this will **not** be visible in the list of data sources you've just pulled up. Instead, you will need to open `c:\Windows\SysWOW64\odbcad32.exe`, to see a version of the same software with all the 32 bit drivers listed. All the rest of the instructions that follow should be the same.
 
 Back to [top](#top).
 
 <a name="security" />
+
 ### 2.2 White label your local IP address with Amazon Redshift security
 
-As a security measure, Amazon only allows connection to Redshift clusters from white-labelled IP addresses. That means you need to white label the IP address of the computer running Excel that you want to connect to Redshift. 
+As a security measure, Amazon only allows connection to Redshift clusters from white-labelled IP addresses. That means you need to white label the IP address of the computer running Excel that you want to connect to Redshift.
 
 To do this, log into the AWS console. (Ideally, from the computer you plan to run Excel on.) Click on **Redshift** and then select **Security Groups**:
 
@@ -73,18 +78,19 @@ Click on your security group. A list of white labelled IP addresses should be sh
 
 Enter the IP address you would like to white list, with the '/32' at the end. Note: Amazon gives you the IP address of the computer you have logged into AWS with - if this is the same computer, you can simply copy and paste the result in the AWS console. (In the example above, it is `37.157.33.178/32`.)
 
-If you do not know the IP address of the computer you wish to use Excel on, you can find it out by visiting [www.findmyip.org] (http://www.findmyip.org/). In most cases, you will simply need to add `/32` to the IP address to correctly get the CIDR/IP address. 
+If you do not know the IP address of the computer you wish to use Excel on, you can find it out by visiting [www.findmyip.org](http://www.findmyip.org/). In most cases, you will simply need to add `/32` to the IP address to correctly get the CIDR/IP address.
 
 Enter the address into the AWS console and click **Authorize**. You are now ready to create an ODBC connection between your Windows machine and Amazon Redshift!
 
 Back to [top](#top).
 
 <a name="windows" />
+
 ### 2.3 Create a data connection in Windows to your Snowplow data in Redshift, via ODBC
 
 Now that you have a Redshift compatible ODBC driver installed on your local machine, and have white labelled the IP address on that same machine, you're in a position to create a connection between it and your Amazon Redshift instance.
 
-Go back to **Data Sources (ODBC)** (in Control Panel / Administrative Tools). 
+Go back to **Data Sources (ODBC)** (in Control Panel / Administrative Tools).
 
 [[/setup-guide/images/excel/connection-1.JPG]]
 
@@ -109,6 +115,7 @@ Once the details have been entered, you can test them (hit the **Test** button),
 Back to [top](#top).
 
 <a href="excel" />
+
 ### 2.4 Use that connection to fetch Snowplow data from Excel, directly into your Excel workbook
 
 Create a new Excel workbook.
@@ -175,11 +182,12 @@ Voila! Our slice of data appears directly in Excel. We can graph it as normal:
 
 [[/setup-guide/images/excel/connection-16.JPG]]
 
-Note: we can use pull *any* cut of Snowplow data directly into Excel in the method described above. For ideas of other slices of data / queries to run, see the [Analytics Cookbook] [cookbook].
+Note: we can use pull *any* cut of Snowplow data directly into Excel in the method described above. For ideas of other slices of data / queries to run, see the [Analytics Cookbook][cookbook].
 
 Back to [top](#top).
 
 <a name="postgres" />
+
 ## 3. Setting up Excel to directly fetch Snwoplow data from PostgreSQL
 
 TO WRITE
@@ -187,6 +195,7 @@ TO WRITE
 Back to [top](#top).
 
 <a name="simple-analysis" />
+
 ## 4. Fetching data into Excel as a PivotTable or PivotChart Report
 
 In the above examples, we a cut of Snowplow data into Excel as a simple table.
@@ -195,7 +204,7 @@ Often, however, it is nice to pull a larger data set into Excel directly as a Pi
 
 Importing data from Snowplow into Excel as a PivotTable or PivotChart is reasonably straightforward. The key thing to understand is that the data must be suitably formatted for Excel to correctly read it into the PivotTable or PivotChart. We've written a set of instructions on [formatting Snowplow data for OLAP analysis][olap-analysis]: those instructions apply here, as PivotTables / PivotCharts are a form of OLAP analysis.
 
-To demonstrate, we're going to use the following query to generate our PivotChart report. (Refer to the [guide to formatting data for OLAP analysis] [olap-analysis] for instructions in how this was derived):
+To demonstrate, we're going to use the following query to generate our PivotChart report. (Refer to the [guide to formatting data for OLAP analysis][olap-analysis] for instructions in how this was derived):
 
 ```sql
 SELECT
@@ -224,7 +233,7 @@ SELECT
 	visits.visit_refr_urlpath,
 	page_views.page_urlpath,
 	page_views.page_views,
-	1 AS number_of_visits	
+	1 AS number_of_visits
 FROM (
 	SELECT
 		domain_userid,
@@ -314,6 +323,7 @@ We can then slice and dice on our different dimensions as normal for a pivot tab
 Back to [top](#top).
 
 <a name="notes" />
+
 ## 5. Notes
 
 ### Managing the volume of data inserted into Excel
@@ -328,6 +338,7 @@ The above instructions *should* work with both Excel 2013 and Excel 2010. Howeve
 
 Back to [top](#top).
 <a name="next-steps" />
+
 ## 6. Next steps
 
 TO WRITE

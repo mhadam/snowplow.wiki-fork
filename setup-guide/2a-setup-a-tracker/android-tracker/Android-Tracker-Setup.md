@@ -4,17 +4,18 @@
 
 ## Contents
 
-- 1. [Overview](#overview)  
-- 2. [Integration options](#integration-options)
+- 1 [Overview](#overview)  
+- 2 [Integration options](#integration-options)
   - 2.1 [Tracker compatibility](#compatibility)  
   - 2.2 [Dependencies](#dependencies)
-- 3. [Setup](#setup)
+- 3 [Setup](#setup)
   - 3.1 [Hosting](#hosting)
   - 3.2 [Gradle](#gradle)
   - 3.3 [Permissions](#permissions)
-- 4. [Example Gradle Dependencies](#example)
+- 4 [Example Gradle Dependencies](#example)
 
 <a name="overview" />
+
 ## 1. Overview
 
 The [Snowplow Android Tracker](https://github.com/snowplow/snowplow-android-tracker) lets you add analytics to your [Android][android]-based mobile apps and games.
@@ -26,9 +27,11 @@ Ready? Let's get started.
 [Back to top](#top)
 
 <a name="integration-options" />
+
 ## 2. Integration options
 
 <a name="compatibility" />
+
 ### 2.1 Tracker compatibility
 
 The Snowplow Android Tracker has been built and tested using the Android SDK version 24, but uses a minimum SDK version of 11, so should work within any Android application built using SDK version 11 upwards.
@@ -36,6 +39,7 @@ The Snowplow Android Tracker has been built and tested using the Android SDK ver
 [Back to top](#top)
 
 <a name="dependencies" />
+
 ### 2.2 Dependencies
 
 To minimize the dex footprint of the Tracker we have kept dependencies to an absolute minimum.  
@@ -49,9 +53,11 @@ compile 'com.squareup.okhttp3:okhttp:3.4.1'
 [Back to top](#top)
 
 <a name="setup" />
+
 ## 3. Setup
 
 <a name="hosting" />
+
 ### 3.1 Hosting
 
 The Tracker is published to jcenter, which should make it easy to add it as a dependency into your own Android app.
@@ -59,6 +65,7 @@ The Tracker is published to jcenter, which should make it easy to add it as a de
 The current version of the Snowplow Android Tracker is 0.6.2.
 
 <a name="gradle" />
+
 ### 3.2 Gradle
 
 If you are using Gradle in your own Android application, you will need to ensure `jcenter()` is in your `build.gradle` file:
@@ -93,6 +100,7 @@ dependencies {
 ```
 
 <a name="permissions" />
+
 ### 3.3 Permissions
 
 To send the events, you need to update your `AndroidManifest.xml` with the internet access permission:
@@ -115,6 +123,7 @@ If you want to send location information with each event you will need to add th
 ```
 
 <a name="example" />
+
 ## 4. Example Gradle Dependencies
 
 The dependencies for the implementation of the Android Tracker goes as follows:

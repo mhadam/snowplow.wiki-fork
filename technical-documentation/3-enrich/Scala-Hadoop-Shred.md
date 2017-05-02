@@ -1,8 +1,10 @@
-[**HOME**](Home) > [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow technical documentation) > [**Enrichment**](Enrichment) > Scala Hadoop Shred
+[**HOME**](Home) > [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow-technical-documentation) > [**Enrichment**](Enrichment) > Scala Hadoop Shred
+
+<a name="overview">
 
 ### 1. Overview
 
-Scala Hadoop Shred is Hadoop job, written in [Scalding][scalding] (Scala API
+Scala Hadoop Shred is Hadoop job, written in [Scalding][scalding](Scala API
 for [Cascading][cascading]) and allowing you to split (shred) Snowplow enriched
 event, produced by Scala Hadoop Enrich into separate enrities. Scala Hadoop
 Shred utilizes the [scala-common-enrich][sce] Scala project to load enriched
@@ -17,6 +19,8 @@ Scala Hadoop Shred has two primary tasks:
 1. Shred enriched event into `atomic-event` TSV and associated JSONs
 2. Make `event_id`s for all events unique
 
+<a name="shredding">
+
 ### 2. Shredding
 
 Snowplow [enriched event][EnrichedEvent] is 131-column TSV file, produced by
@@ -28,7 +32,7 @@ Shredding is process of splitting `EnrichedEvent` TSV into following parts:
 1. **Atomic event**. TSV line very similar to `EnrichedEvent` but not contining
    JSON fields (`contexts`, `derived_contexts` and `unstruct_event`). Result
    will be stored in path similar to `shredded/good/run=2016-11-26-21-48-42/atomic-events/part-00000`
-   and wil be available to load via [StorageLoader](StorageLoader) or directly
+   and will be available to load via [StorageLoader](StorageLoader) or directly
    via Redshift [COPY][redshift-copy].
 2. **Contexts**. This part consists of two extracted above JSON fields:
    `contexts` and `derived_contexts`, which are validated (on enrichment-step)
@@ -52,10 +56,12 @@ single input and output.
 More details on what shredding is can be found on dedicated
 [shredding](Shredding) page.
 
+<a name="deduplication">
+
 ### 3. Deduplication
 
 Duplicates is common problem in event pipelines, it is described
-[many][dealing-with-duplicate-event-ids] [times][r76-release]. Basically
+[many][dealing-with-duplicate-event-ids][times][r76-release]. Basically
 problem is that we cannot guarantee that every event has unique `UUID` because
 
 1. we have no exactly-once-delivery guarantee
@@ -66,12 +72,14 @@ There are four strategies planned for Scala Hadoop Shred's deduplication:
 
 | Strategy                             | Batch?      | Same event ID? | Same event fingerprint? | Availability                              |
 |--------------------------------------|-------------|----------------|-------------------------|-------------------------------------------|
-| In-batch natural de-duplication      | In-batch    | Yes            | Yes                     | [R76 Changeable Hawk-Eagle] [r76-release] |
-| In-batch synthetic de-duplication    | In-batch    | Yes            | No                      | [R86 Petra][r86-release]                                 |
-| Cross-batch natural de-duplication   | Cross-batch | Yes            | Yes                     | Planned                                   |
+| In-batch natural de-duplication      | In-batch    | Yes            | Yes                     | [R76 Changeable Hawk-Eagle][r76-release]  |
+| In-batch synthetic de-duplication    | In-batch    | Yes            | No                      | [R86 Petra][r86-release]                  |
+| Cross-batch natural de-duplication   | Cross-batch | Yes            | Yes                     | [R88 Angkor Wat][r88-release]             |
 | Cross-batch synthetic de-duplication | Cross-batch | Yes            | No                      | Planned                                   |
 
 We will cover these in turn:
+
+<a name="inbatch-natural-deduplication">
 
 #### 3.1 In-batch natural de-duplication
 
@@ -84,6 +92,8 @@ duplicates; all others will be discarded.
 
 To enable this functionality you need to have [Event Fingerprint Enrichment][fingerprint-enrichment]
 enabled in order to correctly populate `event_fingerprint` property.
+
+<a name="inbatch-synthetic-deduplication">
 
 #### 3.2 In-batch synthetic de-duplication
 
@@ -104,27 +114,31 @@ performed automatically in Hadoop Shred, but it is highly recommended to use
 [Event Fingerprint Enrichment][fingerprint-enrichment]
 in order to correctly populate `event_fingerprint` property.
 
+<a name="crossbatch-deduplication">
+
 #### 3.3 Cross-batch natural de-duplication
 
-**Cross-batch natural de-duplication has not been implemented yet.**
+With cross-batch natural de-duplication, we have a challenge: we need to track events across multiple ETL processing batches to detect duplicates.
+We don't need to store the whole event - just the `event_id` and the `event_fingerprint` metadata.
+And we need to store these in a database that allows fast random access - we chose Amazon DynamoDB, a fully managed NoSQL database service.
 
-With cross-batch natural de-duplication, we have a challenge: we need to track events across multiple ETL processing batches to detect duplicates. We don't need to store the whole event - just the `event_id` and the `event_fingerprint` metadata. And we need to store these in a database that allows fast random access - we chose Amazon DynamoDB, a fully managed NoSQL database service.
+##### DynamoDB table design
 
-#### DynamoDB table design
+We store the event metadata in a DynamoDB table with the following attributes:
 
-We store the event metadata in a DynamoDB table with the following columns:
-
-* `event_id`, a String
-* `event_fingerprint`, a String
-* `etl_timestamp`, a Date
+* `eventId`, a String
+* `fingerprint`, a String
+* `etlTime`, a Date
+* `ttl`, a Date
 
 A lookup into this table will tell us if the event we are looking has been seen before based on `event_id` and `event_fingerprint`.
 
-We store the `etl_timestamp` to prevent issues in the case of a failed run. If a run fails during Hadoop Shred and is then rerun, we don't want the rerun to consider rows in the DynamoDB table which were written as part of the prior failed run; otherwise all events in the rerun would be rejected as dupes!
+We store the `etl_timestamp` to prevent issues in the case of a failed run.
+If a run fails during Hadoop Shred and is then rerun, we don't want the rerun to consider rows in the DynamoDB table which were written as part of the prior failed run; otherwise all events in the rerun would be rejected as dupes!
 
-#### Check-and-set algorithm
+##### Check-and-set algorithm
 
-It is clear when we read the event metadata from DynamoDB: during the Hadoop Shred process. But when do we write the event metadata for this run back to DynamoDB? Instead of doing all the reads and then doing all the writes, we decided to use DynamoDB's [conditional update] [dynamodb-cond-writes] to perform a check-and-set operation inside Hadoop Shred, on a per-event basis.
+It is clear when we read the event metadata from DynamoDB: during the Hadoop Shred process. But when do we write the event metadata for this run back to DynamoDB? Instead of doing all the reads and then doing all the writes, we decided to use DynamoDB's [conditional update][dynamodb-cond-writes] to perform a check-and-set operation inside Hadoop Shred, on a per-event basis.
 
 The algorithm is simple:
 
@@ -136,19 +150,34 @@ If we discover a natural duplicate, then we delete it. We know that we have an "
 
 In the code, we perform this check after we have grouped the batch by `event_id` and `event_fingerprint`; this ensures that all check-and-set requests to a specific `event_id-event_fingerprint` pair in DynamoDB will come from a single mapper.
 
-#### Error handling
+##### Enabling
 
-The major failure states will be operational issues - for example a sudden event spike causing DynamoDB throughput exceptions. Hadoop Shred will attempt back-off-and-retry in the case of an error; if three re-attempts fail, then Hadoop Shred will fail the whole job. This is preferable to allowing duplicates to land in Redshift, where they can cause Cartesian product explosions.
+To enable cross-batch natural de-duplication you must provide a DynamoDB table [configuration][dynamodb-storage-target] to EmrEtlRunner and provide [necessary rights][dynamodb-setup-guide] in IAM.
+If this is not provided, then cross-batch natural de-duplication will be disabled.
+In-batch de-duplication will still work however.
 
-#### Enabling
+To avoid "cold start" problem you may want to use [[Event-manifest-populator]] Spark job, which backpopulates duplicate storage with events from specified point in time.
 
-To enable cross-batch natural de-duplication you must provide a DynamoDB table configuration to EmrEtlRunner. If this is not provided, then cross-batch natural de-duplication will be disabled. In-batch de-duplication will still work however.
+##### Table cleanup
+
+To make sure DynamoDB table is not going to be overpopulated we're using [DynamoDB Time-to-Live][dynamodb-ttl] feature, which provides automatic cleanup after specified time.
+For event manifests this time is etl timestamp plus 180 days and stored in `ttl` attribute.
+
+##### Costs and performance penalty
+
+Cross-batch deduplication uses DynamoDB as transient storage and therefore has associated AWS costs.
+Default write capacity is 100 units, which means no matter how powerful your EMR cluster is - whole Hadoop Shred can be throttled by AWS DynamoDB.
+Rough cost of default setup is 50USD per month, however throughput can be [tweaked][dynamodb-setup-guide] according to your needs.
 
 #### 3.4 Cross-batch synthetic de-duplication
 
 This section hasn't been written yet.
 
+[dynamodb-setup-guide]: https://github.com/snowplow/snowplow/wiki/Setting-up-Amazon-DynamoDB
+
 [redshift-copy]: http://docs.aws.amazon.com/redshift/latest/dg/copy-parameters-data-source-s3.html
+[dynamodb-cond-writes]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithItems.html#WorkingWithItems.ConditionalUpdate
+[dynamodb-ttl]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/TTL.html
 [ndjson]: http://ndjson.org/
 [scalding]: https://github.com/twitter/scalding
 [cascading]: http://www.cascading.org/
@@ -161,6 +190,6 @@ This section hasn't been written yet.
 [dealing-with-duplicate-event-ids]: http://snowplowanalytics.com/blog/2015/08/19/dealing-with-duplicate-event-ids/
 [r76-release]: http://snowplowanalytics.com/blog/2016/01/26/snowplow-r76-changeable-hawk-eagle-released/#deduplication
 [r86-release]: http://snowplowanalytics.com/blog/2016/12/20/snowplow-r86-petra-released/
+[r88-release]: http://snowplowanalytics.com/blog/2017/04/27/snowplow-r88-angkor-wat-released/
 [duplicate-schema]: https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/duplicate/jsonschema/1-0-0
-
-[dynamodb-cond-writes]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithItems.html#WorkingWithItems.ConditionalUpdate
+[dynamodb-storage-target]: https://github.com/snowplow/snowplow/wiki/Configuring-storage-targets#dynamodb

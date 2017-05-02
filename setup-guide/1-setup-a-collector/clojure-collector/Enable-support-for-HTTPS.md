@@ -1,4 +1,4 @@
-[**HOME**](Home) > [**SNOWPLOW SETUP GUIDE**](Setting-up-Snowplow) > [**Step 1: setup a Collector**](Setting-up-a-Collector) > [**Clojure collector setup**](setting-up-the-clojure-collector) > [[Enable support for HTTPS]]
+[**HOME**](Home) » [**SNOWPLOW SETUP GUIDE**](Setting-up-Snowplow) » [**Step 1: setup a Collector**](Setting-up-a-Collector) » [**Clojure collector setup**](setting-up-the-clojure-collector) » [[Download the Clojure collector WAR file or compile it from source]] » [[Create a new application in Elastic Beanstalk and upload the WAR file into it]] » [[Enable logging to S3]] » [[Configuring the Clojure collector]] » Enable support for HTTPS
 
 In order to track user behaviour on HTTPS web pages (e.g. shop checkouts), it is necessary to configure HTTPS for your AWS Elastic Beanstalk Environment. This requires that you use a custom domain as your endpoint (rather than the `{{ENVIRONMENT-NAME}}.elasticbeanstalk.com`) and have purchased an SSL certificate for that custom domain.
 
@@ -6,7 +6,7 @@ In order to track user behaviour on HTTPS web pages (e.g. shop checkouts), it is
 
 Using a custom domain is straightforward. In this tutorial, we will use the custom domain `collector.snplow.com`. We own the domain `snplow.com` and have it managed through [Linode][linode]. If you host a domain name with a different 3rd party to Linode, the steps will be broadly the same, although the UI will likely be different. If you use Amazon Route 53 to host your domains, instructions on using these with Elastic Beanstalk can be found [here][route-53]. 
 
-To use a custom domain, all we have to do is create a CNAME with our DNS provider, and map that CNAME to our Elastic Beanstalk environment URL. (In our case, `cc-endpoint.elasticbeanstalk.com`.) In Linode, we login and naviage to the **DNS Manager**, where we select the custom domain we want to use i.e. `snplow.com` and scroll down to the **CNAME Records**:
+To use a custom domain, all we have to do is create a CNAME with our DNS provider, and map that CNAME to our Elastic Beanstalk environment URL. (In our case, `cc-endpoint.elasticbeanstalk.com`.) In Linode, we log in and navigate to the **DNS Manager**, where we select the custom domain we want to use i.e. `snplow.com` and scroll down to the **CNAME Records**:
 
 [[/setup-guide/images/clojure-collector-setup-guide/15.png]]
 

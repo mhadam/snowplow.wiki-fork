@@ -1,6 +1,6 @@
 <a name="top" />
 
-[**HOME**](Home) > [**SNOWPLOW SETUP GUIDE**](Setting-up-Snowplow) > [**Step 4: setting up alternative data stores**](Setting-up-alternative-data-stores) > [Setting up Infobright to work with Snowplow] (Setting-up-Infobright)
+[**HOME**](Home) > [**SNOWPLOW SETUP GUIDE**](Setting-up-Snowplow) > [**Step 4: setting up alternative data stores**](Setting-up-alternative-data-stores) > [Setting up Infobright to work with Snowplow](Setting-up-Infobright)
 
 Setting up Snowplow to work with Infobright is a five step process:
 
@@ -24,10 +24,11 @@ You can download the latest version of ICE on the [Infobright downloads](http://
 	$ wget http://www.infobright.org/downloads/ice/infobright-4.0.7-0-x86_64-ice.deb
 
 <a name="install" />
+
 ## 1. Install
 
 To install:
-	
+
 	$ sudo -i
 	$ cd ~/downloads
 	$ dpkg -i infobright-4.0.7-0-x86_64-ice.deb
@@ -35,6 +36,7 @@ To install:
 [Back to top](#top)
 
 <a name="config" />
+
 ## 2. Configuring ICE
 
 ### Configuration file
@@ -68,11 +70,11 @@ Now we need to secure your ICE installation. Assuming you are still sudo'ed in a
 And set the root password:
 
 	Set root password? [Y/n] Y
-	New password: <<Enter password>> 
-	Re-enter new password: <<Enter password>> 
+	New password: <<Enter password>>
+	Re-enter new password: <<Enter password>>
 	Password updated successfully!
 	Reloading privilege tables..
-	 ... Success!    
+	 ... Success!
 
 And get rid of anonymous users:
 
@@ -154,6 +156,7 @@ And finally make sure that it survives reboot - you might not have to do this st
 [Back to top](#top)
 
 <a name="test" />
+
 ## 3. Testing ICE
 
 You can test ICE using standard MySQL client tools, although note Infobright's non-standard port number:
@@ -164,7 +167,7 @@ To test using the client that comes with ICE:
 
 	$ cd /usr/local/infobright
 	$ bin/mysql --defaults-file=/etc/my-ib.cnf -uroot --password
-	Enter password: <<Enter password>> 
+	Enter password: <<Enter password>>
 	Welcome to the MySQL monitor.  Commands end with ; or \g.
 	Your MySQL connection id is 12
 	Server version: 5.1.40 build number (revision)=IB_4.0.7_r16961_17249(ice) (static)
@@ -178,6 +181,7 @@ Alternatively you can also test by running Navicat or another database querying 
 [Back to top](#top)
 
 <a name="snowplow" />
+
 ## 4. Setting up the Snowplow database and events table
 
 Now that you've got ICE up and running, its time to setup a database for Snowplow on it, and create the Snowplow events table in it.
@@ -201,9 +205,10 @@ The `setup.sh` script will run the two 'sql' files in the [sql](https://github.c
 [Back to top](#top)
 
 <a name="storageloader" />
+
 ## 5. Automating the loading of Snowplow data into Infobright
 
-Now you have setup Infobright and a database / table in it for Snowplow data, you are ready to [setup the StorageLoader to regularly upload Snowplow data into the table] [storage-loader-for-infobright]. Click [here] [storage-loader-for-infobright] for step-by-step instruction on how.
+Now you have setup Infobright and a database / table in it for Snowplow data, you are ready to [setup the StorageLoader to regularly upload Snowplow data into the table][storage-loader-for-infobright]. Click [here][storage-loader-for-infobright] for step-by-step instruction on how.
 
 [Back to top](#top)
 

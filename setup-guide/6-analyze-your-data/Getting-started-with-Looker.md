@@ -1,6 +1,7 @@
-[**HOME**](Home) > [**SNOWPLOW SETUP GUIDE**](Setting-up-Snowplow) > [**Step 5: Get started analysing Snowplow data**](Getting started analyzing Snowplow data) > [Setting up Looker](Getting-started-with-Looker)
+[**HOME**](Home) > [**SNOWPLOW SETUP GUIDE**](Setting-up-Snowplow) > [**Step 6: Get started analyzing Snowplow data**](Getting-started-analyzing-Snowplow-data) > [Setting up Looker](Getting-started-with-Looker)
 
 <a name="top" />
+
 ## Contents
 
 1. [What is Looker, and why use it to analyze / visualize Snowplow data](#what-and-why)
@@ -12,6 +13,7 @@
 
 
 <a name="what-and-why" />
+
 ## 1. What is Looker, and why use it to analyze / visualize Snowplow data
 
 Looker is a next-generation BI tool that is particularly well-suited to mining Snowplow data:
@@ -20,32 +22,35 @@ Looker is a next-generation BI tool that is particularly well-suited to mining S
 2. It is optimized to work with Amazon Redshift in particular
 3. It boasts a lightweight metadata model, that makes it easy for users with no SQL knowledge to perform very advanced queries against Snowplow data
 
-For more information on why Looker plays so well with Snowplow data, see [this blog post] [introducing-looker-blog-post].
+For more information on why Looker plays so well with Snowplow data, see [this blog post][introducing-looker-blog-post].
 
 Back to [top](#top).
 
 <a name="setup" />
+
 ## 2. Setting up a Looker account
 
-You can apply for a Looker account directly from the [Looker website] [looker-website]. Snowplow SaaS customers or users on our free trial can [get in touch with the Snowplow team] [snowplow-contact] to request a Looker trial.
+You can apply for a Looker account directly from the [Looker website][looker-website]. Snowplow SaaS customers or users on our free trial can [get in touch with the Snowplow team][snowplow-contact] to request a Looker trial.
 
 Back to [top](#top).
 
 <a name="redshift" />
+
 ## 3. Connecting to Looker to Snowplow data in Redshift or PostgreSQL
 
 This is a three step process:
 
 1. [Create user credentials for Looker](#user-creds)
 2. [Add the server running Looker to your Redshift white-list](#white-list) (Redshift only)
-3. [Add a connection from Looker to your Snowplowplow data in Redshift or PostgreSQL] (#setup-connection)
+3. [Add a connection from Looker to your Snowplowplow data in Redshift or PostgreSQL](#setup-connection)
 
 <a name="user-creds" />
+
 ### 3.1 Create user credentials for Looker
 
 We recommend you create a dedicated 'Looker' user to access your Snowplow data. This user should have read only permissions on `atomic.events`, and write permissions on a new schema called `looker_scratch`, that Looker will use to persist temporary tables to. (Looker users temporary tables to make querying Snowplow data much faster.)
 
-To do so, log into your Snowplow database using admin / super user credentials with your client of choice (e.g. [Navicat][navicat], [psql] [psql] etc.) and execute the following:
+To do so, log into your Snowplow database using admin / super user credentials with your client of choice (e.g. [Navicat][navicat], [psql][psql] etc.) and execute the following:
 
 ```sql
 CREATE USER looker PASSWORD {{ password }};
@@ -58,13 +63,14 @@ GRANT ALL ON SCHEMA looker_scratch TO looker;
 Back to [top](#top).
 
 <a name="white-list" />
+
 ### 3.2 Add the server running Looker to your Redshift white-list (Redshift only)
 
-If you are using Amazon Redshift, you will need to add the server running Looker to one of your Redshift security groups. 
+If you are using Amazon Redshift, you will need to add the server running Looker to one of your Redshift security groups.
 
 To add the server:
 
-* Log into the AWS Management console 
+* Log into the AWS Management console
 * Select Redshift
 * Select **Security** from left hand menu. A list of security groups will appear
 * Select the security group you would like to add the server to. (Or create a dedicated one for the purpose.)
@@ -80,6 +86,7 @@ To add the server:
 Back to [top](#top).
 
 <a name="setup-connection" />
+
 ### 3.3 Add a connection from to your Snowplowplow data in Redshift or PostgreSQL
 
 
@@ -101,6 +108,7 @@ Back to [top](#top).
 Back to [top](#top).
 
 <a name="importing-the-models" />
+
 ## 4. Importing the metadata models
 
 Note: if you are setting up a trial with the Looker or Snowplow teams, they should be able to set up the metadata models for you. If you want to go through the process yourself, however, follow these instructions:
@@ -138,13 +146,14 @@ We now need to create a file for each of our models. Select the **Edit** link ne
 
 Then click the **Done** next to **MODELS** on the left hand menu.
 
-Now we need to populate each of the models files. The YAML definitions to populate them can be found [here, on our Github repo] [looker-yamls-on-snowplow-repo]. Copy the contents of each file in the repo to the corresponding file in Looker, making sure to copy the contents of the `snowplow.lookerml` file into the topmost file in your model. Save each model.
+Now we need to populate each of the models files. The YAML definitions to populate them can be found [here, on our Github repo][looker-yamls-on-snowplow-repo]. Copy the contents of each file in the repo to the corresponding file in Looker, making sure to copy the contents of the `snowplow.lookerml` file into the topmost file in your model. Save each model.
 
 You are now ready to [explore your data in Looker](#exploring-your-data)!
 
 Back to [top](#top).
 
 <a name="exploring-your-data" />
+
 ## 5. Exploring your Snowplow data in Looker
 
 Let's perform a simple analysis to start getting used to Looker. Let's analyze visitor and engagement levels by landing page.
@@ -169,6 +178,7 @@ Easy - huh?
 Back to [top](#top).
 
 <a name="next-steps" />
+
 ## 6. Next steps incl. useful resources
 
 TO WRITE

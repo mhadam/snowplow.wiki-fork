@@ -1,8 +1,8 @@
-[**HOME**](Home) > [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow technical documentation) > [**Collectors**](collectors)
+[**HOME**](Home) > [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow-technical-documentation) > [**Collectors**](collectors)
 
 ## Introduction
 
-The Scala Stream Collector is a Snowplow event collector for [Snowplow] [snowplow], written in Scala. The Scala Stream Collector allows near-real time processing (Enrichment, Storage, Analytics) of a Snowplow raw event stream.
+The Scala Stream Collector is a Snowplow event collector for [Snowplow][snowplow], written in Scala. The Scala Stream Collector allows near-real time processing (Enrichment, Storage, Analytics) of a Snowplow raw event stream.
 
 The Scala Stream Collector receives raw Snowplow events over HTTP, serializes them to a [Thrift][thrift] record format, and then writes them to a sink. Currently supported sinks are:
 
@@ -19,7 +19,7 @@ Like the Clojure Collector, the Scala Stream Collector supports cross-domain Sno
 
 The Scala Stream Collector allows the use of a third-party cookie, making user tracking across domains possible. The CloudFront Collector does not support cross domain tracking of users because user ids are set client-side, whereas the Scala Stream Collector sets them server-side.
 
-In a nutshell: the Scala Stream Collector receives events from the [Snowplow JavaScript tracker] [snowplow-js], sets/updates a third-party user tracking cookie, and returns the pixel to the client. The ID in this third-party user tracking cookie is stored in the `network_userid` field in Snowplow events.
+In a nutshell: the Scala Stream Collector receives events from the [Snowplow JavaScript tracker][snowplow-js], sets/updates a third-party user tracking cookie, and returns the pixel to the client. The ID in this third-party user tracking cookie is stored in the `network_userid` field in Snowplow events.
 
 In pseudocode terms:
 
@@ -34,12 +34,12 @@ In pseudocode terms:
 
 ## Technical architecture
 
-The Scala Stream Collector is built on top of [Spray][spray] and [Akka][akka] actors. 
+The Scala Stream Collector is built on top of [Spray][spray] and [Akka][akka] actors.
 
 ## See also
 
-* [GitHub repository] [github-repo]
-* [Setup guide] [setup-guide]
+* [GitHub repository][github-repo]
+* [Setup guide][setup-guide]
 
 [snowplow]: http://snowplowanalytics.com
 [cloudfront-collector]: https://github.com/snowplow/snowplow/tree/master/2-collectors/cloudfront-collector

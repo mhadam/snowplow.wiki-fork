@@ -16,6 +16,7 @@ For previous versions:
 - 3. [Application Focus](#app-focus)
 
 <a name="tracker" />
+
 ## 1. Init Tracker
 
 You will need to have imported the following library into your project:
@@ -61,6 +62,7 @@ public class SnowplowTrackerBuilder {
 [Back to top](#top)
 
 <a name="events" />
+
 ## 2. Tracking Events
 
 Once you have successfully built your Tracker object you can track events with calls like the following:
@@ -75,6 +77,7 @@ For an outline of all available tracking combinations have a look [here][demo-ap
 [Back to top](#top)
 
 <a name="app-focus" />
+
 ## 3. Application Focus
 
 The Tracker Session object can be tuned to timeout in `foreground` and `background` scenarios, but you are required to tell us when your application is in these states.  Unfortunately it is not possible to do so from a library standpoint.

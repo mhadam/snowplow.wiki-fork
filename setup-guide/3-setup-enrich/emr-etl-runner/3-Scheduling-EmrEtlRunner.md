@@ -1,6 +1,6 @@
 <a name="top" />
 
-[**HOME**](Home) > [**SNOWPLOW SETUP GUIDE**](Setting-up-Snowplow) > [Step 3: Setting up Enrich](Setting-up-enrich) > [Step 3.1: setting up EmrEtlRunner](Setting-up-EmrEtlRunner) > [Step 3.1.2: Using EmrEtlRunner](2-Using-EmrEtlRunner) > Step 3.1.3: Scheduling EmrEtlRunner
+[HOME](Home) » [SNOWPLOW SETUP GUIDE](Setting-up-Snowplow) » [Step 3: Setting up Enrich](Setting-up-enrich) » [Step 3.1: setting up EmrEtlRunner](Setting-up-EmrEtlRunner) [Step 3.1.1: Installing EmrEtlRunner](1-Installing-EmrEtlRunner) » [Step 3.1.2: Using EmrEtlRunner](2-Using-EmrEtlRunner) » Step 3.1.3: Scheduling EmrEtlRunner
 
 1. [Overview](#scheduling-overview)
 2. [cron](#cron)
@@ -9,32 +9,35 @@
 5. [Next steps](#next-steps)
 
 <a name="scheduling"/>
+
 ## Scheduling
 
 <a name="scheduling-overview"/>
+
 ## 1. Overview
 
 Once you have the ETL process working smoothly, you can schedule a daily
 (or more frequent) task to automate the daily ETL process.
 
-We run our daily ETL jobs at 3am UTC, so that we are sure that we have
+We run our daily ETL jobs at 3 AM UTC so that we are sure that we have
 processed all of the events from the day before (CloudFront logs can
 take some time to arrive).
 
 To consider your different scheduling options in turn:
 
 <a name="cron"/>
+
 ## 2. cron
 
-[[/images/warning.png]] | Running EmrEtlRunner as *Ruby* (rather than *JRuby* apps) is no longer actively supported. The latest version of the EmrEtlRunner is available from our Bintray [here](http://dl.bintray.com/snowplow/snowplow-generic/snowplow_emr_r77_great_auk.zip).
+[[/images/warning.png]] | Running EmrEtlRunner as *Ruby* (rather than *JRuby* apps) is no longer actively supported. The latest version of the EmrEtlRunner is available from our Bintray [here](http://dl.bintray.com/snowplow/snowplow-generic/snowplow_emr_r88_ankgor_wat.zip).
 ---|:---
 
 The recommended way of scheduling the ETL process is as a daily cronjob.
 
-**Note**: The below reference to `snowplow-emr-etl-runner.sh` script is provided in case you are still using the older version of *EmrEtlRunner*. It's a better solution to use [`snowplow-runner-and-loader.sh`](https://github.com/snowplow/snowplow/blob/r77-great-auk/4-storage/storage-loader/bin/snowplow-runner-and-loader.sh) script which synchronizes EmrEtlRunner and [StorageLoader](1-Installing-the-StorageLoader). You might skip this instructions altogether and return to this topic on [Scheduling the StorageLoader](3-scheduling-the-storageloader) page.
+**Note**: The below reference to `snowplow-emr-etl-runner.sh` script is provided in case you are still using the older version of *EmrEtlRunner*. It's a better solution to use [`snowplow-runner-and-loader.sh`](https://github.com/snowplow/snowplow/tree/master/4-storage/storage-loader/bin/snowplow-runner-and-loader.sh) script which synchronizes EmrEtlRunner and [StorageLoader](1-Installing-the-StorageLoader). You might skip these instructions altogether and return to this topic on [Scheduling the StorageLoader](3-scheduling-the-storageloader) page.
 
-If you are still using the shell script available in the Snowplow GitHub repository at 
-[`/3-enrich/emr-etl-runner/bin/snowplow-emr-etl-runner.sh`] [bash-script] you need to edit this script and update the three variables:
+If you are still using the shell script available in the Snowplow GitHub repository at
+[`/3-enrich/emr-etl-runner/bin/snowplow-emr-etl-runner.sh`][bash-script] you need to edit this script and update the three variables:
 
     rvm_path=/path/to/.rvm # Typically in the $HOME of the user who installed RVM
     RUNNER_PATH=/path/to/snowplow/3-enrich/snowplow-emr-etl-runner
@@ -45,37 +48,40 @@ So for example if you installed RVM as the `admin` user, then you would set:
 
     rvm_path=/home/admin/.rvm
 
-Now, assuming you're using the excellent [cronic] [cronic] as a wrapper for 
-your cronjobs, and that both cronic and Bundler are on your path, you can 
+Now, assuming you're using the excellent [cronic][cronic] as a wrapper for
+your cronjobs, and that both cronic and Bundler are on your path, you can
 configure your cronjob like so:
 
     0 4   * * *   root    cronic /path/to/snowplow/3-enrich/bin/snowplow-emr-etl-runner.sh
 
-This will run the ETL job daily at 4am, emailing any failures to you via cronic.
+This will run the ETL job daily at 4 AM, emailing any failures to you via cronic.
 
 <a name="jenkins"/>
+
 ## 3. Jenkins
 
-Some developers use the [Jenkins] [jenkins] continuous integration server (or
-[Hudson] [hudson], which is very similar) to schedule their Hadoop and Hive jobs.
+Some developers use the [Jenkins][jenkins] continuous integration server (or
+[Hudson][hudson], which is very similar) to schedule their Hadoop and Hive jobs.
 
 Describing how to do this is out of scope for this guide, but the blog post
-[Lowtech Monitoring with Jenkins] [jenkins-tutorial] is a great tutorial on using
+[Lowtech Monitoring with Jenkins][jenkins-tutorial] is a great tutorial on using
 Jenkins for non-CI-related tasks, and could be easily adapted to schedule
 EmrEtlRunner.
 
 <a name="windows"/>
+
 ## 4. Windows Task Scheduler
 
 For Windows servers, in theory it should be possible to use a Windows PowerShell
-script plus [Windows Task Scheduler] [windows-task-scheduler] instead of bash and cron. However, this has not been tested or documented.
+script plus [Windows Task Scheduler][windows-task-scheduler] instead of bash and cron. However, this has not been tested or documented.
 
 If you get this working, please let us know!
 
 <a name="next-steps" />
+
 ## 5. Next steps
 
-Now you have installed and scheduled [EmrEtlRunner] [emr-etl-runner], you have all your data ready for analysis in S3. Learn how to [setup the StorageLoader] [storage-loader] to regularly load your data into a database e.g. Infobright or Redshift for e.g. OLAP analysis, or to [analyse it on S3 via Emr] [emr-analysis].
+Now you have installed and scheduled [EmrEtlRunner][emr-etl-runner], you have all your data ready for analysis in S3. Learn how to [setup the StorageLoader][storage-loader] to regularly load your data into a database e.g. Infobright or Redshift for e.g. OLAP analysis, or to [analyse it on S3 via Emr][emr-analysis].
 
 
 [emr-etl-runner]: https://github.com/snowplow/snowplow/tree/master/3-enrich/emr-etl-runner
@@ -89,7 +95,7 @@ Now you have installed and scheduled [EmrEtlRunner] [emr-etl-runner], you have a
 [nokogiri-install]: http://nokogiri.org/tutorials/installing_nokogiri.html
 [rubygems-install]: http://docs.rubygems.org/read/chapter/3
 
-[config-yml]: https://github.com/snowplow/snowplow/blob/master/3-enrich/emr-etl-runner/config/config.yml
+[config-yml]: https://github.com/snowplow/snowplow/tree/master/3-enrich/emr-etl-runner/config/config.yml
 [bash-script]: https://github.com/snowplow/snowplow/blob/r76-changeable-hawk-eagle/3-enrich/emr-etl-runner/bin/snowplow-emr-etl-runner.sh
 
 [cronic]: http://habilis.net/cronic/

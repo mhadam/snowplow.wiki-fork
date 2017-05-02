@@ -16,6 +16,7 @@ For previous versions:
 - 4. [Application Focus](#app-focus)
 
 <a name="classic" />
+
 ## 1. Classic Tracker
 
 You will need to have imported the following library into your project:
@@ -66,6 +67,7 @@ public class TrackerBuilderClassic {
 [Back to top](#top)
 
 <a name="rx-java" />
+
 ## 2. RxJava tracker
 
 You will need to have imported the following library into your project:
@@ -116,6 +118,7 @@ public class TrackerBuilderRx {
 [Back to top](#top)
 
 <a name="events" />
+
 ## 3. Tracking Events
 
 Once you have successfully built your Tracker object you can track events with calls like the following:
@@ -130,6 +133,7 @@ For an outline of all available tracking combinations have a look [here][demo-ap
 [Back to top](#top)
 
 <a name="app-focus" />
+
 ## 4. Application Focus
 
 The Tracker Session object can be tuned to timeout in `foreground` and `background` scenarios, but you are required to tell us when your application is in these states.  Unfortunately it is not possible to do so from a library standpoint.

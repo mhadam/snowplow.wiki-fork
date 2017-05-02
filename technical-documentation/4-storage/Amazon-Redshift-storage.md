@@ -1,4 +1,4 @@
-[**HOME**](Home) > [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow technical documentation) > [**Storage**](storage documentation) > Amazon Redshift Storage
+[**HOME**](Home) > [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow-technical-documentation) > [**Storage**](storage-documentation) > Amazon Redshift Storage
 
 Currently, Snowplow events are stored in Redshift in a single events table. The full table definition is given in the [Github repo][redshift-atomic-def].
 

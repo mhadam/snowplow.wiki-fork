@@ -4,7 +4,7 @@
 
 Snowplow offers the option to configure certain enrichments. This is done using configuration JSONs. When running EmrEtlRunner or Kinesis Enrich, the `--enrichments` argument should be populated with the filepath of a directory containing your configuration JSONs. The files in the directory should be named "{{name-of-enrichment}}.json", where "name-of-enrichment" is the value of the "name" field in the JSON.
 
-Each enrichment has a JSON schema against which it is validated. (For more information on how Snowplow uses JSON schemas, see [this blog post][snowplow-schemas].) The enrichment JSONs follow a common pattern:
+Each enrichment has a JSON schema against which it is validated. (For more information on how Snowplow uses JSON schemas, see [this blog post][snowplow-schemas]) The enrichment JSONs follow a common pattern:
 
 ```json
 {

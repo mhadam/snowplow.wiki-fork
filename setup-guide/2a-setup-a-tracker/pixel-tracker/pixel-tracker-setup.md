@@ -2,7 +2,7 @@
 
 The Pixel tracker enables you to track page views of HTML pages where it is not possible to insert standard Snowplow JavaScript tracking tags: for example HTML emails or pages hosted with 3rd party service providers.
 
-The tracker is effectively a wizard that generates an HTML tracking tag based on parameters that you pass into it via a webform. The sourcecode for the wizard is [available on the Github repo] [pixel-tracker-repo]. A hosted version of the wizard is available on the [Snowplow Analytics website] [pixel-wizard].
+The tracker is effectively a wizard that generates an HTML tracking tag based on parameters that you pass into it via a webform. The sourcecode for the wizard is [available on the Github repo][pixel-tracker-repo]. A hosted version of the wizard is available on the [Snowplow Analytics website][pixel-wizard].
 
 Using the Pixel tracker is a simple, three step process:
 
@@ -16,6 +16,7 @@ In addition, in this guide, we cover:
 * [Other sources of information on the Pixel tracker](#information)
 
 <a name="id" />
+
 ## Setting up the Pixel tracker
 
 ### 1. Identify the event you wish to track
@@ -23,9 +24,10 @@ In addition, in this guide, we cover:
 Identify the event you wish to track. This may be opening a particular email that is sent out via your email marketing system, or viewing a product you are selling on a 3rd party marketplace.
 
 <a name="wizard" />
+
 ### 2. Use the wizard to create the tracking code
 
-Navigate to the [wizard] [pixel-wizard].
+Navigate to the [wizard][pixel-wizard].
 
 **2.1. Enter an application ID**. If you are running Snowplow to track user behaviour across multiple applications, you may want to have a different application ID for each. Most Snowplow users track behaviour across a single website or webapp. For those users, it probably makes sense to set the application ID to the same value they use on their core website.
 
@@ -40,11 +42,13 @@ Navigate to the [wizard] [pixel-wizard].
 **2.6. Select the `Generate Pixel tracking tag button**. The tracking code will be displayed below the wizard. Copy this to the clipboard.
 
 <a name="embed" />
+
 ### 3. Insert the tracking code into the page you wish to track
 
 If this is an HTML email, you will need to insert it in the email. If it is a webpage hosted on a third party site, you will need to add it to your source code.
 
 <a name="considerations" />
+
 ## Considerations when using the Pixel tracker, especially with the Clojure collector
 
 The behaviour of the Pixel tracker is very different if used with the Clojure collector than with the Cloudfront collector.
@@ -53,14 +57,16 @@ When used with the Cloudfront collector, no `user_id` is set, because this has t
 
 On the other hand, when used with the Clojure collector, a `user_id` is set. That is because it is set server side. The Clojure collector then drops a cookie with the stored `user_id` on the user's browsers. If you were using this to track views of Github READMEs, for example, you would then be able to track specific user browsing behaviour across your site and your Github repos.
 
-That is great from an analytics perspective. However, you need to make sure that you are not violating the terms and conditions of any service providers by dropping the cookie. For example, [eBay expressively forbid the dropping of cookies on product listings] [ebay-prohibit]. It is **your** responsibility to make sure you abide by the terms and conditions of any service providers you use, when employing that Pixel tracker, in particular in conjunction with the Clojure collector. if you are tracking behaviour on domains that are not your own, **it is your responsibility to abide by the terms and conditions of that domain owner**.
+That is great from an analytics perspective. However, you need to make sure that you are not violating the terms and conditions of any service providers by dropping the cookie. For example, [eBay expressively forbid the dropping of cookies on product listings][ebay-prohibit]. It is **your** responsibility to make sure you abide by the terms and conditions of any service providers you use, when employing that Pixel tracker, in particular in conjunction with the Clojure collector. if you are tracking behaviour on domains that are not your own, **it is your responsibility to abide by the terms and conditions of that domain owner**.
 
 <a name="more-info" />
+
 ## Further sources of information
 
-For further information on the Pixel tracker, see this [introductory blog post] [intro-to-pixel-tracker].
+For further information on the Pixel tracker, see this [introductory blog post][intro-to-pixel-tracker].
 
 <a name="next-steps" />
+
 ## Next steps
 
 Finished setting up your trackers? Now you can proceed to [setting up the EmrEtlRunner](Setting-up-Snowplow#wiki-step3).

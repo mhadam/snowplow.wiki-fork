@@ -2,20 +2,20 @@
 
 [**HOME**](Home) > [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow-technical-documentation) > [**Trackers**](trackers) > [**JavaScript Tracker**](Javascript-Tracker) > General parameters
 
-*This page refers to version 1 of the Snowplow JavaScript Tracker, which is out of date. Click [here] [general-parameters-v2] for the corresponding documentation for version 2, which is the latest version.*
+*This page refers to version 1 of the Snowplow JavaScript Tracker, which is out of date. Click [here][general-parameters-v2] for the corresponding documentation for version 2, which is the latest version.*
 
 <a name="general" />
 
 ## 2. General parameters
 
-  - 2.1 [Setting the endpoint](#endpoint)  
-    - 2.1.1 [`setCollectorCf`](#setCollectorCf)  
+  - 2.1 [Setting the endpoint](#endpoint)
+    - 2.1.1 [`setCollectorCf`](#setCollectorCf)
     - 2.1.2 [`setCollectorUrl`](#setCollectorUrl)
   - 2.2 [Setting the application ID](#app-id)
-    - 2.2.1 [`setAppId`](#setAppId)  
+    - 2.2.1 [`setAppId`](#setAppId)
   - 2.3 [Setting the cookie domain](#cookiedomain)
-    - 2.3.1 [`setCookieDomain`](#setCookieDomain) 
-  - 2.4 [Setting the user ID](#user-id)  
+    - 2.3.1 [`setCookieDomain`](#setCookieDomain)
+  - 2.4 [Setting the user ID](#user-id)
     - 2.4.1 [`setUserId`](#setUserId)
   - 2.5 [Setting the URL as a custom value](#customurl)
     - 2.5.1 [`setCustomUrl`](#setcustomurl)
@@ -33,7 +33,7 @@ There are three "global parameters" that can be set for the JavaScript Tracker:
 
 Of them, the collector endpoint is **essential** - Snowplow will not function if this is not set. The other two global parameters (application ID and cookie domain) are optional. We will discuss in which cases these *should* be set below.
 
-When set, these are global parameters should be set as part of the Snowplow pageview tracking tags, before the actual `trackPageView` method is called e.g. 
+When set, these are global parameters should be set as part of the Snowplow pageview tracking tags, before the actual `trackPageView` method is called e.g.
 
 ```javascript
 <!-- Snowplow starts plowing -->
@@ -188,7 +188,7 @@ However, in certain situations, you may want to override the actual URL with a c
 
 <a name="setcustomurl" />
 
-#### 2.5.1 Setting a custom URL using `setCustomUrl` 
+#### 2.5.1 Setting a custom URL using `setCustomUrl`
 
 To set a custom URL, use the `setCustomUrl` method i.e.:
 

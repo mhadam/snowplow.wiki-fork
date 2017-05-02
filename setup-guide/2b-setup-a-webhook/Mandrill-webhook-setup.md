@@ -4,16 +4,17 @@
 
 ## Contents
 
-- 1. [Overview](#overview)  
+- 1 [Overview](#overview)
   - 1.1 [Compatibility](#compat)
-- 2. [Setup](#setup)
+- 2 [Setup](#setup)
   - 2.1 [Mandrill](#setup-mandrill)
   - 2.2 [Snowplow Redshift](#setup-redshift)
 
 <a name="overview" />
+
 ## 1. Overview
 
-This webhook integration lets you track a variety of events logged by [Mandrill] [mandrill-website].
+This webhook integration lets you track a variety of events logged by [Mandrill][mandrill-website].
 
 Available events are:
 
@@ -30,12 +31,14 @@ Available events are:
 For the technical implementation, see [[Mandrill webhook adapter]].
 
 <a name="compat" />
+
 ### 1.1 Compatibility
 
-* [Snowplow 0.9.14] [snowplow-0.9.14]+ (`POST`-capable collectors only)
-* [Mandrill webhook API] [mandrill-webhooks]
+* [Snowplow 0.9.14][snowplow-0.9.14]+ (`POST`-capable collectors only)
+* [Mandrill webhook API][mandrill-webhooks]
 
 <a name="setup" />
+
 ## 2. Setup
 
 Integrating Mandrill's webhooks into Snowplow is a two-stage process:
@@ -44,6 +47,7 @@ Integrating Mandrill's webhooks into Snowplow is a two-stage process:
 2. (Optional) Create the Mandrill events tables into Amazon Redshift
 
 <a name="setup-mandrill" />
+
 ## 2.1 Mandrill
 
 First login to Mandrill and click on the **Settings** button which will be on the left hand side of the screen.
@@ -62,7 +66,7 @@ Once we have selected what events we want to record we need to fill in the **Pos
 http://<collector host>/com.mandrill/v1?aid=<company code>
 ```
 
-The `aid=` name-value pair in your URI's querystring is optional; this is the `app_id` parameter taken from the [Snowplow Tracker Protocol] [tracker-protocol]. You can use it to specify which company in Mandrill these call complete events belong to. Putting it all together, our setup screen now looks like this:
+The `aid=` name-value pair in your URI's querystring is optional; this is the `app_id` parameter taken from the [Snowplow Tracker Protocol][tracker-protocol]. You can use it to specify which company in Mandrill these call complete events belong to. Putting it all together, our setup screen now looks like this:
 
 [[/setup-guide/images/webhooks/mandrill/mandrill-2.png]]
 
@@ -72,26 +76,27 @@ If you want, you can also manually override the event's `platform` parameter lik
 http://<collector host>/com.mandrill/v1?aid=<company code>&p=<platform code>
 ```
 
-Supported platform codes can again be found in the [Snowplow Tracker Protocol] [tracker-protocol]; if not set, then the value for `platform` will default to `srv` for a server-side application.
+Supported platform codes can again be found in the [Snowplow Tracker Protocol][tracker-protocol]; if not set, then the value for `platform` will default to `srv` for a server-side application.
 
 Once you click the **Create Webhook** button it will attempt to authenticate that the Collector actually exists and is ready to receive events.  If everything is setup correctly it will return to the previous page and you will now see your new Webhook listed!
 
 <a name="setup-redshift" />
+
 ## 2.2 Redshift
 
 If you are running the Snowplow batch (Hadoop) flow with Amazon Redshift, then you should deploy the relevent event tables into your Amazon Redshift.
 
 You can find the table definitions here:
 
-* [com_mandrill_message_sent_1.sql] [sent-sql] 
-* [com_mandrill_message_bounced_1.sql] [bounced-sql]
-* [com_mandrill_message_soft_bounced_1.sql] [soft-bounced-sql]
-* [com_mandrill_message_opened_1.sql] [opened-sql]            
-* [com_mandrill_message_marked_as_spam.sql] [spam-sql]        
-* [com_mandrill_message_rejected_1.sql] [rejected-sql]        
-* [com_mandrill_message_delayed_1.sql] [delayed-sql]          
-* [com_mandrill_message_clicked_1.sql] [clicked-sql]          
-* [com_mandrill_recipient_unsubscribed_1.sql] [unsub-sql]     
+* [com_mandrill_message_sent_1.sql][sent-sql]
+* [com_mandrill_message_bounced_1.sql][bounced-sql]
+* [com_mandrill_message_soft_bounced_1.sql][soft-bounced-sql]
+* [com_mandrill_message_opened_1.sql][opened-sql]
+* [com_mandrill_message_marked_as_spam.sql][spam-sql]
+* [com_mandrill_message_rejected_1.sql][rejected-sql]
+* [com_mandrill_message_delayed_1.sql][delayed-sql]
+* [com_mandrill_message_clicked_1.sql][clicked-sql]
+* [com_mandrill_recipient_unsubscribed_1.sql][unsub-sql]
 
 Make sure to deploy this table into the same schema as your `events` table.
 

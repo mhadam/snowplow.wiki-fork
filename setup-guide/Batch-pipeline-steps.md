@@ -1,12 +1,12 @@
 [**HOME**](Home) » [**SNOWPLOW SETUP GUIDE**](Setting-up-Snowplow) » Batch Pipeline Steps
 
-##Dataflow diagram
+## Dataflow diagram
 
 [[/images/batch_pipeline_steps.png]]
 
-##Recovery steps
+## Recovery steps
 
-The below table summarizes the actions to be taken at each particular step failure from the block diagram above.
+The below table summarizes the actions to be taken at each particular step failure from the dataflow diagram above.
 
 Failed step | Recovery actions 
 :---:|---

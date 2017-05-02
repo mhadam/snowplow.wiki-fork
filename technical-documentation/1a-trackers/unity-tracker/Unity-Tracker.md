@@ -1,25 +1,25 @@
 <a name="top" />
 
-[**HOME**](Home) > [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow technical documentation) > [**Trackers**](trackers) > Unity Tracker
+[**HOME**](Home) > [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow-technical-documentation) > [**Trackers**](trackers) > [**Unity Tracker**](Unity-Tracker)
 
 This page refers to version 0.1.0 of the Snowplow Unity Tracker.
 
 ## Contents
 
-- 1. [Overview](#overview)
+- 1 [Overview](#overview)
   - 1.1 [Snowplow Pong Demo](#demo-app)
-- 2. [Initialization](#init)
+- 2 [Initialization](#init)
   - 2.1 [Importing the library](#importing)
   - 2.2 [Creating a tracker](#create-tracker)
-- 3. [Tracker](#tracker)
+- 3 [Tracker](#tracker)
   - 3.1 [Constructor](#t-constructor)
   - 3.2 [Functions](#t-functions)
     - 3.2.1 [`StartEventTracking()`](#t-start)
     - 3.2.2 [`StopEventTracking()`](#t-stop)
     - 3.2.3 [`Track(IEvent)`](#t-track)
-- 4. [Emitter](#emitter)
+- 4 [Emitter](#emitter)
   - 4.1 [Constructor](#e-constructor)
-- 5. [Subject](#subject)
+- 5 [Subject](#subject)
   - 5.1 [`SetUserId`](#set-user-id)
   - 5.2 [`SetResolution`](#set-screen-resolution)
   - 5.3 [`SetViewPort`](#set-viewport-dimensions)
@@ -30,11 +30,11 @@ This page refers to version 0.1.0 of the Snowplow Unity Tracker.
   - 5.8 [`SetUseragent`](#set-useragent)
   - 5.9 [`SetNetworkUserId`](#set-network-user-id)
   - 5.10 [`SetDomainUserId`](#set-domain-user-id)
-- 6. [Session](#session)
+- 6 [Session](#session)
   - 6.1 [Constructor](#s-constructor)
   - 6.2 [Functions](#s-functions)
     - 6.2.1 [`SetBackground(bool)`](#s-set-background)
-- 7. [Event Tracking](#event-tracking)
+- 7 [Event Tracking](#event-tracking)
   - 7.1 [Events Types](#event-types)
     - 7.1.1 [`PageView`](#et-page-view)
     - 7.1.2 [`ScreenView`](#et-screen-view)
@@ -49,11 +49,12 @@ This page refers to version 0.1.0 of the Snowplow Unity Tracker.
     - 7.2.3 [`GeoLocationContext`](#ct-geo-location)
     - 7.2.4 [`GenericContext`](#ct-generic)
   - 7.3 [`SelfDescribingJson`](#self-describing-json)
-- 8. [Utilities](#utilities)
+- 8 [Utilities](#utilities)
   - 8.1 [Log](#log)
   - 8.2 [ConcurrentQueue](#concurrent)
 
 <a name="overview" />
+
 ## 1. Overview
 
 The [Snowplow Unity Tracker](https://github.com/snowplow/snowplow-unity-tracker) allows you to track Snowplow events from your Unity games and apps.
@@ -61,6 +62,7 @@ The [Snowplow Unity Tracker](https://github.com/snowplow/snowplow-unity-tracker)
 [Back to top](#top)
 
 <a name="demo-app" />
+
 ### 1.1 Snowplow Pong Demo
 
 To see the Tracker in action you can download our demonstration game Snowplow Pong from [here][snowplow-pong-dl].  You will need to set a valid collector endpoint on the Settings Page to see the events being generated.
@@ -68,6 +70,7 @@ To see the Tracker in action you can download our demonstration game Snowplow Po
 [Back to top](#top)
 
 <a name="init" />
+
 ## 2. Initialization
 
 Assuming you have completed the [[Unity Tracker Setup]] for your project, you are now ready to initialize the Unity Tracker.
@@ -75,6 +78,7 @@ Assuming you have completed the [[Unity Tracker Setup]] for your project, you ar
 [Back to top](#top)
 
 <a name="importing" />
+
 ### 2.1 Importing the library
 
 Add the following `using` lines to the top of your `.cs` scripts to access the Tracker:
@@ -90,6 +94,7 @@ You should now be able to setup the Tracker!
 [Back to top](#top)
 
 <a name="create-tracker" />
+
 ### 2.2 Creating a tracker
 
 To instantiate a Tracker in your code (can be global or local to the process being tracked) simply instantiate the Tracker interface with the following:
@@ -108,6 +113,7 @@ This is the simplest possible Tracker creation available.  For more information 
 [Back to top](#top)
 
 <a name="tracker" />
+
 ## 3. Tracker
 
 The Tracker object is responsible for co-ordinating the saving and sending of events as well as managing the optional Session object.
@@ -115,6 +121,7 @@ The Tracker object is responsible for co-ordinating the saving and sending of ev
 [Back to top](#top)
 
 <a name="t-constructor" />
+
 ### 3.1 Constructor
 
 | **Argument Name**  | **Description**                              | **Required?**  | **Default**   |
@@ -141,6 +148,7 @@ All of these variables can be altered after creation with the accompanying `trac
 [Back to top](#top)
 
 <a name="t-functions" />
+
 ### 3.2 Functions
 
 The Tracker also contains several critical functions that must be used to start Tracking.
@@ -148,6 +156,7 @@ The Tracker also contains several critical functions that must be used to start 
 [Back to top](#top)
 
 <a name="t-start" />
+
 #### 3.2.1 `StartEventTracking()`
 
 This function must be called before any events will start being stored or sent.  This is due to the fact that we do not want to start any background processing from the constructors so it is left up to the developer to choose when to start everything up.
@@ -163,6 +172,7 @@ Once this is run everything should be in place for asynchronous event tracking.
 [Back to top](#top)
 
 <a name="t-stop" />
+
 #### 3.2.2 `StopEventTracking()`
 
 If you need to temporarily halt the Tracker from tracking events you can run this function.  This will bring all event processing, sending and collection to a halt and nothing will be started again until `StartEventTracking()` is fired again.
@@ -170,6 +180,7 @@ If you need to temporarily halt the Tracker from tracking events you can run thi
 [Back to top](#top)
 
 <a name="t-track" />
+
 #### 3.2.3 `Track(IEvent)`
 
 This is the function used for Tracking all events.  You can pass any of [these](#event-types) event types to this function.
@@ -181,6 +192,7 @@ tracker.Track(IEvent newEvent);
 [Back to top](#top)
 
 <a name="emitter" />
+
 ## 4. Emitter
 
 The Emitter object is responsible for sending and storing all events.
@@ -193,6 +205,7 @@ We have two emitters available currently:
 [Back to top](#top)
 
 <a name="e-constructor" />
+
 ### 4.1 Constructor
 
 | **Argument Name**  | **Description**                              | **Required?**  | **Default**   |
@@ -217,6 +230,7 @@ All of these variables can be altered after creation with the accompanying `emit
 [Back to top](#top)
 
 <a name="subject" />
+
 ## 5. Subject
 
 You may have additional information about your application's environment, current user and so on, which you want to send to Snowplow with each event.
@@ -238,7 +252,7 @@ Here are some examples:
 
 ```csharp
 Subject s1 = new Subject();
-s1.SetUserId("Kevin Gleason"); 
+s1.SetUserId("Kevin Gleason");
 s1.SetLanguage("en-gb");
 s1.SetScreenResolution(1920, 1080);
 ```
@@ -256,6 +270,7 @@ t1.SetSubject(s1);
 [Back to top](#top)
 
 <a name="set-user-id" />
+
 ### 5.1 Set user ID with `SetUserId`
 
 You can set the user ID to any string:
@@ -273,6 +288,7 @@ s1.SetUserId("alexd")
 [Back to top](#top)
 
 <a name="set-screen-resolution" />
+
 ### 5.2 Set screen resolution with `SetScreenResolution`
 
 If your C# code has access to the device's screen resolution, then you can pass this in to Snowplow too:
@@ -290,6 +306,7 @@ t1.SetScreenResolution(1366, 768)
 [Back to top](#top)
 
 <a name="set-viewport-dimensions" />
+
 ### 5.3 Set viewport dimensions with `SetViewport`
 
 If your C# code has access to the viewport dimensions, then you can pass this in to Snowplow too:
@@ -307,6 +324,7 @@ s.SetViewport(300, 200)
 [Back to top](#top)
 
 <a name="set-color-depth" />
+
 ### 5.4 Set color depth with `SetColorDepth`
 
 If your C# code has access to the bit depth of the device's color palette for displaying images, then you can pass this in to Snowplow too:
@@ -324,6 +342,7 @@ s.SetColorDepth(32)
 [Back to top](#top)
 
 <a name="set-timezone" />
+
 ### 5.5 Set timezone with `SetTimezone`
 
 This method lets you pass a user's timezone in to Snowplow:
@@ -341,6 +360,7 @@ s.SetTimezone("Europe/London")
 [Back to top](#top)
 
 <a name="set-lang" />
+
 ### 5.6 Set the language with `SetLanguage`
 
 This method lets you pass a user's language in to Snowplow:
@@ -358,6 +378,7 @@ s.SetLanguage('en')
 [Back to top](#top)
 
 <a name="set-ip-address" />
+
 ### 5.7 `SetIpAddress`
 
 This method lets you pass a user's IP Address in to Snowplow:
@@ -375,6 +396,7 @@ subj.SetIpAddress("127.0.0.1");
 [Back to top](#top)
 
 <a name="set-useragent" />
+
 ### 5.8 `SetUseragent`
 
 This method lets you pass a useragent in to Snowplow:
@@ -392,6 +414,7 @@ subj.SetUseragent("Agent Smith");
 [Back to top](#top)
 
 <a name="set-network-user-id" />
+
 ### 5.9 `SetNetworkUserId`
 
 This method lets you pass a Network User ID in to Snowplow:
@@ -409,6 +432,7 @@ subj.SetNetworkUserId("network-id");
 [Back to top](#top)
 
 <a name="set-domain-user-id" />
+
 ### 5.10 `SetDomainUserId`
 
 This method lets you pass a Domain User ID in to Snowplow:
@@ -426,6 +450,7 @@ subj.SetDomainUserId("domain-id");
 [Back to top](#top)
 
 <a name="session" />
+
 ## 6. Session
 
 The Session object is responsible for maintaining persistent data around user sessions over the life-time of an application.
@@ -433,6 +458,7 @@ The Session object is responsible for maintaining persistent data around user se
 [Back to top](#top)
 
 <a name="s-constructor" />
+
 ### 6.1 Constructor
 
 | **Argument Name**   | **Description**                              | **Required?**  | **Default**   |
@@ -452,11 +478,13 @@ The timeout's refer to the length of time the session remains active after the l
 [Back to top](#top)
 
 <a name="s-functions" />
+
 ### 6.2 Functions
 
 [Back to top](#top)
 
 <a name="s-set-background" />
+
 #### 6.2.1 `SetBackground(bool)`
 
 Will set whether or not the application is in the background.  It is up to the developer to set this metric if they wish to have a different timeout for foreground and background.
@@ -464,6 +492,7 @@ Will set whether or not the application is in the background.  It is up to the d
 [Back to top](#top)
 
 <a name="event-tracking" />
+
 ## 7. Event Tracking
 
 Snowplow has been built to enable you to track a wide range of events that occur when users interact with your websites and apps. We are constantly growing the range of functions available in order to capture that data more richly.
@@ -482,11 +511,13 @@ Events supported by the Unity Tracker at a glance:
 [Back to top](#top)
 
 <a name="event-types" />
+
 ## 7. Event Types
 
 [Back to top](#top)
 
 <a name="et-page-view" />
+
 #### 7.1.1 Track page views with `Track(PageView)`
 
 You can use `Track(PageView)` to track a user viewing a web page within your app.
@@ -524,6 +555,7 @@ t1.Track(new PageView()
 [Back to top](#top)
 
 <a name="et-screen-view" />
+
 #### 7.1.2 Track screen views with `Track(ScreenView)`
 
 Use `Track(ScreenView)` to track a user viewing a screen (or equivalent) within your app. You **must** use either `name` or `id`. Arguments are:
@@ -556,6 +588,7 @@ t1.Track(new ScreenView()
 [Back to top](#top)
 
 <a name="et-structured" />
+
 #### 7.1.3 Track structured events with `Track(Structured)`
 
 Use `Track(Structured)` to track a custom event happening in your app which fits the Google Analytics-style structure of having up to five fields (with only the first two required):
@@ -594,6 +627,7 @@ t1.Track(new Structured()
 [Back to top](#top)
 
 <a name="et-timing" />
+
 #### 7.1.4 Track timing events with `Track(Timing)`
 
 Use `Track(Timing)` to track an event related to a custom timing.
@@ -631,6 +665,7 @@ t1.Track(new Timing()
 [Back to top](#top)
 
 <a name="et-unstructured" />
+
 #### 7.1.5 Track unstructured events with `Track(Unstructured)`
 
 Custom unstructured events are a flexible tool that enable Snowplow users to define their own event types and send them into Snowplow.
@@ -689,11 +724,12 @@ t1.Track(new Unstructured()
     .Build();
 ```
 
-For more on JSON schema, see the [blog post] [self-describing-jsons].
+For more on JSON schema, see the [blog post][self-describing-jsons].
 
 [Back to top](#top)
 
 <a name="et-ecomm" />
+
 #### 7.1.6 Track ecommerce transactions with `Track(EcommerceTransaction)`
 
 Use `Track(EcommerceTransaction)` to track an ecommerce transaction.
@@ -709,20 +745,21 @@ Arguments:
 | `shipping`      | Delivery cost charged                | No            | `double`                   |
 | `city`          | Delivery address city                | No            | `string`                   |
 | `state`         | Delivery address state               | No            | `string`                   |
-| `country`       | Delivery address country             | No            | `string`                   | 
+| `country`       | Delivery address country             | No            | `string`                   |
 | `currency`      | Transaction currency                 | No            | `string`                   |
 | `items`         | Items in the transaction             | Yes           | `List<EcommerceTransactionItem>` |
 | `customContexts`| Optional custom context              | No            | `List<IContext>`           |
 | `timestamp`     | Optional timestamp                   | No            | `long`                     |
 | `eventId`       | Optional custom event id             | No            | `string`                   |
 
-The `items` argument is a `List` of individual `EcommerceTransactionItem` elements representing the items in the e-commerce transaction. Note that `Track(EcommerceTransaction)` fires multiple events: one transaction event for the transaction as a whole, and one transaction item event for each element of the `items` `List`. 
+The `items` argument is a `List` of individual `EcommerceTransactionItem` elements representing the items in the e-commerce transaction. Note that `Track(EcommerceTransaction)` fires multiple events: one transaction event for the transaction as a whole, and one transaction item event for each element of the `items` `List`.
 
 Each transaction item event will have the same timestamp, orderId, and currency as the main transaction event.
 
 [Back to top](#top)
 
 <a name="et-ecomm-item" />
+
 #### 7.1.6.1 `EcommerceTransactionItem`
 
 To instantiate a `EcommerceTransactionItem` in your code, simply use the following constructor signature:
@@ -793,6 +830,7 @@ tracker.Track(new EcommerceTransaction()
 [Back to top](#top)
 
 <a name="context-types" />
+
 ### 7.2 Custom Contexts
 
 Custom contexts are Self Describing Jsons with extra descriptive information that can be optionally attached to any Snowplow event with `SetCustomContexts(...)`.
@@ -805,6 +843,7 @@ All of these contexts will need to be combined into a `List<IContext>` before be
 [Back to top](#top)
 
 <a name="ct-desktop" />
+
 #### 7.2.1 `DesktopContext`
 
 The following arguments can be used in a DesktopContext:
@@ -836,6 +875,7 @@ DesktopContext context = new DesktopContext ()
 [Back to top](#top)
 
 <a name="ct-mobile" />
+
 #### 7.2.2 `MobileContext`
 
 The following arguments can be used in a MobileContext:
@@ -871,6 +911,7 @@ MobileContext context = new MobileContext ()
 [Back to top](#top)
 
 <a name="ct-geo-location" />
+
 #### 7.2.3 `GeoLocationContext`
 
 The following arguments can be used in a GeoLocationContext:
@@ -904,6 +945,7 @@ GeoLocationContext context = new GeoLocationContext ()
 [Back to top](#top)
 
 <a name="ct-generic" />
+
 #### 7.2.4 `GenericContext`
 
 The GenericContext is a simple builder with three functions:
@@ -926,6 +968,7 @@ GenericContext context = new GenericContext()
 [Back to top](#top)
 
 <a name="self-describing-json" />
+
 ### 7.3 SelfDescribingJson
 
 A `SelfDescribingJson` is used as a wrapper around a `Dictionary<string, object>`.  After creating the Dictionary you want to wrap you can create a `SelfDescribingJson` using the following:
@@ -951,6 +994,7 @@ You can create a SelfDescribingJson with the following arguments:
 [Back to top](#top)
 
 <a name="utilities" />
+
 ## 8. Utilities
 
 The Tracker also provides several extra utilities that can be used.
@@ -958,6 +1002,7 @@ The Tracker also provides several extra utilities that can be used.
 [Back to top](#top)
 
 <a name="log" />
+
 ### 8.1 Log
 
 There is a custom logging wrapper which allows you to control the level of Tracker logging that occurs. You can set the level via:
@@ -974,6 +1019,7 @@ Log.SetLogLevel({0,1,2 or 3});
 [Back to top](#top)
 
 <a name="concurrent" />
+
 ### 8.2 ConcurrentQueue
 
 Due to the .NET 2.0 limitation we have had to implement our own ThreadSafe queue which can be found in the following package:

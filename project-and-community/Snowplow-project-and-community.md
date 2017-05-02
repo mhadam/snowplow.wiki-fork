@@ -12,9 +12,9 @@ Using Snowplow in your company? Add your site [to our list](Our-users)!
 
 ## Improve Snowplow
 
-* [Ticket system] [issues] - report bugs and make feature requests
+* [Ticket system][issues] - report bugs and make feature requests
 * Chat to us - in our #snowplow channel on Freenode
-* [Snowplow wiki] [wiki] - fork it to contribute tips and documentation
+* [Snowplow wiki][wiki] - fork it to contribute tips and documentation
 
 [issues]: https://github.com/snowplow/snowplow/issues
 [wiki]: https://github.com/snowplow/snowplow/wiki

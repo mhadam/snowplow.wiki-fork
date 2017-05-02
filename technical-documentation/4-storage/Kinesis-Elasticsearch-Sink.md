@@ -1,4 +1,4 @@
-[**HOME**](Home) > [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow technical documentation) > [**Storage**](storage documentation) > Kinesis Elasticsearch Sink
+[**HOME**](Home) > [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow-technical-documentation) > [**Storage**](storage-documentation) > Kinesis Elasticsearch Sink
 
 The Kinesis Elasticsearch Sink converts enriched Snowplow events from a Kinesis stream to JSON and writes them to an Elasticsearch cluster.
 
@@ -71,7 +71,7 @@ would be converted to
     },
     "contexts_com_acme_context_two_3": {
         "name": "second"
-    }    
+    }
 }
 ```
 

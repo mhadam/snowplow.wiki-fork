@@ -1,11 +1,11 @@
-Snowplow has a very different architecture from conventional open-source web analytics packages such as [Piwik] [piwik] or [Open Web Analytics] [owa]. Where those packages are built on a tightly-coupled LAMP stack, Snowplow has a loosely-coupled architecture which consists of six sub-systems:
+Snowplow has a very different architecture from conventional open-source web analytics packages such as [Piwik][piwik] or [Open Web Analytics][owa]. Where those packages are built on a tightly-coupled LAMP stack, Snowplow has a loosely-coupled architecture which consists of six sub-systems:
 
-![architecture] [conceptual-architecture]
+![architecture][conceptual-architecture]
 
 To briefly explain these sub-systems:
 
 * **Trackers** fire Snowplow events. Currently we have 12 trackers, covering web, mobile, desktop, server and IoT. (For more information see the [trackers section](https://github.com/snowplow/snowplow/tree/master/1-trackers) of the repository). Additionally, **webhooks** allow third-party software to send their own internal event streams to Snowplow Collectors for further processing. [Webhooks](Setting-up-a-webhook) are sometimes referred to as "streaming APIs" or "HTTP response APIs".
-* **Collectors** receive Snowplow events from trackers. Currently we have three different event collectors, sinking events either to Amazon S3 or Amazon Kinesis, namely a CDN-based [Cloudfront Collector](https://github.com/snowplow/snowplow/tree/master/2-collectors/cloudfront-collector) on [Amazon CloudFront] [cloudfront], a collector that sets a third party pixel for cross-domain tracking called the [Clojure Collector](https://github.com/snowplow/snowplow/tree/master/2-collectors/clojure-collector), and a [Scala Stream Collector](https://github.com/snowplow/snowplow/tree/master/2-collectors/scala-stream-collector) which sets a third-party cookie for cross-domain tracking.
+* **Collectors** receive Snowplow events from trackers. Currently we have three different event collectors, sinking events either to Amazon S3 or Amazon Kinesis, namely a CDN-based [Cloudfront Collector](https://github.com/snowplow/snowplow/tree/master/2-collectors/cloudfront-collector) on [Amazon CloudFront][cloudfront], a collector that sets a third party pixel for cross-domain tracking called the [Clojure Collector](https://github.com/snowplow/snowplow/tree/master/2-collectors/clojure-collector), and a [Scala Stream Collector](https://github.com/snowplow/snowplow/tree/master/2-collectors/scala-stream-collector) which sets a third-party cookie for cross-domain tracking.
 * **Enrichment** cleans up the raw Snowplow events, enriches them and puts them into storage. Currently we have a Hadoop-based enrichment process, and a Kinesis-based process.
 * **Storage** is where the Snowplow events live. Currently we store the Snowplow events in an S3, Amazon Redshift and PostgreSQL.
 * **Data modeling** is where event-level data is joined with other data sets and aggregated into smaller data sets, and business logic is applied. This produces a clean set of tables which make it easier to perform analysis on the data. We have data models for Redshift and [Looker](http://www.looker.com/).
@@ -36,7 +36,7 @@ advantages are:
 * **Direct access to events** - not intermediated by a third-party
     vendor, or a slow API, or an interface offering aggregates only
 * **Analysis tool agnostic** - Snowplow can be used to feed whatever
-    analytics process you want (e.g. Hive, R, Pig, Sky EQL)  
+    analytics process you want (e.g. Hive, R, Pig, Sky EQL)
 * **Integrable with other data sources** - join Snowplow data into
     your other data sources (e.g. ecommerce, CRM) at the event level
 * **Clean separation of tracking and analysis** - new analyses will not
@@ -48,7 +48,7 @@ The current Snowplow architecture, tightly coupled as it is to Amazon
 CloudFront and S3, has some specific limitations to consider:
 
 * **Not real-time** - CloudFront takes 20-60 minutes to collate logs from its edge nodes, so real-time analytics are not feasible. In addition the enrichment process is batch-based, rather than stream-based
-* **Data payload limited by querystring length** - Snowplow data logged via a `GET` querystring could potentially hit the de facto [2000 character] [2000char] URL length limit
+* **Data payload limited by querystring length** - Snowplow data logged via a `GET` querystring could potentially hit the de facto [2000 character][2000char] URL length limit
 
 For more information on these limitations, please see the [[Technical FAQ|Developer-FAQ]].
 

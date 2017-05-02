@@ -1,8 +1,8 @@
-[**HOME**](Home) > [**SNOWPLOW SETUP GUIDE**](Setting-up-Snowplow) > [**Step 1: setup a Collector**](Setting-up-a-Collector) > [**Scala Stream Collector setup**](setting-up-the-Scala-Stream-Collector) > [[Configure the Scala Stream Collector]]
+[HOME](Home) » [SNOWPLOW SETUP GUIDE](Setting-up-Snowplow) » [Step 1: setup a Collector](Setting-up-a-Collector) » [[Setting up the Scala Stream Collector]] » [[Install the Scala Stream Collector]] » Configure the Scala Stream Collector
 
 **This documentation refers to version 0.5.0 - 0.8.0 of the Scala Stream Collector**
 
-**[Version 0.1.0][v0.1]**  
+**[Version 0.1.0][v0.1]**
 **[Version 0.3.0 & 0.4.0][v0.3]**
 
 The Scala Stream Collector has a number of configuration options available.
@@ -11,7 +11,7 @@ The Scala Stream Collector has a number of configuration options available.
 
 ### Template
 
-Download a template configuration file from GitHub: [config.hocon.sample] [app-conf].
+Download a template configuration file from GitHub: [config.hocon.sample][app-conf].
 
 Now open the `config.hocon.sample` file in your editor of choice.
 
@@ -91,7 +91,7 @@ Please, refer to [RFC 6265](https://tools.ietf.org/html/rfc6265#section-5.1.3) f
 ### 5. Setting the cookie duration
 
 The cookie expiration duration is set in `collector.cookie.expiration`.
-If no value is provided, cookies set default to expiring after one year (i.e. 365 days).
+If no value is provided, cookies set the default to expiring after one year (i.e. 365 days).
 From version 0.4.0 forwards, if `collector.cookie.expiration` is set to 0, no cookie will be set.
 
 Next: [[Run the Scala Stream collector]]

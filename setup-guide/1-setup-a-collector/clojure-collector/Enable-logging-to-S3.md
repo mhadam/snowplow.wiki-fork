@@ -1,6 +1,6 @@
-[**HOME**](Home) > [**SNOWPLOW SETUP GUIDE**](Setting-up-Snowplow) > [**Step 1: setup a Collector**](Setting-up-a-Collector) > [**Clojure collector setup**](setting-up-the-clojure-collector) > [[Enable logging to S3]]
+[**HOME**](Home) » [**SNOWPLOW SETUP GUIDE**](Setting-up-Snowplow) » [**Step 1: setup a Collector**](Setting-up-a-Collector) » [**Clojure collector setup**](setting-up-the-clojure-collector) » [[Download the Clojure collector WAR file or compile it from source]] » [[Create a new application in Elastic Beanstalk and upload the WAR file into it]] » Enable logging to S3
 
-Now that your application is up and running, you need to update the configuration so that the Tomcat logs are pushed to S3. (These will be processed by the [etl](choosing an etl module) step to generate your Snowplow data.) Click on the **Configuration** link.
+Now that your application is up and running, you need to update the configuration so that the Tomcat logs are pushed to S3. (These will be processed by the ETL step to generate your Snowplow data.) Click on the **Configuration** link.
 
 [[/setup-guide/images/clojure-collector-setup-guide/13.jpg]]
 
@@ -17,7 +17,7 @@ Click the **Apply** button. The environment update will be processed, and the co
 [[/setup-guide/images/clojure-collector-setup-guide/16.jpg]]
 
 
-##Alternative approach: AWS CLI
+## Alternative approach: AWS CLI
 
 The above effect could be achieved via [AWS CLI](https://aws.amazon.com/cli/) in the following fashion.
 

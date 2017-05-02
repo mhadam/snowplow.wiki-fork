@@ -10,11 +10,11 @@ This page refers to version 0.6.2 of the Snowplow Objective-C Tracker, which is 
 
 ## Contents
 
-- 1. [Overview](#overview)
-- 2. [Integration options](#integration-options)
-  - 2.1 [Tracker compatibility](#compatibility)  
+- 1 [Overview](#overview)
+- 2 [Integration options](#integration-options)
+  - 2.1 [Tracker compatibility](#compatibility)
   - 2.2 [Dependencies](#dependencies)
-- 3. [Setup](#setup)
+- 3 [Setup](#setup)
   - 3.1 [CocoaPods](#cocoapods)
   - 3.2 [Manual setup](#manual-setup)
     - 3.2.1 [FMDB Setup](#fmdb-setup)
@@ -24,9 +24,10 @@ This page refers to version 0.6.2 of the Snowplow Objective-C Tracker, which is 
     - 3.3.1 [OpenIDFA Setup](#open-idfa-setup)
 
 <a name="overview" />
+
 ## 1. Overvew
 
-The [Snowplow Objective-C Tracker](https://github.com/snowplow/snowplow-objc-tracker) lets you add analytics to your [iOS] [ios], [OSX][osx] and [tvOS][tvos] applications.
+The [Snowplow Objective-C Tracker](https://github.com/snowplow/snowplow-objc-tracker) lets you add analytics to your [iOS][ios], [OSX][osx] and [tvOS][tvos] applications.
 
 The Tracker should be relatively straightforward to setup if you are familiar with iOS/OSX development using CocoaPods.
 
@@ -35,9 +36,11 @@ Ready? Let's get started.
 [Back to top](#top)
 
 <a name="integration-options" />
+
 ## 2. Integration options
 
 <a name="compatibility" />
+
 ### 2.1 Tracker compatibility
 
 With iOS backward compatibility is limited to a small range which it makes it easy to support. Hence, our goal was to make the iOS Tracker compatible with iOS 7+ with easy availability via CocoaPods.
@@ -45,6 +48,7 @@ With iOS backward compatibility is limited to a small range which it makes it ea
 [Back to top](#top)
 
 <a name="dependencies" />
+
 ### 2.2 Dependencies
 
 * For iOS the Tracker has dependencies limited to the [FMDB][fmdb] and [Reachability][reach] libraries for database management and network information respectively. Both of which have iOS 7+ support as well.
@@ -56,9 +60,11 @@ If you're installing via CocoaPods, the dependencies are recursively downloaded 
 [Back to top](#top)
 
 <a name="setup" />
+
 ## 3. Setup
 
 <a name="cocoapods" />
+
 ### 3.1 CocoaPods
 
 We support installing the Objective-C Tracker via CocoaPods since it's the easiest way to install the tracker. Doing so is simple:
@@ -74,6 +80,7 @@ pod 'SnowplowTracker'
 [Back to top](#top)
 
 <a name="manual-setup" />
+
 ### 3.2 Manual Setup
 
 If you prefer not to use CocoaPods, you can grab the tracker from our [GitHub repo][objc-tracker-github] and import it into your project.
@@ -84,7 +91,7 @@ First, git clone the latest version of the tracker to your local machine:
 
     git clone https://github.com/snowplow/snowplow-objc-tracker.git
 
-If you don't have git installed locally, [install it] [git] first.
+If you don't have git installed locally, [install it][git] first.
 
 #### Copy the tracker into your project
 
@@ -103,9 +110,10 @@ Make sure that the suggested options for adding `Snowplow` are set **Create grou
 [[/setup-guide/images/setup-objc-tracker-manual-2.png]]
 
 <a name="fmdb-setup" />
+
 #### 3.2.1 Add the FMDB dependency
 
-The tracker is dependent on [FMDB] [fmdb] version 2.3, an Objective-C wrapper around SQLite.
+The tracker is dependent on [FMDB][fmdb] version 2.3, an Objective-C wrapper around SQLite.
 
 As before, git clone the dependency and copy the source into your XCode project's folder:
 
@@ -132,9 +140,10 @@ to:
 [Back to top](#top)
 
 <a name="reach-setup" />
+
 #### 3.2.2 Add the Reachability dependency
 
-For iOS only, the tracker is dependent on [Reachability] [reach] version 3.2, a drop in replacement for Apple's Reachability class.
+For iOS only, the tracker is dependent on [Reachability][reach] version 3.2, a drop in replacement for Apple's Reachability class.
 
 As before, git clone the dependency and copy the source into your XCode project's folder:
 
@@ -159,6 +168,7 @@ Once you have added the `.h/m` files to the project:
 [Back to top](#top)
 
 <a name="required-frameworks" />
+
 #### 3.2.3 Import all required frameworks
 
 The tracker also depends on various frameworks:
@@ -192,6 +202,7 @@ You are now ready to proceed to instrumenting your app. Just remember to use quo
 [Back to top](#top)
 
 <a name="static-setup" />
+
 ### 3.3 Static Library Setup
 
 **Currently the Static Library is only available for iOS, not for OS-X.**
@@ -228,9 +239,10 @@ This portion was based on the developers guide from Apple on [importing static l
 [Back to top](#top)
 
 <a name="open-idfa-setup" />
+
 #### 3.3.1 Add the OpenIDFA dependency
 
-If you are embedding this app in an iOS app, then you will need to add [OpenIDFA] [openidfa], which has been intentionally excluded from the Static Library.
+If you are embedding this app in an iOS app, then you will need to add [OpenIDFA][openidfa], which has been intentionally excluded from the Static Library.
 
 **Do not add OpenIDFA for a OS-X app.**
 

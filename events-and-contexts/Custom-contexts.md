@@ -1,6 +1,6 @@
 [**HOME**](Home) » [**EVENTS AND CONTEXTS**](Events-and-Contexts) » [Contexts Overview](Contexts-overview) » Custom Contexts
 
-##Custom Contexts
+## Custom Contexts
 
 Custom contexts can be used to augment any standard Snowplow event type, including unstructured events, with additional data.
 
@@ -65,7 +65,7 @@ Knowing in advance what the expected structure and format of data should be as a
 
 » Read more about [schema registry](Schema-registry)
 
-##Further reading
+## Further reading
 
 To find out more about the concepts mentioned above and ultimately how to set up custom events and contexts and send them to Snowplow pipeline, follow the links below.
 

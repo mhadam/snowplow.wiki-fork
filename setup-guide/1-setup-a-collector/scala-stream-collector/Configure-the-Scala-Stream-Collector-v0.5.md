@@ -2,7 +2,7 @@
 
 **This documentation refers to version 0.5.0 of the Scala Stream Collector**
 
-**[Version 0.1.0][v0.1]**  
+**[Version 0.1.0][v0.1]**
 **[Version 0.3.0 & 0.4.0][v0.3]**
 
 The Scala Stream Collector has a number of configuration options available.
@@ -11,7 +11,7 @@ The Scala Stream Collector has a number of configuration options available.
 
 ### Template
 
-Download a template configuration file from GitHub: [config.hocon.sample] [app-conf].
+Download a template configuration file from GitHub: [config.hocon.sample][app-conf].
 
 Now open the `config.hocon.sample` file in your editor of choice.
 

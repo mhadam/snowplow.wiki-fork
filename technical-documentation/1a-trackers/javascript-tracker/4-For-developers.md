@@ -4,7 +4,7 @@
 
 **THIS DOCUMENT IS WIP**
 
-*This page refers to version 2.7.0 of the Snowplow JavaScript Tracker*  
+*This page refers to version 2.7.0 of the Snowplow JavaScript Tracker*
 
 <a name="for-developers" />
 
@@ -43,8 +43,8 @@ None of above tools are essential for JavaScript tracker, but they are necessary
 
 ## 5.2 Tag
 
-As all programs, JavaScript tracker has an entry point from where tracker gets 
-initialized. In our case this is a tag, which website owner need to insert into 
+As all programs, JavaScript tracker has an entry point from where tracker gets
+initialized. In our case this is a tag, which website owner need to insert into
 pages where JavaScript tracker should be loaded.
 This `script` tag used to be minified as much as possible and at first glance
 may seem cryptic, but you can find expanded version with all explanations in
@@ -64,10 +64,10 @@ to it. While execution still in the tag - `q` is simple JS `Array`.
 
 ### 5.3.1 js/init.js
 
-When *actual tracker code* loads - we're getting into second entry point - 
-`js/init.js`. Here `q` becomes `snowplow.Snowplow` object (`InQueueManager` 
-more precisely) contating what `q` array was containing before (browser could 
-push many events there since script loading is asynchronous). You can ignore 
+When *actual tracker code* loads - we're getting into second entry point -
+`js/init.js`. Here `q` becomes `snowplow.Snowplow` object (`InQueueManager`
+more precisely) contating what `q` array was containing before (browser could
+push many events there since script loading is asynchronous). You can ignore
 everything with `_snaq` - this is legacy queue which will be removed soon.
 
 <a name="snowplow" />
@@ -78,10 +78,10 @@ Here we come to `Snowplow` module, which can be considered as third entry point,
 but you may have as many `Snowplow` objects as many namespace objects you have.
 This is obviously because each `snowplow_name_here.q` is `Snowplow` object.
 
-`snowplow.Snowplow` is side-effecting constructor (I cannot see why it should 
-be a constructor and not a simple function). Its side-effect is attaching 
-callback on `DOMContentLoaded` which executes all functions inside 
-`bufferFlushers` and `registeredOnLoadHandlers` (we will talk about these 
+`snowplow.Snowplow` is side-effecting constructor (I cannot see why it should
+be a constructor and not a simple function). Its side-effect is attaching
+callback on `DOMContentLoaded` which executes all functions inside
+`bufferFlushers` and `registeredOnLoadHandlers` (we will talk about these
 arrays later).
 
 But real purpose of `Snowplow` constructor is to call constructor for
@@ -101,10 +101,10 @@ It doesn't take any particular arguments, but instead it works with JS special
 `arguments` object, which is array-like structure representing everything
 passed to function. Usually its `arguments` has just one element and this
 element is `arguments` object of very top-level function `p[i]` defined in our
-tag, so if we look at [example initialization](example-newtracker) like it is 
+tag, so if we look at [example initialization](example-newtracker) like it is
 array, it should look like following:
 
-```javascript 
+```javascript
 // nested one-element array
 [["newTracker", "cf", "d3rkrsqld9gmqf.cloudfront.net", { appId: "cfe23a", platform: "mob" })]]
 ```
@@ -112,7 +112,7 @@ array, it should look like following:
 Also `InQueueManager` is responsible for holding all named trackers (we'll
 discuss tracker objects below). And once `applyAsyncFunction` receives
 `newTracker` function - it creates it and puts into internal
-`trackerDictionary` object. When it receives another functions (tracking method 
+`trackerDictionary` object. When it receives another functions (tracking method
 calls) - it just decides on which tracker this method should be called and
 actually invokes it.
 
@@ -120,7 +120,7 @@ actually invokes it.
 
 ### 5.3.4 js/tracker.js
 
-When loop in `push` encounters `newTracker` method - it invokes `Tracker` 
+When loop in `push` encounters `newTracker` method - it invokes `Tracker`
 constructor. `Tracker` is the biggest class and core of javascript tracker
 logic. But most of `Tracker` methods are self-descriptive, every method in
 returned object is public and can be called using
@@ -134,7 +134,7 @@ side-effecting constructor and lot of private helper methods.
 
 Tracker's `core` object is part of separate project published as
 [`snowplow-tracker-core`][npm-core]. Its purpose is to serve as high-level
-interface over [Snowplow Tracker Protocol][tracker-protocol], independent of 
+interface over [Snowplow Tracker Protocol][tracker-protocol], independent of
 particular JavaScript implementation or runtime (browser or node). All its
 logic concentrated around HTTP payload. Most important thing about `core` is
 its callback. Whenever `track` method is called (at the end of every tracking
@@ -159,7 +159,7 @@ request with payload created in `core` and `Tracker`.
 
 For testing javascript tracker uses [intern][intern] testing framework.
 
-You can install it with npm as part of devDependencies: 
+You can install it with npm as part of devDependencies:
 `cd snowplow-javascript-tracker && npm install`.
 
 Intern provides two strategies for testing: unit and functional tests.
@@ -173,19 +173,19 @@ Functional tests are bit different. We have two functional test suites:
 interactions with browser, therefore they need some "browser emulator". We're
 using [Sauce Labs][saucelabs] for emulating browser - it provides many cool
 features such multiple browser/OS environments, interaction recording, etc. You
-need to have an account on Sauce Labs (it has no free plans, sadly) and provide 
+need to have an account on Sauce Labs (it has no free plans, sadly) and provide
 `SAUCE_ACCESS_KEY` and `SAUCE_USERNAME` environment variables. Providing it you
 can run functional suite with `grunt intern:functional`.
 
 Another functional suite called `integration`. It not just emulates user
 interactions, but also sends data (tracking payload) to [emulated
 collector][snowplow-collector]. This collector emulator is primitive node.js
-middleware that write down GET-payloads as JSON to temporary file, which then 
-can be parsed by test runner. You can find this middleware at 
+middleware that write down GET-payloads as JSON to temporary file, which then
+can be parsed by test runner. You can find this middleware at
 `tests/integration/request_recorder.js`. But some more preparation is required.
 Problem here is that integration suite executing on remote Sauce Lab server,
-whereas requirest recorder runs on local machine. To solve this we're using 
-[Ngrok][ngrok]. This tool tunnels your local port to some public acessible 
+whereas requirest recorder runs on local machine. To solve this we're using
+[Ngrok][ngrok]. This tool tunnels your local port to some public acessible
 machine, which means your collector emulator will be available at public host.
 You'll also need to set this host as `SUBDOMAIN` environment variable and grunt
 will generate html page out of `tests/pages/integration-template.html` with
@@ -196,6 +196,7 @@ appropriate domain (`SUBDOMAIN.ngrok.io`) as collector.
 TODO: mention async-small etc
 
 <a name="build" />
+
 ## 5.5 Build
 
 We're using Grunt as our build system.

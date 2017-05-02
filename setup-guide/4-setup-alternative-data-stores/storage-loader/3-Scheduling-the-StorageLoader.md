@@ -7,26 +7,28 @@
 5. [Next steps](#next-steps)
 
 <a name="scheduling-overview"/>
+
 ## 1. Overview
 
 Once you have the load process working smoothly, you can schedule a daily (or more frequent) task to automate the storage process.
 
-The standard way of scheduling the load process is as a daily cronjob. We provide a [snowplow-runner-and-loader.sh] [combo-bash] shell scripts for you to use in your scheduling if you want to run the StorageLoader immediately after EmrEtlRunner has completed its work (recommended).
+The standard way of scheduling the load process is as a daily cronjob. We provide a [snowplow-runner-and-loader.sh][combo-bash] shell scripts for you to use in your scheduling if you want to run the StorageLoader immediately after EmrEtlRunner has completed its work (recommended).
 
-1. [snowplow-storage-loader.sh] [loader-bash] - this (**obsolete**) script just runs the StorageLoader
-2. [snowplow-runner-and-loader.sh] [combo-bash] - this script runs the EmrEtlRunner immediately followed by the StorageLoader
+1. [snowplow-storage-loader.sh][loader-bash] - this (**obsolete**) script just runs the StorageLoader
+2. [snowplow-runner-and-loader.sh][combo-bash] - this script runs the EmrEtlRunner immediately followed by the StorageLoader
 
-The second script is recommended assuming 
+The second script is recommended assuming
 
 To consider each scheduling option in turn:
 
 <a name="storage-loader-cron"/>
+
 ## 2. Scheduling StorageLoader only
 
 [[/images/warning.png]] | The below steps are relevant to the obsolete script `snowplow-storage-loader.sh`. Running EmrEtlRunner as *Ruby* (rather than *JRuby* apps) is no longer actively supported. The latest version of the EmrEtlRunner is available from our Bintray [here](http://dl.bintray.com/snowplow/snowplow-generic/snowplow_emr_r77_great_auk.zip).
 ---|:---
 
-The shell script [`/4-storage/storage-loader/bin/snowplow-storage-loader.sh`] [loader-bash]
+The shell script [`/4-storage/storage-loader/bin/snowplow-storage-loader.sh`][loader-bash]
 runs the StorageLoader app only.
 
 You need to edit this script and update the three variables at the top:
@@ -39,20 +41,21 @@ So for example if you installed RVM as the `admin` user, then you would set:
 
     rvm_path=/home/admin/.rvm
 
-Now, assuming you're using the excellent [cronic] [cronic] as a wrapper for 
-your cronjobs, and that both cronic and Bundler are on your path, you can 
+Now, assuming you're using the excellent [cronic][cronic] as a wrapper for
+your cronjobs, and that both cronic and Bundler are on your path, you can
 configure your cronjob like so:
 
-    0 6   * * *   root    /path/to/snowplow/4-storage/storage-loader/bin/snowplow-storage-loader.sh 
+    0 6   * * *   root    /path/to/snowplow/4-storage/storage-loader/bin/snowplow-storage-loader.sh
 
 This will run the ETL job daily at 6am, emailing any failures to you via cronic. Please make
 sure that your Snowplow events have been safely generated and stored in your In Bucket prior
-to 6am. 
+to 6am.
 
 <a name="runner-and-loader-cron"/>
+
 ## 3. Scheduling EmrEtlRunner and StorageLoader
 
-The shell script [`/4-storage/storage-loader/bin/snowplow-runner-and-loader.sh`] [combo-bash] 
+The shell script [`/4-storage/storage-loader/bin/snowplow-runner-and-loader.sh`][combo-bash]
 runs EmrEtlRunner, immediately followed by StorageLoader - i.e. it chains them together. At
 Snowplow, this is the scheduling option we use.
 
@@ -71,22 +74,23 @@ So for example if you installed the StorageLoader as the `admin` user, then you 
 
     LOADER_PATH=/home/admin/snowplow-storage-loader
 
-Using [cronic] [cronic] as a wrapper, and with cronic and Bundler on your path, configure
+Using [cronic][cronic] as a wrapper, and with cronic and Bundler on your path, configure
 your cronjob like so:
 
-    0 4   * * *   root    /path/to/snowplow-runner-and-loader.sh 
+    0 4   * * *   root    /path/to/snowplow-runner-and-loader.sh
 
 This will run the ETL job and then the database load daily at 4am, emailing any failures
 to you via cronic.
 
 <a name="cron-alternatives"/>
+
 ## 4. Alternatives to cron
 
 In place of cron, you could schedule StorageLoader using a continuous integration
-server such as [Jenkins] [jenkins], or potentially use the
-[Windows Task Scheduler] [windows-task-scheduler].
+server such as [Jenkins][jenkins], or potentially use the
+[Windows Task Scheduler][windows-task-scheduler].
 
-These options are explored in a little more detail in the [Scheduling EmrEtlRunner] (3-Scheduling-EmrEtlRunner) guide.
+These options are explored in a little more detail in the [Scheduling EmrEtlRunner](3-Scheduling-EmrEtlRunner) guide.
 
 ## 5. Next steps
 

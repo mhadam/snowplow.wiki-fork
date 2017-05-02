@@ -4,9 +4,9 @@
 
 ### Compatibility
 
-JSON Schema   [iglu:com.snowplowanalytics.snowplow/ip_lookups/jsonschema/1-0-0][schema]  
-Compatibility 0.9.6+  
-Data provider [MaxMind][maxmind]  
+JSON Schema   [iglu:com.snowplowanalytics.snowplow/ip_lookups/jsonschema/1-0-0][schema]
+Compatibility 0.9.6+
+Data provider [MaxMind][maxmind]
 
 ### Overview
 
@@ -101,15 +101,15 @@ Here is a simpler example configuration (which exactly duplicates the behaviour 
 
 This example uses the free GeoLiteCity database hosted by Snowplow.
 
-###Data sources
+### Data sources
 
 The only input value for this enrichment comes from `ip` parameter, which maps to `user_ipaddress` field in `atomic.events` table.
 
-###Algorithm
+### Algorithm
 
 This enrichment uses 3rd party, [MaxMind][maxmind], service to look up data associated with the IP address. MaxMind offer industry-leading IP intelligence data updated weekly.
 
-###Data generated
+### Data generated
 
 Below is the summary of the fields in `atomic.events` table driven by the result of this enrichment (no dedicated table).
 
@@ -118,7 +118,7 @@ Field | Purpose
 `geo_country` | Country of IP origin
 `geo_region` | Region of IP origin
 `geo_city` | City of IP origin
-`geo_zipcode` | Zip (postal) code 
+`geo_zipcode` | Zip (postal) code
 `geo_latitude` | An approximate latitude (coordinates)
 `geo_longitude` | An approximate longitude (coordinates)
 `geo_region_name` | Region

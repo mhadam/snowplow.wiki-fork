@@ -1,6 +1,7 @@
-[**HOME**](Home) > [**SNOWPLOW SETUP GUIDE**](Setting-up-Snowplow) > [**Step 5: Get started analysing Snowplow data**](Getting started analyzing Snowplow data) > [Setting up ChartIO](Setting-up-ChartIO-to-visualize-your-data)
+[**HOME**](Home) > [**SNOWPLOW SETUP GUIDE**](Setting-up-Snowplow) > [**Step 6: Get started analyzing Snowplow data**](Getting-started-analyzing-Snowplow-data) > [Setting up ChartIO](Setting-up-ChartIO-to-visualize-your-data)
 
 <a name="top" />
+
 ## Contents
 
 1. [What is ChartIO, and why use it to analyze / visualize Snowplow data](#what-and-why)
@@ -11,9 +12,10 @@
 6. [Next steps](#next-steps)
 
 <a name="what-and-why" />
+
 ## 1. What is ChartIO, and why use it to analyze / visualize Snowplow data?
 
-[ChartIO] [ChartIO] is a fantastic BI tool that has a number of attractive features, especially for people who want to graph Snowplow data sources quickly:
+[ChartIO][ChartIO] is a fantastic BI tool that has a number of attractive features, especially for people who want to graph Snowplow data sources quickly:
 
 1. It is very simple and straightforward to setup and use. Most BI tools require users to invest in formatting data in their data warehouse in a specific way and / or configuring the way the data from a warehouse is ingested by the BI tool, so that the BI tool knows how to present the data to users via its UI. ChartIO takes a much simpler approach: it lets users query underlying data sources directly (by explicitly entering SQL commands) and then graph the results directly via a web UI. No fiddling around with any metadata editors required.
 2. It is a SaaS solution, so minimal software to setup and install.
@@ -22,15 +24,17 @@
 [Back to top](#top)
 
 <a name="setup" />
+
 ## 2. Setting up a ChartIO account
 
-1. Go to the [ChartIO website] [ChartIO], and setup a trial account by clicking the [Try it Free] [trial] button on the homepage. Enter an email address and password to sign up.
+1. Go to the [ChartIO website][ChartIO], and setup a trial account by clicking the [Try it Free][trial] button on the homepage. Enter an email address and password to sign up.
 
 2. Enter a company name and project name in the next screen, then select 'Create Project'.
 
 Now, if your Snowplow data is in [Redshift](#redshift), read on. If your Snowplow data is in [Infobright](#infobright), proceed to [section 4](#infobright).
 
 <a name="redshift" />
+
 ## 3. Connecting ChartIO to Snowplow data in Redshift
 
 ### 3.1 Create a read-only user in Redshift
@@ -50,10 +54,10 @@ Now grant permissions to that user so he / she can read the relevant tables:
 	GRANT USAGE ON SCHEMA atomic TO chartio;
 	GRANT SELECT ON atomic.events TO chartio;
 	GRANT USAGE ON SCHEMA customer_recipes TO chartio;
-	GRANT SELECT ON customer_recipes.referers_basic, customer_recipes.visits_basic, customer_recipes.visits_with_entry_and_exit_pages, customer_recipes.visits_with_referers TO chartio; 
+	GRANT SELECT ON customer_recipes.referers_basic, customer_recipes.visits_basic, customer_recipes.visits_with_entry_and_exit_pages, customer_recipes.visits_with_referers TO chartio;
 	GRANT USAGE ON SCHEMA catalog_recipes TO chartio;
-	
-	
+
+
 Note: if there are other tables the user needs to access, you should grant select permission to those as well.
 
 ### 3.2 White label ChartIO's inbound IP in your Redshift security group
@@ -62,7 +66,7 @@ Amazon Redshift will only allow clients on whitelisted IP addresses to connect.
 
 To whitelist the ChartIO IP address, log into your AWS console and navigate into Redshift.
 
-Click on the "Security Groups" option on the left hand menu and select your security group. (This is normally 'default'). Amazon gives you the option to add a new connection type: select "CIDR/IP" from the drop down and then enter the ChartIO IP address `173.203.96.249/32`. Click the "add": you should see a screen like the one below, with the ChartIO IP address listed as one of the options. 
+Click on the "Security Groups" option on the left hand menu and select your security group. (This is normally 'default'). Amazon gives you the option to add a new connection type: select "CIDR/IP" from the drop down and then enter the ChartIO IP address `173.203.96.249/32`. Click the "add": you should see a screen like the one below, with the ChartIO IP address listed as one of the options.
 
 [[/setup-guide/images/chartio/redshift-1.png]]
 
@@ -78,7 +82,7 @@ Click on the 'Settings' menu (click on the top right button and then on **Settin
 
 Select **Amazon Redshift**.
 
-Enter your Redshift credentials as appropriate. We can fetch these details directly from the AWS console. Log into [console.aws.amazon.com] [aws-console], select **Redshift** from the list of services and then select the Redshift cluster you want to connect to. The details of the cluster you need to connect Tableau are listed under **Cluster Database Properties**:
+Enter your Redshift credentials as appropriate. We can fetch these details directly from the AWS console. Log into [console.aws.amazon.com][aws-console], select **Redshift** from the list of services and then select the Redshift cluster you want to connect to. The details of the cluster you need to connect Tableau are listed under **Cluster Database Properties**:
 
 [[/setup-guide/images/tableau/4.JPG]]
 
@@ -99,6 +103,7 @@ Now proceed to [step 5: creating your first dashboard](#1st-dashboard).
 **NOTE!** You have only created a connection in ChartIO to the events table in the `atomic` schema. To access the Snowplow views (in e.g. `customers_recipe` schema), you would need to setup an additional connection for each schema, with the same details as those above but changing the `schema` field to e.g. `customer_recipes`, `catalog_recipes` etc.
 
 <a name="infobright" />
+
 ## 4. Connecting ChartIO to Snowplow data in Infobright
 
 We now need to create a connection between ChartIO and Snowplow data, stored on Infobright. To establish a connection, we use the fact that Infobright is a fork of MySQL, and so ChartIO can connect to Infobright as it would to MySQL.
@@ -126,7 +131,7 @@ and then install it:
 	$ cd chartio-2.0.4
 	$ sudo python setup.py install
 
-Before we run the `chartio_setup` to establish the connection we need to ensure that we have MySQL installed on the server. (Because `chartio_setup` uses `mysql` rather than `mysql-ib` to establish the connection.) To check if you have MySQL installed (as well as Infobright), run 
+Before we run the `chartio_setup` to establish the connection we need to ensure that we have MySQL installed on the server. (Because `chartio_setup` uses `mysql` rather than `mysql-ib` to establish the connection.) To check if you have MySQL installed (as well as Infobright), run
 
 	$ which mysql
 
@@ -154,7 +159,7 @@ You should see something like the following displayed:
 
 	Enter an existing read-only role for Chartio to use
 	    [Leave blank to create a new role automatically]
-	Read-only role name: 
+	Read-only role name:
 	==> Creating read-only user 'chartio_pbz305'
 	==> Finished configuring database information
 	==> Launching chartio_connect
@@ -171,6 +176,7 @@ When prompted whether you would 'like a crontab entry added to reconnect to Char
 [Back to top](#top)
 
 <a name="1st-dashboard" />
+
 ## 5. Creating your first Snowplow dashboard in ChartIO
 
 Now that we have a data connection setup between Snowplow and ChartIO, we can start graphing Snowplow data. ChartIO makes this very easy. To demonstrate, we'll create a graph that shows the number of unique visitors and visits to our website in the last 4 weeks:
@@ -204,7 +210,7 @@ We can give out chart a title, by clicking on "Chart Title" on the top left of t
 
 [[/setup-guide/images/chartio/3.png]]
 
-Now click save (top right). Our new chart appears on our new dashboard. We can its size and position, simply by dragging it round the screen. We can create a 2nd graph, by clicking the 
+Now click save (top right). Our new chart appears on our new dashboard. We can its size and position, simply by dragging it round the screen. We can create a 2nd graph, by clicking the
 **Add a Chart** button again. Simple!
 
 [[/setup-guide/images/chartio/4.png]]
@@ -213,11 +219,12 @@ Now click save (top right). Our new chart appears on our new dashboard. We can i
 [Back to top](#top)
 
 <a name="next-steps" />
-## 4. Next steps
+
+## 6. Next steps
 
 Up and running with ChartIO on top of Snowplow? Visit the [Analytics Cookbook][analyst-cookbook] to find out about more ways to drive value from Snowplow data.
 
-Return to [getting started analysing your Snowplow data](Getting-started-analysing-Snowplow-data).
+Return to [getting started analysing your Snowplow data](Getting-started-analyzing-Snowplow-data).
 
 Return to the [setup guide](Setting-up-Snowplow#wiki-step5).
 

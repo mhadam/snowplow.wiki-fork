@@ -1,4 +1,5 @@
 <a name="top" />
+
 [**HOME**](Home) > [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow-technical-documentation) > [**Trackers**](trackers)
 
 <a name="overview" />
@@ -20,17 +21,17 @@ In the [first part of this guide](#common), we cover the parameters in the Snowp
 
 ## The Snowplow Tracker protocol: individual parameters
 
-- 1. [Common parameters (platform and event independent)](#common)
+- 1 [Common parameters (platform and event independent)](#common)
   - 1.1 [Application parameters](#appid)
   - 1.2 [Date / time parameters](#timestamp)
   - 1.3 [Event / transaction parameters](#event2)
   - 1.4 [Snowplow tracker version](#version)
   - 1.5 [User parameters](#user)
   - 1.6 [Device parameters](#device)
-- 2. [Platform-specific parameters](#platform)
+- 2 [Platform-specific parameters](#platform)
   - 2.1 [Web-specific parameters](#web)
   - 2.2 [Internet of Things-specific parameters](#iot)
-- 3. [Snowplow events](#events)
+- 3 [Snowplow events](#events)
   - 3.1 [Pageview events](#pageview)
   - 3.2 [Page pings](#pagepings)
   - 3.3 [Link clicks](#linkclick)
@@ -41,8 +42,8 @@ In the [first part of this guide](#common), we cover the parameters in the Snowp
   - 3.8 [Error tracking](#error)
   - 3.9 [Custom structured events](#event)
   - 3.10 [Custom unstructured events](#unstructevent)
-- 4. [Custom contexts](#custom-contexts)
-- 5. [Reserved parameters](#reserved-parameters)
+- 4 [Custom contexts](#custom-contexts)
+- 5 [Reserved parameters](#reserved-parameters)
 
 <a name="common" />
 

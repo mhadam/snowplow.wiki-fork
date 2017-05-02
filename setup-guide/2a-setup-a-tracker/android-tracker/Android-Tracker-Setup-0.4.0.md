@@ -4,9 +4,9 @@
 
 ## Contents
 
-- 1. [Overview](#overview)  
+- 1. [Overview](#overview)
 - 2. [Integration options](#integration-options)
-  - 2.1 [Tracker compatibility](#compatibility)  
+  - 2.1 [Tracker compatibility](#compatibility)
   - 2.2 [Dependencies](#dependencies)
 - 3. [Setup](#setup)
   - 3.1 [Hosting](#hosting)
@@ -16,6 +16,7 @@
   - 3.4 [Permissions](#permissions)
 
 <a name="overview" />
+
 ## 1. Overview
 
 The [Snowplow Android Tracker](https://github.com/snowplow/snowplow-android-tracker) lets you add analytics to your [Android][android]-based mobile apps and games.
@@ -27,9 +28,11 @@ Ready? Let's get started.
 [Back to top](#top)
 
 <a name="integration-options" />
+
 ## 2. Integration options
 
 <a name="compatibility" />
+
 ### 2.1 Tracker compatibility
 
 The Snowplow Android Tracker has been built and tested using the Android SDK version 21, but uses a minimum SDK version of 11, so should work within any Android application built using SDK version 11 upwards.
@@ -37,25 +40,29 @@ The Snowplow Android Tracker has been built and tested using the Android SDK ver
 [Back to top](#top)
 
 <a name="dependencies" />
+
 ### 2.2 Dependencies
 
-To minimize the dex footprint of the Tracker we have kept dependencies to an absolute minimum.  
+To minimize the dex footprint of the Tracker we have kept dependencies to an absolute minimum.
 
 To minimize jar bloat, we have tried to keep external dependencies to a minimum. For the full list of dependencies, please see our [core Gradle build file][gradle-build-core], [classic Gradle build file][gradle-build-classic] and our [rx Gradle build file][gradle-build-rx].
 
 [Back to top](#top)
 
 <a name="setup" />
+
 ## 3. Setup
 
 <a name="hosting" />
+
 ### 3.1 Hosting
 
-The Tracker is published to Snowplow's [hosted Maven repository] [maven-snplow], which should make it easy to add it as a dependency into your own Android app.
+The Tracker is published to Snowplow's [hosted Maven repository][maven-snplow], which should make it easy to add it as a dependency into your own Android app.
 
 The current version of the Snowplow Android Tracker is 0.4.0.
 
 <a name="maven" />
+
 ### 3.2 Maven
 
 If you are using Maven for building your Android application, then add the following code into your `HOME/.m2/settings.xml` to be able to use this repository:
@@ -104,6 +111,7 @@ Then add into your project's `pom.xml` for the classic Tracker:
 ```
 
 <a name="gradle" />
+
 ### 3.3 Gradle
 
 If you are using Gradle in your own Android application, then add our Maven repository in your `build.gradle` file:
@@ -132,7 +140,7 @@ dependencies {
 }
 ```
 
-This will install version `0.4.0` of the android tracker.  However if you would like to ensure that all bug fixes and patches for version `0.4.0` are installed, simply change `0.4.0` into `0.4.+`.  
+This will install version `0.4.0` of the android tracker.  However if you would like to ensure that all bug fixes and patches for version `0.4.0` are installed, simply change `0.4.0` into `0.4.+`.
 
 Please note that no breaking changes will occur in the '0.4.x' space.
 
@@ -149,6 +157,7 @@ dependencies {
 }
 ```
 <a name="aar" />
+
 #### 3.3.1 Android Archive
 
 You can also add the Android Tracker using the Android ARchive (aar) package in your gradle file in a similar way to the Gradle version while appending '@aar' to the end:
@@ -166,12 +175,13 @@ dependencies {
 ```
 
 <a name="permissions" />
+
 ### 3.4 Permissions
 
 To send the events, you need to update your `AndroidManifest.xml` with the internet access permission:
 
 ```xml
-<uses-permission android:name="android.permission.INTERNET" /> 
+<uses-permission android:name="android.permission.INTERNET" />
 ```
 
 To have the emitter check for online status before sending you will need to add the following:

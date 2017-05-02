@@ -10,7 +10,7 @@ This is the **single-instance setup guide** for getting a local version of Druid
 
 ## 2. Apache ZooKeeper
 
-You will need [Apache ZooKeeper] [apache-zookeeper] running on your machine.
+You will need [Apache ZooKeeper][apache-zookeeper] running on your machine.
 
 First download it:
 
@@ -36,7 +36,7 @@ Leave this terminal running.
 
 ## 3. Druid server
 
-You will need [Druid] [druid] server running on your machine.
+You will need [Druid][druid] server running on your machine.
 
 Download the Druid binaries:
 
@@ -60,7 +60,7 @@ Leave this terminal running.
 
 ### 4. Tranquility Server
 
-You will need [Tranquility Server] [tranquility-server] running on your machine.
+You will need [Tranquility Server][tranquility-server] running on your machine.
 
 First download it:
 

@@ -1,9 +1,9 @@
-[**HOME**](Home) > [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow technical documentation) > [**Enrichment**](Enrichment) > The Enrichment Process
+[**HOME**](Home) > [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow-technical-documentation) > [**Enrichment**](Enrichment) > The Enrichment Process
 
-###Overview
+### Overview
 
 Enrichment process parses raw Snowplow events and performs the following:
- 
+
 1. Extracts data
 2. Validates data against [Snowplow Tracker Protocol](snowplow-tracker-protocol) and JSON schema
 3. Enriches data (adds extra value derived from the tracked/captured data), so called "dimension widening"
@@ -11,12 +11,12 @@ Enrichment process parses raw Snowplow events and performs the following:
 
 Therefore feeding in a raw Snowplow event will produce either the enriched event with additional data (context), modified (enriched) data or a `bad` record.
 
-> **JSON schema** specifies a *JSON*-based format to define the structure of JSON data for validation, documentation, and interaction control. 
+> **JSON schema** specifies a *JSON*-based format to define the structure of JSON data for validation, documentation, and interaction control.
 
 > **JSON** (JavaScript Object Notation) is an open-standard format that uses human-readable text to transmit data objects consisting of attribute–value pairs.
 
 We distinguish 3 types of enrichment:
- 
+
 - Hardcoded enrichments loading `atomic.events` (legacy)
 - Configurable enrichments loading `atomic.events` (legacy)
 - Configurable enrichments adding new contexts to the `derived_contexts` JSON array
@@ -30,12 +30,13 @@ We distinguish 3 types of enrichment:
 During the common enrichment process the data received from collector(s) is mapped according to our [Canonical Event Model](canonical-event-model).
 
 The raw data undergoing "dimension widening" (enrichment) listed as per following:
- 
+
 - [Hardcoded enrichment](#hardcoded-enrichment)
 - [Configurable enrichment](#configurable-enrichment)
 
 <a name="hardcoded-enrichment" />
-###Hardcoded enrichment
+
+### Hardcoded enrichment
 
 The following fields are populated depending on whether the tracker provided the corresponding value or not.
 
@@ -81,18 +82,19 @@ Added Parameter | Purpose
 `refr_urlhost` | Host (domain)
 `refr_urlport` | Port if specified, 80 if not
 `refr_urlpath` | Path to page
-`refr_urlquery` | Querystring 
+`refr_urlquery` | Querystring
 `refr_urlfragment` | Fragment (anchor)
 
 Additionally the derived timestamp is calculated, `derived_tstamp`. See [this blog post](http://snowplowanalytics.com/blog/2015/09/15/improving-snowplows-understanding-of-time/) for more details.
- 
+
 Finally, contexts, unstructured events and the relevant configurable enrichments (if enabled) are validated against their corresponding JSON schemas and the array of the derived contexts is assembled.
 
 <a name="configurable-enrichment" />
-###Configurable enrichment
+
+### Configurable enrichment
 
 The configurable enrichment are listed below. Follow the corresponding links to find out more.
- 
+
 The enrichments which write the data into `atomic.events` table (legacy enrichments):
 
 - [IP anonymization enrichment](IP-anonymization-enrichment)

@@ -1,6 +1,6 @@
 [**HOME**](Home) » [**SNOWPLOW SETUP GUIDE**](Setting-up-Snowplow) » [**Step 4: setting up alternative data stores**](Setting-up-alternative-data-stores) » [Kinesis-LZO-S3-Sink-Setup](Kinesis-LZO-S3-Sink-Setup) » Kinesis at-least-once processing
 
-##Overview
+## Overview
 
 Kinesis LZO S3 Sink is using the [Amazon Kinesis Client Library](http://docs.aws.amazon.com/kinesis/latest/dev/developing-consumers-with-kcl.html#kinesis-record-processor-overview-kcl) (KCL). The KCL helps to consume and process data from Amazon Kinesis streams. It takes care of many of the complex tasks associated with distributed computing, such as load-balancing across multiple instances, responding to instance failures, checkpointing processed records, and reacting to resharding.
 
@@ -14,7 +14,7 @@ At runtime:
 - A single Kinesis consumer can read from multiple shards of a Kinesis stream.
 - Each Kinesis consumer maintains its own checkpoint info.
 
-##Kinesis Checkpointing
+## Kinesis Checkpointing
 
 Kinesis checkpointing works in the following way:
 
@@ -29,7 +29,7 @@ In other words, streams have "**at least once**" semantics, meaning that every d
 
 We are steadily introducing de-duplication into our Redshift loading process, with the goal that our data in Redshift is dupe-free. We can explore these techniques for other data stores too.
 
-###Further reading on deduplication
+### Further reading on deduplication
 
 - [Dealing with duplicate event IDs](http://snowplowanalytics.com/blog/2015/08/19/dealing-with-duplicate-event-ids/)
 - [Event fingerprint enrichment](Event-fingerprint-enrichment)

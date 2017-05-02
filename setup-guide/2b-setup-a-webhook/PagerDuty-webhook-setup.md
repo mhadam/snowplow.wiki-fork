@@ -4,16 +4,17 @@
 
 ## Contents
 
-- 1. [Overview](#overview)  
+- 1 [Overview](#overview)
   - 1.1 [Compatibility](#compat)
-- 2. [Setup](#setup)
+- 2 [Setup](#setup)
   - 2.1 [PagerDuty](#setup-pagerduty)
   - 2.2 [Snowplow Redshift](#setup-redshift)
 
 <a name="overview" />
+
 ## 1. Overview
 
-This webhook integration lets you track a variety of events logged by [PagerDuty] [pagerduty-website].
+This webhook integration lets you track a variety of events logged by [PagerDuty][pagerduty-website].
 
 Available events are:
 
@@ -28,12 +29,14 @@ Available events are:
 For the technical implementation, see [[PagerDuty webhook adapter]].
 
 <a name="compat" />
+
 ### 1.1 Compatibility
 
-* [Snowplow 0.9.13] [snowplow-0.9.13]+ (`POST`-capable collectors for event processing)
-* [PagerDuty webhook API] [pagerduty-webhooks]
+* [Snowplow 0.9.13][snowplow-0.9.13]+ (`POST`-capable collectors for event processing)
+* [PagerDuty webhook API][pagerduty-webhooks]
 
 <a name="setup" />
+
 ## 2. Setup
 
 Integrating PagerDuty's webhooks into Snowplow is a two-stage process:
@@ -42,6 +45,7 @@ Integrating PagerDuty's webhooks into Snowplow is a two-stage process:
 2. (Optional) Create the PagerDuty events table into Amazon Redshift
 
 <a name="setup-pagerduty" />
+
 ## 2.1 PagerDuty
 
 First login into to your PagerDuty account and select the **Services** button from the top of the screen.
@@ -58,7 +62,7 @@ For the Endpoint URL field you will need to provide the URI to your Snowplow Col
 http://<collector host>/com.mandrill/v1?aid=<company code>
 ```
 
-The `aid=` name-value pair in your URI's querystring is optional; this is the `app_id` parameter taken from the [Snowplow Tracker Protocol] [tracker-protocol]. You can use it to specify which company in PagerDuty these call complete events belong to. Putting it all together, our setup screen now looks like this:
+The `aid=` name-value pair in your URI's querystring is optional; this is the `app_id` parameter taken from the [Snowplow Tracker Protocol][tracker-protocol]. You can use it to specify which company in PagerDuty these call complete events belong to. Putting it all together, our setup screen now looks like this:
 
 [[/setup-guide/images/webhooks/pagerduty/pagerduty-2.png]]
 
@@ -68,18 +72,19 @@ If you want, you can also manually override the event's `platform` parameter lik
 http://<collector host>/com.mandrill/v1?aid=<company code>&p=<platform code>
 ```
 
-Supported platform codes can again be found in the [Snowplow Tracker Protocol] [tracker-protocol]; if not set, then the value for `platform` will default to `srv` for a server-side application.
+Supported platform codes can again be found in the [Snowplow Tracker Protocol][tracker-protocol]; if not set, then the value for `platform` will default to `srv` for a server-side application.
 
 Click save and from now on when any of the seven available events are triggered an event will also be sent to the Webhook!
 
 <a name="setup-redshift" />
+
 ## 2.2 Redshift
 
 If you are running the Snowplow batch (Hadoop) flow with Amazon Redshift, then you should deploy the relevent event table into your Amazon Redshift.
 
 You can find the table definition here:
 
-* [incident_1.sql] [incident]
+* [incident_1.sql][incident]
 
 Make sure to deploy this table into the same schema as your `events` table.
 

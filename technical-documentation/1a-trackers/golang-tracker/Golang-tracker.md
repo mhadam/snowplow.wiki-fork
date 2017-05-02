@@ -1,20 +1,20 @@
 <a name="top" />
 
-[**HOME**](Home) > [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow technical documentation) > [**Trackers**](trackers) > Golang Tracker
+[**HOME**](Home) > [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow-technical-documentation) > [**Trackers**](trackers) > Golang Tracker
 
 ## Contents
 
-- 1. [Overview](#overview)  
-- 2. [Initialization](#init)  
+- 1 [Overview](#overview)
+- 2 [Initialization](#init)
   - 2.1 [Import the library](#importing)
   - 2.2 [Creating a tracker](#create-tracker)
-    - 2.2.1 [`RequireEmitter`](#emitter)  
+    - 2.2.1 [`RequireEmitter`](#emitter)
     - 2.2.2 [`OptionSubject`](#subject)
     - 2.2.3 [`OptionNamespace`](#namespace)
     - 2.2.4 [`OptionAppId`](#app-id)
     - 2.2.5 [`OptionPlatform`](#platform)
     - 2.2.6 [`OptionBase64Encode`](#base64)
-- 3. [Adding extra data: the Subject class](#subject-class)
+- 3 [Adding extra data: the Subject class](#subject-class)
   - 3.1 [`SetUserId`](#set-user-id)
   - 3.2 [`SetScreenResolution`](#set-screen-resolution)
   - 3.3 [`SetViewport`](#set-viewport-dimensions)
@@ -25,7 +25,7 @@
   - 3.8 [`SetUseragent`](#set-useragent)
   - 3.9 [`SetDomainUserId`](#set-domain)
   - 3.10 [`SetNetworkUserId`](#set-network)
-- 4. [Tracking specific events](#events)
+- 4 [Tracking specific events](#events)
   - 4.1 [Common](#common)
     - 4.1.1 [Custom contexts](#custom-contexts)
     - 4.1.2 [Optional timestamp argument](#tstamp-arg)
@@ -37,10 +37,11 @@
   - 4.5 [`TrackEcommerceTransaction()`](#ecommerce-transaction)
   - 4.6 [`TrackStructEvent()`](#struct-event)
   - 4.7 [`TrackTiming()`](#timing-event)
-- 5. [Emitters](#emitter)
+- 5 [Emitters](#emitter)
   - 5.1 [Under the hood](#emitter-inner-workings)
 
 <a name="overview" />
+
 ## 1. Overview
 
 The [Snowplow Golang Tracker](https://github.com/snowplow/snowplow-golang-tracker) allows you to track Snowplow events from your Golang apps and servers.
@@ -54,11 +55,13 @@ __READ ME__: As sending and processing of events is done asynchronously it is ad
 See [here for instructions](http://blog.ralch.com/tutorial/design-patterns/golang-singleton/) on building a Singleton in Golang.
 
 <a name="init" />
+
 ## 2 Initialization
 
 Assuming you have completed the [[Golang Tracker Setup]] for your project, you are now ready to initialize the Golang Tracker.
 
 <a name="importing" />
+
 ### 2.1 Import the library
 
 Import the Golang Tracker library like so:
@@ -78,6 +81,7 @@ The package can now be referred to as `sp` rather than `tracker`.
 That's it - you are now ready to initialize a tracker instance.
 
 <a name="create-tracker" />
+
 ### 2.2 Creating a tracker
 
 The simplest tracker initialization only requires you to provide the URI of the collector to which the tracker will log events:
@@ -98,7 +102,7 @@ There are other optional builder functions:
 | `OptionNamespace`    | The name of the tracker instance              | No            | ``           |
 | `OptionAppId`        | The application ID                            | No            | ``           |
 | `OptionPlatform`     | The platform the Tracker is running on        | No            | `srv`        |
-| `OptionBase64Encode` | Whether to enable [base 64 encoding] [base64] | No            | `true`       |
+| `OptionBase64Encode` | Whether to enable [base 64 encoding][base64] | No            | `true`       |
 
 A more complete example:
 
@@ -116,33 +120,39 @@ tracker := sp.InitTracker(
 ```
 
 <a name="emitter" />
+
 #### 2.2.1 `RequireEmitter`
 
 Accepts an argument of an Emitter instance pointer; if the object is `nil` will `panic`. See [Emitters](#emitters) for more on emitter configuration.
 
 <a name="subject" />
+
 #### 2.2.2 `OptionSubject`
 
-The user which the Tracker will track. Accepts an argument of a [Subject](#subject) instance pointer. 
+The user which the Tracker will track. Accepts an argument of a [Subject](#subject) instance pointer.
 
 You don't need to set this during Tracker construction; you can use the `tracker.SetSubject()` method afterwards. In fact, you don't need to create a subject at all. If you don't, though, your events won't contain user-specific data such as timezone and language.
 
 <a name="namespace" />
+
 #### 2.2.3 `OptionNamespace`
 
 If provided, the `namespace` argument will be attached to every event fired by the new tracker. This allows you to later identify which tracker fired which event if you have multiple trackers running.
 
 <a name="app-id" />
+
 #### 2.2.4 `OptionAppId`
 
 The `appId` argument lets you set the application ID to any string.
 
 <a name="platform" />
+
 #### 2.2.5 `OptionPlatform`
 
 By default we assume the Tracker will be running in a server environment.  To override this provide your own platform string.
 
 <a name="base64" />
+
 #### 2.2.6 `OptionBase64Encode`
 
 By default, unstructured events and custom contexts are encoded into Base64 to ensure that no data is lost or corrupted. You can turn encoding on or off using the Boolean `OptionBase64Encode` function with either `true` or `false` passed in.
@@ -150,6 +160,7 @@ By default, unstructured events and custom contexts are encoded into Base64 to e
 [Back to top](#top)
 
 <a name="subject-class" />
+
 ## 3. Adding extra data: The Subject class
 
 You may have additional information about your application's environment, current user and so on, which you want to send to Snowplow with each event.
@@ -176,6 +187,7 @@ The Subject class has a set of `Set...()` methods to attach extra data relating 
 We will discuss each of these in turn below:
 
 <a name="set-user-id" />
+
 ### 3.1 Set user ID with `SetUserId`
 
 You can set the user ID to any string:
@@ -193,6 +205,7 @@ s.SetUserId("alexd");
 [Back to top](#top)
 
 <a name="set-screen-resolution" />
+
 ### 3.2 Set screen resolution with `SetScreenResolution`
 
 If your code has access to the device's screen resolution, then you can pass this in to Snowplow too:
@@ -210,6 +223,7 @@ s.SetScreenResolution(1366, 768);
 [Back to top](#top)
 
 <a name="set-viewport-dimensions" />
+
 ### 3.3 Set viewport dimensions with `SetViewport`
 
 If your code has access to the viewport dimensions, then you can pass this in to Snowplow too:
@@ -227,6 +241,7 @@ s.SetViewport(300, 200);
 [Back to top](#top)
 
 <a name="set-color-depth" />
+
 ### 3.4 Set color depth with `SetColorDepth`
 
 If your code has access to the bit depth of the device's color palette for displaying images, then you can pass this in to Snowplow too:
@@ -244,6 +259,7 @@ s.SetColorDepth(32);
 [Back to top](#top)
 
 <a name="set-timezone" />
+
 ### 3.5 Set timezone with `SetTimezone`
 
 This method lets you pass a user's timezone in to Snowplow:
@@ -261,6 +277,7 @@ s.SetColorDepth("Europe/London");
 [Back to top](#top)
 
 <a name="set-lang" />
+
 ### 3.6 Set the language with `SetLang`
 
 This method lets you pass a user's language in to Snowplow:
@@ -278,6 +295,7 @@ s.SetLang('en');
 [Back to top](#top)
 
 <a name="set-ip" />
+
 ### 3.7 Set the IP Address with `SetIpAddress`
 
 This method lets you pass a user's IP Address in to Snowplow:
@@ -295,6 +313,7 @@ s.SetIpAddress('127.0.0.1');
 [Back to top](#top)
 
 <a name="set-useraganet" />
+
 ### 3.8 Set the useragent with `SetUseragent`
 
 This method lets you pass a user's useragent string in to Snowplow:
@@ -312,6 +331,7 @@ s.SetUseragent('some useragent');
 [Back to top](#top)
 
 <a name="set-domain" />
+
 ### 3.9 Set the Domain User ID with `SetDomainUserId`
 
 This method lets you pass a user's Domain User ID string in to Snowplow:
@@ -329,6 +349,7 @@ s.SetDomainUserId('domain-uid-12');
 [Back to top](#top)
 
 <a name="set-network" />
+
 ### 3.10 Set the Domain User ID with `SetNetworkUserId`
 
 This method lets you pass a user's Network User ID string in to Snowplow:
@@ -346,6 +367,7 @@ s.SetNetworkUserId('domain-uid-12');
 [Back to top](#top)
 
 <a name="events" />
+
 ## 4. Tracking specific events
 
 Snowplow has been built to enable you to track a wide range of events that occur when users interact with your websites and apps. We are constantly growing the range of functions available in order to capture that data more richly.
@@ -370,11 +392,13 @@ __NOTE__: All event structs require pointer values as a way of asserting properl
 These all accept their respective raw value and return a pointer to this value.
 
 <a name="common" />
+
 ### 4.1 Common
 
 All events are tracked with specific methods on the tracker instance, of the form `TrackXXX()`, where `XXX` is the name of the event to track.
 
 <a name="custom-contexts" />
+
 ### 4.1.1 Custom contexts
 
 In short, custom contexts let you add additional information about the circumstances surrounding an event in the form of an array of SelfDescribingJson structs (`[]SelfDescribingJson`). Each tracking method accepts an additional optional contexts parameter, which should be a list of contexts:
@@ -389,7 +413,7 @@ If a visitor arrives on a page advertising a movie, the dictionary for a single 
 ```golang
 contextArray := []sp.SelfDescribingJson{
   *sp.InitSelfDescribingJson(
-    "iglu:com.acme_company/movie_poster/jsonschema/2-1-1", 
+    "iglu:com.acme_company/movie_poster/jsonschema/2-1-1",
     map[string]interface{}{
       "movie_name": "Solaris",
       "poster_country": "JP",
@@ -402,7 +426,7 @@ This is how to fire a page view event with the above custom context:
 
 ```golang
 tracker.TrackPageView(
-  sp.PageViewEvent{ 
+  sp.PageViewEvent{
     PageUrl: sp.NewString("acme.com"),
     Contexts: contextArray,
   },
@@ -412,6 +436,7 @@ tracker.TrackPageView(
 Note that even though there is only one custom context attached to the event, it still needs to be placed in an array.
 
 <a name="tstamp-arg" />
+
 ### 4.1.2 Optional timestamp argument
 
 Each `Track...()` method supports an optional timestamp argument; this allows you to manually override the timestamp attached to this event. The timestamp should be in milliseconds since the Unix epoch.
@@ -421,7 +446,7 @@ If you do not pass this timestamp in as an argument, then the Golang Tracker wil
 Here is an example tracking a structured event and supplying the optional timestamp argument:
 
 ```golang
-tracker.TrackStructEvent(sp.StructuredEvent{ 
+tracker.TrackStructEvent(sp.StructuredEvent{
   Category: sp.NewString("some category"),
   Action: sp.NewString("some action"),
   Timestamp: sp.NewInt64(1368725287000),
@@ -429,6 +454,7 @@ tracker.TrackStructEvent(sp.StructuredEvent{
 ```
 
 <a name="true-tstamp-arg" />
+
 ### 4.1.3 Optional true-timestamp argument
 
 Each `Track...()` method supports an optional true-timestamp argument; this allows you to provide the true-timestamp attached to this event to help with the timing of events in multiple timezones. The timestamp should be in milliseconds since the Unix epoch.
@@ -436,7 +462,7 @@ Each `Track...()` method supports an optional true-timestamp argument; this allo
 Here is an example tracking a structured event and supplying the optional true-timestamp argument:
 
 ```golang
-tracker.TrackStructEvent(sp.StructuredEvent{ 
+tracker.TrackStructEvent(sp.StructuredEvent{
   Category: sp.NewString("some category"),
   Action: sp.NewString("some action"),
   TrueTimestamp: sp.NewInt64(1368725287000),
@@ -444,6 +470,7 @@ tracker.TrackStructEvent(sp.StructuredEvent{
 ```
 
 <a name="event-id-arg" />
+
 ### 4.1.4 Optional event ID argument
 
 Each `Track...()` method supports an optional event id argument; this allows you to manually override the event ID attached to this event. The event ID should be a valid version 4 UUID string.
@@ -451,7 +478,7 @@ Each `Track...()` method supports an optional event id argument; this allows you
 Here is an example tracking a structured event and supplying the optional event ID argument:
 
 ```golang
-tracker.TrackStructEvent(sp.StructuredEvent{ 
+tracker.TrackStructEvent(sp.StructuredEvent{
   Category: sp.NewString("some category"),
   Action: sp.NewString("some action"),
   EventId: sp.NewString("486820fb-e722-4311-b33d-d2f319b511f6"),
@@ -461,6 +488,7 @@ tracker.TrackStructEvent(sp.StructuredEvent{
 [Back to top](#top)
 
 <a name="unstruct-event" />
+
 ### 4.2 Track SelfDescribing/Unstructured events with `TrackSelfDescribingEvent()`
 
 Use `TrackSelfDescribingEvent()` to track a custom event which consists of a name and an unstructured set of properties. This is useful when:
@@ -491,16 +519,17 @@ data := map[string]interface{}{
 // Create a new SelfDescribingJson
 sdj := sp.InitSelfDescribingJson("iglu:com.example_company/save-game/jsonschema/1-0-2", data)
 
-tracker.TrackSelfDescribingEvent(sp.SelfDescribingEvent{ 
+tracker.TrackSelfDescribingEvent(sp.SelfDescribingEvent{
   Event: sdj,
 })
 ```
 
-For more on JSON schema, see the [blog post] [self-describing-jsons].
+For more on JSON schema, see the [blog post][self-describing-jsons].
 
 [Back to top](#top)
 
 <a name="screen-view" />
+
 ### 4.3 Track screen views with `TrackScreenView()`
 
 Use `TrackScreenView()` to track a user viewing a screen (or equivalent) within your app:
@@ -519,7 +548,7 @@ Although name and id are not individually required, at least one must be provide
 Example:
 
 ```golang
-tracker.TrackScreenView(sp.ScreenViewEvent{ 
+tracker.TrackScreenView(sp.ScreenViewEvent{
   Id: sp.NewString("Screen ID"),
 })
 ```
@@ -527,6 +556,7 @@ tracker.TrackScreenView(sp.ScreenViewEvent{
 [Back to top](#top)
 
 <a name="page-view" />
+
 ### 4.4 Track pageviews with `TrackPageView()`
 
 Use `TrackPageView()` to track a user viewing a page within your app:
@@ -544,7 +574,7 @@ Use `TrackPageView()` to track a user viewing a page within your app:
 Example:
 
 ```golang
-tracker.TrackPageView(sp.PageViewEvent{ 
+tracker.TrackPageView(sp.PageViewEvent{
   PageUrl: sp.NewString("acme.com"),
 })
 ```
@@ -552,6 +582,7 @@ tracker.TrackPageView(sp.PageViewEvent{
 [Back to top](#top)
 
 <a name="ecommerce-transaction" />
+
 ### 4.5 Track ecommerce transactions with `TrackEcommerceTransaction()`
 
 Use `TrackEcommerceTransaction()` to track an ecommerce transaction:
@@ -605,7 +636,7 @@ items := []sp.EcommerceTransactionItemEvent{
   },
 }
 
-tracker.TrackEcommerceTransaction(sp.EcommerceTransactionEvent{ 
+tracker.TrackEcommerceTransaction(sp.EcommerceTransactionEvent{
   OrderId: sp.NewString("6a8078be"),
   TotalValue: sp.NewFloat64(35),
   Affiliation: sp.NewString("some-affiliation"),
@@ -622,6 +653,7 @@ tracker.TrackEcommerceTransaction(sp.EcommerceTransactionEvent{
 [Back to top](#top)
 
 <a name="struct-event" />
+
 ### 4.6 Track structured events with `TrackStructEvent()`
 
 Use `TrackStructEvent()` to track a custom event happening in your app which fits the Google Analytics-style structure of having up to five fields (with only the first two required):
@@ -641,7 +673,7 @@ Use `TrackStructEvent()` to track a custom event happening in your app which fit
 Example:
 
 ```golang
-tracker.TrackStructEvent(sp.StructuredEvent{ 
+tracker.TrackStructEvent(sp.StructuredEvent{
   Category: sp.NewString("shop"),
   Action: sp.NewString("add-to-basket"),
   Property: sp.NewString("pcs"),
@@ -652,6 +684,7 @@ tracker.TrackStructEvent(sp.StructuredEvent{
 [Back to top](#top)
 
 <a name="timing-event" />
+
 ### 4.7 Track timing events with `TrackTiming()`
 
 Use `TrackTiming()` to track a timing event.
@@ -672,7 +705,7 @@ The arguments are as follows:
 Example:
 
 ```golang
-tracker.TrackTiming(sp.TimingEvent{ 
+tracker.TrackTiming(sp.TimingEvent{
   Category: sp.NewString("Timing Category"),
   Variable: sp.NewString("Some var"),
   Timing: sp.NewInt64(124578),
@@ -682,6 +715,7 @@ tracker.TrackTiming(sp.TimingEvent{
 [Back to top](#top)
 
 <a name="emitter" />
+
 ## 5. Emitters
 
 Tracker instances must be initialized with an emitter. This section will go into more depth about the Emitter and how it works under the hood.
@@ -728,6 +762,7 @@ The OptionDbName can be any valid path on your host file system (that can be cre
 [Back to top](#top)
 
 <a name="emitter-inner-workings">
+
 ### 5.1 Under the hood
 
 Once the emitter receives an event from the Tracker a few things start to happen:

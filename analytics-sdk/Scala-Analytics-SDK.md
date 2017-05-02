@@ -1,8 +1,9 @@
 [**HOME**](Home) » [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow-technical-documentation) » [**Snowplow Analytics SDK**](Snowplow-Analytics-SDK) » Scala Analytics SDK
 
-##Overview
+## Overview
 
-The [Snowplow Analytics SDK for Scala](https://github.com/snowplow/snowplow-scala-analytics-sdk) lets you work with [Snowplow enriched events](https://github.com/snowplow/snowplow/wiki/canonical-event-model) in your Scala event processing, data modeling and machine-learning jobs. You can use this SDK with [Apache Spark](http://spark.apache.org/), [AWS Lambda](https://aws.amazon.com/lambda/), [Apache Flink](https://flink.apache.org/), [Scalding](https://github.com/twitter/scalding), [Apache Samza](http://samza.apache.org/) and other Scala-compatible data processing frameworks.
+The [Snowplow Analytics SDK for Scala](https://github.com/snowplow/snowplow-scala-analytics-sdk) lets you work with [Snowplow enriched events](https://github.com/snowplow/snowplow/wiki/canonical-event-model) in your Scala event processing, 
+data modeling and machine-learning jobs. You can use this SDK with [Apache Spark](http://spark.apache.org/), [AWS Lambda](https://aws.amazon.com/lambda/), [Apache Flink](https://flink.apache.org/), [Scalding](https://github.com/twitter/scalding), [Apache Samza](http://samza.apache.org/) and other JVM-compatible data processing frameworks.
 
 The Scala Analytics SDK makes it significantly easier to build applications that consume Snowplow enriched data directly from Kinesis or S3.
 
@@ -17,7 +18,7 @@ Working with the Snowplow Scala Analytics SDK therefore has two major advantages
 
 Currently the Analytics SDK for Scala ships with one event transformer: the JSON Event Transformer. 
 
-##The JSON Event Transformer
+## The JSON Event Transformer
 
 The JSON Event Transformer takes a Snowplow enriched event and converts it into a JSON ready for further processing. This transformer was adapted from the code used to load Snowplow events into Elasticsearch in the Kinesis real-time pipeline.
 
@@ -44,25 +45,9 @@ For example, if an enriched event contained a `com.snowplowanalytics.snowplow/li
   },...
 ```
 
-##Using the SDK
+## Using the SDK
 
-###Installation
-
-The latest version of Snowplow Scala Analytics SDK is 0.1.0, which is cross-built against Scala 2.10.x and 2.11.x.
-
-If you’re using SBT, add the following lines to your build file:
-
-```
-// Resolvers
-val snowplowRepo = "Snowplow Analytics" at "http://maven.snplow.com/releases/"
-
-// Dependency
-val analyticsSdk = "com.snowplowanalytics" %% "snowplow-scala-analytics-sdk" % "0.1.0"
-```
-
-Note the double percent (`%%`) between the group and artifactId. This will ensure that you get the right package for your Scala version.
-
-###Using from Apache Spark
+### Using from Apache Spark
 
 The Scala Analytics SDK is a great fit for performing Snowplow [event data modeling](http://snowplowanalytics.com/blog/2016/03/16/introduction-to-event-data-modeling/) in Apache Spark and Spark Streaming.
 
@@ -79,7 +64,7 @@ val events = input
 val dataframe = ctx.read.json(events)
 ```
 
-###Using from AWS Lambda
+### Using from AWS Lambda
 
 The Scala Analytics SDK is a great fit for performing analytics-on-write, monitoring or alerting on Snowplow event streams using AWS Lambda.
 

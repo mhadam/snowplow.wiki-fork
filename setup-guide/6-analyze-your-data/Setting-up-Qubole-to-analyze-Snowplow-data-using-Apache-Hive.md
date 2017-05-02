@@ -1,8 +1,8 @@
 <a name="top" />
 
-[**HOME**](Home) > [**SNOWPLOW SETUP GUIDE**](Setting-up-Snowplow) > [**Step 5: Get started analyzing Snowplow data**](Getting started analyzing Snowplow data) > Setting up Qubole to analyze your Snowplow data 
+[**HOME**](Home) > [**SNOWPLOW SETUP GUIDE**](Setting-up-Snowplow) > [**Step 6: Get started analyzing Snowplow data**](Getting-started-analyzing-Snowplow-data) > Setting up Qubole to analyze your Snowplow data
 
-[Qubole] [qubole] provides a service that enables data scientists to crunch Snowplow data in S3 using Hive, Pig and other Hadoop-backed services. Qubole's service is an attractive alternative to Amazon's own EMR - it offers a couple of big advantages in particular:
+[Qubole][qubole] provides a service that enables data scientists to crunch Snowplow data in S3 using Hive, Pig and other Hadoop-backed services. Qubole's service is an attractive alternative to Amazon's own EMR - it offers a couple of big advantages in particular:
 
 1. **Ease-of-use**. Qubole provides a really nice, web-based user interface for composing and executing Hive queries. It makes it easy to execute and keep track of multiple queries in parallel (very useful with something like Hive, where each query can time a few minutes to run). It caches the results of individual queries, so you can quickly grab the results (even download them) and inspect / visualize them locally, whilst you continue to run new queries against your cluster. And it enables you to easily test queries on subsets of your data, before kicking off jobs to use the same queries to crunch bigger data sets.
 2. **Speed / efficiency**. the Qubole team have optimized their Hadoop and Hive distribution, perhaps better than the folks at Amazon have for EMR. (They are well placed to do this, as their engineers include some of the original team at Facebook that developed Hive.)
@@ -17,19 +17,21 @@ In this guide, we walk through the steps necessary to get up and running using H
 4. [Performing some sample queries against the table](#queries)
 
 <a name="sign-up" />
+
 ## 1. Sign up to Qubole
 
-Signing up to Qubole is straightforward: apply for an account directly through the [Qubole website] [signup-for-qubole] by entering your name, email address and company name on the signup form.
+Signing up to Qubole is straightforward: apply for an account directly through the [Qubole website][signup-for-qubole] by entering your name, email address and company name on the signup form.
 
 Back to [top](#top).
 
 <a name="login" />
+
 ## 2. Login to Qubole and setup access to your data in S3
 
 Once you have signed up, login:
 
 [[/setup-guide/images/qubole/1.png]]
-git 
+git
 The first thing we need to do is give Qubole access to our AWS account details and S3 specifically, so that we can access our Snowplow data in S3
 
 To do this, click on the **Control Panel** icon on the left of the UI:
@@ -50,7 +52,7 @@ Select the **Storage type** drop down and change it from `QUBOLE_MANAGED` to `CU
         "s3:GetObject",
         "s3:GetObjectAcl",
         "s3:GetObjectVersion",
-        "s3:GetObjectVersionAcl"      
+        "s3:GetObjectVersionAcl"
       ],
       "Resource": [
         "arn:aws:s3:::snowplow-saas-archive-eu-west-1/snplow2/events/*"
@@ -78,7 +80,7 @@ Select the **Storage type** drop down and change it from `QUBOLE_MANAGED` to `CU
       "Action": ["s3:ListBucket"],
       "Resource": ["arn:aws:s3:::qubole-analysis"],
       "Effect": "Allow"
-    }  
+    }
   ]
 }
 ```
@@ -88,6 +90,7 @@ Now click the **Save** button. Qubole should report that the storage credentials
 Back to [top](#top).
 
 <a name="define-table" />
+
 ## 3. Define a table in Hive for Snowplow data in S3
 
 We're going to start our Qubole session by defining a table with our data in S3 using Hive. Click on the **Analyze** icon in Qubole, and then click on the **Composer** icon. Qubole provides a window in which you can enter a new query:
@@ -96,7 +99,7 @@ We're going to start our Qubole session by defining a table with our data in S3 
 
 (Note that in our screenshot, some historical queries are listed in the pane on the right hand side of the screen. If this is your first time logging in to Qubole, there will not be any listed on your screen.)
 
-In the query window, enter the Hive query to define your Snowplow table. You can find the Hive definition for Snowplow data on S3 [here, in the Github repo] [hive-table-def]. Make sure you update the last line, `LOCATION '${EVENTS_TABLE}' ;`, with the specific location of your Snowplow data in S3, including the final backslash. In our case, that is `LOCATION 's3n://snowplow-saas-archive-eu-west-1/snplow2/events/' ;`:
+In the query window, enter the Hive query to define your Snowplow table. You can find the Hive definition for Snowplow data on S3 [here, in the Github repo][hive-table-def]. Make sure you update the last line, `LOCATION '${EVENTS_TABLE}' ;`, with the specific location of your Snowplow data in S3, including the final backslash. In our case, that is `LOCATION 's3n://snowplow-saas-archive-eu-west-1/snplow2/events/' ;`:
 
 [[/setup-guide/images/qubole/4.png]]
 
@@ -106,7 +109,7 @@ Click the submit button to execute the query. Qubole lets you know that the quer
 
 Snowplow data is partitioned in S3 by run ID (i.e. the output of each ETL run is saved in a separate folder in S3). We need to instruct Hive to identify all the different data partitions, by executing the following query:
 
-```sql 
+```sql
 ALTER TABLE `events` RECOVER PARTITIONS;
 ```
 
@@ -133,6 +136,7 @@ Also note how you can download the results to your local machine, by simply clic
 Back to [top](#top).
 
 <a name="queries" />
+
 ## 4. Performing a simple query against the table
 
 Let's execute a straightforward query to calculate the number of unique visitors to our website by date:
@@ -140,7 +144,7 @@ Let's execute a straightforward query to calculate the number of unique visitors
 ```sql
 SELECT
 TO_DATE(`collector_tstamp`),
-COUNT(DISTINCT(`domain_userid`)) 
+COUNT(DISTINCT(`domain_userid`))
 FROM `events`
 GROUP BY TO_DATE(`collector_tstamp`)
 ```
@@ -153,7 +157,7 @@ Once the query has finished you can click, you will be able to view some of the 
 
 [[/setup-guide/images/qubole/9.JPG]]
 
-That's it! For other analytics recipes to perform in Hive / Qubole, please consult the [Analytics Cookbook] [cookbook]...
+That's it! For other analytics recipes to perform in Hive / Qubole, please consult the [Analytics Cookbook][cookbook]...
 
 Back to [top](#top).
 

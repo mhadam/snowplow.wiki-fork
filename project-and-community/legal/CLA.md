@@ -10,17 +10,17 @@ For all contributions to Snowplow (be they software, bug fixes, configuration ch
 
 We have two different CLAs, depending on whether you are contributing to Snowplow in a personal or professional capacity:
 
-1. [Individual Contributor License Agreement v1.0] [indiv-cla]
-2. [Software Grant and Corporate Contributor License Agreement v1.0] [corp-cla]
+1. [Individual Contributor License Agreement v1.0][indiv-cla]
+2. [Software Grant and Corporate Contributor License Agreement v1.0][corp-cla]
 
 ## For lawyers
 
-Our individual and corporate CLAs are based on the Contributor License Agreements published by the [Apache Software Foundation] [apache], with modifications:
+Our individual and corporate CLAs are based on the Contributor License Agreements published by the [Apache Software Foundation][apache], with modifications:
 
-1. [Individual Contributor License Agreement ("Agreement") V2.0] [apache-indiv-cla]
-2. [Software Grant and Corporate Contributor License Agreement ("Agreement") v r190612] [apache-corp-cla]
+1. [Individual Contributor License Agreement ("Agreement") V2.0][apache-indiv-cla]
+2. [Software Grant and Corporate Contributor License Agreement ("Agreement") v r190612][apache-corp-cla]
 
-If you have questions about Snowplow's own CLAs, please contact us at [legal@snowplowanalytics.com] [mailto-legal].
+If you have questions about Snowplow's own CLAs, please contact us at [legal@snowplowanalytics.com][mailto-legal].
 
 [apache]: http://www.apache.org/
 

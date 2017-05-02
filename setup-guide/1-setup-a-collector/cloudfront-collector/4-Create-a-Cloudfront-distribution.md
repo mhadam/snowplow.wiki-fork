@@ -1,6 +1,6 @@
-[**HOME**](Home) > [**SNOWPLOW SETUP GUIDE**](Setting-up-Snowplow) > [**Step 1: setup a Collector**](Setting-up-a-collector) > [**Setup the Cloudfront collector**](setting up the cloudfront collector) > 4. Create a Cloudfront distribution
+[**HOME**](Home) » [**SNOWPLOW SETUP GUIDE**](Setting-up-Snowplow) » [**Step 1: setup a Collector**](Setting-up-a-collector) » [**Setup the Cloudfront collector**](Setting-up-the-Cloudfront-collector) » [**1. Setup a bucket on S3 for the pixel**](1-Setup-a-bucket-on-S3-for-the-pixel) » [**2. Upload the Tracking Pixel**](2-upload-the-tracking-pixel) » [**3. Create a bucket for the Cloudfront logs**](3-Create-a-bucket-for-Cloudfront-logs) » 4. Create a Cloudfront distribution
 
-Having setup everything in S3, we now need to create a Cloudfront distribution. This will be used to serve the tracking pixel `i` (so we need to tell Cloudfront to serve the contents of the [first bucket](1-Setup-a-bucket-on-S3-for-the-pixel) in S3 we created, that houses the tracking pixel). We also need to switch on Cloudfront logging, so that every request made for the tracking pixel by the Snowplow tracker will be logged. Again, we need to tell Cloudfront to store these logs in the [second bucket](3-create-a-bucket-for-cloudfront-logs) we created.
+Having set up everything in S3, we now need to create a Cloudfront distribution. This will be used to serve the tracking pixel `i` (so we need to tell Cloudfront to serve the contents of the [first bucket](1-Setup-a-bucket-on-S3-for-the-pixel) in S3 we created, that houses the tracking pixel). We also need to switch on Cloudfront logging, so that every request made for the tracking pixel by the Snowplow tracker will be logged. Again, we need to tell Cloudfront to store these logs in the [second bucket](3-create-a-bucket-for-cloudfront-logs) we created.
 
 ## 4.1 Switch from S3 to Cloudfront
 
@@ -30,7 +30,7 @@ In the drop down you should see the bucket you setup in [step 1](1-Setup-a-bucke
 
 [[/setup-guide/images/cloudfront-collector-setup-guide/cloudfront-create-distribution-5.jpg]]
 
-Great! We've linked the Cloudfront subdomain to the bucket on S3 with our tracking pixel. Now we need to switch on Cloudfront logging, and ensure that Cloudfront logs to the bucket we setup in S3. Scroll down the list of options (you will need to scroll quite far):
+Great! We've linked the Cloudfront subdomain to the bucket on S3 with our tracking pixel. Now we need to switch on Cloudfront logging and ensure that Cloudfront logs to the bucket we setup in S3. Scroll down the list of options (you will need to scroll quite far):
 
 [[/setup-guide/images/cloudfront-collector-setup-guide/cloudfront-create-distribution-6.jpg]]
 
@@ -52,7 +52,7 @@ Note it might take a while for the distribution creation to complete. Watch for 
 
 Write down the **Domain Name** for the distribution you just created. (Highlighted above - in our case it is `http://d3age8pcob9fi8.cloudfront.net`.) You will need this in the next step (to test the collector is working), and when you set up your [tracker](choosing-a-tracker).
 
-##Alternative approach: AWS CLI
+## Alternative approach: AWS CLI
 
 Note [AWS CLI](https://aws.amazon.com/cli/) support for **cloudfront** service is only available in a *preview stage*.
 
