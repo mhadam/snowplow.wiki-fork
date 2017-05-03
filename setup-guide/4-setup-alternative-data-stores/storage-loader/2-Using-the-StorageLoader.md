@@ -61,7 +61,7 @@ As per the above, running StorageLoader is a matter of populating
 your storage [targets configurations][storage-targets] (`config/targets/`) and [configuration file][common-configuration], (`my-config.yml`) for this
 example, and then invoking StorageLoader like so:
 
-    $ ./snowplow-storage-loader --config my-config.yml --targets config/targets/ --skip analyze
+    $ ./snowplow-storage-loader --config config/config.yml --resolver config/resolver.json --targets config/targets/ --skip analyze
 
 The `--skip analyze` is required because in Redshift only the table owner or superuser can ANALYZE a table, not our `storageloader` user.
 
