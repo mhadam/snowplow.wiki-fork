@@ -58,7 +58,7 @@ $ cat config/config.yml | ./snowplow-storage-loader --config -
 ## 3. Running
 
 As per the above, running StorageLoader is a matter of populating
-your storage [targets configurations][storage-targets] (`config/targets/`) and [configuration file][common-configuration], (`my-config.yml`) for this
+your storage [targets configurations][storage-targets] (`config/targets/`) and [configuration file][common-configuration], (`config/config.yml`) for this
 example, and then invoking StorageLoader like so:
 
     $ ./snowplow-storage-loader --config config/config.yml --resolver config/resolver.json --targets config/targets/ --skip analyze
