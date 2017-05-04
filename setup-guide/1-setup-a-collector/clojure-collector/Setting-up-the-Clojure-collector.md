@@ -16,7 +16,7 @@ Setting up the Clojure collector is a 6 step process:
 1. [[Download the Clojure collector WAR file or compile it from source]]. (Required)  
 2. [[Create a new application in Elastic Beanstalk, and upload the WAR file into it]]. (Required)  
 3. [[Enable logging to S3]]. (Required)  
-4. [[Configuring the Clojure collector]]). (Required)
+4. [[Configuring the Clojure collector]]. (Required)
 5. [[Enable support for HTTPS]]. (Optional, but recommended.)  
 
 
