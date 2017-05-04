@@ -4,8 +4,8 @@
 
 ## Contents
 
-- 1. [Overview](#overview)  
-- 2. [General parameters](1-General-parameters-for-the-Javascript-tracker#wiki-general)  
+- 1 [Overview](#overview)  
+- 2 [General parameters](1-General-parameters-for-the-Javascript-tracker#wiki-general)  
   - 2.1 [Loading Snowplow.js](1-General-parameters-for-the-Javascript-tracker#wiki-loading)
   - 2.2 [Initialising a tracker](1-General-parameters-for-the-Javascript-tracker#wiki-initialisation)
     - 2.2.1 [Setting the application ID](1-General-parameters-for-the-Javascript-tracker#app-id)
@@ -67,12 +67,12 @@
     - 3.16.1 [`trackError`](2-Specific-event-tracking-with-the-Javascript-tracker#trackError)
     - 3.16.2 [`enableErrorTracking`](2-Specific-event-tracking-with-the-Javascript-tracker#enableErrorTracking)
   - 3.17 [Setting the true timestamp](#trueTimestamps)
-- 4. [Advanced usage of the JavaScript Tracker](3-Advanced-usage-of-the-JavaScript-Tracker)
-- 4.1 [Callbacks](3-Advanced-usage-of-the-JavaScript-Tracker#callbacks)
-- 4.2 [Methods which can be used from inside a callback](3-Advanced-usage-of-the-JavaScript-Tracker#return-methods)
-- 4.3 [Extracting the Google Analytics cookie ID](3-Advanced-usage-of-the-JavaScript-Tracker#ga)
-- 5. [Modifying Snowplow JS](Modifying-snowplow-js)
-- 6. [For developers](4-For-developers)
+- 4 [Advanced usage of the JavaScript Tracker](3-Advanced-usage-of-the-JavaScript-Tracker)
+  - 4.1 [Callbacks](3-Advanced-usage-of-the-JavaScript-Tracker#callbacks)
+  - 4.2 [Methods which can be used from inside a callback](3-Advanced-usage-of-the-JavaScript-Tracker#return-methods)
+  - 4.3 [Extracting the Google Analytics cookie ID](3-Advanced-usage-of-the-JavaScript-Tracker#ga)
+- 5 [Modifying Snowplow JS](Modifying-snowplow-js)
+- 6 [For developers](4-For-developers)
 
 
 <a name="overview" />
