@@ -3,13 +3,21 @@
 [**HOME**](Home) > [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow-technical-documentation) > [**Trackers**](trackers) > [**JavaScript Tracker**](Javascript-Tracker) > Specific event tracking
 
 *This page refers to version 2.8.0 of the Snowplow JavaScript Tracker.*
+
 *Click [here][specific-events-v1] for the corresponding documentation for version 1.*
+
 *Click [here][specific-events-v2.0] for the corresponding documentation for version 2.0.*
+
 *Click [here][specific-events-v2.2] for the corresponding documentation for version 2.2.2.*
+
 *Click [here][specific-events-v2.3] for the corresponding documentation for version 2.3.0.*
+
 *Click [here][specific-events-v2.4] for the corresponding documentation for version 2.4.3.*
+
 *Click [here][specific-events-v2.5] for the corresponding documentation for version 2.5.3.*
+
 *Click [here][specific-events-v2.6] for the corresponding documentation for version 2.6.2.*
+
 *Click [here][specific-events-v2.7] for the corresponding documentation for version 2.7.2.*
 
 <a name="tracking-specific-events" />
@@ -22,6 +30,7 @@ Snowplow has been built to enable users to track a wide range of events that occ
     - 3.1.1 [`trackPageView`](#trackPageView)
   - 3.2 [Pagepings](#pagepings)
     - 3.2.1 [`enableActivityTracking`](#enableActivityTracking)
+    - 3.2.2 [`updatePageActivity`](#updatePageActivity)
   - 3.3 [Ecommerce transaction tracking](#ecommerce)
     - 3.3.1 [`addTrans`](#addTrans)
     - 3.3.2 [`addItem`](#addItem)
@@ -178,6 +187,19 @@ Notes:
 * The `enableActivityTracking` method **must** be called *before* the `trackPageView` method.
 * Activity tracking will be disabled if either `minimumVisitLength` or
 `heartBeat` is not integer. This is to prevent relentless callbacks.
+
+<a name="updatePageActivity" />
+
+#### 3.2.2 `updatePageActivity`
+
+You can also trigger a page ping manually with:
+
+```javascript
+snowplow_name_here('updatePageActivity');
+```
+
+This is particularly useful when a user is passively engaging with your content,
+e.g. watching a video.
 
 [Back to top](#top)
 [Back to JavaScript technical documentation contents][contents]
@@ -1430,7 +1452,7 @@ window.snowplow_name_here('trackSelfDescribingEvent', {
 [specific-events-v2.4]: https://github.com/snowplow/snowplow/wiki/2-Specific-event-tracking-with-the-Javascript-tracker-v2.4
 [specific-events-v2.5]: https://github.com/snowplow/snowplow/wiki/2-Specific-event-tracking-with-the-Javascript-tracker-v2.5
 [specific-events-v2.6]: https://github.com/snowplow/snowplow/wiki/2-Specific-event-tracking-with-the-Javascript-tracker-v2.6
-[specific-events-v2.6]: https://github.com/snowplow/snowplow/wiki/2-Specific-event-tracking-with-the-Javascript-tracker-v2.7
+[specific-events-v2.7]: https://github.com/snowplow/snowplow/wiki/2-Specific-event-tracking-with-the-Javascript-tracker-v2.7
 [multiple-trackers]: https://github.com/snowplow/snowplow/wiki/1-General-parameters-for-the-Javascript-tracker#24-managing-multiple-trackers
 [json-schema]: http://json-schema.org/
 [self-describing-jsons]: http://snowplowanalytics.com/blog/2014/05/15/introducing-self-describing-jsons/
