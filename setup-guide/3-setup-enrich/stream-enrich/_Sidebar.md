@@ -11,8 +11,9 @@
     - [3.2.2: Configure Stream Enrich](Configure-Stream-Enrich)
     - [3.2.3: Run Stream Enrich](Run-Stream-Enrich)
   - [Configurable enrichments](Configurable-enrichments)
-- [Step 4: Setup alternative data stores](setting-up-alternative-data-stores)  
-- [Step 5: Analyze your data!](Getting-started-analyzing-Snowplow-data)  
+- [Step 4: Setup alternative data stores](setting-up-alternative-data-stores)    
+- [Step 5: Data modeling](getting-started-with-data-modeling)  
+- [Step 6: Analyze your data!](getting-started-analyzing-snowplow-data) 
 
 **Useful resources**  
 

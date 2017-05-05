@@ -5,8 +5,9 @@
 - [Step 1: Setup a Collector](Setting-up-a-collector)  
 - [Step 2: Setup a Tracker](Setting-up-a-tracker)  
 - [Step 3: Setup Enrich](setting-up-enrich)  
-- [Step 4: Setup alternative data stores](Setting-up-alternative-data-stores)  
-- [Step 5: Analyze your data!](getting-started-analyzing-Snowplow-data)  
+- [Step 4: Setup alternative data stores](Setting-up-alternative-data-stores)   
+- [Step 5: Data modeling](Getting-started-with-data-modeling)
+- [Step 6: Analyze your data!](Getting-started-analyzing-Snowplow-data)
 
 **Useful resources**  
 

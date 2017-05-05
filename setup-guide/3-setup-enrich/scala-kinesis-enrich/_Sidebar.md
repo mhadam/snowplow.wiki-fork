@@ -11,8 +11,9 @@
     - [3.2.2: Configure Scala Kinesis Enrich](Configure-Scala-Kinesis-Enrich)
     - [3.2.3: Run Scala Kinesis Enrich](Run-Scala-Kinesis-Enrich)
   - [Configurable enrichments](Configurable-enrichments)
-- [Step 4: Setup alternative data stores](setting-up-alternative-data-stores)  
-- [Step 5: Analyze your data!](Getting-started-analyzing-Snowplow-data)  
+- [Step 4: Setup alternative data stores](setting-up-alternative-data-stores)   
+- [Step 5: Data modeling](getting-started-with-data-modeling)  
+- [Step 6: Analyze your data!](getting-started-analyzing-snowplow-data) 
 
 **Useful resources**  
 

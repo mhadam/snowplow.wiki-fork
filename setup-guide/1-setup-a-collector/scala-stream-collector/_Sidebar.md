@@ -8,9 +8,10 @@
     - [Configure the Scala Stream Collector](Configure-the-Scala-Stream-Collector)
     - [Run the Scala Stream Collector](Run-the-Scala-Stream-Collector)
 2. [Step 2: Setup a Tracker](setting-up-a-tracker)  
-3. [Step 3: Setup Enrich](setting-up-enrich)  
-4. [Step 4: Setup the StorageLoader](setting-up-storageloader)  
-5. [Step 5: Analyze your data!](Getting-started-analyzing-Snowplow-data)  
+3. [Step 3: Setup Enrich](setting-up-enrich)    
+4. [Step 4: Setup alternative data stores](setting-up-alternative-data-stores)
+5. [Step 5: Data modeling](getting-started-with-data-modeling)  
+6. [Step 6: Analyze your data!](getting-started-analyzing-snowplow-data)
 
 **Useful resources**  
 
