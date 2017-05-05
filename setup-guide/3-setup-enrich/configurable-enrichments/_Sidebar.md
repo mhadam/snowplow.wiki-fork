@@ -23,7 +23,8 @@
     - [[HTTP header extractor enrichment]]
     - [[SQL Query enrichment]]
 - [Step 4: Setup alternative data stores](setting-up-alternative-data-stores)  
-- [Step 5: Analyze your data!](Getting-started-analyzing-Snowplow-data)  
+- [Step 5: Data modeling](getting-started-with-data-modeling)  
+- [Step 6: Analyze your data!](getting-started-analyzing-snowplow-data) 
 
 **Useful resources**  
 

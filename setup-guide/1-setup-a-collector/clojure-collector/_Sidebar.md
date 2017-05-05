@@ -6,14 +6,15 @@
   - [Setup the Clojure Collector](Setting-up-the-Cloudfront-collector)     
     - [Download the Clojure collector WAR file](Download-the-Clojure-collector-WAR-file-or-compile-it-from-source)  
     - [Create a new application in Elastic Beanstalk, and upload the WAR file into it](Create-a-new-application-in-Elastic-Beanstalk-and-upload-the-WAR-file-into-it) 
-    - [Enable logging to S3](Enable logging to S3) 
-    - [Configure the Clojure collector](Configuring the Clojure collector)  
+    - [Enable logging to S3](Enable-logging-to-S3) 
+    - [Configure the Clojure collector](Configuring-the-Clojure-collector)  
     - [Enable support for HTTPS](Enable-support-for-HTTPS) 
-    - [Additional configuration options (optional)](additional configuration options) 
+    - [Additional configuration options (optional)](Additional-configuration-options) 
 2. [Step 2: Setup a Tracker](setting-up-a-tracker)  
 3. [Step 3: Setup Enrich](setting-up-enrich)  
-4. [Step 4: Setup the StorageLoader](setting-up-storageloader)  
-5. [Step 5: Analyze your data!](Getting started analyzing Snowplow data)  
+4. [Step 4: Setup alternative data stores](setting-up-alternative-data-stores) 
+5. [Step 5: Data modeling](getting-started-with-data-modeling)  
+6. [Step 6: Analyze your data!](getting-started-analyzing-snowplow-data)
 
 **Useful resources**  
 

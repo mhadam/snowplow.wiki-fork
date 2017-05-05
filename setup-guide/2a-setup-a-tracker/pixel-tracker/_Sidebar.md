@@ -6,8 +6,9 @@
 - [Step 2: Setup a Tracker](setting-up-a-tracker)  
   - [Pixel tracker setup](pixel-tracker-setup)
 - [Step 3: Setup Enrich](setting-up-enrich)  
-- [Step 4: Setup the StorageLoader](setting-up-storageloader)  
-- [Step 5: Analyse your data!](Getting-started-analyzing-Snowplow-data)  
+- [Step 4: Setup alternative data stores](setting-up-alternative-data-stores)
+- [Step 5: Data modeling](getting-started-with-data-modeling)
+- [Step 6: Analyze your data!](getting-started-analyzing-snowplow-data)
 
 **Useful resources**  
 
