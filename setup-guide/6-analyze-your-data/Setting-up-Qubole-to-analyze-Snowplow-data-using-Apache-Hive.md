@@ -1,6 +1,6 @@
 <a name="top" />
 
-[**HOME**](Home) > [**SNOWPLOW SETUP GUIDE**](Setting-up-Snowplow) > [**Step 6: Get started analyzing Snowplow data**](Getting-started-analyzing-Snowplow-data) > Setting up Qubole to analyze your Snowplow data
+[**HOME**](Home) » [**SNOWPLOW SETUP GUIDE**](Setting-up-Snowplow) » [**Step 6: Get started analyzing Snowplow data**](Getting-started-analyzing-Snowplow-data) » Setting up Qubole to analyze your Snowplow data
 
 [Qubole][qubole] provides a service that enables data scientists to crunch Snowplow data in S3 using Hive, Pig and other Hadoop-backed services. Qubole's service is an attractive alternative to Amazon's own EMR - it offers a couple of big advantages in particular:
 
@@ -157,7 +157,7 @@ Once the query has finished you can click, you will be able to view some of the 
 
 [[/setup-guide/images/qubole/9.JPG]]
 
-That's it! For other analytics recipes to perform in Hive / Qubole, please consult the [Analytics Cookbook][cookbook]...
+That's it!
 
 Back to [top](#top).
 
@@ -166,4 +166,3 @@ Back to [top](#top).
 [qubole]: http://www.qubole.com/
 [signup-for-qubole]: http://info.qubole.com/free-account
 [hive-table-def]: https://github.com/snowplow/snowplow/blob/master/4-storage/hive-storage/hiveql/table-def.q
-[cookbook]: http://snowplowanalytics.com/analytics/index.html
