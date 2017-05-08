@@ -146,7 +146,7 @@ We now need to create a file for each of our models. Select the **Edit** link ne
 
 Then click the **Done** next to **MODELS** on the left hand menu.
 
-Now we need to populate each of the models files. The YAML definitions to populate them can be found [here, on our Github repo][looker-yamls-on-snowplow-repo]. Copy the contents of each file in the repo to the corresponding file in Looker, making sure to copy the contents of the `snowplow.lookerml` file into the topmost file in your model. Save each model.
+Now we need to populate each of the models files. The YAML definitions to populate them can be found [here, on our Github repo][looker-yamls-on-snowplow-repo]. Copy the contents of each file in the repo to the corresponding file in Looker.
 
 You are now ready to [explore your data in Looker](#exploring-your-data)!
 
@@ -191,4 +191,4 @@ Back to [top](#top).
 [snowplow-contact]: mailto:contact@snowplowanalytics.com
 [psql]: http://www.postgresql.org/docs/9.2/static/app-psql.html
 [navicat]: http://www.navicat.com/
-[looker-yamls-on-snowplow-repo]: https://github.com/snowplow/snowplow/tree/master/5-analytics/looker-analytics
+[looker-yamls-on-snowplow-repo]: https://github.com/snowplow/snowplow/tree/master/5-data-modeling/web-model/looker
