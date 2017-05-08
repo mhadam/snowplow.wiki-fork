@@ -222,13 +222,10 @@ Now click save (top right). Our new chart appears on our new dashboard. We can i
 
 ## 6. Next steps
 
-Up and running with ChartIO on top of Snowplow? Visit the [Analytics Cookbook][analyst-cookbook] to find out about more ways to drive value from Snowplow data.
-
-Return to [getting started analysing your Snowplow data](Getting-started-analyzing-Snowplow-data).
+Return to [getting started analysing your Snowplow data](Getting-started-analyzing-Snowplow-data) to find out about more ways to drive value from Snowplow data.
 
 Return to the [setup guide](Setting-up-Snowplow#wiki-step5).
 
 
 [trial]: https://chartio.com/users/signup/
 [ChartIO]: http://chartio.com/
-[analyst-cookbook]: http://snowplowanalytics.com/analytics/index.html
