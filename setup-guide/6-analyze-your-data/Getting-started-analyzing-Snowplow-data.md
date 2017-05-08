@@ -10,11 +10,11 @@ Now you have your Snowplow data being generated and loaded into S3 and potential
 
 Because Snowplow gives you access to incredibly granular, event-level and customer-level data, the possible analyses you can perform on that data are endless.
 
-As part of this setup guide, we provide details on how to get started analyzing that data. There are many other resources we are building out (notably the [Analytics Cookbook][analyst-cookbook]) that go into much more detail.
+As part of this setup guide, we provide details on how to get started analyzing that data. There are many other resources we are building out that go into much more detail.
 
 The first guide covers creating schemas with prebuilt recipes and cubes in Redshift or PostgreSQL. These can help you get started analyzing Snowplow data faster. 
 
-The next four guides cover using different tools (ChartIO, Tableau, Excel and R) to analyze Snowplow data in Redshift or PostgreSQL. The sixth guide covers how to analyze Snowplow data in S3 using Elastic MapReduce and Apache Hive specifically, as an easy-introduction to EMR more generally. The final guide (7) covers how to use Qubole with Apache Hive to analyze the data in S3, as an attractive alternative to EMR.
+The next four guides cover using different tools (ChartIO, Tableau, Excel and R) to analyze Snowplow data in Redshift or PostgreSQL. The sixth guide covers how to analyze Snowplow data in S3 using Elastic MapReduce and Apache Hive specifically, as an easy-introduction to EMR more generally. The final guide (8) covers how to use Qubole with Apache Hive to analyze the data in S3, as an attractive alternative to EMR.
 
 1. [Creating the prebuilt cube and recipe views that Snowplow ships with in Redshift / PostgreSQL][views]
 2. [Exploring, analysing and dashboarding your Snowplow data with Looker][looker]
