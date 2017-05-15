@@ -10,7 +10,7 @@
       - [3.1.1.1: Input formats](EmrEtlRunner-Input-Formats)
     - [3.1.2: Use EmrEtlRunner](2-Using-EmrEtlRunner)  
     - [3.1.3: Schedule EmrEtlRunner](3-Scheduling-EmrEtlRunner)  
-    - [3.1.4: Self-host Hadoop Enrich](4-Self-hosting-Hadoop-Enrich)  
+    - [3.1.4: Self-host Spark Enrich](4-Self-hosting-Spark-Enrich)  
     - [3.1.5: Configuring-enrichments](5-Configuring-enrichments)  
     - [3.1.6: Configuring shredding](6-Configuring-shredding)  
   - [3.2: Setup Stream Enrich](setting-up-stream-enrich)

@@ -53,7 +53,7 @@ To process CloudFront access logs, first create a new EmrEtlRunner `config.yml`:
 2. Set your `:etl:collector_format:` to `tsv/com.amazon.aws.cloudfront/wd_access_log`
 3. Provide new bucket paths and a new job name, to prevent this job from clashing with your existing Snowplow job(s)
 
-If you are running the Snowplow batch (Hadoop) flow with Amazon Redshift, then you should deploy the relevent event table into your Amazon Redshift database. You can find the table definition here:
+If you are running the Snowplow batch flow with Amazon Redshift, then you should deploy the relevent event table into your Amazon Redshift database. You can find the table definition here:
 
 * [com_amazon_aws_cloudfront_wd_access_log_1.sql][access-log-sql]
 

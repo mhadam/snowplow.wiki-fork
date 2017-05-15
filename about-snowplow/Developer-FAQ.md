@@ -20,13 +20,7 @@
 
 ## Is Snowplow real-time?
 
-There is nothing inherently high-latency or batch-based about the Snowplow architecture. However, the production-ready end-to-end implementation currently available for Snowplow **is** a high-latency, batch-based architecture, being dependent on:
-
-1. Either of the currently supported collectors (the CloudFront collector and the Clojure-based collector), which feature a lag (typically 20-60 minutes) before events are written to Amazon S3
-2. Our ETL process (which takes raw Snowplow events and enriches them) is based on Hadoop, a batch-based processing tool, not designed for real-time (or near-real-time) data processing
-3. Our database load process is also batch-based - we do not yet have a drip-feed solution for Postgres or Redshift
-
-However, real-time support is a priority for Snowplow in 2014 - starting with the release of our new [[Scala Stream Collector]] and [[Stream Enrich]], both of which are Amazon Kinesis-based, in February.
+Yes!
 
 <a name="performance"/>
 
@@ -120,21 +114,6 @@ As you increase run frequency towards the every-hour mark, there are some import
 
 * Do make sure that your Enrichment process can happily finish within the 1 hour period. The next Enrichment process starting before the last one has finished will break things currently (see [#195](https://github.com/snowplow/snowplow/issues/195) for details)
 * Be aware that more frequent runs increases the chance of you running into Elastic MapReduce "failing to launch" every few days, which is not yet resolved (see [#195](https://github.com/snowplow/snowplow/issues/195) for details)
-
-<a name="recency"/>
-
-## What data recency is Snowplow capable of?
-
-As discussed in the [Is Snowplow real-time?](#rt) answer above, the data recency of Snowplow is impacted by:
-
-1. Both of our supported collectors having a lag before events are written to Amazon S3
-2. Our Enrichment process running on top of Hadoop, a batch-based ETL tool
-
-Given these, the minimum achievable data recency is around 2 hours.
-
-To find our more about the lag before events are logged to S3, please read the answer [How long do CloudFront access logs take to arrive in S3?](#cfs3lag)
-
-To find out more about how often you can safely run the Enrichment process, please check out the previous question, [How often can I run the Enrichment process?](#enrichmentfreq).
 
 <a name="roadmap"/>
 

@@ -44,6 +44,7 @@ aws:
         errors: ADD HERE     # Leave blank unless continue_on_unexpected_error: set to true below
         archive: ADD HERE    # Where to archive shredded events to, e.g. s3://my-archive-bucket/shredded
   emr:
+    job_name: Snowplow ETL # Give your job a name
     ami_version: 4.5.0      # Don't change this
     region: ADD HERE        # Always set this
     jobflow_role: EMR_EC2_DefaultRole # Created using $ aws emr create-default-roles
@@ -55,7 +56,7 @@ aws:
     software:
       hbase:                # Optional. To launch on cluster, provide version, "0.92.0", keep quotes. Leave empty otherwise.
       lingual:              # Optional. To launch on cluster, provide version, "1.1", keep quotes. Leave empty otherwise.
-    # Adjust your Hadoop cluster below
+    # Adjust your Spark cluster below
     jobflow:
       master_instance_type: m1.medium
       core_instance_count: 2
@@ -73,14 +74,14 @@ aws:
 collectors:
   format: cloudfront # Or 'clj-tomcat' for the Clojure Collector, or 'thrift' for Thrift records, or 'tsv/com.amazon.aws.cloudfront/wd_access_log' for Cloudfront access logs
 enrich:
-  job_name: Snowplow ETL # Give your job a name
   versions:
-    hadoop_enrich: 1.8.0 # Version of the Hadoop Enrichment process
-    hadoop_shred: 0.11.0 # Version of the Hadoop Shredding process
-    hadoop_elasticsearch: 0.1.0 # Version of the Hadoop to Elasticsearch copying process
+    spark_enrich: 1.9.0 # Version of the Spark Enrichment process
   continue_on_unexpected_error: false # Set to 'true' (and set out_errors: above) if you don't want any exceptions thrown from ETL
   output_compression: NONE # Compression only supported with Redshift, set to NONE if you have Postgres targets. Allowed formats: NONE, GZIP
 storage:
+  versions:
+    rdb_shredder: 0.12.0        # Version of the Relational Database Shredding process
+    hadoop_elasticsearch: 0.1.0 # Version of the Hadoop to Elasticsearch copying process
   download:
     folder: # Postgres-only config option. Where to store the downloaded files. Leave blank for Redshift
 monitoring:
@@ -201,12 +202,15 @@ See the [[EmrEtlRunner Input Formats]] page.
 
 ### enrich
 
-* `job_name`: the name to give our ETL job. This makes it easier to identify your ETL job in the Elastic MapReduce console
-* `hadoop_enrich`: version of the Scala Hadoop Enrich jar
-* `hadoop_shred`: version of the Scala Hadoop Shred jar
+* `spark_enrich`: version of the Spark Enrich jar
 * `continue_on_unexpected_error`: continue processing even on unexpected row-level errors, e.g. an input file not matching the expected CloudFront format. Off ("false") by default
 
 ### storage
+
+#### versions
+
+* `rdb_shredder`: version of the RDB Shredder jar
+* `hadoop_elasticsearch`: version of the Hadoop Elasticsearch Sink
 
 #### download
 

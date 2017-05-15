@@ -6,7 +6,7 @@ To briefly explain these sub-systems:
 
 * **Trackers** fire Snowplow events. Currently we have 12 trackers, covering web, mobile, desktop, server and IoT. (For more information see the [trackers section](https://github.com/snowplow/snowplow/tree/master/1-trackers) of the repository). Additionally, **webhooks** allow third-party software to send their own internal event streams to Snowplow Collectors for further processing. [Webhooks](Setting-up-a-webhook) are sometimes referred to as "streaming APIs" or "HTTP response APIs".
 * **Collectors** receive Snowplow events from trackers. Currently we have three different event collectors, sinking events either to Amazon S3 or Amazon Kinesis, namely a CDN-based [Cloudfront Collector](https://github.com/snowplow/snowplow/tree/master/2-collectors/cloudfront-collector) on [Amazon CloudFront][cloudfront], a collector that sets a third party pixel for cross-domain tracking called the [Clojure Collector](https://github.com/snowplow/snowplow/tree/master/2-collectors/clojure-collector), and a [Scala Stream Collector](https://github.com/snowplow/snowplow/tree/master/2-collectors/scala-stream-collector) which sets a third-party cookie for cross-domain tracking.
-* **Enrichment** cleans up the raw Snowplow events, enriches them and puts them into storage. Currently we have a Hadoop-based enrichment process, and a Kinesis-based process.
+* **Enrichment** cleans up the raw Snowplow events, enriches them and puts them into storage. Currently we have a Spark-based enrichment process, and a Kinesis-based process.
 * **Storage** is where the Snowplow events live. Currently we store the Snowplow events in an S3, Amazon Redshift and PostgreSQL.
 * **Data modeling** is where event-level data is joined with other data sets and aggregated into smaller data sets, and business logic is applied. This produces a clean set of tables which make it easier to perform analysis on the data. We have data models for Redshift and [Looker](http://www.looker.com/).
 * **Analytics** are performed on the Snowplow events or on the aggregate tables. We currently have an online cookbook of ad hoc analyses that work with Redshift, Postgres and Hive. We also have data models for [Looker](http://www.looker.com/) in LookML.
@@ -61,7 +61,6 @@ However, the limitations above have been lifted with the release of [Scala Strea
 [owa]: http://www.openwebanalytics.com/
 [cloudfront]: http://aws.amazon.com/cloudfront/
 [s3]: http://aws.amazon.com/s3/
-[hadoop]: http://hadoop.apache.org/
 [hive]: http://hive.apache.org/
 [2000char]: http://stackoverflow.com/questions/417142/what-is-the-maximum-length-of-a-url
 [post-limits]: http://stackoverflow.com/questions/2880722/is-http-post-limitless

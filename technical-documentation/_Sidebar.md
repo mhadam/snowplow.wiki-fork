@@ -46,18 +46,18 @@
 [Overview](Enrichment)  
 [EmrEtlRunner](EmrEtlRunner)  
 [Stream Enrich](Stream-Enrich)  
-[Scala Hadoop Shred](Hadoop-Hadoop-Shred)  
 [Hadoop Event Recovery](Hadoop-Event-Recovery)  
 
 **[C. Canonical Snowplow event model](canonical-event-model)**  
 
 **4. Storage**  
 [Overview](Storage-documentation)  
+[Relational Database Shredder](Relational-Database-Shredder)  
 [Storage in S3](S3-storage)  
 [Storage in Redshift](amazon-redshift-storage)  
 [Storage in PostgreSQL](postgresql-storage)  
 [Storage in Infobright](infobright-storage) (deprecated)  
-[The StorageLoader](The-StorageLoader)   
+[StorageLoader](StorageLoader)   
 
 **D. Snowplow storage formats (to write)**
 

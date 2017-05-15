@@ -52,18 +52,19 @@ The technical documentation reflects the Snowplow architecture, with six loosely
 
 [Overview](Enrichment)   
 [EmrEtlRunner](EmrEtlRunner)   
-[Scalding-based Enrichment Process](The-Enrichment-Process)   
+[Spark-based Enrichment Process](The-Enrichment-Process)   
 
 ### C. [Canonical Snowplow event model](canonical-event-model)
 
 ## 4. Storage
 
 [Storage Overview](Storage-documentation)  
+[Relational Database Shredder](Relational-Database-Shredder)
 [Storage in S3](S3-storage)  
 [Storage in Redshift](amazon-redshift-storage)  
 [Storage in PostgreSQL](postgresql-storage)   
 [Storage in Infobright](infobright-storage) (deprecated)  
-[The StorageLoader](The-StorageLoader)  
+[StorageLoader](StorageLoader)  
 
 ### D. Snowplow storage formats (to write)
 

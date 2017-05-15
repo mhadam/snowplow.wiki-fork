@@ -15,7 +15,7 @@ This guide covers how to setup EmrEtlRunner (including scheduling it) so that yo
 1. [Installation](1-Installing-EmrEtlRunner). You need to install EmrEtlRunner on your own server. It will interact with Amazon Elastic MapReduce and S3 via the Amazon API
 2. [Usage](2-Using-EmrEtlRunner). How to use EmrEtlRunner at the command line, to instruct it to process data from your collector
 3. [Scheduling](3-Scheduling-EmrEtlRunner). How to schedule the tool so that you always have an up to date set of cleaned, enriched data available for analysis
-4. [Self-hosting Hadoop Enrich](4-Self-hosting-Hadoop-Enrich). (Optional step)
+4. [Self-hosting Spark Enrich](4-Self-hosting-Spark-Enrich). (Optional step)
 5. [Configuring enrichments](5-Configuring-enrichments). How to configure enrichments such as referer parsing and IP lookups
 6. [Configuring shredding](6-Configuring-shredding). How to configure Snowplow to shred custom self-describing events (also called unstructured events) and contexts ready for loading into dedicated tables in Redshift
 

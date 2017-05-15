@@ -84,7 +84,7 @@ Once you click the **Create Webhook** button it will attempt to authenticate tha
 
 ## 2.2 Redshift
 
-If you are running the Snowplow batch (Hadoop) flow with Amazon Redshift, then you should deploy the relevent event tables into your Amazon Redshift.
+If you are running the Snowplow batch flow with Amazon Redshift, then you should deploy the relevent event tables into your Amazon Redshift.
 
 You can find the table definitions here:
 

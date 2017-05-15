@@ -27,7 +27,7 @@ In addition, this guide also covers the
 [hive]: http://hive.apache.org/
 [pig]: http://pig.apache.org/
 [mahout]: http://mahout.apache.org/
-[storage-loader]: The-StorageLoader
+[storage-loader]: StorageLoader
 [redshift]: Amazon-Redshift-storage
 [r]: http://cran.r-project.org/
 [tableau]: http://www.tableausoftware.com/

@@ -95,7 +95,7 @@ Rather than keeping the enrichment configuration JSONs in a local directory, you
 
 For the `ip_lookups` enrichment you can manually download the latest version of the [MaxMind GeoLiteCity database][geolite] jarfile directly from our Hosted Assets bucket on Amazon S3 - please see our [[Hosted assets]] page for details.
 
-If you do not have the databases downloaded prior to running but still have the `ip_lookups` enrichment activated then these databases will be downloaded automatically and saved in the working directory. Not that although Scala Hadoop Enrich can download databases whose URIs begin with "s3://" from S3, Stream Enrich can't.
+If you do not have the databases downloaded prior to running but still have the `ip_lookups` enrichment activated then these databases will be downloaded automatically and saved in the working directory. Not that although Spark Enrich can download databases whose URIs begin with "s3://" from S3, Stream Enrich can't.
 
 Next: [[Run Stream Enrich]]
 

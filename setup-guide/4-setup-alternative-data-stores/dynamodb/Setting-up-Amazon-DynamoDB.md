@@ -14,7 +14,7 @@
 
 ## 1. Creating Amazon DynamoDB table
 
-If [[Scala Hadoop Shred]] won't find a specified table - it will try to create it with default provisioned throughput, which might be not sufficient. This step is optional, but recommended.
+If [[Relational Database Shredder]] won't find a specified table - it will try to create it with default provisioned throughput, which might be not sufficient. This step is optional, but recommended.
 
 Table name can be anything, but must be unique.
 
@@ -71,4 +71,4 @@ Back to [top](#top).
 
 ## 3. Next steps
 
-Now you have setup DynamoDB, you are ready to run [[Scala Hadoop Shred]] job with cross-batch de-duplication.
+Now you have setup DynamoDB, you are ready to run [[Relational Database Shredder]] job with cross-batch de-duplication.

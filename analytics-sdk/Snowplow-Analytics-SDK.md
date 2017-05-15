@@ -6,7 +6,7 @@ We are pleased to announce the releases of our first analytics SDKs for Snowplow
 
 Some good use cases for the SDK include:
 
-1. Performing [event data modeling](http://snowplowanalytics.com/blog/2016/03/16/introduction-to-event-data-modeling/) in Apache Spark as part our Hadoop batch pipeline
+1. Performing [event data modeling](http://snowplowanalytics.com/blog/2016/03/16/introduction-to-event-data-modeling/) in Apache Spark as part our Spark batch pipeline
 2. Developing machine learning models on your event data using Apache Spark (e.g. using [Databricks](https://databricks.com/) or [Zeppelin on EMR](https://blogs.aws.amazon.com/bigdata/post/Tx6J5RM20WPG5V/Building-a-Recommendation-Engine-with-Spark-ML-on-Amazon-EMR-using-Zeppelin))
 3. Performing analytics-on-write in AWS Lambda as part of our Kinesis real-time pipeline:
 

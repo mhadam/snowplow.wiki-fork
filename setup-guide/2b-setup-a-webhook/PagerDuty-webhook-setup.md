@@ -80,7 +80,7 @@ Click save and from now on when any of the seven available events are triggered 
 
 ## 2.2 Redshift
 
-If you are running the Snowplow batch (Hadoop) flow with Amazon Redshift, then you should deploy the relevent event table into your Amazon Redshift.
+If you are running the Snowplow batch flow with Amazon Redshift, then you should deploy the relevent event table into your Amazon Redshift.
 
 You can find the table definition here:
 

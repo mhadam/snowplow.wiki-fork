@@ -155,7 +155,7 @@ Then finish your array of JSON Paths with an element for each custom field in yo
 
 A few things to note:
 
-* Scala Hadoop Shred will nest all of your JSON's properties into a `data` property, hence the namespacing seen above
+* Relational Database Shredder will nest all of your JSON's properties into a `data` property, hence the namespacing seen above
 * Currently the Shredding process does not support nested tables. A nested property such as an array (like `elementClasses` above) should be loaded into a single field
 
 ### 4.3 Naming the JSON Paths file

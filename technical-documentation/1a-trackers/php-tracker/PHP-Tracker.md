@@ -6,7 +6,7 @@
 
 *[Version 0.1.0][version-0.1.0]*
 
-**Please note** that this version of the PHP Tracker is dependent upon the [Snowplow 0.9.14 release][snowplow-0.9.14], you will need to be running this version of Snowplow for events sent by the tracker to be successfully processed. Snowplow 0.9.14 contains updates to the Hadoop Enrich and Scala Hadoop Shred jobs to allow newer self-describing JSON versions, as sent by PHP Tracker 0.2.1. For more information, please refer to tickets [#1220][issue-1220] and [#1231][issue-1231].
+**Please note** that this version of the PHP Tracker is dependent upon the [Snowplow 0.9.14 release][snowplow-0.9.14], you will need to be running this version of Snowplow for events sent by the tracker to be successfully processed. Snowplow 0.9.14 contains updates to the Spark Enrich and Relational Database Shredder jobs to allow newer self-describing JSON versions, as sent by PHP Tracker 0.2.1. For more information, please refer to tickets [#1220][issue-1220] and [#1231][issue-1231].
 
 ## Contents
 

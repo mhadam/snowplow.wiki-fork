@@ -24,9 +24,10 @@ Iglu is a schema repository technology which holds the JSON Schemas against whic
 
 For more information on Iglu, see the [Iglu wiki][iglu-wiki].
 
-### 1. Scala Hadoop Shred
+### 1. Relational Database Shredder
 
-Scala Hadoop Shred is a dedicated Scalding job to perform the JSON validation and extraction. This is a five step process:
+Relational Database Shredder (RDB Shredder for short) is a dedicated Spark job performing JSON
+validation and extraction. This is a five step process:
 
 1. Reads Snowplow enriched events from S3
 2. Extracts any unstructured event JSONs and context JSONs found
@@ -36,20 +37,22 @@ Scala Hadoop Shred is a dedicated Scalding job to perform the JSON validation an
 
 Configuring this is covered in [Configuring shredding](6-Configuring-shredding).
 
-As of release R76, removing endogenous duplicate records was also introduced as a phase in Shredding process. It does not require an additional configuration. Hadoop Shred de-duplicates “natural duplicates” - i.e. events which share the same event ID and the same event fingerprint, meaning that they are semantically identical to each other.
+As of release R76, removing endogenous duplicate records was also introduced as a phase in Shredding
+process. It does not require an additional configuration. RDB Shredder de-duplicates “natural
+duplicates” - i.e. events which share the same event ID and the same event fingerprint, meaning that
+they are semantically identical to each other.
 
-For a given ETL run of events being processed, Hadoop Shred will now keep only one out of each group of natural duplicates; all others will be discarded.
+For a given ETL run of events being processed, RDB Shredder will now keep only one out of each group
+of natural duplicates; all others will be discarded.
 
-Note:
-
-- We do not yet tackle “synthetic dupes” - this is where two events have the same event ID but different event fingerprints.
-- If natural duplicates exist across ETL runs, these will not be de-duplicated currently. This is something we hope to explore soon.
-
-More technical information about Scala Hadoop Shred can be found on dedicated [Scala Hadoop Shred](Scala Hadoop Shred) page.
+More technical information about RDB Shredder can be found on the dedicated
+[RDB Shredder](Relational-Database-Shredder) page.
 
 ### 2. StorageLoader
 
-The StorageLoader has functionality to load shredded types into corresponding tables in Redshift, using Redshift's native [`COPY FROM JSON`](http://docs.aws.amazon.com/redshift/latest/dg/copy-usage_notes-copy-from-json.html) functionality. This is a multi-step process:
+The StorageLoader provides a way to load shredded types into the corresponding tables in Redshift,
+using the Redshift's native [`COPY FROM JSON`](http://docs.aws.amazon.com/redshift/latest/dg/copy-usage_notes-copy-from-json.html)
+functionality. This is a multi-step process:
 
 * Find folders of shredded types in S3
 * For each folder of shredded types:

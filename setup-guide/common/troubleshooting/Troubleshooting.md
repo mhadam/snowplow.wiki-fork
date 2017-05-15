@@ -112,7 +112,7 @@ java.io.FileNotFoundException: File does not exist: hdfs:/local/snowplow/shredde
 	at org.apache.hadoop.hdfs.DistributedFileSystem.getFileStatus(DistributedFileSystem.java:517)
 ```
 
-The Hadoop job step that is failing is the copy (using Amazon's S3DistCp utility) of shredded JSONs from your EMR cluster's HDFS file system back to Amazon S3, ready for loading into Redshift. Due to an unfortunate attribute of S3DistCp, it will fail if no files were output for shredding. Possible reasons for this:
+The Spark job step that is failing is the copy (using Amazon's S3DistCp utility) of shredded JSONs from your EMR cluster's HDFS file system back to Amazon S3, ready for loading into Redshift. Due to an unfortunate attribute of S3DistCp, it will fail if no files were output for shredding. Possible reasons for this:
 
 1. You are not generating any custom contexts, nor unstructured events and have not enabled link click tracking. **Solution:** run EmrEtlRunner with `--skip shred`. Remove this `--skip` as/when you know that you do have JSONs to shred.
 2. You are trying to send contexts/unstructured events from your tracker, but something is going wrong. You can validate that this is the case by doing a text search on your collector logs and confirming you can't see the query string parameters 'ue_pr' or 'ue_px', and 'co' or 'cx'. **Solution:** review your tracker implementation to fix

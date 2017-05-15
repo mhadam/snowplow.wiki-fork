@@ -70,7 +70,7 @@ Supported platform codes can again be found in the [Snowplow Tracker Protocol][t
 
 ## 2.2 Redshift
 
-If you are running the Snowplow batch (Hadoop) flow with Amazon Redshift, then you should deploy the `call_complete` table into your Amazon Redshift.
+If you are running the Snowplow batch flow with Amazon Redshift, then you should deploy the `call_complete` table into your Amazon Redshift.
 
 You can find the table definition here:
 
