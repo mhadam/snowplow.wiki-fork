@@ -74,11 +74,10 @@ Schema: [iglu:com.snowplowanalytics.snowplow.storage/postgresql_config/jsonschem
 Schema: [iglu:com.snowplowanalytics.snowplow.storage/elastic_config/jsonschema/1-0-0][elastic-schema]
 
 1. `name`: a descriptive name for this Snowplow storage target
-3. `port`: The port to load. Normally 9200, should be 80 for Amazon Elasticsearch Service.
-4. `index`: The Elasticsearch index to load
-5. `table`: The Elasticsearch type to load
-7. `nodesWanOnly`: if this is set to true, the EMR job will disable node discovery. This option is necessary when using Amazon Elasticsearch Service.
-10. `purpose`: common for all targets. Elasticsearch supports only `FAILED_EVENTS`
+2. `port`: The port to load. Normally 9200, should be 80 for Amazon Elasticsearch Service.
+3. `index`: The Elasticsearch index to load
+4. `nodesWanOnly`: if this is set to true, the EMR job will disable node discovery. This option is necessary when using Amazon Elasticsearch Service.
+5. `purpose`: common for all targets. Elasticsearch supports only `FAILED_EVENTS`
 
 For information on setting up Elasticsearch itself, see [[Setting up Amazon Elasticsearch Service]].
 
