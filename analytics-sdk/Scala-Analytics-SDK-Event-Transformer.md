@@ -70,8 +70,8 @@ import com.snowplowanalytics.snowplow.analytics.scalasdk.json.EventTransformer
 
 val events = input
   .map(line => EventTransformer.transform(line))
-  .filter(_.isSuccess)
-  .flatMap(_.toOption)
+  .filter(_.isRight)
+  .flatMap(_.right.toOption)
 
 val dataframe = ctx.read.json(events)
 ```

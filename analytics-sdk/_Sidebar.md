@@ -4,6 +4,7 @@
 - [Scala Analytics SDK](Scala-Analytics-SDK)
     * [Setup](Scala-Analytics-SDK-Setup)
     * [Event Transformer](Scala-Analytics-SDK-Event-Transformer)
+    * [Run Manifests](Scala-Analytics-SDK-Run-Manifests)
 - [Python Analytics SDK](Python-Analytics-SDK)
     * [Setup](Python-Analytics-SDK-Setup)
     * [Event Transformer](Python-Analytics-SDK-Event-Transformer)

@@ -2,8 +2,6 @@
 
 [**HOME**](Home) » [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow-technical-documentation) » [**Snowplow Analytics SDK**](Snowplow-Analytics-SDK) » Scala Analytics SDK setup
 
-**Page refers to 0.2.0 which is not yet released**
-
 ## Contents
 
 - 1 [Overview](#overview)  
@@ -48,7 +46,7 @@ If you’re using SBT, add the following lines to your build file:
 
 ```
 // Dependency
-libraryDependencies += "com.snowplowanalytics" %% "snowplow-scala-analytics-sdk" % "0.1.0"
+libraryDependencies += "com.snowplowanalytics" %% "snowplow-scala-analytics-sdk" % "0.2.0"
 ```
 
 Note the double percent (`%%`) between the group and artifactId. This will ensure that you get the right package for your Scala version.
@@ -63,7 +61,7 @@ If you are using Gradle in your own job, then add following lines in your `build
 dependencies {
     ...
     // Snowplow Scala Tracker
-    compile 'com.snowplowanalytics:snowplow-scala-analytics-sdk_2.10:0.3.0'
+    compile 'com.snowplowanalytics:snowplow-scala-analytics-sdk_2.10:0.2.0'
     }
 ```
 
