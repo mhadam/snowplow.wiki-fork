@@ -1,6 +1,6 @@
 <a name="top" />
 
-[**HOME**](Home) » [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow-technical-documentation) » [**Snowplow Analytics SDK**](Snowplow-Analytics-SDK) » Python Analytics SDK Run Manifests
+[**HOME**](Home) » [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow-technical-documentation) » [**Snowplow Analytics SDK**](Snowplow-Analytics-SDK) » Scala Analytics SDK Run Manifests
 
 ## Overview
 
@@ -20,7 +20,7 @@ Using `listRunids` and `RunManifests` you can list job runs and safely process t
 
 Here's a short usage example:
 
-```python
+```scala
 import com.amazonaws.services.s3.AmazonS3ClientBuilder
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBAsyncClientBuilder
 import com.amazonaws.auth.DefaultAWSCredentialsProviderChain
