@@ -41,6 +41,7 @@ Here's pretty common configuration suited for [starter plan][owm-price]:
             "timeout": 5
         }
     }
+}
 ```
 
 ### Data sources
