@@ -58,7 +58,7 @@ This makes it easy to either install the SDK locally, or to add it as a dependen
 To install the Snowplow Python Analytics SDK locally, assuming you already have Pip installed:
 
 ```bash
-$ pip install snowplow_python_sdk --upgrade
+$ pip install snowplow_analytics_sdk --upgrade
 ```
 
 To add the Snowplow Analytics SDK as a dependency to your own Python app, edit your `requirements.txt` and add:
@@ -74,7 +74,7 @@ snowplow_analytics_sdk==0.2.0
 If you are still using easy_install:
 
 ```bash
-$ easy_install -U snowplow_python_sdk
+$ easy_install -U snowplow_analytics_sdk
 ```
 
 Done? Now read the [Python Analytics SDK API](Python-Analytics-SDK) to start analyzing events data.
