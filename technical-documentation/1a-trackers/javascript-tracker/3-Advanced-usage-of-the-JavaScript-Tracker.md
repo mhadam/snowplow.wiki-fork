@@ -130,6 +130,7 @@ The `domainUserInfo` variable will contain an array with 6 elements:
 3. The number of times the user has visited the site
 4. The timestamp for the current visit
 5. The timestamp of the last visit
+6. The session id
 
 <a name="get-user-id" />
 
