@@ -122,7 +122,7 @@ snowplow(function () {
 })
 ```
 
-The `domainUserInfo` variable will contain an array with 6 elements:
+The `domainUserInfo` variable will contain an array with 7 elements:
 
 0. A string set to `'1'` if this is the user's first session and `'0'` otherwise
 1. The domain user ID
