@@ -6,7 +6,7 @@ You can also use [Snowplow Version Matrix](Snowplow-version-matrix) as a guidanc
 
 For easier navigation, please, follow the links below.
 
-- [Snowplow 89 Plain of Jars released](#r89) (**r89**) 2017-05-20
+- [Snowplow 89 Plain of Jars released](#r89) (**r89**) 2017-06-12
 - [Snowplow 88 Angkor Wat released](#r88) (**r88**) 2017-04-27
 - [Snowplow 87 Chichen Itza](#r87) (**r87**) 2017-02-21
 - [Snowplow 86 Petra](#r86) (**r86**) 2016-12-20
@@ -56,7 +56,7 @@ For easier navigation, please, follow the links below.
 
 ## Snowplow 89 Plain of Jars
 
-This release ports the batch pipeline to Apache Spark.
+This release ports the batch pipeline from [Twitter Scalding](https://github.com/twitter/scalding) to [Apache Spark](http://spark.apache.org/).
 
 ### Upgrade steps
 
@@ -66,17 +66,20 @@ The latest version of the *EmrEtlRunner* and *StorageLoader* are available from 
 
 #### Updating config.yml
 
-1. Move `job_name` to aws -> emr -> jobflow
-2. Remove `hadoop_shred` from enrich -> versions
-3. Add `rdb_shredder` to a newly created storage -> versions
-4. Move `hadoop_elasticsearch` to storage -> version
-5. Replace `hadoop_enrich` by `spark_enrich`
+1. Update `ami_version` to `5.5.0`
+2. Move `job_name` to aws -> emr -> jobflow
+3. Remove `hadoop_shred` from enrich -> versions
+4. Add `rdb_shredder` to a newly created storage -> versions
+5. Move `hadoop_elasticsearch` to storage -> version
+6. Replace `hadoop_enrich` by `spark_enrich`
 
 ```yaml
 aws:
   emr:
+    ami_version: 5.5.0          # WAS 4.5.0
+    . . .
     jobflow:
-      job_name: Snowplow ETL
+      job_name: Snowplow ETL    # MOVED FROM enrich:
 enrich:
   versions:
     spark_enrich: 1.9.0         # WAS 1.8.0
@@ -86,11 +89,11 @@ storage:
     hadoop_elasticsearch: 0.1.0 # UNCHANGED BUT MOVED
 ```
 
-For a complete example, see our sample [`config.yml`](https://github.com/snowplow/snowplow/blob/r88-angkor-wat/3-enrich/emr-etl-runner/config/config.yml.sample) template.
+For a complete example, see our sample [`config.yml`](https://github.com/snowplow/snowplow/blob/r89-plain-of-jars/3-enrich/emr-etl-runner/config/config.yml.sample) template.
 
 ### Read more
 
-* [R89 Blog Post](https://snowplowanalytics.com/blog/2017/05/20/snowplow-r89-plain-of-jars-released/)
+* [R89 Blog Post](https://snowplowanalytics.com/blog/2017/06/12/snowplow-r89-plain-of-jars-released/)
 * [R89 Release Notes](https://github.com/snowplow/snowplow/releases/tag/r89-plain-of-jars)
 
 <a name="r88" />
