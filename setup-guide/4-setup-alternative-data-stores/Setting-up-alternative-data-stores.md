@@ -49,4 +49,4 @@ All done? Then get started with [data modeling][modeling] or [start analysing yo
 [setup-postgres]: Setting-up-PostgreSQL
 [setup-elasticsearch]: kinesis-elasticsearch-sink-setup
 [setup-dynamodb]: Setting-up-Amazon-DynamoDB
-[deduplication]: Scala-Hadoop-Shred#crossbatch-deduplication
+[deduplication]: Relational-Database-Shredder#crossbatch-deduplication

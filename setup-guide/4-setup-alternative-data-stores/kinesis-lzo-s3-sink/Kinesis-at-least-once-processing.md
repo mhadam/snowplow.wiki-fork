@@ -33,4 +33,4 @@ We are steadily introducing de-duplication into our Redshift loading process, wi
 
 - [Dealing with duplicate event IDs](http://snowplowanalytics.com/blog/2015/08/19/dealing-with-duplicate-event-ids/)
 - [Event fingerprint enrichment](Event-fingerprint-enrichment)
-- [Event de-duplication in Hadoop Shred](http://snowplowanalytics.com/blog/2016/01/26/snowplow-r76-changeable-hawk-eagle-released/#deduplication)
+- [Event de-duplication in Relational Database Shredder](http://snowplowanalytics.com/blog/2016/01/26/snowplow-r76-changeable-hawk-eagle-released/#deduplication)

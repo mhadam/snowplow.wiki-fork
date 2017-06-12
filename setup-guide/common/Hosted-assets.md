@@ -48,23 +48,16 @@ Right-click on this [Download link][ssc-download] to save it down locally.
 
 ## 3. Enrich
 
-### 3.1 Scala Hadoop Enrich resources
+### 3.1 Spark Enrich resources
 
-The Scala Hadoop Enrich process uses a single jarfile containing the MapReduce job. This is made available in a public Amazon S3 bucket, for Snowplowers who are running their Hadoop Enrich process on Amazon EMR:
+The Spark Enrich process uses a single jarfile containing the Spark job. This is made available in a
+public Amazon S3 bucket, for Snowplowers who are running their Spark Enrich process on Amazon EMR:
 
-    s3://snowplow-hosted-assets/3-enrich/scala-hadoop-enrich/snowplow-hadoop-enrich-1.8.0.jar
+    s3://snowplow-hosted-assets/3-enrich/spark-enrich/snowplow-spark-enrich-1.9.0.jar
 
-Right-click on this [Download link][hadoop-enrich-download] to save it down locally via CloudFront CDN.
+Right-click on this [Download link][spark-enrich-download] to save it down locally via CloudFront CDN.
 
-### 3.2 Scala Hadoop Shred resources
-
-The Scala Hadoop Shred process uses a single jarfile containing the MapReduce job. This is made available in a public Amazon S3 bucket, for Snowplowers who are running their Hadoop Enrich & Shred process on Amazon EMR:
-
-    s3://snowplow-hosted-assets/3-enrich/scala-hadoop-shred/snowplow-hadoop-shred-0.11.0.jar
-
-Right-click on this [Download link][hadoop-shred-download] to save it down locally via CloudFront CDN.
-
-### 3.3 Scala Hadoop Event Recovery resources
+### 3.2 Scala Hadoop Event Recovery resources
 
 The Scala Hadoop Event Recovery (formerly Hadoop Bad Rows) tool uses a single jarfile containing the MapReduce job. This is made available in a public Amazon S3 bucket:
 
@@ -72,7 +65,7 @@ The Scala Hadoop Event Recovery (formerly Hadoop Bad Rows) tool uses a single ja
 
 Right-click on this [Download link][hadoop-event-recovery-download] to save it down locally via CloudFront CDN.
 
-### 3.4 Stream Enrich resources
+### 3.3 Stream Enrich resources
 
 The Stream Enrich app is available on Bintray here:
 
@@ -82,7 +75,7 @@ Right-click on this [Download link][se-download] to save it down locally.
 
 ### 3.3 Shared resources
 
-#### 3.31. MaxMind GeoLiteCity
+#### 3.3.1 MaxMind GeoLiteCity
 
 Both Enrichment processes make use of the free [GeoLite City database][geolite] from [MaxMind, Inc][maxmind], also stored in this public Amazon S3 bucket:
 
@@ -94,7 +87,17 @@ If you are running Stream Enrich, you will need a local copy of this file. Right
 
 ## 4. Storage
 
-### 4.1 Redshift Storage resources
+### 4.1 Relational Database Shredder resources
+
+The Relational Database Shredder process uses a single jarfile containing the Spark job. This is
+made available in a public Amazon S3 bucket, for Snowplowers who are running their Spark Enrich &
+Shred process on Amazon EMR:
+
+    s3://snowplow-hosted-assets/4-storage/rdb-shredder/snowplow-rdb-shredder-0.12.0.jar
+
+Right-click on this [Download link][rdb-download] to save it down locally via CloudFront CDN.
+
+### 4.2 Redshift Storage resources
 
 Our shredding process for loading JSONs into Redshift uses a standard set of JSON Path files, available here:
 
@@ -102,7 +105,7 @@ Our shredding process for loading JSONs into Redshift uses a standard set of JSO
 
 If you are running StorageLoader, these files will automatically be used for loading corresponding JSONs into Redshift.
 
-### 4.2 Kinesis Elasticsearch Sink resources
+### 4.3 Kinesis Elasticsearch Sink resources
 
 The Kinesis Elasticsearch Sink app is available for both Elasticsearch 1.x and 2.x on Bintray here:
 
@@ -111,7 +114,7 @@ The Kinesis Elasticsearch Sink app is available for both Elasticsearch 1.x and 2
 
 Right-click on this [Download link][kes-download-1x] for the 1.x version and this [Download link][kes-download-2x] for the 2.x version.
 
-### 4.3 Kinesis LZO S3 Sink resources
+### 4.4 Kinesis LZO S3 Sink resources
 
 The Kinesis S3 app is available for download separately here:
 
@@ -139,8 +142,8 @@ Please see the [[Artifact repositories]] wiki page for more information.
 
 [snowplow-repo]: https://github.com/snowplow/snowplow
 [cc-download]: http://d2io1hx8u877l0.cloudfront.net/2-collectors/clojure-collector/clojure-collector-1.1.0-standalone.war
-[hadoop-enrich-download]: http://d2io1hx8u877l0.cloudfront.net/3-enrich/scala-hadoop-enrich/snowplow-hadoop-enrich-1.8.0.jar
-[hadoop-shred-download]: http://d2io1hx8u877l0.cloudfront.net/3-enrich/scala-hadoop-shred/snowplow-hadoop-shred-0.11.0.jar
+[spark-enrich-download]: http://d2io1hx8u877l0.cloudfront.net/3-enrich/spark-enrich/snowplow-spark-enrich-1.9.0.jar
+[rdb-download]: http://d2io1hx8u877l0.cloudfront.net/4-storage/rdb-shredder/snowplow-rdb-shredder-0.12.0.jar
 [hadoop-event-recovery-download]: http://d2io1hx8u877l0.cloudfront.net/3-enrich/hadoop-event-recovery/snowplow-hadoop-event-recovery-0.2.0.jar
 [glc-download]: http://d2io1hx8u877l0.cloudfront.net/third-party/maxmind/GeoLiteCity.dat
 [geolite]: http://dev.maxmind.com/geoip/legacy/geolite?rld=snowplow

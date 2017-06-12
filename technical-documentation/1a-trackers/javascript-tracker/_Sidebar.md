@@ -44,8 +44,6 @@
 **3. ETL**
 [Overview](etl)
 [EmrEtlRunner](EmrEtlRunner)
-[Hive ETL](hive-etl)
-[Hadoop ETL](scaldingetl)
 
 **[C. Canonical Snowplow event model](canonical-event-model)**
 

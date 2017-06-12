@@ -156,7 +156,7 @@ As with the `GET` request above you can also attach extra information into the q
 
 ## 2.2 Redshift
 
-If you are running the Snowplow batch (Hadoop) flow with Amazon Redshift, then you will need to define for each Iglu-compatible event:
+If you are running the Snowplow batch flow with Amazon Redshift, then you will need to define for each Iglu-compatible event:
 
 * A JSON Schema
 * A JSON Paths file

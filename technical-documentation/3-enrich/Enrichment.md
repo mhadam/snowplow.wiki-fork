@@ -11,7 +11,10 @@ alternative storage mechanism for analysis
 
 The current enrichment process provides 2 options for developers to use:
 
-1. Using [Scalding][scalding], a Scala implementation of [Cascading][cascading], an ETL library that's written on top of Hadoop. This is the [Hadoop Enrichment][hadoop-enrich]. Snowplow uses Amazon's EMR to run the Enrichment process. The regular running of the process (which is necessary to ensure that up-to-date Snowplow data is available for analysis) is managed by [EmrEtlRunner][emr-etl-runner], a Ruby application.
+1. Using [Apache Spark][spark] for batch processing of data. This is [Spark Enrich][spark-enrich].
+Snowplow uses Amazon's EMR to run the Enrichment process. The regular running of the process (which
+is necessary to ensure that up-to-date Snowplow data is available for analysis) is managed by
+[EmrEtlRunner][emr-etl-runner], a Ruby application.
 
 2. Using Scala and [Amazon Kinesis][kinesis] for real-time processing
 of data.
@@ -20,11 +23,11 @@ In this guide, we cover:
 
 1. [The Enrichment Process itself](The-enrichment-process)
 2. [How the EmrEtlRunner instruments the regular running of the Enrichment Process][emr-etl-runner]
-3. [Stream](stream-enrich)
+3. [Stream Enrich](stream-enrich)
 
 
-[scalding]: https://github.com/twitter/scalding
+[spark]: http://spark.apache.org/
 [cascading]: http://www.cascading.org/
 [kinesis]: http://aws.amazon.com/kinesis/
 [emr-etl-runner]: EmrEtlRunner
-[hadoop-enrich]: https://github.com/snowplow/snowplow/tree/master/3-enrich/scala-hadoop-enrich
+[spark-enrich]: https://github.com/snowplow/snowplow/tree/master/3-enrich/spark-enrich

@@ -28,7 +28,7 @@ Link this new account into your Consolidated Billing in your main account, and a
 
 Next, you need to enable the services Snowplow will require in the new subaccount.
 
-For the Snowplow batch (Hadoop) flow:
+For the Snowplow batch (Spark) flow:
 
 * CloudFront
 * CloudFormation

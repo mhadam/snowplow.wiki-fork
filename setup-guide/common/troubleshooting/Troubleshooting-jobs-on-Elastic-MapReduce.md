@@ -43,13 +43,13 @@ On the other hand, if your job started but encountered errors part way through, 
 
 [[/setup-guide/images/troubleshooting/emr-console-step-failed.png]]
 
-To find out what happened, we will need to dig into the Hadoop logs for the step - please continue to the next section, [Checking the Hadoop logs for errors](#check-hadoop-logs).
+To find out what happened, we will need to dig into the Spark logs for the step - please continue to the next section, [Checking the Spark logs for errors](#check-spark-logs).
 
-<a name="check-hadoop-logs"/>
+<a name="check-spark-logs"/>
 
-### Checking the Hadoop logs for errors
+### Checking the Spark logs for errors
 
-Elastic MapReduce saves all Hadoop logs into your Log Bucket. To check them for errors, follow these steps:
+Elastic MapReduce saves all Spark logs into your Log Bucket. To check them for errors, follow these steps:
 
 1. Browse to your Log Bucket (as defined in your `config.yml` file) in the Amazon S3 interface (or in CloudBerry, BucketExplorer or similar)
 2. Open the sub-folder named after the jobflow which just failed (in the example above, `j-397K2WS5ZTOOT`)

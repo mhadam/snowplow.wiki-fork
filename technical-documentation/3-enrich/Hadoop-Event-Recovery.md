@@ -12,7 +12,7 @@ You will typically run the Hadoop Event Recovery jar as part of an EMR jobflow w
 
 ### The Snowplow bad row format
 
-When a raw event fails Scala Hadoop Enrich validation, it is written out to a bad rows bucket in a format which looks something like this:
+When a raw event fails Spark Enrich validation, it is written out to a bad rows bucket in a format which looks something like this:
 
 ```
 {
@@ -28,7 +28,7 @@ The `line` field is the original TSV input to the enrichment process; the `error
 
 For events sent by GET request, the format of the TSV is based on Cloudfront's [Web Distribution Log File Format](http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/AccessLogs.html). For events sent by POST request, the format is the same, but with an additional field at the end containing the body of the POST request.
 
-The Scala Hadoop Bad Rows jar lets you extract the `line` field and mutate it using custom JavaScript to fix whatever was wrong with it so you can reprocess it by running Scala Hadoop Enrich again.
+The Scala Hadoop Bad Rows jar lets you extract the `line` field and mutate it using custom JavaScript to fix whatever was wrong with it so you can reprocess it by running Spark Enrich again.
 
 ### Writing the JavaScript
 

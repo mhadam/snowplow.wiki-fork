@@ -1,4 +1,4 @@
-Open source web analytics powered by [Hadoop](http://hadoop.apache.org/), [Hive](http://hive.apache.org/) and [Infobright](http://www.infobright.org/).
+Open source web analytics powered by [Spark](http://spark.apache.org/), [Hive](http://hive.apache.org/) and [Redshift](https://aws.amazon.com/redshift/).
 
 Snowplow is a complete, loosely coupled web analytics platform that lets you capture, store and analyse granular customer-level and event-level data:
 

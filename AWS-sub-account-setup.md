@@ -32,7 +32,7 @@ Your accounts are now linked! This will allow us to spin up instances, create ne
 
 Next, you need to enable the services Snowplow will require in the new subaccount.
 
-For the Snowplow batch (Hadoop) flow:
+For the Snowplow batch (Spark) flow:
 
 * CloudFront
 * CloudFormation

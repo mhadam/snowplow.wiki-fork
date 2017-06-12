@@ -6,6 +6,7 @@ You can also use [Snowplow Version Matrix](Snowplow-version-matrix) as a guidanc
 
 For easier navigation, please, follow the links below.
 
+- [Snowplow 89 Plain of Jars released](#r89) (**r89**) 2017-05-20
 - [Snowplow 88 Angkor Wat released](#r88) (**r88**) 2017-04-27
 - [Snowplow 87 Chichen Itza](#r87) (**r87**) 2017-02-21
 - [Snowplow 86 Petra](#r86) (**r86**) 2016-12-20
@@ -50,6 +51,47 @@ For easier navigation, please, follow the links below.
 - [Snowplow 0.9.2](#v0.9.2) (**v0.9.2**) 2014-04-30
 - [Snowplow 0.9.1](#v0.9.1) (**v0.9.1**) 2014-04-11
 - [Snowplow 0.9.0](#v0.9.0) (**v0.9.0**) 2014-02-04
+
+<a name="r89" />
+
+## Snowplow 89 Plain of Jars
+
+This release ports the batch pipeline to Apache Spark.
+
+### Upgrade steps
+
+#### Upgrading EmrEtlRunner and StorageLoader
+
+The latest version of the *EmrEtlRunner* and *StorageLoader* are available from our Bintray [here](http://dl.bintray.com/snowplow/snowplow-generic/snowplow_emr_r89_plain_of_jars.zip).
+
+#### Updating config.yml
+
+1. Move `job_name` to aws -> emr -> jobflow
+2. Remove `hadoop_shred` from enrich -> versions
+3. Add `rdb_shredder` to a newly created storage -> versions
+4. Move `hadoop_elasticsearch` to storage -> version
+5. Replace `hadoop_enrich` by `spark_enrich`
+
+```yaml
+aws:
+  emr:
+    jobflow:
+      job_name: Snowplow ETL
+enrich:
+  versions:
+    spark_enrich: 1.9.0         # WAS 1.8.0
+storage:
+  versions:
+    rdb_shredder: 0.12.0        # WAS 0.11.0
+    hadoop_elasticsearch: 0.1.0 # UNCHANGED BUT MOVED
+```
+
+For a complete example, see our sample [`config.yml`](https://github.com/snowplow/snowplow/blob/r88-angkor-wat/3-enrich/emr-etl-runner/config/config.yml.sample) template.
+
+### Read more
+
+* [R89 Blog Post](https://snowplowanalytics.com/blog/2017/05/20/snowplow-r89-plain-of-jars-released/)
+* [R89 Release Notes](https://github.com/snowplow/snowplow/releases/tag/r89-plain-of-jars)
 
 <a name="r88" />
 
@@ -111,7 +153,7 @@ If you want to start to deduplicate events across batches you need to add a new 
 
 Optionally, before first run of Shred job with cross-batch deduplication, you may want to run [Event Manifest Populator](https://snowplowanalytics.com/blog/2017/04/27/snowplow-r88-angkor-wat-released/#dedupe-cold-start) to back-fill the DynamoDB table.
 
-When *Hadoop Shred* runs, if the table doesn’t exist then it will be automatically created with [provisioned throughput](http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ProvisionedThroughput.html) by default set to 100 write capacity units and 100 read capacity units and the required schema to store and deduplicate events.
+When *Relational Database Shredder* runs, if the table doesn’t exist then it will be automatically created with [provisioned throughput](http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ProvisionedThroughput.html) by default set to 100 write capacity units and 100 read capacity units and the required schema to store and deduplicate events.
 
 For relatively low (1M events per run) cases, the default settings will likely just work. However, we do *strongly recommend* monitoring the EMR job, and its AWS billing impact, closely and tweaking DynamoDB provisioned throughput and your EMR cluster specification accordingly.
 
@@ -461,7 +503,7 @@ sink {
 
 This release introduces our powerful new [API Request Enrichment](https://github.com/snowplow/snowplow/wiki/API-Request-enrichment), plus a new [HTTP Header Extractor Enrichment](https://github.com/snowplow/snowplow/wiki/HTTP-header-extractor-enrichment) and several other improvements on the enrichments side.
 
-It also updates the ***Iglu client*** used by our *Hadoop Enrich* and *Hadoop Shred* components. The version 1.4.0 lets you fetch your schemas from Iglu registries with *authentication support*, allowing you to keep your proprietary schemas private.
+It also updates the ***Iglu client*** used by our *Spark Enrich* and *Relational Database Shredder* components. The version 1.4.0 lets you fetch your schemas from Iglu registries with *authentication support*, allowing you to keep your proprietary schemas private.
 
 ### Upgrade steps
 

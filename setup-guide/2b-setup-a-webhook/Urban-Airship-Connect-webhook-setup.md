@@ -67,7 +67,7 @@ You'll need to log into your UrbanAirship account and set up integrations to a S
 
 ## 2.2 Redshift
 
-If you are running the Snowplow batch (Hadoop) flow with Amazon Redshift, then you should deploy the relevant event tables into your Amazon Redshift.
+If you are running the Snowplow batch flow with Amazon Redshift, then you should deploy the relevant event tables into your Amazon Redshift.
 
 You can find the table definitions here:
 
@@ -94,11 +94,11 @@ Make sure to deploy this table into the same schema as your `events` table.
 
 # 2.3 EmrEtlRunner
 
-The minimum Hadoop enrich job version is *0.19.0*. You'll need to set the version you're using to be at least this. This setting can be found in the file `config.yml`
+The minimum Spark Enrich job version is *0.19.0*. You'll need to set the version you're using to be at least this. This setting can be found in the file `config.yml`
 
 ```yaml
   versions:
-    hadoop_enrich: 0.19.0
+    spark_enrich: 0.19.0
 ```
 
 You'll also need to set your loader format. To collect Urban Airship Connect events, this should be set to `ndjson/com.urbanairship.connect/v1` as below.

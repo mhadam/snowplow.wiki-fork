@@ -13,6 +13,7 @@ At Snowplow, our daily lives wouldn't be nearly as productive without the genero
 
 The Snowplow platform is built standing on the shoulders of a whole host of different open source frameworks, libraries and tools. Without the amazing ongoing work by these individuals, companies and not-for-profits, the Snowplow project literally could not exist:
 
+* [Apache Spark](http://spark.apache.org/)
 * [Apache Hadoop](http://hadoop.apache.org/)
 * [Apache Avro](http://avro.apache.org/)
 * [Cascading](http://www.cascading.org/)

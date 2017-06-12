@@ -1,6 +1,6 @@
 <a name="top" />
 
-[**HOME**](Home) » [**SNOWPLOW SETUP GUIDE**](Setting-up-Snowplow) » [**Step 3: Setting up Enrich**](Setting-up-enrich) » [Step 3.1: setting up EmrEtlRunner](Setting-up-EmrEtlRunner) » 4: Self-hosting Hadoop Enrich
+[**HOME**](Home) » [**SNOWPLOW SETUP GUIDE**](Setting-up-Snowplow) » [**Step 3: Setting up Enrich**](Setting-up-enrich) » [Step 3.1: setting up EmrEtlRunner](Setting-up-EmrEtlRunner) » 4: Self-hosting Spark Enrich
 
 1. [Overview](#overview)
 2. [Bucket and directory setup](#bucket-setup)
@@ -12,9 +12,9 @@
 
 ## 1. Overview
 
-EmrEtlRunner runs Hadoop Enrich resources which are publicly hosted on Amazon S3 by Snowplow - please see the [[Hosted assets]] page for details. For most users, this will be fine. However, there are some cases where you will need to self-host the Hadoop Enrich process in your own Amazon S3 bucket. Two examples are:
+EmrEtlRunner runs Spark Enrich resources which are publicly hosted on Amazon S3 by Snowplow - please see the [[Hosted assets]] page for details. For most users, this will be fine. However, there are some cases where you will need to self-host the Spark Enrich process in your own Amazon S3 bucket. Two examples are:
 
-1. You are using a custom fork of the Hadoop Enrich process
+1. You are using a custom fork of the Spark Enrich process
 2. You are using a commercial version of the MaxMind GeoCity database
 
 For self-hosting instructions read on.
@@ -31,7 +31,7 @@ You do **not** need to give any public permissions on this bucket.
 
 Now create the following two directory structures:
 
-    s3://[mycompanyname]-snowplow-hosted-assets/3-enrich/hadoop-etl
+    s3://[mycompanyname]-snowplow-hosted-assets/3-enrich/spark-enrich
     s3://[mycompanyname]-snowplow-hosted-assets/third-party/maxmind
 
 That's it - you are now ready to upload your files.
@@ -52,15 +52,15 @@ If you are using a commercial version of the MaxMind GeoCity database, then down
 
 **Please note:** MaxMind releases an updated version of the GeoCity database each month, so be sure to keep your version up-to-date.
 
-### 3.2 Hadoop Enrich process
+### 3.2 Spark Enrich process
 
-If you are using the standard version of Hadoop Enrich, then download it from [[Hosted assets]] and upload to:
+If you are using the standard version of Spark Enrich, then download it from [[Hosted assets]] and upload to:
 
-    s3://[mycompanyname]-snowplow-hosted-assets/3-enrich/scala-hadoop-enrich/snowplow-hadoop-enrich-[version].jar
+    s3://[mycompanyname]-snowplow-hosted-assets/3-enrich/spark-enrich/snowplow-spark-enrich-[version].jar
 
-If you are using a custom fork of the Hadoop Enrich process, then upload your assembled fatjar to:
+If you are using a custom fork of the Spark Enrich process, then upload your assembled fatjar to:
 
-    s3://[mycompanyname]-snowplow-hosted-assets/3-enrich/scala-hadoop-enrich/snowplow-hadoop-enrich-[version]-[fork].jar
+    s3://[mycompanyname]-snowplow-hosted-assets/3-enrich/spark-enrich/snowplow-spark-enrich-[version]-[fork].jar
 
 <a name="configure"/>
 
@@ -73,14 +73,14 @@ buckets:
   assets: s3://[mycompanyname]-snowplow-hosted-assets
 ```
 
-If you are using a custom fork of the Hadoop Enrich process, make sure to update `enrich:versions:hadoop_enrich` to your own Hadoop Enrich version:
+If you are using a custom fork of the Spark Enrich process, make sure to update `enrich:versions:spark_enrich` to your own Spark Enrich version:
 
 ```yaml
 enrich:
   ...
   versions:
     ...
-    hadoop_enrich: [version]-[fork]
+    spark_enrich: [version]-[fork]
 ```
 
 <a name="next-steps" />
