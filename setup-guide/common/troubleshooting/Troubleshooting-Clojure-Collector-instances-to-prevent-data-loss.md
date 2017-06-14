@@ -32,8 +32,8 @@ In the Elastic Beanstalk UI, under Scaling and then Scaling Trigger, make sure t
 The solution is to log into the instance and manually force the push of the remaining logs. If you ssh into the instance, you can run the following three commands to capture the current logs and upload them to S3:
 
 ```
-sudo logrotate -f /etc/logrotate.conf.elasticbeanstalk
-sudo logrotate -f /etc/logrotate.conf.elasticbeanstalk.httpd
+sudo logrotate -f /etc/logrotate.elasticbeanstalk.hourly/logrotate.elasticbeanstalk.tomcat8.conf
+sudo logrotate -f /etc/logrotate.elasticbeanstalk.hourly/logrotate.elasticbeanstalk.httpd.conf
 sudo publishLogs.py --de-dupe --conf-path '/opt/elasticbeanstalk/tasks/publishlogs.d/*' --location-prefix resources/environments/logs/publish/ --num-concurrent 2
 ```
 
