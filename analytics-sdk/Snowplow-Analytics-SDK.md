@@ -23,5 +23,6 @@ We are hugely excited about developing our analytics SDK initiative in four dire
 
 - [Scala Analytics SDK](Scala-Analytics-SDK) - lets you work with Snowplow enriched events in your Scala event processing, data modeling and machine-learning jobs. You can use this SDK with Apache Spark, AWS Lambda, Apache Flink, Scalding, Apache Samza and other Scala-compatible data processing frameworks.
 - [Python Analytics SDK](Python-Analytics-SDK) - lets you work with Snowplow enriched events in your Python event processing, data modeling and machine-learning jobs. You can use this SDK with Apache Spark, AWS Lambda, and other Python-compatible data processing frameworks.
+- [.NET Analytics SDK](.NET-Analytics-SDK) - lets you work with Snowplow enriched events in your .NET event processing, data modeling and machine-learning jobs. You can use this SDK with Azure Data Lake Analytics, Azure Function, AWS Lambda, Microsoft Orleans and other .NET-compatible data processing frameworks.
 - Node.js Analytics SDK
 - Java Analytics SDK

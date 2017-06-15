@@ -9,6 +9,9 @@
     * [Setup](Python-Analytics-SDK-Setup)
     * [Event Transformer](Python-Analytics-SDK-Event-Transformer)
     * [Run Manifests](Python-Analytics-SDK-Run-Manifests)
+- [.NET Analytics SDK](.NET-Analytics-SDK)
+    * [Setup](.NET-Analytics-SDK-Setup)
+    * [Event Transformer](.NET-Analytics-SDK-Event-Transformer)    
 - Node.js Analytics SDK
 - Java Analytics SDK
 
