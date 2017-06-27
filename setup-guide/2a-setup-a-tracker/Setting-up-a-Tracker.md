@@ -12,7 +12,7 @@ Snowplow Trackers generate event-data and send that data to [Snowplow Collectors
 
 ## 1. Choose and setup a Tracker
 
-There are currently 16 trackers available for setup:
+There are currently 17 trackers available for setup:
 
 | **Tracker**                                    | **Description**                                     | **Status**       |
 |:-----------------------------------------------|:----------------------------------------------------|:-----------------|
