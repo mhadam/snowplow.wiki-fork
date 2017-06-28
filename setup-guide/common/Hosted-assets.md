@@ -118,7 +118,7 @@ Right-click on this [Download link][kes-download-1x] for the 1.x version and thi
 
 The Kinesis S3 app is available for download separately here:
 
-    http://dl.bintray.com/snowplow/snowplow-generic/kinesis_s3_0.4.0.zip
+    http://dl.bintray.com/snowplow/snowplow-generic/kinesis_s3_0.5.0.zip
 
 Right-click on this [Download link][kinesis-s3-download] to save it down locally.
 
@@ -151,7 +151,7 @@ Please see the [[Artifact repositories]] wiki page for more information.
 
 [bintray]: https://bintray.com/
 [kinesis-download]: https://dl.bintray.com/snowplow/snowplow-generic/snowplow_kinesis_r85_metamorphosis.zip
-[kinesis-s3-download]: http://dl.bintray.com/snowplow/snowplow-generic/kinesis_s3_0.4.0.zip
+[kinesis-s3-download]: http://dl.bintray.com/snowplow/snowplow-generic/kinesis_s3_0.5.0.zip
 [ssc-download]: http://dl.bintray.com/snowplow/snowplow-generic/snowplow_scala_stream_collector_0.9.0.zip
 [se-download]: http://dl.bintray.com/snowplow/snowplow-generic/snowplow_stream_enrich_0.10.0.zip
 [kes-download-1x]: http://dl.bintray.com/snowplow/snowplow-generic/snowplow_kinesis_elasticsearch_sink_0.8.0_1x.zip
