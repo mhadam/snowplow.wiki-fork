@@ -60,6 +60,7 @@
     - 2.2.18 [Configuring the maximum payload size in bytes](#maxPostBytes)
     - 2.2.19 [Automatically discover and set the root domain](#discoverRootDomain)
     - 2.2.20 [Configuring the cookie lifetime](#visitorCookieDuration)
+    - 2.2.21 [Tracking prerendered pages](#prerenderedTracking)
   - 2.3 [Other parameters](#other-methods)
     - 2.3.1 [Setting the user id](#user-id)
       - 2.3.1.1 [`setUserId`](#set-user-id)
@@ -538,6 +539,22 @@ snowplow_name_here('setVisitorCookieTimeout', 86400 * 30);  // 30 days
 
 If `cookieLifetime` is set to `0`, the cookie will expire at the end of the session (when the browser closes).
 If set to `-1`, the first-party cookies will be disabled.
+
+<a name="prerenderedTracking" />
+
+#### 2.2.21 Tracking prerendered pages
+
+Some browsers can "preload" pages while user typing URL in.
+These users not always end up in that page, however due page preloading tracker is initialized and loaded.
+
+JS Tracker by default doesn't fire `pageView`, `linkClick` and `adImpression` events when page is preloaded, but sets callback on [visibilitychange](https://developer.mozilla.org/en-US/docs/Web/Events/visibilitychange) event, which fires actual event only when page starts to render.
+
+To explicitly enable tracking for prerendered pages you can use `setCountPreRendered` function:
+
+```javascript
+snowplow_name_here("setCountPreRendered", true);
+```
+
 
 [Back to top](#top)
 [Back to JavaScript technical documentation contents][contents]
