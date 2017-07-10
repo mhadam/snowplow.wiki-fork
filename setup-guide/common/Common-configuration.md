@@ -45,7 +45,7 @@ aws:
         archive: ADD HERE    # Where to archive shredded events to, e.g. s3://my-archive-bucket/shredded
   emr:
     job_name: Snowplow ETL # Give your job a name
-    ami_version: 4.5.0      # Don't change this
+    ami_version: 5.5.0      # Don't change this
     region: ADD HERE        # Always set this
     jobflow_role: EMR_EC2_DefaultRole # Created using $ aws emr create-default-roles
     service_role: EMR_DefaultRole     # Created using $ aws emr create-default-roles
