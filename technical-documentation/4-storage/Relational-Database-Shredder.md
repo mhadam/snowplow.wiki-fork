@@ -134,6 +134,10 @@ If a run fails and is then rerun, we don't want the rerun to consider rows in th
 which were written as part of the prior failed run; otherwise all events in the rerun would be
 rejected as dupes!
 
+**WARNING** Due used algorithm in cross-batch deduplication, we strictly discourage anyone from deleting `enriched/good` folder, as pipeline recovery step after RDB Shred job has started.
+Reprocessing known `eventId`s and `fingerprint`s will mark events as duplicates and therefore will result in **data loss**.
+
+
 ##### Check-and-set algorithm
 
 It is clear as to when we need to read the event metadata from DynamoDB: during the RDB Shredder
