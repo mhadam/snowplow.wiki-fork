@@ -2,7 +2,7 @@
 
 ### Overview
 
-Hadoop Event Recovery allows you to fix Snowplow bad rows and make them ready for reprocessing. It has not yet been released.
+Hadoop Event Recovery allows you to fix Snowplow bad rows and make them ready for reprocessing.
 
 You will typically run the Hadoop Event Recovery jar as part of an EMR jobflow with three steps:
 
