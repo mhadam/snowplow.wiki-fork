@@ -1,6 +1,6 @@
-[**HOME**](Home) > [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow-technical-documentation) > [**Storage**](storage-documentation) > Kinesis Elasticsearch Sink
+[**HOME**](Home) > [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow-technical-documentation) > [**Storage**](storage-documentation) > Elasticsearch Loader
 
-The Kinesis Elasticsearch Sink converts enriched Snowplow events from a Kinesis stream to JSON and writes them to an Elasticsearch cluster.
+The Elasticsearch Loader converts enriched Snowplow events from a Kinesis stream to JSON and writes them to an Elasticsearch cluster.
 
 The resulting JSONs are like the [Snowplow Canonical Event](canonical-event-model) model with the following changes:
 
@@ -77,5 +77,5 @@ would be converted to
 
 See also the [setup guide][setup-guide].
 
-[geopoint]: http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/mapping-geo-point-type.html
-[setup-guide]: Kinesis-Elasticsearch-Sink-Setup
+[geopoint]: https://www.elastic.co/guide/en/elasticsearch/reference/current/geo-point.html
+[setup-guide]: Elasticsearch-Loader-Setup

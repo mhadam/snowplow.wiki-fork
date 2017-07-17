@@ -105,14 +105,20 @@ Our shredding process for loading JSONs into Redshift uses a standard set of JSO
 
 If you are running StorageLoader, these files will automatically be used for loading corresponding JSONs into Redshift.
 
-### 4.3 Kinesis Elasticsearch Sink resources
+### 4.3 Elasticsearch Loader resources
 
-The Kinesis Elasticsearch Sink app is available for both Elasticsearch 1.x and 2.x on Bintray here:
+The Elasticsearch Loader app is available for both Elasticsearch APIs (HTTP and transport) on Bintray here:
 
-    http://dl.bintray.com/snowplow/snowplow-generic/snowplow_kinesis_elasticsearch_sink_0.8.0_1x.zip
-    http://dl.bintray.com/snowplow/snowplow-generic/snowplow_kinesis_elasticsearch_sink_0.8.0_2x.zip
+    http://dl.bintray.com/snowplow/snowplow-generic/snowplow_elasticsearch_loader_http_0.9.0.zip
+    http://dl.bintray.com/snowplow/snowplow-generic/snowplow_elasticsearch_loader_tcp_0.9.0.zip
+    http://dl.bintray.com/snowplow/snowplow-generic/snowplow_elasticsearch_loader_tcp_2x_0.9.0.zip
 
-Right-click on this [Download link][kes-download-1x] for the 1.x version and this [Download link][kes-download-2x] for the 2.x version.
+Right-click on:
+
+  - this [Download link][esl-dl-http] for the version using the HTTP API which works with
+every Elasticsearch version
+  - this [Download link][esl-dl-tcp] for the version using the transport API for 5.x clusters
+  - this [Download link][esl-dl-tcp-2x] for the version using the transport API for 2.x clusters
 
 ### 4.4 Kinesis LZO S3 Sink resources
 
@@ -154,6 +160,7 @@ Please see the [[Artifact repositories]] wiki page for more information.
 [kinesis-s3-download]: http://dl.bintray.com/snowplow/snowplow-generic/kinesis_s3_0.5.0.zip
 [ssc-download]: http://dl.bintray.com/snowplow/snowplow-generic/snowplow_scala_stream_collector_0.9.0.zip
 [se-download]: http://dl.bintray.com/snowplow/snowplow-generic/snowplow_stream_enrich_0.10.0.zip
-[kes-download-1x]: http://dl.bintray.com/snowplow/snowplow-generic/snowplow_kinesis_elasticsearch_sink_0.8.0_1x.zip
-[kes-download-2x]: http://dl.bintray.com/snowplow/snowplow-generic/snowplow_kinesis_elasticsearch_sink_0.8.0_2x.zip
+[esl-dl-http]: http://dl.bintray.com/snowplow/snowplow-generic/snowplow_elasticsearch_loader_http_0.9.0.zip
+[esl-dl-tcp]: http://dl.bintray.com/snowplow/snowplow-generic/snowplow_elasticsearch_loader_tcp_0.9.0.zip
+[esl-dl-tcp-2x]: http://dl.bintray.com/snowplow/snowplow-generic/snowplow_elasticsearch_loader_tcp_2x_0.9.0.zip
 [emr-download]: http://dl.bintray.com/snowplow/snowplow-generic/snowplow_emr_r88_angkor_wat.zip
