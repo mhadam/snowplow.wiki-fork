@@ -14,6 +14,6 @@ All the things to tick off when doing a new release:
 11. **Blog post** - always write a blog post
 12. **Add release** - in GitHub
 13. **Update the version matrix** - in Google Spreadsheets
-14. **Ticket to Ihor to update upgrade guide**
+14. **Trello card to Ihor to update upgrade guide**
 14. **Tweet** - put `#opensource` in the tweet
 15. **Thread on Discourse** - final step
