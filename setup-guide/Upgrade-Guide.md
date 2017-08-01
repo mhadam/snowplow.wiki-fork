@@ -6,8 +6,9 @@ You can also use [Snowplow Version Matrix](Snowplow-version-matrix) as a guidanc
 
 For easier navigation, please, follow the links below.
 
-- [Snowplow 89 Plain of Jars released](#r89) (**r89**) 2017-06-12
-- [Snowplow 88 Angkor Wat released](#r88) (**r88**) 2017-04-27
+- [Snowplow 90 Lascaux](#r90) (**r90**) 2017-07-26
+- [Snowplow 89 Plain of Jars](#r89) (**r89**) 2017-06-12
+- [Snowplow 88 Angkor Wat](#r88) (**r88**) 2017-04-27
 - [Snowplow 87 Chichen Itza](#r87) (**r87**) 2017-02-21
 - [Snowplow 86 Petra](#r86) (**r86**) 2016-12-20
 - [Snowplow 85 Metamorphosis](#r85) (**r85**) 2016-11-15
@@ -51,6 +52,96 @@ For easier navigation, please, follow the links below.
 - [Snowplow 0.9.2](#v0.9.2) (**v0.9.2**) 2014-04-30
 - [Snowplow 0.9.1](#v0.9.1) (**v0.9.1**) 2014-04-11
 - [Snowplow 0.9.0](#v0.9.0) (**v0.9.0**) 2014-02-04
+
+<a name="r90" />
+
+## Snowplow 90 Lascaux
+
+This release introduces RDB Loader, a new EMR-run application replacing our StorageLoader, as proposed in our [Splitting EmrEtlRunner RFC](http://discourse.snowplowanalytics.com/t/splitting-emretlrunner-into-snowplowctl-and-dataflow-runner/350). This release also brings various enhancements and alterations in EmrEtlRunner.
+
+### Upgrade steps
+
+#### Upgrading EmrEtlRunner
+
+The latest version of the *EmrEtlRunner* is available from our Bintray [here](http://dl.bintray.com/snowplow/snowplow-generic/snowplow_emr_r90_lascaux.zip).
+
+#### Updating config.yml
+
+In order to use RDB Loader you need to make following addition in your configuration YAML:
+
+```yaml
+storage:
+  versions:
+    rdb_loader: 0.12.0        # NEW
+```
+
+The following settings no longer make sense, as Postgres loading also happens on EMR node, therefore can be deleted:
+
+```yaml
+storage:
+  download:                   # REMOVE
+    folder:                   # REMOVE
+```
+
+To gradually configure your EMR application you can add optional emr.configuration property:
+
+```yaml
+emr:
+  configuration:                                  # NEW
+    yarn-site:
+      yarn.resourcemanager.am.max-attempts: "1"
+    spark:
+      maximizeResourceAllocation: "true"
+```
+
+For a complete example, see our sample [`config.yml`](https://github.com/snowplow/snowplow/blob/r90-lascaux/3-enrich/emr-etl-runner/config/config.yml.sample) template.
+
+#### Updating EmrEtlRunner scripts
+
+EmrEtlRunner now accepts a new `--include` option with a single possible `vacuum` argument, which will be passed to RDB Loader.
+
+Also, `--skip` now accepts new `rdb_load`, `archive_enriched` and `analyze` arguments. Skipping `rdb_load` and `archive_enriched` steps is identical to running R89 EmrEtlRunner without StorageLoader.
+
+Finally, note that the StorageLoader is no more part of batch pipeline apps archive.
+
+#### Creating IAM Role for Redshift
+
+As RDB Loader is an EMR step now, we wanted to make sure that user's AWS credentials are not exposed anywhere. To load Redshift we're using [IAM Roles](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html), which allow Redshift to load data from S3.
+
+To [create an IAM Role](http://docs.aws.amazon.com/redshift/latest/gsg/rs-gsg-create-an-iam-role.html) you need to go to AWS Console » IAM » Roles » Create new role. Then you need chose Amazon Redshift » *AmazonS3ReadOnlyAccess*, choose a role name, for example "RedshiftLoadRole". Once created, copy the Role ARN as you will need it in the next section.
+
+Now you need to attach new role to running Redshift cluster. Go to AWS Console » Redshift » Clusters » Manage IAM Roles » Attach just created role.
+
+#### Whitelisting EMR in Redshift
+
+Your EMR cluster’s master node will need to be whitelisted in Redshift in order to perform the load.
+
+If you are using an "EC2 Classic" environment, from the Redshift UI you will need to create a Cluster Security Group and add the relevant EC2 Security Group, most likely called *ElasticMapReduce-master*. Make sure to enable this Cluster Security Group against your Redshift cluster.
+
+If you are using modern VPC-based environment, you will need to modify the Redshift cluster, and add a VPC security group, most likely called *ElasticMapReduce-Master-Private*.
+
+In both cases, you only need to whitelist access from the EMR master node, because RDB Loader runs exclusively from the master node.
+
+#### Updating Storage configs
+
+We have updated the Redshift storage target config - the new version requires the Role ARN that you noted down above:
+
+```
+{
+    "schema": "iglu:com.snowplowanalytics.snowplow.storage/redshift_config/jsonschema/2-0-0",       // WAS 1-0-0
+    "data": {
+        "name": "AWS Redshift enriched events storage",
+        ...
+        "roleArn": "arn:aws:iam::719197435995:role/RedshiftLoadRole",                               // NEW
+        ...
+    }
+}
+```
+
+### Read more
+
+* [R90 Blog Post](https://snowplowanalytics.com/blog/2017/07/26/snowplow-r90-lascaux-released-moving-database-loading-into-emr/)
+* [R90 Release Notes](https://github.com/snowplow/snowplow/releases/tag/r90-lascaux)
 
 <a name="r89" />
 
