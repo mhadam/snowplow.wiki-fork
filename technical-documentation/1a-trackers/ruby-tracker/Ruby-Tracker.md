@@ -83,7 +83,7 @@ Assuming you have completed the [[Ruby Tracker Setup]] for your Ruby project, yo
 Require the Ruby Tracker into your code like this:
 
 ```ruby
-require 'snowplow_tracker'
+require 'snowplow-tracker'
 ```
 
 You can now initialize tracker instances.

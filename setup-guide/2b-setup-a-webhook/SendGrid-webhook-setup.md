@@ -94,10 +94,10 @@ You can find the table definitions here:
 * [com_sendgrgid_bounce_1.sql][bounce-sql]
 * [com_sendgrid_open_1.sql][open-sql]
 * [com_sendgrid_click_1.sql][click-sql]
-* [com_sendgrid_spam_report_1.sql][spam_report-sql]
+* [com_sendgrid_spamreport_1.sql][spam_report-sql]
 * [com_sendgrid_unsubscribe_1.sql][unsubscribe-sql]
 * [com_sendgrid_group_unsubscribe_1.sql][group_unsubscribe-sql]
-* [com_sendgrid_resubscribe_1.sql][group_resubscribe-sql]
+* [com_sendgrid_group_resubscribe_1.sql][group_resubscribe-sql]
 
 Make sure to deploy this table into the same schema as your `events` table.
 
