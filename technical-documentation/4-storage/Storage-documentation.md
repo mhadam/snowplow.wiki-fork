@@ -8,7 +8,7 @@ The Enrichment process (module 3, in the diagram above) takes raw Snowplow colle
 
 The data in these files can be analysed directly by any big data tool that runs on EMR. This includes [Hive][hive], [Pig][pig] and [Mahout][mahout].
 
-In addition, the [StorageLoader Ruby app][storage-loader] can be used to copy Snowplow data from those event files into [Amazon Redshift][redshift], where it can be analysed using any tool that talks to PostgreSQL. (This includes just about every analytics tool including [R][r], [Tableau][tableau] and [Excel][excel].)
+In addition, the [RDB Loader][rdb-loader] can be used to copy Snowplow data from those event files into [Amazon Redshift][redshift], where it can be analysed using any tool that talks to PostgreSQL. (This includes just about every analytics tool including [R][r], [Tableau][tableau] and [Excel][excel].)
 
 There are therefore a number of different potential storage modules that Snowplow users can store their data in, for analysis in different tools:
 
@@ -22,12 +22,12 @@ There are therefore a number of different potential storage modules that Snowplo
 In addition, this guide also covers the 
 
 1. [Snowplow Canonical Event Model][canonical-event-model]. This covers the structure of Snowplow data, as stored in S3, Amazon Redshift and PostgreSQL.
-2. [The StorageLoader][storage-loader]. This Ruby application is responsible for instrumenting the regular movement of data from S3 into Redshift. (And eventually, PostgreSQL, SkyDB, Neo4J, Infobright etc.)
+2. [RDB Loader][rdb-loader]. This EMR step is responsible for instrumenting the regular movement of data from S3 into Redshift and (partially) PostgreSQL.
 
 [hive]: http://hive.apache.org/
 [pig]: http://pig.apache.org/
 [mahout]: http://mahout.apache.org/
-[storage-loader]: StorageLoader
+[rdb-loader]: Relational-Database-Loader
 [redshift]: Amazon-Redshift-storage
 [r]: http://cran.r-project.org/
 [tableau]: http://www.tableausoftware.com/

@@ -1,6 +1,7 @@
 [**HOME**](Home) » [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow-technical-documentation) » [**Storage**](storage-documentation) » Relational Database Loader
 
 Relational Database Loader (RDB Loader) is an application running as AWS EMR step intended to discover shredded data on S3 and load it into relational databases, such as AWS Redshift and PostgreSQL.
+RDB Loader was previously known as [StorageLoader JRuby app](StorageLoader), which it is replaced in R90 release.
 
 The RDB Loader gets submitted to EMR via [[EmrEtlRunner]] after Spark Shred job. EmrEtlRunner passes to it [configuration file][config-file] (minus AWS credentials) and storage targets configuration.
 
