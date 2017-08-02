@@ -8,9 +8,8 @@ Relational Database Shredder (RDB Shredder for short) is a Spark job allowing yo
 Snowplow enriched events, produced by Spark Enrich into separate enrities. RDB Shredder makes use of
 the [scala-common-enrich][sce] project to load enriched events.
 
-You will typically run the RDB Shredder jar as part of an EMR jobflow, started by
-[EmrEtlRunner](EmrEtlRunner). It is designed to be used downstream of Spark Enrich and upstream of
-[StorageLoader](StorageLoader).
+You will typically run the RDB Shredder jar as part of an EMR jobflow, started by [EmrEtlRunner](EmrEtlRunner). 
+It is designed to be used downstream of Spark Enrich and upstream of [RDB Loader](Relational-Database-Loader).
 
 RDB Shredder has two primary tasks:
 
@@ -31,7 +30,7 @@ Shredding is the process of splitting the `EnrichedEvent` TSVs into the followin
    JSON fields (`contexts`, `derived_contexts` and `unstruct_event`). The results
    will be stored in a path similar to
    `shredded/good/run=2016-11-26-21-48-42/atomic-events/part-00000`
-   and will be available to load via [StorageLoader](StorageLoader) or directly
+   and will be available to load via [RDB Loader](Relational-Database-Loader) or directly
    via Redshift [COPY][redshift-copy].
 2. **Contexts**. This part consists of the two extracted above JSON fields:
    `contexts` and `derived_contexts`, which are validated (during the enrichment step)
@@ -42,7 +41,7 @@ Shredding is the process of splitting the `EnrichedEvent` TSVs into the followin
    `atomic.events` table. The results will be stored in a path which looks like
    `shredded/good/run=2016-11-26-21-48-42/shredded-types/vendor=com.acme/name=mycontext/format=jsonschema/version=1-0-1/part-00000`,
    where the part files like `part-00000` are valid NDJSONs and it will be possible to load them
-   via [StorageLoader](StorageLoader) or directly via Redshift [COPY][redshift-copy].
+   via [RDB Loader](Relational-Database-Loader) or directly via Redshift [COPY][redshift-copy].
 3. **Self-describing (unstructured) events**. Very much similar to the contexts described above
    those are the same JSONs with the `schema`, `data` and `hierarchy` fields. The only difference
    is that there is a one-to-one relation with `atomic.events`, whereas contexts have
