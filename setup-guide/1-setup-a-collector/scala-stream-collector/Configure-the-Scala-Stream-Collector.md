@@ -90,11 +90,9 @@ Please, refer to [RFC 6265](https://tools.ietf.org/html/rfc6265#section-5.1.3) f
 
 ### 5. Setting the cookie duration
 
-The cookie expiration duration is set in `collector.cookie.expiration`.
-If no value is provided, cookies set the default to expiring after one year (i.e. 365 days).
-From version 0.4.0 forwards, if `collector.cookie.expiration` is set to 0, no cookie will be set.
+The cookie expiration duration is set in `collector.cookie.expiration`. If no value is provided, cookies set the default to expire after one year (i.e. 365 days). If you don't want to set a third party cookie at all it could be disabled by setting `collector.cookie.enabled` to `false`. Alternatively, it could be achieved if `collector.cookie.expiration` is set to 0 (from version 0.4.0). 
 
-Next: [[Run the Scala Stream collector]]
+» Next: [[Run the Scala Stream collector]]
 
 [v0.1]: https://github.com/snowplow/snowplow/wiki/Configure-the-Scala-Stream-Collector-v0.1
 [v0.3]: https://github.com/snowplow/snowplow/wiki/Configure-the-Scala-Stream-Collector-v0.3
