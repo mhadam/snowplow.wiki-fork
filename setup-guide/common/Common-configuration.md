@@ -2,7 +2,7 @@
 
 ### Overview
 
-This page describes the format for the YAML file which is used to configure both the EmrEtlRunner and the Storage Loader.
+This page describes the format for the YAML file which is used to configure the EmrEtlRunner.
 
 You can and should use the same file for both applications.
 
@@ -81,9 +81,8 @@ enrich:
 storage:
   versions:
     rdb_shredder: 0.12.0        # Version of the Relational Database Shredding process
+    rdb_loader: 0.12.0          # Version of the Relational Database Loader app
     hadoop_elasticsearch: 0.1.0 # Version of the Hadoop to Elasticsearch copying process
-  download:
-    folder: # Postgres-only config option. Where to store the downloaded files. Leave blank for Redshift
 monitoring:
   tags: {} # Name-value pairs describing this job
   logging:
@@ -210,28 +209,12 @@ See the [[EmrEtlRunner Input Formats]] page.
 #### versions
 
 * `rdb_shredder`: version of the RDB Shredder jar
+* `rdb_loader`: version of the RDB Loader jar
 * `hadoop_elasticsearch`: version of the Hadoop Elasticsearch Sink
-
-#### download
-
-This is where we configure the StorageLoader download operation, which
-downloads the Snowplow event files from Amazon S3 to your local server,
-ready for loading into your database.
-
-This setting is needed for Postgres, but not if you are only loading into Redshift
-- you can safely leave it blank.
-
-You will need to set the `folder` variable to a local directory path -
-please make sure that:
-
-* this path exists,
-* is writable by StorageLoader
-* it is empty
-* **PostgreSQL's own `postgres` user must to be able to read every parent directory of the directory specified. This is necessary to ensure that PostgreSQL can read the data in the directory, when it comes to ingest it**
 
 ### monitoring
 
-This section deals with metadata around the EmrEtlRunner and StorageLoader.
+This section deals with metadata around the EmrEtlRunner and RDB Loader.
 
 * `tags`: a dictionary of name-value pairs describing the job
 * `logging`: how verbose/chatty the log output from EmrEtlRunner should be.

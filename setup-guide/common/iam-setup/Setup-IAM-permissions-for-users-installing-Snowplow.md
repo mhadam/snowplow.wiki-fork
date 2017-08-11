@@ -57,8 +57,8 @@ The following permissions are needed for all batch proccessing operations:
 
 * Amazon S3
 * Amazon EMR
-* Amazon EC2 (required for EmrEtlRunner / StorageLoader)
-* Amazon Marketplaces (required for EmrEtlRunner / StorageLoader)
+* Amazon EC2 (required for EmrEtlRunner)
+* Amazon Marketplaces (required for EmrEtlRunner)
 * Amazon CloudFront (required for Cloudfront collector)
 * Amazon Elastic Beanstalk (required for Clojure collector)
 * Amazon Elasticsearch service (for loading bad rows)
@@ -158,7 +158,7 @@ For the Kinesis Pipeline ending in the LZO S3 Sink with events from this sink th
 * Amazon S3
 * Amazon EMR
 * Amazon EC2
-* Amazon Marketplaces (required for EmrEtlRunner / StorageLoader)
+* Amazon Marketplaces (required for EmrEtlRunner)
 * Amazon Redshift (required for Redshift)
 * Amazon Cloudformation (required if the Snowplow team setup your Snowplow data pipeline, as we use Cloudformation)
 * Amazon IAM (required as each Application for the Kinesis Pipeline has its own IAM Policy)
@@ -238,7 +238,7 @@ Click _Continue_ and you should see the following:
 
 Click _Download Credentials_ to save these credentials locally. Then click _Close Window_.
 
-Provide these credentials in a secure way - **not** via email - to whoever is setting up Snowplow for you, so that they can add them into the configuration of your EmrEtlRunner and StorageLoader applications.
+Provide these credentials in a secure way - **not** via email - to whoever is setting up Snowplow for you, so that they can add them into the configuration of your EmrEtlRunner applications.
 
 Back to [top](#top).
 

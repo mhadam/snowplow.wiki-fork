@@ -49,19 +49,20 @@ The solution is to re-run the ETL process across all of your raw Snowplow logs w
 
 ###  I need to recreate my table of Snowplow events, how?
 
-If you have somehow lost or corrupted your Snowplow event store (in Infobright or Redshift), don't panic!
+If you have somehow lost or corrupted your Snowplow event store in Redshift, don't panic!
 
 Fortunately, **Snowplow does not delete any data at any stage of its processing**, so it's all available for you to restore from your archive buckets.
 
-Here is a simple workflow to use with StorageLoader to re-populate Infobright or Redshift with all of your events:
+Here is a simple workflow to use with RDB Loader to re-populate Redshift with all of your events:
 
-1. Create a new events table in your database, let's call it `events2`
+1. Create a new database schema in your database, let's call it `atomic2`
 2. Create a new S3 bucket, let's call it `events-archive2`
-3. Edit your StorageLoader's `config.yml` file:
-   * Change `:table:` to point to your `events2` table
+3. Edit your `config.yml` file:
    * Change `:in:` to point to your existing archive bucket
    * Change `:archive:` to point to your new `events-archive2` bucket
-4. Rerun StorageLoader
+4. Edit your storage target (`redshift.json`) configuration:
+   * Change `schema` to point to your `atomic2`
+4. Rerun EmrEtlRunner with following option: `--skip archive_raw,analyze,archive`
 
 This should load **all** of your events into your new `events2` table, archiving all events after loading into `events-archive2`.
 
@@ -83,21 +84,17 @@ Here is a simple workflow to use with EmrEtlRunner to regenerate your Snowplow e
    * Change `:archive:` to point to your new `logs-archive2` bucket
 4. Rerun EmrEtlRunner
 
-This should load **recompute** all of your events into your new `events2` bucket, archiving all events after loading into `events-archive2`. From there you can reload your recomputed events into Infobright or Redshift using StorageLoader.
+This should load **recompute** all of your events into your new `events2` bucket, archiving all events after loading into `events-archive2`. From there you can reload your recomputed events into Infobright or Redshift using RDB Loader.
 
 <a name="s3-filecopy"/>
 
 ###  My database load process died during an S3 file copy, help!
 
-Occasionally Amazon S3 fails repeatedly to perform a file operation, eventually causing StorageLoader to die. When this happens, you may see "500 InternalServerErrors", reported by [Sluice][sluice], which is the library we use to handle S3 file operations.
+Occasionally Amazon S3 fails repeatedly to perform a file operation, eventually causing pipeline to die.
 
-If this happens, you will need to rerun your StorageLoader process, using the following guidance:
+If this happens, you will need to rerun your RDB Loader step, using the following guidance:
 
-If the job died during the download-to-local step, then:
-  1. Delete any files in your download folder
-  2. Rerun StorageLoader
-
-If the job died during the archiving step, rerun StorageLoader with the command-line option of `--skip download,delete,load`
+If the job died during the archiving step, rerun EmrEtlRunner with the command-line option of  `--skip rdb_load`
 
 <a name="shred-fail"/>
 

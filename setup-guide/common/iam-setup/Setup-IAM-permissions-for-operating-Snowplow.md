@@ -2,7 +2,7 @@
 
 ## Overview
 
-These are instructions for setting up the IAM permissions for the "user(s)" that "operates" Snowplow: in practice this is the user associated with the credentials that should be used in the EmrEtlRunner and StorageLoader config files. The permissions represent the minimum required to keep the Snowplow data pipeline running: this is best practice, so that if a hacker manages to compromise the server with EmrEtlRunner and StorageLoader on it (so gain access to these credentials), they will have only limited access to your AWS resources.
+These are instructions for setting up the IAM permissions for the "user(s)" that "operates" Snowplow: in practice this is the user associated with the credentials that should be used in the EmrEtlRunner and storage config files. The permissions represent the minimum required to keep the Snowplow data pipeline running: this is best practice, so that if a hacker manages to compromise the server with EmrEtlRunner and storage configs on it (so gain access to these credentials), they will have only limited access to your AWS resources.
 
 Setting up the credentials is an 5 step process:
 
@@ -11,7 +11,7 @@ Setting up the credentials is an 5 step process:
     - [Running Kinesis Applications](#kinesis-apps)
 - 3 [Create a new user](#user)
 - 4 [Add the new user to your new group](#add-to-group)
-- 5 [Update the EmrEtlRunner and StorageLoader config files with the new credentials](#update-configs)
+- 5 [Update the EmrEtlRunner config files with the new credentials](#update-configs)
 - 6 [Delete the user created to setup Snowplow](#delete)
 
 **Disclaimer: Snowplow Analytics Ltd will not be liable for any problems caused by the full or partial implementation of these instructions on your Amazon Web Services account. If in doubt, please consult an independent AWS security expert.**
@@ -147,11 +147,11 @@ Back to [top](top).
 
 <a name="update-configs" />
 
-## 5. Update the EmrEtlRunner and StorageLoader config files with the new credentials
+## 5. Update the EmrEtlRunner config files with the new credentials
 
-Now that you have setup your new user and given her the relevant permissions to run the Snowplow data pipeline, you need to take those credentials and use them instead of the existing credentials in your EmrEtlRunner and StorageLoader config files.
+Now that you have setup your new user and given her the relevant permissions to run the Snowplow data pipeline, you need to take those credentials and use them instead of the existing credentials in your EmrEtlRunner config files.
 
-Those files should be accessible on the server setup to run EmrEtlRunner and StorageLoader. (Examples of those files can be found on the Snowplow repo [here][emretlrunner.config] and [here][storageloader.config].) Update the `:access_key_id:` and `:secret_access_key:` fields with those from the new user in **both** files. 
+Those files should be accessible on the server setup to run EmrEtlRunner. (Examples of those files can be found on the Snowplow repo [here][emretlrunner.config] and [here][storage.config].) Update the `:access_key_id:` and `:secret_access_key:` fields with those from the new user in **both** files. 
 
 Back to [top](#top).
 
@@ -159,7 +159,7 @@ Back to [top](#top).
 
 ## 6. Delete the user created to setup Snowplow
 
-Now that we have created a new user with just the permissions required to run the Snowplow data pipeline, and used her credentials in in the EmrEtlRunner and StorageLoader config files, we can delete the user that we created to setup/install Snowplow originally.
+Now that we have created a new user with just the permissions required to run the Snowplow data pipeline, and used her credentials in in the EmrEtlRunner config files, we can delete the user that we created to setup/install Snowplow originally.
 
 In the IAM console, go into the `snowplow-setup` group you created when you created user credentials for the individual who setup Snowplow. Select the user in that group e.g. `snowplow-setup` and click the *Remove User from Group* link:
 
@@ -176,4 +176,4 @@ Back to [top](#top).
 
 
 [emretlrunner.config]: https://github.com/snowplow/snowplow/tree/master/3-enrich/emr-etl-runner/config
-[storageloader.config]: https://github.com/snowplow/snowplow/tree/master/4-storage/storage-loader/config
+[storage.config]: https://github.com/snowplow/snowplow/tree/master/4-storage/config

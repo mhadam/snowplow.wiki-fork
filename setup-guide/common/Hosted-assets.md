@@ -10,13 +10,13 @@ The **current versions** of the assets hosted by the Snowplow Analytics team are
 
 We are steadily moving over to [Bintray][bintray] for hosting binaries and artifacts which don't have to be hosted on S3.
 
-To make operating Snowplow easier, the EmrEtlRunner and StorageLoader apps are now available as prebuilt executables in a single zipfile here:
+To make operating Snowplow easier, the EmrEtlRunner app are now available as prebuilt executables in a single zipfile here:
 
-    http://dl.bintray.com/snowplow/snowplow-generic/snowplow_emr_r88_angkor_wat.zip
+    http://dl.bintray.com/snowplow/snowplow-generic/snowplow_emr_r90_lascaux.zip
 
 Right-click on this [Download link][emr-download] to save it down locally.
 
-**Note**: The link above refers to the latest version at the time of writing (R87). If you know there is a newer version you can locate and download it from the [generic page](http://dl.bintray.com/snowplow/snowplow-generic/). Search for the pattern `snowplow_emr_`. The higher the number version the newer it is.
+**Note**: The link above refers to the latest version at the time of writing (R90). If you know there is a newer version you can locate and download it from the [generic page](http://dl.bintray.com/snowplow/snowplow-generic/). Search for the pattern `snowplow_emr_`. The higher the number version the newer it is.
 
 ## 1. Trackers
 
@@ -24,9 +24,9 @@ Right-click on this [Download link][emr-download] to save it down locally.
 
 The minified JavaScript tracker is hosted on CloudFront against its full semantic version:
 
-    http(s)://d1fc8wv8zag5ca.cloudfront.net/2.7.0/sp.js
+    http(s)://d1fc8wv8zag5ca.cloudfront.net/2.8.1/sp.js
 
-**Note**: The above URL references JavaScript tracker v2.7.0 (d1fc8wv8zag5ca.cloudfront.net/**2.6.2**/sp.js). To ensure you are using the latest version, please, check what it currently is at [GitHub](https://github.com/snowplow/snowplow-javascript-tracker/releases) and amend accordingly.
+**Note**: The above URL references JavaScript tracker v2.8.2 (d1fc8wv8zag5ca.cloudfront.net/**2.8.2**/sp.js). To ensure you are using the latest version, please, check what it currently is at [GitHub](https://github.com/snowplow/snowplow-javascript-tracker/releases) and amend accordingly.
 
 ## 2. Collectors
 
@@ -103,7 +103,7 @@ Our shredding process for loading JSONs into Redshift uses a standard set of JSO
 
     s3://snowplow-hosted-assets/4-storage/redshift-storage/jsonpaths
 
-If you are running StorageLoader, these files will automatically be used for loading corresponding JSONs into Redshift.
+If you are running RDB Loader, these files will automatically be used for loading corresponding JSONs into Redshift.
 
 ### 4.3 Elasticsearch Loader resources
 

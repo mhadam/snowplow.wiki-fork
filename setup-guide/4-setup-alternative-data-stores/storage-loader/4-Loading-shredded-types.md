@@ -1,10 +1,12 @@
 [**HOME**](Home) » [**SNOWPLOW SETUP GUIDE**](Setting-up-Snowplow) » [Step 4: setting up alternative data stores](Setting-up-alternative-data-stores) » [1: Installing the StorageLoader](1-Installing-the-StorageLoader) » [2: Using the StorageLoader](2-Using-the-StorageLoader) » [3: Scheduling the StorageLoader](3-Scheduling-the-StorageLoader) » 4: Loading shredded types
 
+**WARNING: StorageLoader is deprecated and replaced by RDB Loader since R90 Lascaux. RDB Loader must be scheduled via EmrEtlRunner**
+
 1. [Overview](#overview)
 2. [Loading Snowplow-authored JSONs](#snowplow-jsons)
 3. [Defining and installing a new table](#table)
 4. [Creating and uploading a JSON Paths file](#jsonpaths)
-5. [Configuring StorageLoader](#configure)
+5. [Configuring loading](#configure)
 6. [Next steps](#next-steps)
 
 <a name="overview"/>
@@ -17,7 +19,7 @@ Snowplow has a [Shredding process](Shredding) for Redshift which consists of thr
 2. Removing endogenous duplicate records, which are sometimes introduced within the Snowplow pipeline (feature added to r76)
 3. Loading those files into corresponding tables in Redshift
 
-The third phase is instrumented by StorageLoader and is documented on this wiki page; to configure the first phase, visit the [Configuring shredding](5-Configuring-shredding) wiki page (second phase requires no configuration).
+The third phase is instrumented by RDB Loader and is documented on this wiki page; to configure the first phase, visit the [Configuring shredding](5-Configuring-shredding) wiki page (second phase requires no configuration).
 
 <a name="snowplow-jsons"/>
 
@@ -29,7 +31,7 @@ Loading Snowplow-authored JSONs is straightforward: Snowplow provides pre-made R
 
 For example, if you have link click tracking enabled in the JavaScript Tracker, then install `com.snowplowanalytics.snowplow/link_click_1.sql` into your Snowplow database.
 
-Each table needs to be loaded using a JSON Paths file. Snowplow hosts JSON Paths files for all Snowplow-authored JSONs. StorageLoader will automatically locate these JSON Paths files and use them to load shredded types into Redshift.
+Each table needs to be loaded using a JSON Paths file. Snowplow hosts JSON Paths files for all Snowplow-authored JSONs. RDB Loader will automatically locate these JSON Paths files and use them to load shredded types into Redshift.
 
 <a name="overview"/>
 
@@ -37,7 +39,7 @@ Each table needs to be loaded using a JSON Paths file. Snowplow hosts JSON Paths
 
 ### 3.1 Overview
 
-StorageLoader loads each shredded type into its own table in Redshift. You need to create a Redshift table for each new shredded type you have defined.
+RDB Loader loads each shredded type into its own table in Redshift. You need to create a Redshift table for each new shredded type you have defined.
 
 ### 3.2 Naming the table
 
@@ -116,7 +118,7 @@ Install the table into your Redshift database. The table must be stored in the s
 
 ### 4.1 Overview
 
-You need to create a JSON Paths file which StorageLoader will use to load your shredded type into Redshift.
+You need to create a JSON Paths file which RDB Loader will use to load your shredded type into Redshift.
 
 The format is simple - a JSON Paths file consists of a JSON array, where each element corresponds to a column in the target table. For full details, see the [Copy from JSON](http://docs.aws.amazon.com/redshift/latest/dg/copy-usage_notes-copy-from-json.html) documentation from Amazon.
 
@@ -170,7 +172,7 @@ Then your JSON Paths file should be called:
 
 ### 4.4 Installing the JSON Paths file
 
-Upload the JSON Paths file to a private S3 bucket which is accessible using the AWS credentials provided in your StorageLoader's `config.yml` file.
+Upload the JSON Paths file to a private S3 bucket which is accessible using the AWS credentials provided in your `config.yml` file.
 
 Store the JSON Paths file in a sub-folder named after the vendor, for example:
 
@@ -178,9 +180,11 @@ Store the JSON Paths file in a sub-folder named after the vendor, for example:
 
 <a name="configure"/>
 
-## 5. Configuring StorageLoader
+## 5. Configuring loading
 
-Now you need to update StorageLoader's `config.yml` to load the shredded types. First, make sure that your `jsonpath_assets:` points to the private S3 bucket you stored the JSON Paths file in section 4.
+RDB Loader step uses same `config.yml` as EmrEtlRunner.
+
+Now you need to update `config.yml` to load the shredded types. First, make sure that your `jsonpath_assets:` points to the private S3 bucket you stored the JSON Paths file in section 4.
 
 ```yaml
 buckets:
@@ -203,4 +207,4 @@ If you are using separate configuration files make sure this cross-checks with t
 
 ## 6. Next steps
 
-That's it for configuring StorageLoader for shredding. You should be ready to load shredded types into Redshift.
+That's it for configuring pipeline for shredding. You should be ready to load shredded types into Redshift.

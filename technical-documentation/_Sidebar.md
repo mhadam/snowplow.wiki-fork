@@ -53,11 +53,11 @@
 **4. Storage**  
 [Overview](Storage-documentation)  
 [Relational Database Shredder](Relational-Database-Shredder)  
+[Relational Database Loader](Relational-Database-Loader)   
 [Storage in S3](S3-storage)  
 [Storage in Redshift](amazon-redshift-storage)  
 [Storage in PostgreSQL](postgresql-storage)  
 [Storage in Infobright](infobright-storage) (deprecated)  
-[StorageLoader](StorageLoader)   
 
 **D. Snowplow storage formats (to write)**
 

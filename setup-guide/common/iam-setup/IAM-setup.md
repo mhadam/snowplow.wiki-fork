@@ -9,7 +9,7 @@ You need to setup different groups / users in IAMs at different stages of your S
 [[/setup-guide/images/iam/setup-flow-cropped.png]]
 
 1. [A user to setup Snowplow on your AWS account (the *Snowplow Installer*)][install-snowplow]. Create credentials for a user to install Snowplow on your AWS account. This user has lots of permissions, as she will need to setup all the relevant collectors, buckets on Amazon S3 and Redshift cluster, if required. 
-2. [A user to run the Snowplow data pipeline (the *Snowplow Operator*)][operate-snowplow]. *Once* your Snowplow stack has been setup, you create a new user with much more limited permissions than those allocated to the user who installed Snowplow, and use these credentials for EmrEtlRunner and StorageLoader to manage your data pipeline over time.
+2. [A user to run the Snowplow data pipeline (the *Snowplow Operator*)][operate-snowplow]. *Once* your Snowplow stack has been setup, you create a new user with much more limited permissions than those allocated to the user who installed Snowplow, and use these credentials for EmrEtlRunner to manage your data pipeline over time.
 3. [A user who uses EMR to crunch Snowplow data (the *Snowplow Data Scientist*)][crunch-snowplow-data]. If you have analysts / data scientists who are using EMR to analyse Snowplow data, you will need to set them up with their own credentials.
 
 **Disclaimer: Snowplow Analytics Ltd will not be liable for any problems caused by the full or partial implementation of these instructions on your Amazon Web Services account. If in doubt, please consult an independent AWS security expert.**

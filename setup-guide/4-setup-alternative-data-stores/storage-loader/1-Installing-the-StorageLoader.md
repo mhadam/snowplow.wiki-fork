@@ -1,5 +1,7 @@
 [**HOME**](Home) > [**SNOWPLOW SETUP GUIDE**](Setting-up-Snowplow) > [Step 4: setting up alternative data stores](Setting-up-alternative-data-stores) > 1: Installing the StorageLoader
 
+**WARNING: StorageLoader is deprecated and replaced by RDB Loader since R90 Lascaux. RDB Loader does not require manual installation**
+
 1. [Assumptions](#assumptions)
 2. [Dependencies](#dependencies)
 3. [Installation](#installation)

@@ -1,5 +1,7 @@
 [**HOME**](Home) > [**SNOWPLOW SETUP GUIDE**](Setting-up-Snowplow) > [Step 4: setting up alternative data stores](Setting-up-alternative-data-stores) > [1: Installing the StorageLoader](1-Installing-the-StorageLoader) > [2: Using the StorageLoader](2-Using-the-StorageLoader) > 3: Scheduling the StorageLoader
 
+**WARNING: StorageLoader is deprecated and replaced by RDB Loader since R90 Lascaux. RDB Loader must be scheduled via EmrEtlRunner**
+
 1. [Overview](#scheduling-overview)
 2. [Scheduling StorageLoader only](#storage-loader-cron)
 3. [Scheduling EmrEtlRunner and StorageLoader](#runner-and-loader-cron)

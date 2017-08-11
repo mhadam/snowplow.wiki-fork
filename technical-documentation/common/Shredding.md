@@ -48,9 +48,9 @@ of natural duplicates; all others will be discarded.
 More technical information about RDB Shredder can be found on the dedicated
 [RDB Shredder](Relational-Database-Shredder) page.
 
-### 2. StorageLoader
+### 2. Relational Database Loader
 
-The StorageLoader provides a way to load shredded types into the corresponding tables in Redshift,
+The RDB Loader provides a way to load shredded types into the corresponding tables in Redshift,
 using the Redshift's native [`COPY FROM JSON`](http://docs.aws.amazon.com/redshift/latest/dg/copy-usage_notes-copy-from-json.html)
 functionality. This is a multi-step process:
 

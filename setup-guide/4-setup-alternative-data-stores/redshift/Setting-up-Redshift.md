@@ -224,15 +224,15 @@ If you capture unstructured events or contexts, you also need to create the corr
 
 We recommend you setup access credentials for at least three different users:
 
-1. [The StorageLoader](#storageloader-user)
+1. [The RDB Loader](#rdb-user)
 2. [A user with read-only access](#read-only-user)  to the data, but write access on his / her own schema
 3. [A power user](#power-user) with admin privileges
 
-<a name="storageloader-user" />
+<a name="rdb-user" />
 
-### 5.1 Creating a user for the StorageLoader
+### 5.1 Creating a user for the RDB Loader
 
-We recommend that you create a specific user in Redshift with *only* the permissions required to load data into your Snowplow schema and run `vacuum` and `analyze` against those tables, and use this user's credentials in the StorageLoader config to manage the automatic movement of data into the table. That way, in the event that the server running StorageLoader is hacked and the hacker gets access to those credentials, they cannot use them to do any harm to your other data in Redshift. To create a new user with restrictive permissions, log into Redshift, connect to the Snowplow database and execute the following SQL:
+We recommend that you create a specific user in Redshift with *only* the permissions required to load data into your Snowplow schema and run `vacuum` and `analyze` against those tables, and use this user's credentials in the config to manage the automatic movement of data into the table. That way, in the event that the server storing storage targets configuration is hacked and the hacker gets access to those credentials, they cannot use them to do any harm to your other data in Redshift. To create a new user with restrictive permissions, log into Redshift, connect to the Snowplow database and execute the following SQL:
 
 ```sql
 CREATE USER storageloader PASSWORD '$storageloaderpassword';
@@ -323,9 +323,9 @@ Click the **Modify** button to save the changes. We now need to reboot the clust
 
 <a name="load" />
 
-## 8. Loading Snowplow data into Redshift using StorageLoader
+## 8. Loading Snowplow data into Redshift using RDB Loader
 
-Now that you have your Snowplow database and table setup on Redshift, you are ready to setup the StorageLoader to regularly upload Snowplow data into the table.
+Now that you have your Snowplow database and table setup on Redshift, you are ready to setup the EmrEtlRunner to regularly upload Snowplow data into the table.
 
 1. [Installing the StorageLoader](1-Installing-the-StorageLoader)
 2. [Using the StorageLoader](2-using-the-storageloader)

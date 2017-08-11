@@ -18,12 +18,12 @@ By [setting up the EmrEtlRunner](setting-up-EmrEtlRunner) (in the previous step)
 
 If you wish to analyse your data using a wider range of tools (e.g. BI tools like [Looker][looker], [ChartIO][chartio] or [Tableau][tableau], or statistical tools like [R][r]), you will want to load your data into a database like Amazon [Redshift][setup-redshift] or [PostgreSQL][setup-postgres] to enable use of these tools.
 
-The [StorageLoader][storage-loader-setup] is an application to make it simple to keep an updated copy of your data in Redshift. To setup Snowplow to automatically populate a PostgreSQL and/or Redshift database with Snowplow data, you need to first:
+The [RDB Loader][storage-loader-setup] is an application to make it simple to keep an updated copy of your data in Redshift. To setup Snowplow to automatically populate a PostgreSQL and/or Redshift database with Snowplow data, you need to first:
 
 1. [Create a database and table for Snowplow data in Redshift][setup-redshift] and/or
 2. [Create a database and table for Snowplow data in PostgreSQL][setup-postgres]
 
-Then, *afterwards*, you will need to [set up the StorageLoader to regularly transfer Snowplow data into your new store(s)][storage-loader-setup]
+Then, *afterwards*, you will need to [set up the EmrEtlRunner to regularly transfer Snowplow data into your new store(s)][storage-loader-setup]
 
 Note that instructions on setting up both Redshift and PostreSQL on EC2 are included in this setup guide and referenced from the links above.
 
