@@ -3,114 +3,81 @@
 [HOME](Home) » [SNOWPLOW SETUP GUIDE](Setting-up-Snowplow) » [Step 3: Setting up Enrich](Setting-up-enrich) » [Step 3.1: setting up EmrEtlRunner](Setting-up-EmrEtlRunner) [Step 3.1.1: Installing EmrEtlRunner](1-Installing-EmrEtlRunner) » Step 3.1.2: Using EmrEtlRunner
 
 1. [Overview](#usage-overview)
-2. [Command-line options](#cli-options)
-3. [Running in each mode](#running)
-4. [Checking the results](#checking)
-5. [Next-steps](#next-steps)
+2. [Commands](#commands)
+3. [Checking the results](#checking)
+4. [Next-steps](#next-steps)
 
 <a name="usage-overview"/>
 
 ## 1. Overview
 
-There are two usage modes for EmrEtlRunner:
+EmrEtlRunner works in **Rolling mode** where it processes whatever raw Snowplow event logs it finds
+in the In Bucket
 
-1. **Rolling mode** where EmrEtlRunner processes whatever raw Snowplow
-   event logs it finds in the In Bucket
-2. **Timespan mode** where EmrEtlRunner only processes those raw
-   Snowplow event logs whose timestamp is within a timespan specified
-   on the command-line
+<a name="commands"/>
 
-Timespan mode can be useful if you have a large backlog of raw Snowplow
-event logs and you want to start by processing just a small subset of
-those logs.
+## 2. Commands
 
-<a name="cli-options"/>
+### 2.1 Run command
 
-## 2. Command-line options
+The most useful command is the `run` command which allows you to actually run your EMR job:
 
-The EmrEtlRunner is an executable jar:
+    $ ./snowplow-emr-etl-runner run
 
-    $ ./snowplow-emr-etl-runner
+The available options are as follows:
 
-The command-line options for EmrEtlRunner look like this:
-
-    Usage: snowplow-emr-etl-runner [options]
-
-    Specific options:
+    Usage: run [options]
         -c, --config CONFIG              configuration file
         -n, --enrichments ENRICHMENTS    enrichments directory
         -r, --resolver RESOLVER          Iglu resolver file
         -t, --targets TARGETS            targets directory
         -d, --debug                      enable EMR Job Flow debugging
-        -s, --start YYYY-MM-DD           optional start date *
-        -e, --end YYYY-MM-DD             optional end date *
-        -x staging,s3distcp,emr{enrich,shred,elasticsearch},archive_raw,
-            --skip                       skip work step(s)
-        -E, --process-enrich LOCATION    run enrichment only on specified location. Implies --skip staging,shred,archive_raw
-        -S, --process-shred LOCATION     run shredding only on specified location. Implies --skip staging,enrich,archive_raw
+        -f {enrich,shred,elasticsearch,archive_raw,rdb_load,analyze,archive_enriched},
+            --resume-from                resume from the specified step
+        -x {staging,enrich,shred,elasticsearch,archive_raw,rdb_load,analyze,archive_enriched},
+            --skip                       skip the specified step(s)
+        -i, --include {vacuum}           include additional step(s)
+        -l, --lock PATH                  where to store the lock
+            --consul ADDRESS             address to the Consul server
 
-    * filters the raw event logs processed by EmrEtlRunner by their timestamp. Only
-      supported with 'cloudfront' collector format currently.
+Note that the `config` and `resolver` options are mandatory.
 
-    Common options:
-        -h, --help                       Show this message
-        -v, --version                    Show version
+### 2.2 Lint commands
 
-A note on the `--skip` option: this takes a list of individual steps to skip.
-So for example you could run **only** the EMR job with the command-line option:
+Other useful commands include the `lint` commands which allows you to check the validity of your
+resolver or enrichments with respect to their respective schemas.
 
-    $ ./snowplow-emr-etl-runner --skip staging,archive_raw --config config/config.yml --targets config/targets/ --resolver resolver.json --enrichments config/enrichments
+If you want to lint your resolver:
 
-Instead of using the --config option, you can pass the configuration to the EmrEtlRunner via stdin. You need to set `--config -` to signal that the config is to be read from stdin rather than from a file:
+    $ ./snowplow-emr-etl-runner lint resolver
 
-    $ cat config/config.yml | ./snowplow-emr-etl-runner --config - --targets config/targets/ --resolver resolver.json --enrichments config/enrichments
+The mandatory options are:
+
+    Usage: lint resolver [options]
+        -r, --resolver RESOLVER          Iglu resolver file
+
+If you want to lint your enrichments:
+
+    $ ./snowplow-emr-etl-runner lint enrichments
+
+The mandatory options are:
+
+    Usage: lint enrichments [options]
+        -r, --resolver RESOLVER          Iglu resolver file
+        -n, --enrichments ENRICHMENTS    enrichments directory
+
 
 <a name="running"/>
 
-## 3. Running in each mode
-
-### 3.1 Rolling mode
-
-Invoking EmrEtlRunner with just the `--config` option puts it into rolling
-mode, processing all the raw Snowplow event logs it can find in your In
-Bucket:
-
-    $ ./snowplow-emr-etl-runner --config config/config.yml --resolver config/resolver.json --enrichments config/enrichments --targets config/targets/
-
-### 3.2 Timespan mode
-
-To run EmrEtlRunner in timespan mode, you need to specify the `--start`
-and/or `--end` dates as well as the `--config` option, like so:
-
-    $ ./snowplow-emr-etl-runner \
-      --config config.yml \
-      --resolver config/resolver.json \
-      --start 2012-06-20 \
-      --end 2012-06-24  \
-      --targets config/targets/
-
-This will run EmrEtlRunner on log files which have timestamps in the period
-20 June 2012 to 24 June 2012 inclusive.
-
-Note that you do not have to specify both the start and end dates:
-
-1. Specify `--start` only and the timespan will run from your start date
-   up to today, inclusive
-2. Specify `--end` only and the timespan will run from the beginning of
-   time up to your end date, inclusive
-
-If your raw Snowplow logs are generated by the Amazon CloudFront collector,
-please note that CloudFront timestamps in **UTC**.
-
 <a name="checking"/>
 
-## 4. Checking the results
+## 3. Checking the results
 
-Once you have run the EmrEtlRunner you should be able to manually inspect in S3 the folder specified in the `:out:` parameter in your `config.yml` file and see new files generated, which will contain the cleaned data either for uploading into a storage target (e.g. Redshift or Infobright) or for analysing directly using Hive (or Pig or Mahout or some other Spark querying tool) on EMR.
+Once you have run the EmrEtlRunner you should be able to manually inspect in S3 the folder specified in the `:out:` parameter in your `config.yml` file and see new files generated, which will contain the cleaned data either for uploading into a storage target (e.g. Redshift) or for analysing directly using Hive or Spark or some other querying tool on EMR.
 
-Note: most Snowplow users run the 'spark' version of the ETL process, in which case the data generated is saved into subfolders with names of the form `part-000...`. If, however,  you are running the legacy 'hive' ETL (because e.g. you want to use Hive or Infobright as your storage target, rather than Redshift, which is the only storage target the 'spark' etl currently supports), the subfolders names will be of the format `dt=...`.
+Note: most Snowplow users run the 'spark' version of the ETL process, in which case the data generated is saved into subfolders with names of the form `part-000...`. If, however,  you are running the legacy 'hive' ETL (because e.g. you want to use Hive as your storage target, rather than Redshift, which is the only storage target the 'spark' etl currently supports), the subfolders names will be of the format `dt=...`.
 
-## 5. Next steps
+## 4. Next steps
 
 Comfortable using EmrEtlRunner? Then [schedule it][schedule] so that it regularly takes new data generated by the collector, processes it, cleans it, enriches it, and writes it back to S3.
 

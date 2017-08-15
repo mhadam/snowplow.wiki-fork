@@ -73,7 +73,7 @@ The archive contains both EmrEtlRunner and [StorageLoader](1-Installing-the-Stor
 $ unzip snowplow_emr_{{RELEASE_VERSION}}.zip
 ```
 
-You will see two files `snowplow-emr-etl-runner` and `snowplow-storage-loader` where the first one is the actual EmrEtlRunner.
+The archive should contain a `snowplow-emr-etl-runner` file.
 
 <a name="configuration"/>
 
