@@ -3,10 +3,10 @@
 [**HOME**](Home) > [**SNOWPLOW SETUP GUIDE**](Setting-up-Snowplow) > [Step 3: Setting up Enrich](Setting-up-enrich) > Configuring storage targets
 
 Snowplow offers the option to configure certain storage targets. This is done using configuration JSONs. 
-When running EmrEtlRunner or StorageLoader, the `--targets` argument should be populated with the filepath of a directory containing your configuration JSONs. 
+When running EmrEtlRunner, the `--targets` argument should be populated with the filepath of a directory containing your configuration JSONs. 
 Each storage target JSON file can have arbitrary name, but must conform it's JSON Schema.
 
-Some targets are handled by EmrEtlRunner (duplicate tracking, failure tracking) and some by StorageLoader (enriched data).
+Some targets are handled by EmrEtlRunner (duplicate tracking, failure tracking) and some by RDB Loader (enriched data).
 
 Here's a list of currently supported targets, grouped by purpose:
 
@@ -23,7 +23,7 @@ Here's a list of currently supported targets, grouped by purpose:
 
 ### Redshift
 
-Schema: [iglu:com.snowplowanalytics.snowplow.storage/redshift_config/jsonschema/1-0-0][redshift-schema]
+Schema: [iglu:com.snowplowanalytics.snowplow.storage/redshift_config/jsonschema/2-0-0][redshift-schema]
 
 1. `name`, a descriptive name for this Snowplow storage target
 2. `host`, the host (endpoint in Redshift parlance) of the databse to load.
@@ -47,7 +47,7 @@ Note: The difference between `VERIFY_CA` and `VERIFY_FULL` depends on the policy
 
 ### Postgres
 
-Schema: [iglu:com.snowplowanalytics.snowplow.storage/postgresql_config/jsonschema/1-0-0][postgresql-schema]
+Schema: [iglu:com.snowplowanalytics.snowplow.storage/postgresql_config/jsonschema/1-0-1][postgresql-schema]
 
 1. `name`, enter a descriptive name for this Snowplow storage target
 2. `host`, the host (endpoint in Redshift parlance) of the databse to
@@ -66,12 +66,14 @@ Schema: [iglu:com.snowplowanalytics.snowplow.storage/postgresql_config/jsonschem
  - `VERIFY_CA`: SSL must be used and the server certificate must be verified.
  - `VERIFY_FULL`: SSL must be used. The server certificate must be verified and the server hostname must match the hostname attribute on the certificate.
 10. `purpose`: common for all targets. PostgreSQL supports only `ENRICHED_DATA`
+11. `id`: optional machine-readable config id
+12. `roleArn`: AWS Role ARN allowing Redshift to read data from S3
 
 <a name="elasticsearch" />
 
 ### Elasticsearch
 
-Schema: [iglu:com.snowplowanalytics.snowplow.storage/elastic_config/jsonschema/1-0-0][elastic-schema]
+Schema: [iglu:com.snowplowanalytics.snowplow.storage/elastic_config/jsonschema/1-0-1][elastic-schema]
 
 1. `name`: a descriptive name for this Snowplow storage target
 2. `port`: The port to load. Normally 9200, should be 80 for Amazon Elasticsearch Service.
@@ -79,6 +81,7 @@ Schema: [iglu:com.snowplowanalytics.snowplow.storage/elastic_config/jsonschema/1
 4. `nodesWanOnly`: if this is set to true, the EMR job will disable node discovery. This option is necessary when using Amazon Elasticsearch Service.
 5. `type`: name of type
 6. `purpose`: common for all targets. Elasticsearch supports only `FAILED_EVENTS`
+7. `id`: optional machine-readable config id
 
 For information on setting up Elasticsearch itself, see [[Setting up Amazon Elasticsearch Service]].
 
@@ -86,7 +89,7 @@ For information on setting up Elasticsearch itself, see [[Setting up Amazon Elas
 
 ### Amazon DynamoDB
 
-Schema: [iglu:com.snowplowanalytics.snowplow.storage/amazon_dynamodb_config/jsonschema/1-0-0][amazon-dynamodb-schema]
+Schema: [iglu:com.snowplowanalytics.snowplow.storage/amazon_dynamodb_config/jsonschema/1-0-1][amazon-dynamodb-schema]
 
 1. `name`: a descriptive name for this Snowplow storage target
 2. `accessKeyId`: AWS Access Key Id
@@ -94,10 +97,11 @@ Schema: [iglu:com.snowplowanalytics.snowplow.storage/amazon_dynamodb_config/json
 4. `awsRegion`: AWS region
 5. `dynamodbTable`: DynamoDB table to store information about processed events
 6. `purpose`: common for all targets. Elasticsearch supports only `DUPLICATE_TRACKING`
+7. `id`: optional machine-readable config id
 
-[amazon-dynamodb-schema]: https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow.storage/amazon_dynamodb_config/jsonschema/1-0-0
-[elastic-schema]: https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow.storage/elastic_config/jsonschema/1-0-0
-[postgresql-schema]: https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow.storage/postgresql_config/jsonschema/1-0-0
-[redshift-schema]: https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow.storage/redshift_config/jsonschema/1-0-0
+[amazon-dynamodb-schema]: https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow.storage/amazon_dynamodb_config/jsonschema/2-0-0
+[elastic-schema]: https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow.storage/elastic_config/jsonschema/1-0-1
+[postgresql-schema]: https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow.storage/postgresql_config/jsonschema/1-0-1
+[redshift-schema]: https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow.storage/redshift_config/jsonschema/1-0-1
 
 [redshift-copy]: http://docs.aws.amazon.com/redshift/latest/dg/r_COPY.html
