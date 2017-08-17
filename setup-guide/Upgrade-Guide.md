@@ -182,6 +182,9 @@ storage:
 
 For a complete example, see our sample [`config.yml`](https://github.com/snowplow/snowplow/blob/r89-plain-of-jars/3-enrich/emr-etl-runner/config/config.yml.sample) template.
 
+Note that using the Spark artifacts is incompatible with instances types having only one virtual CPU
+such as m1.medium.
+
 ### Read more
 
 * [R89 Blog Post](https://snowplowanalytics.com/blog/2017/06/12/snowplow-r89-plain-of-jars-released/)
