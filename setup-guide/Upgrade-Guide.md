@@ -6,6 +6,7 @@ You can also use [Snowplow Version Matrix](Snowplow-version-matrix) as a guidanc
 
 For easier navigation, please, follow the links below.
 
+- [Snowplow 91 Stonehenge](#r91) (**r91**) 2017-08-17
 - [Snowplow 90 Lascaux](#r90) (**r90**) 2017-07-26
 - [Snowplow 89 Plain of Jars](#r89) (**r89**) 2017-06-12
 - [Snowplow 88 Angkor Wat](#r88) (**r88**) 2017-04-27
@@ -52,6 +53,36 @@ For easier navigation, please, follow the links below.
 - [Snowplow 0.9.2](#v0.9.2) (**v0.9.2**) 2014-04-30
 - [Snowplow 0.9.1](#v0.9.1) (**v0.9.1**) 2014-04-11
 - [Snowplow 0.9.0](#v0.9.0) (**v0.9.0**) 2014-02-04
+
+<a name="r91" />
+
+## Snowplow 91 Stonehenge
+
+his release revolves around making EmrEtlRunner, the component launching the EMR steps for the batch pipeline, significantly more robust. Most notably, this release fixes a long-standing bug in the way the staging step was performed, which affected all users of the Clojure Collector ([issue #3085](https://github.com/snowplow/snowplow/issues/3085)).
+
+### Upgrade steps
+
+#### Upgrading EmrEtlRunner
+
+The latest version of the *EmrEtlRunner* is available from our Bintray [here](http://dl.bintray.com/snowplow/snowplow-generic/snowplow_emr_r91_stonehenge.zip).
+
+Make sure to use the `run` command when launching *EmrEtlRunner*, for example:
+
+```bash
+./snowplow-emr-etl-runner run \
+  -c config.yml \
+  -r resolver.json
+```
+
+Additionally, it is advised to setup a local (through a file) or distributed (through Consul) lock:
+
+```bash
+./snowplow-emr-etl-runner run \
+  -c       config.yml \
+  -r       resolver.json \
+  --lock   path/to/lock \
+  --consul http://127.0.0.1:8500 # Optional address to your Consul server
+```
 
 <a name="r90" />
 
