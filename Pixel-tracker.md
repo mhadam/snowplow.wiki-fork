@@ -11,13 +11,11 @@ This guide covers:
 
 ## 1. What is the Pixel tracker?
 
-The Pixel tracker is a wizard that generates an HTML-only tracking tag (no JavaScript) to track opens / views of HTML content that does not support JavaScript. Examples of use cases include HTML emails.
+The Pixel tracker is an HTML-only tracking tag (no JavaScript) to track opens / views of HTML content that does not support JavaScript. Examples of use cases include HTML emails.
 
 In a normal JavaScript tag, the name-value pairs of data that are sent through to the Snowplow collector via the querystring are calculated on the fly by the JavaScript. (Examples of data points that are calculated on the fly include `user_id`, or `browser_features`.)
 
 In an environment where JavaScript is not permitted, these values need to be set in advance and hardcoded into the tracking tag. As a result, if you want to record a different `page_title`, for example, for several different HTML-only web pages using the tracking code, you will need to generate a different tracking tag for each of those different web pages, with the right `page_title` set for each.
-
-To make it easy to quickly generate Pixel tracking tags, we have created a wizard. This is hosted on [snowplowanalytics.com][wizard]. The source code is available on the core [Github repo][pixel-repo].
 
 <a name="anatomy" />
 
