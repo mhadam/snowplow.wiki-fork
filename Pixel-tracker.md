@@ -4,9 +4,8 @@ This guide covers:
 
 1. [What is the Pixel tracker?](#what)
 2. [Anatomy of a Pixel tracking tag](#anatomy)
-3. [The tag-generating wizard](#wizard)
-4. [Using the Pixel tracker with the Clojure collector](#clojure)
-5. [Click tracking](#click-tracking)
+3. [Using the Pixel tracker with the Clojure collector](#clojure)
+4. [Click tracking](#click-tracking)
 
 <a name="what" />
 
@@ -38,23 +37,9 @@ Some things to note about the tag:
 2. The endpoint is set to a Clojure collector that we are running at `collector.snplow.com`.
 3. Five data points are passed on the query string: the event type (`pageview`), the page name (`Root README`), the URL (`http://github.com/snowplow/snowplow`), the application id (`snowplow`), the platform (`web`) and the tracker version (`no-js-0.1.0`)
 
-<a name="wizard" />
-
-## 3. The tag-generating wizard
-
-The [wizard] generates the a tracking tag given:
-
-* A collector endpoint (or Cloudfront subdomain)
-* The page scheme (HTTP or HTTPS)
-* The page name
-* The page URL (if provided)
-* The application ID
-
-It takes care of URL encoding of values (e.g. for page title).
-
 <a name="clojure" />
 
-## 4. Using the Pixel tracker with the Clojure collector
+## 3. Using the Pixel tracker with the Clojure collector
 
 When using the Pixel tracker with the Clojure collector, the Clojure collector sets a `user_id` and drops this on a browser cookie.
 
@@ -62,7 +47,7 @@ Care must therefore be exercised when using the Pixel tracker on domains that yo
 
 <a name="click-tracking" />
 
-## 5. Click tracking
+## 4. Click tracking
 
 **This feature requires Snowplow R72+ and the Clojure Collector 1.1.0+**
 
@@ -86,5 +71,4 @@ How Snowplow attaches the `uri_redirect` to the event depends on what other Trac
 1. If you attached an `&e={{event type}}` to your event, then the `uri_redirect` will be added to the contexts array of your event
 2. If you did not attach an `&e={{event type}}` to your event, then this event will be treated as an unstructured event and the `uri_redirect` will be attached as the event itself
 
-[wizard]: http://snowplowanalytics.com/no-js-tracker.html
 [pixel-repo]: https://github.com/snowplow/snowplow/tree/master/1-trackers/no-js-tracker
