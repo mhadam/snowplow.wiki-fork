@@ -1,10 +1,10 @@
-[**HOME**](Home) » [**SNOWPLOW SETUP GUIDE**](Setting-up-Snowplow) » [**Step 4: setting up alternative data stores**](Setting-up-alternative-data-stores) » [Kinesis-LZO-S3-Sink-Setup](Kinesis-LZO-S3-Sink-Setup) » Kinesis at-least-once processing
+[**HOME**](Home) » [**SNOWPLOW SETUP GUIDE**](Setting-up-Snowplow) » [**Step 4: setting up alternative data stores**](Setting-up-alternative-data-stores) » [Snowplow-S3-Loader-Setup](Snowplow-S3-Loader-Setup) » Kinesis at-least-once processing
 
 ## Overview
 
-Kinesis LZO S3 Sink is using the [Amazon Kinesis Client Library](http://docs.aws.amazon.com/kinesis/latest/dev/developing-consumers-with-kcl.html#kinesis-record-processor-overview-kcl) (KCL). The KCL helps to consume and process data from Amazon Kinesis streams. It takes care of many of the complex tasks associated with distributed computing, such as load-balancing across multiple instances, responding to instance failures, checkpointing processed records, and reacting to resharding.
+Snowplow S3 Loader is using the [Amazon Kinesis Client Library](http://docs.aws.amazon.com/kinesis/latest/dev/developing-consumers-with-kcl.html#kinesis-record-processor-overview-kcl) (KCL). The KCL helps to consume and process data from Amazon Kinesis streams. It takes care of many of the complex tasks associated with distributed computing, such as load-balancing across multiple instances, responding to instance failures, checkpointing processed records, and reacting to resharding.
 
-On the first run of the application, the Kinesis Connectors Library creates a DynamoDB table to keep track of what it has consumed from the stream so far. Either on first run it starts consuming from `LATEST` being the most recent record in the stream or `TRIM_HORIZON` being the oldest record available in the stream.
+On the first run of the application, the Kinesis Connectors Library creates a DynamoDB table to keep track of what it has consumed from the stream so far. Either on first run it starts consuming from `LATEST` being the most recent record in the stream,`TRIM_HORIZON` being the oldest record available in the stream or `AT_TIMESTAMP` being first record after the specified timestamp.
 
 At runtime:
 
@@ -19,7 +19,7 @@ At runtime:
 Kinesis checkpointing works in the following way:
 
 - Each Kinesis consumer periodically stores the current position of the stream in the backing DynamoDB table. This allows the system to recover from failures and continue processing where the application left off.
-- If no Kinesis checkpoint info exists when the consumer starts, it will start either from the oldest record available (`TRIM_HORIZON`) or from the latest tip (`LATEST`). This is configurable.
+- If no Kinesis checkpoint info exists when the consumer starts, it will start either from the oldest record available (`TRIM_HORIZON`), from the latest tip (`LATEST`) or from the specified timestamp (`AT_TIMESTAMP`). This is configurable.
 - `LATEST` could lead to missed records if data is added to the stream while no Kinesis consumer is running (and no checkpoint info is being stored).
 - `TRIM_HORIZON` may lead to duplicate processing of records where the impact is dependent on checkpoint frequency and processing idempotency.
 
