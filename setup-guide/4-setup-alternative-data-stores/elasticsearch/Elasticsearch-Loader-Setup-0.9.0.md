@@ -2,7 +2,7 @@
 
 [**HOME**](Home) > [**SNOWPLOW SETUP GUIDE**](Setting-up-Snowplow) > [**Step 4: setting up alternative data stores**](Setting-up-alternative-data-stores) > [Elasticsearch-Loader-Setup](Elasticsearch-Loader-Setup)
 
-This documentation is for version 0.10.0 of the Elasticsearch Loader.  For previous versions, refer
+This documentation is for version 0.9.0 of the Elasticsearch Loader.  For previous versions, refer
 to:
 
 * **[Version 0.1.0 - 0.3.0][0.1]**
@@ -10,7 +10,6 @@ to:
 * **[Version 0.5.0 - 0.6.0][0.5]**
 * **[Version 0.7.0][0.7]**
 * **[Version 0.8.0][0.8]**
-* **[Version 0.9.0][0.9]**
 
 ## Overview
 
@@ -162,7 +161,7 @@ sbt "project tcp2x" assembly # if you want to use the transport API with a 2.x c
 ```
 
 You will then find the fat jar in the corresponding directory:
-`{http,tcp,tcp2x}/target/scala-2.11/snowplow-elasticsearch-loader-{http,tcp,tcp-2x}-0.10.0.jar`.
+`{http,tcp,tcp2x}/target/scala-2.11/snowplow-elasticsearch-loader-{http,tcp,tcp-2x}-0.9.0.jar`.
 It is now ready to be deployed.
 
 ## Using the Elasticsearch Loader
@@ -172,28 +171,20 @@ It is now ready to be deployed.
 The sink is configured using a HOCON file, for which you can find an example [here][config-file].
 These are the fields:
 
-* `source`: Change this to "kinesis", "stdin" or "nsq".
+* `source`: Change this from "kinesis" to "stdin" to get input from stdin rather than Kinesis. You can pipe in the output of [Stream Enrich][stream-enrich].
 * `sink.good`: Where to write good events. "elasticsearch" or "stdout".
-* `sink.bad`: Where to write error JSONs for bad events. "kinesis", "stderr" or "nsq" (or "none" to ignore bad events).
-* `enabled`: "good" if the input stream contains successfully enriched events; "bad" if it contains bad rows; "plain-json" if it contains plain JSON.
-* `aws.accessKey` and `aws.secretKey`: Change these to your AWS credentials. You can alternatively leave them as "default", in which case the [DefaultAWSCredentialsProviderChain][DefaultAWSCredentialsProviderChain] will be used.
-* `kinesis.initialPosition`: Where to start reading from the stream the first time the app is run. "TRIM_HORIZON" for as far back as possible, "LATEST" for as recent as possibly, "AT_TIMESTAMP" for after specified timestamp.
-* `kinesis.initialTimestamp`: Need to be specified when initial position is "AT_TIMESTAMP"
-* `kinesis.maxRecords`: Maximum number of records fetched in a single request.
+* `sink.bad`: Where to write error JSONs for bad events. "kinesis" or "stderr" (or "none" to ignore bad events).
+* `stream-type`: "good" if the input stream contains successfully enriched events; "bad" if it contains bad rows.
+* `aws.access-key` and `aws.secret-key`: Change these to your AWS credentials. You can alternatively leave them as "default", in which case the [DefaultAWSCredentialsProviderChain][DefaultAWSCredentialsProviderChain] will be used.
+* `kinesis.in.stream-name`: The name of the input Kinesis stream
+* `kinesis.in.initial-position`: Where to start reading from the stream the first time the app is run. "TRIM_HORIZON" for as far back as possible, "LATEST" for as recent as possibly.
+* `kinesis.in.maxRecords`: Maximum number of records fetched in a single request.
+* `kinesis.out.stream-name`: The name of the output Kinesis stream. Records which cannot be converted to JSON or can be converted but are rejected by Elasticsearch get sent here.
 * `kinesis.region`: The AWS region where the streams are located.
-* `kinesis.appName`: Unique identifier for the app which ensures that if it is stopped and restarted, it will restart at the correct location.
-* `nsq.channelName`: Channel name for NSQ source stream. If more than one application reading from the same NSQ topic at the same time, all of them must have unique channel name to be able to get all the data from the same topic
-* `nsq.host`: Hostname for NSQ tools
-* `nsq.port`: HTTP port number for nsqd
-* `nsq.lookupPort`: HTTP port number for nsqlookupd
-* `stream.inStreamName`: The name of the input stream of the tool which you choose as a source.
-* `stream.outStreamName`: The name of the output stream of the tool which you choose as sink. Records which cannot be converted to JSON or can be converted but are rejected by Elasticsearch get sent here.
-* `streams.buffer.byteLimit`: Whenever the total size of the buffered records exceeds this number, they will all be sent to elasticsearch. 
-* `streams.buffer.recordLimit`: Whenever the total number of buffered records exceeds this number, they will all be sent to elasticsearch.
-* `streams.buffer.timeLimit`: If this length of time passes without the buffer being flushed, the buffer will be flushed.
+* `kinesis.app-name`: Unique identifier for the app which ensures that if it is stopped and restarted, it will restart at the correct location.
 * `elasticsearch.client.endpoint`: The Elasticesarch cluster endpoint.
 * `elasticsearch.client.port`: The Elasticesarch cluster port.
-* `elasticsearch.client.maxTimeout`: The Elasticesarch maximum timeout in milliseconds.
+* `elasticsearch.client.max-timeout`: The Elasticesarch maximum timeout in milliseconds.
 * `elasticsearch.client.ssl`: If using the HTTP API whether to use SSL or not.
 * `elasticsearch.aws.signing`: If using the Amazon Elasticsearch service and the HTTP API, this lets
 you sign your requests.
@@ -201,14 +192,18 @@ you sign your requests.
 located.
 * `elasticsearch.cluster.name`: The Elasticesarch cluster name.
 * `elasticsearch.cluster.index`: The Elasticsearch index name.
-* `elasticsearch.cluster.clusterType`: The Elasticesarch type name.
+* `elasticsearch.cluster.type`: The Elasticesarch type name.
+* `buffer`: The app maintains a buffer of enriched events and won't send them until certain conditions are met.
+ - `buffer.byte-limit`: Whenever the total size of the buffered records exceeds this number, they will all be sent to Elasticsearch.
+ - `buffer.record-limit`: Whenever the total number of buffered records exceeds this number, they will all be sent to Elasticsearch.
+ - `buffer.time-limit`: If this length of time passes without the buffer being flushed, the buffer will be flushed.
 
 ### Monitoring
 
 You can also include Snowplow Monitoring in the application.  This is set up through a new section at the bottom of the config.  You will need to ammend:
 
-+ `monitoring.snowplow.collectorUri` insert your snowplow collector URI here.
-+ `monitoring.snowplow.appId` the app-id used in decorating the events sent.
++ `monitoring.snowplow.collector-uri` insert your snowplow collector URI here.
++ `monitoring.snowplow.app-id` the app-id used in decorating the events sent.
 
 If you do not wish to include Snowplow Monitoring, remove the entire `monitoring` section from the config.
 
@@ -217,9 +212,9 @@ If you do not wish to include Snowplow Monitoring, remove the entire `monitoring
 The Elasticsearch Loader is a jarfile. Simply provide the configuration file as a parameter:
 
 ```bash
-java -jar snowplow-elasticsearch-loader-http-0.10.0.jar --config my.conf # if using the HTTP API
-java -jar snowplow-elasticsearch-loader-tcp-0.10.0.jar --config my.conf # if using the transport API with a 5.x cluster
-java -jar snowplow-elasticsearch-loader-tcp-2x-0.10.0.jar --config my.conf # if using the transport API with a 2.x cluster
+java -jar snowplow-elasticsearch-loader-http-0.9.0.jar --config my.conf # if using the HTTP API
+java -jar snowplow-elasticsearch-loader-tcp-0.9.0.jar --config my.conf # if using the transport API with a 5.x cluster
+java -jar snowplow-elasticsearch-loader-tcp-2x-0.9.0.jar --config my.conf # if using the transport API with a 2.x cluster
 ```
 
 This will start the process of reading events from Kinesis and writing them to an Elasticsearch cluster.
@@ -233,8 +228,7 @@ This will start the process of reading events from Kinesis and writing them to a
 [0.4]: https://github.com/snowplow/snowplow/wiki/kinesis-elasticsearch-sink-setup-0.4.0
 [0.5]: https://github.com/snowplow/snowplow/wiki/kinesis-elasticsearch-sink-setup-0.5.0
 [0.7]: https://github.com/snowplow/snowplow/wiki/kinesis-elasticsearch-sink-setup-0.7.0
-[0.8]: https://github.com/snowplow/snowplow/wiki/kinesis-elasticsearch-sink-setup-0.8.0
-[0.9]: https://github.com/snowplow/snowplow/wiki/kinesis-elasticsearch-sink-setup-0.9.0
+[0.7]: https://github.com/snowplow/snowplow/wiki/kinesis-elasticsearch-sink-setup-0.8.0
 
 [scala]: https://www.scala-lang.org
 [sbt]: http://www.scala-sbt.org

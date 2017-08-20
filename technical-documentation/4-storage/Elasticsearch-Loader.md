@@ -1,6 +1,6 @@
 [**HOME**](Home) > [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow-technical-documentation) > [**Storage**](storage-documentation) > Elasticsearch Loader
 
-The Elasticsearch Loader converts enriched Snowplow events from a Kinesis stream to JSON and writes them to an Elasticsearch cluster.
+The Elasticsearch Loader converts enriched Snowplow events from a Kinesis or NSQ stream to JSON and writes them to an Elasticsearch cluster.
 
 The resulting JSONs are like the [Snowplow Canonical Event](canonical-event-model) model with the following changes:
 
