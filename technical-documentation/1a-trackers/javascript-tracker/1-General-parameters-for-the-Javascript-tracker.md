@@ -161,7 +161,6 @@ snowplow_name_here("newTracker", "cf", "d3rkrsqld9gmqf.cloudfront.net", {
   },
   cookieLifetime: 86400 * 31,
   stateStorageStrategy: "cookie",
-  respectOptOutCookie: false,
   contexts: {
     webPage: true,
     performanceTiming: true,
