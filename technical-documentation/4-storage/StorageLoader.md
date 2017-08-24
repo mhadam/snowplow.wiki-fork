@@ -1,6 +1,6 @@
 [**HOME**](Home) » [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow-technical-documentation) » [**Storage**](storage-documentation) » The StorageLoader
 
-**StorageLoader is discounted since R90 Lascaux release and replaced with [RDB Loader][Relational-Database-Loader]**
+**StorageLoader is discounted since R90 Lascaux release and replaced with [RDB Loader][rdb-loader]**
 
 ## An overview of how the StorageLoader instruments the loading of data from S3 into Redshift
 
@@ -34,6 +34,7 @@ The whole process could be depicted with the following dataflow diagram.
 
 [[/technical-documentation/images/storage-loader-dataflow.png]]
 
+[rdb-loader]: https://github.com/snowplow/snowplow/wiki/Relational-Database-Loader
 [config-file]: https://github.com/snowplow/snowplow/blob/master/3-enrich/emr-etl-runner/config/config.yml.sample
 [storage-loader-setup]: 1-Installing-the-StorageLoader
 [postgres.yml.sample]: https://github.com/snowplow/snowplow/blob/master/4-storage/storage-loader/config/postgres.yml.sample
