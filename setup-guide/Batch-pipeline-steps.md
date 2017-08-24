@@ -1,9 +1,13 @@
 [**HOME**](Home) » [**SNOWPLOW SETUP GUIDE**](Setting-up-Snowplow) » Batch Pipeline Steps
 
 *This page refers to Snowplow R91+*
+
 *Click [here](Batch-pipeline-steps-r90) for the corresponding documentation for R90*
+
 *Click [here](Batch-pipeline-steps-r89) for the corresponding documentation for R89*
+
 *Click [here](Batch-pipeline-steps-r87) for the corresponding documentation for R87-R88*
+
 *Click [here](Batch-pipeline-steps-r86) for the corresponding documentation for R86 and earlier*
 
 ## Dataflow diagram
