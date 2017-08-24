@@ -868,7 +868,7 @@ function trackLinkClick(targetUrl, elementId, elementClasses, elementTarget, ele
 Of these arguments, only `targetUrl` is required. This is how to use `trackLinkClick`:
 
 ```javascript
-snowplow_name_here('trackLinkCLick', 'http://www.example.com', 'first-link', ['class-1', 'class-2'], '', 'this page');
+snowplow_name_here('trackLinkClick', 'http://www.example.com', 'first-link', ['class-1', 'class-2'], '', 'this page');
 ```
 
 `trackLinkClick` can also be passed an array of custom contexts as an additional final parameter. See [Contexts](#custom-contexts) for more information.
