@@ -2,7 +2,7 @@
 
 *This page refers to Snowplow R87-R88*
 
-*Click [here](Batch-pipeline-steps) for the corresponding documentation for other releases
+*Click [here](Batch-pipeline-steps) for the corresponding documentation for other releases*
 
 ## Dataflow diagram
 
