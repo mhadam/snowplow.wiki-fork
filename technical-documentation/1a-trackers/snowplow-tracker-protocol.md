@@ -589,7 +589,7 @@ The tracker will wrap this [self-describing JSON][self-desc-jsons] in an outer s
 {
 
   // Tells Snowplow this is an unstructured event
-  schema: 'iglu:com.my_company/unstruct_event/jsonschema/1-0-0',
+  schema: 'iglu:com.snowplowanalytics.snowplow/unstruct_event/jsonschema/1-0-0',
   data: {
 
     // Tells Snowplow this is a viewed_product event
