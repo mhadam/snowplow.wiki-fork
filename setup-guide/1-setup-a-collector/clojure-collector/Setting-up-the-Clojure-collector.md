@@ -11,7 +11,7 @@ The Clojure collector has been designed to run on [Amazon's Elastic Beanstalk][e
 
 ## Contents
 
-Setting up the Clojure collector is a 6 step process:
+Setting up the Clojure collector is a 5 step process:
 
 1. [[Download the Clojure collector WAR file or compile it from source]]. (Required)  
 2. [[Create a new application in Elastic Beanstalk and upload the WAR file into it]]. (Required)  
