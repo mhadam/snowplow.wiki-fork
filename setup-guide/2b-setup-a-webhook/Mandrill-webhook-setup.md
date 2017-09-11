@@ -86,17 +86,7 @@ Once you click the **Create Webhook** button it will attempt to authenticate tha
 
 If you are running the Snowplow batch flow with Amazon Redshift, then you should deploy the relevent event tables into your Amazon Redshift.
 
-You can find the table definitions here:
-
-* [com_mandrill_message_sent_1.sql][sent-sql]
-* [com_mandrill_message_bounced_1.sql][bounced-sql]
-* [com_mandrill_message_soft_bounced_1.sql][soft-bounced-sql]
-* [com_mandrill_message_opened_1.sql][opened-sql]
-* [com_mandrill_message_marked_as_spam.sql][spam-sql]
-* [com_mandrill_message_rejected_1.sql][rejected-sql]
-* [com_mandrill_message_delayed_1.sql][delayed-sql]
-* [com_mandrill_message_clicked_1.sql][clicked-sql]
-* [com_mandrill_recipient_unsubscribed_1.sql][unsub-sql]
+You can find the table definitions [here at Iglu Central](https://github.com/snowplow/iglu-central/tree/master/sql/com.mandrill).
 
 Make sure to deploy this table into the same schema as your `events` table.
 
