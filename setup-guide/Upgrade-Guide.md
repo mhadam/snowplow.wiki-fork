@@ -6,6 +6,7 @@ You can also use [Snowplow Version Matrix](Snowplow-version-matrix) as a guidanc
 
 For easier navigation, please, follow the links below.
 
+- [Snowplow 92 Maiden Castle](#r92) (**r92**) 2017-09-11
 - [Snowplow 91 Stonehenge](#r91) (**r91**) 2017-08-17
 - [Snowplow 90 Lascaux](#r90) (**r90**) 2017-07-26
 - [Snowplow 89 Plain of Jars](#r89) (**r89**) 2017-06-12
@@ -54,11 +55,37 @@ For easier navigation, please, follow the links below.
 - [Snowplow 0.9.1](#v0.9.1) (**v0.9.1**) 2014-04-11
 - [Snowplow 0.9.0](#v0.9.0) (**v0.9.0**) 2014-02-04
 
+<a name="r92" />
+
+## Snowplow 92 Maiden Castle
+
+This release most notably solves a bug which occurred if one were to skip the shred step, more
+information is available in [issue #3403](https://github.com/snowplow/snowplow/issues/3403) and
+[the dedicated Discourse post](https://discourse.snowplowanalytics.com/t/important-alert-r90-r91-bug-may-result-in-shredded-types-not-loading-into-redshift-after-recovery/1422).
+
+### Upgrade steps
+
+#### Upgrading EmrEtlRunner
+
+The latest version of the *EmrEtlRunner* is available from our Bintray [here](http://dl.bintray.com/snowplow/snowplow-generic/snowplow_emr_r92_maiden_castle.zip).
+
+#### Updating config.yml
+
+In order to update RDB Loader you need to make following change to your configuration YAML:
+
+```yaml
+storage:
+  versions:
+    rdb_loader: 0.13.0        # WAS 0.12.0
+```
+
+For a complete example, see our sample [`config.yml`](https://github.com/snowplow/snowplow/blob/r90-lascaux/3-enrich/emr-etl-runner/config/config.yml.sample) template.
+
 <a name="r91" />
 
 ## Snowplow 91 Stonehenge
 
-his release revolves around making EmrEtlRunner, the component launching the EMR steps for the batch pipeline, significantly more robust. Most notably, this release fixes a long-standing bug in the way the staging step was performed, which affected all users of the Clojure Collector ([issue #3085](https://github.com/snowplow/snowplow/issues/3085)).
+This release revolves around making EmrEtlRunner, the component launching the EMR steps for the batch pipeline, significantly more robust. Most notably, this release fixes a long-standing bug in the way the staging step was performed, which affected all users of the Clojure Collector ([issue #3085](https://github.com/snowplow/snowplow/issues/3085)).
 
 ### Upgrade steps
 
