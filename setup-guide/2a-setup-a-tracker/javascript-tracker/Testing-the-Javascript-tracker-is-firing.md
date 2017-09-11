@@ -24,6 +24,8 @@ In the above example, we've selected one of the requests, and clicked on the **P
 * We see that the status of the request is a '200 OK'. That's good!
 * We can see the different parameters on the query string. In particular, we can see that `e` is set to 'pp': `e` is event type: and 'pp' represents a page ping event. We can also see that `duid`, which is the `domain_userid` is set to '8fbe862fff4ddef3'. You can look up the meaning of the other parameters on the [Snowplow Tracker Protocol page](SnowPlow-Tracker-Protocol).
 
+**HINT**: Test that the JavaScript tracker is working correctly, including decoding embedded JSON, using [Snowpow Inspector](https://chrome.google.com/webstore/detail/snowplow-inspector/maplkdomeamdlngconidoefjpogkmljm), a Chrome extension that exposes a new tab for Snowplow beacons inside the developer tools.
+
 #### 3. Specific things to check for
 
 We recommend checking the following:
