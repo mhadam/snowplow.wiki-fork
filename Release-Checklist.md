@@ -17,3 +17,4 @@ All the things to tick off when doing a new release:
 14. **Trello card to Ihor to update upgrade guide**
 14. **Tweet** - put `#opensource` in the tweet
 15. **Thread on Discourse** - final step
+16. **Deploy final** - to our cluster
