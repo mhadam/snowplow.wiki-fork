@@ -1,6 +1,6 @@
 <a name="top" />
 
-[**HOME**](Home) > [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow-technical-documentation) > [**Trackers**](trackers) > CPP Tracker
+[**HOME**](Home) » [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow-technical-documentation) » [**Trackers**](trackers) » CPP Tracker
 
 ## Contents
 
@@ -359,7 +359,7 @@ If a visitor arrives on a page advertising a movie, the dictionary for a single 
 ```c++
 vector<SelfDescribingJson> contexts;
 SelfDescribingJson sdj(
-  "iglu:com.acme_company/movie_poster/jsonschema/2.1.1",
+  "iglu:com.acme_company/movie_poster/jsonschema/2-1-1",
   "{\"movie_name\":\"Solaris\",\"poster_country\":\"JP\"}"_json
 );
 contexts.push_back(sdj);
