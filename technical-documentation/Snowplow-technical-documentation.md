@@ -60,7 +60,8 @@ The technical documentation reflects the Snowplow architecture, with six loosely
 
 [Storage Overview](Storage-documentation)  
 [Relational Database Shredder](Relational-Database-Shredder)
-[Storage in S3](S3-storage)  
+[S3 Loader](S3-loader)  
+[Elasticsearch Loader](Elasticsearch-loader)
 [Storage in Redshift](amazon-redshift-storage)  
 [Storage in PostgreSQL](postgresql-storage)   
 [Storage in Infobright](infobright-storage) (deprecated)  
