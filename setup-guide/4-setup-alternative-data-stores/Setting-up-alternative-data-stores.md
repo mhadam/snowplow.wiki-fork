@@ -8,7 +8,7 @@ Snowplow supports storing your data into four different data stores:
 
 | **Storage**                          | **Description**                                                                                               | **Status**       |
 |:-------------------------------------|:--------------------------------------------------------------------------------------------------------------|:-----------------|
-| S3 (EMR, [Kinesis][kinesis])         | Data is stored in the S3 file system where it can be analysed using [EMR][emr](e.g. Hive, Pig, Mahout)        | Production-ready |
+| S3 (EMR, [Kinesis][kinesis])         | Data is stored in the S3 file system where it can be analysed using [EMR][emr] (e.g. Hive, Spark)             | Production-ready |
 | [Redshift][setup-redshift]           | A columnar database offered as a service on EMR. Optimized for performing OLAP analysis. Scales to Petabytes  | Production-ready |
 | [PostgreSQL][setup-postgres]         | A popular, open source, RDBMS database                                                                        | Production-ready |
 | [Elasticsearch][setup-elasticsearch] | A search server for JSON documents                                                                            | Production-ready |
@@ -32,14 +32,11 @@ All done? Then get started with [data modeling][modeling] or [start analysing yo
 **Note**: We recommend running all Snowplow AWS operations through an IAM user with the bare minimum permissions required to run Snowplow. Please see our [IAM user setup page](IAM-setup) for more information on doing this.
 
 [emr]: http://aws.amazon.com/elasticmapreduce/
-[kinesis]: kinesis-lzo-s3-sink-setup
-[infobright]: http://www.infobright.org/
+[kinesis]: snowplow-s3-loader-setup
 [redshift]: http://aws.amazon.com/redshift/
-[skydb]: http://skydb.io/
 [chartio]: http://chartio.com/
 [storageloader]: https://github.com/snowplow/snowplow/tree/master/4-storage/storage-loader
 [setup-redshift]: setting-up-redshift
-[setup-infobright]: Setting-up-Infobright
 [storage-loader-setup]: 1-Installing-the-StorageLoader
 [tableau]: http://www.tableausoftware.com/
 [analyse]: Setting-up-Snowplow#step6

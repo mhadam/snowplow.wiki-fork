@@ -120,13 +120,13 @@ every Elasticsearch version
   - this [Download link][esl-dl-tcp] for the version using the transport API for 5.x clusters
   - this [Download link][esl-dl-tcp-2x] for the version using the transport API for 2.x clusters
 
-### 4.4 Kinesis LZO S3 Sink resources
+### 4.4 Snowplow S3 Loader resources
 
-The Kinesis S3 app is available for download separately here:
+The Snowplow S3 Loader app is available for download separately here:
 
-    http://dl.bintray.com/snowplow/snowplow-generic/kinesis_s3_0.5.0.zip
+    http://dl.bintray.com/snowplow/snowplow-generic/snowplow_s3_loader_0.6.0.zip
 
-Right-click on this [Download link][kinesis-s3-download] to save it down locally.
+Right-click on this [Download link][s3-loader-download] to save it down locally.
 
 ## 5. Analytics
 
@@ -157,7 +157,7 @@ Please see the [[Artifact repositories]] wiki page for more information.
 
 [bintray]: https://bintray.com/
 [kinesis-download]: https://dl.bintray.com/snowplow/snowplow-generic/snowplow_kinesis_r85_metamorphosis.zip
-[kinesis-s3-download]: http://dl.bintray.com/snowplow/snowplow-generic/kinesis_s3_0.5.0.zip
+[s3-loader-download]: http://dl.bintray.com/snowplow/snowplow-generic/snowplow_s3_loader_0.6.0.zip
 [ssc-download]: http://dl.bintray.com/snowplow/snowplow-generic/snowplow_scala_stream_collector_0.9.0.zip
 [se-download]: http://dl.bintray.com/snowplow/snowplow-generic/snowplow_stream_enrich_0.10.0.zip
 [esl-dl-http]: http://dl.bintray.com/snowplow/snowplow-generic/snowplow_elasticsearch_loader_http_0.9.0.zip
