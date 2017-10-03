@@ -2,11 +2,12 @@
 
 ## Running
 
-The Scala Stream Collector is an executable jarfile which should be runnable from any Unix-like shell environment. Simply provide the configuration file as a parameter:
+The Scala Stream Collector is a jarfile. Simply provide the configuration file as a parameter:
 
-    $ ./snowplow-stream-collector-0.[version].0 --config my.conf
+    $ java -jar snowplow-stream-collector-0.[version].0.jar --config my.conf
 
-This will start the collector as a HTTP service and write serialized Thrift records to either `stdout` or Kinesis, depending on your configuration.
+This will start the collector as a HTTP service and write serialized Thrift records to either
+`stdout`, Kinesis or Kafka, depending on your configuration.
 
 ## Healthcheck
 

@@ -2,7 +2,7 @@ To simplify setting up and running Snowplow, the Snowplow Analytics team provide
 
 As we release new versions of these assets, we will leave old versions unchanged on their existing URLs - so you won't have to upgrade your own Snowplow installation unless you want to.
 
-**Disclaimer: While Snowplow Analytics Ltd will make every reasonable effort to host these assets, we will not be liable for any failure to provide this service. All of the hosted assets listed below are freely available via [our GitHub repository][snowplow-repo] and you are encouraged to host them yourselves.** 
+**Disclaimer: While Snowplow Analytics Ltd will make every reasonable effort to host these assets, we will not be liable for any failure to provide this service. All of the hosted assets listed below are freely available via [our GitHub repository][snowplow-repo] and you are encouraged to host them yourselves.**
 
 The **current versions** of the assets hosted by the Snowplow Analytics team are as follows:
 
@@ -42,7 +42,7 @@ Right-click on this [Download link][cc-download] to save it down locally via Clo
 
 The Scala Stream Collector is available on Bintray here:
 
-    http://dl.bintray.com/snowplow/snowplow-generic/snowplow_scala_stream_collector_0.9.0.zip
+    http://dl.bintray.com/snowplow/snowplow-generic/snowplow_scala_stream_collector_0.10.0.zip
 
 Right-click on this [Download link][ssc-download] to save it down locally.
 
@@ -69,7 +69,7 @@ Right-click on this [Download link][hadoop-event-recovery-download] to save it d
 
 The Stream Enrich app is available on Bintray here:
 
-    http://dl.bintray.com/snowplow/snowplow-generic/snowplow_stream_enrich_0.10.0.zip
+    http://dl.bintray.com/snowplow/snowplow-generic/snowplow_stream_enrich_0.11.0.zip
 
 Right-click on this [Download link][se-download] to save it down locally.
 
@@ -158,8 +158,8 @@ Please see the [[Artifact repositories]] wiki page for more information.
 [bintray]: https://bintray.com/
 [kinesis-download]: https://dl.bintray.com/snowplow/snowplow-generic/snowplow_kinesis_r85_metamorphosis.zip
 [s3-loader-download]: http://dl.bintray.com/snowplow/snowplow-generic/snowplow_s3_loader_0.6.0.zip
-[ssc-download]: http://dl.bintray.com/snowplow/snowplow-generic/snowplow_scala_stream_collector_0.9.0.zip
-[se-download]: http://dl.bintray.com/snowplow/snowplow-generic/snowplow_stream_enrich_0.10.0.zip
+[ssc-download]: http://dl.bintray.com/snowplow/snowplow-generic/snowplow_scala_stream_collector_0.10.0.zip
+[se-download]: http://dl.bintray.com/snowplow/snowplow-generic/snowplow_stream_enrich_0.11.0.zip
 [esl-dl-http]: http://dl.bintray.com/snowplow/snowplow-generic/snowplow_elasticsearch_loader_http_0.9.0.zip
 [esl-dl-tcp]: http://dl.bintray.com/snowplow/snowplow-generic/snowplow_elasticsearch_loader_tcp_0.9.0.zip
 [esl-dl-tcp-2x]: http://dl.bintray.com/snowplow/snowplow-generic/snowplow_elasticsearch_loader_tcp_2x_0.9.0.zip

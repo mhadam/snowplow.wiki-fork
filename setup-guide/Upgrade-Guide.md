@@ -6,6 +6,7 @@ You can also use [Snowplow Version Matrix](Snowplow-version-matrix) as a guidanc
 
 For easier navigation, please, follow the links below.
 
+- [Snowplow 93 Virunum](#r93) (**r93**) 2017-10-03
 - [Snowplow 92 Maiden Castle](#r92) (**r92**) 2017-09-11
 - [Snowplow 91 Stonehenge](#r91) (**r91**) 2017-08-17
 - [Snowplow 90 Lascaux](#r90) (**r90**) 2017-07-26
@@ -54,6 +55,107 @@ For easier navigation, please, follow the links below.
 - [Snowplow 0.9.2](#v0.9.2) (**v0.9.2**) 2014-04-30
 - [Snowplow 0.9.1](#v0.9.1) (**v0.9.1**) 2014-04-11
 - [Snowplow 0.9.0](#v0.9.0) (**v0.9.0**) 2014-02-04
+
+<a name="r93" />
+
+## Snowplow 93 Virunum
+
+This release refreshes the streaming Snowplow pipeline: the Scala Stream Collector and Stream
+Enrich.
+
+### Scala Stream Collector
+
+The latest version of the *Scala Stream Collector* is available from our Bintray [here](http://dl.bintray.com/snowplow/snowplow-generic/snowplow_scala_stream_collector_0.10.0.zip).
+
+#### Updating the configuration
+
+```hocon
+collector {
+  cookieBounce {                                                   # NEW
+    enabled = false
+    name = "n3pc"
+    fallbackNetworkUserId = "00000000-0000-4000-A000-000000000000"
+  }
+
+  sink = kinesis                                                   # WAS sink.enabled
+
+  streams {                                                        # REORGANIZED
+    good = good-stream
+    bad = bad-stream
+
+    kinesis {
+      // ...
+    }
+
+    kafka {
+      // ...
+      retries = 0                                                  # NEW
+    }
+  }
+}
+
+akka {
+  http.server {                                                    # WAS spray.can.server
+    // ...
+  }
+}
+```
+
+For a complete example, see our sample [`config.hocon`](https://github.com/snowplow/snowplow/blob/r93-virunum/2-collectors/scala-stream-collector/examples/config.hocon.sample) template.
+
+#### Launching
+
+The Scala Stream Collector is no longer an executable jar. As a result, it will have to be launched
+as:
+
+```bash
+java -jar snowplow-stream-collector-0.10.0.jar --config config.hocon
+```
+
+### Stream Enrich
+
+The latest version of *Stream Enrich* is available from our Bintray [here](http://dl.bintray.com/snowplow/snowplow-generic/snowplow_stream_enrich_0.11.0.zip).
+
+#### Updating the configuration
+
+```hocon
+enrich {
+  // ...
+  streams {
+    // ...
+    out {
+      // ...
+      partitionKey = user_ipaddress             # NEW
+    }
+    
+    kinesis {                                   # REORGANIZED
+      // ...
+      initialTimestamp = "2017-05-17T10:00:00Z" # NEW but optional
+      backoffPolicy {                           # MOVED
+        // ...
+      }
+    }
+
+    kafka {
+      // ...
+      retries = 0                               # NEW
+    }
+  }
+}
+```
+
+For a complete example, see our sample [`config.hocon`](https://github.com/snowplow/snowplow/blob/r93-virunum/3-enrich/stream-enrich/examples/config.hocon.sample) template.
+
+#### Launching
+
+Stream Enrich is no longer an executable jar. As a result, it will have to be launched as:
+
+```bash
+java -jar snowplow-stream-enrich-0.11.0.jar --config config.hocon --resolver file:resolver.json
+```
+
+Additionally, a new `--force-ip-lookups-download` flag has been introduced in order to force the
+download of the ip lookup database when the application starts.
 
 <a name="r92" />
 
