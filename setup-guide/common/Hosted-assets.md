@@ -109,9 +109,9 @@ If you are running RDB Loader, these files will automatically be used for loadin
 
 The Elasticsearch Loader app is available for both Elasticsearch APIs (HTTP and transport) on Bintray here:
 
-    http://dl.bintray.com/snowplow/snowplow-generic/snowplow_elasticsearch_loader_http_0.9.0.zip
-    http://dl.bintray.com/snowplow/snowplow-generic/snowplow_elasticsearch_loader_tcp_0.9.0.zip
-    http://dl.bintray.com/snowplow/snowplow-generic/snowplow_elasticsearch_loader_tcp_2x_0.9.0.zip
+    http://dl.bintray.com/snowplow/snowplow-generic/snowplow_elasticsearch_loader_http_0.10.1.zip
+    http://dl.bintray.com/snowplow/snowplow-generic/snowplow_elasticsearch_loader_tcp_0.10.1.zip
+    http://dl.bintray.com/snowplow/snowplow-generic/snowplow_elasticsearch_loader_tcp_2x_0.10.1.zip
 
 Right-click on:
 
@@ -132,14 +132,6 @@ Right-click on this [Download link][s3-loader-download] to save it down locally.
 
 No hosted assets currently.
 
-## 6. Kinesis resources
-
-To make deployment easier, the Kinesis apps Scala Stream Collector, Stream Enrich and Kinesis Elasticsearch Sink are also all available in a single zip file here:
-
-    https://dl.bintray.com/snowplow/snowplow-generic/snowplow_kinesis_r85_metamorphosis.zip
-
-Right-click on this [Download link][kinesis-download] to save it down locally.
-
 ## See also
 
 As well as these hosted assets for running Snowplow, the Snowplow Analytics team also make code components and libraries available through Ruby and Java artifact repositories.
@@ -156,11 +148,10 @@ Please see the [[Artifact repositories]] wiki page for more information.
 [maxmind]: http://www.maxmind.com/?rld=snowplow
 
 [bintray]: https://bintray.com/
-[kinesis-download]: https://dl.bintray.com/snowplow/snowplow-generic/snowplow_kinesis_r85_metamorphosis.zip
 [s3-loader-download]: http://dl.bintray.com/snowplow/snowplow-generic/snowplow_s3_loader_0.6.0.zip
 [ssc-download]: http://dl.bintray.com/snowplow/snowplow-generic/snowplow_scala_stream_collector_0.10.0.zip
 [se-download]: http://dl.bintray.com/snowplow/snowplow-generic/snowplow_stream_enrich_0.11.0.zip
-[esl-dl-http]: http://dl.bintray.com/snowplow/snowplow-generic/snowplow_elasticsearch_loader_http_0.9.0.zip
-[esl-dl-tcp]: http://dl.bintray.com/snowplow/snowplow-generic/snowplow_elasticsearch_loader_tcp_0.9.0.zip
-[esl-dl-tcp-2x]: http://dl.bintray.com/snowplow/snowplow-generic/snowplow_elasticsearch_loader_tcp_2x_0.9.0.zip
+[esl-dl-http]: http://dl.bintray.com/snowplow/snowplow-generic/snowplow_elasticsearch_loader_http_0.10.1.zip
+[esl-dl-tcp]: http://dl.bintray.com/snowplow/snowplow-generic/snowplow_elasticsearch_loader_tcp_0.10.1.zip
+[esl-dl-tcp-2x]: http://dl.bintray.com/snowplow/snowplow-generic/snowplow_elasticsearch_loader_tcp_2x_0.10.1.zip
 [emr-download]: http://dl.bintray.com/snowplow/snowplow-generic/snowplow_emr_r88_angkor_wat.zip

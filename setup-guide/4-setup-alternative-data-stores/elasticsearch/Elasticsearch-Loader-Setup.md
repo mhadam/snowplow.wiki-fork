@@ -2,8 +2,8 @@
 
 [**HOME**](Home) > [**SNOWPLOW SETUP GUIDE**](Setting-up-Snowplow) > [**Step 4: setting up alternative data stores**](Setting-up-alternative-data-stores) > [Elasticsearch-Loader-Setup](Elasticsearch-Loader-Setup)
 
-This documentation is for version 0.10.0 of the Elasticsearch Loader.  For previous versions, refer
-to:
+This documentation is for version 0.10.0 and 0.10.1 of the Elasticsearch Loader.  For previous
+versions, refer to:
 
 * **[Version 0.1.0 - 0.3.0][0.1]**
 * **[Version 0.4.0][0.4]**
@@ -20,7 +20,7 @@ If you are using [Stream Enrich][stream-enrich] to write enriched Snowplow event
 
 ### Getting started
 
-First off, install and set up Elasticsearch version 5.x, 2.x, or 1.x. For more information check out the [installation guide][installation-guide].
+First off, install and set up Elasticsearch version 5.x or 2.x.x. For more information check out the [installation guide][installation-guide].
 
 ### Raising the file limit
 
@@ -49,9 +49,7 @@ If the `max_file_descriptors` equals 32000 it is running with the new limit.
 
 ### Defining the mapping
 
-Use the following request to create the mapping for the enriched event type on a 1.x cluster:
-
-__NOTE__: On a 2.x or 5.x cluster, you will need to remove the `_timestamp` key as this definition is no longer supported.
+Use the following request to create the mapping for the enriched event type:
 
 ```bash
 curl -XPUT 'http://localhost:9200/snowplow' -d '{
@@ -66,10 +64,6 @@ curl -XPUT 'http://localhost:9200/snowplow' -d '{
     },
     "mappings": {
         "enriched": {
-            "_timestamp" : {
-                "enabled" : "yes",
-                "path" : "collector_tstamp"
-            },
             "_ttl": {
               "enabled":true,
               "default": "604800000"
