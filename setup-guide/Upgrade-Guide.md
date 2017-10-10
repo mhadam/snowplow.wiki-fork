@@ -6,6 +6,7 @@ You can also use [Snowplow Version Matrix](Snowplow-version-matrix) as a guidanc
 
 For easier navigation, please, follow the links below.
 
+- [Snowplow 94 Hill of Tara](#r94) (**r94**) 2017-10-10
 - [Snowplow 93 Virunum](#r93) (**r93**) 2017-10-03
 - [Snowplow 92 Maiden Castle](#r92) (**r92**) 2017-09-11
 - [Snowplow 91 Stonehenge](#r91) (**r91**) 2017-08-17
@@ -55,6 +56,14 @@ For easier navigation, please, follow the links below.
 - [Snowplow 0.9.2](#v0.9.2) (**v0.9.2**) 2014-04-30
 - [Snowplow 0.9.1](#v0.9.1) (**v0.9.1**) 2014-04-11
 - [Snowplow 0.9.0](#v0.9.0) (**v0.9.0**) 2014-02-04
+
+<a name="r94" />
+
+## Snowplow 94 Hill of Tara
+
+This release fixes an issue in Stream Enrich introduced in R93.
+
+The latest version of *Stream Enrich* is available from our Bintray [here](http://dl.bintray.com/snowplow/snowplow-generic/snowplow_stream_enrich_0.11.1.zip).
 
 <a name="r93" />
 

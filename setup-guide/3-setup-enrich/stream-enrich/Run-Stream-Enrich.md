@@ -2,59 +2,43 @@
 
 [HOME](Home) » [SNOWPLOW SETUP GUIDE](Setting-up-Snowplow) » [Step 3: Setting up Enrich](Setting-up-enrich) » [Step 3.2: setting up Stream Enrich](setting-up-stream-enrich) » [[Install Stream Enrich]] » [[Configure Stream Enrich]] » Run Stream Enrich
 
-**This documentation is for version 0.5.0 of Stream Enrich. Documentation for other versions is available:**
+**This documentation is for version 0.11.x of Stream Enrich. Documentation for other versions is available:**
 
-**[Version 0.1.0][v0.1]**
-**[Version 0.3.0][v0.3]**
+- [Stream Enrich v0.5.0 - v0.10.0][v010]
 
 ## Running
 
-Stream Enrich is an executable jarfile which should be runnable from any Unix-like shell environment. Simply provide the configuration file as a parameter:
+Stream Enrich is a jarfile. Simply provide the configuration file as a parameter:
 
-    $ ./snowplow-stream-enrich-0.x.0 --config my.conf --resolver file:resolver.json
+    $ java -jar snowplow-stream-enrich-0.11.x.jar --config my.conf --resolver file:resolver.json
 
-This will start the Stream Enrich app to read raw events from Kinesis and write enriched events back to Kinesis.
+This will start the Stream Enrich app to read raw events from Kinesis or Kafka and write enriched
+events back to Kinesis or Kafka.
 
-If you are using configurable enrichments, provide the path to your enrichments directory as a parameter:
+If you are using configurable enrichments, provide the path to your enrichments directory as a
+parameter:
 
-    $ ./snowplow-stream-enrich-0.x.0 --config my.conf --resolver file:resolver.js --enrichments file:path/to/enrichments
+    $ java -jar snowplow-stream-enrich-0.11.0.jar --config my.conf --resolver file:resolver.js --enrichments file:path/to/enrichments
 
-If you are storing the resolver and/or enrichments in DynamoDB, use the "dynamodb:" prefix in place of the "file:" prefix:
+If you are storing the resolver and/or enrichments in DynamoDB, use the "dynamodb:" prefix in place
+of the "file:" prefix:
 
-    $ ./snowplow-stream-enrich-0.x.0 --config my.conf --resolver dynamodb:eu-west-1/ConfigurationTable/resolver --enrichments dynamodb:eu-west-1/ConfigurationTable/enrichment_
+    $ java -jar snowplow-stream-enrich-0.11.x.jar --config my.conf --resolver dynamodb:eu-west-1/ConfigurationTable/resolver --enrichments dynamodb:eu-west-1/ConfigurationTable/enrichment_
 
-The above command that the enrichments and resolver are stored in a table named ConfigurationTable in eu-west-1, that the hash key for that table is "id", that the resolver JSON is stored in an item whose hash key has value "resolver", and the enrichments are stored in items whose hash keys have values beginning with "enrichment_".
-
-### Running in local mode
-
-When developing the [Scala collector](Setting-up-the-Scala-Stream-Collector) and [Kinesis enrichment](setting-up-stream-enrich) components, we realized that there were strong parallels between the Kinesis stream processing paradigm and conventional Unix `stdio` I/O streams. As a result, we added the ability for:
-
-1. Scala Stream Collector to write Snowplow raw events to [`stdout`][scala-out] instead of a Kinesis stream
-2. Stream Enrich to read Snowplow raw events from [`stdin`][kinesis-in], and write enriched events to `stdout`
-
-This has a nice side-effect: it is possible to run Snowplow in a "local mode", where you simply pipe the output of Scala Stream Collector directly into Stream Enrich, and can then see the generated enriched events printed to your console. You can run Snowplow in local mode with a shell script like this:
-
-```sh
-
-#!/bin/sh
-
-echo "Piping local collector into local enrichment..."
-./snowplow-stream-collector-0.1.0 --config ./collector.conf | ./snowplow-kinesis-enrich-0.1.0 --config ./enrich.conf
-
-```
-
-Make sure to set the sources and sinks in your configuration files ([Scala configuration template][scala-template], [Kinesis enrich template][kinesis-template]) to the relevant `stdio`/`stdout` settings.
-
-Snowplow "local mode" could be helpful for debugging Snowplow tracker implementations before putting tags live.
+The above command that the enrichments and resolver are stored in a table named ConfigurationTable
+in eu-west-1, that the hash key for that table is "id", that the resolver JSON is stored in an item
+whose hash key has value "resolver", and the enrichments are stored in items whose hash keys have
+values beginning with "enrichment_".
 
 ### Configuring the log level
 
-Stream Enrich uses [slf4j logging][logging]. If you run the executable jarfile using the `java -jar` command, you can set the log level as a system property:
+Stream Enrich uses [slf4j logging][logging]:
 
     $ java -jar -Dorg.slf4j.simpleLogger.defaultLogLevel=debug \
-        snowplow-stream-enrich-0.x.0 --config my.conf --resolver file:resolver.json
+        snowplow-stream-enrich-0.11.x --config my.conf --resolver file:resolver.json
 
-This will also affect messages logged by the [Kinesis Client Library][kcl](which Stream Enrich uses to read from Kinesis.)
+This will also affect messages logged by the [Kinesis Client Library][kcl](which Stream Enrich uses
+to read from Kinesis.)
 
 ## All done?
 
@@ -62,8 +46,7 @@ You have setup Stream Enrich! You are now ready to [setup alternative data store
 
 Return to the [setup guide](Setting-up-Snowplow).
 
-[v0.1]: https://github.com/snowplow/snowplow/wiki/Run-Scala-Kinesis-Enrich-v0.1
-[v0.3]: https://github.com/snowplow/snowplow/wiki/Run-Scala-Kinesis-Enrich-v0.3
+[v010]: https://github.com/snowplow/snowplow/wiki/Run-Stream-Enrich-0-10.md
 
 [logging]: http://www.slf4j.org/api/org/slf4j/impl/SimpleLogger.html
 [kcl]: https://github.com/awslabs/amazon-kinesis-client
