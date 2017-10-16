@@ -12,11 +12,11 @@ We are steadily moving over to [Bintray][bintray] for hosting binaries and artif
 
 To make operating Snowplow easier, the EmrEtlRunner app are now available as prebuilt executables in a single zipfile here:
 
-    http://dl.bintray.com/snowplow/snowplow-generic/snowplow_emr_r92_maiden_castle.zip
+    http://dl.bintray.com/snowplow/snowplow-generic/snowplow_emr_r95_ellora.zip
 
 Right-click on this [Download link][emr-download] to save it down locally.
 
-**Note**: The link above refers to the latest version at the time of writing (R92). If you know there is a newer version you can locate and download it from the [generic page](http://dl.bintray.com/snowplow/snowplow-generic/). Search for the pattern `snowplow_emr_`. The higher the number version the newer it is.
+**Note**: The link above refers to the latest version at the time of writing (R95). If you know there is a newer version you can locate and download it from the [generic page](http://dl.bintray.com/snowplow/snowplow-generic/). Search for the pattern `snowplow_emr_`. The higher the number version the newer it is.
 
 ## 1. Trackers
 
@@ -53,7 +53,7 @@ Right-click on this [Download link][ssc-download] to save it down locally.
 The Spark Enrich process uses a single jarfile containing the Spark job. This is made available in a
 public Amazon S3 bucket, for Snowplowers who are running their Spark Enrich process on Amazon EMR:
 
-    s3://snowplow-hosted-assets/3-enrich/spark-enrich/snowplow-spark-enrich-1.9.0.jar
+    s3://snowplow-hosted-assets/3-enrich/spark-enrich/snowplow-spark-enrich-1.10.0.jar
 
 Right-click on this [Download link][spark-enrich-download] to save it down locally via CloudFront CDN.
 
@@ -93,7 +93,7 @@ The Relational Database Shredder process uses a single jarfile containing the Sp
 made available in a public Amazon S3 bucket, for Snowplowers who are running their Spark Enrich &
 Shred process on Amazon EMR:
 
-    s3://snowplow-hosted-assets/4-storage/rdb-shredder/snowplow-rdb-shredder-0.12.0.jar
+    s3://snowplow-hosted-assets/4-storage/rdb-shredder/snowplow-rdb-shredder-0.13.0.jar
 
 Right-click on this [Download link][rdb-download] to save it down locally via CloudFront CDN.
 
@@ -140,8 +140,8 @@ Please see the [[Artifact repositories]] wiki page for more information.
 
 [snowplow-repo]: https://github.com/snowplow/snowplow
 [cc-download]: http://d2io1hx8u877l0.cloudfront.net/2-collectors/clojure-collector/clojure-collector-1.1.0-standalone.war
-[spark-enrich-download]: http://d2io1hx8u877l0.cloudfront.net/3-enrich/spark-enrich/snowplow-spark-enrich-1.9.0.jar
-[rdb-download]: http://d2io1hx8u877l0.cloudfront.net/4-storage/rdb-shredder/snowplow-rdb-shredder-0.12.0.jar
+[spark-enrich-download]: http://d2io1hx8u877l0.cloudfront.net/3-enrich/spark-enrich/snowplow-spark-enrich-1.10.0.jar
+[rdb-download]: http://d2io1hx8u877l0.cloudfront.net/4-storage/rdb-shredder/snowplow-rdb-shredder-0.13.0.jar
 [hadoop-event-recovery-download]: http://d2io1hx8u877l0.cloudfront.net/3-enrich/hadoop-event-recovery/snowplow-hadoop-event-recovery-0.2.0.jar
 [glc-download]: http://d2io1hx8u877l0.cloudfront.net/third-party/maxmind/GeoLiteCity.dat
 [geolite]: http://dev.maxmind.com/geoip/legacy/geolite?rld=snowplow
@@ -154,4 +154,4 @@ Please see the [[Artifact repositories]] wiki page for more information.
 [esl-dl-http]: http://dl.bintray.com/snowplow/snowplow-generic/snowplow_elasticsearch_loader_http_0.10.1.zip
 [esl-dl-tcp]: http://dl.bintray.com/snowplow/snowplow-generic/snowplow_elasticsearch_loader_tcp_0.10.1.zip
 [esl-dl-tcp-2x]: http://dl.bintray.com/snowplow/snowplow-generic/snowplow_elasticsearch_loader_tcp_2x_0.10.1.zip
-[emr-download]: http://dl.bintray.com/snowplow/snowplow-generic/snowplow_emr_r88_angkor_wat.zip
+[emr-download]: http://dl.bintray.com/snowplow/snowplow-generic/snowplow_emr_r95_ellora.zip
