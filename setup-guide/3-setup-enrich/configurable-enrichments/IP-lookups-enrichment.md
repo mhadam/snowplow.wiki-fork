@@ -1,6 +1,6 @@
 <a name="top" />
 
-[**HOME**](Home) > [**SNOWPLOW SETUP GUIDE**](Setting-up-Snowplow) > [Step 3: Setting up Enrich](Setting-up-enrich) > [Configurable enrichments](Configurable-enrichments) > IP lookups enrichment
+[**HOME**](Home) » [**SNOWPLOW SETUP GUIDE**](Setting-up-Snowplow) » [Step 3: Setting up Enrich](Setting-up-enrich) » [Configurable enrichments](Configurable-enrichments) » IP lookups enrichment
 
 ### Compatibility
 
@@ -55,23 +55,23 @@ Here is a maximalist example configuration JSON, which performs all five types o
 		"parameters": {
 			"geo": {
 				"database": "GeoIPCity.dat",
-				"uri": "s3://my-private-bucket.s3.amazonaws.com/third-party/maxmind"
+				"uri": "s3://my-private-bucket/third-party/maxmind"
 			},
 			"isp": {
 				"database": "GeoIPISP.dat",
-				"uri": "s3://my-private-bucket.s3.amazonaws.com/third-party/maxmind"
+				"uri": "s3://my-private-bucket/third-party/maxmind"
 			},
 			"organization": {
 				"database": "GeoIPOrg.dat",
-				"uri": "s3://my-private-bucket.s3.amazonaws.com/third-party/maxmind"
+				"uri": "s3://my-private-bucket/third-party/maxmind"
 			},
 			"domain": {
 				"database": "GeoIPDomain.dat",
-				"uri": "s3://my-private-bucket.s3.amazonaws.com/third-party/maxmind"
+				"uri": "s3://my-private-bucket/third-party/maxmind"
 			},
 			"netspeed": {
 				"database": "GeoIPNetSpeedCell.dat",
-				"uri": "s3://my-private-bucket.s3.amazonaws.com/third-party/maxmind"
+				"uri": "s3://my-private-bucket/third-party/maxmind"
 			}
 		}
 	}
