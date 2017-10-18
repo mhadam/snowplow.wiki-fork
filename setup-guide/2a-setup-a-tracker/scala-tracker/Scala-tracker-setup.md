@@ -19,6 +19,8 @@
 
 The [Snowplow Scala Tracker](https://github.com/snowplow/snowplow-scala-tracker) lets you add analytics to your Scala apps and servers.
 
+Scala Tracker works only on Java 8 an higher.
+
 Setting up the tracker should be relatively straightforward if you are familiar with [sbt][sbt].
 
 <a name="setup" />
@@ -40,7 +42,7 @@ Add the Scala Tracker to your build.sbt like this:
 ```scala
 resolvers += "JCenter" at "https://jcenter.bintray.com/" // you can omit if you're planning to use Maven Central
 
-libraryDependencies += "com.snowplowanalytics" %% "snowplow-scala-tracker" % "0.3.0"
+libraryDependencies += "com.snowplowanalytics" %% "snowplow-scala-tracker" % "0.4.0"
 ```
 
 <a name="gradle" />
@@ -62,11 +64,11 @@ Then add into the same file:
 dependencies {
     ...
     // Snowplow Scala Tracker
-    compile 'com.snowplowanalytics:snowplow-scala-tracker_2.10:0.3.0'
+    compile 'com.snowplowanalytics:snowplow-scala-tracker_2.12:0.3.0'
 }
 ```
 
-Notice a `_2.10` postfix in artifactId. This is used for Scala libraries and denote Scala version which artifact (in our case `snowplow-scala-tracker`) is compiled against. It also means that this library will bring a `org.scala-lang:scala-library_2.10.x` as transitive dependency and if you're using any other Scala dependency you should keep these postfixes in accordance (`snowplow-scala-tracker` is also compiled against Scala 2.11).
+Notice a `_2.12` postfix in artifactId. This is used for Scala libraries and denote Scala version which artifact (in our case `snowplow-scala-tracker`) is compiled against. It also means that this library will bring a `org.scala-lang:scala-library_2.12.x` as transitive dependency and if you're using any other Scala dependency you should keep these postfixes in accordance (`snowplow-scala-tracker` is also compiled against Scala 2.10 and 2.11).
 
 <a name="maven" />
 
@@ -115,12 +117,12 @@ Then add into your project's `pom.xml`:
 ```xml
 <dependency>
     <groupId>com.snowplowanalytics</groupId>
-    <artifactId>snowplow-scala-tracker_2.10</artifactId>
-    <version>0.2.0</version>
+    <artifactId>snowplow-scala-tracker_2.12</artifactId>
+    <version>0.4.0</version>
 </dependency>
 ```
 
-Notice a `_2.10` postfix in artifactId. This is used for Scala libraries and denote Scala version which artifact (in our case `snowplow-scala-tracker`) is compiled against. It also means that this library will bring a `org.scala-lang:scala-library_2.10.x` as transitive dependency and if you're using any other Scala dependency you should keep these postfixes in accordance (`snowplow-scala-tracker` is also compiled against Scala 2.11).
+Notice a `_2.12` postfix in artifactId. This is used for Scala libraries and denote Scala version which artifact (in our case `snowplow-scala-tracker`) is compiled against. It also means that this library will bring a `org.scala-lang:scala-library_2.12.x` as transitive dependency and if you're using any other Scala dependency you should keep these postfixes in accordance (`snowplow-scala-tracker` is also compiled against Scala 2.10 and 2.11).
 
 <a name="older" />
 
