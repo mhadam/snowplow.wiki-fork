@@ -2,11 +2,11 @@
 
 [**HOME**](Home) > [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow-technical-documentation) > [**Trackers**](trackers) > [**Scala Tracker**](Scala-Tracker)
 
-**This page refers to version 0.4.0 of the Snowplow Scala Tracker. Documentation for other versions is available:**
+**This page refers to version 0.3.0 of the Snowplow Scala Tracker. Documentation for other versions is available:**
 
 *[Version 0.1][scala-0.1]*
 *[Version 0.2][scala-0.2]*
-*[Version 0.3][scala-0.3]*
+*[Latest][latest]*
 
 ## Contents
 
@@ -47,8 +47,6 @@ A tracker always has one active subject at a time associated with it. The defaul
 Assuming you have completed the [[Scala Tracker Setup]], you are ready to initialize the Scala Tracker.
 
 ```scala
-import scala.concurrent.ExecutionContext.Implicits.global
-
 import com.snowplowanalytics.snowplow.scalatracker._
 import com.snowplowanalytics.snowplow.scalatracker.emitters._
 
@@ -60,9 +58,9 @@ val tracker = new Tracker(List(emitter1, emitter2, emitter3), "mytrackername", "
 
 The above code:
 
-* creates a non-blocking emitter, `emitter1`, with global execution context, which sends events to "mycollector.com" on the default port, port 80
+* creates a non-blocking emitter, `emitter1`, which sends events to "mycollector.com" on the default port, port 80
 * creates a blocking emitter, `emitter2`, which sends events to "myothercollector.com" on port 8080
-* creates a non-blocking batch `emitter3`, with global execution context, which will buffer events until buffer size reach 32 events and then send all of them at once in POST request
+* creates a non-blocking batch `emitter3`, which will buffer events until buffer size reach 32 events and then send all of them at once in POST request
 * creates a tracker which can be used to send events to all emitters
 
 <a name="subject" />
@@ -162,8 +160,8 @@ Use `trackStructEvent` to track a custom event happening in your app which fits 
 |-------------:|:---------------------------------------------------------------  |:--------------|:---------------------------|
 | `category`   | The grouping of structured events which this `action` belongs to | Yes           | `String`                   |
 | `action`     | Defines the type of user interaction which this event involves   | Yes           | `String`                   |
-| `label`      | A string to provide additional dimensions to the event data      | No            | `Option[String]`           |
-| `property`   | A string describing the object or the action performed on it     | No            | `Option[String]`           |
+| `label`      | A string to provide additional dimensions to the event data      | No            | `Option[String]            |
+| `property`   | A string describing the object or the action performed on it     | No            | `Option[String]            |
 | `value`      | A value to provide numerical data about the event                | No            | `Option[Double]`           |
 | `contexts`   | List of custom contexts for the event                            | No            | `List[SelfDescribingJson]` |
 | `timestamp`  | Device created timestamp or true timestamp                       | No            | `Option[Timestamp]`        |
@@ -358,7 +356,7 @@ subject.setNetworkUserId("ecdff4d0-9175-40ac-a8bb-325c49733607")
 
 [scala-0.1]: https://github.com/snowplow/snowplow/wiki/Scala-Tracker-v0.1
 [scala-0.2]: https://github.com/snowplow/snowplow/wiki/Scala-Tracker-v0.2
-[scala-0.3]: https://github.com/snowplow/snowplow/wiki/Scala-Tracker-v0.3
+[latest]: https://github.com/snowplow/snowplow/wiki/Scala-Tracker
 
 [json4s]: https://github.com/json4s/json4s
 [json4s-dsl]: https://github.com/json4s/json4s#dsl-rules
