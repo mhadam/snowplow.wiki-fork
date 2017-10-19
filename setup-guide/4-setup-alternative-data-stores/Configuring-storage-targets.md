@@ -40,6 +40,7 @@ Schema: [iglu:com.snowplowanalytics.snowplow.storage/redshift_config/jsonschema/
  - `REQUIRE`: SSL is required.
  - `VERIFY_CA`: SSL must be used and the server certificate must be verified.
  - `VERIFY_FULL`: SSL must be used. The server certificate must be verified and the server hostname must match the hostname attribute on the certificate.
+12. `roleArn`: AWS Role ARN allowing Redshift to read data from S3
 
 Note: The difference between `VERIFY_CA` and `VERIFY_FULL` depends on the policy of the root CA. If a public CA is used, `VERIFY_CA` allows connections to a server that somebody else may have registered with the CA to succeed. In this case, `verify-full` should always be used. If a local CA is used, or even a self-signed certificate, using `VERIFY_CA` often provides enough protection.
 
@@ -67,7 +68,6 @@ Schema: [iglu:com.snowplowanalytics.snowplow.storage/postgresql_config/jsonschem
  - `VERIFY_FULL`: SSL must be used. The server certificate must be verified and the server hostname must match the hostname attribute on the certificate.
 10. `purpose`: common for all targets. PostgreSQL supports only `ENRICHED_DATA`
 11. `id`: optional machine-readable config id
-12. `roleArn`: AWS Role ARN allowing Redshift to read data from S3
 
 <a name="elasticsearch" />
 
