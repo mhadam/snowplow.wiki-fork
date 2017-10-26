@@ -190,7 +190,7 @@ storage:
     rdb_loader: 0.13.0        # WAS 0.12.0
 ```
 
-For a complete example, see our sample [`config.yml`](https://github.com/snowplow/snowplow/blob/r90-lascaux/3-enrich/emr-etl-runner/config/config.yml.sample) template.
+For a complete example, see our sample [`config.yml`](https://github.com/snowplow/snowplow/blob/r92-maiden-castle/3-enrich/emr-etl-runner/config/config.yml.sample) template.
 
 <a name="r91" />
 
@@ -212,7 +212,7 @@ Make sure to use the `run` command when launching *EmrEtlRunner*, for example:
   -r resolver.json
 ```
 
-Additionally, it is advised to setup a local (through a file) or distributed (through Consul) lock:
+Additionally, it is advised to set up a local (through a file) or distributed (through Consul) lock:
 
 ```bash
 ./snowplow-emr-etl-runner run \
