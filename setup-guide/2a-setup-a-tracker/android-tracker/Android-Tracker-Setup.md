@@ -12,6 +12,7 @@
   - 3.1 [Hosting](#hosting)
   - 3.2 [Gradle](#gradle)
   - 3.3 [Permissions](#permissions)
+  - 3.4 [Proguard](#proguard)
 - 4 [Example Gradle Dependencies](#example)
 
 <a name="overview" />
@@ -120,6 +121,17 @@ If you want to send location information with each event you will need to add th
 ```xml
 <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+```
+
+<a name="proguard" />
+
+### 3.4 Proguard
+
+If you enable Proguard in your application (`minifyEnabled true`) add the following rules to the Proguard configuration file
+
+```
+-keep class com.google.android.gms.ads.identifier.AdvertisingIdClient {*;} 
+-keep class com.google.android.gms.ads.identifier.AdvertisingIdClient$Info {*;}
 ```
 
 <a name="example" />
