@@ -31,7 +31,7 @@ Click "add target":
 
 Choose "HTTP target" from the list of target types to add:
 
-[[/setup-guide/images/webhooks/zendesk/extension-form.png]]
+[[/setup-guide/images/webhooks/zendesk/http-target.png]]
 
 Name the new extension something like "Snowplow Collector - Iglu POST". The "Iglu POST" here represents the fact we will be sending Zendesk events and contexts to [Iglu webhook adapter](https://github.com/snowplow/snowplow/wiki/Iglu-webhook-adapter) via `POST` request.
 
@@ -39,9 +39,11 @@ In the **URL** field, enter "https://{{collctor_domain}}/com.snowplowanalytics.i
 
 You can optionally have `?aid={{my_zendesk_namespace}}` added to this URL, where `{{my_zendesk_namespace}}` is a label for the application (here: "zendesk"). This label will be attached to all events fired by the extension, so you can later check where a given event came from (useful if you have more than one Zendesk account).
 
-Set the **Method** field to "POST" and the **Content type** to "JSON" from thne drop-down lists.
+Set the **Method** field to "POST" and the **Content type** to "JSON" from the drop-down lists.
 
 Select "Create Target" and click the ***Submit*** button.
+
+[[/setup-guide/images/webhooks/zendesk/extension-form.png]]
 
 We have set up our collector as a Zendesk extension. We can now add a trigger which sends `POST` requests to the collector whenever certain events occur.
 
@@ -101,7 +103,7 @@ In the ***JSON body*** box, paste the following:
 }
 ```
 
-[[/setup-guide/images/webhooks/zendesk/trigger-conditions.png]]
+[[/setup-guide/images/webhooks/zendesk/json-body.png]]
 
 *NOTE:* Ignore the warning on the left-hand side of the ***JSON body*** textbox. It is due to usage of [Liquid markup](https://shopify.github.io/liquid/) in JSON.
 
