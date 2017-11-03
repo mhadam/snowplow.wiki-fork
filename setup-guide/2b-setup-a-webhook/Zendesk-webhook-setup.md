@@ -12,6 +12,7 @@ This guide will explain how to configure your Zendesk account so that whenever a
       * [Setting up body for ticket requester](#ticket-requester)
       * [Setting up body for ticket assignee](#ticket-assignee)
       * [Setting up body for ticket submitter](#ticket-submitter)
+3. [Creating tables in Redshift](#redshift-tables)
 
 <a name="extension" />
 
@@ -220,7 +221,17 @@ Submit the new trigger by clicking ***Create*** button. It should look something
 
 [[/setup-guide/images/webhooks/zendesk/submit-target.png]]
 
+<a name="redshift-tables"/>
 
-[Back to top](#top)
+## 3 Creating tables in Redshift
 
-[Return to setup guide](Setting-up-Snowplow)
+If you are running the Snowplow batch flow with Amazon Redshift then you should deploy the relevant event tables into your Amazon Redshift.
+
+You can find the table definitions here:
+
+- [ticket_updated_1.sql](https://github.com/snowplow/iglu-central/blob/master/sql/com.zendesk.snowplow/ticket_updated_1.sql)
+- [user_1.sql](https://github.com/snowplow/iglu-central/blob/master/sql/com.zendesk.snowplow/user_1.sql)
+
+Make sure to deploy these tables into the same schema as your `events` table.
+
+That's it - with these tables deployed, your Zendesk events should automatically flow through into Redshift.
