@@ -6,6 +6,7 @@ You can also use [Snowplow Version Matrix](Snowplow-version-matrix) as a guidanc
 
 For easier navigation, please, follow the links below.
 
+- [Snowplow 95 Ellora](#r95) (**r95**) 2017-11-13
 - [Snowplow 94 Hill of Tara](#r94) (**r94**) 2017-10-10
 - [Snowplow 93 Virunum](#r93) (**r93**) 2017-10-03
 - [Snowplow 92 Maiden Castle](#r92) (**r92**) 2017-09-11
@@ -56,6 +57,74 @@ For easier navigation, please, follow the links below.
 - [Snowplow 0.9.2](#v0.9.2) (**v0.9.2**) 2014-04-30
 - [Snowplow 0.9.1](#v0.9.1) (**v0.9.1**) 2014-04-11
 - [Snowplow 0.9.0](#v0.9.0) (**v0.9.0**) 2014-02-04
+
+<a name="r95" />
+
+## Snowplow 95 Ellora
+
+This release introduces ZSTD encoding to the Redshift model as well as update the Spark components
+to 2.2.0 which is included in AMI 5.9.0.
+
+### Upgrade steps
+
+#### Upgrading EmrEtlRunner
+
+The latest version of the *EmrEtlRunner* is available from our Bintray [here](http://dl.bintray.com/snowplow/snowplow-generic/snowplow_emr_r95_ellora.zip).
+
+#### Updating config.yml
+
+This release updates the Spark Enrich and RDB Shredder jobs to Spark 2.2.0. As a result, an AMI bump
+is warranted. RDB Loader has been updated too:
+
+```yaml
+aws:
+  # ...
+  emr:
+    ami_version: 5.9.0        # WAS 5.5.0
+    # ...
+enrich:
+  version:
+    spark_enrich: 1.10.0      # WAS 1.9.0
+storage:
+  versions:
+    rdb_loader: 0.14.0        # WAS 0.13.0
+    rdb_shredder: 0.13.0      # WAS 0.12.0
+```
+
+For a complete example, see our sample [`config.yml`](https://github.com/snowplow/snowplow/blob/r90-lascaux/3-enrich/emr-etl-runner/config/config.yml.sample) template.
+
+#### Updating Redshift tables
+
+Unlocking ZSTD compression relies on updating the `atomic.events` table through 
+[a migration script](https://github.com/snowplow/snowplow/blob/master/4-storage/redshift-storage/sql/migrate_0.8.0_to_0.9.0.sql).
+
+This script assumes that you're currently on version 0.8.0 of the `atomic.events` table, if you're
+upgrading from an earlier version, please refer to
+[the appropriate migration script][migrate-redshift-sql] to get to version 0.8.0.
+
+### Updating the Redshift storage target
+
+If you rely on an SSH tunnel to connect the RDB Loader to your Redshift cluster, you'll need to
+update your Redshift storage target to 2-1-0. Refer to [the schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow.storage/redshift_config/jsonschema/2-1-0)
+to incorporate a properly formatted `sshTunnel` field.
+
+### Updating your Iglu resolver
+
+We've set up a mirror of Iglu central on Google Cloud Platform to maintain high availability in
+case of S3 outages. To benefit from this mirror, you'll need to add the following repository to your
+Iglu resolver JSON file:
+
+```json
+{
+  "name": "Iglu Central - Mirror 01",
+  "priority": 1,
+  "vendorPrefixes": [ "com.snowplowanalytics" ],
+  "connection": {
+  "http": {
+    "uri": "http://mirror01.iglucentral.com"
+  }
+}
+```
 
 <a name="r94" />
 
@@ -136,7 +205,7 @@ enrich {
       // ...
       partitionKey = user_ipaddress             # NEW
     }
-    
+
     kinesis {                                   # REORGANIZED
       // ...
       initialTimestamp = "2017-05-17T10:00:00Z" # NEW but optional
@@ -862,10 +931,10 @@ Also, note that the configuration file no longer supports loading AWS credential
 
 ```json
 {
-	"aws": {
-		"access-key": "cpf",
-		"secret-key": "cpf"
-	}
+    "aws": {
+        "access-key": "cpf",
+        "secret-key": "cpf"
+    }
 }
 ```
 
@@ -877,9 +946,10 @@ Replace the `sink.kinesis.out` string with an object with two fields:
 
 ```json
 {
-	"sink": {
-		"good": "elasticsearch",  # or "stdout"
-		"bad": "kinesis"          # or "stderr" or "none"
+    "sink": {
+        "good": "elasticsearch",  # or "stdout"
+        "bad": "kinesis"          # or "stderr" or "none"
+    }
 }
 ```
 
@@ -980,7 +1050,7 @@ In your EmrEtlRunner’s `config.yml` file, update your `hadoop_enrich` job’s 
     hadoop_enrich: 1.5.0 # WAS 1.4.0
 ```
 
-For a complete example, see our sample [`config.yml`](https://github.com/snowplow/snowplow/blob/r75-long-legged-buzzard/3-enrich/emr-etl-runner/config/config.yml.sample) template.  
+For a complete example, see our sample [`config.yml`](https://github.com/snowplow/snowplow/blob/r75-long-legged-buzzard/3-enrich/emr-etl-runner/config/config.yml.sample) template.
 
 #### Redshift
 
@@ -1015,7 +1085,7 @@ To take advantage of this new enrichment, update the `hadoop_enrich` jar version
     hadoop_elasticsearch: 0.1.0 # UNCHANGED
 ```
 
-For a complete example, see our sample [`config.yml`](https://github.com/snowplow/snowplow/blob/r74-european-honey-buzzard/3-enrich/emr-etl-runner/config/config.yml.sample) template.  
+For a complete example, see our sample [`config.yml`](https://github.com/snowplow/snowplow/blob/r74-european-honey-buzzard/3-enrich/emr-etl-runner/config/config.yml.sample) template.
 
 Make sure to add a [`weather_enrichment_config.json`](https://github.com/snowplow/snowplow/blob/master/3-enrich/config/enrichments/weather_enrichment_config.json) configured as explained [here](Weather-enrichment) into your `enrichments` folder too. The file should conform to this [JSON Schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow.enrichments/weather_enrichment_config/jsonschema/1-0-0).
 
@@ -1535,15 +1605,13 @@ To continue parsing useragent strings using the `user_agent_utils` library, you 
 
 ```
 {
-	"schema": "iglu:com.snowplowanalytics.snowplow/user_agent_utils_config/jsonschema/1-0-0",
-
-	"data": {
-
-		"vendor": "com.snowplowanalytics.snowplow",
-		"name": "user_agent_utils_config",
-		"enabled": true,
-		"parameters": {}
-	}
+    "schema": "iglu:com.snowplowanalytics.snowplow/user_agent_utils_config/jsonschema/1-0-0",
+    "data": {
+        "vendor": "com.snowplowanalytics.snowplow",
+        "name": "user_agent_utils_config",
+        "enabled": true,
+        "parameters": {}
+    }
 }
 ```
 
