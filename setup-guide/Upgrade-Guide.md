@@ -6,7 +6,7 @@ You can also use [Snowplow Version Matrix](Snowplow-version-matrix) as a guidanc
 
 For easier navigation, please, follow the links below.
 
-- [Snowplow 95 Ellora](#r95) (**r95**) 2017-10-xx
+- [Snowplow 95 Ellora](#r95) (**r95**) 2017-11-13
 - [Snowplow 94 Hill of Tara](#r94) (**r94**) 2017-10-10
 - [Snowplow 93 Virunum](#r93) (**r93**) 2017-10-03
 - [Snowplow 92 Maiden Castle](#r92) (**r92**) 2017-09-11
