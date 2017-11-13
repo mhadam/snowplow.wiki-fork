@@ -45,7 +45,7 @@ aws:
         archive: ADD HERE    # Where to archive shredded events to, e.g. s3://my-archive-bucket/shredded
   emr:
     job_name: Snowplow ETL # Give your job a name
-    ami_version: 5.5.0      # Don't change this
+    ami_version: 5.9.0      # Don't change this
     region: ADD HERE        # Always set this
     jobflow_role: EMR_EC2_DefaultRole # Created using $ aws emr create-default-roles
     service_role: EMR_DefaultRole     # Created using $ aws emr create-default-roles
@@ -75,7 +75,7 @@ collectors:
   format: cloudfront # Or 'clj-tomcat' for the Clojure Collector, or 'thrift' for Thrift records, or 'tsv/com.amazon.aws.cloudfront/wd_access_log' for Cloudfront access logs
 enrich:
   versions:
-    spark_enrich: 1.9.0 # Version of the Spark Enrichment process
+    spark_enrich: 1.10.0 # Version of the Spark Enrichment process
   continue_on_unexpected_error: false # Set to 'true' (and set out_errors: above) if you don't want any exceptions thrown from ETL
   output_compression: NONE # Compression only supported with Redshift, set to NONE if you have Postgres targets. Allowed formats: NONE, GZIP
 storage:
