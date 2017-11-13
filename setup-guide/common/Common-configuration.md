@@ -80,8 +80,8 @@ enrich:
   output_compression: NONE # Compression only supported with Redshift, set to NONE if you have Postgres targets. Allowed formats: NONE, GZIP
 storage:
   versions:
-    rdb_shredder: 0.12.0        # Version of the Relational Database Shredding process
-    rdb_loader: 0.12.0          # Version of the Relational Database Loader app
+    rdb_shredder: 0.13.0        # Version of the Relational Database Shredding process
+    rdb_loader: 0.14.0          # Version of the Relational Database Loader app
     hadoop_elasticsearch: 0.1.0 # Version of the Hadoop to Elasticsearch copying process
 monitoring:
   tags: {} # Name-value pairs describing this job
