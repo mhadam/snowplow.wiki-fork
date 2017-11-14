@@ -102,6 +102,6 @@ Schema: [iglu:com.snowplowanalytics.snowplow.storage/amazon_dynamodb_config/json
 [amazon-dynamodb-schema]: https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow.storage/amazon_dynamodb_config/jsonschema/2-0-0
 [elastic-schema]: https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow.storage/elastic_config/jsonschema/1-0-1
 [postgresql-schema]: https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow.storage/postgresql_config/jsonschema/1-0-1
-[redshift-schema]: https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow.storage/redshift_config/jsonschema/1-0-1
+[redshift-schema]: https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow.storage/redshift_config/jsonschema/2-0-0
 
 [redshift-copy]: http://docs.aws.amazon.com/redshift/latest/dg/r_COPY.html
