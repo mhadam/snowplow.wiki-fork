@@ -2,7 +2,7 @@
 
 [HOME](Home) » [SNOWPLOW SETUP GUIDE](Setting-up-Snowplow) » [Step 3: Setting up Enrich](Setting-up-enrich) » [Step 3.2: setting up Stream Enrich](setting-up-stream-enrich) » [[Install Stream Enrich]] » Configure Stream Enrich
 
-**This documentation is for version 0.11.x of Stream Enrich. Documentation for other versions is available:**
+**This documentation is for version 0.11.x and 0.12.x of Stream Enrich. Documentation for other versions is available:**
 
 * **[Version 0.6.0-0.10.0][v0.10]**
 
@@ -29,7 +29,6 @@ the config.
 ## Resolver configuration
 
 You will also need a JSON configuration for the Iglu resolver used to look up JSON schemas. A sample configuration is available [here][resolver.json.sample].
-
 
 ### Configuring enrichments
 
