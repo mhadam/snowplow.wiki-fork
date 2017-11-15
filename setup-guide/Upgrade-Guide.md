@@ -6,6 +6,7 @@ You can also use [Snowplow Version Matrix](Snowplow-version-matrix) as a guidanc
 
 For easier navigation, please, follow the links below.
 
+- [Snowplow 96 Zeugma](#r96) (**r96**) 2017-11-21
 - [Snowplow 95 Ellora](#r95) (**r95**) 2017-11-13
 - [Snowplow 94 Hill of Tara](#r94) (**r94**) 2017-10-10
 - [Snowplow 93 Virunum](#r93) (**r93**) 2017-10-03
@@ -57,6 +58,40 @@ For easier navigation, please, follow the links below.
 - [Snowplow 0.9.2](#v0.9.2) (**v0.9.2**) 2014-04-30
 - [Snowplow 0.9.1](#v0.9.1) (**v0.9.1**) 2014-04-11
 - [Snowplow 0.9.0](#v0.9.0) (**v0.9.0**) 2014-02-04
+
+<a name="r96" />
+
+## Snowplow 96 Zeugma
+
+This release brings NSQ support to the Scala Stream Collector and Stream Enrich.
+
+### Scala Stream Collector
+
+The latest version of the *Scala Stream Collector* is available from our Bintray [here](http://dl.bintray.com/snowplow/snowplow-generic/snowplow_scala_stream_collector_0.11.0.zip).
+
+#### Updating the configuration
+
+```hocon
+collector {
+
+  #sink = kinesis                     # REMOVED
+
+  streams {
+
+    sink {                            # ADDED
+      enabled = kinesis               # or kafka or nsq
+
+      # only the corresponding config is needed (e.g. kinesis or kafka config)
+    }
+  }
+}
+```
+
+For a complete example, see our sample [`config.hocon`](https://github.com/snowplow/snowplow/blob/r96-zeugma/2-collectors/scala-stream-collector/examples/config.hocon.sample) template.
+
+### Stream Enrich
+
+The latest version of *Stream Enrich* is available from our Bintray [here](http://dl.bintray.com/snowplow/snowplow-generic/snowplow_stream_enrich_0.12.0.zip).
 
 <a name="r95" />
 
