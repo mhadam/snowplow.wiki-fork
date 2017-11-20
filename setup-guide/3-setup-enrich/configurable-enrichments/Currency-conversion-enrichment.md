@@ -22,7 +22,7 @@ This enrichment uses [Open Exchange Rates][openexchangerates] to convert the val
         "vendor": "com.snowplowanalytics.snowplow",
         "name": "currency_conversion_config",
         "parameters": {
-            "accountType": "developer",
+            "accountType": "DEVELOPER",
             "apiKey": "{{API_KEY}}",
             "baseCurrency": "EUR",
             "rateAt": "EOD_PRIOR"
