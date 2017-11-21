@@ -4,7 +4,7 @@
 
 The Scala Stream Collector allows near-real-time processing (Enrichment, Storage, Analytics) of a
 Snowplow raw event stream. Snowplow raw events can be sunk to either [Amazon Kinesis][kinesis],
-[Apache Kafka][kafka], or to `stdout` for a custom stream collection process.
+[Apache Kafka][kafka], [NSQ][nsq] or to `stdout` for a custom stream collection process.
 
 For more information on the architecture of the Scala Stream Collector, please see [[Scala Stream Collector]].
 
@@ -22,3 +22,4 @@ information on doing this.
 
 [kinesis]: http://aws.amazon.com/kinesis/
 [kafka]: http://kafka.apache.org/
+[nsq]: http://nsq.io
