@@ -4,7 +4,7 @@ Let's build the future of analytics together.
 
 ## Contributing
 
-To get involved, share your ideas, and collaborate with us, head to our [[Contributing]] home page.
+To get involved, share your ideas, and collaborate with us, head to our [Contributing](https://github.com/snowplow/snowplow/blob/master/CONTRIBUTING.md) home page.
 
 ## Tell the world
 
