@@ -64,7 +64,7 @@ For easier navigation, please, follow the links below.
 
 ## Snowplow 97 Knossos
 
-This release brings 4 new webhook adapters (Mailgun, StatusGator, Unbounce, Olark) to Snowplow. Follow the corresponding webhook set-up guide [here](https://github.com/snowplow/snowplow/wiki/Setting-up-a-Webhook)
+This release brings 4 new webhook adapters (Mailgun, StatusGator, Unbounce, Olark) to Snowplow. Follow the corresponding webhook set-up guide [[Webhook setup]]
 
 ### Updating the configuration
 
