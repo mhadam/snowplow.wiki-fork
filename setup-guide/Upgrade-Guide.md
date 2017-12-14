@@ -6,6 +6,7 @@ You can also use [Snowplow Version Matrix](Snowplow-version-matrix) as a guidanc
 
 For easier navigation, please, follow the links below.
 
+- [Snowplow 97 Knossos](#r97) (**r97**) 2017-12-13
 - [Snowplow 96 Zeugma](#r96) (**r96**) 2017-11-21
 - [Snowplow 95 Ellora](#r95) (**r95**) 2017-11-13
 - [Snowplow 94 Hill of Tara](#r94) (**r94**) 2017-10-10
@@ -58,6 +59,22 @@ For easier navigation, please, follow the links below.
 - [Snowplow 0.9.2](#v0.9.2) (**v0.9.2**) 2014-04-30
 - [Snowplow 0.9.1](#v0.9.1) (**v0.9.1**) 2014-04-11
 - [Snowplow 0.9.0](#v0.9.0) (**v0.9.0**) 2014-02-04
+
+<a name="r97" />
+
+## Snowplow 97 Knossos
+
+This release brings 4 new webhook adapters (Mailgun, StatusGator, Unbounce, Olark) to Snowplow. Follow the corresponding webhook set-up guide [here](https://github.com/snowplow/snowplow/wiki/Setting-up-a-Webhook)
+
+### Updating the configuration
+
+```yaml
+enrich:
+  version:
+    spark_enrich: 1.11.0      # WAS 1.10.0
+```
+
+For a complete example, see our sample [`config.yml`](https://github.com/snowplow/snowplow/blob/r97-knossos/3-enrich/emr-etl-runner/config/config.yml.sample) template.
 
 <a name="r96" />
 
@@ -130,7 +147,7 @@ For a complete example, see our sample [`config.yml`](https://github.com/snowplo
 
 #### Updating Redshift tables
 
-Unlocking ZSTD compression relies on updating the `atomic.events` table through 
+Unlocking ZSTD compression relies on updating the `atomic.events` table through
 [a migration script](https://github.com/snowplow/snowplow/blob/master/4-storage/redshift-storage/sql/migrate_0.8.0_to_0.9.0.sql).
 
 This script assumes that you're currently on version 0.8.0 of the `atomic.events` table, if you're
