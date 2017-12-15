@@ -70,16 +70,15 @@ Then set the collector URL:
 http://<collector host>/com.mailgun/v1
 ```
 
-Finally click on **Set Webhook URL**. You can optionall click on **Test Webhook** to verify that your collector instance is reachable from Mailgun's servers.
+Finally click on **Set Webhook URL**. You can optionally click on **Test Webhook** to verify that your collector instance is reachable from Mailgun's servers.
 
 You may want to set the snowplow `aid=` parameter in your URI query string to the company for which this webhook has been configured; this is the `app_id` parameter taken from the [Snowplow Tracker Protocol][tracker-protocol], however this is optional. The company is also contained in the received messages.
 
-If you want, you can also manually override the event's `platform` parameter by appending a query string to the end of the URL, in combination or separately with aid above. Here is what the final URL would look like for a configured aid and platfrom:
+If you want, you can also manually override the event's `platform` parameter by appending a query string to the end of the URL, in combination or separately with aid above. Here is what the final URL would look like for a configured aid and platform:
 
 ```
 http://<collector host>/com.mailgun/v1?aid=<company>&p=<platform code>
 ```
-
 
 Supported platform codes can again be found in the [Snowplow Tracker Protocol][tracker-protocol]; if not set, then the value for `platform` will default to `srv` for a server-side application.
 
