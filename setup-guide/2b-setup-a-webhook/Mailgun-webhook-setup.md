@@ -32,7 +32,7 @@ For the technical implementation, see [[Mailgun webhook adapter]].
 
 ### 1.1 Compatibility
 
-* [R97 Knossos][r97]+ (`POST`-capable collectors only that accept both "application/x-www-form-urlencoded" and "multipart/form-data" as content type)
+* [R97 Knossos][r97]+ (`POST`-capable collectors only)
 * [Mailgun webhook API][mailgun-webhooks]
 
 <a name="setup" />
@@ -103,8 +103,8 @@ Make sure to deploy this table into the same schema as your `events` table.
 
 That's it - with this table deployed, your Mailgun events should automatically flow through into Redshift.
 
-[mailgun-website]: http://Mailgun.com/
-[mailgun-webhooks]: http://apidocs.Mailgun.com/webhooks/
+[mailgun-website]: https://www.mailgun.com/
+[mailgun-webhooks]: https://documentation.mailgun.com/en/latest/user_manual.html#webhooks
 [r97]: https://github.com/snowplow/snowplow/releases/tag/r97-knossos
 [tracker-protocol]: https://github.com/snowplow/snowplow/wiki/snowplow-tracker-protocol#1-common-parameters-platform-and-event-independent
 
