@@ -27,7 +27,7 @@ This webhook adapter lets you track a variety of events logged by [olark][olark-
 
 Details of the olark webhook format as of 15.12.2017.
 
-Olark sends multiple events together as a `POST` request with all information in the body, with `application/x-www-form-urlencoded` as the content type.
+Olark events as a `POST` request with all information in the body, with `application/x-www-form-urlencoded` as the content type.
 
 <a name="adapter" />
 

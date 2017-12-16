@@ -27,7 +27,7 @@ This webhook adapter lets you track a variety of events logged by [Mailgun][mail
 
 Details of the Mailgun webhook format as of 15.12.2017.
 
-Mailgun sends multiple events together as a `POST` request with all information in the body, with `application/x-www-form-urlencoded` or `multipart/form-data` as the content type.
+Mailgun events as a `POST` request with all information in the body, with `application/x-www-form-urlencoded` or `multipart/form-data` as the content type.
 
 <a name="adapter" />
 
