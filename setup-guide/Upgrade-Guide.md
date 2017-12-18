@@ -6,7 +6,7 @@ You can also use [Snowplow Version Matrix](Snowplow-version-matrix) as a guidanc
 
 For easier navigation, please, follow the links below.
 
-- [Snowplow 97 Knossos](#r97) (**r97**) 2017-12-13
+- [Snowplow 97 Knossos](#r97) (**r97**) 2017-12-18
 - [Snowplow 96 Zeugma](#r96) (**r96**) 2017-11-21
 - [Snowplow 95 Ellora](#r95) (**r95**) 2017-11-13
 - [Snowplow 94 Hill of Tara](#r94) (**r94**) 2017-10-10
@@ -66,7 +66,13 @@ For easier navigation, please, follow the links below.
 
 This release brings 4 new webhook adapters (Mailgun, StatusGator, Unbounce, Olark) to Snowplow. Follow the corresponding webhook set-up guide in [[Setting up a webhook]]
 
-### Updating the configuration
+### Upgrade steps
+
+#### Upgrading EmrEtlRunner
+
+The latest version of the *EmrEtlRunner* is available from our Bintray [here](http://dl.bintray.com/snowplow/snowplow-generic/snowplow_emr_r97_knossos.zip).
+
+#### Updating config.yml
 
 ```yaml
 enrich:
