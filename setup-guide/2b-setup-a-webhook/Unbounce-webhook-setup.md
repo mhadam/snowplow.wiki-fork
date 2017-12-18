@@ -96,4 +96,4 @@ That's it - with this table deployed, your Mailgun events should automatically f
 
 [tracker-protocol]: https://github.com/snowplow/snowplow/wiki/snowplow-tracker-protocol#1-common-parameters-platform-and-event-independent
 
-[com_unbounce_form_post_1]: https://github.com/snowplow/iglu-central/blob/master/sql/com.unbounce/form_post_1.sql
+[com_unbounce_form_post_1-sql]: https://github.com/snowplow/iglu-central/blob/master/sql/com.unbounce/form_post_1.sql
