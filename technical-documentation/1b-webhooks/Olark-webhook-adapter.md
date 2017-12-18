@@ -53,7 +53,7 @@ All resources for this webhook's events:
 
 ## 4. See also
 
-[[olark webhook setup]]
+[[Olark webhook setup]]
 
 [olark-website]: https://www.olark.com/
 [olark-webhooks]: https://www.olark.com/help/webhooks
