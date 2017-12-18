@@ -56,6 +56,9 @@ If you switch to `"stdout"`, we recommend setting 'akka.loglevel = OFF' and 'akk
 You should fill the rest of the `collector.streams.sink` section according to your selection as a
 sink.
 
+To use `stdout` as a sink comment everything in the `collector.streams.sink` but
+`collector.streams.sink.enabled` which should be set to `stdout`.
+
 ### 2. Setting the P3P policy header
 
 The P3P policy header is set in `collector.p3p`, and
