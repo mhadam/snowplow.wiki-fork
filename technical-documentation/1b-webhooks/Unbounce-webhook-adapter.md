@@ -45,7 +45,7 @@ All resources for this webhook's events:
 
 | **Event**      | **JSON Schema**                                  | **JSON Paths**                                    | **Redshift Table**                                     |
 |:---------------|:-------------------------------------------------|:--------------------------------------------------|:-------------------------------------------------------|
-|Form Submit     |[com_unbounce_form_post 1-0-0][com_unbounce_offline_message_1-schema]               | [com_unbounce_form_post_1.json][com_mailgun_recipient_unsubscribed-json]               | [com_unbounce_form_post_1.sql][com_unbounce_form_post_1-sql]               |
+|Form Submit     |[com_unbounce_form_post 1-0-0][com_unbounce_offline_message_1-schema]               | [com_unbounce_form_post_1.json][com_unbounce_offline_message_1-json]               | [com_unbounce_form_post_1.sql][com_unbounce_offline_message_1-sql]               |
 
 
 <a name="see-also" />
