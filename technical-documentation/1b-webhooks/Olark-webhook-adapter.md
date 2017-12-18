@@ -45,8 +45,8 @@ All resources for this webhook's events:
 
 | **Event**      | **JSON Schema**                                  | **JSON Paths**                                    | **Redshift Table**                                     |
 |:---------------|:-------------------------------------------------|:--------------------------------------------------|:-------------------------------------------------------|
-|Offline Messages       | |[com_olark_offline_message_1 1-0-0][com_olark_offline_message_1-schema]               | [com_olark_offline_message_1.json][com_olark_offline_message_1-json]               | [com_olark_offline_message_1.sql] [com_olark_offline_message_1-sql]               |
-|Transcript             | |[com_olark_transcript_1 1-0-0][com_olark_transcript_1-schema]                         | [com_olark_transcript_1.json][com_olark_transcript_1-json]                         | [com_olark_transcript_1.sql] [com_olark_transcript_1-sql]                         |
+|Offline Messages       |[com_olark_offline_message_1 1-0-0][com_olark_offline_message_1-schema]               | [com_olark_offline_message_1.json][com_olark_offline_message_1-json]               | [com_olark_offline_message_1.sql][com_olark_offline_message_1-sql]               |
+|Transcript             |[com_olark_transcript_1 1-0-0][com_olark_transcript_1-schema]                         | [com_olark_transcript_1.json][com_olark_transcript_1-json]                         | [com_olark_transcript_1.sql][com_olark_transcript_1-sql]                         |
 
 
 <a name="see-also" />
