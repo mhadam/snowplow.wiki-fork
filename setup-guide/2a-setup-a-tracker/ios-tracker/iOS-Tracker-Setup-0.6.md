@@ -2,9 +2,8 @@
 
 [**HOME**](Home) > [**SNOWPLOW SETUP GUIDE**](Setting-up-Snowplow) > [**Step 2: Setup a Tracker**](Setting-up-a-Tracker) > [**Objective-C tracker**](ios-tracker-setup)
 
-This page refers to version 0.7.0 of the Snowplow Objective-C Tracker, which is the latest version. Documentation for earlier versions is available:
+This page refers to version 0.6.2 of the Snowplow Objective-C Tracker, which is the latest version. Documentation for earlier versions is available:
 
-* *[Version 0.6][ios-0.6]*
 * *[Version 0.5][ios-0.5]*
 * *[Version 0.4][ios-0.4]*
 * *[Version 0.1-0.3][ios-0.3]*
@@ -114,13 +113,13 @@ Make sure that the suggested options for adding `Snowplow` are set **Create grou
 
 #### 3.2.1 Add the FMDB dependency
 
-The tracker is dependent on [FMDB][fmdb] version 2.6.2, an Objective-C wrapper around SQLite.
+The tracker is dependent on [FMDB][fmdb] version 2.3, an Objective-C wrapper around SQLite.
 
 As before, git clone the dependency and copy the source into your XCode project's folder:
 
 ```
 git clone https://github.com/ccgus/fmdb.git
-cd fmdb && git checkout 2.6.2
+cd fmdb && git checkout v2.3
 cp -r src/fmdb ../MyObjcApp/MyObjcApp/
 ```
 
@@ -269,7 +268,7 @@ Now add the `OpenIDFA.{h,m}` files to your project by:
 [tvos]: https://www.apple.com/tv/
 [objc-tracker-github]: https://github.com/snowplow/snowplow-objc-tracker
 
-[static-download]: https://bintray.com/artifact/download/snowplow/snowplow-generic/snowplow_objc_tracker_0.7.0.zip
+[static-download]: https://bintray.com/artifact/download/snowplow/snowplow-generic/snowplow_objc_tracker_0.6.2.zip
 [apple-static-instructions]: https://developer.apple.com/library/ios/technotes/iOSStaticLibraries/Articles/configuration.html
 
 [git]: http://git-scm.com/downloads
@@ -280,4 +279,3 @@ Now add the `OpenIDFA.{h,m}` files to your project by:
 [ios-0.3]: https://github.com/snowplow/snowplow/wiki/iOS-Tracker-Setup-0.1-0.3
 [ios-0.4]: https://github.com/snowplow/snowplow/wiki/iOS-Tracker-Setup-0.4
 [ios-0.5]: https://github.com/snowplow/snowplow/wiki/iOS-Tracker-Setup-0.5
-[ios-0.6]: https://github.com/snowplow/snowplow/wiki/iOS-Tracker-Setup-0.6
