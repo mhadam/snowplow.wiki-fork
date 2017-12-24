@@ -2,7 +2,7 @@
 
 [**HOME**](Home) > [**SNOWPLOW SETUP GUIDE**](Setting-up-Snowplow) > [**Step 2: Setup a Tracker**](Setting-up-a-Tracker) > [**Objective-C tracker**](ios-tracker-setup)
 
-This page refers to version 0.6.2 of the Snowplow Objective-C Tracker, which is the latest version. Documentation for earlier versions is available:
+This page refers to version 0.6.2 of the Snowplow Objective-C Tracker. Documentation for earlier versions is available:
 
 * *[Version 0.5][ios-0.5]*
 * *[Version 0.4][ios-0.4]*
