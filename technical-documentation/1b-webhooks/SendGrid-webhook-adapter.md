@@ -70,49 +70,45 @@ All resources for this webhook's events:
 [snowplow-release]: https://github.com/snowplow/snowplow/releases/tag/r75-long-legged-buzzard
 
 [processed-json-schema]: https://github.com/snowplow/iglu-central/tree/master/schemas/com.sendgrid/processed/jsonschema/1-0-0
-[processed-json-paths]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/jsonpaths/com.sendgrid/processed_1.json
-[processed-sql]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/sql/com.sendgrid/processed_1.sql
+[processed-json-paths]: https://github.com/snowplow/iglu-central/blob/master/jsonpaths/com.sendgrid/processed_1.json
+[processed-sql]: https://github.com/snowplow/iglu-central/blob/master/sql/com.sendgrid/processed_1.sql
 
 [dropped-json-schema]: https://github.com/snowplow/iglu-central/tree/master/schemas/com.sendgrid/dropped/jsonschema/1-0-0
-[dropped-json-paths]: https://github.com/snowplow/snowplow/tre0.9.11e/master/4-storage/redshift-storage/jsonpaths/com.sendgrid/dropped_1.json
-[dropped-sql]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/sql/com.sendgrid/dropped_1.sql
+[dropped-json-paths]: https://github.com/snowplow/iglu-central/blob/master/jsonpaths/com.sendgrid/dropped_1.json
+[dropped-sql]: https://github.com/snowplow/iglu-central/blob/master/sql/com.sendgrid/dropped_1.sql
 
 [delivered-json-schema]: https://github.com/snowplow/iglu-central/tree/master/schemas/com.sendgrid/delivered/jsonschema/1-0-0
-[delivered-json-paths]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/jsonpaths/com.sendgrid/delivered.json
-[delivered-sql]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/sql/com.sendgrid/delivered.sql
+[delivered-json-paths]: https://github.com/snowplow/iglu-central/blob/master/jsonpaths/com.sendgrid/delivered_1.json
+[delivered-sql]: https://github.com/snowplow/iglu-central/blob/master/sql/com.sendgrid/delivered_1.sql
 
 [deferred-json-schema]: https://github.com/snowplow/iglu-central/tree/master/schemas/com.sendgrid/deferred/jsonschema/1-0-0
-[deferred-json-paths]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/jsonpaths/com.sendgrid/deferred_1.json
-[deferred-sql]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/sql/com.sendgrid/deferred_1.sql
+[deferred-json-paths]: https://github.com/snowplow/iglu-central/blob/master/jsonpaths/com.sendgrid/deferred_1.json
+[deferred-sql]: https://github.com/snowplow/iglu-central/blob/master/sql/com.sendgrid/deferred_1.sql
 
 [bounce-json-schema]: https://github.com/snowplow/iglu-central/tree/master/schemas/com.sendgrid/bounce/jsonschema/1-0-0
-[bounce-json-paths]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/jsonpaths/com.sendgrid/bounce_1.json
-[bounce-sql]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/sql/com.sendgrid/bounce_1.sql
+[bounce-json-paths]: https://github.com/snowplow/iglu-central/blob/master/jsonpaths/com.sendgrid/bounce_1.json
+[bounce-sql]: https://github.com/snowplow/iglu-central/blob/master/sql/com.sendgrid/bounce_1.sql
 
 [open-json-schema]: https://github.com/snowplow/iglu-central/tree/master/schemas/com.sendgrid/open/jsonschema/1-0-0
-[open-json-paths]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/jsonpaths/com.sendgrid/open_1.json
-[open-sql]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/sql/com.sendgrid/open_1.sql
+[open-json-paths]: https://github.com/snowplow/iglu-central/blob/master/jsonpaths/com.sendgrid/open_1.json
+[open-sql]: https://github.com/snowplow/iglu-central/blob/master/sql/com.sendgrid/open_1.sql
 
 [click-json-schema]: https://github.com/snowplow/iglu-central/tree/master/schemas/com.sendgrid/click/jsonschema/1-0-0
-[click-json-paths]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/jsonpaths/com.sendgrid/click_1.json
-[click-sql]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/sql/com.sendgrid/click_1.sql
+[click-json-paths]: https://github.com/snowplow/iglu-central/blob/master/jsonpaths/com.sendgrid/click_1.json
+[click-sql]: https://github.com/snowplow/iglu-central/blob/master/sql/com.sendgrid/click_1.sql
 
 [spam_report-json-schema]: https://github.com/snowplow/iglu-central/tree/master/schemas/com.sendgrid/spam_report/jsonschema/1-0-0
-[spam_report-json-paths]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/jsonpaths/com.sendgrid/spam_report_1.json
-[spam_report-sql]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/sql/com.sendgrid/spam_report_1.sql
+[spam_report-json-paths]: https://github.com/snowplow/iglu-central/blob/master/jsonpaths/com.sendgrid/spamreport_1.json
+[spam_report-sql]: https://github.com/snowplow/iglu-central/blob/master/sql/com.sendgrid/spamreport_1.sql
 
 [unsubscribe-json-schema]: https://github.com/snowplow/iglu-central/tree/master/schemas/com.sendgrid/unsubscribe/jsonschema/1-0-0
-[unsubscribe-json-paths]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/jsonpaths/com.sendgrid/unsubscribe_1.json
-[unsubscribe-sql]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/sql/com.sendgrid/unsubscribe_1.sql
-
-[unsubscribe-json-schema]: https://github.com/snowplow/iglu-central/tree/master/schemas/com.sendgrid/unsubscribe/jsonschema/1-0-0
-[unsubscribe-json-paths]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/jsonpaths/com.sendgrid/unsubscribe_1.json
-[unsubscribe-sql]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/sql/com.sendgrid/unsubscribe_1.sql
+[unsubscribe-json-paths]: https://github.com/snowplow/iglu-central/blob/master/jsonpaths/com.sendgrid/unsubscribe_1.json
+[unsubscribe-sql]: https://github.com/snowplow/iglu-central/blob/master/sql/com.sendgrid/unsubscribe_1.sql
 
 [group_unsubscribe-json-schema]: https://github.com/snowplow/iglu-central/tree/master/schemas/com.sendgrid/group_unsubscribe/jsonschema/1-0-0
-[group_unsubscribe-json-paths]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/jsonpaths/com.sendgrid/group_unsubscribe_1.json
-[group_unsubscribe-sql]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/sql/com.sendgrid/group_unsubscribe_1.sql
+[group_unsubscribe-json-paths]: https://github.com/snowplow/iglu-central/blob/master/jsonpaths/com.sendgrid/group_unsubscribe_1.json
+[group_unsubscribe-sql]: https://github.com/snowplow/iglu-central/blob/master/sql/com.sendgrid/group_unsubscribe_1.sql
 
 [group_resubscribe-json-schema]: https://github.com/snowplow/iglu-central/tree/master/schemas/com.sendgrid/group_resubscribe/jsonschema/1-0-0
-[group_resubscribe-json-paths]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/jsonpaths/com.sendgrid/group_resubscribe_1.json
-[group_resubscribe-sql]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/sql/com.sendgrid/group_resubscribe_1.sql
+[group_resubscribe-json-paths]: https://github.com/snowplow/iglu-central/blob/master/jsonpaths/com.sendgrid/group_resubscribe_1.json
+[group_resubscribe-sql]: https://github.com/snowplow/iglu-central/blob/master/sql/com.sendgrid/group_resubscribe_1.sql

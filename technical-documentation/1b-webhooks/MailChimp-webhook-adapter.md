@@ -64,25 +64,25 @@ All resources for this webhook's events:
 [snowplow-0.9.11]: https://github.com/snowplow/snowplow/releases/tag/0.9.11
 
 [subscribe-json-schema]: https://github.com/snowplow/iglu-central/tree/master/schemas/com.mailchimp/subscribe/jsonschema/1-0-0
-[subscribe-json-paths]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/jsonpaths/com.mailchimp/subscribe_1.json
-[subscribe-sql]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/sql/com.mailchimp/subscribe_1.sql
+[subscribe-json-paths]: https://github.com/snowplow/iglu-central/blob/master/jsonpaths/com.mailchimp/subscribe_1.json
+[subscribe-sql]: https://github.com/snowplow/iglu-central/blob/master/sql/com.mailchimp/subscribe_1.sql
 
 [unsubscribe-json-schema]: https://github.com/snowplow/iglu-central/tree/master/schemas/com.mailchimp/unsubscribe/jsonschema/1-0-0
-[unsubscribe-json-paths]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/jsonpaths/com.mailchimp/unsubscribe_1.json
-[unsubscribe-sql]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/sql/com.mailchimp/unsubscribe_1.sql
+[unsubscribe-json-paths]: https://github.com/snowplow/iglu-central/blob/master/jsonpaths/com.mailchimp/unsubscribe_1.json
+[unsubscribe-sql]: https://github.com/snowplow/iglu-central/blob/master/sql/com.mailchimp/unsubcribe_1.sql
 
 [profile-json-schema]: https://github.com/snowplow/iglu-central/tree/master/schemas/com.mailchimp/profile_update/jsonschema/1-0-0
-[profile-json-paths]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/jsonpaths/com.mailchimp/profile_update_1.json
-[profile-sql]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/sql/com.mailchimp/profile_update_1.sql
+[profile-json-paths]: https://github.com/snowplow/iglu-central/blob/master/jsonpaths/com.mailchimp/profile_update_1.json
+[profile-sql]: https://github.com/snowplow/iglu-central/blob/master/sql/com.mailchimp/profile_update_1.sql
 
 [email-change-json-schema]: https://github.com/snowplow/iglu-central/tree/master/schemas/com.mailchimp/email_address_change/jsonschema/1-0-0
-[email-change-json-paths]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/jsonpaths/com.mailchimp/email_address_change_1.json
-[email-change-sql]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/sql/com.mailchimp/email_address_change_1.sql
+[email-change-json-paths]: https://github.com/snowplow/iglu-central/blob/master/jsonpaths/com.mailchimp/email_address_change_1.json
+[email-change-sql]: https://github.com/snowplow/iglu-central/blob/master/sql/com.mailchimp/email_address_change_1.sql
 
 [email-clean-json-schema]: https://github.com/snowplow/iglu-central/tree/master/schemas/com.mailchimp/cleaned_email/jsonschema/1-0-0
-[email-clean-json-paths]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/jsonpaths/com.mailchimp/cleaned_email_1.json
-[email-clean-sql]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/sql/com.mailchimp/cleaned_email_1.sql
+[email-clean-json-paths]: https://github.com/snowplow/iglu-central/blob/master/jsonpaths/com.mailchimp/cleaned_email_1.json
+[email-clean-sql]: https://github.com/snowplow/iglu-central/blob/master/sql/com.mailchimp/cleaned_email_1.sql
 
 [campaign-json-schema]: https://github.com/snowplow/iglu-central/tree/master/schemas/com.mailchimp/campaign_sending_status/jsonschema/1-0-0
-[campaign-json-paths]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/jsonpaths/com.mailchimp/campaign_sending_status_1.json
-[campaign-sql]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/sql/com.mailchimp/campaign_sending_status_1.sql
+[campaign-json-paths]: https://github.com/snowplow/iglu-central/blob/master/jsonpaths/com.mailchimp/campaign_sending_status_1.json
+[campaign-sql]: https://github.com/snowplow/iglu-central/blob/master/sql/com.mailchimp/campaign_sending_status_1.sql

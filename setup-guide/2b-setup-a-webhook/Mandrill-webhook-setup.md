@@ -97,12 +97,12 @@ That's it - with this table deployed, your Mandrill events should automatically 
 [snowplow-0.9.14]: https://github.com/snowplow/snowplow/releases/tag/0.9.14
 [tracker-protocol]: https://github.com/snowplow/snowplow/wiki/snowplow-tracker-protocol#1-common-parameters-platform-and-event-independent
 
-[sent-sql]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/sql/com.mandrill/message_sent_1.sql
-[bounced-sql]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/sql/com.mandrill/message_bounced_1.sql
-[soft-bounced-sql]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/sql/com.mandrill/message_soft_bounced_1.sql
-[opened-sql]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/sql/com.mandrill/message_opened_1.sql
-[spam-sql]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/sql/com.mandrill/message_marked_as_spam_1.sql
-[rejected-sql]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/sql/com.mandrill/message_rejected_1.sql
-[delayed-sql]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/sql/com.mandrill/message_delayed_1.sql
-[clicked-sql]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/sql/com.mandrill/message_clicked_1.sql
-[unsub-sql]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/sql/com.mandrill/recipient_unsubscribed_1.sql
+[sent-sql]: https://github.com/snowplow/iglu-central/blob/master/sql/com.mandrill/message_sent_1.sql
+[bounced-sql]: https://github.com/snowplow/iglu-central/blob/master/sql/com.mandrill/message_bounced_1.sql
+[soft-bounced-sql]: https://github.com/snowplow/iglu-central/blob/master/sql/com.mandrill/message_soft_bounced_1.sql
+[opened-sql]: https://github.com/snowplow/iglu-central/blob/master/sql/com.mandrill/message_opened_1.sql
+[spam-sql]: https://github.com/snowplow/iglu-central/blob/master/sql/com.mandrill/message_marked_as_spam_1.sql
+[rejected-sql]: https://github.com/snowplow/iglu-central/blob/master/sql/com.mandrill/message_rejected_1.sql
+[delayed-sql]: https://github.com/snowplow/iglu-central/blob/master/sql/com.mandrill/message_delayed_1.sql
+[clicked-sql]: https://github.com/snowplow/iglu-central/blob/master/sql/com.mandrill/message_clicked_1.sql
+[unsub-sql]: https://github.com/snowplow/iglu-central/blob/master/sql/com.mandrill/recipient_unsubscribed_1.sql

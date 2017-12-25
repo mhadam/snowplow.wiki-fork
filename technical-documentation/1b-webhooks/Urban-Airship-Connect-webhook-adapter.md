@@ -76,66 +76,66 @@ All resources for this webhook's events:
 [UrbanAirship-adapter]: https://github.com/snowplow/snowplow/blob/master/3-enrich/scala-common-enrich/src/main/scala/com.snowplowanalytics.snowplow.enrich/common/adapters/registry/UrbanAirshipAdapter.scala
 [snowplow-release]: http://snowplowanalytics.com/blog/2015/12/04/snowplow-r75-long-legged-buzzard-released
 
-[close-json-paths]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/jsonpaths/com.urbanairship.connect/close_1.json
+[close-json-paths]: https://github.com/snowplow/iglu-central/blob/master/jsonpaths/com.urbanairship.connect/close_1.json
 [close-json-schema]: https://github.com/snowplow/iglu-central/tree/master/schemas/com.urbanairship.connect/close/jsonschema/1-0-0
-[close-sql]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/sql/com.urbanairship.connect/close_1.sql
+[close-sql]: https://github.com/snowplow/iglu-central/blob/master/sql/com.urbanairship.connect/close_1.sql
 
 [custom-json-schema]: https://github.com/snowplow/iglu-central/tree/master/schemas/com.urbanairship.connect/custom/jsonschema/1-0-0
-[custom-json-paths]: https://github.com/snowplow/snowplow/tre0.9.11e/master/4-storage/redshift-storage/jsonpaths/com.urbanairship.connect/custom_1.json
-[custom-sql]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/sql/com.urbanairship.connect/custom_1.sql
+[custom-json-paths]: https://github.com/snowplow/iglu-central/blob/master/jsonpaths/com.urbanairship.connect/custom_1.json
+[custom-sql]: https://github.com/snowplow/iglu-central/blob/master/sql/com.urbanairship.connect/custom_1.sql
 
 [first_open-json-schema]: https://github.com/snowplow/iglu-central/tree/master/schemas/com.urbanairship.connect/first_open/jsonschema/1-0-0
-[first_open-json-paths]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/jsonpaths/com.urbanairship.connect/first_open_1.json
-[first_open-sql]: https://githuopen-json-pathsbpathsb.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/sql/com.urbanairship.connect/first_open_1.sql
+[first_open-json-paths]: https://github.com/snowplow/iglu-central/blob/master/jsonpaths/com.urbanairship.connect/first_open_1.json
+[first_open-sql]: https://github.com/snowplow/iglu-central/blob/master/sql/com.urbanairship.connect/first_open_1.sql
 
 [in_app_message_display-json-schema]: https://github.com/snowplow/iglu-central/tree/master/schemas/com.urbanairship.connect/in_app_message_display/jsonschema/1-0-0
-[in_app_message_display-json-paths]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/jsonpaths/com.urbanairship.connect/in_app_message_display_1.json
-[in_app_message_display-sql]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/sql/com.urbanairship.connect/in_app_message_display_1.sql
+[in_app_message_display-json-paths]: https://github.com/snowplow/iglu-central/blob/master/jsonpaths/com.urbanairship.connect/in_app_message_display_1.json
+[in_app_message_display-sql]: https://github.com/snowplow/iglu-central/blob/master/sql/com.urbanairship.connect/in_app_message_display_1.sql
 
 [in_app_message_expiration-json-schema]: https://github.com/snowplow/iglu-central/tree/master/schemas/com.urbanairship.connect/in_app_message_expiration/jsonschema/1-0-0
-[in_app_message_expiration-json-paths]: https://github.unsubscribe-json-pathscom/snowplow/snowplow/tree/master/4-storage/redshift-storage/jsonpaths/com.urbanairship.connect/in_app_message_expiration_1.json
-[in_app_message_expiration-sql]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/sql/com.urbanairship.connect/in_app_message_expiration_1.sql
+[in_app_message_expiration-json-paths]: https://github.com/snowplow/iglu-central/blob/master/jsonpaths/com.urbanairship.connect/in_app_message_expiration_1.json
+[in_app_message_expiration-sql]: https://github.com/snowplow/iglu-central/blob/master/sql/com.urbanairship.connect/in_app_message_expiration_1.sql
 
 [in_app_message_resolution-json-schema]: https://github.com/snowplow/iglu-central/tree/master/schemas/com.urbanairship.connect/in_app_message_resolution/jsonschema/1-0-0
-[in_app_message_resolution-json-paths]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/jsonpaths/com.urbanairship.connect/in_app_message_resolution_1.json
-[in_app_message_resolution-sql]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/sql/com.urbanairship.connect/in_app_message_resolution_1.sql
+[in_app_message_resolution-json-paths]: https://github.com/snowplow/iglu-central/blob/master/jsonpaths/com.urbanairship.connect/in_app_message_resolution_1.json
+[in_app_message_resolution-sql]: https://github.com/snowplow/iglu-central/blob/master/sql/com.urbanairship.connect/in_app_message_resolution_1.sql
 
 [location-json-schema]: https://github.com/snowplow/iglu-central/tree/master/schemas/com.urbanairship.connect/location/jsonschema/1-0-0
-[location-json-paths]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/jsonpaths/com.urbanairship.connect/location_1.json
-[location-sql]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/sql/com.urbanairship.connect/location_1.sql
+[location-json-paths]: https://github.com/snowplow/iglu-central/blob/master/jsonpaths/com.urbanairship.connect/location_1.json
+[location-sql]: https://github.com/snowplow/iglu-central/blob/master/sql/com.urbanairship.connect/location_1.sql
 
 [open-json-schema]: https://github.com/snowplow/iglu-central/tree/master/schemas/com.urbanairship.connect/open/jsonschema/1-0-0
-[open-json-paths]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/jsonpaths/com.urbanairship.connect/open_1.json
-[open-sql]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/sql/com.urbanairship.connect/open_1.sql
+[open-json-paths]: https://github.com/snowplow/iglu-central/blob/master/jsonpaths/com.urbanairship.connect/open_1.json
+[open-sql]: https://github.com/snowplow/iglu-central/blob/master/sql/com.urbanairship.connect/open_1.sql
 
 [push_body-json-schema]: https://github.com/snowplow/iglu-central/tree/master/schemas/com.urbanairship.connect/push_body/jsonschema/1-0-0
-[push_body-json-paths]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/jsonpaths/com.urbanairship.connect/push_body_1.json
-[push_body-sql]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/sql/com.urbanairship.connect/push_body_1.sql
+[push_body-json-paths]: https://github.com/snowplow/iglu-central/blob/master/jsonpaths/com.urbanairship.connect/push_body_1.json
+[push_body-sql]: https://github.com/snowplow/iglu-central/blob/master/sql/com.urbanairship.connect/push_body_1.sql
 
 [region-json-schema]: https://github.com/snowplow/iglu-central/tree/master/schemas/com.urbanairship.connect/region/jsonschema/1-0-0
-[region-json-paths]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/jsonpaths/com.urbanairship.connect/region_1.json
-[region-sql]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/sql/com.urbanairship.connect/region_1.sql
+[region-json-paths]: https://github.com/snowplow/iglu-central/blob/master/jsonpaths/com.urbanairship.connect/region_1.json
+[region-sql]: https://github.com/snowplow/iglu-central/blob/master/sql/com.urbanairship.connect/region_1.sql
 
 [rich_delete-json-schema]: https://github.com/snowplow/iglu-central/tree/master/schemas/com.urbanairship.connect/rich_delete/jsonschema/1-0-0
-[rich_delete-json-paths]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/jsonpaths/com.urbanairship.connect/rich_delete_1.json
-[rich_delete-sql]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/sql/com.urbanairship.connect/rich_delete_1.sql
+[rich_delete-json-paths]: https://github.com/snowplow/iglu-central/blob/master/jsonpaths/com.urbanairship.connect/rich_delete_1.json
+[rich_delete-sql]: https://github.com/snowplow/iglu-central/blob/master/sql/com.urbanairship.connect/rich_delete_1.sql
 
 [rich_delivery-json-schema]: https://github.com/snowplow/iglu-central/tree/master/schemas/com.urbanairship.connect/rich_delivery/jsonschema/1-0-0
-[rich_delivery-json-paths]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/jsonpaths/com.urbanairship.connect/rich_delivery_1.json
-[rich_delivery-sql]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/sql/com.urbanairship.connect/rich_delivery_1.sql
+[rich_delivery-json-paths]: https://github.com/snowplow/iglu-central/blob/master/jsonpaths/com.urbanairship.connect/rich_delivery_1.json
+[rich_delivery-sql]: https://github.com/snowplow/iglu-central/blob/master/sql/com.urbanairship.connect/rich_delivery_1.sql
 
 [rich_read-json-schema]: https://github.com/snowplow/iglu-central/tree/master/schemas/com.urbanairship.connect/rich_read/jsonschema/1-0-0
-[rich_read-json-paths]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/jsonpaths/com.urbanairship.connect/rich_read_1.json
-[rich_read-sql]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/sql/com.urbanairship.connect/rich_read_1.sql
+[rich_read-json-paths]: https://github.com/snowplow/iglu-central/blob/master/jsonpaths/com.urbanairship.connect/rich_read_1.json
+[rich_read-sql]: https://github.com/snowplow/iglu-central/blob/master/sql/com.urbanairship.connect/rich_read_1.sql
 
 [send-json-schema]: https://github.com/snowplow/iglu-central/tree/master/schemas/com.urbanairship.connect/send/jsonschema/1-0-0
-[send-json-paths]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/jsonpaths/com.urbanairship.connect/send_1.json
-[send-sql]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/sql/com.urbanairship.connect/send_1.sql
+[send-json-paths]: https://github.com/snowplow/iglu-central/blob/master/jsonpaths/com.urbanairship.connect/send_1.json
+[send-sql]: https://github.com/snowplow/iglu-central/blob/master/sql/com.urbanairship.connect/send_1.sql
 
 [tag_change-json-schema]: https://github.com/snowplow/iglu-central/tree/master/schemas/com.urbanairship.connect/tag_change/jsonschema/1-0-0
-[tag_change-json-paths]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/jsonpaths/com.urbanairship.connect/tag_change_1.json
-[tag_change-sql]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/sql/com.urbanairship.connect/tag_change_1.sql
+[tag_change-json-paths]: https://github.com/snowplow/iglu-central/blob/master/jsonpaths/com.urbanairship.connect/tag_change_1.json
+[tag_change-sql]: https://github.com/snowplow/iglu-central/blob/master/sql/com.urbanairship.connect/tag_change_1.sql
 
 [uninstall-json-schema]: https://github.com/snowplow/iglu-central/tree/master/schemas/com.urbanairship.connect/uninstall/jsonschema/1-0-0
-[uninstall-json-paths]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/jsonpaths/com.urbanairship.connect/uninstall_1.json
-[uninstall-sql]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/sql/com.urbanairship.connect/uninstall_1.sql
+[uninstall-json-paths]: https://github.com/snowplow/iglu-central/blob/master/jsonpaths/com.urbanairship.connect/uninstall_1.json
+[uninstall-sql]: https://github.com/snowplow/iglu-central/blob/master/sql/com.urbanairship.connect/uninstall_1.sql

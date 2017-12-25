@@ -53,6 +53,6 @@ If you are running the Snowplow batch flow with Amazon Redshift, then you should
 
 You can find the table definition here:
 
-[s3_notification_event_1.sql](https://github.com/snowplow/snowplow/blob/master/4-storage/redshift-storage/sql/com.amazon.aws.lambda/s3_notification_event_1.sql)
+[s3_notification_event_1.sql](https://github.com/snowplow/iglu-central/blob/master/sql/com.amazon.aws.lambda/s3_notification_event_1.sql)
 
 Make sure to deploy this table into the same schema as your `events` table.

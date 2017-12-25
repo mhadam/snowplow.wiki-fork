@@ -60,5 +60,5 @@ While seven potential events can be sent from PagerDuty; as each of them has a n
 [snowplow-0.9.13]: https://github.com/snowplow/snowplow/releases/tag/0.9.13
 
 [incident-json-schema]: https://github.com/snowplow/iglu-central/tree/master/schemas/com.pagerduty/incident/jsonschema/1-0-0
-[incident-json-paths]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/jsonpaths/com.pagerduty/incident_1.json
-[incident-sql]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/sql/com.pagerduty/incident_1.sql
+[incident-json-paths]: https://github.com/snowplow/iglu-central/blob/master/jsonpaths/com.pagerduty/incident_1.json
+[incident-sql]: https://github.com/snowplow/iglu-central/blob/master/sql/com.pagerduty/incident_1.sql

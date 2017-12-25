@@ -65,4 +65,4 @@ You can either load these events using your existing `atomic.events` table, or i
 
 Use this when you are working with Urban Airship Connect. For more details see [[Urban Airship Connect webhook setup]].
 
-[access-log-sql]: https://github.com/snowplow/snowplow/blob/master/4-storage/redshift-storage/sql/com.amazon.aws.cloudfront/wd_access_log_1.sql
+[access-log-sql]: https://github.com/snowplow/iglu-central/blob/master/sql/com.amazon.aws.cloudfront/wd_access_log_1.sql

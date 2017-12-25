@@ -1147,11 +1147,11 @@ For a complete example, see our sample [`config.yml`](https://github.com/snowplo
 
 Make sure to add a [`weather_enrichment_config.json`](https://github.com/snowplow/snowplow/blob/master/3-enrich/config/enrichments/weather_enrichment_config.json) configured as explained [here](Weather-enrichment) into your `enrichments` folder too. The file should conform to this [JSON Schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow.enrichments/weather_enrichment_config/jsonschema/1-0-0).
 
-The corresponding JSONPaths file could be found [here](https://github.com/snowplow/snowplow/blob/master/4-storage/redshift-storage/jsonpaths/org.openweathermap/weather_1.json).
+The corresponding JSONPaths file could be found [here](https://github.com/snowplow/iglu-central/blob/master/jsonpaths/org.openweathermap/weather_1.json).
 
 #### Redshift
 
-If you are using Snowplow with Amazon Redshift, you will need to deploy the [org_openweathermap_weather_1](https://github.com/snowplow/snowplow/blob/master/4-storage/redshift-storage/sql/org.openweathermap/weather_1.sql) table into your database.
+If you are using Snowplow with Amazon Redshift, you will need to deploy the [org_openweathermap_weather_1](https://github.com/snowplow/iglu-central/blob/master/sql/org.openweathermap/weather_1.sql) table into your database.
 
 ### Read more
 
@@ -1265,14 +1265,14 @@ This default configuration is capturing the Scala Stream Collector's own `sp` co
 
 ##### JSONPaths files
 
-- [`org.ietf/http_cookie_1.json`](https://github.com/snowplow/snowplow/blob/master/4-storage/redshift-storage/jsonpaths/org.ietf/http_cookie_1.json)
-- [`com.snowplowanalytics.snowplow/uri_redirect_1.json`](https://github.com/snowplow/snowplow/blob/master/4-storage/redshift-storage/jsonpaths/com.snowplowanalytics.snowplow/uri_redirect_1.json)
+- [`org.ietf/http_cookie_1.json`](https://github.com/snowplow/iglu-central/blob/master/jsonpaths/org.ietf/http_cookie_1.json)
+- [`com.snowplowanalytics.snowplow/uri_redirect_1.json`](https://github.com/snowplow/iglu-central/blob/master/jsonpaths/com.snowplowanalytics.snowplow/uri_redirect_1.json)
 
 #### Redshift
 
-If you are using Snowplow with Amazon Redshift and wish to use the new cookie extractor enrichment, you will need to deploy the [`org_ietf_http_cookie_1`](https://github.com/snowplow/snowplow/blob/master/4-storage/redshift-storage/sql/org.ietf/http_cookie_1.sql) table into your database.
+If you are using Snowplow with Amazon Redshift and wish to use the new cookie extractor enrichment, you will need to deploy the [`org_ietf_http_cookie_1`](https://github.com/snowplow/iglu-central/blob/master/sql/org.ietf/http_cookie_1.sql) table into your database.
 
-For the new URI redirect functionality, install the [`com_snowplowanalytics_snowplow_uri_redirect_1`](https://github.com/snowplow/snowplow/blob/master/4-storage/redshift-storage/sql/com.snowplowanalytics.snowplow/uri_redirect_1.sql) table.
+For the new URI redirect functionality, install the [`com_snowplowanalytics_snowplow_uri_redirect_1`](https://github.com/snowplow/iglu-central/blob/master/sql/com.snowplowanalytics.snowplow/uri_redirect_1.sql) table.
 
 ### Read more
 
@@ -1326,7 +1326,7 @@ Use the appropriate migration script to update your version of the `atomic.event
 - [The Redshift migration script](https://github.com/snowplow/snowplow/blob/master/4-storage/redshift-storage/sql/migrate_0.6.0_to_0.7.0.sql)
 - [The PostgreSQL migration script](https://github.com/snowplow/snowplow/blob/master/4-storage/postgres-storage/sql/migrate_0.5.0_to_0.6.0.sql)
 
-If you are ingesting Cloudfront access logs with Snowplow, use the [Cloudfront access log migration script](https://github.com/snowplow/snowplow/blob/master/4-storage/redshift-storage/sql/com.amazon.aws.cloudfront/migrate_wd_access_log_1_r3_to_r4.sql) to update your `com_amazon_aws_cloudfront_wd_access_log_1` table.
+If you are ingesting Cloudfront access logs with Snowplow, use the [Cloudfront access log migration script](https://github.com/snowplow/iglu-central/blob/master/sql/com.amazon.aws.cloudfront/migrate_wd_access_log_1_r3_to_r4.sql) to update your `com_amazon_aws_cloudfront_wd_access_log_1` table.
 
 ### Read more
 
@@ -1713,7 +1713,7 @@ You need to use the appropriate migration script to update to the new table defi
 
 If you want to make use of the new *ua_parser* based useragent parsing enrichment in Redshift, you must also deploy the new table into your `atomic` schema:
 
-- [com_snowplowanalytics_snowplow_ua_parser_context_1](https://github.com/snowplow/snowplow/blob/master/4-storage/redshift-storage/sql/com.snowplowanalytics.snowplow/ua_parser_context_1.sql)
+- [com_snowplowanalytics_snowplow_ua_parser_context_1](https://github.com/snowplow/iglu-central/blob/master/sql/com.snowplowanalytics.snowplow/ua_parser_context_1.sql)
 
 #### Kinesis pipeline
 
@@ -2089,7 +2089,7 @@ To upgrade to this release:
 
 #### Redshift
 
-If you have installed the `com_snowplowanalytics_snowplow_change_form_1` table following the [0.9.10](#v0.9.10) release, then please upgrade it by using the upgrade script, [`migrate_change_form_1_r1_to_r2.sql`](https://github.com/snowplow/snowplow/blob/master/4-storage/redshift-storage/sql/com.snowplowanalytics.snowplow/migrate_change_form_1_r1_to_r2.sql).
+If you have installed the `com_snowplowanalytics_snowplow_change_form_1` table following the [0.9.10](#v0.9.10) release, then please upgrade it by using the upgrade script, [`migrate_change_form_1_r1_to_r2.sql`](https://github.com/snowplow/iglu-central/blob/master/sql/com.snowplowanalytics.snowplow/migrate_change_form_1_r1_to_r2.sql).
 
 Also, make sure to deploy Redshift tables for any webhooks you plan on ingesting into Snowplow. You can find the Redshift table deployment instructions on the corresponding webhook setup wiki pages:
 
@@ -2114,7 +2114,7 @@ This release is primarily targeted at Snowplow users of Amazon Redshift who are 
 
 You will need to deploy the tables for any new events/context you want to support into your Amazon Redshift database. Make sure to deploy these into the same schema as your `events` table resides in.
 
-You can find all Redshift table definitions in our GitHub repository under [`4-storage/redshift-storage/sql`](https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/sql).
+You can find all Redshift table definitions in our GitHub repository under [`4-storage/redshift-storage/sql`](https://github.com/snowplow/iglu-central/tree/master/sql).
 
 The StorageLoader will automatically pick up the new JSON Paths files - you do not have need to deploy these.
 
@@ -2224,7 +2224,7 @@ To upgrade to this release:
 
 Both of the new trackers send mobile-related context conforming to the [mobile_context](http://www.iglucentral.com/schemas/com.snowplowanalytics.snowplow/mobile_context/jsonschema/1-0-0) JSON Schema, as a custom context automatically attached to each event.
 
-If you are running Redshift, you can deploy the `mobile_context` table into your database using this [this script](https://github.com/snowplow/snowplow/blob/master/4-storage/redshift-storage/sql/com.snowplowanalytics.snowplow/mobile_context_1.sql).
+If you are running Redshift, you can deploy the `mobile_context` table into your database using this [this script](https://github.com/snowplow/iglu-central/blob/master/sql/com.snowplowanalytics.snowplow/mobile_context_1.sql).
 
 The Android Tracker also optionally sends a geolocation-related context relating to the [geolocation_context](http://www.iglucentral.com/schemas/com.snowplowanalytics.snowplow/geolocation_context/jsonschema/1-0-0) JSON Schema; support for this in the iOS Tracker is planned soon.
 
@@ -2688,4 +2688,4 @@ No upgrade steps as the release introduces the whole "new" concept. If you want 
 
 [config-yml]: https://github.com/snowplow/snowplow/blob/master/3-enrich/emr-etl-runner/config/config.yml.sample
 [migrate-postgre-sql]: https://github.com/snowplow/snowplow/tree/master/4-storage/postgres-storage/sql
-[migrate-redshift-sql]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/sql
+[migrate-redshift-sql]: https://github.com/snowplow/iglu-central/tree/master/sql

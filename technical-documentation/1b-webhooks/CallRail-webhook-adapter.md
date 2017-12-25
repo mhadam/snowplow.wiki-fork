@@ -59,5 +59,5 @@ All resources for this webhook's events:
 [snowplow-0.9.10]: https://github.com/snowplow/snowplow/releases/tag/0.9.10
 
 [call-complete-json-schema]: https://github.com/snowplow/iglu-central/tree/master/schemas/com.callrail/call_complete/jsonschema/1-0-0
-[call-complete-json-paths]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/jsonpaths/com.callrail/call_complete_1.json
-[call-complete-sql]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/sql/com.callrail/call_complete_1.sql
+[call-complete-json-paths]: https://github.com/snowplow/iglu-central/blob/master/jsonpaths/com.callrail/call_complete_1.json
+[call-complete-sql]: https://github.com/snowplow/iglu-central/blob/master/sql/com.callrail/call_complete_1.sql

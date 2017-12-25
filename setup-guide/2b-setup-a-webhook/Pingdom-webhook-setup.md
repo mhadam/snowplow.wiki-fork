@@ -108,6 +108,7 @@ You can find the table definitions here:
 
 * [incident_assign_1.sql][assign]
 * [incident_notify_of_close_1.sql][close]
+* [incident_notify_user_1.sql][notify]
 
 Make sure to deploy this table into the same schema as your `events` table.
 
@@ -119,5 +120,6 @@ That's it - with this table deployed, your Pingdom events should automatically f
 [snowplow-0.9.14]: https://github.com/snowplow/snowplow/releases/tag/0.9.14
 [tracker-protocol]: https://github.com/snowplow/snowplow/wiki/snowplow-tracker-protocol#1-common-parameters-platform-and-event-independent
 
-[assign]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/sql/com.pingdom/incident_assign_1.sql
-[close]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/sql/com.pingdom/incident_notify_of_close_1.sql
+[assign]: https://github.com/snowplow/iglu-central/blob/master/sql/com.pingdom/incident_assign_1.sql
+[close]: https://github.com/snowplow/iglu-central/blob/master/sql/com.pingdom/incident_notify_of_close_1.sql
+[notify]: https://github.com/snowplow/iglu-central/blob/master/sql/com.pingdom/incident_notify_user_1.sql

@@ -47,6 +47,7 @@ All resources for this webhook's events:
 |:---------------|:-------------------------------------------------|:--------------------------------------------------|:-------------------------------------------------------|
 | Assign          | [incident_assign 1-0-0][assign-json-schema]         | [incident_assign_1.json][assign-json-paths]         | [com_pingdom_incident_assign_1.sql][assign-sql]         |
 | Notify of close | [incident_notify_of_close 1-0-0][close-json-schema] | [incident_notify_of_close_1.json][close-json-paths] | [com_pingdom_incident_notify_of_close_1.sql][close-sql] |
+| Notify user | [incident_notify_of_close 1-0-0][notify-json-schema] | [incident_notify_of_close_1.json][notify-json-paths] | [com_pingdom_incident_notify_of_close_1.sql][notify-sql] |
 
 <a name="see-also" />
 
@@ -59,9 +60,13 @@ All resources for this webhook's events:
 [snowplow-0.9.13]: https://github.com/snowplow/snowplow/releases/tag/0.9.13
 
 [assign-json-schema]: https://github.com/snowplow/iglu-central/tree/master/schemas/com.pingdom/incident_assign/jsonschema/1-0-0
-[assign-json-paths]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/jsonpaths/com.pingdom/incident_assign_1.json
-[assign-sql]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/sql/com.pingdom/incident_assign_1.sql
+[assign-json-paths]: https://github.com/snowplow/iglu-central/blob/master/jsonpaths/com.pingdom/incident_assign_1.json
+[assign-sql]: https://github.com/snowplow/iglu-central/blob/master/sql/com.pingdom/incident_assign_1.sql
 
 [close-json-schema]: https://github.com/snowplow/iglu-central/tree/master/schemas/com.pingdom/incident_notify_of_close/jsonschema/1-0-0
-[close-json-paths]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/jsonpaths/com.pingdom/incident_notify_of_close_1.json
-[close-sql]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/sql/com.pingdom/incident_notify_of_close_1.sql
+[close-json-paths]: https://github.com/snowplow/iglu-central/blob/master/sql/com.pingdom/incident_notify_of_close_1.sql
+[close-sql]: https://github.com/snowplow/iglu-central/blob/master/sql/com.pingdom/incident_notify_of_close_1.sql
+
+[notify-json-schema]: https://github.com/snowplow/iglu-central/blob/master/schemas/com.pingdom/incident_notify_user/jsonschema/1-0-0
+[notify-json-paths]: https://github.com/snowplow/iglu-central/blob/master/jsonpaths/com.pingdom/incident_notify_user_1.json
+[notify-sql]: https://github.com/snowplow/iglu-central/blob/master/sql/com.pingdom/incident_notify_user_1.sql

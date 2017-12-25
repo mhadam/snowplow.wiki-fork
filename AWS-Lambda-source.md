@@ -38,7 +38,7 @@ All resources for the S3 source events:
 
 | **Event**      | **JSON Schema**                                  | **JSON Paths**                                    | **Redshift Table**                                     |
 |:---------------|:-------------------------------------------------|:--------------------------------------------------|:-------------------------------------------------------|
-| S3 Put/Delete  | [com.amazon.aws.lambda/s3_notification_event](https://github.com/snowplow/iglu-central/blob/master/schemas/com.amazon.aws.lambda/s3_notification_event/jsonschema/1-0-0)    | [s3_notification_event_1.json](https://github.com/snowplow/snowplow/blob/3baae3f40bcfcde32106e032e5ccf5ac08a400a0/4-storage/redshift-storage/jsonpaths/com.amazon.aws.lambda/s3_notification_event_1.json)  |     [s3_notification_event_1.sql](https://github.com/snowplow/snowplow/blob/661c6a60c84b3a8af113118d162f0a29680d6904/4-storage/redshift-storage/sql/com.amazon.aws.lambda/s3_notification_event_1.sql)        |
+| S3 Put/Delete  | [com.amazon.aws.lambda/s3_notification_event](https://github.com/snowplow/iglu-central/blob/master/schemas/com.amazon.aws.lambda/s3_notification_event/jsonschema/1-0-0)    | [s3_notification_event_1.json](https://github.com/snowplow/iglu-central/blob/master/jsonpaths/com.amazon.aws.lambda/s3_notification_event_1.json)  |     [s3_notification_event_1.sql](https://github.com/snowplow/iglu-central/blob/master/sql/com.amazon.aws.lambda/s3_notification_event_1.sql)        |
 
 <a name="see-also" />
 

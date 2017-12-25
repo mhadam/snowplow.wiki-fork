@@ -95,4 +95,4 @@ That's it - with this table deployed, your PagerDuty events should automatically
 [snowplow-0.9.13]: https://github.com/snowplow/snowplow/releases/tag/0.9.13
 [tracker-protocol]: https://github.com/snowplow/snowplow/wiki/snowplow-tracker-protocol#1-common-parameters-platform-and-event-independent
 
-[incident]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/sql/com.pagerduty/incident_1.sql
+[incident]: https://github.com/snowplow/iglu-central/blob/master/sql/com.pagerduty/incident_1.sql

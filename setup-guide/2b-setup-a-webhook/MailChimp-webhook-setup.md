@@ -99,9 +99,9 @@ That's it - with this table deployed, your MailChimp events should automatically
 [snowplow-0.9.11]: https://github.com/snowplow/snowplow/releases/tag/0.9.11
 [tracker-protocol]: https://github.com/snowplow/snowplow/wiki/snowplow-tracker-protocol#1-common-parameters-platform-and-event-independent
 
-[subscribe-sql]: https://github.com/snowplow/snowplow/blob/master/4-storage/redshift-storage/sql/com.mailchimp/subscribe_1.sql
-[unsubscribe-sql]: https://github.com/snowplow/snowplow/blob/master/4-storage/redshift-storage/sql/com.mailchimp/unsubscribe_1.sql
-[profile-sql]: https://github.com/snowplow/snowplow/blob/master/4-storage/redshift-storage/sql/com.mailchimp/profile_update_1.sql
-[email-change-sql]: https://github.com/snowplow/snowplow/blob/master/4-storage/redshift-storage/sql/com.mailchimp/email_address_change_1.sql
-[email-clean-sql]: https://github.com/snowplow/snowplow/blob/master/4-storage/redshift-storage/sql/com.mailchimp/cleaned_email_1.sql
-[campaign-sql]: https://github.com/snowplow/snowplow/blob/master/4-storage/redshift-storage/sql/com.mailchimp/campaign_sending_status_1.sql
+[subscribe-sql]: https://github.com/snowplow/iglu-central/blob/master/sql/com.mailchimp/subscribe_1.sql
+[unsubscribe-sql]: https://github.com/snowplow/iglu-central/blob/master/sql/com.mailchimp/unsubcribe_1.sql
+[profile-sql]: https://github.com/snowplow/iglu-central/blob/master/sql/com.mailchimp/profile_update_1.sql
+[email-change-sql]: https://github.com/snowplow/iglu-central/blob/master/sql/com.mailchimp/email_address_change_1.sql
+[email-clean-sql]: https://github.com/snowplow/iglu-central/blob/master/sql/com.mailchimp/cleaned_email_1.sql
+[campaign-sql]: https://github.com/snowplow/iglu-central/blob/master/sql/com.mailchimp/campaign_sending_status_1.sql

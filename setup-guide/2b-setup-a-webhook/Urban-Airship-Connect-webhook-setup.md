@@ -126,21 +126,21 @@ That's it - with these tables deployed and your configuration set up, your Urban
 [urbanairship-adapter]: https://github.com/snowplow/snowplow/blob/master/3-enrich/scala-common-enrich/src/main/scala/com.snowplowanalytics.snowplow.enrich/common/adapters/registry/SendgridAdapter.scala
 [snowplow-release]: https://github.com/snowplow/snowplow/releases/tag/r75-long-legged-buzzard
 
-[CLOSE-sql]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/sql/com.urbanairship.connect/close_1.sql
-[CUSTOM-sql]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/sql/com.urbanairship.connect/custom_1.sql
-[FIRST_OPEN-sql]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/sql/com.urbanairship.connect/first_open_1.sql
-[IN_APP_MESSAGE_DISPLAY-sql]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/sql/com.urbanairship.connect/in_app_message_display_1.sql
-[IN_APP_MESSAGE_EXPIRATION-sql]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/sql/com.urbanairship.connect/in_app_message_expiration_1.sql
-[IN_APP_MESSAGE_RESOLUTION-sql]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/sql/com.urbanairship.connect/in_app_message_resolution_1.sql
-[LOCATION-sql]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/sql/com.urbanairship.connect/location_1.sql
-[OPEN-sql]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/sql/com.urbanairship.connect/open_1.sql
-[PUSH_BODY-sql]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/sql/com.urbanairship.connect/push_body_1.sql
-[REGION-sql]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/sql/com.urbanairship.connect/region_1.sql
-[RICH_DELETE-sql]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/sql/com.urbanairship.connect/rich_delete_1.sql
-[RICH_DELIVERY-sql]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/sql/com.urbanairship.connect/rich_delivery_1.sql
-[RICH_READ-sql]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/sql/com.urbanairship.connect/rich_read_1.sql
-[SEND-sql]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/sql/com.urbanairship.connect/send_1.sql
-[TAG_CHANGE-sql]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/sql/com.urbanairship.connect/tag_change_1.sql
-[UNINSTALL-sql]: https://github.com/snowplow/snowplow/tree/master/4-storage/redshift-storage/sql/com.urbanairship.connect/uninstall_1.sql
+[CLOSE-sql]: https://github.com/snowplow/iglu-central/blob/master/sql/com.urbanairship.connect/close_1.sql
+[CUSTOM-sql]: https://github.com/snowplow/iglu-central/blob/master/sql/com.urbanairship.connect/custom_1.sql
+[FIRST_OPEN-sql]: https://github.com/snowplow/iglu-central/blob/master/sql/com.urbanairship.connect/first_open_1.sql
+[IN_APP_MESSAGE_DISPLAY-sql]: https://github.com/snowplow/iglu-central/blob/master/sql/com.urbanairship.connect/in_app_message_display_1.sql
+[IN_APP_MESSAGE_EXPIRATION-sql]: https://github.com/snowplow/iglu-central/blob/master/sql/com.urbanairship.connect/in_app_message_expiration_1.sql
+[IN_APP_MESSAGE_RESOLUTION-sql]: https://github.com/snowplow/iglu-central/blob/master/sql/com.urbanairship.connect/in_app_message_resolution_1.sql
+[LOCATION-sql]: https://github.com/snowplow/iglu-central/blob/master/sql/com.urbanairship.connect/location_1.sql
+[OPEN-sql]: https://github.com/snowplow/iglu-central/blob/master/sql/com.urbanairship.connect/open_1.sql
+[PUSH_BODY-sql]: https://github.com/snowplow/iglu-central/blob/master/sql/com.urbanairship.connect/push_body_1.sql
+[REGION-sql]: https://github.com/snowplow/iglu-central/blob/master/sql/com.urbanairship.connect/region_1.sql
+[RICH_DELETE-sql]: https://github.com/snowplow/iglu-central/blob/master/sql/com.urbanairship.connect/rich_delete_1.sql
+[RICH_DELIVERY-sql]: https://github.com/snowplow/iglu-central/blob/master/sql/com.urbanairship.connect/rich_delivery_1.sql
+[RICH_READ-sql]: https://github.com/snowplow/iglu-central/blob/master/sql/com.urbanairship.connect/rich_read_1.sql
+[SEND-sql]: https://github.com/snowplow/iglu-central/blob/master/sql/com.urbanairship.connect/send_1.sql
+[TAG_CHANGE-sql]: https://github.com/snowplow/iglu-central/blob/master/sql/com.urbanairship.connect/tag_change_1.sql
+[UNINSTALL-sql]: https://github.com/snowplow/iglu-central/blob/master/sql/com.urbanairship.connect/uninstall_1.sql
 
  [emretlrunner-config-yml]: https://github.com/snowplow/snowplow/blob/master/3-enrich/emr-etl-runner/config/config.yml.sample
