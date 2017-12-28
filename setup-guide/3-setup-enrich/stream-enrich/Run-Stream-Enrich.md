@@ -2,7 +2,7 @@
 
 [HOME](Home) » [SNOWPLOW SETUP GUIDE](Setting-up-Snowplow) » [Step 3: Setting up Enrich](Setting-up-enrich) » [Step 3.2: setting up Stream Enrich](setting-up-stream-enrich) » [[Install Stream Enrich]] » [[Configure Stream Enrich]] » Run Stream Enrich
 
-**This documentation is for version 0.11.x and 0.12.x of Stream Enrich. Documentation for other versions is available:**
+**This documentation is for version 0.11.x, 0.12.x and 0.13.x of Stream Enrich. Documentation for other versions is available:**
 
 - [Stream Enrich v0.5.0 - v0.10.0][v010]
 
@@ -10,7 +10,7 @@
 
 Stream Enrich is a jarfile. Simply provide the configuration file as a parameter:
 
-    $ java -jar snowplow-stream-enrich-0.12.x.jar --config my.conf --resolver file:resolver.json
+    $ java -jar snowplow-stream-enrich-0.13.0.jar --config my.conf --resolver file:resolver.json
 
 This will start the Stream Enrich app to read raw events from Kinesis, Kafka, or NSQ and write
 enriched events back to Kinesis, Kafka or NSQ.
@@ -18,12 +18,12 @@ enriched events back to Kinesis, Kafka or NSQ.
 If you are using configurable enrichments, provide the path to your enrichments directory as a
 parameter:
 
-    $ java -jar snowplow-stream-enrich-0.12.0.jar --config my.conf --resolver file:resolver.js --enrichments file:path/to/enrichments
+    $ java -jar snowplow-stream-enrich-0.13.0.jar --config my.conf --resolver file:resolver.js --enrichments file:path/to/enrichments
 
 If you are storing the resolver and/or enrichments in DynamoDB, use the "dynamodb:" prefix in place
 of the "file:" prefix:
 
-    $ java -jar snowplow-stream-enrich-0.12.x.jar --config my.conf --resolver dynamodb:eu-west-1/ConfigurationTable/resolver --enrichments dynamodb:eu-west-1/ConfigurationTable/enrichment_
+    $ java -jar snowplow-stream-enrich-0.13.0.jar --config my.conf --resolver dynamodb:eu-west-1/ConfigurationTable/resolver --enrichments dynamodb:eu-west-1/ConfigurationTable/enrichment_
 
 The above command that the enrichments and resolver are stored in a table named ConfigurationTable
 in eu-west-1, that the hash key for that table is "id", that the resolver JSON is stored in an item
@@ -35,7 +35,7 @@ values beginning with "enrichment_".
 Stream Enrich uses [slf4j logging][logging]:
 
     $ java -jar -Dorg.slf4j.simpleLogger.defaultLogLevel=debug \
-        snowplow-stream-enrich-0.12.x --config my.conf --resolver file:resolver.json
+        snowplow-stream-enrich-0.13.x --config my.conf --resolver file:resolver.json
 
 This will also affect messages logged by the [Kinesis Client Library][kcl](which Stream Enrich uses
 to read from Kinesis.)

@@ -6,6 +6,7 @@ You can also use [Snowplow Version Matrix](Snowplow-version-matrix) as a guidanc
 
 For easier navigation, please, follow the links below.
 
+- [Snowplow 98 Argentomagus](#r98) (**r98**) 2017-12-05
 - [Snowplow 97 Knossos](#r97) (**r97**) 2017-12-18
 - [Snowplow 96 Zeugma](#r96) (**r96**) 2017-11-21
 - [Snowplow 95 Ellora](#r95) (**r95**) 2017-11-13
@@ -59,6 +60,54 @@ For easier navigation, please, follow the links below.
 - [Snowplow 0.9.2](#v0.9.2) (**v0.9.2**) 2014-04-30
 - [Snowplow 0.9.1](#v0.9.1) (**v0.9.1**) 2014-04-11
 - [Snowplow 0.9.0](#v0.9.0) (**v0.9.0**) 2014-02-04
+
+<a name="r98" />
+
+## Snowplow 98 Argentomagus
+
+This release brings support for the webhooks introduced in [Release 97](#r97) to the realtime
+pipeline as well as some nifty features to the Scala Stream Collector.
+
+### Scala Stream Collector
+
+The latest version of the *Scala Stream Collector* is available from our Bintray [here](http://dl.bintray.com/snowplow/snowplow-generic/snowplow_scala_stream_collector_0.12.0.zip).
+
+#### Updating the configuration
+
+```hocon
+collector {
+  # Optional cross domain policy configuration.
+  # To disable, remove the "crossDomain" configuration and the collector will respond with a 404 to
+  # the /crossdomain.xml route.
+  crossDomain {  # NEW
+    domain = "*"
+    secure = true
+  }
+
+  cookie {
+    # ...
+
+    # Optionally, specify the name of the header containing the originating protocol for use in the
+    # bounce redirect location. Use this if behind a load balancer that performs SSL termination.
+    # The value of this header must be http or https. Example, if behind an AWS Classic ELB.
+    forwardedProtocolHeader = "X-Forwarded-Proto"  # NEW
+  }
+
+  # When enabled, the redirect url passed via the `u` query parameter is scanned for a placeholder
+  # token. All instances of that token are replaced withe the network ID. If the placeholder isn't
+  # specified, the default value is `${SP_NUID}`.
+  redirectMacro {  # NEW
+    enabled = false
+    placeholder = "[TOKEN]"
+  }
+}
+```
+
+For a complete example, see our sample [`config.hocon`](https://github.com/snowplow/snowplow/blob/r98-argentomagus/2-collectors/scala-stream-collector/examples/config.hocon.sample) template.
+
+### Stream Enrich
+
+The latest version of *Stream Enrich* is available from our Bintray [here](http://dl.bintray.com/snowplow/snowplow-generic/snowplow_stream_enrich_0.13.0.zip).
 
 <a name="r97" />
 
