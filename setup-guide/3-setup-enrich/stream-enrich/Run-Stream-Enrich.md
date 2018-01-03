@@ -34,8 +34,8 @@ values beginning with "enrichment_".
 
 Stream Enrich uses [slf4j logging][logging]:
 
-    $ java -jar -Dorg.slf4j.simpleLogger.defaultLogLevel=debug \
-        snowplow-stream-enrich-0.12.x --config my.conf --resolver file:resolver.json
+    $ java -Dorg.slf4j.simpleLogger.defaultLogLevel=debug \
+        -jar snowplow-stream-enrich-0.12.x.jar --config my.conf --resolver file:resolver.json
 
 This will also affect messages logged by the [Kinesis Client Library][kcl](which Stream Enrich uses
 to read from Kinesis.)
