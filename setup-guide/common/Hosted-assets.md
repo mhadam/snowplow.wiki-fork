@@ -42,7 +42,7 @@ Right-click on this [Download link][cc-download] to save it down locally via Clo
 
 The Scala Stream Collector is available on Bintray here:
 
-    http://dl.bintray.com/snowplow/snowplow-generic/snowplow_scala_stream_collector_0.11.0.zip
+    http://dl.bintray.com/snowplow/snowplow-generic/snowplow_scala_stream_collector_0.12.0.zip
 
 Right-click on this [Download link][ssc-download] to save it down locally.
 
@@ -69,7 +69,7 @@ Right-click on this [Download link][hadoop-event-recovery-download] to save it d
 
 The Stream Enrich app is available on Bintray here:
 
-    http://dl.bintray.com/snowplow/snowplow-generic/snowplow_stream_enrich_0.12.0.zip
+    http://dl.bintray.com/snowplow/snowplow-generic/snowplow_stream_enrich_0.13.0.zip
 
 Right-click on this [Download link][se-download] to save it down locally.
 
@@ -149,8 +149,8 @@ Please see the [[Artifact repositories]] wiki page for more information.
 
 [bintray]: https://bintray.com/
 [s3-loader-download]: http://dl.bintray.com/snowplow/snowplow-generic/snowplow_s3_loader_0.6.0.zip
-[ssc-download]: http://dl.bintray.com/snowplow/snowplow-generic/snowplow_scala_stream_collector_0.11.0.zip
-[se-download]: http://dl.bintray.com/snowplow/snowplow-generic/snowplow_stream_enrich_0.12.0.zip
+[ssc-download]: http://dl.bintray.com/snowplow/snowplow-generic/snowplow_scala_stream_collector_0.12.0.zip
+[se-download]: http://dl.bintray.com/snowplow/snowplow-generic/snowplow_stream_enrich_0.13.0.zip
 [esl-dl-http]: http://dl.bintray.com/snowplow/snowplow-generic/snowplow_elasticsearch_loader_http_0.10.1.zip
 [esl-dl-tcp]: http://dl.bintray.com/snowplow/snowplow-generic/snowplow_elasticsearch_loader_tcp_0.10.1.zip
 [esl-dl-tcp-2x]: http://dl.bintray.com/snowplow/snowplow-generic/snowplow_elasticsearch_loader_tcp_2x_0.10.1.zip
