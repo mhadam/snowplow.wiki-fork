@@ -39,16 +39,8 @@ The whole process could be depicted with the following dataflow diagram.
 
 ## 2. Setup
 
-RDB Loader does not have access to AWS credentials (they can be erased from `config.yml`).
-To perform `COPY FROM s3` statement, Redshift needs a read access to `shredded.good` S3 bucket.
-This access can be retrieved through [AWS IAM role][redshift-iam].
-
-To create an IAM Role you need to go to AWS Console -> IAM -> Roles -> Create new role.
-Then you need chose Amazon Redshift -> `AmazonS3ReadOnlyAccess`, choose a role name, for example `RedshiftLoadRole`. Once created, copy the Role ARN as you will need it in the next section.
-Now you need to attach new role to running Redshift cluster. Go to AWS Console -> Redshift -> Clusters -> Manage IAM Roles -> Attach just created role.
-
-You need to add just created role ARN as `roleArn` in [Redshift Storage Traget][target-config] configuration JSON. 
-Note: this should be full ARN URI, looking like `arn:aws:iam::719197435995:role/RedshiftLoadRole`.
+RDB Loader itself does not require any configuration and will be submitted automatically by EmrEtlRunner for each [configuration file][target-config] in `targets` directory.
+However, each particular storage target can requires specifi setup to be used with RDB Loader. e.g. [Redshift](setting-up-redshift)
 
 <a name="usage" />
 
@@ -96,4 +88,3 @@ RDB Loader internally run has four steps:
 
 [config-file]: https://github.com/snowplow/snowplow/blob/master/3-enrich/emr-etl-runner/config/config.yml.sample
 [target-config]: https://github.com/snowplow/snowplow/wiki/Configuring-storage-targets
-[redshift-iam]: http://docs.aws.amazon.com/redshift/latest/gsg/rs-gsg-create-an-iam-role.html

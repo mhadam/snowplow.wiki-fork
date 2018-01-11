@@ -11,7 +11,7 @@ Setting up Redshift is a 9 step process:
 5. [Set up user access on Redshift](#user)
 6. [Generate Redshift-format data from Snowplow](#etl)
 7. [Update the search path for your Redshift cluster](#search_path)
-8. [Automate the loading of Snowplow data into Redshift](#load)
+8. [Loading Snowplow data into Redshift using RDB Loader](#load)
 
 **Note**: We recommend running all Snowplow AWS operations through an IAM user with the bare minimum permissions required to run Snowplow. Please see our [IAM user setup page](IAM-setup) for more information on doing this.
 
@@ -325,16 +325,68 @@ Click the **Modify** button to save the changes. We now need to reboot the clust
 
 ## 8. Loading Snowplow data into Redshift using RDB Loader
 
-Now that you have your Snowplow database and table setup on Redshift, you are ready to setup the EmrEtlRunner to regularly upload Snowplow data into the table.
+Now that you have your Snowplow database and table setup on Redshift, you are ready to use the EmrEtlRunner to regularly upload Snowplow data into the table using [RDB Loader](Relational-Database-Loader).
 
-1. [Installing the StorageLoader](1-Installing-the-StorageLoader)
-2. [Using the StorageLoader](2-using-the-storageloader)
-3. [Scheduling the StorageLoader](3-scheduling-the-storageloader)
+### 8.1. IAM Role
+
+RDB Loader requires to setup additional IAM Role to access S3 without passing secret AWS credentials.
+
+To perform `COPY FROM s3` statement, Redshift needs a read access to `shredded.good` S3 bucket.
+This access can be retrieved through [AWS IAM role][redshift-iam].
+
+To create an IAM Role you need to follow these instructions
+1. Go to `AWS Console -> IAM -> Roles -> Create new role`.
+2. Choose `Amazon Redshift -> AmazonS3ReadOnlyAccess`
+3. Choose a role name, for example `RedshiftLoadRole`
+4. Once created, copy the Role ARN as you will need it in the next section.
+5. Now you need to attach new role to running Redshift cluster. Go to `AWS Console -> Redshift -> Clusters -> Manage IAM Roles` and attach just created role.
+
+### 8.2. Storage Target Configuration JSON
+
+EmrEtlRunner and RDB Loader uses [Redshift Storage target configuration JSON][storage-target-config] to access Redshift.
+This file **must** have `json` extension and placed to dedicated folder, which path specified with `--targets` option in EmrEtlRunner.
+
+In this file uou need to add a role ARN created in previous step as `roleArn`.
+Note: this should be full ARN URI, looking like `arn:aws:iam::719197435995:role/RedshiftLoadRole`.
+
+<a name="secure-password" />
+
+### 8.3. EC2 Parameter stored password (optional)
+
+For `password`, to avoid storing secrets in plain-text configs, you can use [EC2 Parameter Store][ec2-parameter-store] in form of:
+
+```json
+{
+    "password": {
+        "ec2ParameterStore": {
+            "parameterName": "snowplow.redshift.password"
+        }
+    }
+}
+```
+
+instead of plain text, where `snowplow.redshift.password` is an arbitrary key in [EC2 Parameter Store][ec2-parameter-store] containing your encrypted password.
+
+1. Execute `aws ssm put-parameter --name "snowplow.redshift.password" --type SecureString --value $YOUR_PASSWORD` to save key to parameter store. Optionally `--key-id $KMS_KEY_ID` can be used
+2. **Optional**. If you used non-default (`aws/ssm` key): in AWS Console navigate to `IAM -> Encryption keys`
+  - Choose a key provided by `--key-id`
+  - Scroll down to `Key Policy -> Key Users`
+  - Click Add and choose `jobflow_role` specified in `config.yml` (`EMR_EC2_DefaultRole` by default)
+3. Navigate to `IAM -> Roles`
+  - Find your `jobflow_role` (`EMR_EC2_DefaultRole` by default)
+  - Attach `AmazonSSMReadOnlyAccess` to it 
+
+Second step provides EMR cluster access to master key, without it key cannot be decrypted.
+Third step allows EMR cluster to access EC2 Parameter Store itself.
+
 
 [Back to top](#top).
 
 
 [emr-etl-runner]: 1-Installing-EmrEtlRunner
-[storage-loader]: 1-Installing-the-StorageLoader
 [sql-workbench-tutorial]: http://docs.aws.amazon.com/redshift/latest/gsg/getting-started.html
 [redshift-table-def]: https://github.com/snowplow/snowplow/blob/master/4-storage/redshift-storage/sql/atomic-def.sql
+[rdb-loader-role]: https://github.com/snowplow/snowplow/wiki/Relational-Database-Loader#2-setup
+[storage-target-config]: https://github.com/snowplow/snowplow/wiki/Configuring-storage-targets#redshift
+
+[ec2-parameter-store]: https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-paramstore.html
