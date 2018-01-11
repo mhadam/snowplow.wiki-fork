@@ -349,6 +349,7 @@ This file **must** have `json` extension and placed to dedicated folder, which p
 In this file uou need to add a role ARN created in previous step as `roleArn`.
 Note: this should be full ARN URI, looking like `arn:aws:iam::719197435995:role/RedshiftLoadRole`.
 
+
 <a name="secure-password" />
 
 ### 8.3. EC2 Parameter stored password (optional)

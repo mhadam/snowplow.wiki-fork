@@ -32,7 +32,7 @@ Schema: [iglu:com.snowplowanalytics.snowplow.storage/redshift_config/jsonschema/
 4. `port`, the port of the database to load. 5439 is the default Redshift port
 5. `schema`, the name of the database schema which will store your Snowplow tables
 6. `username`, the database user to load your Snowplow events with. You can leave this blank to default to the user running the script
-7. `password`, the password for the database user. Either plain-text password or `ec2ParameterStore` object with EC2 Parameter Store key
+7. `password`, the password for the database user. Either plain-text password or [`ec2ParameterStore` object][secure-redshift-password]
 8. `maxError`, a Redshift-specific setting governing how many load errors should be permitted before failing the overall load. See the [Redshift `COPY` documentation][redshift-copy] for more details
 9. `compRows`, a Redshift-specific setting defining number of rows to be used as the sample size for compression analysis. Should be between 1000 and 1000000000
 10. `purpose`: common for all targets. Redshift supports only `ENRICHED_EVENTS`
@@ -120,4 +120,4 @@ Schema: [iglu:com.snowplowanalytics.snowplow.storage/amazon_dynamodb_config/json
 [redshift-copy]: http://docs.aws.amazon.com/redshift/latest/dg/r_COPY.html
 
 [snowflake-setup]: https://github.com/snowplow-incubator/snowplow-snowflake-loader/wiki/Setup-Guide
-
+[secure-redshift-password]: https://github.com/snowplow/snowplow/wiki/Setting-up-Redshift#secure-password
