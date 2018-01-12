@@ -26,8 +26,6 @@ In spite of its 'unusualness', there is one very good reasons to use R to analyz
 2. **Statistical analysis**. R supports a staggering array of statistical analyzes: making it easy to run standard statistical tests on data to see if e.g. two groups of visitors behave in a way that is significantly different
 3. **Algorithmic analysis**. R libraries include a wide range of algorithmic analytical techniques including market basket analyzes, principle component analysis, to give just two that are relevant with web analytics data.
 
-Over time, we plan to build out the [Analytics Cookbook][cookbook] to include tutorials explaining how to perform the above analyzes in R using Snowplow data.
-
 Back to [top](#top)
 
 

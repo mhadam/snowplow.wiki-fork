@@ -1,4 +1,4 @@
-[**HOME**](Home) > [**SNOWPLOW SETUP GUIDE**](Setting-up-Snowplow) > [**Step 6: Get started analyzing Snowplow data**](Getting-started-analyzing-Snowplow-data) > Setting up Excel to analyze Snowplow data
+[**HOME**](Home) » [**SNOWPLOW SETUP GUIDE**](Setting-up-Snowplow) » [**Step 6: Get started analyzing Snowplow data**](Getting-started-analyzing-Snowplow-data) » Setting up Excel to analyze Snowplow data
 
 <a name="top" />
 
@@ -182,7 +182,7 @@ Voila! Our slice of data appears directly in Excel. We can graph it as normal:
 
 [[/setup-guide/images/excel/connection-16.JPG]]
 
-Note: we can use pull *any* cut of Snowplow data directly into Excel in the method described above. For ideas of other slices of data / queries to run, see the [Analytics Cookbook][cookbook].
+Note: we can use pull *any* cut of Snowplow data directly into Excel in the method described above. For ideas of other slices of data / queries to run, see [our blog](https://snowplowanalytics.com/blog/analytics/).
 
 Back to [top](#top).
 

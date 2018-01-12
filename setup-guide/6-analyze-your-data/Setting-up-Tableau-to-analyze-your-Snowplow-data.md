@@ -1,6 +1,6 @@
 <a name="top" />
 
-[**HOME**](Home) > [**SNOWPLOW SETUP GUIDE**](Setting-up-Snowplow) > [**Step 6: Get started analyzing Snowplow data**](Getting-started-analyzing-Snowplow-data) > Setting up Tableau to perform OLAP analysis on your data
+[**HOME**](Home) » [**SNOWPLOW SETUP GUIDE**](Setting-up-Snowplow) » [**Step 6: Get started analyzing Snowplow data**](Getting-started-analyzing-Snowplow-data) » Setting up Tableau to perform OLAP analysis on your data
 
 ## Contents
 
@@ -215,7 +215,7 @@ Back to [top](#top)
 
 ## 5. Next steps
 
-There is a huge number of ways you can interrogate Snowplow data using Tableau. For some ideas, see the [Analytics Cookbook][cookbook] and the following blog posts for some examples:
+There is a huge number of ways you can interrogate Snowplow data using Tableau. For some ideas, see the following blog posts for some examples:
 
 * [Performing web analytics on Snowplow dadta using Tableau - a video demo](http://snowplowanalytics.com/blog/2012/10/24/web-analytics-with-tableau-and-snowplow/)
 * [Funnel analysis with Snowplow](http://snowplowanalytics.com/blog/2013/04/23/performing-funnel-analysis-with-snowplow/)
@@ -230,4 +230,4 @@ Back ot [top](#top)
 [white-list-ip-address]: setting-up-redshift#wiki-authorise
 [pp-analytics]: http://snowplowanalytics.com/analytics/catalog-analytics/measuring-and-comparing-product-page-performance.html#visualising
 [individual-customer-visualisation]: http://snowplowanalytics.com/analytics/catalog-analytics/measuring-and-comparing-content-page-performance.html#single-user-journey
-[cookbook]: http://snowplowanalytics.com/analytics/
+

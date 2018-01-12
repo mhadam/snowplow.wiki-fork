@@ -1,13 +1,15 @@
 <a name="top" />
 
-[**HOME**](Home) > [**PROJECT & COMMUNITY**](Snowplow-project-and-community) > [**CONTRIBUTING**](Contributing) > [Documentation](Contributing-to-documentation)
+[**HOME**](Home) » [**PROJECT & COMMUNITY**](Snowplow-project-and-community) » [**CONTRIBUTING**](Contributing) » [Documentation](Contributing-to-documentation)
 
 We welcome contributors to the Snowplow documentation with open arms - just as we welcome contributors to the Snowplow codebase!
 
 We have two main stores of documentation currently:
 
 * Our wiki: https://github.com/snowplow/snowplow/wiki
-* Our website: http://snowplowanalytics.com/ including the [Analytics Cookbook][analytics-cookbook] at: http://snowplowanalytics.com/analytics/index.html
+* Our website: http://snowplowanalytics.com/ 
+
+You can also help the community by participating in our [Discource](https://discourse.snowplowanalytics.com/) forum.
 
 <a name="wiki" />
 

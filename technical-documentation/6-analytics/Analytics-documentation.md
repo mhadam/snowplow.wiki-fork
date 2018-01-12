@@ -1,4 +1,4 @@
-[**HOME**](Home) > [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow-technical-documentation) > [**Analytics**](analytics-documentation)
+[**HOME**](Home) » [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow-technical-documentation) » [**Analytics**](analytics-documentation)
 
 [[https://d3i6fms1cm1j0i.cloudfront.net/github-wiki/images/snowplow-architecture-6-analytics.png]]
 
@@ -8,4 +8,4 @@ Snowplow has been designed to make it as easy as possible for analysts to use wh
 
 As a result, documenting how to employ all the different possible tools to perform that analysis with Snowplow is a huge project in itself. We are just making a start now!
 
-For more information on analytics with Snowplow, see the [Analytics Cookbook](http://snowplowanalytics.com/analytics/index.html) on the [Snowplow website](http://snowplowanalytics.com).
+For more information on analytics with Snowplow, see the blog posts on the [Snowplow website](https://snowplowanalytics.com/blog/analytics/).

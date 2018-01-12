@@ -1,4 +1,4 @@
-[**HOME**](Home) > [**SNOWPLOW SETUP GUIDE**](Setting-up-Snowplow) > [**Step 5: Get started analysing Snowplow data**](Getting-started-analysing-Snowplow-data) > [Getting started analysing your data in Infobright](Getting-started-analysing-your-data-in-Infobright)
+[**HOME**](Home) » [**SNOWPLOW SETUP GUIDE**](Setting-up-Snowplow) » [**Step 5: Get started analysing Snowplow data**](Getting-started-analysing-Snowplow-data) » [Getting started analysing your data in Infobright](Getting-started-analysing-your-data-in-Infobright)
 
 Broadly speaking, there are three ways to query your data in Infobright:
 
@@ -34,8 +34,6 @@ We can now query the events table directly. For example, to count the number of 
 	WHERE page_url IS NOT NULL
 	GROUP BY dt ;
 
-For more queries, please see the [analytics cookbook][analysts-cookbook].
-
 <a name="sql-admin" />
 
 ## 2. Querying the data in Infobright using a SQL admin tool
@@ -53,8 +51,6 @@ Because any tool that can read data from MySQL can also read data from Infobrigh
 [ChartIO][chartio] is a great tool for generating dashboards and quickly visualising Snowplow data. We provide a dedicated guide to getting up and running with ChartIO [here][chartio].
 
 Whilst it is possible to connect a BI / OLAP tool like Tableau or Microstrategy to run directly on top of your Snowplow data, you are better off generating a copy of that data optimized for OLAP analysis. (I.e. formatted with distinct dimensions and metrics.) We provide a detailed guide on doing so [here][olap].
-
-We will be adding guides to analysing your data using R and Weka to the [Analytsts Cookbook][analysts-cookbook] in the near future.
 
 [tableau]: http://www.tableausoftware.com/
 [r]: http://www.r-project.org/
