@@ -18,7 +18,7 @@ By [setting up the EmrEtlRunner](setting-up-EmrEtlRunner) (in the previous step)
 
 If you wish to analyse your data using a wider range of tools (e.g. BI tools like [Looker][looker], [ChartIO][chartio] or [Tableau][tableau], or statistical tools like [R][r]), you will want to load your data into a database like Amazon [Redshift][setup-redshift] or [PostgreSQL][setup-postgres] to enable use of these tools.
 
-The [RDB Loader][storage-loader-setup] is an application to make it simple to keep an updated copy of your data in Redshift. To setup Snowplow to automatically populate a PostgreSQL and/or Redshift database with Snowplow data, you need to first:
+The [RDB Loader](Relational-Database-Loader) is an EMR step to make it simple to keep an updated copy of your data in Redshift. To setup Snowplow to automatically populate a PostgreSQL and/or Redshift database with Snowplow data, you need to first:
 
 1. [Create a database and table for Snowplow data in Redshift][setup-redshift] and/or
 2. [Create a database and table for Snowplow data in PostgreSQL][setup-postgres]
@@ -35,7 +35,6 @@ All done? Then get started with [data modeling][modeling] or [start analysing yo
 [kinesis]: snowplow-s3-loader-setup
 [redshift]: http://aws.amazon.com/redshift/
 [chartio]: http://chartio.com/
-[storageloader]: https://github.com/snowplow/snowplow/tree/master/4-storage/storage-loader
 [setup-redshift]: setting-up-redshift
 [storage-loader-setup]: 1-Installing-the-StorageLoader
 [tableau]: http://www.tableausoftware.com/

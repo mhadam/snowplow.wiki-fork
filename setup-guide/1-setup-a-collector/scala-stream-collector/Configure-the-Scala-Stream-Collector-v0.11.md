@@ -1,9 +1,11 @@
 [HOME](Home) » [SNOWPLOW SETUP GUIDE](Setting-up-Snowplow) » [Step 1: setup a Collector](Setting-up-a-Collector) » [[Setting up the Scala Stream Collector]] » [[Install the Scala Stream Collector]] » Configure the Scala Stream Collector
 
-**This documentation refers to version 0.12.0 of the Scala Stream Collector**
+**This documentation refers to version 0.11.0 of the Scala Stream Collector**
 
+**[Version 0.1.0][v0.1]**
+**[Version 0.3.0 & 0.4.0][v0.3]**
+**[Version 0.5.0 - 0.9.0][v0.9]**
 **[Version 0.10.0][v0.10]**
-**[Version 0.11.0][v0.11]**
 
 The Scala Stream Collector has a number of configuration options available.
 
@@ -78,6 +80,8 @@ The cookie expiration duration is set in `collector.cookie.expiration`. If no va
 
 » Next: [[Run the Scala Stream collector]]
 
+[v0.1]: https://github.com/snowplow/snowplow/wiki/Configure-the-Scala-Stream-Collector-v0.1
+[v0.3]: https://github.com/snowplow/snowplow/wiki/Configure-the-Scala-Stream-Collector-v0.3
+[v0.9]: https://github.com/snowplow/snowplow/wiki/Configure-the-Scala-Stream-Collector-v0.9
 [v0.10]: https://github.com/snowplow/snowplow/wiki/Configure-the-Scala-Stream-Collector-v0.10
-[v0.11]: https://github.com/snowplow/snowplow/wiki/Configure-the-Scala-Stream-Collector-v0.11
 [app-conf]: https://raw.githubusercontent.com/snowplow/snowplow/master/2-collectors/scala-stream-collector/examples/config.hocon.sample
