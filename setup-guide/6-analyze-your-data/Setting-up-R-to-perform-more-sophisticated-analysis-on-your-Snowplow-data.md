@@ -1,14 +1,12 @@
 <a name="top" />
 
-[**HOME**](Home) > [**SNOWPLOW SETUP GUIDE**](Setting-up-Snowplow) > [**Step 6: Get started analyzing Snowplow data**](Getting-started-analyzing-Snowplow-data) > Setting up R to perform more sophisticated analysis on your data
+[**HOME**](Home) » [**SNOWPLOW SETUP GUIDE**](Setting-up-Snowplow) » [**Step 6: Get started analyzing Snowplow data**](Getting-started-analyzing-Snowplow-data) » Setting up R to perform more sophisticated analysis on your data
 
 ## Contents
 
 1. [What is R, and why use it to analyze / visualize Snowplow data?](#what-and-why)
 2. [Download and get started with R](#setup)
 3. [Connecting R to Snowplow data in Redshift](#redshift)
-4. [Getting started analysing Snowplow data in R](#1st-analysis)
-5. [Next steps](#next-steps)
 
 <a name="what-and-why" />
 
@@ -157,23 +155,7 @@ We can pull that data into R by executing the following at the R command prompt:
 
 Back to [top](#top)
 
-<a name="1st-analysis" />
 
-## 4. Getting started analysing Snowplow data in R
-
-A guide to getting started using R to perform analysis can be found [here][get-started-with-r] on the [Analytics Cookbook][get-started-with-r].
-
-Back to [top](#top)
-
-<a name="next-steps" />
-
-## 5. Next steps
-
-TO WRITE
-
-Back ot [top](#top)
-
-[cookbook]: http://snowplowanalytics.com/analytics/index.html
 [r]: http://www.r-project.org/
 [download-r]: http://www.r-project.org/
 [aws-console]: https://console.aws.amazon.com/console/home
