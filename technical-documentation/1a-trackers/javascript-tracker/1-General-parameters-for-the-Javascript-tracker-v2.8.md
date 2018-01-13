@@ -2,7 +2,7 @@
 
 [**HOME**](Home) » [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow-technical-documentation) » [**Trackers**](trackers) » [**JavaScript Tracker**](Javascript-Tracker) » General parameters
 
-*This page refers to version 2.9.0 of the Snowplow JavaScript Tracker.*
+*This page refers to version 2.8.2 of the Snowplow JavaScript Tracker.*
 
 *Click [here][general-parameters-v1] for the corresponding documentation for version 1.*
 
@@ -19,8 +19,6 @@
 *Click [here][general-parameters-v2.6] for the corresponding documentation for version 2.6.2.*
 
 *Click [here][general-parameters-v2.7] for the corresponding documentation for version 2.7.2.*
-
-*Click [here][general-parameters-v2.8] for the corresponding documentation for version 2.8.2.*
 
 <a name="general"></a>
 
@@ -588,8 +586,6 @@ Note: this will only set the user ID on further events fired while the user is o
 snowplow_name_here('setUserId', 'joe.blogs@email.com');
 ```
 
-Note: `setUserId` can also be called using the alias `identifyUser`.
-
 <a name="set-user-id-from-location" />
 
 ##### 2.3.1.1 `setUserIdFromLocation`
@@ -755,8 +751,6 @@ like _sp_ses.4209 and _sp_id.4209.
 Called _sp_ses.{{DOMAIN HASH}} by default, the only purpose of this cookie is to differentiate between different visits. Whenever an event is fired, the session cookie is set to expire in 30 minutes. (This value can be altered using `setSessionCookieTimeout`.)
 
 If no session cookie is already present when an event fires, the tracker treats this as an indication that long enough has passed since the user last visited that this session should be treated as a new session rather than a continuation of the previous session. The `visitCount` (how many times the user has visited) is increased by one and the `lastVisitTs` (the timestamp for the last session) is updated.
-
-Note: A new session can be started at any time by calling the function `newSession`.
 
 #### The ID cookie
 
