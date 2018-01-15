@@ -109,6 +109,11 @@ For a complete example, see our sample [`config.hocon`](https://github.com/snowp
 
 The latest version of *Stream Enrich* is available from our Bintray [here](http://dl.bintray.com/snowplow/snowplow-generic/snowplow_stream_enrich_0.13.0.zip).
 
+### Read more
+
+* [R98 Blog Post](https://snowplowanalytics.com/blog/2018/01/05/snowplow-r98-argentomagus/)
+* [R98 Release Notes](https://github.com/snowplow/snowplow/releases/tag/r98-argentomagus)
+
 <a name="r97" />
 
 ## Snowplow 97 Knossos
@@ -130,6 +135,11 @@ enrich:
 ```
 
 For a complete example, see our sample [`config.yml`](https://github.com/snowplow/snowplow/blob/r97-knossos/3-enrich/emr-etl-runner/config/config.yml.sample) template.
+
+### Read more
+
+* [R97 Blog Post](https://snowplowanalytics.com/blog/2017/12/18/snowplow-r97-knsossos-released/)
+* [R97 Release Notes](https://github.com/snowplow/snowplow/releases/tag/r97-knossos)
 
 <a name="r96" />
 
@@ -164,6 +174,12 @@ For a complete example, see our sample [`config.hocon`](https://github.com/snowp
 ### Stream Enrich
 
 The latest version of *Stream Enrich* is available from our Bintray [here](http://dl.bintray.com/snowplow/snowplow-generic/snowplow_stream_enrich_0.12.0.zip).
+
+### Read more
+
+* [R96 Blog Post](https://snowplowanalytics.com/blog/2017/11/21/snowplow-r96-zeugma-released-with-nsq-support/)
+* [R96 Release Notes](https://github.com/snowplow/snowplow/releases/tag/r96-zeugma)
+
 
 <a name="r95" />
 
@@ -233,6 +249,11 @@ Iglu resolver JSON file:
 }
 ```
 
+### Read more
+
+* [R95 Blog Post](https://snowplowanalytics.com/blog/2017/11/13/snowplow-r95-ellora-released-with-zstd-support/)
+* [R95 Release Notes](https://github.com/snowplow/snowplow/releases/tag/r95-ellora)
+
 <a name="r94" />
 
 ## Snowplow 94 Hill of Tara
@@ -240,6 +261,11 @@ Iglu resolver JSON file:
 This release fixes an issue in Stream Enrich introduced in R93.
 
 The latest version of *Stream Enrich* is available from our Bintray [here](http://dl.bintray.com/snowplow/snowplow-generic/snowplow_stream_enrich_0.11.1.zip).
+
+### Read more
+
+* [R94 Blog Post](https://snowplowanalytics.com/blog/2017/10/10/snowplow-r94-hill-of-tara-realtime-pipeline-auto-scaling-issue/)
+* [R94 Release Notes](https://github.com/snowplow/snowplow/releases/tag/r94-hill-of-tara)
 
 <a name="r93" />
 
@@ -342,6 +368,11 @@ java -jar snowplow-stream-enrich-0.11.0.jar --config config.hocon --resolver fil
 Additionally, a new `--force-ip-lookups-download` flag has been introduced in order to force the
 download of the ip lookup database when the application starts.
 
+### Read more
+
+* [R93 Blog Post](https://snowplowanalytics.com/blog/2017/10/03/snowplow-r93-virunum-released-realtime-pipeline-refresh/)
+* [R93 Release Notes](https://github.com/snowplow/snowplow/releases/tag/r93-virunum)
+
 <a name="r92" />
 
 ## Snowplow 92 Maiden Castle
@@ -367,6 +398,11 @@ storage:
 ```
 
 For a complete example, see our sample [`config.yml`](https://github.com/snowplow/snowplow/blob/r92-maiden-castle/3-enrich/emr-etl-runner/config/config.yml.sample) template.
+
+### Read more
+
+* [R92 Blog Post](https://snowplowanalytics.com/blog/2017/09/11/snowplow-r92-maiden-castle-released-improving-emretlrunner/)
+* [R92 Release Notes](https://github.com/snowplow/snowplow/releases/tag/r92-maiden-castle)
 
 <a name="r91" />
 
@@ -397,6 +433,11 @@ Additionally, it is advised to set up a local (through a file) or distributed (t
   --lock   path/to/lock \
   --consul http://127.0.0.1:8500 # Optional address to your Consul server
 ```
+
+### Read more
+
+* [R91 Blog Post](https://snowplowanalytics.com/blog/2017/08/17/snowplow-r91-stonehenge-released-with-important-bug-fix/)
+* [R91 Release Notes](https://github.com/snowplow/snowplow/releases/tag/r91-stonehenge)
 
 <a name="r90" />
 
