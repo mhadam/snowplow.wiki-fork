@@ -6,7 +6,8 @@ You can also use [Snowplow Version Matrix](Snowplow-version-matrix) as a guidanc
 
 For easier navigation, please, follow the links below.
 
-- [Snowplow 98 Argentomagus](#r98) (**r98**) 2017-12-05
+- [Snowplow 99 Carnac](#r99) (**r99**) 2018-01-25
+- [Snowplow 98 Argentomagus](#r98) (**r98**) 2018-01-05
 - [Snowplow 97 Knossos](#r97) (**r97**) 2017-12-18
 - [Snowplow 96 Zeugma](#r96) (**r96**) 2017-11-21
 - [Snowplow 95 Ellora](#r95) (**r95**) 2017-11-13
@@ -60,6 +61,38 @@ For easier navigation, please, follow the links below.
 - [Snowplow 0.9.2](#v0.9.2) (**v0.9.2**) 2014-04-30
 - [Snowplow 0.9.1](#v0.9.1) (**v0.9.1**) 2014-04-11
 - [Snowplow 0.9.0](#v0.9.0) (**v0.9.0**) 2014-02-04
+
+<a name="r99" />
+
+## Snowplow 99 Carnac
+
+This release lets you seamlessly integrates Google Analytics events in your Snowplow batch pipeline.
+
+### Snowplow Google Analytics plugin
+
+[The Snowplow Google Analytics plugin](https://github.com/snowplow-incubator/snowplow-google-analytics-plugin)
+lets you tee your Google Analytics payloads directly to a Snowplow collector to be further
+processed.
+
+Check out [the setup guide](Setting-up-google-analytics-integration) to know more.
+
+### Updating config.yml
+
+To benefit from the Google Analytics integration you'll need Spark Enrich 1.12.0 or higher:
+
+```yaml
+enrich:
+  version:
+    spark_enrich: 1.12.0      # WAS 1.11.0
+```
+
+For a complete example, see our sample [`config.yml`](https://github.com/snowplow/snowplow/blob/r99-carnac/3-enrich/emr-etl-runner/config/config.yml.sample) template.
+
+### Read more
+
+* [R99 Blog Post](https://snowplowanalytics.com/blog/2018/01/25/snowplow-r99-carnac/)
+* [R99 Release Notes](https://github.com/snowplow/snowplow/releases/tag/r99-carnac)
+* [Google Analytics integration setup guide](Setting-up-google-analytics-integration)
 
 <a name="r98" />
 
