@@ -401,23 +401,28 @@ In the end `sshTunnel` configuration can look like following:
 
 ```json
 {
-"bastion": {
-"host": "bastion.acme.com",
-"port": 22,
-"user": "snowplow-loader",
-"key": {
-"ec2ParameterStore": {
-"parameterName": "snowplow.rdbloader.redshift.key"
-}
-}
-},
-"destination": {
-"host": "10.0.0.11",
-"port": 5439
-},
-"localPort": 15151
+  "bastion": {
+    "host": "bastion.acme.com",
+    "port": 22,
+    "user": "snowplow-loader",
+    "key": {
+      "ec2ParameterStore": {
+        "parameterName": "snowplow.rdbloader.redshift.key"
+      }
+    }
+  },
+  "destination": {
+    "host": "10.0.0.11",
+    "port": 5439
+  },
+  "localPort": 15151
 }
 ```
+
+1. `bastion` is a description of bastion host connection with all usual parameters for SSH configuration.
+2. `destination` is an actual Redshift host and port **inside** your private network
+3. `localPort` is an arbitrary *localhost* port, on which RDB Loader will open a connection
+4. It is important to note that since RDB Loader opens a tunnel on `localhost:localPort` socket - root properties (not from `sshTunnel`!) `host` and `port` must contain corresponding values: `localhost` and `15151`, since this socket now should be provided to JDBC driver as Redshift's endpoint.
 
 [Back to top](#top).
 
