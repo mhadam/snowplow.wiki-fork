@@ -71,6 +71,7 @@ Schema: [iglu:com.snowplowanalytics.snowplow.storage/postgresql_config/jsonschem
  - `VERIFY_FULL`: SSL must be used. The server certificate must be verified and the server hostname must match the hostname attribute on the certificate.
 10. `purpose`: common for all targets. PostgreSQL supports only `ENRICHED_EVENTS`
 11. `id`: optional machine-readable config id
+12. `sshTunnel`: optional bastion host configuration
 
 <a name="snowflake" />
 

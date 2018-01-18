@@ -327,12 +327,17 @@ Click the **Modify** button to save the changes. We now need to reboot the clust
 
 Now that you have your Snowplow database and table setup on Redshift, you are ready to use the EmrEtlRunner to regularly upload Snowplow data into the table using [RDB Loader](Relational-Database-Loader).
 
-### 8.1. IAM Role
+### 8.1. Storage Target Configuration JSON
+
+EmrEtlRunner and RDB Loader use [Redshift Storage target configuration JSON][storage-target-config] to access Redshift.
+This file **must** have `json` extension and placed to dedicated folder, which path specified with `--targets` option in EmrEtlRunner.
+
+### 8.2. IAM Role
 
 RDB Loader requires to setup additional IAM Role to access S3 without passing secret AWS credentials.
 
 To perform `COPY FROM s3` statement, Redshift needs a read access to `shredded.good` S3 bucket.
-This access can be retrieved through [AWS IAM role][redshift-iam].
+This access can be retrieved through [AWS IAM role][iam] with `AmazonS3ReadOnlyAccess`.
 
 To create an IAM Role you need to follow these instructions
 1. Go to `AWS Console -> IAM -> Roles -> Create new role`.
@@ -341,14 +346,8 @@ To create an IAM Role you need to follow these instructions
 4. Once created, copy the Role ARN as you will need it in the next section.
 5. Now you need to attach new role to running Redshift cluster. Go to `AWS Console -> Redshift -> Clusters -> Manage IAM Roles` and attach just created role.
 
-### 8.2. Storage Target Configuration JSON
-
-EmrEtlRunner and RDB Loader uses [Redshift Storage target configuration JSON][storage-target-config] to access Redshift.
-This file **must** have `json` extension and placed to dedicated folder, which path specified with `--targets` option in EmrEtlRunner.
-
-In this file uou need to add a role ARN created in previous step as `roleArn`.
+The role ARN created in this step should be placed as `roleArn` in Storage target configuration.
 Note: this should be full ARN URI, looking like `arn:aws:iam::719197435995:role/RedshiftLoadRole`.
-
 
 <a name="secure-password" />
 
@@ -380,6 +379,45 @@ instead of plain text, where `snowplow.redshift.password` is an arbitrary key in
 Second step provides EMR cluster access to master key, without it key cannot be decrypted.
 Third step allows EMR cluster to access EC2 Parameter Store itself.
 
+### 8.4. Setting up SSH tunnel (optional)
+
+RDB Loader supports loading data into Redshift via [bastion hosts][bastion-host].
+No Snowplow-specific setup required for placing Redshift instance behind bastion and up-to-date guide can be found in [AWS documentation][vpc-connect].
+
+You'll have to store private SSH key in [EC2 Parameter Store][ec2-parameter-store] as an encrypted key and provide EMR cluster permissions to read the key (same steps as for password).
+
+1. Execute `aws ssm put-parameter --name "snowplow.redshift.sshtunnel" --type SecureString --value $(cat $PATH_TO_SECRET_KEY)` to save key to parameter store. Optionally `--key-id $KMS_KEY_ID` can be used
+2. **Optional**. If you used non-default (`aws/ssm` key): in AWS Console navigate to `IAM -> Encryption keys`
+  - Choose a key provided by `--key-id`
+  - Scroll down to `Key Policy -> Key Users`
+  - Click Add and choose `jobflow_role` specified in `config.yml` (`EMR_EC2_DefaultRole` by default)
+3. Navigate to `IAM -> Roles`
+  - Find your `jobflow_role` (`EMR_EC2_DefaultRole` by default)
+  - Attach `AmazonSSMReadOnlyAccess` to it 
+
+`$(cat $PATH_TO_SECRET_KEY)` ensures that key is uploaded without special characters.
+
+In the end `sshTunnel` configuration can look like following:
+
+```json
+{
+"bastion": {
+"host": "bastion.acme.com",
+"port": 22,
+"user": "snowplow-loader",
+"key": {
+"ec2ParameterStore": {
+"parameterName": "snowplow.rdbloader.redshift.key"
+}
+}
+},
+"destination": {
+"host": "10.0.0.11",
+"port": 5439
+},
+"localPort": 15151
+}
+```
 
 [Back to top](#top).
 
@@ -391,3 +429,6 @@ Third step allows EMR cluster to access EC2 Parameter Store itself.
 [storage-target-config]: https://github.com/snowplow/snowplow/wiki/Configuring-storage-targets#redshift
 
 [ec2-parameter-store]: https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-paramstore.html
+[iam]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html
+[bastion-host]: https://en.wikipedia.org/wiki/Bastion_host
+[vpc-connect]: https://docs.aws.amazon.com/quickstart/latest/linux-bastion/architecture.html#bastion-hosts
