@@ -34,7 +34,7 @@ docker pull snowplow-docker-registry.bintray.io/snowplow/scala-stream-collector:
 docker pull snowplow-docker-registry.bintray.io/snowplow/stream-enrich:0.13.0
 
 # Elasticsearch Loader image
-docker pull snowplow-docker-registry.bintray.io/snowplow/elasticsearch-loader:0.10.0
+docker pull snowplow-docker-registry.bintray.io/snowplow/elasticsearch-loader:0.10.1
 
 # S3 Loader image
 docker pull snowplow-docker-registry.bintray.io/snowplow/s3-loader:0.6.0
@@ -63,7 +63,7 @@ docker build -t snowplow/scala-stream-collector:0.10.0 scala-stream-collector/0.
 docker build -t snowplow/stream-enrich:0.11.0 stream-enrich/0.13.0
 
 # Elasticsearch Loader image
-docker build -t snowplow/elasticsearch-loader:0.10.0 elasticsearch-loader/0.10.0
+docker build -t snowplow/elasticsearch-loader:0.10.0 elasticsearch-loader/0.10.1
 
 # S3 Loader image
 docker build -t snowplow/s3-loader:0.6.0 s3-loader/0.6.0
@@ -104,7 +104,7 @@ docker run \
 # Elasticsearch Loader
 docker run \
   -v $PWD/elasticsearch-loader-config:/snowplow/config \
-  snowplow/elasticsearch-loader:0.10.0 \
+  snowplow/elasticsearch-loader:0.10.1 \
   --config /snowplow/config/config.hocon
 
 # S3 Loader
