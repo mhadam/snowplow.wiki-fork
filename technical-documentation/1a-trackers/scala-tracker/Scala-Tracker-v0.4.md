@@ -2,12 +2,12 @@
 
 [**HOME**](Home) > [**SNOWPLOW TECHNICAL DOCUMENTATION**](Snowplow-technical-documentation) > [**Trackers**](trackers) > [**Scala Tracker**](Scala-Tracker)
 
-**This page refers to version 0.5.0 of the Snowplow Scala Tracker. Documentation for other versions is available:**
+**This page refers to version 0.4.0 of the Snowplow Scala Tracker. Documentation for other versions is available:**
 
 - *[Version 0.1][scala-0.1]*
 - *[Version 0.2][scala-0.2]*
 - *[Version 0.3][scala-0.3]*
-- *[Version 0.4][scala-0.4]*
+- *[Latest][latest]*
 
 ## Contents
 
@@ -16,20 +16,12 @@
   - 2.1 [Tracker](#tracker-init)
   - 2.2 [Subject](#subject)
   - 2.3 [EC2 Context](#ec2)
-  - 2.4 [GCE Context](#gce)
-  - 2.5 [Callbacks](#callbacks)
 - 3 [Sending events](#events)
   - 3.1 [`trackSelfDescribingEvent`](#trackSelfDescribingEvent)
   - 3.2 [`trackStructEvent`](#trackStructEvent)
   - 3.3 [`trackPageView`](#trackPageView)
-  - 3.4 [`trackError`](#trackError)
-  - 3.5 [`trackAddToCart`](#trackAddToCart)
-  - 3.6 [`trackRemoveFromCart`](#trackRemoveFromCart)
-  - 3.7 [`trackTransaction`](#trackTransaction)
-  - 3.8 [`trackTransactionItem`](#trackTransactionItem)
-  - 3.9 [Setting timestamp](#timestamp)
+  - 3.4 [Setting timestamp](#timestamp)
 - 4 [Subject methods](#subject)
-
 
 <a name="overview" />
 
@@ -98,54 +90,6 @@ You can add this informational as additional custom context to all sent events b
 tracker.enableEc2Context()
 ```
 
-<a name="gce" />
-
-### 2.4 Google Compute Engine Metadata context
-
-Google [Cloud Compute Engine][gce] can provide basic information about instance running your app.
-You can add this informational as additional custom context to all sent events by enabling it in Tracker after initializaiton of your tracker:
-
-```scala
-tracker.enableGceContext()
-```
-
-This will add [`iglu:com.google.cloud.gce/instance_metadata/jsonschema/1-0-0`][gce-metadata] context to all your events
-
-### 2.5 Callbacks
-
-All emitters supplied with Scala Tracker support callbacks invoked after every sent event (or batch of events) whether it was successful or not.
-This feature particularly useful for checking collector unavailability and tracker debugging.
-
-Callbacks should have following signature:
-
-```scala
-type Callback = (CollectorParams, CollectorRequest, CollectorResponse) => Unit
-```
-
-* `CollectorParams` is collector configuration attached to emitter
-* `CollectorRequest` is raw collector's payload, which can be either `GET` or `POST` and holding number of undertaken attempts
-* `CollectorResponse` is processed collector's response or failure reason. You'll want to pattern-match it to either no-op or notify DevOps about non-working collector
-
-To add a callback to `AsyncBatchEmitter` you can use following approach:
-
-```scala
-def emitterCallback(params: CollectorParams, req: CollectorRequest, res: CollectorResponse): Unit = {
-  res match {
-    case TEmitter.CollectorSuccess(_) => ()
-    case TEmitter.CollectorFailure(code) => 
-      devopsIncident(s"Scala Tracker got unexpected HTTP code $code from ${params.getUri}")
-    case TEmitter.TrackerFailure(exception) => 
-      devopsIncident(s"Scala Tracker failed to reach ${params.getUri} with following exception $exception after ${req.attempt} attempt")
-    case TEmitter.RetriesExceeded(failure) =>
-      devopsIncident(s"Scala Tracker has stopped trying to deliver payload after following failure: $failure")
-      savePayload(req)      // can be investigated and sent afterwards
-  }
-}
-val emitter = AsyncBatchEmitter.createAndStart(collector, port, bufferSize = 32, callback = Some(emitterCallback _))
-```
-
-All async emitters will perform callbacks asynchronously in their `ExecutionContext`.
-
 <a name="events" />
 
 ## 3. Sending events
@@ -158,21 +102,6 @@ Tracking methods supported by the Scala Tracker at a glance:
 + [trackSelfDescribingEvent](#trackSelfDescribingEvent)
 + [trackStructEvent](#trackStructEvent)
 + [trackPageView](#trackPageView)
-+ [trackError](#trackError)
-+ [trackAddToCart](#trackAddToCart)
-+ [trackRemoveFromCart](#trackRemoveFromCart)
-+ [trackTransaction](#trackTransaction)
-+ [trackTransactionItem](#trackTransactionItem)
-
-Since 0.5.0 self-describing events and contexts can be sent with `SchemaKey` wrapper from [Iglu Core][iglu-core] for additional type-safely.
-
-```scala
-val pageTypeContext = SelfDescribingJson(
-  SchemaKey("com.acme", "page_type", "jsonschema", SchemaVer(1,0,0)),
-  ("type" -> "promotional") ~ ("backgroundColor" -> "red")
-)
-t.trackPageView(url, contexts = List(pageTypeContext))
-```
 
 <a name="trackSelfDescribingEvent" />
 
@@ -276,60 +205,9 @@ Example:
 t.trackPageView("www.example.com", Some("example"), Some("www.referrer.com"))
 ```
 
-<a name="trackError" />
-
-### 3.4 `trackError`
-
-Use `trackError` to track exceptions raised during your app's execution. Arguments are:
-
-| **Argument** | **Description**                    | **Required?** | **Validation**             |
-|-------------:|:-----------------------------------|:--------------|:---------------------------|
-| `error`      | Any throwable need to be tracked   | Yes           | `Throwable`                |
-| `contexts`   | Custom contexts for the event      | No            | `List[SelfDescribingJson]` |
-| `timestamp`  | When the pageview occurred         | No            | `Option[Timestamp]`        |
-
-Example:
-
-```scala
-try {
-  1 / 0
-} catch {
-  case e: java.lang.ArithmeticException =>
-    t.trackError(e)
-}
-```
-
-Note: this tracker should not be used to track exceptions happening in tracker itself, use [callbacks](#callbacks) mechanism for that.
-
-<a name="trackAddToCart" />
-
-### 3.5 `trackAddToCart`
-
-Use `trackAddToCart` to track an add-to-cart event.
-
-<a name="trackRemoveFromCart" />
-
-### 3.6 `trackRemoveFromCart`
-
-Use `trackRemoveFromCart` to track a remove-from-cart event.
-
-<a name="trackTransaction" />
-
-### 3.7 `trackTransaction`
-
-Use `trackTransaction` to record view of transaction.
-Fire a `trackTransaction` to register the transaction, and then fire `trackTransactionItem` to log specific data about the items that were part of that transaction. 
-
-<a name="trackTransactionItem" />
-
-### 3.8 `trackTransactionItem`
-
-To track an ecommerce transaction item.
-Fire a `trackTransaction` to register the transaction, and then fire `trackTransactionItem` to log specific data about the items that were part of that transaction. 
-
 <a name="timestamp" />
 
-### 3.9 Setting timestamp
+### 3.4 Setting timestamp
 
 By default, Scala Tracker will generate a `dvce_created_tstamp` and add it to event payload.
 You also can manually set it using `timestamp` argument in all tracking methods.
@@ -482,13 +360,10 @@ subject.setNetworkUserId("ecdff4d0-9175-40ac-a8bb-325c49733607")
 [scala-0.1]: https://github.com/snowplow/snowplow/wiki/Scala-Tracker-v0.1
 [scala-0.2]: https://github.com/snowplow/snowplow/wiki/Scala-Tracker-v0.2
 [scala-0.3]: https://github.com/snowplow/snowplow/wiki/Scala-Tracker-v0.3
-[scala-0.4]: https://github.com/snowplow/snowplow/wiki/Scala-Tracker-v0.4
+[latest]: https://github.com/snowplow/snowplow/wiki/Scala-Tracker
 
 [json4s]: https://github.com/json4s/json4s
 [json4s-dsl]: https://github.com/json4s/json4s#dsl-rules
 [ec2]: https://aws.amazon.com/ec2/
-
-[gce-metadata]: https://github.com/snowplow/iglu-central/blob/152c90a72d5888460985ea43605afb5252180b10/schemas/com.google.cloud.gce/instance_metadata/jsonschema/1-0-0
-[iglu-core]: https://github.com/snowplow/iglu/wiki/Scala-iglu-core
 
 [self-describing-jsons]: https://github.com/snowplow/iglu/wiki/Self-describing-JSONs

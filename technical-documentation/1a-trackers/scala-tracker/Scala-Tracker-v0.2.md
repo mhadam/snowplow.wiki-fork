@@ -4,8 +4,10 @@
 
 **This page refers to version 0.2.0 of the Snowplow Scala Tracker. Documentation for other versions is available:**
 
-*[Version 0.1][scala-0.1]*
-*[Version 0.3][scala-0.3]*
+- *[Version 0.1][scala-0.1]*
+- *[Version 0.3][scala-0.3]*
+- *[Version 0.4][scala-0.4]*
+- *[Latest][latest]*
 
 ## Contents
 
@@ -245,7 +247,9 @@ subject.setNetworkUserId("ecdff4d0-9175-40ac-a8bb-325c49733607")
 [Back to top](#top)
 
 [scala-0.1]: https://github.com/snowplow/snowplow/wiki/Scala-Tracker-v0.1
-[scala-0.3]: https://github.com/snowplow/snowplow/wiki/Scala-Tracker
+[scala-0.3]: https://github.com/snowplow/snowplow/wiki/Scala-Tracker-v0.3
+[scala-0.4]: https://github.com/snowplow/snowplow/wiki/Scala-Tracker-v0.4
+[latest]: https://github.com/snowplow/snowplow/wiki/Scala-Tracker
 
 [json4s]: https://github.com/json4s/json4s
 [json4s-dsl]: https://github.com/json4s/json4s#dsl-rules
