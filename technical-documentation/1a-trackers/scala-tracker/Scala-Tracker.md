@@ -111,6 +111,8 @@ tracker.enableGceContext()
 
 This will add [`iglu:com.google.cloud.gce/instance_metadata/jsonschema/1-0-0`][gce-metadata] context to all your events
 
+<a name="callbacks" />
+
 ### 2.5 Callbacks
 
 All emitters supplied with Scala Tracker support callbacks invoked after every sent event (or batch of events) whether it was successful or not.
