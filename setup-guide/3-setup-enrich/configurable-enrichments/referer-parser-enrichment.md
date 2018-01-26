@@ -12,6 +12,8 @@ Data provider [Snowplow referer-parser][referer-parser-repo]
 
 The referer parser enrichment uses the [Snowplow referer-parser][referer-parser-repo] to extract attribution data from referer URLs. You can provide a list of internal subdomains which will be treated as "internal" rather than unknown.
 
+Each subdomain will have to be listed individually. It is currently not possible to use wildcards or Regex.
+
 *Note that we always use the original HTTP misspelling of 'referer' (and thus 'referal') in this project - never 'referrer'.*
 
 ### Example
