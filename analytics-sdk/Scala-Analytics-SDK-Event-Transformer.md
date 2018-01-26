@@ -53,6 +53,19 @@ For example, if an enriched event contained a `com.snowplowanalytics.snowplow/li
   },...
 ```
 
+`EventTransformer` has three primary functions:
+
+* `transform` - simply accepts enriched event as a string and returns JSON (as `String`) of above structure as a result
+* `transformWithInventory` - accepts enriched event as a string and returns JSON  (as `String`) of above structure as a result **and** event's inventory (explained below)
+* `jsonifyGoodEvent` - same as above, but accepts already splitted TSV columns (as `Array[String]`) and returns JSON as json4s `JObject` in case you'll need to perform some modifications with this AST
+
+### Event inventory
+
+Invetory is simply a metadata about shredded type:
+
+1. Its Iglu URI (e.g. `iglu:com.acme/context/jsonschema/1-0-0`)
+2. Where it was extracted from: `unstruct_event` column (`UnstructEvent`), `contexts` column (`Contexts(CustomContexts)`) or `derived_contexts` column (`Contexts(DerivedContexts)`)
+
 <a name="example" />
 
 ## Examples
