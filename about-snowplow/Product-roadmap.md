@@ -1,6 +1,6 @@
 ## Overview
 
-The current release of Snowplow is **Release 90 Lascaux**. The planned roadmap for Snowplow is divided in two:
+The current release of Snowplow is **Release 99 Carnac**. The planned roadmap for Snowplow is divided in two:
 
 1. **Short term: a series of planned point releases** - adding specific, mostly incremental features, tweaks and bug fixes to the core platform
 2. **Longer term: an approximate schedule for new components and capabilities** - setting out priorities and approximate timings for all-new Snowplow components and other ambitious new developments
