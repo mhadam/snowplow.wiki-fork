@@ -516,13 +516,19 @@ Ad impression tracking is accomplished using the `trackAdImpression` method. Her
 | **Name**       | **Required?** | **Description**                            | **Type**
 |---------------:|:--------------|:-------------------------------------------|:---------------------|
 | `impressionId` | No            | Identifier for the particular impression instance   | string |
-|    `costModel` | No            | The cost model for the campaign: 'cpc', 'cpm', or 'cpa'  | string |
-|         `cost` | No            | Ad cost   |    number    |
-|   `targetUrl`  | No            | The destination URL  |        string   |
+|    `costModel` | No*           | The cost model for the campaign: 'cpc', 'cpm', or 'cpa'  | string |
+|         `cost` | No*           | Ad cost   |    number    |
+|   `targetUrl`  | No*           | The destination URL  |        string   |
 |     `bannerId` | No            | Adserver identifier for the ad banner (creative) being displayed  | string                |
 |       `zoneId` | No            | Adserver identifier for the zone where the ad banner is located | string  |
 | `advertiserID` | No            | Adserver identifier for the advertiser which the campaign belongs to      | string   |
 |   `campaignId` | No            | Adserver identifier for the ad campaign which the banner belongs to    |  string |
+
+*_Note: There are the following restrictions in place_
+
+- _`targetUrl` should have at least 1 character_
+- _`cost` should have a minimum value of 0_
+- _`costModel` has to be present as `cost` depends on it_
 
 An example:
 
