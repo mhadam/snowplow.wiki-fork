@@ -798,7 +798,7 @@ If you set a custom `cookieName` field in the argmap, pass that name into the fu
 
 <a name="timestamp" />
 
-### 2.9 Optional timestamp argument
+### 2.8 Optional timestamp argument
 
 Since 2.7.0 each `track...()` method supports an optional timestamp as its final argument; this allows you to manually override the timestamp attached to this event.
 The timestamp should be in milliseconds since the Unix epoch.
@@ -824,7 +824,7 @@ You can also use, plain number or `{type: 'dtm', value: stamp}` to send `device_
 
 <a name="preservePageViewId" />
 
-### 2.10 Preserving pageViewId
+### 2.9 Preserving pageViewId
 
 As explained in [webPage section](#webPage), JS tracker regenerates `webPage` context each time `trackPageView` was called.
 However, before 2.7.0 this was not always the case - `webPage` context was regenerating only when whole HTML page loaded, initialising the tracker.
