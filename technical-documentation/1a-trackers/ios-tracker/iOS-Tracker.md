@@ -14,9 +14,13 @@ This page refers to version 0.6.x-0.7.0 of the Snowplow Objective-C Tracker, whi
 
 - 1. [Overview](#overview)
   - 1.1 [Demonstration App](#demo-app)
+    - 1.1.1 [Obj-C Demonstration App](#objc-demo)
+    - 1.1.2 [Swift Demonstration App](#swift-demo)
   - 1.2 [HTTPs and Certificates](#certificates)
 - 2. [Initialization](#init)
   - 2.1 [Importing the library](#importing)
+    - 2.1.1 [Importing the library into Swift code](#importing-swift)
+    - 2.1.2 [Accessing Swift generated interfaces](#swift-interface)
   - 2.2 [Creating a tracker](#create-tracker)
     - 2.2.1 [`SPEmitter`](#emitter)
     - 2.2.2 [`namespace`](#namespace)
@@ -140,6 +144,9 @@ You can then access your Tracker via `SnowplowManager *snowplowManager = [Snowpl
 
 ### 1.1 Demonstration App
 
+<a name="objc-demo" />
+
+#### 1.1.1 Obj-C Demonstration App
 If you would like to see the Tracker in action you can launch the demo app like so:
 
 * Download the GitHub repo: `git clone https://github.com/snowplow/snowplow-objc-tracker.git`
@@ -147,6 +154,17 @@ If you would like to see the Tracker in action you can launch the demo app like 
 * Select the device you want to launch the SnowplowDemo into!
 
 You will then need to simply enter a valid endpoint URL and hit the `Start Demo!` button.
+
+<a name="swift-demo" />
+
+#### 1.1.2 Swift Demonstration App
+If you would like to see the Tracker in action you can launch the demo app like so:
+
+* Download the GitHub repo: `git clone https://github.com/snowplow/snowplow-objc-tracker.git`
+* In XCode open the `SnowplowSwiftDemo.xcworkspace` file.
+* Select the device you want to launch the SnowplowDemo into!
+
+You will then need to simply enter a valid endpoint URL and hit the `Run Demo` button.
 
 [Back to top](#top)
 
@@ -194,6 +212,50 @@ If you have statically added the library you will need to further amend your syn
 ```
 
 That's it - you are now ready to initialize a tracker instance.
+
+<a name="importing-swift" />
+
+### 2.1.1 Importing the library into Swift code
+
+Adding the library into a Swift project requires using a bridging header.
+
+A bridging header is normally placed in the root of your project, with a name following the format: `Project Name-Bridging-Header.h`.
+
+Include any of the Obj-C library files headers that has code you would like to import. An example is found in the SnowplowSwiftDemo in the file `SnowplowSwiftDemo-Bridging-Header.h`:
+
+```objective-c
+//
+//  SnowplowSwiftDemo-Bridging-Header.h
+//  SnowplowSwiftDemo
+//
+//  Created by Michael Hadam on 1/18/18.
+//  Copyright © 2018 snowplowanalytics. All rights reserved.
+//
+
+#ifndef SnowplowSwiftDemo_Bridging_Header_h
+#define SnowplowSwiftDemo_Bridging_Header_h
+
+#import "SnowplowTracker/SPEmitter.h"
+#import "SnowplowTracker/SPTracker.h"
+#import "SnowplowTracker/SPUtilities.h"
+#import "SnowplowTracker/SPSubject.h"
+#import "SnowplowTracker/SPRequestCallback.h"
+#import "SnowplowTracker/SPSelfDescribingJson.h"
+
+#endif /* SnowplowSwiftDemo_Bridging_Header_h */
+```
+
+The import statement `import SnowplowTracker` must be used in Swift files that will use the Obj-C library.
+
+Finally, the bridging header file must be specified under build settings. The setting is found in the project's xcodeproj file under `Build Settings` -> `Swift Compiler - General` -> `Objective-C Bridging Header`.
+
+<a name="swift-interface" />
+
+### 2.1.2 Accessing Swift generated interfaces
+
+In order to make sense of how to use the Obj-C library in Swift, Xcode creates interface files that list all the type signatures it has created for Swift.
+
+These interface files can be accessed by opening an Obj-C header file in Xcode and clicking the button in the top-left of the code editor window that looks like 4 small squares. Under `Generated Interface` click the desired file (it will list a Swift 3 and Swift 4 interface).
 
 [Back to top](#top)
 
