@@ -1313,6 +1313,8 @@ Use the `trackConsentGranted` method to track a user opting into data collection
 |     `context` | Custom context for the event                              | No            | Array            |
 |      `tstamp` | When the event occurred                                   | No            | Positive integer |
 
+The `expiry` field specifies that the user consents to the attached documents until the date-time provided, after which the consent is no longer valid.
+
 Tracking a consent granted event:
 
 ```javascript
@@ -1334,8 +1336,8 @@ The method arguments are:
 
 |      **Name** | **Description**                                   | **Required?** | **Type**         |
 |--------------:|:--------------------------------------------------|:--------------|:-----------------|
-|          `id` | Identifier for the document withdrawing consent   | No            | Number           |
-|     `version` | Version of the document withdrawing consent       | No            | Number           |
+|          `id` | Identifier for the document withdrawing consent   | No            | String           |
+|     `version` | Version of the document withdrawing consent       | No            | string           |
 |        `name` | Name of the document withdrawing consent          | No            | String           |
 | `description` | Description of the document withdrawing consent   | No            | String           |
 |         `all` | Specifies whether all consent should be withdrawn | No            | Boolean          |
